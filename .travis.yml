@@ -1,0 +1,35 @@
+# http://lint.travis-ci.org/
+
+language: python
+
+sudo: false
+
+matrix:
+  fast_finish: true
+  include:
+  - python: 2.7
+    env: TEST_TARGET=default
+  - python: 3.6
+    env: TEST_TARGET=default
+
+before_install:
+  - wget http://bit.ly/miniconda -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - conda config --set always_yes yes --set changeps1 no --set show_channel_urls true
+  - conda update conda
+  - conda config --add channels conda-forge --force
+  - conda create --name TEST python=$TRAVIS_PYTHON_VERSION --file requirements.txt --file requirements-dev.txt
+  - source activate TEST
+
+install:
+  - python setup.py sdist && version=$(python setup.py --version) && pushd dist  && pip install erddapy-${version}.tar.gz && popd
+
+script:
+  - if [[ $TEST_TARGET != 'docs' ]]; then
+      cp -r tests/ /tmp && cd /tmp ;
+    fi
+
+  - if [[ $TEST_TARGET == 'default' ]]; then
+      py.test -vv tests ;
+    fi

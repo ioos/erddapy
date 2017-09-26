@@ -22,34 +22,34 @@ class ERDDAP(object):
     The user must pass the endpoint explicitly!!
 
     Examples:
-        >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
+        >>> e = ERDDAP(
+        ...     server_url='https://data.ioos.us/gliders/erddap',
+        ...     server_type='tabledap'
+        ... )
 
     """
-    def __init__(self, server_url):
+    def __init__(self, server_url, server_type='tabledap'):
         self.server_url = server_url
-        # Caching the last resquest for multiple access,
-        # will be overriden when a new variable is requested.
+        self.server_type = server_type
+        # Caching the last request for quicker multiple access,
+        # will be overridden when making a new requested.
         self._nc = None
         self._dataset_id = None
-        self.search_url = None
-        self._search_options = {}
-        self.info_url = None
-        self._info_options = {}
         self._variables = {}
 
-    def search(self, items_per_page=1000, page=1, response='csv', **kwargs):
-        """Compose the search URL for `server_url` endpoint.
+    def search_url(self, items_per_page=1000, page=1, response='csv', **kwargs):
+        """Compose the search URL for the `server_url` endpoint.
 
         Args:
             items_per_page (int): how many items per page in the return,
                 default is 1000.
             page (int): which page to display, defatul is the first page (1).
-            response (str): check https://data.ioos.us/gliders/erddap/tabledap/documentation.html#fileType
-                for all the options, default is a Comma Separated Value ('csv').
+            response (str): default is a Comma Separated Value ('csv').
+                See ERDDAP docs for all the options,
+                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+                griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
         Returns:
             search_url (str): the search URL for the `response` chosen.
-                The `search_url` is cached as an instance property,
-                but will be overriden when performing a new search.
         """
         base = (
             '{server_url}/search/advanced.{response}'
@@ -94,22 +94,19 @@ class ERDDAP(object):
             'minTime': kwargs.get('min_time', default),
             'maxTime': kwargs.get('max_time', default),
         }
-        if not self.search_url or (self._search_options.items() != search_options):
-            self.search_url = base(**search_options)
-            self._search_options = search_options
-        return self.search_url
+        return base(**search_options)
 
-    def info(self, dataset_id, response='csv'):
-        """Compose the info URL for `server_url` endpoint.
+    def info_url(self, dataset_id, response='csv'):
+        """Compose the info URL for the `server_url` endpoint.
 
         Args:
-            dataset_id (str): Use the data id found using the the search.
-            response (str): check https://data.ioos.us/gliders/erddap/tabledap/documentation.html#fileType
-                for all the options, default is a Comma Separated Value ('csv').
+            dataset_id (str): a dataset unique id.
+            response (str): default is a Comma Separated Value ('csv').
+                See ERDDAP docs for all the options,
+                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+                griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
         Returns:
             info_url (str): the info URL for the `response` chosen.
-                The `info_url` is cached as an instance property,
-                but will be overriden when performing a new info request.
         """
         response = _clean_response(response)
         base = '{server_url}/info/{dataset_id}/index.{response}'.format
@@ -118,15 +115,47 @@ class ERDDAP(object):
             'dataset_id': dataset_id,
             'response': response
         }
-        if not self.info_url or (self._info_options.items() != info_options):
-            self.info_url = base(**info_options)
-            self._info_options = info_options
-        return self.info_url
+        return base(**info_options)
 
-    def opendap(self, dataset_id):
-        base = '{server_url}/tabledap/{dataset_id}'.format
-        self.opendap_url = base(server_url=self.server_url, dataset_id=dataset_id)
-        return self.opendap_url
+    def download_url(self, dataset_id, variables, response='csv', **kwargs):
+        """Compose the download URL for the `server_url` endpoint.
+
+        Args:
+            dataset_id (str): a dataset unique id.
+            variables (list/tuple): a list of the variables to download.
+            response (str): default is a Comma Separated Value ('csv').
+                See ERDDAP docs for all the options,
+                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+                griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
+        Returns:
+            download_url (str): the download URL for the `response` chosen.
+        """
+        variables = ','.join(variables)
+        base = (
+            '{server_url}/{server_type}/{dataset_id}.{response}'
+            '?{variables}'
+            '{kwargs}'
+        ).format
+
+        kwargs = ''.join(['&{}{}'.format(k, v) for k, v in kwargs.items()])
+        return base(server_url=self.server_url, server_type=self.server_type,
+                    dataset_id=dataset_id, response=response, variables=variables,
+                    kwargs=kwargs)
+
+    def opendap_url(self, dataset_id):
+        """Compose the opendap URL for the `server_url` the endpoint.
+
+        Args:
+            dataset_id (str): a dataset unique id.
+        Returns:
+            download_url (str): the download URL for the `response` chosen.
+        """
+        base = '{server_url}/{server_type}/{dataset_id}'.format
+        return base(
+            server_url=self.server_url,
+            server_type=self.server_type,
+            dataset_id=dataset_id
+            )
 
     def get_var_by_attr(self, dataset_id, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for a ERDDAP
@@ -151,20 +180,21 @@ class ERDDAP(object):
             >>> # Get variables that have a "grid_mapping" attribute
             >>> vs = nc.get_variables_by_attributes(grid_mapping=lambda v: v is not None)
         """
-        info_url = self.info(dataset_id, response='csv')
-        df = pd.read_csv(info_url)
+        info_url = self.info_url(dataset_id, response='csv')
 
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
         if not self._variables or self._dataset_id != dataset_id:
+            _df = pd.read_csv(info_url)
+            self._dataset_id = dataset_id
             variables = {}
-            # Virtually the same code as the netCDF4 counterpart.
-            for variable in set(df['Variable Name']):
-                attributes = df.loc[
-                    df['Variable Name'] == variable,
+            for variable in set(_df['Variable Name']):
+                attributes = _df.loc[
+                    _df['Variable Name'] == variable,
                     ['Attribute Name', 'Value']
                 ].set_index('Attribute Name').to_dict()['Value']
                 variables.update({variable: attributes})
                 self._variables = variables
+        # Virtually the same code as the netCDF4 counterpart.
         vs = []
         has_value_flag = False
         for vname in self._variables:
