@@ -22,22 +22,18 @@ class ERDDAP(object):
     The user must pass the endpoint explicitly!!
 
     Examples:
-        >>> e = ERDDAP(
-        ...     server_url='https://data.ioos.us/gliders/erddap',
-        ...     server_type='tabledap'
-        ... )
+        >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
 
     """
-    def __init__(self, server_url, server_type='tabledap'):
+    def __init__(self, server_url):
         self.server_url = server_url
-        self.server_type = server_type
         # Caching the last request for quicker multiple access,
         # will be overridden when making a new requested.
         self._nc = None
         self._dataset_id = None
         self._variables = {}
 
-    def search_url(self, items_per_page=1000, page=1, response='csv', **kwargs):
+    def search_url(self, response='csv', items_per_page=1000, page=1, search_for=None, **kwargs):
         """Compose the search URL for the `server_url` endpoint.
 
         Args:
@@ -55,7 +51,6 @@ class ERDDAP(object):
             '{server_url}/search/advanced.{response}'
             '?page={page}'
             '&itemsPerPage={itemsPerPage}'
-            '&searchFor='
             '&protocol={protocol}'
             '&cdm_data_type={cdm_data_type}'
             '&institution={institution}'
@@ -70,7 +65,10 @@ class ERDDAP(object):
             '&maxLat={maxLat}'
             '&minTime={minTime}'
             '&maxTime={maxTime}'
-        ).format
+            )
+        if search_for:
+            search_for = search_for.replace(' ', '+AND+')
+            base += '&searchFor={searchFor}'
 
         default = '(ANY)'
         response = _clean_response(response)
@@ -93,8 +91,9 @@ class ERDDAP(object):
             'maxLat': kwargs.get('max_lat', default),
             'minTime': kwargs.get('min_time', default),
             'maxTime': kwargs.get('max_time', default),
+            'searchFor': search_for,
         }
-        return base(**search_options)
+        return base.format(**search_options)
 
     def info_url(self, dataset_id, response='csv'):
         """Compose the info URL for the `server_url` endpoint.
@@ -117,7 +116,7 @@ class ERDDAP(object):
         }
         return base(**info_options)
 
-    def download_url(self, dataset_id, variables, response='csv', **kwargs):
+    def download_url(self, dataset_id, variables, response='csv', protocol='tabledap', **kwargs):
         """Compose the download URL for the `server_url` endpoint.
 
         Args:
@@ -132,17 +131,17 @@ class ERDDAP(object):
         """
         variables = ','.join(variables)
         base = (
-            '{server_url}/{server_type}/{dataset_id}.{response}'
+            '{server_url}/{protocol}/{dataset_id}.{response}'
             '?{variables}'
             '{kwargs}'
         ).format
 
         kwargs = ''.join(['&{}{}'.format(k, v) for k, v in kwargs.items()])
-        return base(server_url=self.server_url, server_type=self.server_type,
+        return base(server_url=self.server_url, protocol=protocol,
                     dataset_id=dataset_id, response=response, variables=variables,
                     kwargs=kwargs)
 
-    def opendap_url(self, dataset_id):
+    def opendap_url(self, dataset_id, protocol='tabledap'):
         """Compose the opendap URL for the `server_url` the endpoint.
 
         Args:
@@ -150,10 +149,10 @@ class ERDDAP(object):
         Returns:
             download_url (str): the download URL for the `response` chosen.
         """
-        base = '{server_url}/{server_type}/{dataset_id}'.format
+        base = '{server_url}/{protocol}/{dataset_id}'.format
         return base(
             server_url=self.server_url,
-            server_type=self.server_type,
+            protocol=protocol,
             dataset_id=dataset_id
             )
 
