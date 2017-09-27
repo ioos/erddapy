@@ -2,7 +2,6 @@
 
 from __future__ import (absolute_import, division, print_function)
 
-import pandas as pd
 
 
 def _clean_response(response):
@@ -33,17 +32,34 @@ class ERDDAP(object):
         self._dataset_id = None
         self._variables = {}
 
-    def search_url(self, response='csv', items_per_page=1000, page=1, search_for=None, **kwargs):
+    def search_url(self, response='csv', search_for=None, items_per_page=1000, page=1, **kwargs):
         """Compose the search URL for the `server_url` endpoint.
 
         Args:
-            items_per_page (int): how many items per page in the return,
-                default is 1000.
-            page (int): which page to display, defatul is the first page (1).
+            search_for (str): "Google-like" search
+                - This is a Google-like search of the datasets' metadata:
+                  Type the words you want to search for, with spaces between the words.
+                  ERDDAP will search for the words separately, not as a phrase.
+                - To search for a phrase, put double quotes around the phrase
+                  (for example, `"wind speed"`).
+                - To exclude datasets with a specific word, use `-excludedWord`.
+                - To exclude datasets with a specific phrase, use `-"excluded phrase"`
+                - Searches are not case-sensitive.
+                - To find just grid or just table datasets, include `protocol=griddap`
+                  or `protocol=tabledap` in your search.
+                - You can search for any part of a word. For example,
+                  searching for `spee` will find datasets with `speed` and datasets with
+                `WindSpeed`
+                - The last word in a phrase may be a partial word. For example,
+                  to find datasets from a specific website (usually the start of the datasetID),
+                  include (for example) `"datasetID=erd"` in your search.
             response (str): default is a Comma Separated Value ('csv').
                 See ERDDAP docs for all the options,
                 tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
                 griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
+            items_per_page (int): how many items per page in the return,
+                default is 1000.
+            page (int): which page to display, defatul is the first page (1).
         Returns:
             search_url (str): the search URL for the `response` chosen.
         """
@@ -164,21 +180,30 @@ class ERDDAP(object):
         for the `dataset_id`, and the variables attribute dictionary.
 
         Examples:
+            >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
+            >>> dataset_id = 'whoi_406-20160902T1700'
+
             >>> # Get variables with x-axis attribute.
-            >>> vs = nc.get_variables_by_attributes(axis='X')
+            >>> vs = e.get_var_by_attr(dataset_id, axis='X')
 
             >>> # Get variables with matching "standard_name" attribute
-            >>> vs = nc.get_variables_by_attributes(standard_name='northward_sea_water_velocity')
+            >>> vs = e.get_var_by_attr(dataset_id, standard_name='northward_sea_water_velocity')
 
             >>> # Get Axis variables
-            >>> vs = nc.get_variables_by_attributes(axis=lambda v: v in ['X', 'Y', 'Z', 'T'])
+            >>> vs = e.get_var_by_attr(dataset_id, axis=lambda v: v in ['X', 'Y', 'Z', 'T'])
 
             >>> # Get variables that don't have an "axis" attribute
-            >>> vs = nc.get_variables_by_attributes(axis=lambda v: v is None)
+            >>> vs = e.get_var_by_attr(dataset_id, axis=lambda v: v is None)
 
             >>> # Get variables that have a "grid_mapping" attribute
-            >>> vs = nc.get_variables_by_attributes(grid_mapping=lambda v: v is not None)
+            >>> vs = e.get_var_by_attr(dataset_id, grid_mapping=lambda v: v is not None)
         """
+        # FIXME: try to make the variables dict with the json response to make
+        # erddapy run with no dependencyes.
+        try:
+            import pandas as pd
+        except ImportError:
+            raise ImportError('pandas is needed to use `get_var_by_attr`.')
         info_url = self.info_url(dataset_id, response='csv')
 
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
@@ -188,8 +213,7 @@ class ERDDAP(object):
             variables = {}
             for variable in set(_df['Variable Name']):
                 attributes = _df.loc[
-                    _df['Variable Name'] == variable,
-                    ['Attribute Name', 'Value']
+                    _df['Variable Name'] == variable, ['Attribute Name', 'Value']
                 ].set_index('Attribute Name').to_dict()['Value']
                 variables.update({variable: attributes})
                 self._variables = variables
