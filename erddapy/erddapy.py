@@ -2,6 +2,7 @@
 
 from __future__ import (absolute_import, division, print_function)
 
+from urllib.parse import quote_plus
 
 
 def _clean_response(response):
@@ -49,7 +50,7 @@ class ERDDAP(object):
                   or `protocol=tabledap` in your search.
                 - You can search for any part of a word. For example,
                   searching for `spee` will find datasets with `speed` and datasets with
-                `WindSpeed`
+                  `WindSpeed`
                 - The last word in a phrase may be a partial word. For example,
                   to find datasets from a specific website (usually the start of the datasetID),
                   include (for example) `"datasetID=erd"` in your search.
@@ -83,7 +84,7 @@ class ERDDAP(object):
             '&maxTime={maxTime}'
             )
         if search_for:
-            search_for = search_for.replace(' ', '+AND+')
+            search_for = quote_plus(search_for)
             base += '&searchFor={searchFor}'
 
         default = '(ANY)'
