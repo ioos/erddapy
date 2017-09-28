@@ -236,3 +236,20 @@ class ERDDAP(object):
             if has_value_flag is True:
                 vs.append(vname)
         return vs
+
+
+
+def urlopen(url):
+    import io
+    import requests
+    return io.BytesIO(requests.get(url).content)
+
+
+def open_dataset(url, **kwargs):
+    import xarray as xr
+    from tempfile import NamedTemporaryFile
+    data = urlopen(url).read()
+    with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
+        tmp.write(data)
+        tmp.flush()
+        return xr.open_dataset(tmp.name, **kwargs)
