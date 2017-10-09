@@ -27,6 +27,8 @@ class ERDDAP(object):
     """
     def __init__(self, server_url):
         self.server_url = server_url
+        self.search_options = {}
+        self.download_options = {}
         # Caching the last request for quicker multiple access,
         # will be overridden when making a new requested.
         self._nc = None
@@ -110,6 +112,7 @@ class ERDDAP(object):
             'maxTime': kwargs.get('max_time', default),
             'searchFor': search_for,
         }
+        self.search_options.update(search_options)
         return base.format(**search_options)
 
     def info_url(self, dataset_id, response='csv'):
@@ -146,6 +149,7 @@ class ERDDAP(object):
         Returns:
             download_url (str): the download URL for the `response` chosen.
         """
+        self.download_options.update(kwargs)
         variables = ','.join(variables)
         base = (
             '{server_url}/{protocol}/{dataset_id}.{response}'
@@ -156,7 +160,7 @@ class ERDDAP(object):
         kwargs = ''.join(['&{}{}'.format(k, v) for k, v in kwargs.items()])
         return base(server_url=self.server_url, protocol=protocol,
                     dataset_id=dataset_id, response=response, variables=variables,
-                    kwargs=kwargs)
+                    kwargs=self.download_options)
 
     def opendap_url(self, dataset_id, protocol='tabledap'):
         """Compose the opendap URL for the `server_url` the endpoint.
