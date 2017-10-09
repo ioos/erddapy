@@ -1,40 +1,33 @@
-# -*- coding: utf-8 -*-
-
 from __future__ import (absolute_import, division, print_function)
 
 from urllib.parse import quote_plus
 
-
-def _clean_response(response):
-    """Allow for extension or .extension format.
-
-    The user can, for example,
-    use either `.csv` or `csv` in the response kwarg.
-
-    """
-    return response.lstrip('.')
+from erddapy.utilities import _clean_response, _check_url_response
 
 
 class ERDDAP(object):
     """Returns a ERDDAP instance for the user defined server endpoint.
 
-    Different from the R version there are no hard-coded servers!
-    The user must pass the endpoint explicitly!!
+    Different from the `R` package there are no hard-coded servers in `erddapy`!
+    The user must pass an endpoint explicitly!!
 
     Examples:
         >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
 
     """
     def __init__(self, server_url):
+        _check_url_response(server_url)
         self.server_url = server_url
+        self.search_options = {}
+        self.download_options = {}
         # Caching the last request for quicker multiple access,
         # will be overridden when making a new requested.
         self._nc = None
         self._dataset_id = None
         self._variables = {}
 
-    def search_url(self, response='csv', search_for=None, items_per_page=1000, page=1, **kwargs):
-        """Compose the search URL for the `server_url` endpoint.
+    def get_search_url(self, response='csv', search_for=None, items_per_page=1000, page=1, **kwargs):
+        """Compose the search URL for the `server_url` endpoint provided.
 
         Args:
             search_for (str): "Google-like" search
@@ -56,8 +49,8 @@ class ERDDAP(object):
                   include (for example) `"datasetID=erd"` in your search.
             response (str): default is a Comma Separated Value ('csv').
                 See ERDDAP docs for all the options,
-                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
                 griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
+                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
             items_per_page (int): how many items per page in the return,
                 default is 1000.
             page (int): which page to display, defatul is the first page (1).
@@ -110,9 +103,12 @@ class ERDDAP(object):
             'maxTime': kwargs.get('max_time', default),
             'searchFor': search_for,
         }
-        return base.format(**search_options)
+        self.search_options.update(search_options)
+        search_url = base.format(**search_options)
+        _check_url_response(search_url)
+        return search_url
 
-    def info_url(self, dataset_id, response='csv'):
+    def get_info_url(self, dataset_id, response='csv'):
         """Compose the info URL for the `server_url` endpoint.
 
         Args:
@@ -131,9 +127,11 @@ class ERDDAP(object):
             'dataset_id': dataset_id,
             'response': response
         }
-        return base(**info_options)
+        info_url = base(**info_options)
+        _check_url_response(info_url)
+        return info_url
 
-    def download_url(self, dataset_id, variables, response='csv', protocol='tabledap', **kwargs):
+    def get_download_url(self, dataset_id, variables, response='csv', protocol='tabledap', **kwargs):
         """Compose the download URL for the `server_url` endpoint.
 
         Args:
@@ -141,11 +139,12 @@ class ERDDAP(object):
             variables (list/tuple): a list of the variables to download.
             response (str): default is a Comma Separated Value ('csv').
                 See ERDDAP docs for all the options,
-                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
                 griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
+                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
         Returns:
             download_url (str): the download URL for the `response` chosen.
         """
+        self.download_options.update(kwargs)
         variables = ','.join(variables)
         base = (
             '{server_url}/{protocol}/{dataset_id}.{response}'
@@ -153,12 +152,19 @@ class ERDDAP(object):
             '{kwargs}'
         ).format
 
-        kwargs = ''.join(['&{}{}'.format(k, v) for k, v in kwargs.items()])
-        return base(server_url=self.server_url, protocol=protocol,
-                    dataset_id=dataset_id, response=response, variables=variables,
-                    kwargs=kwargs)
+        kwargs = ''.join(['&{}{}'.format(k, v) for k, v in self.download_options.items()])
+        download_url = base(
+            server_url=self.server_url,
+            protocol=protocol,
+            dataset_id=dataset_id,
+            response=response,
+            variables=variables,
+            kwargs=kwargs
+        )
+        _check_url_response(download_url)
+        return download_url
 
-    def opendap_url(self, dataset_id, protocol='tabledap'):
+    def get_opendap_url(self, dataset_id, protocol='tabledap'):
         """Compose the opendap URL for the `server_url` the endpoint.
 
         Args:
@@ -167,11 +173,13 @@ class ERDDAP(object):
             download_url (str): the download URL for the `response` chosen.
         """
         base = '{server_url}/{protocol}/{dataset_id}'.format
-        return base(
+        opendap_url = base(
             server_url=self.server_url,
             protocol=protocol,
             dataset_id=dataset_id
             )
+        _check_url_response(opendap_url)
+        return opendap_url
 
     def get_var_by_attr(self, dataset_id, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for a ERDDAP
@@ -199,13 +207,11 @@ class ERDDAP(object):
             >>> # Get variables that have a "grid_mapping" attribute
             >>> vs = e.get_var_by_attr(dataset_id, grid_mapping=lambda v: v is not None)
         """
-        # FIXME: try to make the variables dict with the json response to make
-        # erddapy run with no dependencyes.
         try:
             import pandas as pd
         except ImportError:
             raise ImportError('pandas is needed to use `get_var_by_attr`.')
-        info_url = self.info_url(dataset_id, response='csv')
+        info_url = self.get_info_url(dataset_id, response='csv')
 
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
         if not self._variables or self._dataset_id != dataset_id:
@@ -236,20 +242,3 @@ class ERDDAP(object):
             if has_value_flag is True:
                 vs.append(vname)
         return vs
-
-
-
-def urlopen(url):
-    import io
-    import requests
-    return io.BytesIO(requests.get(url).content)
-
-
-def open_dataset(url, **kwargs):
-    import xarray as xr
-    from tempfile import NamedTemporaryFile
-    data = urlopen(url).read()
-    with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
-        tmp.write(data)
-        tmp.flush()
-        return xr.open_dataset(tmp.name, **kwargs)
