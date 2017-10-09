@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-
 from __future__ import (absolute_import, division, print_function)
 
 from erddapy.erddapy import ERDDAP
-from erddapy.erddapy import open_dataset
+from erddapy.utilities import open_dataset
 
 __all__ = [
     'ERDDAP',
