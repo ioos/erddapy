@@ -29,12 +29,11 @@ before_install:
   - source activate TEST
 
 install:
-  - python setup.py sdist && version=$(python setup.py --version) && pushd dist  && pip install erddapy-${version}.tar.gz && popd
+  - python setup.py sdist && version=$(python setup.py --version) && pushd dist && pip install erddapy-${version}.tar.gz && popd
 
 script:
-
   - if [[ $TEST_TARGET == 'default' ]]; then
-      cp tests /tmp && cd tmp ;
+      cp -r tests/ /tmp && cd /tmp ;
       py.test -vv tests ;
     fi
 

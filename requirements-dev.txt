@@ -8,3 +8,4 @@ flake8-quotes
 netcdf4
 nbsphinx
 sphinx
+pytest
