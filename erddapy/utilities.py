@@ -1,7 +1,9 @@
 from __future__ import (absolute_import, division, print_function)
 
 
+import io
 import requests
+from tempfile import NamedTemporaryFile
 
 
 def _clean_response(response):
@@ -20,14 +22,11 @@ def _check_url_response(url):
 
 
 def _urlopen(url):
-    import io
-    import requests
     return io.BytesIO(requests.get(url).content)
 
 
 def open_dataset(url, **kwargs):
     import xarray as xr
-    from tempfile import NamedTemporaryFile
     data = _urlopen(url).read()
     with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
         tmp.write(data)
