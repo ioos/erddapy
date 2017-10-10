@@ -39,7 +39,9 @@ config = {
         'License :: OSI Approved :: BSD License',
         'Development Status :: 4 - Beta'],
     'packages': find_packages(),
-    'tests_require': ['pytest'],
+    'extras_require': {
+        'testing': ['pytest'],
+    },
     'license': LICENSE,
     'install_requires': install_requires,
     'cmdclass': versioneer.get_cmdclass(),
