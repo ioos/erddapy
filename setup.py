@@ -3,7 +3,7 @@
 from __future__ import (absolute_import, division, print_function)
 
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 import versioneer
 
@@ -39,6 +39,7 @@ config = dict(
         'Topic :: Scientific/Engineering :: GIS',
         'License :: OSI Approved :: BSD License',
         'Development Status :: 4 - Beta'],
+    packages=find_packages(),
     tests_require=['pytest'],
     license=LICENSE,
     install_requires=install_requires,
