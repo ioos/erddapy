@@ -1,8 +1,10 @@
-# http://lint.travis-ci.org/
-
 language: python
 
 sudo: false
+
+env:
+  global:
+    - secure: "mn3RZC/TCt+zx8HK1LYFplCAWiSE+19mJ6S7JgVRggbpizbSln73/KtTXvLvZbJHwxK1n5m8yK6gFS3gZBpFKdOnQtkkT+yinaEYFV7eX+3kPxv4KX97spIHHMGKl/jIrewMbLBe4Drz8XcAUdWDWA4iFPrA1tVDhbnGTiZ2NEvMdn4Q4QXWfYhOzfJizSLnjqiuiNYI9cFVERf6mD5S5aVqRd2OivKR85FbCZPzAn6gcxl5XKIzvqFhMTffXXhe1vq4/pWuu+2vj5sb36gAKoh8fPW+WvieuAtKY4VqCZ4GPIA7iMLxqDXkGXD2s5KsBPXN0j9f5zyL7KCDqmYgw08gxa9GM+eEdtC2lQLtGpV2mmoau3hG6FevJkD9qraORoQiul4ZmBwCqznqDvE61MkbMnA0XCutLb/bhFlcrUrLRvCkiF5xpm8t6NNWKI5kqP1MQUlRFCxoaUn+xdwAGKbwXdyC+w9HhZR9lNuotfg0XVLCVTeP3GIWIhuZJMiJsfCpm71HnaFXsq7B9J0mq4wEinIBDeNCJxAZN2phQHH5ElBkl+EyDy+8p3czLLSQ/WhfHVW7Ylv3oRNab5YTFFTKTVY5plGx6nbzHQG6YS9wAPTGEeHyPGheLI0/fpZZ/8m4WLBx/VUYAPpkYe42a8xpdbeoz6lx7Xj3jAmo+Lg="
 
 matrix:
   fast_finish: true
@@ -11,6 +13,10 @@ matrix:
     env: TEST_TARGET=default
   - python: 3.6
     env: TEST_TARGET=default
+  - python: 3.6
+    env: TEST_TARGET=coding_standards
+  - python: 3.6
+    env: TEST_TARGET=docs
 
 before_install:
   - wget http://bit.ly/miniconda -O miniconda.sh
@@ -23,13 +29,28 @@ before_install:
   - source activate TEST
 
 install:
-  - python setup.py sdist && version=$(python setup.py --version) && pushd dist  && pip install erddapy-${version}.tar.gz && popd
+  - python setup.py sdist && version=$(python setup.py --version) && pushd dist && pip install erddapy-${version}.tar.gz && popd
 
 script:
-  - if [[ $TEST_TARGET != 'docs' ]]; then
-      cp -r tests/ /tmp && cd /tmp ;
-    fi
-
   - if [[ $TEST_TARGET == 'default' ]]; then
+      cp -r tests/ /tmp && cd /tmp ;
       py.test -vv tests ;
     fi
+
+  - if [[ $TEST_TARGET == 'coding_standards' ]]; then
+      flake8 --max-line-length=105 erddapy --exclude=_version.py ;
+    fi
+
+  - if [[ $TEST_TARGET == 'docs' ]]; then
+      set -e ;
+      conda install doctr ;
+      pushd docs ;
+      make clean html linkcheck ;
+      popd ;
+      python -m doctr deploy --sync .;
+      python -m doctr deploy --sync --no-require-master  --built-docs docs/build/html "docs-$TRAVIS_BRANCH" ;
+    fi
+
+doctr:
+  require-master: true
+  sync: False
