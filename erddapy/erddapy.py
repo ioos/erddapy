@@ -2,7 +2,7 @@ from __future__ import (absolute_import, division, print_function)
 
 from urllib.parse import quote_plus
 
-from erddapy.utilities import _clean_response, _check_url_response
+from erddapy.utilities import _check_url_response, _clean_response
 
 
 class ERDDAP(object):
