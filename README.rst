@@ -1,22 +1,17 @@
 .. image:: https://travis-ci.org/pyoceans/erddapy.svg?branch=master
    :target: https://travis-ci.org/pyoceans/erddapy
-   :alt: Travis-CI
 
 .. image:: https://anaconda.org/conda-forge/erddapy/badges/version.svg
    :target: https://anaconda.org/conda-forge/erddapy
-   :alt: Conda Package
 
 .. image:: https://img.shields.io/pypi/v/erddapy.svg
    :target: https://pypi.python.org/pypi/erddapy/
-   :alt: PyPI Package
 
 .. image:: https://img.shields.io/pypi/l/erddapy.svg
    :target: https://pypi.python.org/pypi/erddapy/
-   :alt: License
 
 .. image:: https://zenodo.org/badge/104919828.svg
    :target: https://zenodo.org/badge/latestdoi/104919828
-   :alt: DOI
 
 erddapy
 =======
