@@ -6,6 +6,7 @@ erddapy
    :caption: Contents:
 
    erddapy_tour.ipynb
+   erddapy_searchfor.ipynb
 
 Indices and tables
 ==================
