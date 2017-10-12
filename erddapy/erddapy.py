@@ -5,7 +5,7 @@ try:
 except ImportError:
     from urllib import quote_plus
 
-from erddapy.utilities import _check_url_response, _clean_response
+from erddapy.utilities import _check_url_response, _clean_response, parse_dates
 
 
 class ERDDAP(object):
@@ -57,6 +57,10 @@ class ERDDAP(object):
             items_per_page (int): how many items per page in the return,
                 default is 1000.
             page (int): which page to display, defatul is the first page (1).
+            kwargs (dict): extra search constraints based on metadata and/or coordinates ke/value.
+                metadata: `cdm_data_type`, `institution`, `ioos_category`,
+                `keywords`, `long_name`, `standard_name`, and `variableName`.
+                coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`, `minTime`, and `maxTime`.
         Returns:
             search_url (str): the search URL for the `response` chosen.
         """
@@ -82,6 +86,14 @@ class ERDDAP(object):
         if search_for:
             search_for = quote_plus(search_for)
             base += '&searchFor={searchFor}'
+
+        # Parse dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
+        min_time = kwargs.pop('min_time', None)
+        max_time = kwargs.pop('max_time', None)
+        if min_time:
+            kwargs.update({'min_time': parse_dates(min_time)})
+        if max_time:
+            kwargs.update({'max_time': parse_dates(max_time)})
 
         default = '(ANY)'
         response = _clean_response(response)

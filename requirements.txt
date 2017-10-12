@@ -1,2 +1,3 @@
+netcdf4
 pandas
 requests
