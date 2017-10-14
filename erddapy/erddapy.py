@@ -68,6 +68,7 @@ class ERDDAP(object):
         # Caching the last `dataset_id` request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
         self._dataset_id = None
+        self._variables = {}
 
     def get_search_url(self, response='csv', search_for=None, items_per_page=1000, page=1, **kwargs):
         """Compose the search URL for the `server_url` endpoint provided.
@@ -255,20 +256,21 @@ class ERDDAP(object):
         Examples:
             >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
             >>> dataset_id = 'whoi_406-20160902T1700'
-            >>> # Get variables with x-axis attribute.
+
+            Get variables with x-axis attribute.
+
             >>> e.get_var_by_attr(dataset_id, axis='X')
+            ['longitude']
 
-            >>> # Get variables with matching "standard_name" attribute
+            Get variables with matching "standard_name" attribute
+
             >>> e.get_var_by_attr(dataset_id, standard_name='northward_sea_water_velocity')
+            ['v']
 
-            >>> # Get Axis variables
+            Get Axis variables
+
             >>> e.get_var_by_attr(dataset_id, axis=lambda v: v in ['X', 'Y', 'Z', 'T'])
-
-            >>> # Get variables that don't have an "axis" attribute
-            >>> e.get_var_by_attr(dataset_id, axis=lambda v: v is None)
-
-            >>> # Get variables that have a "grid_mapping" attribute
-            >>> e.get_var_by_attr(dataset_id, grid_mapping=lambda v: v is not None)
+            ['latitude', 'longitude', 'time', 'depth']
 
         """
         try:
@@ -278,8 +280,8 @@ class ERDDAP(object):
         info_url = self.get_info_url(dataset_id, response='csv')
 
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
-        variables = {}
-        if self._dataset_id != dataset_id:
+        if not self._variables or self._dataset_id != dataset_id:
+            variables = {}
             _df = pd.read_csv(info_url)
             self._dataset_id = dataset_id
             for variable in set(_df['Variable Name']):
@@ -287,11 +289,12 @@ class ERDDAP(object):
                     _df['Variable Name'] == variable, ['Attribute Name', 'Value']
                 ].set_index('Attribute Name').to_dict()['Value']
                 variables.update({variable: attributes})
+                self._variables = variables
         # Virtually the same code as the netCDF4 counterpart.
         vs = []
         has_value_flag = False
-        for vname in variables:
-            var = variables[vname]
+        for vname in self._variables:
+            var = self._variables[vname]
             for k, v in kwargs.items():
                 if callable(v):
                     has_value_flag = v(var.get(k, None))
