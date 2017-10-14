@@ -1,6 +1,7 @@
 import io
 
-from erddapy.utilities import _check_url_response, _clean_response, _urlopen
+from erddapy.utilities import _check_url_response, _clean_response
+from erddapy.extras import _urlopen
 
 import pytest
 

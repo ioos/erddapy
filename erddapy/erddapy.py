@@ -5,27 +5,68 @@ try:
 except ImportError:
     from urllib import quote_plus
 
+from erddapy.extras import servers
 from erddapy.utilities import _check_url_response, _clean_response, parse_dates
 
 
 class ERDDAP(object):
-    """Returns a ERDDAP instance for the user defined server endpoint.
+    """Creates an ERDDAP instance for the user defined server endpoint.
 
-    Different from the `R` package there are no hard-coded servers in `erddapy`!
-    The user must pass an endpoint explicitly!!
+    Args:
+        server_url (str): an ERDDAP server URL or an acronym for the builtin servers.
+
+    Returns:
+        instance: the ERDDAP URL builder.
 
     Examples:
+        Specifying the server URL
+
         >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
+
+        let's search for glider `ru29` and read the csv response with pandas.
+
+        >>> import pandas as pd
+        >>> url = e.get_search_url(search_for='ru29', response='csv')
+        >>> pd.read_csv(url)['Dataset ID']
+        0    ru29-20150623T1046
+        1    ru29-20161105T0131
+        Name: Dataset ID, dtype: object
+
+        there are "shortcuts" for some servers
+
+        >>> e = ERDDAP(server_url='SECOORA')
+
+        to get a list of the shortcuts available servers:
+
+        >>> from erddapy import servers
+        >>> {k: v.url for k, v in servers.items()}
+        {'BMLSC': 'http://bmlsc.ucdavis.edu:8080/erddap',
+         'CSCGOM': 'http://cwcgom.aoml.noaa.gov/erddap',
+         'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap',
+         'CeNCOOS': 'http://erddap.axiomalaska.com/erddap',
+         'IFREMER': 'http://www.ifremer.fr/erddapindex.html',
+         'MDA': 'https://bluehub.jrc.ec.europa.eu/erddap',
+         'MII': 'http://erddap.marine.ie/erddap',
+         'NCEI': 'http://ecowatch.ncddc.noaa.gov/erddap',
+         'NERACOOS': 'http://www.neracoos.org/erddap',
+         'NGDAC': 'http://data.ioos.us/gliders/erddap',
+         'ONC': 'http://dap.onc.uvic.ca/erddap',
+         'OSMC': 'http://osmc.noaa.gov/erddap',
+         'PacIOOS': 'http://oos.soest.hawaii.edu/erddap',
+         'RTECH': 'http://meteo.rtech.fr/erddap',
+         'SECOORA': 'http://erddap.secoora.org/erddap',
+         'UAF': 'https://upwell.pfeg.noaa.gov/erddap'}
 
     """
     def __init__(self, server_url):
+        if server_url in servers.keys():
+            server_url = servers[server_url].url
         _check_url_response(server_url)
         self.server_url = server_url
         self.search_options = {}
         self.download_options = {}
-        # Caching the last request for quicker multiple access,
-        # will be overridden when making a new requested.
-        self._nc = None
+        # Caching the last `dataset_id` request for quicker multiple accesses,
+        # will be overridden when requesting a new `dataset_id`.
         self._dataset_id = None
         self._variables = {}
 
@@ -33,9 +74,9 @@ class ERDDAP(object):
         """Compose the search URL for the `server_url` endpoint provided.
 
         Args:
-            search_for (str): "Google-like" search
-                - This is a Google-like search of the datasets' metadata:
-                  Type the words you want to search for, with spaces between the words.
+            search_for (str): "Google-like" search of the datasets' metadata.
+
+                - Type the words you want to search for, with spaces between the words.
                   ERDDAP will search for the words separately, not as a phrase.
                 - To search for a phrase, put double quotes around the phrase
                   (for example, `"wind speed"`).
@@ -50,10 +91,13 @@ class ERDDAP(object):
                 - The last word in a phrase may be a partial word. For example,
                   to find datasets from a specific website (usually the start of the datasetID),
                   include (for example) `"datasetID=erd"` in your search.
+
             response (str): default is a Comma Separated Value ('csv').
                 See ERDDAP docs for all the options,
-                griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
-                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+
+                - tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+                - griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
+
             items_per_page (int): how many items per page in the return,
                 default is 1000.
             page (int): which page to display, defatul is the first page (1).
@@ -63,6 +107,7 @@ class ERDDAP(object):
                 coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`, `minTime`, and `maxTime`.
         Returns:
             search_url (str): the search URL for the `response` chosen.
+
         """
         base = (
             '{server_url}/search/advanced.{response}'
@@ -87,7 +132,7 @@ class ERDDAP(object):
             search_for = quote_plus(search_for)
             base += '&searchFor={searchFor}'
 
-        # Parse dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
+        # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
         min_time = kwargs.pop('min_time', None)
         max_time = kwargs.pop('max_time', None)
         if min_time:
@@ -130,10 +175,12 @@ class ERDDAP(object):
             dataset_id (str): a dataset unique id.
             response (str): default is a Comma Separated Value ('csv').
                 See ERDDAP docs for all the options,
-                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
-                griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
+
+                - tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+                - griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
         Returns:
             info_url (str): the info URL for the `response` chosen.
+
         """
         response = _clean_response(response)
         base = '{server_url}/info/{dataset_id}/index.{response}'.format
@@ -154,10 +201,12 @@ class ERDDAP(object):
             variables (list/tuple): a list of the variables to download.
             response (str): default is a Comma Separated Value ('csv').
                 See ERDDAP docs for all the options,
-                griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
-                tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+
+                - tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+                - griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
         Returns:
             download_url (str): the download URL for the `response` chosen.
+
         """
         self.download_options.update(kwargs)
         variables = ','.join(variables)
@@ -186,6 +235,7 @@ class ERDDAP(object):
             dataset_id (str): a dataset unique id.
         Returns:
             download_url (str): the download URL for the `response` chosen.
+
         """
         base = '{server_url}/{protocol}/{dataset_id}'.format
         opendap_url = base(
@@ -197,7 +247,7 @@ class ERDDAP(object):
         return opendap_url
 
     def get_var_by_attr(self, dataset_id, **kwargs):
-        """Similar to netCDF4-python `get_variables_by_attributes` for a ERDDAP
+        """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
         `dataset_id`.
 
         The `get_var_by_attr` method will create an info `csv` return,
@@ -207,20 +257,21 @@ class ERDDAP(object):
             >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
             >>> dataset_id = 'whoi_406-20160902T1700'
 
-            >>> # Get variables with x-axis attribute.
-            >>> vs = e.get_var_by_attr(dataset_id, axis='X')
+            Get variables with x-axis attribute.
 
-            >>> # Get variables with matching "standard_name" attribute
-            >>> vs = e.get_var_by_attr(dataset_id, standard_name='northward_sea_water_velocity')
+            >>> e.get_var_by_attr(dataset_id, axis='X')
+            ['longitude']
 
-            >>> # Get Axis variables
-            >>> vs = e.get_var_by_attr(dataset_id, axis=lambda v: v in ['X', 'Y', 'Z', 'T'])
+            Get variables with matching "standard_name" attribute
 
-            >>> # Get variables that don't have an "axis" attribute
-            >>> vs = e.get_var_by_attr(dataset_id, axis=lambda v: v is None)
+            >>> e.get_var_by_attr(dataset_id, standard_name='northward_sea_water_velocity')
+            ['v']
 
-            >>> # Get variables that have a "grid_mapping" attribute
-            >>> vs = e.get_var_by_attr(dataset_id, grid_mapping=lambda v: v is not None)
+            Get Axis variables
+
+            >>> e.get_var_by_attr(dataset_id, axis=lambda v: v in ['X', 'Y', 'Z', 'T'])
+            ['latitude', 'longitude', 'time', 'depth']
+
         """
         try:
             import pandas as pd
@@ -230,9 +281,9 @@ class ERDDAP(object):
 
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
         if not self._variables or self._dataset_id != dataset_id:
+            variables = {}
             _df = pd.read_csv(info_url)
             self._dataset_id = dataset_id
-            variables = {}
             for variable in set(_df['Variable Name']):
                 attributes = _df.loc[
                     _df['Variable Name'] == variable, ['Attribute Name', 'Value']
