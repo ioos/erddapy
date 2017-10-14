@@ -1,7 +1,14 @@
+import io
+
 from collections import namedtuple
 from tempfile import NamedTemporaryFile
 
-from erddapy.utilities import _urlopen
+import requests
+
+
+def _urlopen(url):
+    """Thin wrapper around requests get content."""
+    return io.BytesIO(requests.get(url).content)
 
 
 def open_dataset(url, **kwargs):

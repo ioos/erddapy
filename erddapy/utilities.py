@@ -1,8 +1,6 @@
 from __future__ import (absolute_import, division, print_function)
 
 
-import io
-
 from netCDF4 import netcdftime
 
 import requests
@@ -21,11 +19,6 @@ def _clean_response(response):
 
     """
     return response.lstrip('.')
-
-
-def _urlopen(url):
-    """Thin wrapper around requests get content."""
-    return io.BytesIO(requests.get(url).content)
 
 
 def parse_dates(date_time, calendar='standard'):
