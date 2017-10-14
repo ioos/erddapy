@@ -2,7 +2,6 @@ from __future__ import (absolute_import, division, print_function)
 
 
 import io
-from tempfile import NamedTemporaryFile
 
 from netCDF4 import netcdftime
 
@@ -31,26 +30,12 @@ def _urlopen(url):
 
 def parse_dates(date_time, calendar='standard'):
     """
-    ERDDAP ReSTful API can take a variety of time constraints.
-    For erddapy we chose to use only `seconds since 1970-01-01T00:00:00Z`,
-    converted from datetime, so the user can parse the dates in any way they like.
+    ERDDAP ReSTful API can take a variety of time constraints,
+    for erddapy we chose to use only `seconds since 1970-01-01T00:00:00Z`,
+    converted from datetime internally, that way the user can parse the dates in any way they like
+    using python datetime like objects..
 
     """
 
     utime = netcdftime.utime('seconds since 1970-01-01T00:00:00Z', calendar=calendar)
     return utime.date2num(date_time)
-
-
-def open_dataset(url, **kwargs):
-    """
-    Load data as a xarray dataset from the .nc format.
-
-    Caveat: this downloads a temporary file! Be careful with the size of the request.
-
-    """
-    import xarray as xr
-    data = _urlopen(url).read()
-    with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
-        tmp.write(data)
-        tmp.flush()
-        return xr.open_dataset(tmp.name, **kwargs)
