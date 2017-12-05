@@ -273,8 +273,12 @@ class ERDDAP(object):
             ['latitude', 'longitude', 'time', 'depth']
 
         """
+        import requests
+        from io import StringIO
+            
         try:
             import pandas as pd
+
         except ImportError:
             raise ImportError('pandas is needed to use `get_var_by_attr`.')
         info_url = self.get_info_url(dataset_id, response='csv')
@@ -282,7 +286,8 @@ class ERDDAP(object):
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
         if not self._variables or self._dataset_id != dataset_id:
             variables = {}
-            _df = pd.read_csv(info_url)
+            r = requests.get(info_url, verify=True)
+            _df = pd.read_csv(StringIO(r.text))
             self._dataset_id = dataset_id
             for variable in set(_df['Variable Name']):
                 attributes = _df.loc[
