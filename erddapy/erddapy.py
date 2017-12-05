@@ -1,5 +1,7 @@
 from __future__ import (absolute_import, division, print_function)
 
+import requests
+
 try:
     from urllib.parse import quote_plus
 except ImportError:
@@ -273,9 +275,8 @@ class ERDDAP(object):
             ['latitude', 'longitude', 'time', 'depth']
 
         """
-        import requests
         from io import StringIO
-            
+
         try:
             import pandas as pd
 
