@@ -64,8 +64,7 @@ class ERDDAP(object):
     def __init__(self, server_url):
         if server_url in servers.keys():
             server_url = servers[server_url].url
-        _check_url_response(server_url)
-        self.server_url = server_url
+        self.server_url = _check_url_response(server_url)
         self.search_options = {}
         self.download_options = {}
         # Caching the last `dataset_id` request for quicker multiple accesses,
@@ -168,8 +167,7 @@ class ERDDAP(object):
         }
         self.search_options.update(search_options)
         search_url = base.format(**search_options)
-        _check_url_response(search_url)
-        return search_url
+        return _check_url_response(search_url)
 
     def get_info_url(self, dataset_id, response='csv'):
         """Compose the info URL for the `server_url` endpoint.
@@ -193,8 +191,7 @@ class ERDDAP(object):
             'response': response
         }
         info_url = base(**info_options)
-        _check_url_response(info_url)
-        return info_url
+        return _check_url_response(info_url)
 
     def get_download_url(self, dataset_id, variables, response='csv', protocol='tabledap', **kwargs):
         """Compose the download URL for the `server_url` endpoint.
@@ -228,8 +225,7 @@ class ERDDAP(object):
             variables=variables,
             kwargs=kwargs
         )
-        _check_url_response(download_url)
-        return download_url
+        return _check_url_response(download_url)
 
     def get_opendap_url(self, dataset_id, protocol='tabledap'):
         """Compose the opendap URL for the `server_url` the endpoint.
@@ -246,8 +242,7 @@ class ERDDAP(object):
             protocol=protocol,
             dataset_id=dataset_id
             )
-        _check_url_response(opendap_url)
-        return opendap_url
+        return _check_url_response(opendap_url)
 
     def get_var_by_attr(self, dataset_id, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP

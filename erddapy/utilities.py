@@ -8,6 +8,7 @@ def _check_url_response(url):
     """Shortcut to `raise_for_status` instead of fetching the whole content."""
     r = requests.head(url)
     r.raise_for_status()
+    return r.url
 
 
 def _clean_response(response):
