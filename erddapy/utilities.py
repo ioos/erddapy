@@ -21,14 +21,11 @@ def _clean_response(response):
     return response.lstrip('.')
 
 
-def parse_dates(date_time, calendar='standard'):
+def parse_dates(date_time):
     """
-    ERDDAP ReSTful API can take a variety of time constraints,
-    for erddapy we chose to use only `seconds since 1970-01-01T00:00:00Z`,
-    converted from datetime internally, that way the user can parse the dates in any way they like
-    using python datetime like objects..
+    ERDDAP ReSTful API standardizes the representation of data as either ISO strings or seconds since 1970, 
+    but in ERDDAPY we convert all datetime objects to seconds since 1970. 
 
     """
 
-    utime = netcdftime.utime('seconds since 1970-01-01T00:00:00Z', calendar=calendar)
-    return utime.date2num(date_time)
+    return date_time.timestamp()
