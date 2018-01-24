@@ -1,8 +1,6 @@
 from __future__ import (absolute_import, division, print_function)
 
 
-from netCDF4 import netcdftime
-
 import requests
 
 
@@ -23,9 +21,19 @@ def _clean_response(response):
 
 def parse_dates(date_time):
     """
-    ERDDAP ReSTful API standardizes the representation of data as either ISO strings or seconds since 1970, 
-    but in ERDDAPY we convert all datetime objects to seconds since 1970. 
+    ERDDAP ReSTful API standardizes the representation of dates as either ISO
+    strings or seconds since 1970, but internally ERDDAPY uses datetime-like
+    objects. `timestamp` returns the expected strings in seconds since 1970.
 
     """
 
     return date_time.timestamp()
+
+
+def quote_string_constraints(kwargs):
+    """
+    For constraints of String variables,
+    the right-hand-side value must be surrounded by double quotes.
+
+    """
+    return {k: '"{}"'.format(v) if isinstance(v, str) else v for k, v in kwargs.items()}

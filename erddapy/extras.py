@@ -1,5 +1,4 @@
 import io
-
 from collections import namedtuple
 from tempfile import NamedTemporaryFile
 
