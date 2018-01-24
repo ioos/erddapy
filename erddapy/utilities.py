@@ -29,3 +29,15 @@ def parse_dates(date_time):
     """
 
     return date_time.timestamp()
+
+
+def quote_string_constraints(kwargs):
+    """
+    For constraints of String variables,
+    the right-hand-side value must be surrounded by double quotes.
+
+    """
+    return {k: '"{}"'.format(v) if isinstance(v, str) else v for k, v in kwargs.items()}
+
+
+

@@ -8,7 +8,8 @@ except ImportError:
     from urllib import quote_plus
 
 from erddapy.extras import servers
-from erddapy.utilities import _check_url_response, _clean_response, parse_dates
+from erddapy.utilities import (_check_url_response, _clean_response,
+                               parse_dates, quote_string_constraints)
 
 
 class ERDDAP(object):
@@ -210,7 +211,7 @@ class ERDDAP(object):
             download_url (str): the download URL for the `response` chosen.
 
         """
-        self.download_options.update(kwargs)
+        self.download_options.update(quote_string_constraints(kwargs))
         variables = ','.join(variables)
         base = (
             '{server_url}/{protocol}/{dataset_id}.{response}'
