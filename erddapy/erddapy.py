@@ -1,7 +1,5 @@
 from __future__ import (absolute_import, division, print_function)
 
-import requests
-
 try:
     from urllib.parse import quote_plus
 except ImportError:
@@ -10,6 +8,8 @@ except ImportError:
 from erddapy.extras import servers
 from erddapy.utilities import (_check_url_response, _clean_response,
                                parse_dates, quote_string_constraints)
+
+import requests
 
 
 class ERDDAP(object):
