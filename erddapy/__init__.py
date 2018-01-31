@@ -1,11 +1,9 @@
 from __future__ import (absolute_import, division, print_function)
 
-from erddapy.erddapy import ERDDAP
-from erddapy.extras import open_dataset, servers
+from erddapy.erddapy import ERDDAP, servers
 
 __all__ = [
     'ERDDAP',
-    'open_dataset',
     'servers',
 ]
 
