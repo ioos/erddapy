@@ -1,22 +1,36 @@
+"""
+erddapy
+
+Pythonic way to access ERDDAP data
+
+"""
+
 from __future__ import (absolute_import, division, print_function)
 
-try:
-    from urllib.parse import quote_plus
-except ImportError:
-    from urllib import quote_plus
+from erddapy.url_builder import (
+    download_url,
+    info_url,
+    search_url,
+)
+from erddapy.utilities import (
+    _check_url_response,
+    _urlopen,
+    servers,
+    )
 
-from erddapy.extras import servers
-from erddapy.utilities import (_check_url_response, _clean_response,
-                               parse_dates, quote_string_constraints)
-
-import requests
+import pandas as pd
 
 
 class ERDDAP(object):
-    """Creates an ERDDAP instance for the user defined server endpoint.
+    """Creates an ERDDAP instance for a specific server endpoint.
 
     Args:
-        server_url (str): an ERDDAP server URL or an acronym for the builtin servers.
+        server (str): an ERDDAP server URL or an acronym for one of the builtin servers.
+        dataset_id (str): a dataset unique id.
+        protocol (str): tabledap or griddap.
+        variables (:obj:`list`/`tuple`): a list variables to download.
+        response (str): default is HTML.
+        constraints (:obj:`dict`): download constraints, default None (opendap-like url)
 
     Returns:
         instance: the ERDDAP URL builder.
@@ -24,7 +38,7 @@ class ERDDAP(object):
     Examples:
         Specifying the server URL
 
-        >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
+        >>> e = ERDDAP(server='https://data.ioos.us/gliders/erddap')
 
         let's search for glider `ru29` and read the csv response with pandas.
 
@@ -37,7 +51,9 @@ class ERDDAP(object):
 
         there are "shortcuts" for some servers
 
-        >>> e = ERDDAP(server_url='SECOORA')
+        >>> e = ERDDAP(server='SECOORA')
+        >>> e.server
+        'http://erddap.secoora.org/erddap'
 
         to get a list of the shortcuts available servers:
 
@@ -61,190 +77,70 @@ class ERDDAP(object):
          'UAF': 'https://upwell.pfeg.noaa.gov/erddap'}
 
     """
-    def __init__(self, server_url):
-        if server_url in servers.keys():
-            server_url = servers[server_url].url
-        self.server_url = _check_url_response(server_url)
-        self.search_options = {}
-        self.download_options = {}
+    def __init__(self, server, dataset_id=None, protocol=None, variables='',
+                 response='html', constraints=None):
+        if server in servers.keys():
+            server = servers[server].url
+        self.server = _check_url_response(server)
+        self.dataset_id = dataset_id
+        self.protocol = protocol
+        self.variables = variables
+        self.response = response
+        self.constraints = constraints
+
         # Caching the last `dataset_id` request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
         self._dataset_id = None
         self._variables = {}
 
-    def get_search_url(self, response='csv', search_for=None, items_per_page=1000, page=1, **kwargs):
-        """Compose the search URL for the `server_url` endpoint provided.
-
-        Args:
-            search_for (str): "Google-like" search of the datasets' metadata.
-
-                - Type the words you want to search for, with spaces between the words.
-                  ERDDAP will search for the words separately, not as a phrase.
-                - To search for a phrase, put double quotes around the phrase
-                  (for example, `"wind speed"`).
-                - To exclude datasets with a specific word, use `-excludedWord`.
-                - To exclude datasets with a specific phrase, use `-"excluded phrase"`
-                - Searches are not case-sensitive.
-                - To find just grid or just table datasets, include `protocol=griddap`
-                  or `protocol=tabledap` in your search.
-                - You can search for any part of a word. For example,
-                  searching for `spee` will find datasets with `speed` and datasets with
-                  `WindSpeed`
-                - The last word in a phrase may be a partial word. For example,
-                  to find datasets from a specific website (usually the start of the datasetID),
-                  include (for example) `"datasetID=erd"` in your search.
-
-            response (str): default is a Comma Separated Value ('csv').
-                See ERDDAP docs for all the options,
-
-                - tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
-                - griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
-
-            items_per_page (int): how many items per page in the return,
-                default is 1000.
-            page (int): which page to display, defatul is the first page (1).
-            kwargs (dict): extra search constraints based on metadata and/or coordinates ke/value.
-                metadata: `cdm_data_type`, `institution`, `ioos_category`,
-                `keywords`, `long_name`, `standard_name`, and `variableName`.
-                coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`, `minTime`, and `maxTime`.
-        Returns:
-            search_url (str): the search URL for the `response` chosen.
-
-        """
-        base = (
-            '{server_url}/search/advanced.{response}'
-            '?page={page}'
-            '&itemsPerPage={itemsPerPage}'
-            '&protocol={protocol}'
-            '&cdm_data_type={cdm_data_type}'
-            '&institution={institution}'
-            '&ioos_category={ioos_category}'
-            '&keywords={keywords}'
-            '&long_name={long_name}'
-            '&standard_name={standard_name}'
-            '&variableName={variableName}'
-            '&minLon={minLon}'
-            '&maxLon={maxLon}'
-            '&minLat={minLat}'
-            '&maxLat={maxLat}'
-            '&minTime={minTime}'
-            '&maxTime={maxTime}'
-            )
-        if search_for:
-            search_for = quote_plus(search_for)
-            base += '&searchFor={searchFor}'
-
-        # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
-        min_time = kwargs.pop('min_time', None)
-        max_time = kwargs.pop('max_time', None)
-        if min_time:
-            kwargs.update({'min_time': parse_dates(min_time)})
-        if max_time:
-            kwargs.update({'max_time': parse_dates(max_time)})
-
-        default = '(ANY)'
-        response = _clean_response(response)
-        search_options = {
-            'server_url': self.server_url,
-            'response': response,
-            'page': page,
-            'itemsPerPage': items_per_page,
-            'protocol': kwargs.get('protocol', default),
-            'cdm_data_type': kwargs.get('cdm_data_type', default),
-            'institution': kwargs.get('institution', default),
-            'ioos_category': kwargs.get('ioos_category', default),
-            'keywords': kwargs.get('keywords', default),
-            'long_name': kwargs.get('long_name', default),
-            'standard_name': kwargs.get('standard_name', default),
-            'variableName': kwargs.get('variableName', default),
-            'minLon': kwargs.get('min_lon', default),
-            'maxLon': kwargs.get('max_lon', default),
-            'minLat': kwargs.get('min_lat', default),
-            'maxLat': kwargs.get('max_lat', default),
-            'minTime': kwargs.get('min_time', default),
-            'maxTime': kwargs.get('max_time', default),
-            'searchFor': search_for,
-        }
-        self.search_options.update(search_options)
-        search_url = base.format(**search_options)
-        return _check_url_response(search_url)
-
-    def get_info_url(self, dataset_id, response='csv'):
-        """Compose the info URL for the `server_url` endpoint.
-
-        Args:
-            dataset_id (str): a dataset unique id.
-            response (str): default is a Comma Separated Value ('csv').
-                See ERDDAP docs for all the options,
-
-                - tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
-                - griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
-        Returns:
-            info_url (str): the info URL for the `response` chosen.
-
-        """
-        response = _clean_response(response)
-        base = '{server_url}/info/{dataset_id}/index.{response}'.format
-        info_options = {
-            'server_url': self.server_url,
-            'dataset_id': dataset_id,
-            'response': response
-        }
-        info_url = base(**info_options)
-        return _check_url_response(info_url)
-
-    def get_download_url(self, dataset_id, variables, response='csv', protocol='tabledap', **kwargs):
-        """Compose the download URL for the `server_url` endpoint.
-
-        Args:
-            dataset_id (str): a dataset unique id.
-            variables (list/tuple): a list of the variables to download.
-            response (str): default is a Comma Separated Value ('csv').
-                See ERDDAP docs for all the options,
-
-                - tabledap: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
-                - griddap: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
-        Returns:
-            download_url (str): the download URL for the `response` chosen.
-
-        """
-        self.download_options.update(quote_string_constraints(kwargs))
-        variables = ','.join(variables)
-        base = (
-            '{server_url}/{protocol}/{dataset_id}.{response}'
-            '?{variables}'
-            '{kwargs}'
-        ).format
-
-        kwargs = ''.join(['&{}{}'.format(k, v) for k, v in self.download_options.items()])
-        download_url = base(
-            server_url=self.server_url,
-            protocol=protocol,
-            dataset_id=dataset_id,
+    def get_search_url(self, response=None, search_for=None, items_per_page=1000, page=1, **kwargs):
+        response = response if response else self.response
+        return search_url(
+            server=self.server,
             response=response,
-            variables=variables,
-            kwargs=kwargs
-        )
-        return _check_url_response(download_url)
-
-    def get_opendap_url(self, dataset_id, protocol='tabledap'):
-        """Compose the opendap URL for the `server_url` the endpoint.
-
-        Args:
-            dataset_id (str): a dataset unique id.
-        Returns:
-            download_url (str): the download URL for the `response` chosen.
-
-        """
-        base = '{server_url}/{protocol}/{dataset_id}'.format
-        opendap_url = base(
-            server_url=self.server_url,
-            protocol=protocol,
-            dataset_id=dataset_id
+            search_for=search_for,
+            items_per_page=items_per_page,
+            page=page,
+            **kwargs
             )
-        return _check_url_response(opendap_url)
 
-    def get_var_by_attr(self, dataset_id, **kwargs):
+    def get_info_url(self, dataset_id=None, response=None):
+        dataset_id = dataset_id if dataset_id else self.dataset_id
+        response = response if response else self.response
+
+        if not dataset_id:
+            raise ValueError('You must specify a valid dataset_id, got {}'.format(self.dataset_id))
+
+        return info_url(
+            server=self.server,
+            dataset_id=dataset_id,
+            response=response
+            )
+
+    def get_download_url(self, dataset_id=None, protocol=None,
+                         variables=None, response=None, constraints=None):
+        dataset_id = dataset_id if dataset_id else self.dataset_id
+        protocol = protocol if protocol else self.protocol
+        variables = variables if variables else self.variables
+        response = response if response else self.response
+        constraints = constraints if constraints else self.constraints
+
+        if not dataset_id:
+            raise ValueError('Please specify a valid `dataset_id`, got {}'.format(self.dataset_id))
+
+        if not protocol:
+            raise ValueError('Please specify a valid `protocol`, got {}'.format(self.protocol))
+
+        return download_url(
+            server=self.server,
+            dataset_id=dataset_id,
+            protocol=protocol,
+            variables=','.join(self.variables),
+            response=response,
+            constraints=constraints,
+            )
+
+    def get_var_by_attr(self, dataset_id=None, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
         `dataset_id`.
 
@@ -271,21 +167,15 @@ class ERDDAP(object):
             ['latitude', 'longitude', 'time', 'depth']
 
         """
-        from io import StringIO
-
-        try:
-            import pandas as pd
-
-        except ImportError:
-            raise ImportError('pandas is needed to use `get_var_by_attr`.')
-        info_url = self.get_info_url(dataset_id, response='csv')
+        if not dataset_id:
+            dataset_id = self.dataset_id
+        url = info_url(self.server, dataset_id=dataset_id, response='csv')
 
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
-        if not self._variables or self._dataset_id != dataset_id:
+        if not self._variables or self._dataset_id != self.dataset_id:
             variables = {}
-            r = requests.get(info_url, verify=True)
-            _df = pd.read_csv(StringIO(r.text))
-            self._dataset_id = dataset_id
+            _df = pd.read_csv(_urlopen(url))
+            self._dataset_id = self.dataset_id
             for variable in set(_df['Variable Name']):
                 attributes = _df.loc[
                     _df['Variable Name'] == variable, ['Attribute Name', 'Value']
