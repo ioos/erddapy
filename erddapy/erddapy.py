@@ -135,7 +135,7 @@ class ERDDAP(object):
             server=self.server,
             dataset_id=dataset_id,
             protocol=protocol,
-            variables=','.join(self.variables),
+            variables=variables,
             response=response,
             constraints=constraints,
             )
