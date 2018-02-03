@@ -14,8 +14,8 @@ from erddapy.url_builder import (
 )
 from erddapy.utilities import (
     _check_url_response,
-    _urlopen,
     servers,
+    urlopen,
     )
 
 import pandas as pd
@@ -31,6 +31,7 @@ class ERDDAP(object):
         variables (:obj:`list`/`tuple`): a list variables to download.
         response (str): default is HTML.
         constraints (:obj:`dict`): download constraints, default None (opendap-like url)
+        params and requests_kwargs: `request.get` options
 
     Returns:
         instance: the ERDDAP URL builder.
@@ -78,7 +79,7 @@ class ERDDAP(object):
 
     """
     def __init__(self, server, dataset_id=None, protocol=None, variables='',
-                 response='html', constraints=None):
+                 response='html', constraints=None, params=None, requests_kwargs=None):
         if server in servers.keys():
             server = servers[server].url
         self.server = _check_url_response(server)
@@ -87,6 +88,8 @@ class ERDDAP(object):
         self.variables = variables
         self.response = response
         self.constraints = constraints
+        self.params = params
+        self.requests_kwargs = requests_kwargs if requests_kwargs else {}
 
         # Caching the last `dataset_id` request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
@@ -142,19 +145,22 @@ class ERDDAP(object):
 
     def to_pandas(self, **kw):
         """Save a data request to a pandas.DataFrame.
+
         Accepts any `pandas.read_csv` keyword arguments.
+
         """
         url = self.get_download_url(response='csv')
-        return pd.read_csv(_urlopen(url), **kw)
+        return pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs), **kw)
 
     def to_xarray(self, **kw):
         """Save a data request to a xarray.Dataset.
-        Accepts any `pandas.read_csv` keyword arguments.
+
+        Accepts any `xr.open_dataset` keyword arguments.
         """
         import xarray as xr
         from tempfile import NamedTemporaryFile
         url = self.get_download_url(response='nc')
-        data = _urlopen(url).read()
+        data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
             tmp.write(data)
             tmp.flush()
@@ -194,7 +200,7 @@ class ERDDAP(object):
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
         if not self._variables or self._dataset_id != self.dataset_id:
             variables = {}
-            _df = pd.read_csv(_urlopen(url))
+            _df = pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs))
             self._dataset_id = self.dataset_id
             for variable in set(_df['Variable Name']):
                 attributes = _df.loc[

@@ -4,9 +4,9 @@ from datetime import datetime
 from erddapy.utilities import (
     _check_url_response,
     _clean_response,
-    _urlopen,
     parse_dates,
-    quote_string_constraints
+    quote_string_constraints,
+    urlopen,
 )
 
 import pendulum
@@ -38,10 +38,10 @@ def test__clean_response():
 
 
 @pytest.mark.web
-def test__urlopen():
+def test_urlopen():
     """Assure that urlopen is always a BytesIO object."""
     url = 'http://erddap.sensors.ioos.us/erddap/tabledap/'
-    ret = _urlopen(url)
+    ret = urlopen(url)
     isinstance(ret, io.BytesIO)
 
 
