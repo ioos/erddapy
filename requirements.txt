@@ -1,3 +1,2 @@
-pendulum
 pandas
 requests
