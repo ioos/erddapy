@@ -22,6 +22,46 @@ Easier access to scientific data.
 erddapy takes advantage of ERDDAP's RESTful web services and creates the ERDDAP URL for any request,
 like searching for datasets, acquiring metadata, downloading the data, etc.
 
+
+Example
+-------
+
+.. code:: python
+
+    from erddapy import ERDDAP
+    import pandas as pd
+
+
+    constraints = {
+        'time>=': '2016-07-10T00:00:00Z',
+        'time<=': '2017-02-10T00:00:00Z',
+        'latitude>=': 38.0,
+        'latitude<=': 41.0,
+        'longitude>=': -72.0,
+        'longitude<=': -69.0,
+    }
+
+    variables = [
+    'depth',
+    'latitude',
+    'longitude',
+    'salinity',
+    'temperature',
+    'time',
+    ]
+
+    e = ERDDAP(
+        server='https://data.ioos.us/gliders/erddap',
+        protocol='tabledap',
+        response='csv',
+        dataset_id='blue-20160818T1448',
+        constraints=constraints,
+        variables=variables,
+    )
+
+    df = e.to_pandas()
+
+
 What is ERDDAP?
 ---------------
 
