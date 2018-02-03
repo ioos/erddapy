@@ -140,6 +140,26 @@ class ERDDAP(object):
             constraints=constraints,
             )
 
+    def to_pandas(self, **kw):
+        """Save a data request to a pandas.DataFrame.
+        Accepts any `pandas.read_csv` keyword arguments.
+        """
+        url = self.get_download_url(response='csv')
+        return pd.read_csv(_urlopen(url), **kw)
+
+    def to_xarray(self, **kw):
+        """Save a data request to a xarray.Dataset.
+        Accepts any `pandas.read_csv` keyword arguments.
+        """
+        import xarray as xr
+        from tempfile import NamedTemporaryFile
+        url = self.get_download_url(response='nc')
+        data = _urlopen(url).read()
+        with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
+            tmp.write(data)
+            tmp.flush()
+            return xr.open_dataset(tmp.name, **kw)
+
     def get_var_by_attr(self, dataset_id=None, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
         `dataset_id`.
