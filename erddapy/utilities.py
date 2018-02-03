@@ -1,5 +1,5 @@
 """
-Utilities
+utilities
 
 """
 
@@ -86,14 +86,18 @@ servers = {
 }
 
 
-def _urlopen(url):
-    """Thin wrapper around requests get content."""
-    return io.BytesIO(requests.get(url).content)
+def urlopen(url, params=None, **kwargs):
+    """Thin wrapper around requests get content.
+
+    See requests.get docs for the `params` and `kwargs` options.
+
+    """
+    return io.BytesIO(requests.get(url, params=params, **kwargs).content)
 
 
-def _check_url_response(url):
+def _check_url_response(url, **kwargs):
     """Shortcut to `raise_for_status` instead of fetching the whole content."""
-    r = requests.head(url)
+    r = requests.head(url, **kwargs)
     r.raise_for_status()
     return url
 
