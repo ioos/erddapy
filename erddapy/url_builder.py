@@ -10,6 +10,8 @@ See ERDDAP docs for all the response options available,
 
 from __future__ import (absolute_import, division, print_function)
 
+import copy
+
 try:
     from urllib.parse import quote_plus
 except ImportError:
@@ -161,12 +163,13 @@ def download_url(server, dataset_id, protocol, variables, response='html', const
     else:
         base += '.{response}?{variables}{constraints}'
 
-        for k, v in constraints.items():
+        _constraints = copy.copy(constraints)
+        for k, v in _constraints.items():
             if k.startswith('time'):
-                constraints.update({k: parse_dates(v)})
+                _constraints.update({k: parse_dates(v)})
 
-        constraints = quote_string_constraints(constraints)
-        constraints = ''.join(['&{}{}'.format(k, v) for k, v in constraints.items()])
+        _constraints = quote_string_constraints(_constraints)
+        _constraints = ''.join(['&{}{}'.format(k, v) for k, v in _constraints.items()])
         variables = ','.join(variables)
 
         url = base.format(
@@ -175,6 +178,6 @@ def download_url(server, dataset_id, protocol, variables, response='html', const
             dataset_id=dataset_id,
             response=response,
             variables=variables,
-            constraints=constraints
+            constraints=_constraints
         )
     return _check_url_response(url)
