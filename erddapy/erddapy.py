@@ -64,7 +64,7 @@ class ERDDAP(object):
          'CSCGOM': 'http://cwcgom.aoml.noaa.gov/erddap',
          'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap',
          'CeNCOOS': 'http://erddap.axiomalaska.com/erddap',
-         'IFREMER': 'http://www.ifremer.fr/erddapindex.html',
+         'IFREMER': 'http://www.ifremer.fr/erddap',
          'MDA': 'https://bluehub.jrc.ec.europa.eu/erddap',
          'MII': 'http://erddap.marine.ie/erddap',
          'NCEI': 'http://ecowatch.ncddc.noaa.gov/erddap',
@@ -75,7 +75,8 @@ class ERDDAP(object):
          'PacIOOS': 'http://oos.soest.hawaii.edu/erddap',
          'RTECH': 'http://meteo.rtech.fr/erddap',
          'SECOORA': 'http://erddap.secoora.org/erddap',
-         'UAF': 'https://upwell.pfeg.noaa.gov/erddap'}
+         'UAF': 'https://upwell.pfeg.noaa.gov/erddap'
+         'UBC': 'https://salishsea.eos.ubc.ca/erddap'}
 
     """
     def __init__(self, server, dataset_id=None, protocol=None, variables='',
