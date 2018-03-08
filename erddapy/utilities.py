@@ -81,7 +81,11 @@ servers = {
     ),
     'IFREMER': _server(
         'French Research Institute for the Exploitation of the Sea',
-        'http://www.ifremer.fr/erddapindex.html'
+        'http://www.ifremer.fr/erddap'
+    ),
+    'UBC': _server(
+        'UBC Earth, Ocean & Atmospheric Sciences SalishSeaCast Project',
+        'https://salishsea.eos.ubc.ca/erddap/'
     ),
 }
 
