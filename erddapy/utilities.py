@@ -9,7 +9,7 @@ from __future__ import (absolute_import, division, print_function)
 import io
 from collections import namedtuple
 
-from pandas._libs.tslibs.parsing import parse_time_string
+from pandas.core.tools.datetimes import parse_time_string
 
 import pytz
 
