@@ -1,29 +1,31 @@
-0.1.5
-~~~~~
+# Changelog
+
+## 0.1.6
+
+- Simplify the `erddapy` object constructor.
+  Everything but the `server` and `protocol` should be passed as properties
+  after the object creation.
+
+## 0.1.5
 
 - Re-implemented caching in `get_var_by_attr()`.
 
-0.1.3
-~~~~~
+## 0.1.3
 
 - Avoid a caching bug in `get_var_by_attr()` by not caching at all.
 
-0.1.3
-~~~~~
+## 0.1.3
 
 - New API to make it easier to handle multiple requests from the same server.
 
-0.1.2
-~~~~~
+## 0.1.2
 
 - Added a workaround to access authenticated ERDDAP servers.
 
-0.1.1
-~~~~~
+## 0.1.1
 
 - Mostly boilerplate updates for a GitHub/PyPI release.
 
-0.1.0
-~~~~~
+## 0.1.0
 
 - First version!
