@@ -199,15 +199,16 @@ class ERDDAP(object):
         url = info_url(self.server, dataset_id=dataset_id, response='csv')
 
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
-        variables = {}
-        _df = pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs))
-        self._dataset_id = self.dataset_id
-        for variable in set(_df['Variable Name']):
-            attributes = _df.loc[
-                _df['Variable Name'] == variable, ['Attribute Name', 'Value']
-            ].set_index('Attribute Name').to_dict()['Value']
-            variables.update({variable: attributes})
-            self._variables = variables
+        if not self._variables or dataset_id != self._dataset_id:
+            variables = {}
+            _df = pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs))
+            self._dataset_id = dataset_id
+            for variable in set(_df['Variable Name']):
+                attributes = _df.loc[
+                    _df['Variable Name'] == variable, ['Attribute Name', 'Value']
+                ].set_index('Attribute Name').to_dict()['Value']
+                variables.update({variable: attributes})
+                self._variables = variables
         # Virtually the same code as the netCDF4 counterpart.
         vs = []
         has_value_flag = False

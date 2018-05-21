@@ -8,7 +8,7 @@ flake8-print
 flake8-quotes
 jupyter
 nbsphinx
-pendulum
+pendulum>=2.0.1
 pytest
 sphinx
 xarray
