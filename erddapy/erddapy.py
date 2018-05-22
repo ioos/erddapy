@@ -79,20 +79,21 @@ class ERDDAP(object):
          'UBC': 'https://salishsea.eos.ubc.ca/erddap'}
 
     """
-    def __init__(self, server, dataset_id=None, protocol=None, variables='',
-                 response='html', constraints=None, params=None, requests_kwargs=None):
+    def __init__(self, server, protocol=None, response='html'):
         if server in servers.keys():
             server = servers[server].url
         self.server = _check_url_response(server)
-        self.dataset_id = dataset_id
         self.protocol = protocol
-        self.variables = variables
-        self.response = response
-        self.constraints = constraints
-        self.params = params
-        self.requests_kwargs = requests_kwargs if requests_kwargs else {}
 
-        # Caching the last `dataset_id` request for quicker multiple accesses,
+        # Initialized only via properties.
+        self.constraints = None
+        self.dataset_id = None
+        self.params = None
+        self.requests_kwargs = {}
+        self.response = response
+        self.variables = ''
+
+        # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
         self._dataset_id = None
         self._variables = {}
@@ -113,7 +114,7 @@ class ERDDAP(object):
         response = response if response else self.response
 
         if not dataset_id:
-            raise ValueError('You must specify a valid dataset_id, got {}'.format(self.dataset_id))
+            raise ValueError(f'You must specify a valid dataset_id, got {dataset_id}')
 
         return info_url(
             server=self.server,
@@ -130,10 +131,10 @@ class ERDDAP(object):
         constraints = constraints if constraints else self.constraints
 
         if not dataset_id:
-            raise ValueError('Please specify a valid `dataset_id`, got {}'.format(self.dataset_id))
+            raise ValueError(f'Please specify a valid `dataset_id`, got {dataset_id}')
 
         if not protocol:
-            raise ValueError('Please specify a valid `protocol`, got {}'.format(self.protocol))
+            raise ValueError(f'Please specify a valid `protocol`, got {protocol}')
 
         return download_url(
             server=self.server,
@@ -196,6 +197,10 @@ class ERDDAP(object):
         """
         if not dataset_id:
             dataset_id = self.dataset_id
+
+        if dataset_id is None:
+            raise ValueError(f'You must specify a valid dataset_id, got {dataset_id}')
+
         url = info_url(self.server, dataset_id=dataset_id, response='csv')
 
         # Creates the variables dictionary for the `get_var_by_attr` lookup.
