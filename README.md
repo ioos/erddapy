@@ -59,7 +59,14 @@ ERDDAP unifies the different types of data servers and offers a consistent way t
 from erddapy import ERDDAP
 
 
-constraints = {
+e = ERDDAP(
+  server='https://data.ioos.us/gliders/erddap',
+  protocol='tabledap',
+)
+
+e.response = 'csv'
+e.dataset_id = 'blue-20160818T1448'
+e.constraints = {
     'time>=': '2016-07-10T00:00:00Z',
     'time<=': '2017-02-10T00:00:00Z',
     'latitude>=': 38.0,
@@ -67,24 +74,14 @@ constraints = {
     'longitude>=': -72.0,
     'longitude<=': -69.0,
 }
-
-variables = [
-'depth',
-'latitude',
-'longitude',
-'salinity',
-'temperature',
-'time',
+e.variables = [
+    'depth',
+    'latitude',
+    'longitude',
+    'salinity',
+    'temperature',
+    'time',
 ]
-
-e = ERDDAP(
-    server='https://data.ioos.us/gliders/erddap',
-    protocol='tabledap',
-    response='csv',
-    dataset_id='blue-20160818T1448',
-    constraints=constraints,
-    variables=variables,
-)
 
 df = e.to_pandas()
 ```
