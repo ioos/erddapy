@@ -152,32 +152,19 @@ def download_url(server, dataset_id, protocol, variables, response='html', const
         url (str): the download URL for the `response` chosen.
 
     """
-    base = '{server_url}/{protocol}/{dataset_id}'
+    url = f'{server}/{protocol}/{dataset_id}.{response}?'
 
-    if not constraints:
-        url = base.format(
-            server_url=server,
-            protocol=protocol,
-            dataset_id=dataset_id
-            )
-    else:
-        base += '.{response}?{variables}{constraints}'
+    if variables:
+        variables = ','.join(variables)
+        url += f'{variables}'
 
+    if constraints:
         _constraints = copy.copy(constraints)
         for k, v in _constraints.items():
             if k.startswith('time'):
                 _constraints.update({k: parse_dates(v)})
-
         _constraints = quote_string_constraints(_constraints)
         _constraints = ''.join(['&{}{}'.format(k, v) for k, v in _constraints.items()])
-        variables = ','.join(variables)
 
-        url = base.format(
-            server_url=server,
-            protocol=protocol,
-            dataset_id=dataset_id,
-            response=response,
-            variables=variables,
-            constraints=_constraints
-        )
+        url += f'{_constraints}'
     return _check_url_response(url)
