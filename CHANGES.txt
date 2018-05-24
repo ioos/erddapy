@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.7
+
+- Fixed bug that preventing from generating download URLs with no data
+  constraints or variables.
+
 ## 0.1.6
 
 - Simplify the `erddapy` object constructor.
