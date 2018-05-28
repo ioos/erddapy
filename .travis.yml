@@ -48,9 +48,20 @@ script:
       make clean html linkcheck ;
       popd ;
       python -m doctr deploy --sync .;
-      python -m doctr deploy --sync --no-require-master  --built-docs docs/build/html "docs-$TRAVIS_BRANCH" ;
+      python -m doctr deploy --sync --no-require-master --built-docs docs/build/html "docs-$TRAVIS_BRANCH" ;
     fi
 
 doctr:
   require-master: true
-  sync: False
+  sync: false
+
+deploy:
+  provider: pypi
+  user: ocefpaf
+  password:
+    secure: HD3oiZ3aWzGlmMpoZqsu8uG6v7Zhk/VgqrU+Ch0y0MQFCl8Dagh8Wuo6iLKGWimqSQ3vl3CpXZAhCZRyv/iEZLVf3f5rDiPpQNgvAARZANxMolidGEa+HBhzNOPtJQ78d76ikJ9fe575cO5FEzJi+7NgHFXucyjr+1kINDjPXNvhLeUEaT+C7+uOYrCc0hkznDs0sCwsNGIYvy+cyjQL2FsLmoqRzwsliCTSXNBLJ3fw15BlXGRbHCXT1qf+8kNAGdR650a3c+jazz76ElIdjsg7E//bWmxiePHgBuctnIXNTdMxEi2rMC2QqURV/UEdZMb361bAk3avu1/vuTrOiO86As1hzh+luQVF/jK0x90mpPSlCYN2cyvx2eliLgrDNSzmIiL1H5YYlXSqLX80hb2+YQE8hNwe53SGAhYBO1bktyAuIno4+vK54wShnpqK/alcwvpB3uwx3QNCUKcKEQwzTs6bJVSYWySCyy7fuIGFX+mwdzOOyLrhnWIIimyolpITzbfOqCf/5FnGXoIZ7Kjm4CTGqqaEos4wG2CXDsz8dlgU8xSz1nImZlg6mM+6h/hLxaUtRsw79ZLZZ8/IsKUewWTi/FPJPB8Dri8+3Qa74JppNWVkb7DxNYYErxOGRF6GHGRtsBb4I2stupD2VNGKHFZO1Cg+G9RyUOHAlT4=
+  distributions: sdist bdist_wheel
+  upload_docs: no
+  on:
+    repo: pyoceans/erddapy
+    tags: true
