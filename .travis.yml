@@ -64,4 +64,7 @@ deploy:
   upload_docs: no
   on:
     repo: pyoceans/erddapy
+    python: 3.6
+    condition: '$TEST_TARGET == "default"'
     tags: true
+    branch: master
