@@ -16,22 +16,21 @@ def read(*parts):
 
 
 with open('requirements.txt') as f:
-    tests_require = f.readlines()
-install_requires = [t.strip() for t in tests_require]
+    requires = f.readlines()
+install_requires = [req.strip() for req in requires]
 
 
 setup(
     name='erddapy',
     version=versioneer.get_version(),
     description='Python interface for ERDDAP',
-    long_description='{}'.format(read('README.md')),
+    long_description=f'{read("README.md")}',
     long_description_content_type='text/markdown',
     author='Filipe Fernandes',
     author_email='ocefpaf@gmail.com',
     url='https://github.com/ocefpaf/erddapy',
     keywords=['ERDDAP', 'Scientific Python', 'Remote data access'],
     classifiers=[
-        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering :: GIS',
         'License :: OSI Approved :: BSD License',
@@ -40,7 +39,7 @@ setup(
     extras_require={
         'testing': ['pytest'],
     },
-    license='{}'.format(read('LICENSE.txt')),
+    license=f'{read("LICENSE.txt")}',
     install_requires=install_requires,
     cmdclass=versioneer.get_cmdclass(),
 )
