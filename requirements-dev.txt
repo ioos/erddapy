@@ -12,4 +12,5 @@ pendulum>=2.0.1
 pytest
 sphinx
 twine
+wheel
 xarray

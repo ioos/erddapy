@@ -31,8 +31,8 @@ install:
 
 script:
   - if [[ $TEST_TARGET == 'default' ]]; then
-      cp -r tests/ /tmp && cd /tmp ;
-      pytest -vv tests ;
+      cp -r tests/ /tmp ;
+      pushd /tmp && pytest -vv tests && popd ;
     fi
 
   - if [[ $TEST_TARGET == 'coding_standards' ]]; then
@@ -56,6 +56,7 @@ doctr:
   sync: false
 
 deploy:
+  skip_cleanup: true
   provider: pypi
   user: ocefpaf
   password:
@@ -64,7 +65,7 @@ deploy:
   upload_docs: no
   on:
     repo: pyoceans/erddapy
-    python: 3.6
-    condition: '$TEST_TARGET == "default"'
     tags: true
-    branch: master
+    python: 3.6
+    all_branches: master
+    condition: '$TEST_TARGET == "default"'
