@@ -142,4 +142,4 @@ def quote_string_constraints(kwargs):
     the right-hand-side value must be surrounded by double quotes.
 
     """
-    return {k: '"{}"'.format(v) if isinstance(v, str) else v for k, v in kwargs.items()}
+    return {k: f'"{v}"' if isinstance(v, str) else v for k, v in kwargs.items()}

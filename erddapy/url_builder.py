@@ -45,7 +45,7 @@ def search_url(server, response='html', search_for=None, items_per_page=1000, pa
         response (str): default is HTML.
         items_per_page (int): how many items per page in the return,
             default is 1000.
-        page (int): which page to display, defatul is the first page (1).
+        page (int): which page to display, default is the first page (1).
         kwargs (dict): extra search constraints based on metadata and/or coordinates ke/value.
             metadata: `cdm_data_type`, `institution`, `ioos_category`,
             `keywords`, `long_name`, `standard_name`, and `variableName`.
@@ -56,7 +56,7 @@ def search_url(server, response='html', search_for=None, items_per_page=1000, pa
 
     """
     base = (
-        '{server_url}/search/advanced.{response}'
+        '{server}/search/advanced.{response}'
         '?page={page}'
         '&itemsPerPage={itemsPerPage}'
         '&protocol={protocol}'
@@ -88,7 +88,7 @@ def search_url(server, response='html', search_for=None, items_per_page=1000, pa
 
     default = '(ANY)'
     url = base.format(
-        server_url=server,
+        server=server,
         response=response,
         page=page,
         itemsPerPage=items_per_page,
@@ -122,12 +122,7 @@ def info_url(server, dataset_id, response='html'):
         url (str): the info URL for the `response` chosen.
 
     """
-    base = '{server_url}/info/{dataset_id}/index.{response}'.format
-    url = base(
-        server_url=server,
-        dataset_id=dataset_id,
-        response=response
-        )
+    url = f'{server}/info/{dataset_id}/index.{response}'
     return _check_url_response(url)
 
 
@@ -164,7 +159,7 @@ def download_url(server, dataset_id, protocol, variables, response='html', const
             if k.startswith('time'):
                 _constraints.update({k: parse_dates(v)})
         _constraints = quote_string_constraints(_constraints)
-        _constraints = ''.join(['&{}{}'.format(k, v) for k, v in _constraints.items()])
+        _constraints = ''.join([f'&{k}{v}' for k, v in _constraints.items()])
 
         url += f'{_constraints}'
     return _check_url_response(url)
