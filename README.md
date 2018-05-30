@@ -65,7 +65,7 @@ e = ERDDAP(
 )
 
 e.response = 'csv'
-e.dataset_id = 'blue-20160818T1448'
+e.dataset_id = 'whoi_406-20160902T1700'
 e.constraints = {
     'time>=': '2016-07-10T00:00:00Z',
     'time<=': '2017-02-10T00:00:00Z',
