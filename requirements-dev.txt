@@ -1,4 +1,5 @@
 cartopy
+doctr
 flake8
 flake8-builtins
 flake8-comprehensions
