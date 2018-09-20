@@ -6,6 +6,7 @@ from erddapy.utilities import (
     _clean_response,
     parse_dates,
     quote_string_constraints,
+    servers,
     urlopen,
 )
 
@@ -43,6 +44,13 @@ def test_urlopen():
     url = 'http://erddap.sensors.ioos.us/erddap/tabledap/'
     ret = urlopen(url)
     isinstance(ret, io.BytesIO)
+
+
+@pytest.mark.web
+def test_servers():
+    for server in servers.values():
+        # Should raise HTTPError if broken, otherwise returns the URL.
+        _check_url_response(server.url) == server.url
 
 
 def test_parse_dates_naive_datetime():
