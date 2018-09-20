@@ -26,8 +26,10 @@ class ERDDAP(object):
 
     Args:
         server (str): an ERDDAP server URL or an acronym for one of the builtin servers.
-        dataset_id (str): a dataset unique id.
         protocol (str): tabledap or griddap.
+
+    Attributes:
+        dataset_id (str): a dataset unique id.
         variables (:obj:`list`/`tuple`): a list variables to download.
         response (str): default is HTML.
         constraints (:obj:`dict`): download constraints, default None (opendap-like url)
