@@ -8,7 +8,7 @@ See ERDDAP docs for all the response options available,
 
 """
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 
 import copy
 
@@ -17,7 +17,7 @@ try:
 except ImportError:
     from urllib import quote_plus
 
-from erddapy.utilities import (_check_url_response, parse_dates, quote_string_constraints)
+from erddapy.utilities import _check_url_response, parse_dates, quote_string_constraints
 
 
 def search_url(server, response='html', search_for=None, items_per_page=1000, page=1, **kwargs):
@@ -73,7 +73,7 @@ def search_url(server, response='html', search_for=None, items_per_page=1000, pa
         '&maxLat={maxLat}'
         '&minTime={minTime}'
         '&maxTime={maxTime}'
-        )
+    )
     if search_for:
         search_for = quote_plus(search_for)
         base += '&searchFor={searchFor}'
@@ -107,7 +107,7 @@ def search_url(server, response='html', search_for=None, items_per_page=1000, pa
         minTime=kwargs.get('min_time', default),
         maxTime=kwargs.get('max_time', default),
         searchFor=search_for,
-        )
+    )
     return _check_url_response(url)
 
 
