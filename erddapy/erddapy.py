@@ -150,8 +150,13 @@ class ERDDAP(object):
 
         Accepts any `pandas.read_csv` keyword arguments.
 
+        This method uses the `.csvp`(1) response for simplicity,
+        please check ERDDAP's documentation for the other csv options available.
+
+        1) Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
+
         """
-        url = self.get_download_url(response='csv')
+        url = self.get_download_url(response='csvp')
         return pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs), **kw)
 
     def to_xarray(self, **kw):
