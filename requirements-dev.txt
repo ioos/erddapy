@@ -1,3 +1,4 @@
+black
 cartopy
 doctr
 flake8
@@ -15,3 +16,4 @@ sphinx
 twine
 wheel
 xarray
+pylint
