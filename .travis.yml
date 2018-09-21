@@ -32,7 +32,7 @@ install:
 script:
   - if [[ $TEST_TARGET == 'default' ]]; then
       cp -r tests/ /tmp ;
-      pushd /tmp && pytest -vv tests && popd ;
+      pushd /tmp && pytest -rxs tests && popd ;
     fi
 
   - if [[ $TEST_TARGET == 'coding_standards' ]]; then
