@@ -147,7 +147,12 @@ def download_url(server, dataset_id, protocol, variables, response='html', const
         url (str): the download URL for the `response` chosen.
 
     """
-    url = f'{server}/{protocol}/{dataset_id}.{response}?'
+    # This is an unconstrained OPeNDAP response b/c
+    # the integer based constrained version is just not worth supporting ;-p
+    if response == 'opendap':
+        return f'{server}/{protocol}/{dataset_id}'
+    else:
+        url = f'{server}/{protocol}/{dataset_id}.{response}?'
 
     if variables:
         variables = ','.join(variables)
