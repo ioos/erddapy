@@ -1,4 +1,4 @@
-language: python
+language: minimal
 
 sudo: false
 
@@ -9,12 +9,12 @@ env:
 matrix:
   fast_finish: true
   include:
-  - python: 3.6
-    env: TEST_TARGET=default
-  - python: 3.6
-    env: TEST_TARGET=coding_standards
-  - python: 3.6
-    env: TEST_TARGET=docs
+    - name: "default"
+      env: TEST_TARGET=default PY=3.6
+    - name: "coding_standards"
+      env: TEST_TARGET=coding_standards PY=3.6
+    - name: "docs"
+      env: TEST_TARGET=docs PY=3.6
 
 before_install:
   - wget http://bit.ly/miniconda -O miniconda.sh
@@ -23,7 +23,8 @@ before_install:
   - conda config --set always_yes yes --set changeps1 no --set show_channel_urls true
   - conda update conda
   - conda config --add channels conda-forge --force
-  - conda create --name TEST python=$TRAVIS_PYTHON_VERSION --file requirements.txt --file requirements-dev.txt
+  - conda config --remove channels defaults
+  - conda create --name TEST python=$PY --file requirements.txt --file requirements-dev.txt
   - source activate TEST
 
 install:
@@ -32,7 +33,7 @@ install:
 script:
   - if [[ $TEST_TARGET == 'default' ]]; then
       cp -r tests/ /tmp ;
-      pushd /tmp && pytest -rxs tests && popd ;
+      pushd /tmp && pytest -n 2 -rxs tests && popd ;
     fi
 
   - if [[ $TEST_TARGET == 'coding_standards' ]]; then
