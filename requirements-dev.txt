@@ -11,9 +11,10 @@ flake8-quotes
 jupyter
 nbsphinx
 pendulum>=2.0.1
+pylint
 pytest
+pytest-xdist
 sphinx
 twine
 wheel
 xarray
-pylint
