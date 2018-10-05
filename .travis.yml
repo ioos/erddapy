@@ -10,11 +10,11 @@ matrix:
   fast_finish: true
   include:
     - name: "default"
-      env: TEST_TARGET=default PY=3.6
+      env: TEST_TARGET=default PY=3.7
     - name: "coding_standards"
-      env: TEST_TARGET=coding_standards PY=3.6
+      env: TEST_TARGET=coding_standards PY=3.7
     - name: "docs"
-      env: TEST_TARGET=docs PY=3.6
+      env: TEST_TARGET=docs PY=3.7
 
 before_install:
   - wget http://bit.ly/miniconda -O miniconda.sh
