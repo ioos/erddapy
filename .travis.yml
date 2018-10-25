@@ -66,6 +66,5 @@ deploy:
   on:
     repo: pyoceans/erddapy
     tags: true
-    python: 3.6
     all_branches: master
     condition: '$TEST_TARGET == "default"'
