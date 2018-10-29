@@ -174,9 +174,9 @@ class ERDDAP(object):
             return xr.open_dataset(tmp.name, **kw)
 
     def to_iris(self, **kw):
-        """Load the data request into an iris.Cube.
+        """Load the data request into an iris.CubeList.
 
-        Accepts any `xr.open_dataset` keyword arguments.
+        Accepts any `iris.load_raw` keyword arguments.
         """
         import iris
         url = self.get_download_url(response='nc')
