@@ -8,6 +8,7 @@ from __future__ import (absolute_import, division, print_function)
 
 import io
 from collections import namedtuple
+from contextlib import contextmanager
 
 from pandas.core.tools.datetimes import parse_time_string
 
@@ -143,3 +144,17 @@ def quote_string_constraints(kwargs):
 
     """
     return {k: f'"{v}"' if isinstance(v, str) else v for k, v in kwargs.items()}
+
+
+@contextmanager
+def _tempnc(data):
+    from tempfile import NamedTemporaryFile
+    tmp = None
+    try:
+        tmp = NamedTemporaryFile(suffix='.nc', prefix='erddapy_')
+        tmp.write(data)
+        tmp.flush()
+        yield tmp
+    finally:
+        if tmp is not None:
+            tmp.close()

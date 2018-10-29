@@ -14,9 +14,10 @@ from erddapy.url_builder import (
 )
 from erddapy.utilities import (
     _check_url_response,
+    _tempnc,
     servers,
     urlopen,
-    )
+)
 
 import pandas as pd
 
@@ -167,27 +168,23 @@ class ERDDAP(object):
         Accepts any `xr.open_dataset` keyword arguments.
         """
         import xarray as xr
-        from tempfile import NamedTemporaryFile
         url = self.get_download_url(response='nc')
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
-        with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
-            tmp.write(data)
-            tmp.flush()
+        with _tempnc(data) as tmp:
             return xr.open_dataset(tmp.name, **kw)
 
     def to_iris(self, **kw):
-        """Load the data request into an iris.Cube.
+        """Load the data request into an iris.CubeList.
 
-        Accepts any `xr.open_dataset` keyword arguments.
+        Accepts any `iris.load_raw` keyword arguments.
         """
         import iris
-        from tempfile import NamedTemporaryFile
         url = self.get_download_url(response='nc')
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
-        with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
-            tmp.write(data)
-            tmp.flush()
-            return iris.load_raw(tmp.name, **kw)
+        with _tempnc(data) as tmp:
+            cubes = iris.load_raw(tmp.name, **kw)
+            cubes.realise_data()
+            return cubes
 
     def get_var_by_attr(self, dataset_id=None, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
