@@ -162,7 +162,7 @@ class ERDDAP(object):
         return pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs), **kw)
 
     def to_xarray(self, **kw):
-        """Save a data request to a xarray.Dataset.
+        """Load the data request into a xarray.Dataset.
 
         Accepts any `xr.open_dataset` keyword arguments.
         """
@@ -174,6 +174,20 @@ class ERDDAP(object):
             tmp.write(data)
             tmp.flush()
             return xr.open_dataset(tmp.name, **kw)
+
+    def to_iris(self, **kw):
+        """Load the data request into an iris.Cube.
+
+        Accepts any `xr.open_dataset` keyword arguments.
+        """
+        import iris
+        from tempfile import NamedTemporaryFile
+        url = self.get_download_url(response='nc')
+        data = urlopen(url, params=self.params, **self.requests_kwargs).read()
+        with NamedTemporaryFile(suffix='.nc', prefix='erddapy_') as tmp:
+            tmp.write(data)
+            tmp.flush()
+            return iris.load_raw(tmp.name, **kw)
 
     def get_var_by_attr(self, dataset_id=None, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
