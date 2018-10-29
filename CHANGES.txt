@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.10
+
+- Add a `to_iris` method.
+
 ## 0.1.9
 
 - `erddapy` is not Python 3.7 compatible!
