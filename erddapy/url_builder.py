@@ -126,6 +126,25 @@ def info_url(server, dataset_id, response='html'):
     return _check_url_response(url)
 
 
+def categorize_url(server, categorize_by, value=None, response='html'):
+    """The categorize URL for the `server` endpoint.
+
+    Args:
+        categorize_by (str): a valid attribute, e.g.: ioos_category or standard_name.
+        value (str): an attribute value.
+        response (str): default is HTML.
+
+    Returns:
+        url (str): the categorized URL for the `response` chosen.
+
+    """
+    if value:
+        url = f'{server}/categorize/{categorize_by}/{value}/index.{response}'
+    else:
+        url = f'{server}/categorize/{categorize_by}/index.{response}'
+    return _check_url_response(url)
+
+
 def download_url(server, dataset_id, protocol, variables, response='html', constraints=None):
     """The download URL for the `server` endpoint.
 

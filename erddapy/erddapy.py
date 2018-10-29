@@ -8,6 +8,7 @@ Pythonic way to access ERDDAP data
 from __future__ import (absolute_import, division, print_function)
 
 from erddapy.url_builder import (
+    categorize_url,
     download_url,
     info_url,
     search_url,
@@ -124,6 +125,15 @@ class ERDDAP(object):
             dataset_id=dataset_id,
             response=response
             )
+
+    def get_categorize(self, categorize_by, value=None, response=None):
+        response = response if response else self.response
+        return categorize_url(
+            self.server,
+            categorize_by,
+            value=value,
+            response=response,
+        )
 
     def get_download_url(self, dataset_id=None, protocol=None,
                          variables=None, response=None, constraints=None):
