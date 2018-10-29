@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.11
+
+- Re-factor methods that output a temporary netCDF file.
+
 ## 0.1.10
 
 - Add a `to_iris` method.
