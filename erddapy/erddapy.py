@@ -64,23 +64,23 @@ class ERDDAP(object):
 
         >>> from erddapy import servers
         >>> {k: v.url for k, v in servers.items()}
-        {'BMLSC': 'http://bmlsc.ucdavis.edu:8080/erddap',
-         'CSCGOM': 'http://cwcgom.aoml.noaa.gov/erddap',
-         'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap',
-         'CeNCOOS': 'http://erddap.axiomalaska.com/erddap',
-         'IFREMER': 'http://www.ifremer.fr/erddap',
-         'MDA': 'https://bluehub.jrc.ec.europa.eu/erddap',
-         'MII': 'http://erddap.marine.ie/erddap',
-         'NCEI': 'http://ecowatch.ncddc.noaa.gov/erddap',
-         'NERACOOS': 'http://www.neracoos.org/erddap',
-         'NGDAC': 'http://data.ioos.us/gliders/erddap',
-         'ONC': 'http://dap.onc.uvic.ca/erddap',
-         'OSMC': 'http://osmc.noaa.gov/erddap',
-         'PacIOOS': 'http://oos.soest.hawaii.edu/erddap',
-         'RTECH': 'http://meteo.rtech.fr/erddap',
-         'SECOORA': 'http://erddap.secoora.org/erddap',
-         'UAF': 'https://upwell.pfeg.noaa.gov/erddap'
-         'UBC': 'https://salishsea.eos.ubc.ca/erddap'}
+        {'MDA': 'https://bluehub.jrc.ec.europa.eu/erddap/',
+         'MII': 'https://erddap.marine.ie/erddap/',
+         'CSCGOM': 'http://cwcgom.aoml.noaa.gov/erddap/',
+         'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap/',
+         'CeNCOOS': 'http://erddap.axiomalaska.com/erddap/',
+         'NERACOOS': 'http://www.neracoos.org/erddap/',
+         'NGDAC': 'https://data.ioos.us/gliders/erddap/',
+         'PacIOOS': 'http://oos.soest.hawaii.edu/erddap/',
+         'SECOORA': 'http://erddap.secoora.org/erddap/',
+         'NCEI': 'https://ecowatch.ncddc.noaa.gov/erddap/',
+         'OSMC': 'http://osmc.noaa.gov/erddap/',
+         'UAF': 'https://upwell.pfeg.noaa.gov/erddap/',
+         'ONC': 'http://dap.onc.uvic.ca/erddap/',
+         'BMLSC': 'http://bmlsc.ucdavis.edu:8080/erddap/',
+         'RTECH': 'https://meteo.rtech.fr/erddap/',
+         'IFREMER': 'http://www.ifremer.fr/erddap/',
+         'UBC': 'https://salishsea.eos.ubc.ca/erddap/'}
 
     """
     def __init__(self, server, protocol=None, response='html'):
