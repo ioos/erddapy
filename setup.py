@@ -1,7 +1,7 @@
 from __future__ import (absolute_import, division, print_function)
 
 import os
-from codecs import open
+import io
 
 from setuptools import find_packages, setup
 
@@ -15,7 +15,7 @@ def read(*parts):
         return f.read().decode('utf-8')
 
 
-with open('requirements.txt') as f:
+with io.open('requirements.txt') as f:
     requires = f.readlines()
 install_requires = [req.strip() for req in requires]
 
