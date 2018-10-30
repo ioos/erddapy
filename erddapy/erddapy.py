@@ -126,7 +126,7 @@ class ERDDAP(object):
             response=response
             )
 
-    def get_categorize(self, categorize_by, value=None, response=None):
+    def get_categorize_url(self, categorize_by, value=None, response=None):
         response = response if response else self.response
         return categorize_url(
             self.server,
