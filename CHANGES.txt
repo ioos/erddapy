@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+
+- Add a `get_categorize_url` method
+- Test suite for url_builder
+
 ## 0.1.11
 
 - Re-factor methods that output a temporary netCDF file.
