@@ -37,8 +37,7 @@ script:
     fi
 
   - if [[ $TEST_TARGET == 'coding_standards' ]]; then
-      flake8 --max-line-length=105 erddapy --exclude=_version.py ;
-      flake8 --max-line-length=105 tests ;
+      pytest --flake8 -m flake8 ;
     fi
 
   - if [[ $TEST_TARGET == 'docs' ]]; then
