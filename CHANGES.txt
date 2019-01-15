@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Cache `_check_url_response` results
+
 ## 0.2.0
 
 - Add a `get_categorize_url` method

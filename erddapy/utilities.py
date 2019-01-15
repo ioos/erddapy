@@ -6,6 +6,7 @@ utilities
 from __future__ import (absolute_import, division, print_function)
 
 
+import functools
 import io
 from collections import namedtuple
 from contextlib import contextmanager
@@ -100,9 +101,10 @@ def urlopen(url, params=None, **kwargs):
     return io.BytesIO(requests.get(url, params=params, **kwargs).content)
 
 
-def _check_url_response(url, **kwargs):
+@functools.lru_cache(maxsize=None)
+def _check_url_response(url):
     """Shortcut to `raise_for_status` instead of fetching the whole content."""
-    r = requests.head(url, **kwargs)
+    r = requests.head(url)
     r.raise_for_status()
     return url
 
