@@ -7,6 +7,8 @@ Pythonic way to access ERDDAP data
 
 from __future__ import (absolute_import, division, print_function)
 
+import functools
+
 from erddapy.url_builder import (
     categorize_url,
     download_url,
@@ -196,6 +198,26 @@ class ERDDAP(object):
             cubes.realise_data()
             return cubes
 
+    @functools.lru_cache(maxsize=None)
+    def _get_variables(self, dataset_id=None):
+        if not dataset_id:
+            dataset_id = self.dataset_id
+
+        if dataset_id is None:
+            raise ValueError(f'You must specify a valid dataset_id, got {dataset_id}')
+
+        url = info_url(self.server, dataset_id=dataset_id, response='csv')
+
+        variables = {}
+        _df = pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs))
+        self._dataset_id = dataset_id
+        for variable in set(_df['Variable Name']):
+            attributes = _df.loc[
+                _df['Variable Name'] == variable, ['Attribute Name', 'Value']
+            ].set_index('Attribute Name').to_dict()['Value']
+            variables.update({variable: attributes})
+        return variables
+
     def get_var_by_attr(self, dataset_id=None, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
         `dataset_id`.
@@ -223,30 +245,12 @@ class ERDDAP(object):
             ['latitude', 'longitude', 'time', 'depth']
 
         """
-        if not dataset_id:
-            dataset_id = self.dataset_id
-
-        if dataset_id is None:
-            raise ValueError(f'You must specify a valid dataset_id, got {dataset_id}')
-
-        url = info_url(self.server, dataset_id=dataset_id, response='csv')
-
-        # Creates the variables dictionary for the `get_var_by_attr` lookup.
-        if not self._variables or dataset_id != self._dataset_id:
-            variables = {}
-            _df = pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs))
-            self._dataset_id = dataset_id
-            for variable in set(_df['Variable Name']):
-                attributes = _df.loc[
-                    _df['Variable Name'] == variable, ['Attribute Name', 'Value']
-                ].set_index('Attribute Name').to_dict()['Value']
-                variables.update({variable: attributes})
-                self._variables = variables
+        variables = self._get_variables(dataset_id=dataset_id)
         # Virtually the same code as the netCDF4 counterpart.
         vs = []
         has_value_flag = False
-        for vname in self._variables:
-            var = self._variables[vname]
+        for vname in variables:
+            var = variables[vname]
             for k, v in kwargs.items():
                 if callable(v):
                     has_value_flag = v(var.get(k, None))
