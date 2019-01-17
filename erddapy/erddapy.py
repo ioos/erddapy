@@ -5,8 +5,6 @@ Pythonic way to access ERDDAP data
 
 """
 
-from __future__ import (absolute_import, division, print_function)
-
 import functools
 
 from erddapy.url_builder import (

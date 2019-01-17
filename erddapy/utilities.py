@@ -3,9 +3,6 @@ utilities
 
 """
 
-from __future__ import (absolute_import, division, print_function)
-
-
 import functools
 import io
 from collections import namedtuple
