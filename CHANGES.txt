@@ -3,6 +3,7 @@
 ## 0.3.0
 
 - Cache `_check_url_response` and `get_var_by_attr` returns
+- Removed all python 2k code
 
 ## 0.2.0
 
