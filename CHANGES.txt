@@ -2,8 +2,7 @@
 
 ## 0.3.0
 
-- Cache `_check_url_response` returns
-- Cache `get_var_by_attr` returns
+- Cache `_check_url_response` and `get_var_by_attr` returns
 
 ## 0.2.0
 
