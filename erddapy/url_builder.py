@@ -9,11 +9,7 @@ See ERDDAP docs for all the response options available,
 """
 
 import copy
-
-try:
-    from urllib.parse import quote_plus
-except ImportError:
-    from urllib import quote_plus
+from urllib.parse import quote_plus
 
 from erddapy.utilities import _check_url_response, parse_dates, quote_string_constraints
 
