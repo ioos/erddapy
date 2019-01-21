@@ -7,20 +7,15 @@ Pythonic way to access ERDDAP data
 
 import functools
 
+import pandas as pd
+
 from erddapy.url_builder import (
     categorize_url,
     download_url,
     info_url,
     search_url,
 )
-from erddapy.utilities import (
-    _check_url_response,
-    _tempnc,
-    servers,
-    urlopen,
-)
-
-import pandas as pd
+from erddapy.utilities import _check_url_response, _tempnc, servers, urlopen
 
 
 class ERDDAP(object):
@@ -83,7 +78,8 @@ class ERDDAP(object):
          'UBC': 'https://salishsea.eos.ubc.ca/erddap/'}
 
     """
-    def __init__(self, server, protocol=None, response='html'):
+
+    def __init__(self, server, protocol=None, response="html"):
         if server in servers.keys():
             server = servers[server].url
         self.server = _check_url_response(server)
@@ -95,14 +91,21 @@ class ERDDAP(object):
         self.params = None
         self.requests_kwargs = {}
         self.response = response
-        self.variables = ''
+        self.variables = ""
 
         # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
         self._dataset_id = None
         self._variables = {}
 
-    def get_search_url(self, response=None, search_for=None, items_per_page=1000, page=1, **kwargs):
+    def get_search_url(
+        self,
+        response=None,
+        search_for=None,
+        items_per_page=1000,
+        page=1,
+        **kwargs,
+    ):
         response = response if response else self.response
         return search_url(
             server=self.server,
@@ -110,33 +113,36 @@ class ERDDAP(object):
             search_for=search_for,
             items_per_page=items_per_page,
             page=page,
-            **kwargs
-            )
+            **kwargs,
+        )
 
     def get_info_url(self, dataset_id=None, response=None):
         dataset_id = dataset_id if dataset_id else self.dataset_id
         response = response if response else self.response
 
         if not dataset_id:
-            raise ValueError(f'You must specify a valid dataset_id, got {dataset_id}')
+            raise ValueError(
+                f"You must specify a valid dataset_id, got {dataset_id}"
+            )
 
         return info_url(
-            server=self.server,
-            dataset_id=dataset_id,
-            response=response
-            )
+            server=self.server, dataset_id=dataset_id, response=response
+        )
 
     def get_categorize_url(self, categorize_by, value=None, response=None):
         response = response if response else self.response
         return categorize_url(
-            self.server,
-            categorize_by,
-            value=value,
-            response=response,
+            self.server, categorize_by, value=value, response=response
         )
 
-    def get_download_url(self, dataset_id=None, protocol=None,
-                         variables=None, response=None, constraints=None):
+    def get_download_url(
+        self,
+        dataset_id=None,
+        protocol=None,
+        variables=None,
+        response=None,
+        constraints=None,
+    ):
         dataset_id = dataset_id if dataset_id else self.dataset_id
         protocol = protocol if protocol else self.protocol
         variables = variables if variables else self.variables
@@ -144,10 +150,14 @@ class ERDDAP(object):
         constraints = constraints if constraints else self.constraints
 
         if not dataset_id:
-            raise ValueError(f'Please specify a valid `dataset_id`, got {dataset_id}')
+            raise ValueError(
+                f"Please specify a valid `dataset_id`, got {dataset_id}"
+            )
 
         if not protocol:
-            raise ValueError(f'Please specify a valid `protocol`, got {protocol}')
+            raise ValueError(
+                f"Please specify a valid `protocol`, got {protocol}"
+            )
 
         return download_url(
             server=self.server,
@@ -156,7 +166,7 @@ class ERDDAP(object):
             variables=variables,
             response=response,
             constraints=constraints,
-            )
+        )
 
     def to_pandas(self, **kw):
         """Save a data request to a pandas.DataFrame.
@@ -169,8 +179,10 @@ class ERDDAP(object):
         1) Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
 
         """
-        url = self.get_download_url(response='csvp')
-        return pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs), **kw)
+        url = self.get_download_url(response="csvp")
+        return pd.read_csv(
+            urlopen(url, params=self.params, **self.requests_kwargs), **kw
+        )
 
     def to_xarray(self, **kw):
         """Load the data request into a xarray.Dataset.
@@ -178,7 +190,8 @@ class ERDDAP(object):
         Accepts any `xr.open_dataset` keyword arguments.
         """
         import xarray as xr
-        url = self.get_download_url(response='nc')
+
+        url = self.get_download_url(response="nc")
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             return xr.open_dataset(tmp.name, **kw)
@@ -189,7 +202,8 @@ class ERDDAP(object):
         Accepts any `iris.load_raw` keyword arguments.
         """
         import iris
-        url = self.get_download_url(response='nc')
+
+        url = self.get_download_url(response="nc")
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp.name, **kw)
@@ -202,17 +216,26 @@ class ERDDAP(object):
             dataset_id = self.dataset_id
 
         if dataset_id is None:
-            raise ValueError(f'You must specify a valid dataset_id, got {dataset_id}')
+            raise ValueError(
+                f"You must specify a valid dataset_id, got {dataset_id}"
+            )
 
-        url = info_url(self.server, dataset_id=dataset_id, response='csv')
+        url = info_url(self.server, dataset_id=dataset_id, response="csv")
 
         variables = {}
-        _df = pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs))
+        _df = pd.read_csv(
+            urlopen(url, params=self.params, **self.requests_kwargs)
+        )
         self._dataset_id = dataset_id
-        for variable in set(_df['Variable Name']):
-            attributes = _df.loc[
-                _df['Variable Name'] == variable, ['Attribute Name', 'Value']
-            ].set_index('Attribute Name').to_dict()['Value']
+        for variable in set(_df["Variable Name"]):
+            attributes = (
+                _df.loc[
+                    _df["Variable Name"] == variable,
+                    ["Attribute Name", "Value"],
+                ]
+                .set_index("Attribute Name")
+                .to_dict()["Value"]
+            )
             variables.update({variable: attributes})
         return variables
 

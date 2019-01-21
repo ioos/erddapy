@@ -11,10 +11,21 @@ See ERDDAP docs for all the response options available,
 import copy
 from urllib.parse import quote_plus
 
-from erddapy.utilities import _check_url_response, parse_dates, quote_string_constraints
+from erddapy.utilities import (
+    _check_url_response,
+    parse_dates,
+    quote_string_constraints,
+)
 
 
-def search_url(server, response='html', search_for=None, items_per_page=1000, page=1, **kwargs):
+def search_url(
+    server,
+    response="html",
+    search_for=None,
+    items_per_page=1000,
+    page=1,
+    **kwargs,
+):
     """The search URL for the `server` endpoint provided.
 
     Args:
@@ -50,62 +61,62 @@ def search_url(server, response='html', search_for=None, items_per_page=1000, pa
 
     """
     base = (
-        '{server}/search/advanced.{response}'
-        '?page={page}'
-        '&itemsPerPage={itemsPerPage}'
-        '&protocol={protocol}'
-        '&cdm_data_type={cdm_data_type}'
-        '&institution={institution}'
-        '&ioos_category={ioos_category}'
-        '&keywords={keywords}'
-        '&long_name={long_name}'
-        '&standard_name={standard_name}'
-        '&variableName={variableName}'
-        '&minLon={minLon}'
-        '&maxLon={maxLon}'
-        '&minLat={minLat}'
-        '&maxLat={maxLat}'
-        '&minTime={minTime}'
-        '&maxTime={maxTime}'
+        "{server}/search/advanced.{response}"
+        "?page={page}"
+        "&itemsPerPage={itemsPerPage}"
+        "&protocol={protocol}"
+        "&cdm_data_type={cdm_data_type}"
+        "&institution={institution}"
+        "&ioos_category={ioos_category}"
+        "&keywords={keywords}"
+        "&long_name={long_name}"
+        "&standard_name={standard_name}"
+        "&variableName={variableName}"
+        "&minLon={minLon}"
+        "&maxLon={maxLon}"
+        "&minLat={minLat}"
+        "&maxLat={maxLat}"
+        "&minTime={minTime}"
+        "&maxTime={maxTime}"
     )
     if search_for:
         search_for = quote_plus(search_for)
-        base += '&searchFor={searchFor}'
+        base += "&searchFor={searchFor}"
 
     # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
-    min_time = kwargs.pop('min_time', None)
-    max_time = kwargs.pop('max_time', None)
+    min_time = kwargs.pop("min_time", None)
+    max_time = kwargs.pop("max_time", None)
     if min_time:
-        kwargs.update({'min_time': parse_dates(min_time)})
+        kwargs.update({"min_time": parse_dates(min_time)})
     if max_time:
-        kwargs.update({'max_time': parse_dates(max_time)})
+        kwargs.update({"max_time": parse_dates(max_time)})
 
-    default = '(ANY)'
+    default = "(ANY)"
     url = base.format(
         server=server,
         response=response,
         page=page,
         itemsPerPage=items_per_page,
-        protocol=kwargs.get('protocol', default),
-        cdm_data_type=kwargs.get('cdm_data_type', default),
-        institution=kwargs.get('institution', default),
-        ioos_category=kwargs.get('ioos_category', default),
-        keywords=kwargs.get('keywords', default),
-        long_name=kwargs.get('long_name', default),
-        standard_name=kwargs.get('standard_name', default),
-        variableName=kwargs.get('variableName', default),
-        minLon=kwargs.get('min_lon', default),
-        maxLon=kwargs.get('max_lon', default),
-        minLat=kwargs.get('min_lat', default),
-        maxLat=kwargs.get('max_lat', default),
-        minTime=kwargs.get('min_time', default),
-        maxTime=kwargs.get('max_time', default),
+        protocol=kwargs.get("protocol", default),
+        cdm_data_type=kwargs.get("cdm_data_type", default),
+        institution=kwargs.get("institution", default),
+        ioos_category=kwargs.get("ioos_category", default),
+        keywords=kwargs.get("keywords", default),
+        long_name=kwargs.get("long_name", default),
+        standard_name=kwargs.get("standard_name", default),
+        variableName=kwargs.get("variableName", default),
+        minLon=kwargs.get("min_lon", default),
+        maxLon=kwargs.get("max_lon", default),
+        minLat=kwargs.get("min_lat", default),
+        maxLat=kwargs.get("max_lat", default),
+        minTime=kwargs.get("min_time", default),
+        maxTime=kwargs.get("max_time", default),
         searchFor=search_for,
     )
     return _check_url_response(url)
 
 
-def info_url(server, dataset_id, response='html'):
+def info_url(server, dataset_id, response="html"):
     """The info URL for the `server` endpoint.
 
     Args:
@@ -116,11 +127,11 @@ def info_url(server, dataset_id, response='html'):
         url (str): the info URL for the `response` chosen.
 
     """
-    url = f'{server}/info/{dataset_id}/index.{response}'
+    url = f"{server}/info/{dataset_id}/index.{response}"
     return _check_url_response(url)
 
 
-def categorize_url(server, categorize_by, value=None, response='html'):
+def categorize_url(server, categorize_by, value=None, response="html"):
     """The categorize URL for the `server` endpoint.
 
     Args:
@@ -133,13 +144,15 @@ def categorize_url(server, categorize_by, value=None, response='html'):
 
     """
     if value:
-        url = f'{server}/categorize/{categorize_by}/{value}/index.{response}'
+        url = f"{server}/categorize/{categorize_by}/{value}/index.{response}"
     else:
-        url = f'{server}/categorize/{categorize_by}/index.{response}'
+        url = f"{server}/categorize/{categorize_by}/index.{response}"
     return _check_url_response(url)
 
 
-def download_url(server, dataset_id, protocol, variables, response='html', constraints=None):
+def download_url(
+    server, dataset_id, protocol, variables, response="html", constraints=None
+):
     """The download URL for the `server` endpoint.
 
     Args:
@@ -162,22 +175,22 @@ def download_url(server, dataset_id, protocol, variables, response='html', const
     """
     # This is an unconstrained OPeNDAP response b/c
     # the integer based constrained version is just not worth supporting ;-p
-    if response == 'opendap':
-        return f'{server}/{protocol}/{dataset_id}'
+    if response == "opendap":
+        return f"{server}/{protocol}/{dataset_id}"
     else:
-        url = f'{server}/{protocol}/{dataset_id}.{response}?'
+        url = f"{server}/{protocol}/{dataset_id}.{response}?"
 
     if variables:
-        variables = ','.join(variables)
-        url += f'{variables}'
+        variables = ",".join(variables)
+        url += f"{variables}"
 
     if constraints:
         _constraints = copy.copy(constraints)
         for k, v in _constraints.items():
-            if k.startswith('time'):
+            if k.startswith("time"):
                 _constraints.update({k: parse_dates(v)})
         _constraints = quote_string_constraints(_constraints)
-        _constraints = ''.join([f'&{k}{v}' for k, v in _constraints.items()])
+        _constraints = "".join([f"&{k}{v}" for k, v in _constraints.items()])
 
-        url += f'{_constraints}'
+        url += f"{_constraints}"
     return _check_url_response(url)
