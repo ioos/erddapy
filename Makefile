@@ -7,7 +7,7 @@ format:
 	black --line-length 79 .
 
 test:
-	pytest -n 2 -rxs tests
+	pytest -n 2 -rxs --cov=erddapy tests
 
 lint:
 	pytest --flake8 -m flake8
