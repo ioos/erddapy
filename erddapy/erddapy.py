@@ -362,9 +362,7 @@ class ERDDAP(object):
                 f"You must specify a valid dataset_id, got {dataset_id}"
             )
 
-        url = self.get_info_url(
-            self.server, dataset_id=dataset_id, response="csv"
-        )
+        url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
         variables = {}
         _df = pd.read_csv(
