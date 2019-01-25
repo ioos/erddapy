@@ -1,4 +1,5 @@
 import io
+import os
 from datetime import datetime
 
 import pendulum
@@ -9,11 +10,28 @@ from requests.exceptions import HTTPError
 from erddapy.utilities import (
     _check_url_response,
     _clean_response,
+    _tempnc,
     parse_dates,
     quote_string_constraints,
     servers,
     urlopen,
 )
+
+
+@pytest.mark.web
+@pytest.mark.xfail
+def test_servers():
+    for server in servers.values():
+        # Should raise HTTPError if broken, otherwise returns the URL.
+        _check_url_response(server.url) == server.url
+
+
+@pytest.mark.web
+def test_urlopen():
+    """Assure that urlopen is always a BytesIO object."""
+    url = "http://erddap.sensors.ioos.us/erddap/tabledap/"
+    ret = urlopen(url)
+    isinstance(ret, io.BytesIO)
 
 
 @pytest.mark.web
@@ -33,22 +51,6 @@ def test__check_url_response():
 def test__clean_response():
     """Test if users can pass reponses with or without the '.'."""
     assert _clean_response("html") == _clean_response(".html")
-
-
-@pytest.mark.web
-def test_urlopen():
-    """Assure that urlopen is always a BytesIO object."""
-    url = "http://erddap.sensors.ioos.us/erddap/tabledap/"
-    ret = urlopen(url)
-    isinstance(ret, io.BytesIO)
-
-
-@pytest.mark.web
-@pytest.mark.xfail
-def test_servers():
-    for server in servers.values():
-        # Should raise HTTPError if broken, otherwise returns the URL.
-        _check_url_response(server.url) == server.url
 
 
 def test_parse_dates_naive_datetime():
@@ -117,3 +119,17 @@ def test_quote_string_constraints():
     for k, v in kw.items():
         if isinstance(v, str):
             assert v.startswith('"') and v.endswith('"')
+
+
+def test__tempnc():
+    url = (
+        "https://data.ioos.us/gliders/erddap/tabledap/cp_336-20170116T1254.nc"
+    )
+    data = urlopen(url).read()
+    with _tempnc(data) as tmp:
+        # Check that the file was exists.
+        assert os.path.exists(tmp.name)
+        # Confirm that it is a netCDF file.
+        assert tmp.name.endswith("nc")
+    # Check that the file was removed.
+    assert not os.path.exists(tmp.name)
