@@ -258,13 +258,12 @@ class ERDDAP(object):
             variables (list/tuple): a list of the variables to download.
             response (str): default is HTML.
             constraints (dict): download constraints, default None (opendap-like url)
-                example: constraints = {'latitude<=': 41.0,
-                                        'latitude>=': 38.0,
-                                        'longitude<=': -69.0,
-                                        'longitude>=': -72.0,
-                                        'time<=': '2017-02-10T00:00:00+00:00',
-                                        'time>=': '2016-07-10T00:00:00+00:00',
-                                        }
+            example: constraints = {'latitude<=': 41.0,
+                                    'latitude>=': 38.0,
+                                    'longitude<=': -69.0,
+                                    'longitude>=': -72.0,
+                                    'time<=': '2017-02-10T00:00:00+00:00',
+                                    'time>=': '2016-07-10T00:00:00+00:00',}
 
         Returns:
             url (str): the download URL for the `response` chosen.
@@ -315,10 +314,10 @@ class ERDDAP(object):
 
         Accepts any `pandas.read_csv` keyword arguments.
 
-        This method uses the `.csvp`(1) response for simplicity,
+        This method uses the .csvp [1] response for simplicity,
         please check ERDDAP's documentation for the other csv options available.
 
-        1) Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
+        [1] Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
 
         """
         url = self.get_download_url(response="csvp")
