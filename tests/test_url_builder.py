@@ -11,7 +11,7 @@ def _url_to_dict(url):
 
 @pytest.fixture
 @pytest.mark.web
-def server():
+def e():
     yield ERDDAP(
         server="https://upwell.pfeg.noaa.gov/erddap",
         protocol="tabledap",
@@ -19,27 +19,40 @@ def server():
     )
 
 
+@pytest.fixture
+def taodata(e):
+    e.dataset_id = "pmelTao5dayIso"
+    e.constraints = {
+        "time>=": "1977-11-10T12:00:00Z",
+        "time<=": "2019-01-26T12:00:00Z",
+        "latitude>=": 10,
+        "latitude<=": 10,
+        "longitude>=": 265,
+        "longitude<=": 265,
+    }
+    e.variables = ["ISO_6", "time"]
+    yield e
+
+
 @pytest.mark.web
-def test_search_url_bad_request(server):
+def test_search_url_bad_request(e):
     """Test if a bad request returns HTTPError."""
     kw = {
         "min_time": "1700-01-01T12:00:00Z",
         "max_time": "1750-01-01T12:00:00Z",
     }
     with pytest.raises(HTTPError):
-        server.get_search_url(**kw)
+        e.get_search_url(**kw)
 
 
 @pytest.mark.web
-def test_search_url_valid_request(server):
+def test_search_url_valid_request(e):
     """Test if a bad request returns HTTPError."""
     min_time = "1800-01-01T12:00:00Z"
     max_time = "1950-01-01T12:00:00Z"
     kw = {"min_time": min_time, "max_time": max_time}
-    url = server.get_search_url(**kw)
-    assert url.startswith(
-        f"{server.server}/search/advanced.{server.response}?"
-    )
+    url = e.get_search_url(**kw)
+    assert url.startswith(f"{e.server}/search/advanced.{e.response}?")
     options = _url_to_dict(url)
     assert options.pop("minTime") == str(parse_dates(min_time))
     assert options.pop("maxTime") == str(parse_dates(max_time))
@@ -49,46 +62,41 @@ def test_search_url_valid_request(server):
 
 
 @pytest.mark.web
-def test_info_url(server):
+def test_info_url(e):
     """Check info URL results."""
     dataset_id = "gtoppAT"
-    url = server.get_info_url(dataset_id=dataset_id)
-    assert url == f"{server.server}/info/{dataset_id}/index.{server.response}"
+    url = e.get_info_url(dataset_id=dataset_id)
+    assert url == f"{e.server}/info/{dataset_id}/index.{e.response}"
 
-    url = server.get_info_url(dataset_id=dataset_id, response="csv")
-    assert url == f"{server.server}/info/{dataset_id}/index.csv"
+    url = e.get_info_url(dataset_id=dataset_id, response="csv")
+    assert url == f"{e.server}/info/{dataset_id}/index.csv"
 
 
 @pytest.mark.web
-def test_categorize_url(server):
+def test_categorize_url(e):
     """Check categorize URL results."""
     categorize_by = "standard_name"
-    url = server.get_categorize_url(categorize_by=categorize_by)
-    assert (
-        url
-        == f"{server.server}/categorize/{categorize_by}/index.{server.response}"
-    )
+    url = e.get_categorize_url(categorize_by=categorize_by)
+    assert url == f"{e.server}/categorize/{categorize_by}/index.{e.response}"
 
-    url = server.get_categorize_url(
-        categorize_by=categorize_by, response="csv"
-    )
-    assert url == f"{server.server}/categorize/{categorize_by}/index.csv"
+    url = e.get_categorize_url(categorize_by=categorize_by, response="csv")
+    assert url == f"{e.server}/categorize/{categorize_by}/index.csv"
 
 
 @pytest.mark.web
-def test_download_url_unconstrained(server):
+def test_download_url_unconstrained(e):
     """Check download URL results."""
     dataset_id = "gtoppAT"
     variables = ["commonName", "yearDeployed", "serialNumber"]
-    url = server.get_download_url(dataset_id=dataset_id, variables=variables)
+    url = e.get_download_url(dataset_id=dataset_id, variables=variables)
     assert url.startswith(
-        f"{server.server}/{server.protocol}/{dataset_id}.{server.response}?"
+        f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?"
     )
     assert sorted(url.split("?")[1].split(",")) == sorted(variables)
 
 
 @pytest.mark.web
-def test_download_url_constrained(server):
+def test_download_url_constrained(e):
     dataset_id = "gtoppAT"
     variables = ["commonName", "yearDeployed", "serialNumber"]
 
@@ -108,15 +116,13 @@ def test_download_url_constrained(server):
         "longitude<=": max_lon,
     }
 
-    url = server.get_download_url(
+    url = e.get_download_url(
         dataset_id=dataset_id,
         variables=variables,
         response="csv",
         constraints=constraints,
     )
-    assert url.startswith(
-        f"{server.server}/{server.protocol}/{dataset_id}.csv?"
-    )
+    assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.csv?")
     options = _url_to_dict(url)
     assert options["time>"] == str(parse_dates(min_time))
     assert options["time<"] == str(parse_dates(max_time))
@@ -124,3 +130,63 @@ def test_download_url_constrained(server):
     assert options["latitude<"] == str(max_lat)
     assert options["longitude>"] == str(min_lon)
     assert options["longitude<"] == str(max_lon)
+
+
+@pytest.mark.web
+def test_to_pandas(taodata):
+    import pandas as pd
+
+    df = taodata.to_pandas(index_col="time (UTC)", parse_dates=True).dropna()
+
+    assert isinstance(df, pd.DataFrame)
+    assert df.index.name == "time (UTC)"
+    assert len(df.columns) == 1
+    assert df.columns[0] == "ISO_6 (m)"
+
+
+@pytest.mark.web
+def test_to_xarray(taodata):
+    import xarray as xr
+
+    ds = taodata.to_xarray()
+
+    assert isinstance(ds, xr.Dataset)
+    assert len(ds.variables) == 2
+    assert ds["time"].name == "time"
+    assert ds["ISO_6"].name == "ISO_6"
+
+
+@pytest.mark.web
+def test_to_iris(taodata):
+    import iris
+
+    cubes = taodata.to_iris()
+
+    assert isinstance(cubes, iris.cube.CubeList)
+    assert isinstance(cubes.extract_strict("time"), iris.cube.Cube)
+    assert isinstance(
+        cubes.extract_strict("20C Isotherm Depth"), iris.cube.Cube
+    )
+
+
+@pytest.mark.web
+def test_get_var_by_attr(e):
+    variables = e.get_var_by_attr(dataset_id="gtoppAT", axis="X")
+    assert isinstance(variables, list)
+    assert variables == ["longitude"]
+
+    variables = e.get_var_by_attr(
+        dataset_id="gtoppAT", axis=lambda v: v in ["X", "Y", "Z", "T"]
+    )
+    assert sorted(variables) == ["latitude", "longitude", "time"]
+
+    assert (
+        e.get_var_by_attr(
+            dataset_id="pmelTao5dayIso",
+            standard_name="northward_sea_water_velocity",
+        )
+        == []
+    )
+    assert e.get_var_by_attr(
+        dataset_id="pmelTao5dayIso", standard_name="time"
+    ) == ["time"]
