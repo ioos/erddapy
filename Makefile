@@ -21,5 +21,5 @@ lint:
 test:
 	pytest -n 2 -rxs --cov=erddapy tests
 
-check: isort format docs lint test
+check: style docs lint test
 	echo "All checks complete!"
