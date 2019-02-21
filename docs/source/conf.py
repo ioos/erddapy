@@ -97,7 +97,7 @@ html_theme = "alabaster"
 html_theme_options = {
     "logo": "logo.png",
     "logo_name": "erddapy",
-    "github_user": "pyoceans",
+    "github_user": "ioos",
     "github_repo": "erddapy",
     "github_banner": True,
     "travis_button": True,

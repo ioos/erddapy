@@ -26,7 +26,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Filipe Fernandes",
     author_email="ocefpaf@gmail.com",
-    url="https://github.com/pyoceans/erddapy",
+    url="https://github.com/ioos/erddapy",
     keywords=["ERDDAP", "Scientific Python", "Remote data access"],
     classifiers=[
         "Programming Language :: Python :: 3.6",
