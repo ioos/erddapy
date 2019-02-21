@@ -61,11 +61,11 @@ deploy:
   provider: pypi
   user: ocefpaf
   password:
-    secure: HD3oiZ3aWzGlmMpoZqsu8uG6v7Zhk/VgqrU+Ch0y0MQFCl8Dagh8Wuo6iLKGWimqSQ3vl3CpXZAhCZRyv/iEZLVf3f5rDiPpQNgvAARZANxMolidGEa+HBhzNOPtJQ78d76ikJ9fe575cO5FEzJi+7NgHFXucyjr+1kINDjPXNvhLeUEaT+C7+uOYrCc0hkznDs0sCwsNGIYvy+cyjQL2FsLmoqRzwsliCTSXNBLJ3fw15BlXGRbHCXT1qf+8kNAGdR650a3c+jazz76ElIdjsg7E//bWmxiePHgBuctnIXNTdMxEi2rMC2QqURV/UEdZMb361bAk3avu1/vuTrOiO86As1hzh+luQVF/jK0x90mpPSlCYN2cyvx2eliLgrDNSzmIiL1H5YYlXSqLX80hb2+YQE8hNwe53SGAhYBO1bktyAuIno4+vK54wShnpqK/alcwvpB3uwx3QNCUKcKEQwzTs6bJVSYWySCyy7fuIGFX+mwdzOOyLrhnWIIimyolpITzbfOqCf/5FnGXoIZ7Kjm4CTGqqaEos4wG2CXDsz8dlgU8xSz1nImZlg6mM+6h/hLxaUtRsw79ZLZZ8/IsKUewWTi/FPJPB8Dri8+3Qa74JppNWVkb7DxNYYErxOGRF6GHGRtsBb4I2stupD2VNGKHFZO1Cg+G9RyUOHAlT4=
+    secure: "PTeep8OV7UlqsgSHmI4QNjQNlchdGlI32w15SyK1oPrbmvIMt0bWx8+sOHvfIyzEiuKooA/j+N5wjAnsHZF+BPby634IjSj/ctF1Fbw143TF1m7GpsYMzT9zWRcBk/9/Br8q+w4Uv4HUvtWlP0TV+gTMIbNpDt9/lpmhaEAsbz9ceDv3VT3kZUS989vYHlKAdZ3mmasWfd/WEPZgleiLLwT9Vi3zooLw4RiCIGX5yiVtn6Dvde9HChHBw21gvXN1Dsqoc4aFebcCr2zuTaRgcumGka8ZZaj8pw5p25d9Elp5PyYl2fBQCvGa6VlbJGFhDe6lY1HwvLsOBsrNrPIRnpiyU4oNBpW5qfk29amBs379RvlVkN+w39aMcoObsrIIFigC3ggUz9LcFJbTkRqsnWPLyujxquj1kti2NfTkzqbTKHiXT8nzxa8WPrpsG69ay6HV5MjfEUMzAAUbjiUKWoQTkXsGusXiSUZ4tJtl2O3vrHm5YGYGHLqP79sQSGKOKkAg8tY6r7g1WSAhzC8RH/GzclIqtaOds/+K32kT2PAwi14SWZbA+YNHAmblx5+RGhnJiHp67tK3gX+4Oy6M/L7DDQANLrbJBAi/Lg8v3jGA7i5o1xn5yVKXh90ae57RyILokIfue3t+UNCyQ3ENxRfDCZIanC1VqRZg1MnqfQI="
   distributions: sdist bdist_wheel
   upload_docs: no
   on:
-    repo: pyoceans/erddapy
+    repo: ioos/erddapy
     tags: true
     all_branches: master
     condition: '$TEST_TARGET == "default"'

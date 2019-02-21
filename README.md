@@ -1,5 +1,5 @@
 <h1 align="center" style="margin:1em;">
-  <a href="https://pyoceans.github.io/erddapy/">erddapy</a>
+  <a href="https://ioos.github.io/erddapy/">erddapy</a>
 </h1>
 
 <h4 align="center">
@@ -11,17 +11,17 @@ erddapy: ERDDAP + Python.
 <a href="https://anaconda.org/conda-forge/erddapy">
 <img src="https://img.shields.io/conda/dn/conda-forge/erddapy.svg"
  alt="conda-forge downloads" /></a>
-<a href="https://github.com/pyoceans/erddapy/releases">
-<img src="https://img.shields.io/github/tag/pyoceans/erddapy.svg"
+<a href="https://github.com/ioos/erddapy/releases">
+<img src="https://img.shields.io/github/tag/ioos/erddapy.svg"
  alt="Latest version" /></a>
-<a href="https://github.com/pyoceans/erddapy/commits/master">
-<img src="https://img.shields.io/github/commits-since/pyoceans/erddapy/latest.svg"
+<a href="https://github.com/ioos/erddapy/commits/master">
+<img src="https://img.shields.io/github/commits-since/ioos/erddapy/latest.svg"
  alt="Commits since last release" /></a>
-<a href="https://github.com/pyoceans/erddapy/graphs/contributors">
-<img src="https://img.shields.io/github/contributors/pyoceans/erddapy.svg"
+<a href="https://github.com/ioos/erddapy/graphs/contributors">
+<img src="https://img.shields.io/github/contributors/ioos/erddapy.svg"
  alt="# contributors" /></a>
-<a href="https://travis-ci.org/pyoceans/erddapy/branches">
-<img src="https://api.travis-ci.org/repositories/pyoceans/erddapy.svg?branch=master"
+<a href="https://travis-ci.org/ioos/erddapy/branches">
+<img src="https://api.travis-ci.org/repositories/ioos/erddapy.svg?branch=master"
  alt="Travis-CI" /></a>
 <a href="https://zenodo.org/badge/latestdoi/104919828">
 <img src="https://zenodo.org/badge/104919828.svg"
@@ -89,11 +89,11 @@ df = e.to_pandas()
 
 ## Get in touch
 
-Report bugs, suggest features or view the source code on [GitHub](https://github.com/pyoceans/erddapy/issues).
+Report bugs, suggest features or view the source code on [GitHub](https://github.com/ioos/erddapy/issues).
 
 
 ## License and copyright
 
 Erddapy is licensed under BSD 3-Clause "New" or "Revised" License (BSD-3-Clause).
 
-Development occurs on GitHub at <https://github.com/pyoceans/erddapy>.
+Development occurs on GitHub at <https://github.com/ioos/erddapy>.
