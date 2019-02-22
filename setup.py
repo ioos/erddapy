@@ -29,14 +29,14 @@ setup(
     url="https://github.com/ioos/erddapy",
     keywords=["ERDDAP", "Scientific Python", "Remote data access"],
     classifiers=[
+        "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Topic :: Scientific/Engineering :: GIS",
         "License :: OSI Approved :: BSD License",
-        "Development Status :: 4 - Beta",
     ],
     packages=find_packages(),
     extras_require={"testing": ["pytest"]},
-    license=f'{read("LICENSE.txt")}',
     install_requires=install_requires,
     cmdclass=versioneer.get_cmdclass(),
 )
