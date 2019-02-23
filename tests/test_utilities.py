@@ -121,6 +121,7 @@ def test_quote_string_constraints():
             assert v.startswith('"') and v.endswith('"')
 
 
+@pytest.mark.serial
 def test__tempnc():
     url = (
         "https://data.ioos.us/gliders/erddap/tabledap/cp_336-20170116T1254.nc"
