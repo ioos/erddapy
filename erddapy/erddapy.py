@@ -314,13 +314,14 @@ class ERDDAP(object):
 
         Accepts any `pandas.read_csv` keyword arguments.
 
-        This method uses the .csvp [1] response for simplicity,
+        This method uses the .csvp [1] response as the default for simplicity,
         please check ERDDAP's documentation for the other csv options available.
 
         [1] Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
 
         """
-        url = self.get_download_url(response="csvp")
+        response = kw.pop("response", "csvp")
+        url = self.get_download_url(response=response)
         return pd.read_csv(
             urlopen(url, params=self.params, **self.requests_kwargs), **kw
         )
