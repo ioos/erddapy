@@ -26,6 +26,9 @@ erddapy: ERDDAP + Python.
 <a href="https://zenodo.org/badge/latestdoi/104919828">
 <img src="https://zenodo.org/badge/104919828.svg"
  alt="zenodo" /></a>
+<a href="https://pypi.org/project/erddapy">
+<img src="https://img.shields.io/pypi/pyversions/erddapy.svg"
+ alt="zenodo" /></a>
 </p>
 <br>
 
