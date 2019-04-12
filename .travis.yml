@@ -17,20 +17,24 @@ matrix:
       env: TEST_TARGET=docs PY=3.7
 
 before_install:
-  - wget http://bit.ly/miniconda -O miniconda.sh
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - conda config --set always_yes yes --set changeps1 no --set show_channel_urls true
-  - conda update --quiet conda
-  - conda config --add channels conda-forge --force
-  - conda config --remove channels defaults
-  - conda create --name TEST python=$PY --file requirements.txt --file requirements-dev.txt
-  - source activate TEST
-  # Useful for debugging any issues with conda
-  - conda info --all
+  # Install miniconda and create TEST env.
+  - |
+    wget http://bit.ly/miniconda -O miniconda.sh
+    bash miniconda.sh -b -p $HOME/miniconda
+    export PATH="$HOME/miniconda/bin:$PATH"
+    conda config --set always_yes yes --set changeps1 no --set show_channel_urls true
+    conda update --quiet conda
+    conda config --add channels conda-forge --force
+    conda install pycryptosat
+    conda config --set channel_priority strict
+    conda config --set sat_solver pycryptosat
+    conda config --set safety_checks disabled
+    conda create --name TEST python=$PY --file requirements.txt --file requirements-dev.txt
+    source activate TEST
+    conda info --all
 
 install:
-  - python setup.py sdist && version=$(python setup.py --version) && pushd dist && pip install erddapy-${version}.tar.gz && popd
+  - python setup.py sdist && version=$(python setup.py --version) && pushd dist && pip install --no-deps --force-reinstall erddapy-${version}.tar.gz && popd
 
 script:
   - if [[ $TEST_TARGET == 'default' ]]; then
