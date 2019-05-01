@@ -49,7 +49,7 @@ script:
     - |
     if [[ $TRAVIS_JOB_NAME == 'docs' ]]; then
       set -e
-      cp notebooks/{quick_intro.ipynb,searchfor.ipynb} docs/source/ ;
+      cp notebooks/{quick_intro.ipynb,searchfor.ipynb} docs/source/
       pushd docs
       make clean html linkcheck
       popd
