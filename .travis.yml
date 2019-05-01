@@ -46,7 +46,7 @@ script:
       pytest --flake8 -m flake8 ;
     fi
 
-    - |
+  - |
     if [[ $TRAVIS_JOB_NAME == 'docs' ]]; then
       set -e
       cp notebooks/{quick_intro.ipynb,searchfor.ipynb} docs/source/
