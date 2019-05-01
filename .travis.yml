@@ -37,7 +37,7 @@ install:
   - python setup.py sdist && version=$(python setup.py --version) && pushd dist && pip install --no-deps --force-reinstall erddapy-${version}.tar.gz && popd
 
 script:
-  - if [[ $TEST_TARGET == 'default' ]]; then
+  - if [[ $TRAVIS_JOB_NAME == python-* ]]; then
       cp -r tests/ /tmp ;
       pushd /tmp && pytest -n 2 -rxs --cov=erddapy tests && popd ;
     fi
