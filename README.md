@@ -57,6 +57,20 @@ What is ERDDAP?
 ERDDAP unifies the different types of data servers and offers a consistent way to get the data in multiple the formats.
 For more information on ERDDAP servers please see [https://coastwatch.pfeg.noaa.gov/erddap/index.html](https://coastwatch.pfeg.noaa.gov/erddap/index.html).
 
+### Installation
+
+For `conda` users you can
+
+```shell
+conda install --channel conda-forge erddapy
+```
+
+or, if you are a `pip` users
+
+```shell
+pip install erddapy
+```
+
 ### Example
 
 ```python
