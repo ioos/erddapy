@@ -55,6 +55,7 @@ like searching for datasets, acquiring metadata, downloading the data, etc.
 
 What is ERDDAP?
 ERDDAP unifies the different types of data servers and offers a consistent way to get the data in multiple the formats.
+For more information on ERDDAP servers please see [https://coastwatch.pfeg.noaa.gov/erddap/index.html](https://coastwatch.pfeg.noaa.gov/erddap/index.html).
 
 ### Example
 
