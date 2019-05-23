@@ -71,6 +71,9 @@ or, if you are a `pip` users
 pip install erddapy
 ```
 
+Note that, if you are installing the `requirements-dev.txt`, the `iris` package
+is named `scitools-iris` on PyPI so `pip` users must rename that before installing.
+
 ### Example
 
 ```python
