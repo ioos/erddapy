@@ -36,7 +36,7 @@ before_install:
     conda info --all
 
 install:
-  - pip wheel . -w dist --no-deps
+  - pip install -e . --no-deps --force-reinstall
 
 script:
   - if [[ $TRAVIS_JOB_NAME == python-* ]]; then
@@ -45,6 +45,7 @@ script:
     fi
 
   - if [[ $TRAVIS_JOB_NAME == 'tarball' ]]; then
+      pip wheel . -w dist --no-deps ;
       check-manifest --verbose ;
       twine check dist/* ;
     fi
