@@ -85,7 +85,7 @@ class ERDDAP(object):
     def __init__(self, server, protocol=None, response="html"):
         if server in servers.keys():
             server = servers[server].url
-        self.server = _check_url_response(server)
+        self.server = server
         self.protocol = protocol
 
         # Initialized only via properties.
