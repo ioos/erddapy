@@ -85,4 +85,4 @@ deploy:
     repo: ioos/erddapy
     tags: true
     all_branches: master
-    condition: '$TEST_TARGET == "default"'
+    condition: '$TEST_TARGET == "docs"'
