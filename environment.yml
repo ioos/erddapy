@@ -1,0 +1,12 @@
+name: ERDDAPY
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - cartopy
+  - erddapy
+  - iris
+  - jupyter
+  - pendulum>=2.0.1
+  - xarray
