@@ -1,5 +1,5 @@
-:mod:`erddapy`
---------------
+:mod:`erddapy API`
+------------------
 
 .. automodule:: erddapy.erddapy
    :members:
