@@ -78,6 +78,10 @@ servers = {
         "UBC Earth, Ocean & Atmospheric Sciences SalishSeaCast Project",
         "https://salishsea.eos.ubc.ca/erddap/",
     ),
+    "BCODMO": _server(
+        "Biological and Chemical Oceanography Data Management Office",
+        "https://erddap.bco-dmo.org/erddap/",
+    ),
 }
 
 
