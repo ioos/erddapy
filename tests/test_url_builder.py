@@ -58,7 +58,10 @@ def test_search_url_valid_request(e):
     assert options.pop("maxTime") == str(parse_dates(max_time))
     assert options.pop("itemsPerPage") == str(1000)
     for k, v in options.items():
-        assert v == "(ANY)"
+        if k == "protocol":
+            assert v == e.protocol
+        else:
+            assert v == "(ANY)"
 
 
 @pytest.mark.web
