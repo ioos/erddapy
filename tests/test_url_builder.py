@@ -1,4 +1,5 @@
 import pytest
+
 from requests.exceptions import HTTPError
 
 from erddapy import ERDDAP
@@ -62,6 +63,24 @@ def test_search_url_valid_request(e):
             assert v == e.protocol
         else:
             assert v == "(ANY)"
+
+
+@pytest.mark.web
+def test_search_url_change_protocol(e):
+    """Test if we change the protocol it show in the URL."""
+    kw = {"search_for": "salinity"}
+    url = e.get_search_url(protocol="tabledap", **kw)
+    options = _url_to_dict(url)
+    assert options.pop("protocol") == "tabledap"
+
+    url = e.get_search_url(protocol="griddap", **kw)
+    options = _url_to_dict(url)
+    assert options.pop("protocol") == "griddap"
+
+    e.protocol = None
+    url = e.get_search_url(**kw)
+    options = _url_to_dict(url)
+    assert options.pop("protocol") == "(ANY)"
 
 
 @pytest.mark.web
