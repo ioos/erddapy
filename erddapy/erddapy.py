@@ -7,6 +7,7 @@ Pythonic way to access ERDDAP data
 
 import copy
 import functools
+
 from urllib.parse import quote_plus
 
 import pandas as pd
@@ -105,6 +106,7 @@ class ERDDAP(object):
         self,
         response=None,
         search_for=None,
+        protocol=None,
         items_per_page=1000,
         page=1,
         **kwargs,
@@ -122,8 +124,6 @@ class ERDDAP(object):
                 - To exclude datasets with a specific word, use `-excludedWord`.
                 - To exclude datasets with a specific phrase, use `-"excluded phrase"`
                 - Searches are not case-sensitive.
-                - To find just grid or just table datasets, include `protocol=griddap`
-                    or `protocol=tabledap` in your search.
                 - You can search for any part of a word. For example,
                     searching for `spee` will find datasets with `speed` and datasets with
                     `WindSpeed`
@@ -175,8 +175,12 @@ class ERDDAP(object):
         if max_time:
             kwargs.update({"max_time": parse_dates(max_time)})
 
-        default = "(ANY)"
+        protocol = protocol if protocol else self.protocol
         response = response if response else self.response
+        if protocol:
+            kwargs.update({"protocol": protocol})
+
+        default = "(ANY)"
         url = base.format(
             server=self.server,
             response=response,
