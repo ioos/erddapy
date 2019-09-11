@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+
+- Bugfix: fixed `get_search_url()` protocol filter in #94.
+
 ## 0.5.0
 
 - Do not check server URL when creating the object.
