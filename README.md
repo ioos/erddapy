@@ -87,7 +87,7 @@ from erddapy import ERDDAP
 
 
 e = ERDDAP(
-  server='https://data.ioos.us/gliders/erddap',
+  server='https://gliders.ioos.us/erddap',
   protocol='tabledap',
 )
 
