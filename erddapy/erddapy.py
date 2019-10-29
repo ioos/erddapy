@@ -23,7 +23,18 @@ from erddapy.utilities import (
 
 
 def _distinct(url: str, **kwargs) -> str:
-    """Apply a server side function."""
+    """
+    Sort all of the rows in the results table
+    (starting with the first requested variable,
+    then using the second requested variable if the first variable has a tie, ...),
+    then remove all non-unique rows of data.
+
+    For example, a query for the variables ["stationType", "stationID"] with `distinct=True`
+    will return a sorted list of "stationIDs" associated with each "stationType".
+
+    See https://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html#distinct
+
+    """
     distinct = kwargs.get("distinct")
     if distinct:
         return f"{url}&distinct()"
@@ -327,7 +338,7 @@ class ERDDAP(object):
 
         """
         response = kw.pop("response", "csvp")
-        url = self.get_download_url(response=response)
+        url = self.get_download_url(response=response, **kw)
         return pd.read_csv(
             urlopen(url, params=self.params, **self.requests_kwargs), **kw
         )
@@ -339,7 +350,7 @@ class ERDDAP(object):
         """
         import xarray as xr
 
-        url = self.get_download_url(response="nc")
+        url = self.get_download_url(response="nc", **kw)
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             return xr.open_dataset(tmp.name, **kw)
@@ -351,7 +362,7 @@ class ERDDAP(object):
         """
         import iris
 
-        url = self.get_download_url(response="nc")
+        url = self.get_download_url(response="nc", **kw)
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp.name, **kw)
