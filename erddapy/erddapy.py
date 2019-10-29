@@ -22,6 +22,14 @@ from erddapy.utilities import (
 )
 
 
+def _distinct(url: str, **kwargs) -> str:
+    """Apply a server side function."""
+    distinct = kwargs.get("distinct")
+    if distinct:
+        return f"{url}&distinct()"
+    return url
+
+
 class ERDDAP(object):
     """Creates an ERDDAP instance for a specific server endpoint.
 
@@ -251,6 +259,7 @@ class ERDDAP(object):
         variables=None,
         response=None,
         constraints=None,
+        **kwargs,
     ):
         """The download URL for the `server` endpoint.
 
@@ -303,6 +312,7 @@ class ERDDAP(object):
             _constraints = "".join([f"&{k}{v}" for k, v in _constraints.items()])
 
             url += f"{_constraints}"
+        url = _distinct(url, **kwargs)
         return _check_url_response(url, **self.requests_kwargs)
 
     def to_pandas(self, **kw):
