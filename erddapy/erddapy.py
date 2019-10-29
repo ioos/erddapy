@@ -35,7 +35,7 @@ def _distinct(url: str, **kwargs) -> str:
     See https://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html#distinct
 
     """
-    distinct = kwargs.get("distinct")
+    distinct = kwargs.pop("distinct")
     if distinct:
         return f"{url}&distinct()"
     return url
