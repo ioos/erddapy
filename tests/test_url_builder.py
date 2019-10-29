@@ -211,7 +211,7 @@ def test_get_var_by_attr(e):
 
 # Test URL modifiers (server-side functions).
 def test_download_url_distinct(e):
-    """Check download URL results with the distinct option."""
+    """Check download URL results with and without the distinct option."""
     dataset_id = "gtoppAT"
     variables = ["commonName", "yearDeployed", "serialNumber"]
     no_distinct_url = e.get_download_url(
