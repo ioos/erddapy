@@ -209,6 +209,7 @@ def test_get_var_by_attr(e):
     ) == ["time"]
 
 
+# Test URL modifiers (server-side functions).
 def test_download_url_distinct(e):
     """Check download URL results with the distinct option."""
     dataset_id = "gtoppAT"
