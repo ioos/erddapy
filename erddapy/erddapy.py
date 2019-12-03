@@ -203,7 +203,7 @@ class ERDDAP(object):
             searchFor=search_for,
         )
 
-        return _check_url_response(url)
+        return _check_url_response(url, **self.requests_kwargs)
 
     def get_info_url(self, dataset_id=None, response=None):
         """The info URL for the `server` endpoint.
@@ -225,7 +225,7 @@ class ERDDAP(object):
             )
 
         url = f"{self.server}/info/{dataset_id}/index.{response}"
-        return _check_url_response(url)
+        return _check_url_response(url, **self.requests_kwargs)
 
     def get_categorize_url(self, categorize_by, value=None, response=None):
         """The categorize URL for the `server` endpoint.
@@ -244,7 +244,7 @@ class ERDDAP(object):
             url = f"{self.server}/categorize/{categorize_by}/{value}/index.{response}"
         else:
             url = f"{self.server}/categorize/{categorize_by}/index.{response}"
-        return _check_url_response(url)
+        return _check_url_response(url, **self.requests_kwargs)
 
     def get_download_url(
         self,
@@ -311,7 +311,7 @@ class ERDDAP(object):
             )
 
             url += f"{_constraints}"
-        return _check_url_response(url)
+        return _check_url_response(url, **self.requests_kwargs)
 
     def to_pandas(self, **kw):
         """Save a data request to a pandas.DataFrame.
