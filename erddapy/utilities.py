@@ -95,9 +95,9 @@ def urlopen(url, params=None, **kwargs):
 
 
 @functools.lru_cache(maxsize=None)
-def _check_url_response(url):
+def _check_url_response(url, **kwargs):
     """Shortcut to `raise_for_status` instead of fetching the whole content."""
-    r = requests.head(url)
+    r = requests.head(url, **kwargs)
     r.raise_for_status()
     return url
 
