@@ -41,6 +41,11 @@ def _distinct(url: str, **kwargs) -> str:
     return url
 
 
+def _order_by(url: str, variables, by=None: str) -> str:
+    variables = ",".join(variables)
+    f"{url}&orderBy{by}("{variables}")"
+
+
 class ERDDAP(object):
     """Creates an ERDDAP instance for a specific server endpoint.
 
