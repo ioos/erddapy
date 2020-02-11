@@ -118,7 +118,8 @@ def parse_dates(date_time):
     objects. `timestamp` returns the expected strings in seconds since 1970.
 
     """
-    date_time = parse_time_string(date_time)
+    if isinstance(date_time, str):
+        date_time = parse_time_string(date_time)
     # pandas returns a tuple with datetime, dateutil, and string representation.
     # we want only the datetime obj.
     if isinstance(date_time, tuple):
