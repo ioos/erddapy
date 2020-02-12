@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2
+
+- Bugfix: fixed issue with pandas >=1.0.0.
+
 ## 0.5.1
 
 - Bugfix: fixed `get_search_url()` protocol filter in #94.
