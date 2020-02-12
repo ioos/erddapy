@@ -78,7 +78,7 @@ doctr:
 deploy:
   skip_cleanup: true
   provider: pypi
-  user: ocefpaf
+  user: "__token__"
   password:
     secure: "JZZhudzApHIGqGziiejBVqYM3Lr99zkQhiWngDCHb4fMytGgmODvptrArsENIOC3SS3SBJHw9pIaDj9Dyqt+FKh8DLXjPy190u7QIrStlCQ7395IPRORH5+qiHOGk+I9XZ6zb7RMEG2tNwxOeOmphvQ3RxOt00IuqX4C9QTrf9GCzg//++Xd3RNkwMxgacP8+Sz88KKN77u0IDTUH9AnOQi2Y38Tw70zCFE1qggXStKntnB0d7bf4AxMzFvbn6FxmbkjnT/7i8PcUTav3wtOcT69MRLNazOWv9wvGp/dpps7JwIp1+VFOitW2r9S10PqMD5hu6Pzp+EVBYpGy2FU1SJoyvZ0X6hOio+hQN9W/lyGR0Y7xstBM8Nkvt2ve42TSFZEhw++dnfDqVKfZFL1q81NLC243+sOhvWUBKmHeMgY5cBrWCgvajriE3gwSu5hL67xIrOsmvVNbYiTrH3tP39VZdXhdqQY4r3K6kOnxQWwfRB2OCV6XDAk4+OYst0X1uFdBIhquoJoBX1/XaHvNw3VZUz9JljpAPTxpDfAEDb7F4fZV/5NLFbB5TNRi6FacogZFz5BMJuuFlaCYI1gTIa9IQjXrFquGkyEQGIrJXRBp5PyiH5ZtF7uIkiAeaqFdSeUIJDU1WXxaGORJ/8kyZG0HEgLoaeJPBJxM7J7ZuA="
   distributions: sdist bdist_wheel
