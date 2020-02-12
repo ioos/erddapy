@@ -1,6 +1,4 @@
 include *.txt
-include README.rst
+include README.md
 
 recursive-include erddapy *.py
-include versioneer.py
-include erddapy/_version.py

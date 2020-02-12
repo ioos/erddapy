@@ -1,0 +1,8 @@
+*.egg-info
+.coverage
+.ipynb_checkpoints
+.pytest_cache/
+build/
+dist/
+docs/source/quick_intro.ipynb
+docs/source/searchfor.ipynb
