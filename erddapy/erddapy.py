@@ -8,6 +8,7 @@ Pythonic way to access ERDDAP data
 import copy
 import functools
 
+from typing import Dict, Optional
 from urllib.parse import quote_plus
 
 import pandas as pd
@@ -35,28 +36,28 @@ def _distinct(url: str, **kwargs) -> str:
     See https://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html#distinct
 
     """
-    distinct = kwargs.pop("distinct")
+    distinct = kwargs.pop("distinct", False)
     if distinct:
         return f"{url}&distinct()"
     return url
 
 
-def _order_by(url: str, variables, by=None: str) -> str:
+def _order_by(url: str, variables, by: Optional[str] = None) -> str:
     variables = ",".join(variables)
-    f"{url}&orderBy{by}("{variables}")"
+    return f'{url}&orderBy{by}("{variables}")'
 
 
 class ERDDAP(object):
     """Creates an ERDDAP instance for a specific server endpoint.
 
     Args:
-        server (str): an ERDDAP server URL or an acronym for one of the builtin servers.
-        protocol (str): tabledap or griddap.
+        server: an ERDDAP server URL or an acronym for one of the builtin servers.
+        protocol: tabledap or griddap.
 
     Attributes:
         dataset_id (str): a dataset unique id.
         variables (:obj:`list`/`tuple`): a list variables to download.
-        response (str): default is HTML.
+        response: default is HTML.
         constraints (:obj:`dict`): download constraints, default None (opendap-like url)
         params and requests_kwargs: `request.get` options
 
@@ -107,24 +108,29 @@ class ERDDAP(object):
 
     """
 
-    def __init__(self, server, protocol=None, response="html"):
+    def __init__(
+        self,
+        server: str,
+        protocol: Optional[str] = None,
+        response: Optional[str] = "html",
+    ):
         if server in servers.keys():
             server = servers[server].url
         self.server = server
         self.protocol = protocol
+        self.response = response
 
         # Initialized only via properties.
-        self.constraints = None
-        self.dataset_id = None
-        self.params = None
-        self.requests_kwargs = {}
-        self.response = response
-        self.variables = ""
+        self.constraints: Optional[Dict] = None
+        self.dataset_id: Optional[str] = None
+        self.params: Optional[Dict] = None
+        self.requests_kwargs: Dict = {}
+        self.variables: Optional[str] = ""
 
         # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
-        self._dataset_id = None
-        self._variables = {}
+        self._dataset_id: Optional[str] = None
+        self._variables: Dict = {}
 
     def get_search_url(
         self,
@@ -358,7 +364,7 @@ class ERDDAP(object):
         url = self.get_download_url(response="nc", **kw)
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
-            return xr.open_dataset(tmp.name, **kw)
+            return xr.open_dataset(tmp, **kw)
 
     def to_iris(self, **kw):
         """Load the data request into an iris.CubeList.
@@ -370,7 +376,7 @@ class ERDDAP(object):
         url = self.get_download_url(response="nc", **kw)
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
-            cubes = iris.load_raw(tmp.name, **kw)
+            cubes = iris.load_raw(tmp, **kw)
             cubes.realise_data()
             return cubes
 
@@ -396,7 +402,7 @@ class ERDDAP(object):
             variables.update({variable: attributes})
         return variables
 
-    def get_var_by_attr(self, dataset_id=None, **kwargs):
+    def get_var_by_attr(self, dataset_id: Optional[str] = None, **kwargs):
         """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
         `dataset_id`.
 
