@@ -220,9 +220,7 @@ class ERDDAP(object):
         response = response if response else self.response
 
         if not dataset_id:
-            raise ValueError(
-                f"You must specify a valid dataset_id, got {dataset_id}"
-            )
+            raise ValueError(f"You must specify a valid dataset_id, got {dataset_id}")
 
         url = f"{self.server}/info/{dataset_id}/index.{response}"
         return _check_url_response(url, **self.requests_kwargs)
@@ -280,14 +278,10 @@ class ERDDAP(object):
         constraints = constraints if constraints else self.constraints
 
         if not dataset_id:
-            raise ValueError(
-                f"Please specify a valid `dataset_id`, got {dataset_id}"
-            )
+            raise ValueError(f"Please specify a valid `dataset_id`, got {dataset_id}")
 
         if not protocol:
-            raise ValueError(
-                f"Please specify a valid `protocol`, got {protocol}"
-            )
+            raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
 
         # This is an unconstrained OPeNDAP response b/c
         # the integer based constrained version is just not worth supporting ;-p
@@ -306,9 +300,7 @@ class ERDDAP(object):
                 if k.startswith("time"):
                     _constraints.update({k: parse_dates(v)})
             _constraints = quote_string_constraints(_constraints)
-            _constraints = "".join(
-                [f"&{k}{v}" for k, v in _constraints.items()]
-            )
+            _constraints = "".join([f"&{k}{v}" for k, v in _constraints.items()])
 
             url += f"{_constraints}"
         return _check_url_response(url, **self.requests_kwargs)
@@ -362,23 +354,16 @@ class ERDDAP(object):
             dataset_id = self.dataset_id
 
         if dataset_id is None:
-            raise ValueError(
-                f"You must specify a valid dataset_id, got {dataset_id}"
-            )
+            raise ValueError(f"You must specify a valid dataset_id, got {dataset_id}")
 
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
         variables = {}
-        _df = pd.read_csv(
-            urlopen(url, params=self.params, **self.requests_kwargs)
-        )
+        _df = pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs))
         self._dataset_id = dataset_id
         for variable in set(_df["Variable Name"]):
             attributes = (
-                _df.loc[
-                    _df["Variable Name"] == variable,
-                    ["Attribute Name", "Value"],
-                ]
+                _df.loc[_df["Variable Name"] == variable, ["Attribute Name", "Value"]]
                 .set_index("Attribute Name")
                 .to_dict()["Value"]
             )

@@ -5,12 +5,15 @@ utilities
 
 import functools
 import io
+
 from collections import namedtuple
 from contextlib import contextmanager
 
 import pytz
 import requests
+
 from pandas.core.tools.datetimes import parse_time_string
+
 
 _server = namedtuple("server", ["description", "url"])
 
@@ -19,16 +22,13 @@ servers = {
         "Marine Domain Awareness (MDA) - Italy",
         "https://bluehub.jrc.ec.europa.eu/erddap/",
     ),
-    "MII": _server(
-        "Marine Institute - Ireland", "https://erddap.marine.ie/erddap/"
-    ),
+    "MII": _server("Marine Institute - Ireland", "https://erddap.marine.ie/erddap/"),
     "CSCGOM": _server(
         "CoastWatch Caribbean/Gulf of Mexico Node",
         "http://cwcgom.aoml.noaa.gov/erddap/",
     ),
     "CSWC": _server(
-        "CoastWatch West Coast Node",
-        "https://coastwatch.pfeg.noaa.gov/erddap/",
+        "CoastWatch West Coast Node", "https://coastwatch.pfeg.noaa.gov/erddap/",
     ),
     "CeNCOOS": _server(
         "NOAA IOOS CeNCOOS (Central and Northern California Ocean Observing System)",
@@ -59,12 +59,9 @@ servers = {
         "http://osmc.noaa.gov/erddap/",
     ),
     "UAF": _server(
-        "NOAA UAF (Unified Access Framework)",
-        "https://upwell.pfeg.noaa.gov/erddap/",
+        "NOAA UAF (Unified Access Framework)", "https://upwell.pfeg.noaa.gov/erddap/",
     ),
-    "ONC": _server(
-        "ONC (Ocean Networks Canada)", "http://dap.onc.uvic.ca/erddap/"
-    ),
+    "ONC": _server("ONC (Ocean Networks Canada)", "http://dap.onc.uvic.ca/erddap/"),
     "BMLSC": _server(
         "UC Davis BML (University of California at Davis, Bodega Marine Laboratory)",
         "http://bmlsc.ucdavis.edu:8080/erddap/",
@@ -139,9 +136,7 @@ def quote_string_constraints(kwargs):
     the right-hand-side value must be surrounded by double quotes.
 
     """
-    return {
-        k: f'"{v}"' if isinstance(v, str) else v for k, v in kwargs.items()
-    }
+    return {k: f'"{v}"' if isinstance(v, str) else v for k, v in kwargs.items()}
 
 
 @contextmanager
