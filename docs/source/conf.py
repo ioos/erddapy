@@ -153,13 +153,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (
-        master_doc,
-        "erddapy.tex",
-        "erddapy Documentation",
-        "Filipe Fernandes",
-        "manual",
-    )
+    (master_doc, "erddapy.tex", "erddapy Documentation", "Filipe Fernandes", "manual",)
 ]
 
 
