@@ -8,7 +8,7 @@ Pythonic way to access ERDDAP data
 import copy
 import functools
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional, Tuple, Union
 from urllib.parse import quote_plus
 
 import pandas as pd
@@ -23,7 +23,11 @@ from erddapy.utilities import (
 )
 
 
-def _distinct(url: str, **kwargs) -> str:
+ListLike = Union[List[str], Tuple[str]]
+OptionalStr = Optional[str]
+
+
+def _distinct(url: str, **kwargs: Dict) -> str:
     """
     Sort all of the rows in the results table
     (starting with the first requested variable,
@@ -42,7 +46,7 @@ def _distinct(url: str, **kwargs) -> str:
     return url
 
 
-def _order_by(url: str, variables, by: Optional[str] = None) -> str:
+def _order_by(url: str, variables, by: OptionalStr = None) -> str:
     variables = ",".join(variables)
     return f'{url}&orderBy{by}("{variables}")'
 
@@ -55,10 +59,10 @@ class ERDDAP(object):
         protocol: tabledap or griddap.
 
     Attributes:
-        dataset_id (str): a dataset unique id.
-        variables (:obj:`list`/`tuple`): a list variables to download.
+        dataset_id: a dataset unique id.
+        variables: a list variables to download.
         response: default is HTML.
-        constraints (:obj:`dict`): download constraints, default None (opendap-like url)
+        constraints: download constraints, default None (opendap-like url)
         params and requests_kwargs: `request.get` options
 
     Returns:
@@ -109,10 +113,7 @@ class ERDDAP(object):
     """
 
     def __init__(
-        self,
-        server: str,
-        protocol: Optional[str] = None,
-        response: Optional[str] = "html",
+        self, server: str, protocol: OptionalStr = None, response: str = "html",
     ):
         if server in servers.keys():
             server = servers[server].url
@@ -122,30 +123,30 @@ class ERDDAP(object):
 
         # Initialized only via properties.
         self.constraints: Optional[Dict] = None
-        self.dataset_id: Optional[str] = None
+        self.dataset_id: OptionalStr = None
         self.params: Optional[Dict] = None
         self.requests_kwargs: Dict = {}
-        self.variables: Optional[str] = ""
+        self.variables: Optional[ListLike] = None
 
         # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
-        self._dataset_id: Optional[str] = None
+        self._dataset_id: OptionalStr = None
         self._variables: Dict = {}
 
     def get_search_url(
         self,
-        response=None,
-        search_for=None,
-        protocol=None,
-        items_per_page=1000,
-        page=1,
+        response: OptionalStr = None,
+        search_for: OptionalStr = None,
+        protocol: OptionalStr = None,
+        items_per_page: int = 1000,
+        page: int = 1,
         **kwargs,
-    ):
+    ) -> str:
 
         """The search URL for the `server` endpoint provided.
 
         Args:
-            search_for (str): "Google-like" search of the datasets' metadata.
+            search_for: "Google-like" search of the datasets' metadata.
 
                 - Type the words you want to search for, with spaces between the words.
                     ERDDAP will search for the words separately, not as a phrase.
@@ -161,17 +162,17 @@ class ERDDAP(object):
                     to find datasets from a specific website (usually the start of the datasetID),
                     include (for example) `"datasetID=erd"` in your search.
 
-            response (str): default is HTML.
-            items_per_page (int): how many items per page in the return,
+            response: default is HTML.
+            items_per_page: how many items per page in the return,
                 default is 1000.
-            page (int): which page to display, default is the first page (1).
-            kwargs (dict): extra search constraints based on metadata and/or coordinates ke/value.
+            page: which page to display, default is the first page (1).
+            kwargs: extra search constraints based on metadata and/or coordinates ke/value.
                 metadata: `cdm_data_type`, `institution`, `ioos_category`,
                 `keywords`, `long_name`, `standard_name`, and `variableName`.
                 coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`, `minTime`, and `maxTime`.
 
         Returns:
-            url (str): the search URL.
+            url: the search URL.
 
         """
         base = (
@@ -235,15 +236,17 @@ class ERDDAP(object):
 
         return _check_url_response(url, **self.requests_kwargs)
 
-    def get_info_url(self, dataset_id=None, response=None):
+    def get_info_url(
+        self, dataset_id: OptionalStr = None, response: OptionalStr = None
+    ) -> str:
         """The info URL for the `server` endpoint.
 
         Args:
-            dataset_id (str): a dataset unique id.
-            response (str): default is HTML.
+            dataset_id: a dataset unique id.
+            response: default is HTML.
 
         Returns:
-            url (str): the info URL for the `response` chosen.
+            url: the info URL for the `response` chosen.
 
         """
         dataset_id = dataset_id if dataset_id else self.dataset_id
@@ -255,16 +258,21 @@ class ERDDAP(object):
         url = f"{self.server}/info/{dataset_id}/index.{response}"
         return _check_url_response(url, **self.requests_kwargs)
 
-    def get_categorize_url(self, categorize_by, value=None, response=None):
+    def get_categorize_url(
+        self,
+        categorize_by: str,
+        value: OptionalStr = None,
+        response: OptionalStr = None,
+    ) -> str:
         """The categorize URL for the `server` endpoint.
 
         Args:
-            categorize_by (str): a valid attribute, e.g.: ioos_category or standard_name.
-            value (str): an attribute value.
-            response (str): default is HTML.
+            categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
+            value: an attribute value.
+            response: default is HTML.
 
         Returns:
-            url (str): the categorized URL for the `response` chosen.
+            url: the categorized URL for the `response` chosen.
 
         """
         response = response if response else self.response
@@ -276,18 +284,18 @@ class ERDDAP(object):
 
     def get_download_url(
         self,
-        dataset_id=None,
-        protocol=None,
-        variables=None,
+        dataset_id: OptionalStr = None,
+        protocol: OptionalStr = None,
+        variables: Optional[ListLike] = None,
         response=None,
         constraints=None,
         **kwargs,
-    ):
+    ) -> str:
         """The download URL for the `server` endpoint.
 
         Args:
-            dataset_id (str): a dataset unique id.
-            protocol (str): tabledap or griddap.
+            dataset_id: a dataset unique id.
+            protocol: tabledap or griddap.
             variables (list/tuple): a list of the variables to download.
             response (str): default is HTML.
             constraints (dict): download constraints, default None (opendap-like url)
@@ -322,8 +330,7 @@ class ERDDAP(object):
             url = f"{self.server}/{protocol}/{dataset_id}.{response}?"
 
         if variables:
-            variables = ",".join(variables)
-            url += f"{variables}"
+            url += ",".join(variables)
 
         if constraints:
             _constraints = copy.copy(constraints)
@@ -381,7 +388,7 @@ class ERDDAP(object):
             return cubes
 
     @functools.lru_cache(maxsize=None)
-    def _get_variables(self, dataset_id=None):
+    def _get_variables(self, dataset_id: OptionalStr = None) -> Dict:
         if not dataset_id:
             dataset_id = self.dataset_id
 
@@ -402,7 +409,7 @@ class ERDDAP(object):
             variables.update({variable: attributes})
         return variables
 
-    def get_var_by_attr(self, dataset_id: Optional[str] = None, **kwargs):
+    def get_var_by_attr(self, dataset_id: OptionalStr = None, **kwargs) -> List[str]:
         """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
         `dataset_id`.
 
