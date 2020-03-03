@@ -127,8 +127,8 @@ def test__tempnc():
     data = urlopen(url).read()
     with _tempnc(data) as tmp:
         # Check that the file was exists.
-        assert os.path.exists(tmp.name)
+        assert os.path.exists(tmp)
         # Confirm that it is a netCDF file.
-        assert tmp.name.endswith("nc")
+        assert tmp.endswith("nc")
     # Check that the file was removed.
-    assert not os.path.exists(tmp.name)
+    assert not os.path.exists(tmp)

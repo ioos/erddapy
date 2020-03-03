@@ -8,6 +8,9 @@ import io
 
 from collections import namedtuple
 from contextlib import contextmanager
+from datetime import datetime
+from typing import Dict, Generator, Optional, Union
+from typing.io import BinaryIO
 
 import pytz
 import requests
@@ -82,7 +85,7 @@ servers = {
 }
 
 
-def urlopen(url, params=None, **kwargs):
+def urlopen(url, params: Optional[Dict] = None, **kwargs: Dict) -> BinaryIO:
     """Thin wrapper around requests get content.
 
     See requests.get docs for the `params` and `kwargs` options.
@@ -92,14 +95,14 @@ def urlopen(url, params=None, **kwargs):
 
 
 @functools.lru_cache(maxsize=None)
-def _check_url_response(url, **kwargs):
+def _check_url_response(url: str, **kwargs: Dict) -> str:
     """Shortcut to `raise_for_status` instead of fetching the whole content."""
     r = requests.head(url, **kwargs)
     r.raise_for_status()
     return url
 
 
-def _clean_response(response):
+def _clean_response(response: str) -> str:
     """Allow for `ext` or `.ext` format.
 
     The user can, for example, use either `.csv` or `csv` in the response kwarg.
@@ -108,7 +111,7 @@ def _clean_response(response):
     return response.lstrip(".")
 
 
-def parse_dates(date_time):
+def parse_dates(date_time: Union[datetime, str]) -> float:
     """
     ERDDAP ReSTful API standardizes the representation of dates as either ISO
     strings or seconds since 1970, but internally ERDDAPY uses datetime-like
@@ -116,21 +119,21 @@ def parse_dates(date_time):
 
     """
     if isinstance(date_time, str):
-        date_time = parse_time_string(date_time)
-    # pandas returns a tuple with datetime, dateutil, and string representation.
-    # we want only the datetime obj.
-    if isinstance(date_time, tuple):
-        date_time = date_time[0]
-
-    if not date_time.tzinfo:
-        date_time = pytz.utc.localize(date_time)
+        # pandas returns a tuple with datetime, dateutil, and string representation.
+        # we want only the datetime obj.
+        parse_date_time = parse_time_string(date_time)[0]
     else:
-        date_time = date_time.astimezone(pytz.utc)
+        parse_date_time = date_time
 
-    return date_time.timestamp()
+    if not parse_date_time.tzinfo:
+        parse_date_time = pytz.utc.localize(parse_date_time)
+    else:
+        parse_date_time = parse_date_time.astimezone(pytz.utc)
+
+    return parse_date_time.timestamp()
 
 
-def quote_string_constraints(kwargs):
+def quote_string_constraints(kwargs: Dict) -> Dict:
     """
     For constraints of String variables,
     the right-hand-side value must be surrounded by double quotes.
@@ -140,7 +143,7 @@ def quote_string_constraints(kwargs):
 
 
 @contextmanager
-def _tempnc(data):
+def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
     from tempfile import NamedTemporaryFile
 
     tmp = None
@@ -148,7 +151,7 @@ def _tempnc(data):
         tmp = NamedTemporaryFile(suffix=".nc", prefix="erddapy_")
         tmp.write(data)
         tmp.flush()
-        yield tmp
+        yield tmp.name
     finally:
         if tmp is not None:
             tmp.close()
