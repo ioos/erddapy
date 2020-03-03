@@ -11,8 +11,10 @@ flake8-print
 iris
 isort
 jupyter
+mypy
 nbsphinx
 pendulum>=2.0.1
+pre-commit
 pylint
 pytest
 pytest-cov
