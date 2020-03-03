@@ -37,7 +37,7 @@ def _distinct(url: str, **kwargs) -> str:
 
     """
     distinct = kwargs.pop("distinct", False)
-    if distinct:
+    if distinct is True:
         return f"{url}&distinct()"
     return url
 
