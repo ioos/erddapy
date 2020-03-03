@@ -111,9 +111,7 @@ def test_download_url_unconstrained(e):
     dataset_id = "gtoppAT"
     variables = ["commonName", "yearDeployed", "serialNumber"]
     url = e.get_download_url(dataset_id=dataset_id, variables=variables)
-    assert url.startswith(
-        f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?"
-    )
+    assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?")
     assert sorted(url.split("?")[1].split(",")) == sorted(variables)
 
 
@@ -186,9 +184,7 @@ def test_to_iris(taodata):
 
     assert isinstance(cubes, iris.cube.CubeList)
     assert isinstance(cubes.extract_strict("time"), iris.cube.Cube)
-    assert isinstance(
-        cubes.extract_strict("20C Isotherm Depth"), iris.cube.Cube
-    )
+    assert isinstance(cubes.extract_strict("20C Isotherm Depth"), iris.cube.Cube)
 
 
 @pytest.mark.web
@@ -204,11 +200,10 @@ def test_get_var_by_attr(e):
 
     assert (
         e.get_var_by_attr(
-            dataset_id="pmelTao5dayIso",
-            standard_name="northward_sea_water_velocity",
+            dataset_id="pmelTao5dayIso", standard_name="northward_sea_water_velocity",
         )
         == []
     )
-    assert e.get_var_by_attr(
-        dataset_id="pmelTao5dayIso", standard_name="time"
-    ) == ["time"]
+    assert e.get_var_by_attr(dataset_id="pmelTao5dayIso", standard_name="time") == [
+        "time"
+    ]

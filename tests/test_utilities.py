@@ -1,10 +1,12 @@
 import io
 import os
+
 from datetime import datetime
 
 import pendulum
 import pytest
 import pytz
+
 from requests.exceptions import HTTPError
 
 from erddapy.utilities import (
@@ -112,9 +114,7 @@ def test_quote_string_constraints():
     assert isinstance(kw["cdm_data_type"], str)
 
     assert kw["min_time"].startswith('"') and kw["min_time"].endswith('"')
-    assert kw["cdm_data_type"].startswith('"') and kw[
-        "cdm_data_type"
-    ].endswith('"')
+    assert kw["cdm_data_type"].startswith('"') and kw["cdm_data_type"].endswith('"')
 
     for k, v in kw.items():
         if isinstance(v, str):
@@ -123,9 +123,7 @@ def test_quote_string_constraints():
 
 @pytest.mark.serial
 def test__tempnc():
-    url = (
-        "https://data.ioos.us/gliders/erddap/tabledap/cp_336-20170116T1254.nc"
-    )
+    url = "https://data.ioos.us/gliders/erddap/tabledap/cp_336-20170116T1254.nc"
     data = urlopen(url).read()
     with _tempnc(data) as tmp:
         # Check that the file was exists.
