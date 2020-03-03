@@ -1,6 +1,7 @@
 *.egg*
 .coverage
 .ipynb_checkpoints
+.mypy_cache/
 .pytest_cache/
 build/
 dist/
