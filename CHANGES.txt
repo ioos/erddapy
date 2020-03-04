@@ -1,8 +1,18 @@
 # Changelog
 
-## 0.5.2
+## 0.6.0
+
+- Added the `distinct()` server-side function
+- Added type annotations and pre-commit checks as a GH-action
+- Fetch ERDDAP servers list from a awesome-erddap
+
+## 0.5.3
 
 - Bugfix: fixed issue with pandas >=1.0.0.
+
+## 0.5.2
+
+ - Dummy release to trigger auto-publish
 
 ## 0.5.1
 
