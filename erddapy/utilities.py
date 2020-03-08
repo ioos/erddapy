@@ -21,14 +21,13 @@ from pandas.core.tools.datetimes import parse_time_string
 
 @functools.lru_cache(maxsize=None)
 def servers_list():
-    # Replace with the master version when
-    # https://github.com/IrishMarineInstitute/awesome-erddap/pull/14 is merged.
-    # url = "https://raw.githubusercontent.com/IrishMarineInstitute/awesome-erddap/master/erddaps.json"
-    url = "https://raw.githubusercontent.com/ocefpaf/awesome-erddap/short_names/erddaps.json"
+    url = "https://raw.githubusercontent.com/IrishMarineInstitute/awesome-erddap/master/erddaps.json"
     df = pd.read_json(url)
     _server = namedtuple("server", ["description", "url"])
     return {
-        row["short_name"]: _server(row["name"], row["url"]) for k, row in df.iterrows()
+        row["short_name"]: _server(row["name"], row["url"])
+        for k, row in df.iterrows()
+        if row["short_name"]
     }
 
 
