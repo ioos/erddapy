@@ -384,7 +384,10 @@ class ERDDAP(object):
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp, **kw)
-            cubes.realise_data()
+            try:
+                cubes.realise_data()
+            except ValueError:
+                iris.cube.CubeList([cube.data for cube in cubes])
             return cubes
 
     @functools.lru_cache(maxsize=None)
