@@ -183,7 +183,7 @@ def test_to_iris(taodata):
     cubes = taodata.to_iris()
 
     assert isinstance(cubes, iris.cube.CubeList)
-    assert isinstance(cubes.extract_strict("time"), iris.cube.Cube)
+    assert isinstance(cubes.extract_strict("depth"), iris.cube.Cube)
     assert isinstance(cubes.extract_strict("20C Isotherm Depth"), iris.cube.Cube)
 
 
