@@ -171,7 +171,7 @@ def test_to_xarray(taodata):
     ds = taodata.to_xarray()
 
     assert isinstance(ds, xr.Dataset)
-    assert len(ds.variables) == 2
+    assert len(ds.variables) == 7
     assert ds["time"].name == "time"
     assert ds["ISO_6"].name == "ISO_6"
 
