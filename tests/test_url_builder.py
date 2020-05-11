@@ -171,7 +171,7 @@ def test_to_xarray(taodata):
     ds = taodata.to_xarray()
 
     assert isinstance(ds, xr.Dataset)
-    assert len(ds.variables) == 2
+    assert len(ds.variables) == 7
     assert ds["time"].name == "time"
     assert ds["ISO_6"].name == "ISO_6"
 
@@ -183,7 +183,7 @@ def test_to_iris(taodata):
     cubes = taodata.to_iris()
 
     assert isinstance(cubes, iris.cube.CubeList)
-    assert isinstance(cubes.extract_strict("time"), iris.cube.Cube)
+    assert isinstance(cubes.extract_strict("depth"), iris.cube.Cube)
     assert isinstance(cubes.extract_strict("20C Isotherm Depth"), iris.cube.Cube)
 
 

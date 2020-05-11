@@ -39,9 +39,13 @@ install:
   - pip install -e . --no-deps --force-reinstall
 
 script:
-  - if [[ $TRAVIS_JOB_NAME == python-* ]]; then
-      cp -r tests/ /tmp ;
-      pushd /tmp && pytest -n 2 -rxs --cov=erddapy tests && popd ;
+  - |
+    if [[ $TRAVIS_JOB_NAME == python-* ]]; then
+      cp -r tests/ /tmp
+      pushd /tmp
+      pytest -n 2 -rxs --cov=erddapy -m "not serial" tests
+      pytest -rxs --cov=erddapy -m "serial" tests
+      popd
     fi
 
   - if [[ $TRAVIS_JOB_NAME == 'tarball' ]]; then
