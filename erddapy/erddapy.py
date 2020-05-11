@@ -368,7 +368,7 @@ class ERDDAP(object):
         """
         import xarray as xr
 
-        url = self.get_download_url(response="nc", **kw)
+        url = self.get_download_url(response="ncCF", **kw)
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             return xr.open_dataset(tmp, **kw)
@@ -380,7 +380,7 @@ class ERDDAP(object):
         """
         import iris
 
-        url = self.get_download_url(response="nc", **kw)
+        url = self.get_download_url(response="ncCF", **kw)
         data = urlopen(url, params=self.params, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp, **kw)
