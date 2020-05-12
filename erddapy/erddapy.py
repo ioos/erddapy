@@ -14,7 +14,6 @@ from urllib.parse import quote_plus
 import pandas as pd
 
 from erddapy.utilities import (
-    _check_url_response,
     _tempnc,
     parse_dates,
     quote_string_constraints,
@@ -234,7 +233,7 @@ class ERDDAP(object):
             searchFor=search_for,
         )
 
-        return _check_url_response(url, **self.requests_kwargs)
+        return url
 
     def get_info_url(
         self, dataset_id: OptionalStr = None, response: OptionalStr = None
@@ -256,7 +255,7 @@ class ERDDAP(object):
             raise ValueError(f"You must specify a valid dataset_id, got {dataset_id}")
 
         url = f"{self.server}/info/{dataset_id}/index.{response}"
-        return _check_url_response(url, **self.requests_kwargs)
+        return url
 
     def get_categorize_url(
         self,
@@ -280,7 +279,7 @@ class ERDDAP(object):
             url = f"{self.server}/categorize/{categorize_by}/{value}/index.{response}"
         else:
             url = f"{self.server}/categorize/{categorize_by}/index.{response}"
-        return _check_url_response(url, **self.requests_kwargs)
+        return url
 
     def get_download_url(
         self,
@@ -342,7 +341,7 @@ class ERDDAP(object):
 
             url += f"{_constraints}"
         url = _distinct(url, **kwargs)
-        return _check_url_response(url, **self.requests_kwargs)
+        return url
 
     def to_pandas(self, **kw):
         """Save a data request to a pandas.DataFrame.
