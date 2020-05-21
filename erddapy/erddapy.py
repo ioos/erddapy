@@ -14,6 +14,7 @@ from urllib.parse import quote_plus
 import pandas as pd
 
 from erddapy.utilities import (
+    _nc_dataset,
     _tempnc,
     parse_dates,
     quote_string_constraints,
@@ -123,8 +124,7 @@ class ERDDAP(object):
         # Initialized only via properties.
         self.constraints: Optional[Dict] = None
         self.dataset_id: OptionalStr = None
-        self.params: Optional[Dict] = None
-        self.requests_kwargs: Dict = {}
+        self.auth: Optional[tuple] = None
         self.variables: Optional[ListLike] = None
 
         # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
@@ -356,9 +356,15 @@ class ERDDAP(object):
         """
         response = kw.pop("response", "csvp")
         url = self.get_download_url(response=response, **kw)
-        return pd.read_csv(
-            urlopen(url, params=self.params, **self.requests_kwargs), **kw
-        )
+        return pd.read_csv(urlopen(url, auth=self.auth), **kw)
+
+    def to_ncCF(self, **kw):
+        """Load the data request into a Climate and Forecast compliant netCDF4-python object.
+
+        """
+        url = self.get_download_url(response="ncCF", **kw)
+        nc = _nc_dataset(url, auth=self.auth)
+        return nc
 
     def to_xarray(self, **kw):
         """Load the data request into a xarray.Dataset.
@@ -367,10 +373,9 @@ class ERDDAP(object):
         """
         import xarray as xr
 
-        url = self.get_download_url(response="ncCF", **kw)
-        data = urlopen(url, params=self.params, **self.requests_kwargs).read()
-        with _tempnc(data) as tmp:
-            return xr.open_dataset(tmp, **kw)
+        url = self.get_download_url(response="ncCF")
+        nc = _nc_dataset(url, auth=self.auth)
+        return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
     def to_iris(self, **kw):
         """Load the data request into an iris.CubeList.
@@ -380,7 +385,7 @@ class ERDDAP(object):
         import iris
 
         url = self.get_download_url(response="ncCF", **kw)
-        data = urlopen(url, params=self.params, **self.requests_kwargs).read()
+        data = urlopen(url, auth=self.auth).read()
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp, **kw)
             try:
@@ -400,7 +405,7 @@ class ERDDAP(object):
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
         variables = {}
-        _df = pd.read_csv(urlopen(url, params=self.params, **self.requests_kwargs))
+        _df = pd.read_csv(urlopen(url, auth=self.auth))
         self._dataset_id = dataset_id
         for variable in set(_df["Variable Name"]):
             attributes = (

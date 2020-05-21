@@ -9,14 +9,28 @@ import io
 from collections import namedtuple
 from contextlib import contextmanager
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, Generator, Optional, Union
 from typing.io import BinaryIO
+from urllib.parse import urlparse
 
 import pandas as pd
 import pytz
 import requests
 
 from pandas.core.tools.datetimes import parse_time_string
+
+
+def _nc_dataset(url, auth):
+    from netCDF4 import Dataset
+
+    data = urlopen(url=url, auth=auth)
+    try:
+        return Dataset(Path(urlparse(url).path).name, memory=data.read())
+    except OSError:
+        # if libnetcdf is not compiled with in-memory support fallback to a local tmp file
+        with _tempnc(data) as _nc:
+            return Dataset(_nc)
 
 
 @functools.lru_cache(maxsize=None)
@@ -34,13 +48,14 @@ def servers_list():
 servers = servers_list()
 
 
-def urlopen(url, params: Optional[Dict] = None, **kwargs: Dict) -> BinaryIO:
+def urlopen(url, auth: Optional[tuple] = None) -> BinaryIO:
     """Thin wrapper around requests get content.
 
     See requests.get docs for the `params` and `kwargs` options.
 
     """
-    return io.BytesIO(requests.get(url, params=params, **kwargs).content)
+    response = requests.get(url, allow_redirects=True, auth=auth)
+    return io.BytesIO(response.content)
 
 
 @functools.lru_cache(maxsize=None)

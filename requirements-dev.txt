@@ -13,6 +13,7 @@ isort
 jupyter
 mypy
 nbsphinx
+netcdf4
 pendulum>=2.0.1
 pre-commit
 pylint
