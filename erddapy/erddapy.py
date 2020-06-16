@@ -1,6 +1,4 @@
 """
-erddapy
-
 Pythonic way to access ERDDAP data
 
 """
@@ -71,7 +69,7 @@ class ERDDAP(object):
     Examples:
         Specifying the server URL
 
-        >>> e = ERDDAP(server='https://data.ioos.us/gliders/erddap')
+        >>> e = ERDDAP(server='https://gliders.ioos.us/erddap')
 
         let's search for glider `ru29` and read the csv response with pandas.
 
@@ -98,7 +96,7 @@ class ERDDAP(object):
          'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap/',
          'CeNCOOS': 'http://erddap.axiomalaska.com/erddap/',
          'NERACOOS': 'http://www.neracoos.org/erddap/',
-         'NGDAC': 'https://data.ioos.us/gliders/erddap/',
+         'NGDAC': 'https://gliders.ioos.us/erddap/',
          'PacIOOS': 'http://oos.soest.hawaii.edu/erddap/',
          'SECOORA': 'http://erddap.secoora.org/erddap/',
          'NCEI': 'https://ecowatch.ncddc.noaa.gov/erddap/',
@@ -424,7 +422,7 @@ class ERDDAP(object):
         for the `dataset_id`, and the variables attribute dictionary.
 
         Examples:
-            >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
+            >>> e = ERDDAP(server_url='https://gliders.ioos.us/erddap')
             >>> dataset_id = 'whoi_406-20160902T1700'
 
             Get variables with x-axis attribute.
