@@ -50,7 +50,7 @@
 
 - `erddapy` is not Python 3.7 compatible!
 - Fixed a bug in the OPeNDAP URL endpoint.
-- Use the `csvp` reponse in the `to_pandas()` method
+- Use the `csvp` response in the `to_pandas()` method
   to merge the units in the column name.
 
 ## 0.1.8
