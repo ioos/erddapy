@@ -1,6 +1,4 @@
 """
-erddapy
-
 Pythonic way to access ERDDAP data
 
 """
@@ -46,11 +44,6 @@ def _distinct(url: str, **kwargs: Dict) -> str:
     return url
 
 
-def _order_by(url: str, variables, by: OptionalStr = None) -> str:
-    variables = ",".join(variables)
-    return f'{url}&orderBy{by}("{variables}")'
-
-
 class ERDDAP(object):
     """Creates an ERDDAP instance for a specific server endpoint.
 
@@ -71,20 +64,20 @@ class ERDDAP(object):
     Examples:
         Specifying the server URL
 
-        >>> e = ERDDAP(server='https://data.ioos.us/gliders/erddap')
+        >>> e = ERDDAP(server="https://gliders.ioos.us/erddap")
 
         let's search for glider `ru29` and read the csv response with pandas.
 
         >>> import pandas as pd
-        >>> url = e.get_search_url(search_for='ru29', response='csv')
-        >>> pd.read_csv(url)['Dataset ID']
+        >>> url = e.get_search_url(search_for="ru29", response="csv")
+        >>> pd.read_csv(url)["Dataset ID"]
         0    ru29-20150623T1046
         1    ru29-20161105T0131
         Name: Dataset ID, dtype: object
 
         there are "shortcuts" for some servers
 
-        >>> e = ERDDAP(server='SECOORA')
+        >>> e = ERDDAP(server="SECOORA")
         >>> e.server
         'http://erddap.secoora.org/erddap'
 
@@ -98,7 +91,7 @@ class ERDDAP(object):
          'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap/',
          'CeNCOOS': 'http://erddap.axiomalaska.com/erddap/',
          'NERACOOS': 'http://www.neracoos.org/erddap/',
-         'NGDAC': 'https://data.ioos.us/gliders/erddap/',
+         'NGDAC': 'https://gliders.ioos.us/erddap/',
          'PacIOOS': 'http://oos.soest.hawaii.edu/erddap/',
          'SECOORA': 'http://erddap.secoora.org/erddap/',
          'NCEI': 'https://ecowatch.ncddc.noaa.gov/erddap/',
@@ -424,22 +417,24 @@ class ERDDAP(object):
         for the `dataset_id`, and the variables attribute dictionary.
 
         Examples:
-            >>> e = ERDDAP(server_url='https://data.ioos.us/gliders/erddap')
-            >>> dataset_id = 'whoi_406-20160902T1700'
+            >>> e = ERDDAP(server_url="https://gliders.ioos.us/erddap")
+            >>> dataset_id = "whoi_406-20160902T1700"
 
             Get variables with x-axis attribute.
 
-            >>> e.get_var_by_attr(dataset_id, axis='X')
+            >>> e.get_var_by_attr(dataset_id, axis="X")
             ['longitude']
 
             Get variables with matching "standard_name" attribute
 
-            >>> e.get_var_by_attr(dataset_id, standard_name='northward_sea_water_velocity')
+            >>> e.get_var_by_attr(
+            ...     dataset_id, standard_name="northward_sea_water_velocity"
+            ... )
             ['v']
 
             Get Axis variables
 
-            >>> e.get_var_by_attr(dataset_id, axis=lambda v: v in ['X', 'Y', 'Z', 'T'])
+            >>> e.get_var_by_attr(dataset_id, axis=lambda v: v in ["X", "Y", "Z", "T"])
             ['latitude', 'longitude', 'time', 'depth']
 
         """

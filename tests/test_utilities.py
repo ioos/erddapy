@@ -59,7 +59,7 @@ def test_check_url_response():
 
 
 def test__clean_response():
-    """Test if users can pass reponses with or without the '.'."""
+    """Test if users can pass responses with or without the '.'."""
     assert _clean_response("html") == _clean_response(".html")
 
 

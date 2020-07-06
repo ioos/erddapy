@@ -22,6 +22,7 @@ from pandas.core.tools.datetimes import parse_time_string
 
 
 def _nc_dataset(url, auth):
+    """Returns a netCDF4-python Dataset from memory and fallbacks to disk if that fails."""
     from netCDF4 import Dataset
 
     data = urlopen(url=url, auth=auth)
@@ -114,6 +115,7 @@ def quote_string_constraints(kwargs: Dict) -> Dict:
 
 @contextmanager
 def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
+    """Creates a temporary netcdf file."""
     from tempfile import NamedTemporaryFile
 
     tmp = None
@@ -125,3 +127,10 @@ def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
     finally:
         if tmp is not None:
             tmp.close()
+
+
+def show_iframe(src):
+    """Helper function to show HTML returns."""
+    from IPython.display import IFrame
+
+    return IFrame(src=src, width="100%", height=950)
