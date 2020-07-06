@@ -3,7 +3,7 @@ import pytest
 from requests.exceptions import HTTPError
 
 from erddapy import ERDDAP
-from erddapy.utilities import _check_url_response, parse_dates
+from erddapy.utilities import check_url_response, parse_dates
 
 
 def _url_to_dict(url):
@@ -43,7 +43,7 @@ def test_search_url_bad_request(e):
         "max_time": "1750-01-01T12:00:00Z",
     }
     with pytest.raises(HTTPError):
-        _check_url_response(e.get_search_url(**kw))
+        check_url_response(e.get_search_url(**kw))
 
 
 @pytest.mark.web

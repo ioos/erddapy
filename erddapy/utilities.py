@@ -55,12 +55,18 @@ def urlopen(url, auth: Optional[tuple] = None) -> BinaryIO:
 
     """
     response = requests.get(url, allow_redirects=True, auth=auth)
+    response.raise_for_status()
     return io.BytesIO(response.content)
 
 
 @functools.lru_cache(maxsize=None)
-def _check_url_response(url: str, **kwargs: Dict) -> str:
-    """Shortcut to `raise_for_status` instead of fetching the whole content."""
+def check_url_response(url: str, **kwargs: Dict) -> str:
+    """
+    Shortcut to `raise_for_status` instead of fetching the whole content.
+    One should only use this is passing URLs that are known to work is necessary.
+    Otherwise let it fail later and avoid fetching the head.
+
+    """
     r = requests.head(url, **kwargs)
     r.raise_for_status()
     return url
