@@ -58,7 +58,9 @@ script:
   - |
     if [[ $TRAVIS_JOB_NAME == 'docs' ]]; then
       set -e
-      cp notebooks/{quick_intro.ipynb,searchfor.ipynb} docs/source/
+      jupyter nbconvert --to notebook --execute notebooks/quick_intro.ipynb --output=quick_intro-output.ipynb
+      jupyter nbconvert --to notebook --execute notebooks/searchfor.ipynb --output=searchfor-output.ipynb
+      mv notebooks/{quick_intro-output.ipynb,searchfor-output.ipynb} docs/source/
       pushd docs
       make clean html linkcheck
       popd
