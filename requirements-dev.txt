@@ -11,6 +11,7 @@ flake8-print
 interrogate
 iris
 isort
+joblib
 jupyter
 mypy
 nbsphinx
