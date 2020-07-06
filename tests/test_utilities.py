@@ -10,9 +10,9 @@ import pytz
 from requests.exceptions import HTTPError
 
 from erddapy.utilities import (
-    _check_url_response,
     _clean_response,
     _tempnc,
+    check_url_response,
     parse_dates,
     quote_string_constraints,
     servers,
@@ -25,7 +25,7 @@ from erddapy.utilities import (
 def test_servers():
     for server in servers.values():
         # Should raise HTTPError if broken, otherwise returns the URL.
-        _check_url_response(server.url) == server.url
+        check_url_response(server.url) == server.url
 
 
 @pytest.mark.web
@@ -37,7 +37,15 @@ def test_urlopen():
 
 
 @pytest.mark.web
-def test__check_url_response():
+def test_urlopen_raise():
+    """Assure that urlopen will raise for bad URLs."""
+    url = "https://developer.mozilla.org/en-US/404"
+    with pytest.raises(HTTPError):
+        urlopen(url)
+
+
+@pytest.mark.web
+def test_check_url_response():
     """Test if a bad request returns HTTPError."""
     bad_request = (
         "http://erddap.sensors.ioos.us/erddap/tabledap/"
@@ -47,7 +55,7 @@ def test__check_url_response():
         "&time<=2015-09-05T19:00:00Z"
     )
     with pytest.raises(HTTPError):
-        _check_url_response(bad_request)
+        check_url_response(bad_request)
 
 
 def test__clean_response():
