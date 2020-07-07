@@ -8,4 +8,4 @@ build/
 dist/
 docs/source/quick_intro.ipynb
 docs/source/searchfor.ipynb
-notebooks/quick_intro-output.ipynb
+notebooks/*-output.ipynb
