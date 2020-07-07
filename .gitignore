@@ -3,7 +3,9 @@
 .ipynb_checkpoints
 .mypy_cache/
 .pytest_cache/
+_version.py
 build/
 dist/
 docs/source/quick_intro.ipynb
 docs/source/searchfor.ipynb
+notebooks/quick_intro-output.ipynb
