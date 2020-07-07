@@ -6,6 +6,4 @@
 _version.py
 build/
 dist/
-docs/source/quick_intro.ipynb
-docs/source/searchfor.ipynb
-notebooks/*-output.ipynb
+*-output.ipynb
