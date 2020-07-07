@@ -36,8 +36,8 @@ See https://coastwatch.pfeg.noaa.gov/erddap/index.html for more information.
    :maxdepth: 3
    :caption: Contents:
 
-   quick_intro.ipynb
-   searchfor.ipynb
+   quick_intro-output.ipynb
+   searchfor-output.ipynb
    erddapy
 
 Indices and tables

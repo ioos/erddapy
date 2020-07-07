@@ -60,7 +60,7 @@ script:
       set -e
       travis_wait jupyter nbconvert --to notebook --execute notebooks/quick_intro.ipynb --output=quick_intro-output.ipynb
       jupyter nbconvert --to notebook --execute notebooks/searchfor.ipynb --output=searchfor-output.ipynb
-      mv notebooks/{quick_intro-output.ipynb,searchfor-output.ipynb} docs/source/
+      cp notebooks/*output.ipynb docs/source/
       pushd docs
       make clean html linkcheck
       popd
