@@ -18,7 +18,11 @@ import pandas as pd
 import pytz
 import requests
 
-from pandas.core.tools.datetimes import parse_time_string
+
+try:
+    from pandas.core.indexes.period import parse_time_string
+except ImportError:
+    from pandas._libs.tslibs.parsing import parse_time_string
 
 
 def _nc_dataset(url, auth):
