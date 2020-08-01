@@ -6,6 +6,7 @@ repos:
     - id: check-ast
     - id: debug-statements
     - id: end-of-file-fixer
+      exclude: github_deploy_key_ioos_erddapy.enc
     - id: check-docstring-first
     - id: check-added-large-files
     - id: requirements-txt-fixer
