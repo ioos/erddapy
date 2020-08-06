@@ -7,7 +7,7 @@ import pendulum
 import pytest
 import pytz
 
-from requests.exceptions import HTTPError
+from requests.exceptions import HTTPError, ReadTimeout
 
 from erddapy.utilities import (
     _clean_response,
@@ -42,6 +42,23 @@ def test_urlopen_raise():
     url = "https://developer.mozilla.org/en-US/404"
     with pytest.raises(HTTPError):
         urlopen(url)
+
+
+@pytest.mark.web
+def test_urlopen_requests_kwargs():
+    """ Test that urlopen can pass kwargs to requests """
+    base_url = "http://erddap.sensors.ioos.us/erddap/tabledap/"
+    timeout_seconds = 1  # request timeout in seconds
+    slowwly_milliseconds = (timeout_seconds + 1) * 1000
+    slowwly_url = (
+        "http://slowwly.robertomurray.co.uk/delay/"
+        + str(slowwly_milliseconds)
+        + "/url/"
+        + base_url
+    )
+
+    with pytest.raises(ReadTimeout):
+        urlopen(slowwly_url, timeout=timeout_seconds)
 
 
 @pytest.mark.web
