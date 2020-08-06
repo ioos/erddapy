@@ -1,4 +1,5 @@
 import pytest
+
 from requests.exceptions import ReadTimeout
 
 from erddapy import ERDDAP
@@ -26,4 +27,4 @@ def test_erddap_requests_kwargs():
     connection.requests_kwargs["timeout"] = timeout_seconds
 
     with pytest.raises(ReadTimeout):
-        ds = connection.to_xarray()
+        connection.to_xarray()
