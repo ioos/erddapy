@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+
+- Bugfix: return ability to pass keyword arguments to `requests.get`.
+
 ## 0.6.0
 
 - Added the `distinct()` server-side function

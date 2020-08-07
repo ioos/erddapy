@@ -25,11 +25,11 @@ except ImportError:
     from pandas._libs.tslibs.parsing import parse_time_string
 
 
-def _nc_dataset(url, auth):
+def _nc_dataset(url, auth, **requests_kwargs: Dict):
     """Returns a netCDF4-python Dataset from memory and fallbacks to disk if that fails."""
     from netCDF4 import Dataset
 
-    data = urlopen(url=url, auth=auth)
+    data = urlopen(url=url, auth=auth, **requests_kwargs)
     try:
         return Dataset(Path(urlparse(url).path).name, memory=data.read())
     except OSError:
@@ -53,13 +53,13 @@ def servers_list():
 servers = servers_list()
 
 
-def urlopen(url, auth: Optional[tuple] = None) -> BinaryIO:
+def urlopen(url, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
     """Thin wrapper around requests get content.
 
     See requests.get docs for the `params` and `kwargs` options.
 
     """
-    response = requests.get(url, allow_redirects=True, auth=auth)
+    response = requests.get(url, allow_redirects=True, auth=auth, **kwargs)
     try:
         response.raise_for_status()
     except requests.exceptions.HTTPError as err:

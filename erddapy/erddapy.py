@@ -117,6 +117,7 @@ class ERDDAP(object):
         # Initialized only via properties.
         self.constraints: Optional[Dict] = None
         self.dataset_id: OptionalStr = None
+        self.requests_kwargs: Dict = {}
         self.auth: Optional[tuple] = None
         self.variables: Optional[ListLike] = None
 
@@ -349,14 +350,14 @@ class ERDDAP(object):
         """
         response = kw.pop("response", "csvp")
         url = self.get_download_url(response=response, **kw)
-        return pd.read_csv(urlopen(url, auth=self.auth), **kw)
+        return pd.read_csv(urlopen(url, auth=self.auth, **self.requests_kwargs), **kw)
 
     def to_ncCF(self, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object.
 
         """
         url = self.get_download_url(response="ncCF", **kw)
-        nc = _nc_dataset(url, auth=self.auth)
+        nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
         return nc
 
     def to_xarray(self, **kw):
@@ -367,7 +368,7 @@ class ERDDAP(object):
         import xarray as xr
 
         url = self.get_download_url(response="ncCF")
-        nc = _nc_dataset(url, auth=self.auth)
+        nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
     def to_iris(self, **kw):
@@ -378,7 +379,7 @@ class ERDDAP(object):
         import iris
 
         url = self.get_download_url(response="ncCF", **kw)
-        data = urlopen(url, auth=self.auth).read()
+        data = urlopen(url, auth=self.auth, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp, **kw)
             try:
@@ -398,7 +399,7 @@ class ERDDAP(object):
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
         variables = {}
-        _df = pd.read_csv(urlopen(url, auth=self.auth))
+        _df = pd.read_csv(urlopen(url, auth=self.auth, **self.requests_kwargs))
         self._dataset_id = dataset_id
         for variable in set(_df["Variable Name"]):
             attributes = (
