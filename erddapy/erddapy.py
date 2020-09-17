@@ -356,6 +356,8 @@ class ERDDAP(object):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object.
 
         """
+        if self.protocol == "griddap":
+            return ValueError(f"Cannot use ncCF with griddap.")
         url = self.get_download_url(response="ncCF", **kw)
         nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
         return nc
@@ -367,7 +369,8 @@ class ERDDAP(object):
         """
         import xarray as xr
 
-        url = self.get_download_url(response="ncCF")
+        response = "nc" if self.protocol == "griddap" else "ncCF"
+        url = self.get_download_url(response=response)
         nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
@@ -378,7 +381,8 @@ class ERDDAP(object):
         """
         import iris
 
-        url = self.get_download_url(response="ncCF", **kw)
+        response = "nc" if self.protocol == "griddap" else "ncCF"
+        url = self.get_download_url(response=response, **kw)
         data = urlopen(url, auth=self.auth, **self.requests_kwargs).read()
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp, **kw)
