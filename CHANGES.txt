@@ -1,8 +1,21 @@
 # Changelog
 
-## Upcoming
+## v0.7.0
 
-- Bugfix: return ability to pass keyword arguments to `requests.get`.
+- Added a ncCF response
+- NetCDF file-like response can be in-memory or in-disk
+  depending on the libnetcdf library available.
+- Use canonical list of ERDDAP servers
+- Various packaging improvements towards pep517/518
+- Make `check_url_response` optional to avoid abusing servers
+- New documentation with more examples and tips for multiple requests
+
+Bugfix:
+
+- Return ability to pass keyword arguments to `requests.get`.
+- Fix `urlopen` `raise_for_status`
+- Fix `parse_time_string` import for various pandas versions
+
 
 ## 0.6.0
 
