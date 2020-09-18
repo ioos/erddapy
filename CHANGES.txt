@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.7.1
+
+- Bugfix: while griddap is not support the current ncCF enforced prevented users
+          from building griddap URLs for xarray b/c griddap does not support it.
+          Now the netCDF responses are ncCF for tabledap and plain nc for griddap.
+
 ## v0.7.0
 
 - Added a ncCF response
