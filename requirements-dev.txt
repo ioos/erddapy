@@ -1,4 +1,3 @@
-# iris is named scitools-iris on PyPI.
 black
 cartopy
 check-manifest

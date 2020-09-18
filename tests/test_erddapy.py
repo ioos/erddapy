@@ -7,8 +7,8 @@ from erddapy import ERDDAP
 
 @pytest.mark.web
 def test_erddap_requests_kwargs():
-    """ Test that an ERDDAP instance can have requests_kwargs attribute assigned
-    and are passed to the underlying methods """
+    """Test that an ERDDAP instance can have requests_kwargs attribute assigned
+    and are passed to the underlying methods"""
 
     base_url = "http://www.neracoos.org/erddap"
     timeout_seconds = 1  # request timeout in seconds

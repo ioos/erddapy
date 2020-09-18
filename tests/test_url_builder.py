@@ -150,7 +150,8 @@ def test_get_var_by_attr(e):
 
     assert (
         e.get_var_by_attr(
-            dataset_id="pmelTao5dayIso", standard_name="northward_sea_water_velocity",
+            dataset_id="pmelTao5dayIso",
+            standard_name="northward_sea_water_velocity",
         )
         == []
     )

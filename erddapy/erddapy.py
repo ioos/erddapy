@@ -106,7 +106,10 @@ class ERDDAP(object):
     """
 
     def __init__(
-        self, server: str, protocol: OptionalStr = None, response: str = "html",
+        self,
+        server: str,
+        protocol: OptionalStr = None,
+        response: str = "html",
     ):
         if server in servers.keys():
             server = servers[server].url
@@ -353,9 +356,7 @@ class ERDDAP(object):
         return pd.read_csv(urlopen(url, auth=self.auth, **self.requests_kwargs), **kw)
 
     def to_ncCF(self, **kw):
-        """Load the data request into a Climate and Forecast compliant netCDF4-python object.
-
-        """
+        """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
         if self.protocol == "griddap":
             return ValueError(f"Cannot use ncCF with griddap.")
         url = self.get_download_url(response="ncCF", **kw)
