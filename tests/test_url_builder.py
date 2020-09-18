@@ -20,21 +20,6 @@ def e():
     )
 
 
-@pytest.fixture
-def taodata(e):
-    e.dataset_id = "pmelTao5dayIso"
-    e.constraints = {
-        "time>=": "1977-11-10T12:00:00Z",
-        "time<=": "2019-01-26T12:00:00Z",
-        "latitude>=": 10,
-        "latitude<=": 10,
-        "longitude>=": 265,
-        "longitude<=": 265,
-    }
-    e.variables = ["ISO_6", "time"]
-    yield e
-
-
 @pytest.mark.web
 def test_search_url_bad_request(e):
     """Test if a bad request returns HTTPError."""
@@ -150,41 +135,6 @@ def test_download_url_constrained(e):
     assert options["latitude<"] == str(max_lat)
     assert options["longitude>"] == str(min_lon)
     assert options["longitude<"] == str(max_lon)
-
-
-@pytest.mark.web
-def test_to_pandas(taodata):
-    import pandas as pd
-
-    df = taodata.to_pandas(index_col="time (UTC)", parse_dates=True).dropna()
-
-    assert isinstance(df, pd.DataFrame)
-    assert df.index.name == "time (UTC)"
-    assert len(df.columns) == 1
-    assert df.columns[0] == "ISO_6 (m)"
-
-
-@pytest.mark.web
-def test_to_xarray(taodata):
-    import xarray as xr
-
-    ds = taodata.to_xarray()
-
-    assert isinstance(ds, xr.Dataset)
-    assert len(ds.variables) == 7
-    assert ds["time"].name == "time"
-    assert ds["ISO_6"].name == "ISO_6"
-
-
-@pytest.mark.web
-def test_to_iris(taodata):
-    import iris
-
-    cubes = taodata.to_iris()
-
-    assert isinstance(cubes, iris.cube.CubeList)
-    assert isinstance(cubes.extract_strict("depth"), iris.cube.Cube)
-    assert isinstance(cubes.extract_strict("20C Isotherm Depth"), iris.cube.Cube)
 
 
 @pytest.mark.web
