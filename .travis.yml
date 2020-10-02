@@ -20,19 +20,17 @@ matrix:
       env: PY=3
 
 before_install:
-  # Install miniconda and create TEST env.
+  # Install micromamba and create TEST env.
   - |
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    bash miniconda.sh -b -p $HOME/miniconda
-    export PATH="$HOME/miniconda/bin:$PATH"
-    conda config --set always_yes yes --set changeps1 no --set show_channel_urls true
-    conda update --quiet conda
-    conda config --add channels conda-forge --force
-    conda config --set channel_priority strict
-    conda config --set safety_checks disabled
-    conda create --name TEST python=$PY --file requirements.txt --file requirements-dev.txt
-    source activate TEST
-    conda info --all
+    wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba --strip-components=1
+    ./micromamba shell init -s bash -p ~/micromamba
+    export MAMBA_ROOT_PREFIX=~/micromamba
+    export MAMBA_EXE=$(pwd)/micromamba
+    . ${MAMBA_ROOT_PREFIX}/etc/profile.d/mamba.sh
+
+    echo "micromamba version $(micromamba --version)"
+    micromamba create --yes --name TEST python=$PY pip --file requirements.txt --file requirements-dev.txt --channel conda-forge
+    micromamba activate TEST
 
 install:
   - pip install -e . --no-deps --force-reinstall

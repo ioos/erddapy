@@ -9,7 +9,8 @@ from erddapy import ERDDAP
 @pytest.mark.web
 def e():
     yield ERDDAP(
-        server="https://upwell.pfeg.noaa.gov/erddap", response="htmlTable",
+        server="https://upwell.pfeg.noaa.gov/erddap",
+        response="htmlTable",
     )
 
 
