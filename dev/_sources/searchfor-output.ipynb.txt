@@ -15,10 +15,10 @@
    "execution_count": 1,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-02T15:34:01.512300Z",
-     "iopub.status.busy": "2020-10-02T15:34:01.511534Z",
-     "iopub.status.idle": "2020-10-02T15:34:01.914385Z",
-     "shell.execute_reply": "2020-10-02T15:34:01.913873Z"
+     "iopub.execute_input": "2020-10-02T19:27:31.633473Z",
+     "iopub.status.busy": "2020-10-02T19:27:31.632786Z",
+     "iopub.status.idle": "2020-10-02T19:27:32.030219Z",
+     "shell.execute_reply": "2020-10-02T19:27:32.029728Z"
     }
    },
    "outputs": [],
@@ -44,53 +44,53 @@
    "execution_count": 2,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-02T15:34:01.924237Z",
-     "iopub.status.busy": "2020-10-02T15:34:01.923809Z",
-     "iopub.status.idle": "2020-10-02T15:34:02.678879Z",
-     "shell.execute_reply": "2020-10-02T15:34:02.678472Z"
+     "iopub.execute_input": "2020-10-02T19:27:32.039416Z",
+     "iopub.status.busy": "2020-10-02T19:27:32.039043Z",
+     "iopub.status.idle": "2020-10-02T19:27:32.754502Z",
+     "shell.execute_reply": "2020-10-02T19:27:32.754805Z"
     }
    },
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "0              erdC125h\n",
-       "1              erdC1nma\n",
-       "2              erdC1sfc\n",
-       "3              erdCA25h\n",
-       "4              erdCAnma\n",
-       "5              erdCAsfc\n",
-       "6              erdCB25h\n",
-       "7              erdCBsfc\n",
-       "8              erdCM25h\n",
-       "9              erdCMnma\n",
-       "10             erdCMsfc\n",
-       "11             erdCS25h\n",
-       "12             erdCSsfc\n",
-       "13    erdC125h_LonPM180\n",
-       "14    erdC1nma_LonPM180\n",
-       "15    erdC1sfc_LonPM180\n",
-       "16    erdCA25h_LonPM180\n",
-       "17    erdCAsfc_LonPM180\n",
-       "18    erdCB25h_LonPM180\n",
-       "19    erdCM25h_LonPM180\n",
-       "20    erdCMsfc_LonPM180\n",
-       "21    erdCS25h_LonPM180\n",
-       "22    erdCSsfc_LonPM180\n",
-       "23    erdCAnma_LonPM180\n",
-       "24    erdCMnma_LonPM180\n",
-       "25    erdCBsfc_LonPM180\n",
-       "26            ucsdHfrE6\n",
-       "27          ucsdHfrW500\n",
-       "28            ucsdHfrE1\n",
-       "29            ucsdHfrE2\n",
-       "30            ucsdHfrA6\n",
-       "31            ucsdHfrW2\n",
-       "32            ucsdHfrW6\n",
-       "33            ucsdHfrH1\n",
-       "34            ucsdHfrP2\n",
-       "35            ucsdHfrW1\n",
-       "36            ucsdHfrP6\n",
+       "0     erdCAnma_LonPM180\n",
+       "1     erdCMnma_LonPM180\n",
+       "2     erdCBsfc_LonPM180\n",
+       "3     erdC125h_LonPM180\n",
+       "4              erdC125h\n",
+       "5              erdC1nma\n",
+       "6              erdC1sfc\n",
+       "7              erdCA25h\n",
+       "8              erdCAnma\n",
+       "9              erdCAsfc\n",
+       "10             erdCB25h\n",
+       "11             erdCBsfc\n",
+       "12             erdCM25h\n",
+       "13             erdCMnma\n",
+       "14             erdCMsfc\n",
+       "15             erdCS25h\n",
+       "16             erdCSsfc\n",
+       "17    erdC1nma_LonPM180\n",
+       "18    erdC1sfc_LonPM180\n",
+       "19    erdCA25h_LonPM180\n",
+       "20    erdCAsfc_LonPM180\n",
+       "21    erdCB25h_LonPM180\n",
+       "22    erdCM25h_LonPM180\n",
+       "23    erdCMsfc_LonPM180\n",
+       "24    erdCS25h_LonPM180\n",
+       "25    erdCSsfc_LonPM180\n",
+       "26            ucsdHfrA6\n",
+       "27            ucsdHfrE2\n",
+       "28            ucsdHfrE6\n",
+       "29            ucsdHfrH1\n",
+       "30            ucsdHfrP2\n",
+       "31            ucsdHfrP6\n",
+       "32            ucsdHfrW1\n",
+       "33            ucsdHfrW2\n",
+       "34          ucsdHfrW500\n",
+       "35            ucsdHfrW6\n",
+       "36            ucsdHfrE1\n",
        "Name: Dataset ID, dtype: object"
       ]
      },
@@ -121,10 +121,10 @@
    "execution_count": 3,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-02T15:34:02.688667Z",
-     "iopub.status.busy": "2020-10-02T15:34:02.688136Z",
-     "iopub.status.idle": "2020-10-02T15:34:03.202187Z",
-     "shell.execute_reply": "2020-10-02T15:34:03.202622Z"
+     "iopub.execute_input": "2020-10-02T19:27:32.763837Z",
+     "iopub.status.busy": "2020-10-02T19:27:32.763320Z",
+     "iopub.status.idle": "2020-10-02T19:27:33.199343Z",
+     "shell.execute_reply": "2020-10-02T19:27:33.198989Z"
     }
    },
    "outputs": [
@@ -132,8 +132,8 @@
      "data": {
       "text/plain": [
        "0    ucsdHfrE2\n",
-       "1    ucsdHfrW2\n",
-       "2    ucsdHfrP2\n",
+       "1    ucsdHfrP2\n",
+       "2    ucsdHfrW2\n",
        "Name: Dataset ID, dtype: object"
       ]
      },
@@ -162,27 +162,27 @@
    "execution_count": 4,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-02T15:34:03.212071Z",
-     "iopub.status.busy": "2020-10-02T15:34:03.205879Z",
-     "iopub.status.idle": "2020-10-02T15:34:03.768627Z",
-     "shell.execute_reply": "2020-10-02T15:34:03.768969Z"
+     "iopub.execute_input": "2020-10-02T19:27:33.208153Z",
+     "iopub.status.busy": "2020-10-02T19:27:33.202271Z",
+     "iopub.status.idle": "2020-10-02T19:27:33.792742Z",
+     "shell.execute_reply": "2020-10-02T19:27:33.792372Z"
     }
    },
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "0       ucsdHfrE6\n",
-       "1     ucsdHfrW500\n",
-       "2       ucsdHfrE1\n",
-       "3       ucsdHfrE2\n",
-       "4       ucsdHfrA6\n",
-       "5       ucsdHfrW2\n",
-       "6       ucsdHfrW6\n",
-       "7       ucsdHfrH1\n",
-       "8       ucsdHfrP2\n",
-       "9       ucsdHfrW1\n",
-       "10      ucsdHfrP6\n",
+       "0       ucsdHfrA6\n",
+       "1       ucsdHfrE2\n",
+       "2       ucsdHfrE6\n",
+       "3       ucsdHfrH1\n",
+       "4       ucsdHfrP2\n",
+       "5       ucsdHfrP6\n",
+       "6       ucsdHfrW1\n",
+       "7       ucsdHfrW2\n",
+       "8     ucsdHfrW500\n",
+       "9       ucsdHfrW6\n",
+       "10      ucsdHfrE1\n",
        "Name: Dataset ID, dtype: object"
       ]
      },
@@ -211,10 +211,10 @@
    "execution_count": 5,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-02T15:34:03.778691Z",
-     "iopub.status.busy": "2020-10-02T15:34:03.772489Z",
-     "iopub.status.idle": "2020-10-02T15:34:04.937807Z",
-     "shell.execute_reply": "2020-10-02T15:34:04.937355Z"
+     "iopub.execute_input": "2020-10-02T19:27:33.801650Z",
+     "iopub.status.busy": "2020-10-02T19:27:33.801169Z",
+     "iopub.status.idle": "2020-10-02T19:27:35.096317Z",
+     "shell.execute_reply": "2020-10-02T19:27:35.096643Z"
     },
     "scrolled": true
    },
@@ -251,10 +251,10 @@
    "execution_count": 6,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-02T15:34:04.941348Z",
-     "iopub.status.busy": "2020-10-02T15:34:04.940778Z",
-     "iopub.status.idle": "2020-10-02T15:34:06.198336Z",
-     "shell.execute_reply": "2020-10-02T15:34:06.197828Z"
+     "iopub.execute_input": "2020-10-02T19:27:35.105637Z",
+     "iopub.status.busy": "2020-10-02T19:27:35.099603Z",
+     "iopub.status.idle": "2020-10-02T19:27:36.336979Z",
+     "shell.execute_reply": "2020-10-02T19:27:36.337382Z"
     }
    },
    "outputs": [
