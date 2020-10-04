@@ -63,7 +63,7 @@ def urlopen(url, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
     try:
         response.raise_for_status()
     except requests.exceptions.HTTPError as err:
-        raise requests.exceptions.HTTPError(f"r.content.decode()") from err
+        raise requests.exceptions.HTTPError(f"{response.content.decode()}") from err
     return io.BytesIO(response.content)
 
 
