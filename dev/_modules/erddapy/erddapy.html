@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>erddapy.erddapy &#8212; erddapy 0.7.2.dev4+g82c464a documentation</title>
+    <title>erddapy.erddapy &#8212; erddapy 0.7.2.dev7+g0b6d227 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -465,7 +465,7 @@
 <div class="viewcode-block" id="ERDDAP.to_ncCF"><a class="viewcode-back" href="../../erddapy.html#erddapy.ERDDAP.to_ncCF">[docs]</a>    <span class="k">def</span> <span class="nf">to_ncCF</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the data request into a Climate and Forecast compliant netCDF4-python object.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;griddap&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot use ncCF with griddap.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot use ncCF with griddap.&quot;</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="s2">&quot;ncCF&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="n">_nc_dataset</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">nc</span></div>
