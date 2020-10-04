@@ -9,6 +9,7 @@ repos:
       exclude: github_deploy_key_ioos_erddapy.enc
     - id: check-docstring-first
     - id: check-added-large-files
+      exclude_types: [yaml]
     - id: requirements-txt-fixer
     - id: file-contents-sorter
       files: requirements-dev.txt
@@ -56,5 +57,9 @@ repos:
   rev: v1.17.1
   hooks:
     - id: codespell
+      exclude: >
+          (?x)^(
+              .*\.yaml
+          )$
       args:
         - --quiet-level=2

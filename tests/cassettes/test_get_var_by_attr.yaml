@@ -1,0 +1,156 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.24.0
+    method: GET
+    uri: https://upwell.pfeg.noaa.gov/erddap/info/gtoppAT/index.csv
+  response:
+    body:
+      string: !!binary |
+        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
+        jzDuFgAA
+    headers:
+      Connection:
+      - close
+      Content-Disposition:
+      - attachment;filename=gtoppAT_info.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Sun, 04 Oct 2020 15:45:24 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: ''
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.24.0
+    method: GET
+    uri: https://upwell.pfeg.noaa.gov/erddap/info/pmelTao5dayIso/index.csv
+  response:
+    body:
+      string: !!binary |
+        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
+        jz/9GzgbTutuIwAA
+    headers:
+      Connection:
+      - close
+      Content-Disposition:
+      - attachment;filename=pmelTao5dayIso_info.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Sun, 04 Oct 2020 15:45:25 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: ''
+version: 1
