@@ -23,6 +23,7 @@ def bermuda_1_msl(e):
 
 
 @pytest.fixture
+@pytest.mark.vcr()
 def taodata(e):
     e.dataset_id = "pmelTao5dayIso"
     e.protocol = "tabledap"
@@ -39,6 +40,7 @@ def taodata(e):
 
 
 @pytest.mark.web
+@pytest.mark.vcr()
 def test_to_pandas(taodata):
     import pandas as pd
 
@@ -51,6 +53,7 @@ def test_to_pandas(taodata):
 
 
 @pytest.mark.web
+@pytest.mark.vcr()
 def test_to_xarray_tabledap(taodata):
     ds = taodata.to_xarray()
 
@@ -61,6 +64,7 @@ def test_to_xarray_tabledap(taodata):
 
 
 @pytest.mark.web
+@pytest.mark.vcr()
 def test_to_xarray_griddap(bermuda_1_msl):
     ds = bermuda_1_msl.to_xarray()
 
@@ -68,6 +72,7 @@ def test_to_xarray_griddap(bermuda_1_msl):
 
 
 @pytest.mark.web
+@pytest.mark.vcr()
 def test_to_iris_tabledap(taodata):
     cubes = taodata.to_iris()
 
@@ -77,6 +82,7 @@ def test_to_iris_tabledap(taodata):
 
 
 @pytest.mark.web
+@pytest.mark.vcr()
 def test_to_iris_griddap(bermuda_1_msl):
     cubes = bermuda_1_msl.to_iris()
     assert isinstance(cubes, iris.cube.CubeList)
