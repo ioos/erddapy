@@ -358,7 +358,7 @@ class ERDDAP(object):
     def to_ncCF(self, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
         if self.protocol == "griddap":
-            return ValueError(f"Cannot use ncCF with griddap.")
+            return ValueError("Cannot use ncCF with griddap.")
         url = self.get_download_url(response="ncCF", **kw)
         nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
         return nc
