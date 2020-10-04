@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.7.2
+
+- Bugfix:
+
+- Fixed Wrong type passed to load temporary netCDF files (#138)
+- Fixed some f-strings bugs (#142)
+- Allow erddapy to be loaded offline (#143)
+
 ## v0.7.1
 
 - Bugfix: while griddap is not support the current ncCF enforced prevented users
@@ -21,7 +29,6 @@ Bugfix:
 - Return ability to pass keyword arguments to `requests.get`.
 - Fix `urlopen` `raise_for_status`
 - Fix `parse_time_string` import for various pandas versions
-
 
 ## 0.6.0
 
