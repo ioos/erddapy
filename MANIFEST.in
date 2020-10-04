@@ -1,4 +1,17 @@
 include *.txt
 include README.md
+include pyproject.toml
 
-recursive-include erddapy *.py
+graft erddapy
+
+prune docs
+prune tests
+prune notebooks
+prune *.egg-info
+
+exclude *.yml
+exclude .pre-commit-config.yaml
+exclude *.enc
+exclude .gitignore
+exclude .isort.cfg
+exclude erddapy/_version.py
