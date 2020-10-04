@@ -1,0 +1,42 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.24.0
+    method: HEAD
+    uri: https://upwell.pfeg.noaa.gov/erddap/search/advanced.htmlTable?page=1&itemsPerPage=1000&protocol=tabledap&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&minTime=-8520292800.0&maxTime=-6942456000.0
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - close
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Length:
+      - '103'
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Sun, 04 Oct 2020 15:45:11 GMT
+      Last-Modified:
+      - Sun, 04 Oct 2020 15:45:11 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      erddap-server:
+      - '2.02'
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 404
+      message: ''
+version: 1

@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.24.0
+    method: HEAD
+    uri: http://erddap.sensors.ioos.us/erddap/tabledap/gov_usgs_waterdata_340800117235901.htmlTable?time,&time%3E=2017-08-29T00:00:00Z&time%3C=2015-09-05T19:00:00Z
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Length:
+      - '93'
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Sun, 04 Oct 2020 15:49:49 GMT
+      Last-Modified:
+      - Sun, 04 Oct 2020 15:49:49 GMT
+      Server:
+      - nginx/1.18.0
+      Set-Cookie:
+      - cid=CgIHBV957xwokw+8Az2zAg==; expires=Tue, 04-Oct-22 15:49:49 GMT; path=/
+      erddap-server:
+      - 2.02_axiom-r1
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 400
+      message: ''
+version: 1

@@ -384,7 +384,7 @@ class ERDDAP(object):
 
         response = "nc" if self.protocol == "griddap" else "ncCF"
         url = self.get_download_url(response=response, **kw)
-        data = urlopen(url, auth=self.auth, **self.requests_kwargs).read()
+        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp, **kw)
             try:

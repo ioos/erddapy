@@ -38,8 +38,7 @@ script:
     if [[ $TRAVIS_JOB_NAME == python-* ]]; then
       cp -r tests/ /tmp
       pushd /tmp
-      pytest -n 2 -rxs --cov=erddapy -m "not serial" tests
-      pytest -rxs --cov=erddapy -m "serial" tests
+      pytest -n 2 -rxs --cov=erddapy --vcr-record=none tests
       popd
     fi
 
