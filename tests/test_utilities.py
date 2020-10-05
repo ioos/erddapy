@@ -8,8 +8,8 @@ import pytz
 
 from requests.exceptions import HTTPError, ReadTimeout
 
+from erddapy.erddapy import _quote_string_constraints, parse_dates
 from erddapy.url_handling import _clean_response, check_url_response, urlopen
-from erddapy.utilities import parse_dates, quote_string_constraints
 
 
 @pytest.mark.web
@@ -105,9 +105,9 @@ def test_parse_dates_from_string():
     assert parse_dates("1970/1/1") == 0
 
 
-def test_quote_string_constraints():
+def test__quote_string_constraints():
     """Ensure that only string are quoted."""
-    kw = quote_string_constraints(
+    kw = _quote_string_constraints(
         {
             "latitude": 42,
             "longitude": 42.0,

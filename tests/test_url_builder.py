@@ -2,9 +2,8 @@ import pytest
 
 from requests.exceptions import HTTPError
 
-from erddapy import ERDDAP
+from erddapy.erddapy import ERDDAP, parse_dates
 from erddapy.url_handling import check_url_response
-from erddapy.utilities import parse_dates
 
 
 def _url_to_dict(url):
