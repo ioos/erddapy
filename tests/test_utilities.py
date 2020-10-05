@@ -16,17 +16,8 @@ from erddapy.utilities import (
     check_url_response,
     parse_dates,
     quote_string_constraints,
-    servers,
     urlopen,
 )
-
-
-@pytest.mark.web
-@pytest.mark.xfail
-def test_servers():
-    for server in servers.values():
-        # Should raise HTTPError if broken, otherwise returns the URL.
-        check_url_response(server.url) == server.url
 
 
 @pytest.mark.web
@@ -55,10 +46,7 @@ def test_urlopen_requests_kwargs():
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000
     slowwly_url = (
-        "http://slowwly.robertomurray.co.uk/delay/"
-        + str(slowwly_milliseconds)
-        + "/url/"
-        + base_url
+        f"https://flash.siwalik.in/delay/{slowwly_milliseconds}/url/{base_url}"
     )
 
     with pytest.raises(ReadTimeout):

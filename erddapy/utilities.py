@@ -6,7 +6,6 @@ utilities
 import functools
 import io
 
-from collections import namedtuple
 from contextlib import contextmanager
 from datetime import datetime
 from pathlib import Path
@@ -14,7 +13,6 @@ from typing import Dict, Generator, Optional, Union
 from typing.io import BinaryIO
 from urllib.parse import urlparse
 
-import pandas as pd
 import pytz
 import requests
 
@@ -36,34 +34,6 @@ def _nc_dataset(url, auth, **requests_kwargs: Dict):
         # if libnetcdf is not compiled with in-memory support fallback to a local tmp file
         with _tempnc(data) as _nc:
             return Dataset(_nc)
-
-
-@functools.lru_cache(maxsize=None)
-def servers_list():
-    """
-    Download a new server list from awesome-erddap.
-    If loading the latest one fails it falls back to the default one shipped with the package.
-
-    """
-    from urllib.error import URLError
-
-    try:
-        url = "https://raw.githubusercontent.com/IrishMarineInstitute/awesome-erddap/master/erddaps.json"
-        df = pd.read_json(url)
-    except URLError:
-        from pathlib import Path
-
-        path = Path(__file__).absolute().parent
-        df = pd.read_json(path.joinpath("erddaps.json"))
-    _server = namedtuple("server", ["description", "url"])
-    return {
-        row["short_name"]: _server(row["name"], row["url"])
-        for k, row in df.iterrows()
-        if row["short_name"]
-    }
-
-
-servers = servers_list()
 
 
 def urlopen(url, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:

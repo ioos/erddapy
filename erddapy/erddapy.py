@@ -11,12 +11,12 @@ from urllib.parse import quote_plus
 
 import pandas as pd
 
+from erddapy.servers import servers
 from erddapy.utilities import (
     _nc_dataset,
     _tempnc,
     parse_dates,
     quote_string_constraints,
-    servers,
     urlopen,
 )
 
