@@ -6,12 +6,9 @@ utilities
 import functools
 import io
 
-from contextlib import contextmanager
 from datetime import datetime
-from pathlib import Path
-from typing import Dict, Generator, Optional, Union
+from typing import Dict, Optional, Union
 from typing.io import BinaryIO
-from urllib.parse import urlparse
 
 import pytz
 import requests
@@ -21,19 +18,6 @@ try:
     from pandas.core.indexes.period import parse_time_string
 except ImportError:
     from pandas._libs.tslibs.parsing import parse_time_string
-
-
-def _nc_dataset(url, auth, **requests_kwargs: Dict):
-    """Returns a netCDF4-python Dataset from memory and fallbacks to disk if that fails."""
-    from netCDF4 import Dataset
-
-    data = urlopen(url=url, auth=auth, **requests_kwargs)
-    try:
-        return Dataset(Path(urlparse(url).path).name, memory=data.read())
-    except OSError:
-        # if libnetcdf is not compiled with in-memory support fallback to a local tmp file
-        with _tempnc(data) as _nc:
-            return Dataset(_nc)
 
 
 def urlopen(url, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
@@ -101,22 +85,6 @@ def quote_string_constraints(kwargs: Dict) -> Dict:
 
     """
     return {k: f'"{v}"' if isinstance(v, str) else v for k, v in kwargs.items()}
-
-
-@contextmanager
-def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
-    """Creates a temporary netcdf file."""
-    from tempfile import NamedTemporaryFile
-
-    tmp = None
-    try:
-        tmp = NamedTemporaryFile(suffix=".nc", prefix="erddapy_")
-        tmp.write(data.read())
-        tmp.flush()
-        yield tmp.name
-    finally:
-        if tmp is not None:
-            tmp.close()
 
 
 def show_iframe(src):
