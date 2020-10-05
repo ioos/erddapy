@@ -63,6 +63,7 @@ script:
 
       if [ ! -z "$TRAVIS_TAG" ]; then DEPLOY_DIR="$TRAVIS_TAG"; else DEPLOY_DIR="$TRAVIS_BRANCH"; fi
       doctr deploy --command=doctr-versions-menu --no-require-master --build-tags "$DEPLOY_DIR"
+    fi
 
 deploy:
   skip_cleanup: true
