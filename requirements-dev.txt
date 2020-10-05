@@ -2,6 +2,7 @@ black
 cartopy
 check-manifest
 doctr
+doctr-versions-menu
 flake8
 flake8-builtins
 flake8-comprehensions
