@@ -3,7 +3,7 @@ import os
 import pytest
 
 from erddapy.netcdf_handling import _nc_dataset, _tempnc
-from erddapy.utilities import urlopen
+from erddapy.url_handling import urlopen
 
 
 @pytest.mark.web

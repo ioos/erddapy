@@ -13,30 +13,12 @@ import pandas as pd
 
 from erddapy.netcdf_handling import _nc_dataset, _tempnc
 from erddapy.servers import servers
-from erddapy.utilities import parse_dates, quote_string_constraints, urlopen
+from erddapy.url_handling import _distinct, urlopen
+from erddapy.utilities import parse_dates, quote_string_constraints
 
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
-
-
-def _distinct(url: str, **kwargs: Dict) -> str:
-    """
-    Sort all of the rows in the results table
-    (starting with the first requested variable,
-    then using the second requested variable if the first variable has a tie, ...),
-    then remove all non-unique rows of data.
-
-    For example, a query for the variables ["stationType", "stationID"] with `distinct=True`
-    will return a sorted list of "stationIDs" associated with each "stationType".
-
-    See https://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html#distinct
-
-    """
-    distinct = kwargs.pop("distinct", False)
-    if distinct is True:
-        return f"{url}&distinct()"
-    return url
 
 
 class ERDDAP(object):

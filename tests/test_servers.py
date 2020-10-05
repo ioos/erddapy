@@ -1,7 +1,7 @@
 import pytest
 
-from erddapy.servers import servers
-from erddapy.utilities import check_url_response
+from erddapy import servers
+from erddapy.url_handling import check_url_response
 
 
 @pytest.mark.web
