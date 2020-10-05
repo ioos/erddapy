@@ -1,5 +1,4 @@
 import io
-import os
 
 from datetime import datetime
 
@@ -9,24 +8,8 @@ import pytz
 
 from requests.exceptions import HTTPError, ReadTimeout
 
-from erddapy.utilities import (
-    _clean_response,
-    _nc_dataset,
-    _tempnc,
-    check_url_response,
-    parse_dates,
-    quote_string_constraints,
-    servers,
-    urlopen,
-)
-
-
-@pytest.mark.web
-@pytest.mark.xfail
-def test_servers():
-    for server in servers.values():
-        # Should raise HTTPError if broken, otherwise returns the URL.
-        check_url_response(server.url) == server.url
+from erddapy.erddapy import _quote_string_constraints, parse_dates
+from erddapy.url_handling import _clean_response, check_url_response, urlopen
 
 
 @pytest.mark.web
@@ -55,10 +38,7 @@ def test_urlopen_requests_kwargs():
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000
     slowwly_url = (
-        "http://slowwly.robertomurray.co.uk/delay/"
-        + str(slowwly_milliseconds)
-        + "/url/"
-        + base_url
+        f"https://flash.siwalik.in/delay/{slowwly_milliseconds}/url/{base_url}"
     )
 
     with pytest.raises(ReadTimeout):
@@ -125,9 +105,9 @@ def test_parse_dates_from_string():
     assert parse_dates("1970/1/1") == 0
 
 
-def test_quote_string_constraints():
+def test__quote_string_constraints():
     """Ensure that only string are quoted."""
-    kw = quote_string_constraints(
+    kw = _quote_string_constraints(
         {
             "latitude": 42,
             "longitude": 42.0,
@@ -149,34 +129,3 @@ def test_quote_string_constraints():
     for k, v in kw.items():
         if isinstance(v, str):
             assert v.startswith('"') and v.endswith('"')
-
-
-@pytest.mark.web
-@pytest.mark.vcr()
-def test__tempnc():
-    url = "https://data.ioos.us/gliders/erddap/tabledap/cp_336-20170116T1254.nc"
-    data = urlopen(url)
-    with _tempnc(data) as tmp:
-        # Check that the file was exists.
-        assert os.path.exists(tmp)
-        # Confirm that it is a netCDF file.
-        assert tmp.endswith("nc")
-    # Check that the file was removed.
-    assert not os.path.exists(tmp)
-
-
-@pytest.mark.web
-@pytest.mark.vcr()
-def test__nc_dataset():
-    """
-    FIXME: we need to test both in-memory and local file.
-    That can be achieve with a different libnetcdf but having two environments for testing is cumbersome.
-    However, it turns out sometimes a server can fail to provide files can be loaded in memory (#137).
-    If we identify the reason we can use them to test this function on both in-memory and disk options.
-    """
-    from netCDF4 import Dataset
-
-    url = "https://data.ioos.us/gliders/erddap/tabledap/cp_336-20170116T1254.nc"
-    auth = None
-    _nc = _nc_dataset(url, auth)
-    assert isinstance(_nc, Dataset)
