@@ -54,9 +54,11 @@ script:
   - |
     if [[ $TRAVIS_JOB_NAME == 'docs' ]]; then
       set -e
-      travis_wait jupyter nbconvert --to notebook --execute notebooks/quick_intro.ipynb --output=quick_intro-output.ipynb
-      jupyter nbconvert --to notebook --execute notebooks/searchfor.ipynb --output=searchfor-output.ipynb
-      cp notebooks/*output.ipynb docs/source/
+      travis_wait jupyter nbconvert --to notebook --execute notebooks/00-quick_intro.ipynb --output=00-quick_intro-output.ipynb
+      travis_wait jupyter nbconvert --to notebook --execute notebooks/01-longer_intro.ipynb --output=01-longer_intro-output.ipynb
+      travis_wait jupyter nbconvert --to notebook --execute notebooks/02-extras.ipynb --output=02-extras-output.ipynb
+      travis_wait jupyter nbconvert --to notebook --execute notebooks/03-searchfor.ipynb --output=03-searchfor-output.ipynb
+      mv notebooks/*output.ipynb docs/source/
       pushd docs
       make clean html linkcheck
       popd
