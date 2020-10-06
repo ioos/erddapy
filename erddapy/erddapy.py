@@ -369,7 +369,6 @@ class ERDDAP(object):
         response = kw.pop("response", "csvp")
         url = self.get_download_url(response=response, **kw)
         data = urlopen(url, auth=self.auth, **self.requests_kwargs)
-        data.seek(0)
         return pd.read_csv(data, **kw)
 
     def to_ncCF(self, **kw):
@@ -421,7 +420,8 @@ class ERDDAP(object):
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
         variables = {}
-        _df = pd.read_csv(urlopen(url, auth=self.auth, **self.requests_kwargs))
+        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
+        _df = pd.read_csv(data)
         self._dataset_id = dataset_id
         for variable in set(_df["Variable Name"]):
             attributes = (

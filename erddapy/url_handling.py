@@ -13,18 +13,24 @@ import requests
 
 
 @functools.lru_cache(maxsize=None)
-def urlopen(url, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
-    """Thin wrapper around requests get content.
-
-    See requests.get docs for the `params` and `kwargs` options.
-
-    """
+def _urlopen(url, auth, **kwargs) -> BinaryIO:
     response = requests.get(url, allow_redirects=True, auth=auth, **kwargs)
     try:
         response.raise_for_status()
     except requests.exceptions.HTTPError as err:
         raise requests.exceptions.HTTPError(f"{response.content.decode()}") from err
     return io.BytesIO(response.content)
+
+
+def urlopen(url, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
+    """Thin wrapper around requests get content.
+
+    See requests.get docs for the `params` and `kwargs` options.
+
+    """
+    data = _urlopen(url=url, auth=auth, **kwargs)
+    data.seek(0)
+    return data
 
 
 @functools.lru_cache(maxsize=None)
