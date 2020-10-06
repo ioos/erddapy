@@ -368,7 +368,9 @@ class ERDDAP(object):
         """
         response = kw.pop("response", "csvp")
         url = self.get_download_url(response=response, **kw)
-        return pd.read_csv(urlopen(url, auth=self.auth, **self.requests_kwargs), **kw)
+        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
+        data.seek(0)
+        return pd.read_csv(data, **kw)
 
     def to_ncCF(self, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""

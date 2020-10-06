@@ -12,6 +12,7 @@ from typing.io import BinaryIO
 import requests
 
 
+@functools.lru_cache(maxsize=None)
 def urlopen(url, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
     """Thin wrapper around requests get content.
 
