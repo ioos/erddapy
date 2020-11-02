@@ -128,7 +128,7 @@ class ERDDAP(object):
     ):
         if server in servers.keys():
             server = servers[server].url
-        self.server = server
+        self.server = server.rstrip("/")
         self.protocol = protocol
         self.response = response
 
