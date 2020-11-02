@@ -12,8 +12,8 @@ from typing.io import BinaryIO
 import requests
 
 
-@functools.lru_cache(maxsize=None)
-def _urlopen(url, auth, **kwargs) -> BinaryIO:
+@functools.lru_cache(maxsize=256)
+def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
     response = requests.get(url, allow_redirects=True, auth=auth, **kwargs)
     try:
         response.raise_for_status()
@@ -22,13 +22,14 @@ def _urlopen(url, auth, **kwargs) -> BinaryIO:
     return io.BytesIO(response.content)
 
 
-def urlopen(url, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
+def urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
     """Thin wrapper around requests get content.
 
     See requests.get docs for the `params` and `kwargs` options.
 
     """
-    data = _urlopen(url=url, auth=auth, **kwargs)
+    # Ignoring type checks here b/c mypy does not support decorated functions.
+    data = _urlopen(url=url, auth=auth, **kwargs)  # type: ignore
     data.seek(0)
     return data
 

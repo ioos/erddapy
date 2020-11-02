@@ -59,7 +59,7 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
     return parse_date_time.timestamp()
 
 
-class ERDDAP(object):
+class ERDDAP:
     """Creates an ERDDAP instance for a specific server endpoint.
 
     Args:
@@ -248,7 +248,9 @@ class ERDDAP(object):
         return url
 
     def get_info_url(
-        self, dataset_id: OptionalStr = None, response: OptionalStr = None
+        self,
+        dataset_id: OptionalStr = None,
+        response: OptionalStr = None,
     ) -> str:
         """The info URL for the `server` endpoint.
 
