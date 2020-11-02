@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Searching datasets &#8212; erddapy 0.7.3.dev10+g8a6453d documentation</title>
+    <title>Searching datasets &#8212; erddapy 0.5.4.dev4+gdd1213d documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/badge_only.css" />
@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ERDDAP class API" href="erddapy.html" />
-    <link rel="prev" title="Quick introduction" href="quick_intro-output.html" />
+    <link rel="prev" title="Extra convenience methods for common responses" href="02-extras-output.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -67,8 +67,9 @@
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quick_intro-output.html">Quick introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quick_intro-output.html#Longer-introduction">Longer introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-quick_intro-output.html">Quick introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-longer_intro-output.html">Longer introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-extras-output.html">Extra convenience methods for common responses</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Searching datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="erddapy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code></a></li>
 </ul>
@@ -77,7 +78,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="quick_intro-output.html" title="previous chapter">Quick introduction</a></li>
+      <li>Previous: <a href="02-extras-output.html" title="previous chapter">Extra convenience methods for common responses</a></li>
       <li>Next: <a href="erddapy.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code></a></li>
   </ul></li>
 </ul>
@@ -381,43 +382,43 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0     erdCAnma_LonPM180
-1     erdCMnma_LonPM180
-2     erdCBsfc_LonPM180
-3     erdC125h_LonPM180
-4              erdC125h
-5              erdC1nma
-6              erdC1sfc
-7              erdCA25h
-8              erdCAnma
-9              erdCAsfc
-10             erdCB25h
-11             erdCBsfc
-12             erdCM25h
-13             erdCMnma
-14             erdCMsfc
-15             erdCS25h
-16             erdCSsfc
-17    erdC1nma_LonPM180
-18    erdC1sfc_LonPM180
-19    erdCA25h_LonPM180
-20    erdCAsfc_LonPM180
-21    erdCB25h_LonPM180
-22    erdCM25h_LonPM180
+0              erdCA25h
+1              erdCAnma
+2              erdCAsfc
+3              erdCB25h
+4              erdCBsfc
+5              erdC125h
+6              erdC1nma
+7              erdC1sfc
+8              erdCM25h
+9              erdCMnma
+10             erdCMsfc
+11             erdCS25h
+12             erdCSsfc
+13    erdC125h_LonPM180
+14    erdC1nma_LonPM180
+15    erdC1sfc_LonPM180
+16    erdCA25h_LonPM180
+17    erdCAnma_LonPM180
+18    erdCAsfc_LonPM180
+19    erdCB25h_LonPM180
+20    erdCBsfc_LonPM180
+21    erdCM25h_LonPM180
+22    erdCMnma_LonPM180
 23    erdCMsfc_LonPM180
 24    erdCS25h_LonPM180
 25    erdCSsfc_LonPM180
-26            ucsdHfrE1
-27            ucsdHfrE2
-28            ucsdHfrE6
-29          ucsdHfrW500
-30            ucsdHfrA6
-31            ucsdHfrH1
-32            ucsdHfrP2
-33            ucsdHfrP6
-34            ucsdHfrW2
+26            ucsdHfrA6
+27            ucsdHfrE1
+28            ucsdHfrE2
+29            ucsdHfrE6
+30          ucsdHfrW500
+31            ucsdHfrW1
+32            ucsdHfrW2
+33            ucsdHfrH1
+34            ucsdHfrP2
 35            ucsdHfrW6
-36            ucsdHfrW1
+36            ucsdHfrP6
 Name: Dataset ID, dtype: object
 </pre></div></div>
 </div>
@@ -442,8 +443,8 @@ Name: Dataset ID, dtype: object
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 0    ucsdHfrE2
-1    ucsdHfrP2
-2    ucsdHfrW2
+1    ucsdHfrW2
+2    ucsdHfrP2
 Name: Dataset ID, dtype: object
 </pre></div></div>
 </div>
@@ -467,17 +468,17 @@ Name: Dataset ID, dtype: object
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0       ucsdHfrE1
-1       ucsdHfrE2
-2       ucsdHfrE6
-3     ucsdHfrW500
-4       ucsdHfrA6
-5       ucsdHfrH1
-6       ucsdHfrP2
-7       ucsdHfrP6
-8       ucsdHfrW2
+0       ucsdHfrA6
+1       ucsdHfrE1
+2       ucsdHfrE2
+3       ucsdHfrE6
+4     ucsdHfrW500
+5       ucsdHfrW1
+6       ucsdHfrW2
+7       ucsdHfrH1
+8       ucsdHfrP2
 9       ucsdHfrW6
-10      ucsdHfrW1
+10      ucsdHfrP6
 Name: Dataset ID, dtype: object
 </pre></div></div>
 </div>
@@ -501,7 +502,7 @@ Name: Dataset ID, dtype: object
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-504
+488
 </pre></div></div>
 </div>
 <p>Too many datasets because wind, speed, and wind speed are matched. Now let’s use the quoted search to reduce the number of results to only wind speed.</p>
@@ -524,10 +525,9 @@ Name: Dataset ID, dtype: object
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-483
+469
 </pre></div></div>
 </div>
-<p>This example is written in a Jupyter Notebook <a class="reference external" href="https://raw.githubusercontent.com/ioos/erddapy/master/notebooks/searchfor.ipynb">click here</a> to download the notebook so you can run it locally, or <a class="reference external" href="https://binder.pangeo.io/v2/gh/ioos/erddapy/master?filepath=notebooks/searchfor.ipynb">click here</a> to run a live instance of this notebook.</p>
 </div>
 
 
@@ -545,7 +545,7 @@ Name: Dataset ID, dtype: object
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="_sources/searchfor-output.ipynb.txt"
+      <a href="_sources/03-searchfor-output.ipynb.txt"
           rel="nofollow">Page source</a>
     </div>
 

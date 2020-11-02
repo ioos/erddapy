@@ -15,10 +15,10 @@
    "execution_count": 1,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-05T16:57:39.757847Z",
-     "iopub.status.busy": "2020-10-05T16:57:39.756644Z",
-     "iopub.status.idle": "2020-10-05T16:57:40.185304Z",
-     "shell.execute_reply": "2020-10-05T16:57:40.184427Z"
+     "iopub.execute_input": "2020-11-02T15:16:17.858816Z",
+     "iopub.status.busy": "2020-11-02T15:16:17.858155Z",
+     "iopub.status.idle": "2020-11-02T15:16:18.166938Z",
+     "shell.execute_reply": "2020-11-02T15:16:18.166479Z"
     }
    },
    "outputs": [],
@@ -44,53 +44,53 @@
    "execution_count": 2,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-05T16:57:40.195879Z",
-     "iopub.status.busy": "2020-10-05T16:57:40.195422Z",
-     "iopub.status.idle": "2020-10-05T16:57:41.062018Z",
-     "shell.execute_reply": "2020-10-05T16:57:41.061243Z"
+     "iopub.execute_input": "2020-11-02T15:16:18.176011Z",
+     "iopub.status.busy": "2020-11-02T15:16:18.170119Z",
+     "iopub.status.idle": "2020-11-02T15:16:18.929602Z",
+     "shell.execute_reply": "2020-11-02T15:16:18.929929Z"
     }
    },
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "0     erdCAnma_LonPM180\n",
-       "1     erdCMnma_LonPM180\n",
-       "2     erdCBsfc_LonPM180\n",
-       "3     erdC125h_LonPM180\n",
-       "4              erdC125h\n",
-       "5              erdC1nma\n",
-       "6              erdC1sfc\n",
-       "7              erdCA25h\n",
-       "8              erdCAnma\n",
-       "9              erdCAsfc\n",
-       "10             erdCB25h\n",
-       "11             erdCBsfc\n",
-       "12             erdCM25h\n",
-       "13             erdCMnma\n",
-       "14             erdCMsfc\n",
-       "15             erdCS25h\n",
-       "16             erdCSsfc\n",
-       "17    erdC1nma_LonPM180\n",
-       "18    erdC1sfc_LonPM180\n",
-       "19    erdCA25h_LonPM180\n",
-       "20    erdCAsfc_LonPM180\n",
-       "21    erdCB25h_LonPM180\n",
-       "22    erdCM25h_LonPM180\n",
+       "0              erdCA25h\n",
+       "1              erdCAnma\n",
+       "2              erdCAsfc\n",
+       "3              erdCB25h\n",
+       "4              erdCBsfc\n",
+       "5              erdC125h\n",
+       "6              erdC1nma\n",
+       "7              erdC1sfc\n",
+       "8              erdCM25h\n",
+       "9              erdCMnma\n",
+       "10             erdCMsfc\n",
+       "11             erdCS25h\n",
+       "12             erdCSsfc\n",
+       "13    erdC125h_LonPM180\n",
+       "14    erdC1nma_LonPM180\n",
+       "15    erdC1sfc_LonPM180\n",
+       "16    erdCA25h_LonPM180\n",
+       "17    erdCAnma_LonPM180\n",
+       "18    erdCAsfc_LonPM180\n",
+       "19    erdCB25h_LonPM180\n",
+       "20    erdCBsfc_LonPM180\n",
+       "21    erdCM25h_LonPM180\n",
+       "22    erdCMnma_LonPM180\n",
        "23    erdCMsfc_LonPM180\n",
        "24    erdCS25h_LonPM180\n",
        "25    erdCSsfc_LonPM180\n",
-       "26            ucsdHfrE1\n",
-       "27            ucsdHfrE2\n",
-       "28            ucsdHfrE6\n",
-       "29          ucsdHfrW500\n",
-       "30            ucsdHfrA6\n",
-       "31            ucsdHfrH1\n",
-       "32            ucsdHfrP2\n",
-       "33            ucsdHfrP6\n",
-       "34            ucsdHfrW2\n",
+       "26            ucsdHfrA6\n",
+       "27            ucsdHfrE1\n",
+       "28            ucsdHfrE2\n",
+       "29            ucsdHfrE6\n",
+       "30          ucsdHfrW500\n",
+       "31            ucsdHfrW1\n",
+       "32            ucsdHfrW2\n",
+       "33            ucsdHfrH1\n",
+       "34            ucsdHfrP2\n",
        "35            ucsdHfrW6\n",
-       "36            ucsdHfrW1\n",
+       "36            ucsdHfrP6\n",
        "Name: Dataset ID, dtype: object"
       ]
      },
@@ -121,10 +121,10 @@
    "execution_count": 3,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-05T16:57:41.072411Z",
-     "iopub.status.busy": "2020-10-05T16:57:41.071747Z",
-     "iopub.status.idle": "2020-10-05T16:57:41.631523Z",
-     "shell.execute_reply": "2020-10-05T16:57:41.630540Z"
+     "iopub.execute_input": "2020-11-02T15:16:18.938887Z",
+     "iopub.status.busy": "2020-11-02T15:16:18.933053Z",
+     "iopub.status.idle": "2020-11-02T15:16:19.408397Z",
+     "shell.execute_reply": "2020-11-02T15:16:19.408779Z"
     }
    },
    "outputs": [
@@ -132,8 +132,8 @@
      "data": {
       "text/plain": [
        "0    ucsdHfrE2\n",
-       "1    ucsdHfrP2\n",
-       "2    ucsdHfrW2\n",
+       "1    ucsdHfrW2\n",
+       "2    ucsdHfrP2\n",
        "Name: Dataset ID, dtype: object"
       ]
      },
@@ -162,27 +162,27 @@
    "execution_count": 4,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-05T16:57:41.641981Z",
-     "iopub.status.busy": "2020-10-05T16:57:41.641491Z",
-     "iopub.status.idle": "2020-10-05T16:57:42.328329Z",
-     "shell.execute_reply": "2020-10-05T16:57:42.327865Z"
+     "iopub.execute_input": "2020-11-02T15:16:19.418203Z",
+     "iopub.status.busy": "2020-11-02T15:16:19.416219Z",
+     "iopub.status.idle": "2020-11-02T15:16:20.082774Z",
+     "shell.execute_reply": "2020-11-02T15:16:20.083091Z"
     }
    },
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "0       ucsdHfrE1\n",
-       "1       ucsdHfrE2\n",
-       "2       ucsdHfrE6\n",
-       "3     ucsdHfrW500\n",
-       "4       ucsdHfrA6\n",
-       "5       ucsdHfrH1\n",
-       "6       ucsdHfrP2\n",
-       "7       ucsdHfrP6\n",
-       "8       ucsdHfrW2\n",
+       "0       ucsdHfrA6\n",
+       "1       ucsdHfrE1\n",
+       "2       ucsdHfrE2\n",
+       "3       ucsdHfrE6\n",
+       "4     ucsdHfrW500\n",
+       "5       ucsdHfrW1\n",
+       "6       ucsdHfrW2\n",
+       "7       ucsdHfrH1\n",
+       "8       ucsdHfrP2\n",
        "9       ucsdHfrW6\n",
-       "10      ucsdHfrW1\n",
+       "10      ucsdHfrP6\n",
        "Name: Dataset ID, dtype: object"
       ]
      },
@@ -211,10 +211,10 @@
    "execution_count": 5,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-05T16:57:42.338528Z",
-     "iopub.status.busy": "2020-10-05T16:57:42.338070Z",
-     "iopub.status.idle": "2020-10-05T16:57:43.894979Z",
-     "shell.execute_reply": "2020-10-05T16:57:43.894591Z"
+     "iopub.execute_input": "2020-11-02T15:16:20.092175Z",
+     "iopub.status.busy": "2020-11-02T15:16:20.091667Z",
+     "iopub.status.idle": "2020-11-02T15:16:21.750670Z",
+     "shell.execute_reply": "2020-11-02T15:16:21.751232Z"
     },
     "scrolled": true
    },
@@ -222,7 +222,7 @@
     {
      "data": {
       "text/plain": [
-       "504"
+       "488"
       ]
      },
      "execution_count": 1,
@@ -251,17 +251,17 @@
    "execution_count": 6,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-10-05T16:57:43.904844Z",
-     "iopub.status.busy": "2020-10-05T16:57:43.904372Z",
-     "iopub.status.idle": "2020-10-05T16:57:45.531561Z",
-     "shell.execute_reply": "2020-10-05T16:57:45.532064Z"
+     "iopub.execute_input": "2020-11-02T15:16:21.760485Z",
+     "iopub.status.busy": "2020-11-02T15:16:21.760043Z",
+     "iopub.status.idle": "2020-11-02T15:16:23.286771Z",
+     "shell.execute_reply": "2020-11-02T15:16:23.286380Z"
     }
    },
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "483"
+       "469"
       ]
      },
      "execution_count": 1,
@@ -275,15 +275,6 @@
     "url = e.get_search_url(search_for=search_for, response=\"csv\")\n",
     "\n",
     "len(pd.read_csv(url)[\"Dataset ID\"])"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "This example is written in a Jupyter Notebook\n",
-    "[click here](https://raw.githubusercontent.com/ioos/erddapy/master/notebooks/searchfor.ipynb)\n",
-    "to download the notebook so you can run it locally, or [click here](https://binder.pangeo.io/v2/gh/ioos/erddapy/master?filepath=notebooks/searchfor.ipynb) to run a live instance of this notebook."
    ]
   }
  ],
@@ -314,7 +305,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.8.5"
+   "version": "3.8.6"
   }
  },
  "nbformat": 4,

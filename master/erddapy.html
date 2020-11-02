@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ERDDAP class API &#8212; erddapy 0.7.3.dev10+g8a6453d documentation</title>
+    <title>ERDDAP class API &#8212; erddapy 0.5.4.dev4+gdd1213d documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/badge_only.css" />
@@ -18,7 +18,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Searching datasets" href="searchfor-output.html" />
+    <link rel="prev" title="Searching datasets" href="03-searchfor-output.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -66,9 +66,10 @@
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quick_intro-output.html">Quick introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quick_intro-output.html#Longer-introduction">Longer introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="searchfor-output.html">Searching datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-quick_intro-output.html">Quick introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-longer_intro-output.html">Longer introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-extras-output.html">Extra convenience methods for common responses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-searchfor-output.html">Searching datasets</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code></a></li>
 </ul>
 
@@ -76,7 +77,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="searchfor-output.html" title="previous chapter">Searching datasets</a></li>
+      <li>Previous: <a href="03-searchfor-output.html" title="previous chapter">Searching datasets</a></li>
   </ul></li>
 </ul>
 </div>
@@ -106,12 +107,12 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-erddapy">
-<span id="erddap-class-api"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code><a class="headerlink" href="#module-erddapy" title="Permalink to this headline">¶</a></h1>
-<p>Easier access to scientific data</p>
+  <div class="section" id="module-erddapy.erddapy">
+<span id="erddap-class-api"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code><a class="headerlink" href="#module-erddapy.erddapy" title="Permalink to this headline">¶</a></h1>
+<p>Pythonic way to access ERDDAP data</p>
 <dl class="py class">
-<dt id="erddapy.ERDDAP">
-<em class="property">class </em><code class="sig-prename descclassname">erddapy.</code><code class="sig-name descname">ERDDAP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">response</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'html'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP">
+<em class="property">class </em><code class="sig-prename descclassname">erddapy.erddapy.</code><code class="sig-name descname">ERDDAP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">server</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">response</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'html'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Creates an ERDDAP instance for a specific server endpoint.</p>
 <dl class="field-list simple">
@@ -123,26 +124,26 @@
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="erddapy.ERDDAP.dataset_id">
-<code class="sig-name descname">dataset_id</code><a class="headerlink" href="#erddapy.ERDDAP.dataset_id" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.dataset_id">
+<code class="sig-name descname">dataset_id</code><a class="headerlink" href="#erddapy.erddapy.ERDDAP.dataset_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>a dataset unique id.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="erddapy.ERDDAP.variables">
-<code class="sig-name descname">variables</code><a class="headerlink" href="#erddapy.ERDDAP.variables" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.variables">
+<code class="sig-name descname">variables</code><a class="headerlink" href="#erddapy.erddapy.ERDDAP.variables" title="Permalink to this definition">¶</a></dt>
 <dd><p>a list variables to download.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="erddapy.ERDDAP.response">
-<code class="sig-name descname">response</code><a class="headerlink" href="#erddapy.ERDDAP.response" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.response">
+<code class="sig-name descname">response</code><a class="headerlink" href="#erddapy.erddapy.ERDDAP.response" title="Permalink to this definition">¶</a></dt>
 <dd><p>default is HTML.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="erddapy.ERDDAP.constraints">
-<code class="sig-name descname">constraints</code><a class="headerlink" href="#erddapy.ERDDAP.constraints" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.constraints">
+<code class="sig-name descname">constraints</code><a class="headerlink" href="#erddapy.erddapy.ERDDAP.constraints" title="Permalink to this definition">¶</a></dt>
 <dd><p>download constraints, default None (opendap-like url)</p>
 </dd></dl>
 
@@ -203,8 +204,8 @@
 </pre></div>
 </div>
 <dl class="py method">
-<dt id="erddapy.ERDDAP.get_categorize_url">
-<code class="sig-name descname">get_categorize_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">categorize_by</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">response</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_categorize_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.get_categorize_url" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.get_categorize_url">
+<code class="sig-name descname">get_categorize_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">categorize_by</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">response</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_categorize_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.get_categorize_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>The categorize URL for the <cite>server</cite> endpoint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -224,8 +225,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="erddapy.ERDDAP.get_download_url">
-<code class="sig-name descname">get_download_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset_id</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">variables</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">, </span>Tuple<span class="p">[</span>str<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">response</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_download_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.get_download_url" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.get_download_url">
+<code class="sig-name descname">get_download_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset_id</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">variables</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">, </span>Tuple<span class="p">[</span>str<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">response</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_download_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.get_download_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>The download URL for the <cite>server</cite> endpoint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -253,8 +254,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="erddapy.ERDDAP.get_info_url">
-<code class="sig-name descname">get_info_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset_id</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">response</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_info_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.get_info_url" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.get_info_url">
+<code class="sig-name descname">get_info_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset_id</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">response</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_info_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.get_info_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>The info URL for the <cite>server</cite> endpoint.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -273,8 +274,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="erddapy.ERDDAP.get_search_url">
-<code class="sig-name descname">get_search_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">search_for</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">items_per_page</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">page</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_search_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.get_search_url" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.get_search_url">
+<code class="sig-name descname">get_search_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">search_for</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">protocol</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">items_per_page</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">page</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_search_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.get_search_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>The search URL for the <cite>server</cite> endpoint provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,8 +329,8 @@ coordinates: <cite>minLon</cite>, <cite>maxLon</cite>, <cite>minLat</cite>, <cit
 </dd></dl>
 
 <dl class="py method">
-<dt id="erddapy.ERDDAP.get_var_by_attr">
-<code class="sig-name descname">get_var_by_attr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset_id</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>str<span class="p">]</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_var_by_attr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.get_var_by_attr" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.get_var_by_attr">
+<code class="sig-name descname">get_var_by_attr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset_id</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>str<span class="p">]</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_var_by_attr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.get_var_by_attr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Similar to netCDF4-python <cite>get_variables_by_attributes</cite> for an ERDDAP
 <cite>dataset_id</cite>.</p>
 <p>The <cite>get_var_by_attr</cite> method will create an info <cite>csv</cite> return,
@@ -359,21 +360,21 @@ for the <cite>dataset_id</cite>, and the variables attribute dictionary.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="erddapy.ERDDAP.to_iris">
-<code class="sig-name descname">to_iris</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.to_iris"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.to_iris" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.to_iris">
+<code class="sig-name descname">to_iris</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.to_iris"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.to_iris" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load the data request into an iris.CubeList.</p>
 <p>Accepts any <cite>iris.load_raw</cite> keyword arguments.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="erddapy.ERDDAP.to_ncCF">
-<code class="sig-name descname">to_ncCF</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.to_ncCF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.to_ncCF" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.to_ncCF">
+<code class="sig-name descname">to_ncCF</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.to_ncCF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.to_ncCF" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load the data request into a Climate and Forecast compliant netCDF4-python object.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="erddapy.ERDDAP.to_pandas">
-<code class="sig-name descname">to_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.to_pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.to_pandas" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.to_pandas">
+<code class="sig-name descname">to_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.to_pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.to_pandas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save a data request to a pandas.DataFrame.</p>
 <p>Accepts any <cite>pandas.read_csv</cite> keyword arguments.</p>
 <p>This method uses the .csvp [1] response as the default for simplicity,
@@ -382,12 +383,20 @@ please check ERDDAP’s documentation for the other csv options available.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="erddapy.ERDDAP.to_xarray">
-<code class="sig-name descname">to_xarray</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.to_xarray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.ERDDAP.to_xarray" title="Permalink to this definition">¶</a></dt>
+<dt id="erddapy.erddapy.ERDDAP.to_xarray">
+<code class="sig-name descname">to_xarray</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.to_xarray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.to_xarray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load the data request into a xarray.Dataset.</p>
 <p>Accepts any <cite>xr.open_dataset</cite> keyword arguments.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt id="erddapy.erddapy.parse_dates">
+<code class="sig-prename descclassname">erddapy.erddapy.</code><code class="sig-name descname">parse_dates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">date_time</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>datetime.datetime<span class="p">, </span>str<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/erddapy/erddapy.html#parse_dates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#erddapy.erddapy.parse_dates" title="Permalink to this definition">¶</a></dt>
+<dd><p>ERDDAP ReSTful API standardizes the representation of dates as either ISO
+strings or seconds since 1970, but internally ERDDAPY uses datetime-like
+objects. <cite>timestamp</cite> returns the expected strings in seconds since 1970.</p>
 </dd></dl>
 
 </div>
