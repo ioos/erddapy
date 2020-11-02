@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # erddapy documentation build configuration file, created by
 # sphinx-quickstart on Mon Oct  9 21:28:42 2017.
@@ -123,7 +122,7 @@ html_sidebars = {
         "relations.html",  # needs 'show_related': True theme option to display
         "searchbox.html",
         "donate.html",
-    ]
+    ],
 }
 
 
@@ -160,7 +159,7 @@ latex_documents = [
         "erddapy Documentation",
         "Filipe Fernandes",
         "manual",
-    )
+    ),
 ]
 
 
@@ -185,5 +184,5 @@ texinfo_documents = [
         "erddapy",
         "One line description of project.",
         "Miscellaneous",
-    )
+    ),
 ]

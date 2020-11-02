@@ -152,7 +152,8 @@ def test_get_var_by_attr(e):
     assert variables == ["longitude"]
 
     variables = e.get_var_by_attr(
-        dataset_id="gtoppAT", axis=lambda v: v in ["X", "Y", "Z", "T"]
+        dataset_id="gtoppAT",
+        axis=lambda v: v in ["X", "Y", "Z", "T"],
     )
     assert sorted(variables) == ["latitude", "longitude", "time"]
 
@@ -164,7 +165,7 @@ def test_get_var_by_attr(e):
         == []
     )
     assert e.get_var_by_attr(dataset_id="pmelTao5dayIso", standard_name="time") == [
-        "time"
+        "time",
     ]
 
 
@@ -175,7 +176,9 @@ def test_download_url_distinct(e):
     variables = ["commonName", "yearDeployed", "serialNumber"]
     no_distinct_url = e.get_download_url(dataset_id=dataset_id, variables=variables)
     with_distinct_url = e.get_download_url(
-        dataset_id=dataset_id, variables=variables, distinct=True
+        dataset_id=dataset_id,
+        variables=variables,
+        distinct=True,
     )
     assert not no_distinct_url.endswith("&distinct()")
     assert with_distinct_url.endswith("&distinct()")

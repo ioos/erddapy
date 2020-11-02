@@ -1,7 +1,7 @@
 :mod:`ERDDAP class API`
 -----------------------
 
-.. automodule:: erddapy
+.. automodule:: erddapy.erddapy
    :members:
    :undoc-members:
    :show-inheritance:

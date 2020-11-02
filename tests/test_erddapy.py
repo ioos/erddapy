@@ -58,7 +58,7 @@ def test__quote_string_constraints():
             "max_time": datetime.utcnow(),
             "min_time": "1970-01-01T00:00:00Z",
             "cdm_data_type": "trajectoryprofile",
-        }
+        },
     )
 
     assert isinstance(kw["latitude"], int)
