@@ -32,6 +32,15 @@ def test_search_url_bad_request(e):
         check_url_response(e.get_search_url(**kw))
 
 
+def test_search_normalization(e):
+    search_url = e.get_search_url(
+        cdm_data_type="TimeSeries",
+        standard_name="Sea_Water_Practical_Salinity",
+    )
+    assert "sea_water_practical_salinity" in search_url
+    assert "timeseries" in search_url
+
+
 @pytest.mark.web
 @pytest.mark.vcr()
 def test_search_url_valid_request(e):
