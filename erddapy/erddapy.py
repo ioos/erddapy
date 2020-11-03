@@ -222,6 +222,20 @@ class ERDDAP:
         if protocol:
             kwargs.update({"protocol": protocol})
 
+        lower_case_search_terms = (
+            "cdm_data_type",
+            "institution",
+            "ioos_category",
+            "keywords",
+            "long_name",
+            "standard_name",
+            "variableName",
+        )
+        for search_term in lower_case_search_terms:
+            if search_term in kwargs.keys():
+                lowercase = kwargs[search_term].lower()
+                kwargs.update({search_term: lowercase})
+
         default = "(ANY)"
         url = base.format(
             server=self.server,
