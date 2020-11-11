@@ -66,17 +66,3 @@ script:
       if [ ! -z "$TRAVIS_TAG" ]; then DEPLOY_DIR="$TRAVIS_TAG"; else DEPLOY_DIR="$TRAVIS_BRANCH"; fi
       doctr deploy --command=doctr-versions-menu --no-require-master --build-tags "$DEPLOY_DIR"
     fi
-
-deploy:
-  skip_cleanup: true
-  provider: pypi
-  user: "__token__"
-  password:
-    secure: "GUI/SjwCFR4tc7lsc9kzr3ZrZYdb8tHvCBmX1YGpjcSRfio73Me39BbDh47gy2L/fSmJAAohRTmb1SskuGPIbWLGd295c44btOqRgohjzsVdLoJ6Pa8+E4T1NXj7GKP12puu4z+u78czPpOBw/XQHaFFiS6xBgeG8sxby6mhvpZeb7d+3LnkecXoGPlTMYvfKR1veltuhTIfqmAdHaIAl2JXGvJGIQNvYTI2WXzKt6XUSQRSIgqLwhn7dAx89e4BKti4XKE5KrhdsO0cUKw9LOIJh8kNAw3p6GPByy/KIs362c/hr+7MDsdr5SSJ5UxsoM0AEqSg3YXwLCTQbAONzC9KwHp0e7XHkUEgaPjMY2gYj61g54iMmbWeblN57LGUzOgAXF3FBSCoQfSu0GeBF3I5dEQIkoQX2zUI93JNbt2lT/gfcRrIuKWOIJ6HysOaGFHSbE3+pGUIi9pxfbimp7G6c30Eg8qs2D7/b++X8BGaHpGSunSkqKIkQv0jo5ND0JTYinLzUBH2VNkUo7t0b1a6LOUo86ZM+w8YdIMV5mXAzalFrA4XOl9/wsKn382EZZo0voGC7Kxd5E2bV8NYylsXDU+3l0zwSxch7WNcLYLIBEHvX3hX8+a8+b7enmMmjyEv/9/Jt5pNtjaa8q+tDQmy4+ExN/TECw3YhCKsPmc="
-  distributions: sdist bdist_wheel
-  upload_docs: false
-  on:
-    repo: ioos/erddapy
-    tags: true
-    all_branches: master
-    condition: '$TRAVIS_JOB_NAME == "tarball"'
