@@ -3,6 +3,7 @@ from datetime import datetime
 import pendulum
 import pytest
 import pytz
+import requests
 
 from requests.exceptions import ReadTimeout
 
@@ -96,3 +97,12 @@ def test_erddap_requests_kwargs():
 
     with pytest.raises(ReadTimeout):
         connection.to_xarray()
+
+
+@pytest.mark.web
+@pytest.mark.vcr()
+def test_erddap2_10():
+    e = ERDDAP(server="https://coastwatch.pfeg.noaa.gov/erddap")
+    url = e.get_search_url(search_for="whoi", response="csv")
+    r = requests.head(url)
+    assert r.raise_for_status() is None
