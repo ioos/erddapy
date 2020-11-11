@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>erddapy.erddapy &#8212; erddapy 0.5.4.dev8+gaa166c1 documentation</title>
+    <title>erddapy.erddapy &#8212; erddapy 0.8.1.dev4+gf4bb53d documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/badge_only.css" />
@@ -368,7 +368,9 @@
             <span class="n">maxTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_time&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
             <span class="n">searchFor</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span>
         <span class="p">)</span>
-
+        <span class="c1"># ERDDAP 2.10 no longer accepts strings placeholder for dates.</span>
+        <span class="c1"># Removing them entirely should be OK for older versions too.</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;minTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;maxTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">url</span></div>
 
 <div class="viewcode-block" id="ERDDAP.get_info_url"><a class="viewcode-back" href="../../erddapy.html#erddapy.erddapy.ERDDAP.get_info_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_info_url</span><span class="p">(</span>

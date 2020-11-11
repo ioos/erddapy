@@ -15,10 +15,10 @@
    "execution_count": 1,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-11-04T10:37:05.792193Z",
-     "iopub.status.busy": "2020-11-04T10:37:05.791492Z",
-     "iopub.status.idle": "2020-11-04T10:37:06.138684Z",
-     "shell.execute_reply": "2020-11-04T10:37:06.138193Z"
+     "iopub.execute_input": "2020-11-11T17:25:48.316223Z",
+     "iopub.status.busy": "2020-11-11T17:25:48.315502Z",
+     "iopub.status.idle": "2020-11-11T17:25:48.668370Z",
+     "shell.execute_reply": "2020-11-11T17:25:48.667891Z"
     }
    },
    "outputs": [],
@@ -44,24 +44,24 @@
    "execution_count": 2,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-11-04T10:37:06.148575Z",
-     "iopub.status.busy": "2020-11-04T10:37:06.148052Z",
-     "iopub.status.idle": "2020-11-04T10:37:06.785271Z",
-     "shell.execute_reply": "2020-11-04T10:37:06.785682Z"
+     "iopub.execute_input": "2020-11-11T17:25:48.678335Z",
+     "iopub.status.busy": "2020-11-11T17:25:48.677923Z",
+     "iopub.status.idle": "2020-11-11T17:25:49.395557Z",
+     "shell.execute_reply": "2020-11-11T17:25:49.395158Z"
     }
    },
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "0              erdCA25h\n",
-       "1              erdCAnma\n",
-       "2              erdCAsfc\n",
-       "3              erdCB25h\n",
-       "4              erdCBsfc\n",
-       "5              erdC125h\n",
-       "6              erdC1nma\n",
-       "7              erdC1sfc\n",
+       "0              erdC125h\n",
+       "1              erdC1nma\n",
+       "2              erdC1sfc\n",
+       "3              erdCA25h\n",
+       "4              erdCAnma\n",
+       "5              erdCAsfc\n",
+       "6              erdCB25h\n",
+       "7              erdCBsfc\n",
        "8              erdCM25h\n",
        "9              erdCMnma\n",
        "10             erdCMsfc\n",
@@ -72,25 +72,25 @@
        "15    erdC1sfc_LonPM180\n",
        "16    erdCA25h_LonPM180\n",
        "17    erdCAnma_LonPM180\n",
-       "18    erdCB25h_LonPM180\n",
-       "19    erdCBsfc_LonPM180\n",
-       "20    erdCM25h_LonPM180\n",
-       "21    erdCMnma_LonPM180\n",
-       "22    erdCMsfc_LonPM180\n",
-       "23    erdCS25h_LonPM180\n",
+       "18    erdCAsfc_LonPM180\n",
+       "19    erdCB25h_LonPM180\n",
+       "20    erdCBsfc_LonPM180\n",
+       "21    erdCM25h_LonPM180\n",
+       "22    erdCMnma_LonPM180\n",
+       "23    erdCMsfc_LonPM180\n",
        "24    erdCSsfc_LonPM180\n",
-       "25    erdCAsfc_LonPM180\n",
+       "25    erdCS25h_LonPM180\n",
        "26            ucsdHfrA6\n",
-       "27            ucsdHfrE1\n",
-       "28            ucsdHfrE2\n",
-       "29            ucsdHfrE6\n",
-       "30            ucsdHfrH1\n",
-       "31            ucsdHfrP2\n",
-       "32            ucsdHfrP6\n",
+       "27            ucsdHfrE2\n",
+       "28            ucsdHfrE1\n",
+       "29            ucsdHfrP2\n",
+       "30            ucsdHfrP6\n",
+       "31            ucsdHfrW6\n",
+       "32            ucsdHfrE6\n",
        "33            ucsdHfrW1\n",
        "34            ucsdHfrW2\n",
        "35          ucsdHfrW500\n",
-       "36            ucsdHfrW6\n",
+       "36            ucsdHfrH1\n",
        "Name: Dataset ID, dtype: object"
       ]
      },
@@ -121,10 +121,10 @@
    "execution_count": 3,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-11-04T10:37:06.795427Z",
-     "iopub.status.busy": "2020-11-04T10:37:06.794981Z",
-     "iopub.status.idle": "2020-11-04T10:37:07.149607Z",
-     "shell.execute_reply": "2020-11-04T10:37:07.149235Z"
+     "iopub.execute_input": "2020-11-11T17:25:49.405447Z",
+     "iopub.status.busy": "2020-11-11T17:25:49.404985Z",
+     "iopub.status.idle": "2020-11-11T17:25:49.852234Z",
+     "shell.execute_reply": "2020-11-11T17:25:49.851858Z"
     }
    },
    "outputs": [
@@ -162,10 +162,10 @@
    "execution_count": 4,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-11-04T10:37:07.159116Z",
-     "iopub.status.busy": "2020-11-04T10:37:07.158672Z",
-     "iopub.status.idle": "2020-11-04T10:37:07.594196Z",
-     "shell.execute_reply": "2020-11-04T10:37:07.594600Z"
+     "iopub.execute_input": "2020-11-11T17:25:49.861663Z",
+     "iopub.status.busy": "2020-11-11T17:25:49.855315Z",
+     "iopub.status.idle": "2020-11-11T17:25:50.402508Z",
+     "shell.execute_reply": "2020-11-11T17:25:50.402837Z"
     }
    },
    "outputs": [
@@ -173,16 +173,16 @@
      "data": {
       "text/plain": [
        "0       ucsdHfrA6\n",
-       "1       ucsdHfrE1\n",
-       "2       ucsdHfrE2\n",
-       "3       ucsdHfrE6\n",
-       "4       ucsdHfrH1\n",
-       "5       ucsdHfrP2\n",
-       "6       ucsdHfrP6\n",
+       "1       ucsdHfrE2\n",
+       "2       ucsdHfrE1\n",
+       "3       ucsdHfrP2\n",
+       "4       ucsdHfrP6\n",
+       "5       ucsdHfrW6\n",
+       "6       ucsdHfrE6\n",
        "7       ucsdHfrW1\n",
        "8       ucsdHfrW2\n",
        "9     ucsdHfrW500\n",
-       "10      ucsdHfrW6\n",
+       "10      ucsdHfrH1\n",
        "Name: Dataset ID, dtype: object"
       ]
      },
@@ -211,10 +211,10 @@
    "execution_count": 5,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-11-04T10:37:07.604205Z",
-     "iopub.status.busy": "2020-11-04T10:37:07.603763Z",
-     "iopub.status.idle": "2020-11-04T10:37:08.759081Z",
-     "shell.execute_reply": "2020-11-04T10:37:08.758717Z"
+     "iopub.execute_input": "2020-11-11T17:25:50.412815Z",
+     "iopub.status.busy": "2020-11-11T17:25:50.412276Z",
+     "iopub.status.idle": "2020-11-11T17:25:52.052717Z",
+     "shell.execute_reply": "2020-11-11T17:25:52.052233Z"
     },
     "scrolled": true
    },
@@ -251,10 +251,10 @@
    "execution_count": 6,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2020-11-04T10:37:08.768574Z",
-     "iopub.status.busy": "2020-11-04T10:37:08.762237Z",
-     "iopub.status.idle": "2020-11-04T10:37:09.892508Z",
-     "shell.execute_reply": "2020-11-04T10:37:09.892081Z"
+     "iopub.execute_input": "2020-11-11T17:25:52.062490Z",
+     "iopub.status.busy": "2020-11-11T17:25:52.062029Z",
+     "iopub.status.idle": "2020-11-11T17:25:53.214998Z",
+     "shell.execute_reply": "2020-11-11T17:25:53.214637Z"
     }
    },
    "outputs": [
