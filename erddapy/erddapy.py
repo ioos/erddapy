@@ -258,7 +258,9 @@ class ERDDAP:
             maxTime=kwargs.get("max_time", default),
             searchFor=search_for,
         )
-
+        # ERDDAP 2.10 no longer accepts strings placeholder for dates.
+        # Removing them entirely should be OK for older versions too.
+        url = url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
         return url
 
     def get_info_url(
