@@ -1,0 +1,313 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Searching datasets\n",
+    "\n",
+    "\n",
+    "erddapy can wrap the same form-like search capabilities of ERDDAP with the *search_for* keyword."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2020-11-12T01:05:32.216050Z",
+     "iopub.status.busy": "2020-11-12T01:05:32.215373Z",
+     "iopub.status.idle": "2020-11-12T01:05:32.527905Z",
+     "shell.execute_reply": "2020-11-12T01:05:32.527441Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from erddapy import ERDDAP\n",
+    "\n",
+    "\n",
+    "e = ERDDAP(\n",
+    "    server=\"https://upwell.pfeg.noaa.gov/erddap\",\n",
+    "    protocol=\"griddap\"\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Single word search."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2020-11-12T01:05:32.537087Z",
+     "iopub.status.busy": "2020-11-12T01:05:32.536700Z",
+     "iopub.status.idle": "2020-11-12T01:05:33.018390Z",
+     "shell.execute_reply": "2020-11-12T01:05:33.017972Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0              erdC125h\n",
+       "1              erdC1nma\n",
+       "2              erdC1sfc\n",
+       "3              erdCA25h\n",
+       "4              erdCAnma\n",
+       "5              erdCAsfc\n",
+       "6              erdCB25h\n",
+       "7              erdCBsfc\n",
+       "8              erdCM25h\n",
+       "9              erdCMnma\n",
+       "10             erdCMsfc\n",
+       "11             erdCS25h\n",
+       "12             erdCSsfc\n",
+       "13    erdC125h_LonPM180\n",
+       "14    erdC1nma_LonPM180\n",
+       "15    erdC1sfc_LonPM180\n",
+       "16    erdCA25h_LonPM180\n",
+       "17    erdCAnma_LonPM180\n",
+       "18    erdCAsfc_LonPM180\n",
+       "19    erdCB25h_LonPM180\n",
+       "20    erdCBsfc_LonPM180\n",
+       "21    erdCM25h_LonPM180\n",
+       "22    erdCMnma_LonPM180\n",
+       "23    erdCMsfc_LonPM180\n",
+       "24    erdCSsfc_LonPM180\n",
+       "25    erdCS25h_LonPM180\n",
+       "26            ucsdHfrA6\n",
+       "27            ucsdHfrW1\n",
+       "28            ucsdHfrW2\n",
+       "29          ucsdHfrW500\n",
+       "30            ucsdHfrE2\n",
+       "31            ucsdHfrE6\n",
+       "32            ucsdHfrE1\n",
+       "33            ucsdHfrH1\n",
+       "34            ucsdHfrP2\n",
+       "35            ucsdHfrP6\n",
+       "36            ucsdHfrW6\n",
+       "Name: Dataset ID, dtype: object"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "search_for = \"HFRadar\"\n",
+    "\n",
+    "url = e.get_search_url(search_for=search_for, response=\"csv\")\n",
+    "\n",
+    "pd.read_csv(url)[\"Dataset ID\"]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Filtering the search with extra words."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2020-11-12T01:05:33.027233Z",
+     "iopub.status.busy": "2020-11-12T01:05:33.021250Z",
+     "iopub.status.idle": "2020-11-12T01:05:33.347006Z",
+     "shell.execute_reply": "2020-11-12T01:05:33.347323Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    ucsdHfrW2\n",
+       "1    ucsdHfrE2\n",
+       "2    ucsdHfrP2\n",
+       "Name: Dataset ID, dtype: object"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "search_for = \"HFRadar 2km\"\n",
+    "\n",
+    "url = e.get_search_url(search_for=search_for, response=\"csv\")\n",
+    "\n",
+    "pd.read_csv(url)[\"Dataset ID\"]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Filtering the search with words that should **not** be found."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2020-11-12T01:05:33.356598Z",
+     "iopub.status.busy": "2020-11-12T01:05:33.356158Z",
+     "iopub.status.idle": "2020-11-12T01:05:33.753709Z",
+     "shell.execute_reply": "2020-11-12T01:05:33.753251Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0       ucsdHfrA6\n",
+       "1       ucsdHfrW1\n",
+       "2       ucsdHfrW2\n",
+       "3     ucsdHfrW500\n",
+       "4       ucsdHfrE2\n",
+       "5       ucsdHfrE6\n",
+       "6       ucsdHfrE1\n",
+       "7       ucsdHfrH1\n",
+       "8       ucsdHfrP2\n",
+       "9       ucsdHfrP6\n",
+       "10      ucsdHfrW6\n",
+       "Name: Dataset ID, dtype: object"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "search_for = \"HFRadar -EXPERIMENTAL\"\n",
+    "\n",
+    "url = e.get_search_url(search_for=search_for, response=\"csv\")\n",
+    "\n",
+    "pd.read_csv(url)[\"Dataset ID\"]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Quoted search or \"phrase search,\" first let us try the unquoted search."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2020-11-12T01:05:33.763313Z",
+     "iopub.status.busy": "2020-11-12T01:05:33.762860Z",
+     "iopub.status.idle": "2020-11-12T01:05:34.533545Z",
+     "shell.execute_reply": "2020-11-12T01:05:34.533142Z"
+    },
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "487"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "search_for = \"wind speed\"\n",
+    "\n",
+    "url = e.get_search_url(search_for=search_for, response=\"csv\")\n",
+    "\n",
+    "len(pd.read_csv(url)[\"Dataset ID\"])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Too many datasets because wind, speed, and wind speed are matched.\n",
+    "Now let's use the quoted search to reduce the number of results to only wind speed."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2020-11-12T01:05:34.542692Z",
+     "iopub.status.busy": "2020-11-12T01:05:34.536566Z",
+     "iopub.status.idle": "2020-11-12T01:05:35.315978Z",
+     "shell.execute_reply": "2020-11-12T01:05:35.315541Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "469"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "search_for = '\"wind speed\"'\n",
+    "\n",
+    "url = e.get_search_url(search_for=search_for, response=\"csv\")\n",
+    "\n",
+    "len(pd.read_csv(url)[\"Dataset ID\"])"
+   ]
+  }
+ ],
+ "metadata": {
+  "_draft": {
+   "nbviewer_url": "https://gist.github.com/8ec655651bf16b6e0328367caff971c1"
+  },
+  "gist": {
+   "data": {
+    "description": "ERDDAP searchFor",
+    "public": true
+   },
+   "id": "8ec655651bf16b6e0328367caff971c1"
+  },
+  "gist_id": "3f0f25b13ade0c64c84607bd92903d1b",
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 1
+}
