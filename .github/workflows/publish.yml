@@ -36,7 +36,7 @@ jobs:
 
     - name: Test wheels
       run: |
-        cd dist && python -m pip install erddapy*.whl && python -m pytest --pyargs erddapy
+        cd dist && python -m pip install erddapy*.whl
         python -m twine check *
       shell: bash
 
