@@ -134,6 +134,7 @@ class ERDDAP:
 
         # Initialized only via properties.
         self.constraints: Optional[Dict] = None
+        self.server_functions: Optional[Dict] = None
         self.dataset_id: OptionalStr = None
         self.requests_kwargs: Dict = {}
         self.auth: Optional[tuple] = None
@@ -318,6 +319,7 @@ class ERDDAP:
         variables: Optional[ListLike] = None,
         response=None,
         constraints=None,
+        relative_constraints=None,
         **kwargs,
     ) -> str:
         """The download URL for the `server` endpoint.
@@ -335,6 +337,12 @@ class ERDDAP:
                                     'time<=': '2017-02-10T00:00:00+00:00',
                                     'time>=': '2016-07-10T00:00:00+00:00',}
 
+            relative_constraints (dict): advanced download constraints , default None
+            example: relative_constraints = {'time>': 'now-7days',
+                                         'latitude<':'min(longitude)+180'
+                                         'depth>':'max(depth)-23'
+                                            }
+
         Returns:
             url (str): the download URL for the `response` chosen.
 
@@ -344,7 +352,8 @@ class ERDDAP:
         variables = variables if variables else self.variables
         response = response if response else self.response
         constraints = constraints if constraints else self.constraints
-
+        relative_constraints = relative_constraints if relative_constraints else self.server_functions
+        
         if not dataset_id:
             raise ValueError(f"Please specify a valid `dataset_id`, got {dataset_id}")
 
@@ -370,6 +379,13 @@ class ERDDAP:
             _constraints = "".join([f"&{k}{v}" for k, v in _constraints.items()])
 
             url += f"{_constraints}"
+
+        if relative_constraints:
+            _relative_constraints = "".join([f"&{k}{v}" for k, v in relative_constraints.items()])
+            url += f"{_relative_constraints}"
+
+
+
         url = _distinct(url, **kwargs)
         return url
 
