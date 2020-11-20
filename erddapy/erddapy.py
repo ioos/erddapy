@@ -134,6 +134,7 @@ class ERDDAP:
 
         # Initialized only via properties.
         self.constraints: Optional[Dict] = None
+        self.relative_constraints: Optional[Dict] = None
         self.server_functions: Optional[Dict] = None
         self.dataset_id: OptionalStr = None
         self.requests_kwargs: Dict = {}
@@ -352,7 +353,7 @@ class ERDDAP:
         variables = variables if variables else self.variables
         response = response if response else self.response
         constraints = constraints if constraints else self.constraints
-        relative_constraints = relative_constraints if relative_constraints else self.server_functions
+        relative_constraints = relative_constraints if relative_constraints else self.relative_constraints
         
         if not dataset_id:
             raise ValueError(f"Please specify a valid `dataset_id`, got {dataset_id}")
