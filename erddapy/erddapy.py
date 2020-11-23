@@ -71,6 +71,7 @@ class ERDDAP:
         variables: a list variables to download.
         response: default is HTML.
         constraints: download constraints, default None (opendap-like url)
+        relative_constraints: download constraints based on ERDDAP server calulations, default None
         params and requests_kwargs: `request.get` options
 
     Returns:
