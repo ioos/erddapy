@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>erddapy.erddapy &#8212; erddapy 0.9.1.dev2+g983d9bc documentation</title>
+    <title>erddapy.erddapy &#8212; erddapy 0.9.1.dev8+ge8bbca8 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/badge_only.css" />
@@ -181,6 +181,7 @@
 <span class="sd">        variables: a list variables to download.</span>
 <span class="sd">        response: default is HTML.</span>
 <span class="sd">        constraints: download constraints, default None (opendap-like url)</span>
+<span class="sd">        relative_constraints: download constraints based on ERDDAP server calculations, default None</span>
 <span class="sd">        params and requests_kwargs: `request.get` options</span>
 
 <span class="sd">    Returns:</span>
@@ -244,6 +245,8 @@
 
         <span class="c1"># Initialized only via properties.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relative_constraints</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_functions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="p">:</span> <span class="n">OptionalStr</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">requests_kwargs</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -428,6 +431,7 @@
         <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">constraints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">relative_constraints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;The download URL for the `server` endpoint.</span>
@@ -445,6 +449,12 @@
 <span class="sd">                                    &#39;time&lt;=&#39;: &#39;2017-02-10T00:00:00+00:00&#39;,</span>
 <span class="sd">                                    &#39;time&gt;=&#39;: &#39;2016-07-10T00:00:00+00:00&#39;,}</span>
 
+<span class="sd">            relative_constraints (dict): advanced download constraints , default None</span>
+<span class="sd">            example: relative_constraints = {&#39;time&gt;&#39;: &#39;now-7days&#39;,</span>
+<span class="sd">                                         &#39;latitude&lt;&#39;:&#39;min(longitude)+180&#39;</span>
+<span class="sd">                                         &#39;depth&gt;&#39;:&#39;max(depth)-23&#39;</span>
+<span class="sd">                                            }</span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            url (str): the download URL for the `response` chosen.</span>
 
@@ -454,6 +464,9 @@
         <span class="n">variables</span> <span class="o">=</span> <span class="n">variables</span> <span class="k">if</span> <span class="n">variables</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">response</span> <span class="k">if</span> <span class="n">response</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span>
         <span class="n">constraints</span> <span class="o">=</span> <span class="n">constraints</span> <span class="k">if</span> <span class="n">constraints</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span>
+        <span class="n">relative_constraints</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">relative_constraints</span> <span class="k">if</span> <span class="n">relative_constraints</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_constraints</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dataset_id</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Please specify a valid `dataset_id`, got </span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -480,6 +493,13 @@
             <span class="n">_constraints</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;&amp;</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_constraints</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
 
             <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_constraints</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="n">relative_constraints</span><span class="p">:</span>
+            <span class="n">_relative_constraints</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;&amp;</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">relative_constraints</span><span class="o">.</span><span class="n">items</span><span class="p">()],</span>
+            <span class="p">)</span>
+            <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_relative_constraints</span><span class="si">}</span><span class="s2">&quot;</span>
+
         <span class="n">url</span> <span class="o">=</span> <span class="n">_distinct</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">url</span></div>
 
