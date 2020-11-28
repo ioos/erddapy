@@ -71,7 +71,7 @@ class ERDDAP:
         variables: a list variables to download.
         response: default is HTML.
         constraints: download constraints, default None (opendap-like url)
-        relative_constraints: download constraints based on ERDDAP server calulations, default None
+        relative_constraints: download constraints based on ERDDAP server calculations, default None
         params and requests_kwargs: `request.get` options
 
     Returns:
@@ -354,8 +354,10 @@ class ERDDAP:
         variables = variables if variables else self.variables
         response = response if response else self.response
         constraints = constraints if constraints else self.constraints
-        relative_constraints = relative_constraints if relative_constraints else self.relative_constraints
-        
+        relative_constraints = (
+            relative_constraints if relative_constraints else self.relative_constraints
+        )
+
         if not dataset_id:
             raise ValueError(f"Please specify a valid `dataset_id`, got {dataset_id}")
 
@@ -383,10 +385,10 @@ class ERDDAP:
             url += f"{_constraints}"
 
         if relative_constraints:
-            _relative_constraints = "".join([f"&{k}{v}" for k, v in relative_constraints.items()])
+            _relative_constraints = "".join(
+                [f"&{k}{v}" for k, v in relative_constraints.items()],
+            )
             url += f"{_relative_constraints}"
-
-
 
         url = _distinct(url, **kwargs)
         return url
