@@ -191,3 +191,21 @@ def test_download_url_distinct(e):
     )
     assert not no_distinct_url.endswith("&distinct()")
     assert with_distinct_url.endswith("&distinct()")
+
+
+# Test generic sever-side functions
+def test_download_url_server_functions(e):
+    """Check download URL results with and without the relative constraint option."""
+    dataset_id = "gtoppAT"
+    variables = ["commonName", "yearDeployed", "serialNumber"]
+    no_relative_constraints_url = e.get_download_url(
+        dataset_id=dataset_id,
+        variables=variables,
+    )
+    with_relative_constraints_url = e.get_download_url(
+        dataset_id=dataset_id,
+        variables=variables,
+        relative_constraints={"time=": "max(time)+0minutes"},
+    )
+    assert not no_relative_constraints_url.endswith("&time=max(time)+0minutes")
+    assert with_relative_constraints_url.endswith("&time=max(time)+0minutes")
