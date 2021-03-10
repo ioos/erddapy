@@ -5,7 +5,6 @@ Pythonic way to access ERDDAP data
 
 import copy
 import functools
-
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Union
 from urllib.parse import quote_plus
@@ -16,7 +15,6 @@ import pytz
 from erddapy.netcdf_handling import _nc_dataset, _tempnc
 from erddapy.servers import servers
 from erddapy.url_handling import _distinct, urlopen
-
 
 try:
     from pandas.core.indexes.period import parse_time_string

@@ -4,7 +4,6 @@ servers
 """
 
 import functools
-
 from collections import namedtuple
 
 import pandas as pd

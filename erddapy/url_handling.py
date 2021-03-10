@@ -5,7 +5,6 @@ URL handling
 
 import functools
 import io
-
 from typing import Dict, Optional
 from typing.io import BinaryIO
 
