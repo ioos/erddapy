@@ -6,8 +6,12 @@ import pytz
 import requests
 from requests.exceptions import ReadTimeout
 
-from erddapy.erddapy import (ERDDAP, _format_constraints_url,
-                             _quote_string_constraints, parse_dates)
+from erddapy.erddapy import (
+    ERDDAP,
+    _format_constraints_url,
+    _quote_string_constraints,
+    parse_dates,
+)
 
 
 def test_parse_dates_naive_datetime():
