@@ -74,6 +74,7 @@ def test__quote_string_constraints():
         if isinstance(v, str):
             assert v.startswith('"') and v.endswith('"')
 
+
 def test__format_constraints_url():
     kw_url = _format_constraints_url(
         {
@@ -83,6 +84,7 @@ def test__format_constraints_url():
     )
 
     assert kw_url == "&latitude>=42&longitude<=42.0"
+
 
 @pytest.mark.web
 @pytest.mark.vcr()

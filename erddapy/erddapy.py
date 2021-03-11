@@ -34,12 +34,14 @@ def _quote_string_constraints(kwargs: Dict) -> Dict:
     """
     return {k: f'"{v}"' if isinstance(v, str) else v for k, v in kwargs.items()}
 
+
 def _format_constraints_url(kwargs: Dict) -> str:
     """
-    Join the constraint variables with seperator '&' to add to the download link.
+    Join the constraint variables with separator '&' to add to the download link.
 
     """
     return "".join([f"&{k}{v}" for k, v in kwargs.items()])
+
 
 def parse_dates(date_time: Union[datetime, str]) -> float:
     """
