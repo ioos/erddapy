@@ -35,6 +35,14 @@ def _quote_string_constraints(kwargs: Dict) -> Dict:
     return {k: f'"{v}"' if isinstance(v, str) else v for k, v in kwargs.items()}
 
 
+def _format_constraints_url(kwargs: Dict) -> str:
+    """
+    Join the constraint variables with separator '&' to add to the download link.
+
+    """
+    return "".join([f"&{k}{v}" for k, v in kwargs.items()])
+
+
 def parse_dates(date_time: Union[datetime, str]) -> float:
     """
     ERDDAP ReSTful API standardizes the representation of dates as either ISO
@@ -378,15 +386,13 @@ class ERDDAP:
                 if k.startswith("time"):
                     _constraints.update({k: parse_dates(v)})
             _constraints = _quote_string_constraints(_constraints)
-            _constraints = "".join([f"&{k}{v}" for k, v in _constraints.items()])
+            _constraints_url = _format_constraints_url(_constraints)
 
-            url += f"{_constraints}"
+            url += f"{_constraints_url}"
 
         if relative_constraints:
-            _relative_constraints = "".join(
-                [f"&{k}{v}" for k, v in relative_constraints.items()],
-            )
-            url += f"{_relative_constraints}"
+            _relative_constraints_url = _format_constraints_url(relative_constraints)
+            url += f"{_relative_constraints_url}"
 
         url = _distinct(url, **kwargs)
         return url

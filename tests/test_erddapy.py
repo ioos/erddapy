@@ -6,7 +6,12 @@ import pytz
 import requests
 from requests.exceptions import ReadTimeout
 
-from erddapy.erddapy import ERDDAP, _quote_string_constraints, parse_dates
+from erddapy.erddapy import (
+    ERDDAP,
+    _format_constraints_url,
+    _quote_string_constraints,
+    parse_dates,
+)
 
 
 def test_parse_dates_naive_datetime():
@@ -73,6 +78,17 @@ def test__quote_string_constraints():
     for k, v in kw.items():
         if isinstance(v, str):
             assert v.startswith('"') and v.endswith('"')
+
+
+def test__format_constraints_url():
+    kw_url = _format_constraints_url(
+        {
+            "latitude>=": 42,
+            "longitude<=": 42.0,
+        },
+    )
+
+    assert kw_url == "&latitude>=42&longitude<=42.0"
 
 
 @pytest.mark.web
