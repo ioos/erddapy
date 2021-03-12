@@ -77,8 +77,8 @@ def test_to_iris_tabledap(taodata):
     cubes = taodata.to_iris()
 
     assert isinstance(cubes, iris.cube.CubeList)
-    assert isinstance(cubes.extract_strict("depth"), iris.cube.Cube)
-    assert isinstance(cubes.extract_strict("20C Isotherm Depth"), iris.cube.Cube)
+    assert isinstance(cubes.extract_cube("depth"), iris.cube.Cube)
+    assert isinstance(cubes.extract_cube("20C Isotherm Depth"), iris.cube.Cube)
 
 
 @pytest.mark.web
