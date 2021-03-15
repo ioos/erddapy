@@ -1,3 +1,5 @@
+import sys
+
 import iris
 import pytest
 import xarray as xr
@@ -73,6 +75,7 @@ def test_to_xarray_griddap(bermuda_1_msl):
 
 @pytest.mark.web
 @pytest.mark.vcr()
+@pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
 def test_to_iris_tabledap(taodata):
     cubes = taodata.to_iris()
 
@@ -83,6 +86,7 @@ def test_to_iris_tabledap(taodata):
 
 @pytest.mark.web
 @pytest.mark.vcr()
+@pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
 def test_to_iris_griddap(bermuda_1_msl):
     cubes = bermuda_1_msl.to_iris()
     assert isinstance(cubes, iris.cube.CubeList)

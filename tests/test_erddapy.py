@@ -92,7 +92,6 @@ def test__format_constraints_url():
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
 def test_erddap_requests_kwargs():
     """Test that an ERDDAP instance can have requests_kwargs attribute assigned
     and are passed to the underlying methods"""

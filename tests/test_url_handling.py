@@ -25,7 +25,6 @@ def test_urlopen_raise():
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
 def test_urlopen_requests_kwargs():
     """ Test that urlopen can pass kwargs to requests """
     base_url = "http://erddap.sensors.ioos.us/erddap/tabledap/"
