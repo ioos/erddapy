@@ -80,6 +80,18 @@ pip install erddapy
 Note that, if you are installing the `requirements-dev.txt`, the `iris` package
 is named `scitools-iris` on PyPI so `pip` users must rename that before installing.
 
+And To install the `requirements-dev.txt` use the following commands, 
+
+### For Linux Users
+
+sudo apt-get install libproj-dev proj-data proj-bin
+
+sudo apt-get install libgeos-dev
+
+pip3 install cython
+
+pip3 install -r requirements-dev.txt 
+
 ### Example
 
 ```python
