@@ -1,4 +1,14 @@
+# To install the requirements 
+
+# For Linux Users
+
+# 1-> sudo apt-get install libproj-dev proj-data proj-bin  
+# 2-> sudo apt-get install libgeos-dev  
+# 3-> pip3 install -r requirments.txt
+
+
 black
+cython
 cartopy
 check-manifest
 doctr
