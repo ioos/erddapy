@@ -118,6 +118,19 @@ df = e.to_pandas()
 
 Report bugs, suggest features or view the source code on [GitHub](https://github.com/ioos/erddapy/issues).
 
+## Projects using erddapy
+
+https://github.com/euroargodev/argopy
+
+https://github.com/ioos/gliderpy
+
+https://github.com/kerfoot/gdutils
+
+https://github.com/ioos/colocate
+
+## Similar projects
+
+https://github.com/hmedrano/erddap-python
 
 ## License and copyright
 
