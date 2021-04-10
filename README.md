@@ -87,27 +87,27 @@ from erddapy import ERDDAP
 
 
 e = ERDDAP(
-  server='https://gliders.ioos.us/erddap',
-  protocol='tabledap',
+  server="https://gliders.ioos.us/erddap",
+  protocol="tabledap",
 )
 
-e.response = 'csv'
-e.dataset_id = 'whoi_406-20160902T1700'
+e.response = "csv"
+e.dataset_id = "whoi_406-20160902T1700"
 e.constraints = {
-    'time>=': '2016-07-10T00:00:00Z',
-    'time<=': '2017-02-10T00:00:00Z',
-    'latitude>=': 38.0,
-    'latitude<=': 41.0,
-    'longitude>=': -72.0,
-    'longitude<=': -69.0,
+    "time>=": "2016-07-10T00:00:00Z",
+    "time<=": "2017-02-10T00:00:00Z",
+    "latitude>=": 38.0,
+    "latitude<=": 41.0,
+    "longitude>=": -72.0,
+    "longitude<=": -69.0,
 }
 e.variables = [
-    'depth',
-    'latitude',
-    'longitude',
-    'salinity',
-    'temperature',
-    'time',
+    "depth",
+    "latitude",
+    "longitude",
+    "salinity",
+    "temperature",
+    "time",
 ]
 
 df = e.to_pandas()
@@ -120,17 +120,17 @@ Report bugs, suggest features or view the source code on [GitHub](https://github
 
 ## Projects using erddapy
 
-https://github.com/euroargodev/argopy
-
-https://github.com/ioos/gliderpy
-
-https://github.com/kerfoot/gdutils
-
-https://github.com/ioos/colocate
+- [argopy](https://github.com/euroargodev/argopy)
+- [gliderpy](https://github.com/ioos/gliderpy)
+- [gdutils](https://github.com/kerfoot/gdutils)
+- [colocate](https://github.com/ioos/colocate)
+- [intake-erddap](https://github.com/jmunroe/intake-erddap)
+- [ioos_qc](https://github.com/ioos/ioos_qc)
 
 ## Similar projects
 
-https://github.com/hmedrano/erddap-python
+- [rerddap](https://cran.r-project.org/web/packages/rerddap)
+- [erddap-python](https://github.com/hmedrano/erddap-python)
 
 ## License and copyright
 
