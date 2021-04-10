@@ -129,8 +129,9 @@ Report bugs, suggest features or view the source code on [GitHub](https://github
 
 ## Similar projects
 
-- [rerddap](https://cran.r-project.org/web/packages/rerddap)
-- [erddap-python](https://github.com/hmedrano/erddap-python)
+- [rerddap](https://cran.r-project.org/web/packages/rerddap) implements a nice client for R that performs searches on a curated set of servers instead of a query per server like erddapy.
+
+- [erddap-python](https://github.com/hmedrano/erddap-python) 99% of the same functionality as erddapy but with a JavaScript-like API.
 
 ## License and copyright
 
