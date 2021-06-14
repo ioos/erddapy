@@ -5,6 +5,7 @@ Pythonic way to access ERDDAP data
 
 import copy
 import functools
+import urllib
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Union
 from urllib.parse import quote_plus
@@ -63,6 +64,50 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
         parse_date_time = parse_date_time.astimezone(pytz.utc)
 
     return parse_date_time.timestamp()
+
+
+def _griddap_get_constraints(dataset_url, step=1000):
+    """
+    Fetch metadata of griddap dataset and set initial constraints
+    Step size is applied to all dimensions
+
+    """
+    dds_url = dataset_url + ".dds"
+    with urllib.request.urlopen(dds_url) as url:
+        data = url.read().decode()
+        dims, *variables = data.split("GRID")
+        dim_list = dims.split("[")[:-1]
+        dim_names, variable_names = [], []
+        for dim in dim_list:
+            dim_name = dim.split(" ")[-1]
+            dim_names.append(dim_name)
+        for var in variables:
+            phrase, *__ = var.split("[")
+            var_name = phrase.split(" ")[-1]
+            variable_names.append(var_name)
+    table = pd.DataFrame({"dimension name": [], "min": [], "max": [], "length": []})
+    for dim in dim_names:
+        url = dataset_url + ".csvp?" + dim
+        data = pd.read_csv(url).values
+        table = table.append(
+            {
+                "dimension name": dim,
+                "min": data[0][0],
+                "max": data[-1][0],
+                "length": len(data),
+            },
+            ignore_index=True,
+        )
+    table.index = table["dimension name"]
+    table = table.drop("dimension name", axis=1)
+    print(f"Dimensions:\n{table}\n \nVariables:\n \n{variable_names}")
+    constraints_dict = {}
+    for dim, data in table.iterrows():
+        constraints_dict[dim + ">="] = data["min"]
+        constraints_dict[dim + "<="] = data["max"]
+        constraints_dict[dim + "_step"] = step
+
+    return constraints_dict, dim_names, variable_names
 
 
 class ERDDAP:
@@ -147,11 +192,21 @@ class ERDDAP:
         self.requests_kwargs: Dict = {}
         self.auth: Optional[tuple] = None
         self.variables: Optional[ListLike] = None
+        self.dim_names: Optional[ListLike] = None
 
         # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
         self._dataset_id: OptionalStr = None
         self._variables: Dict = {}
+
+    def griddap_initialise(self):
+        if self.protocol == "griddap":
+            metadata_url = self.server + "/griddap/" + self.dataset_id
+            (
+                self.constraints,
+                self.dim_names,
+                self.variables,
+            ) = _griddap_get_constraints(metadata_url)
 
     def get_search_url(
         self,
@@ -369,6 +424,30 @@ class ERDDAP:
 
         if not protocol:
             raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
+
+        if protocol == "griddap":
+            download_url = [
+                self.server,
+                "/",
+                self.protocol,
+                "/",
+                self.dataset_id,
+                ".",
+                self.response,
+                "?",
+            ]
+            for var in self.variables:
+                sub_url = [var]
+                for dim in self.dim_names:
+                    sub_url.append(
+                        f"[({self.constraints[dim + '>=']}):"
+                        f"{self.constraints[dim + '_step']}:"
+                        f"({self.constraints[dim + '<=']})]",
+                    )
+                sub_url.append(",")
+                download_url.append("".join(sub_url))
+            url = "".join(download_url)[:-1]
+            return url
 
         # This is an unconstrained OPeNDAP response b/c
         # the integer based constrained version is just not worth supporting ;-p
