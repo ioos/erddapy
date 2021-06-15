@@ -5,7 +5,6 @@ Pythonic way to access ERDDAP data
 
 import copy
 import functools
-import urllib
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Union
 from urllib.parse import quote_plus
@@ -72,8 +71,9 @@ def _griddap_get_constraints(dataset_url, step=1000):
     Step size is applied to all dimensions
 
     """
+
     dds_url = dataset_url + ".dds"
-    with urllib.request.urlopen(dds_url) as url:
+    with urlopen(dds_url) as url:
         data = url.read().decode()
         dims, *variables = data.split("GRID")
         dim_list = dims.split("[")[:-1]
