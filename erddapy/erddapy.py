@@ -111,6 +111,7 @@ def _griddap_get_constraints(dataset_url, step=1000):
 
 
 def _griddap_check_constraints(user_constraints, original_constraints):
+    """Check that constraints changed by user match those expected by dataset"""
     if user_constraints.keys() != original_constraints.keys():
         raise ValueError(
             "keys in e.constraints have changed. Re-run e.griddap_initialise",
@@ -118,6 +119,7 @@ def _griddap_check_constraints(user_constraints, original_constraints):
 
 
 def _griddap_check_variables(user_variables, original_variables):
+    """Check user has not requested variables that do not exist in dataset"""
     invalid_variables = []
     for variable in user_variables:
         if variable not in original_variables:
@@ -218,6 +220,7 @@ class ERDDAP:
         self._variables: Dict = {}
 
     def griddap_initialise(self):
+        """Fetch metadata of dataset and initialise constraints and variables"""
         if self.protocol != "griddap":
             raise ValueError(
                 f"Method only valid using griddap protocol, got {self.protocol}",
