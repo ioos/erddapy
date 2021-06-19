@@ -73,18 +73,18 @@ def _griddap_get_constraints(dataset_url, step=1000):
     """
 
     dds_url = f"{dataset_url}.dds"
-    with urlopen(dds_url) as url:
-        data = url.read().decode()
-        dims, *variables = data.split("GRID")
-        dim_list = dims.split("[")[:-1]
-        dim_names, variable_names = [], []
-        for dim in dim_list:
-            dim_name = dim.split(" ")[-1]
-            dim_names.append(dim_name)
-        for var in variables:
-            phrase, *__ = var.split("[")
-            var_name = phrase.split(" ")[-1]
-            variable_names.append(var_name)
+    url = urlopen(dds_url)
+    data = url.read().decode()
+    dims, *variables = data.split("GRID")
+    dim_list = dims.split("[")[:-1]
+    dim_names, variable_names = [], []
+    for dim in dim_list:
+        dim_name = dim.split(" ")[-1]
+        dim_names.append(dim_name)
+    for var in variables:
+        phrase, *__ = var.split("[")
+        var_name = phrase.split(" ")[-1]
+        variable_names.append(var_name)
     table = pd.DataFrame({"dimension name": [], "min": [], "max": [], "length": []})
     for dim in dim_names:
         url = f"{dataset_url}.csvp?{dim}"
@@ -108,6 +108,24 @@ def _griddap_get_constraints(dataset_url, step=1000):
         constraints_dict[f"{dim}_step"] = step
 
     return constraints_dict, dim_names, variable_names
+
+
+def _griddap_check_constraints(user_constraints, original_constraints):
+    if user_constraints.keys() != original_constraints.keys():
+        raise ValueError(
+            "keys in e.constraints have changed. Re-run e.griddap_initialise",
+        )
+
+
+def _griddap_check_variables(user_variables, original_variables):
+    invalid_variables = []
+    for variable in user_variables:
+        if variable not in original_variables:
+            invalid_variables.append(variable)
+    if invalid_variables:
+        raise ValueError(
+            f"variables {invalid_variables} are not present in dataset. Re-run e.griddap_initialise",
+        )
 
 
 class ERDDAP:
@@ -210,6 +228,8 @@ class ERDDAP:
             self.dim_names,
             self.variables,
         ) = _griddap_get_constraints(metadata_url)
+        self._constraints_original = self.constraints.copy()
+        self._variables_original = self.variables.copy()
 
     def get_search_url(
         self,
@@ -429,14 +449,17 @@ class ERDDAP:
             raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
 
         if protocol == "griddap":
+            # Check that dimensions, constraints and variables are valid for this dataset
+            _griddap_check_constraints(self.constraints, self._constraints_original)
+            _griddap_check_variables(self.variables, self._variables_original)
             download_url = [
                 self.server,
                 "/",
-                self.protocol,
+                protocol,
                 "/",
-                self.dataset_id,
+                dataset_id,
                 ".",
-                self.response,
+                response,
                 "?",
             ]
             for var in self.variables:

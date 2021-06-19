@@ -9,6 +9,8 @@ from requests.exceptions import ReadTimeout
 from erddapy.erddapy import (
     ERDDAP,
     _format_constraints_url,
+    _griddap_check_constraints,
+    _griddap_check_variables,
     _quote_string_constraints,
     parse_dates,
 )
@@ -120,3 +122,40 @@ def test_erddap2_10():
     url = e.get_search_url(search_for="whoi", response="csv")
     r = requests.head(url)
     assert r.raise_for_status() is None
+
+
+def test__griddap_check_constraints():
+    """Check griddap constraints dict has not changed keys"""
+    constraints_dict = {
+        "time>=": "2012-01-01T00:00:00Z",
+        "time<=": "2021-06-19T05:00:00Z",
+        "time_step": 1000,
+        "latitude>=": 21.7,
+        "latitude<=": 46.49442,
+    }
+    good_constraints = {
+        "time>=": "2012-01-01T00:00:00Z",
+        "latitude>=": 21.7,
+        "time_step": 1000,
+        "time<=": "2021-06-19T05:00:00Z",
+        "latitude<=": 46.49442,
+    }
+    bad_constraints = {
+        "time>=": "2012-01-01T00:00:00Z",
+        "time<=": "2021-06-19T05:00:00Z",
+    }
+
+    _griddap_check_constraints(good_constraints, constraints_dict)
+    with pytest.raises(ValueError):
+        _griddap_check_constraints(bad_constraints, constraints_dict)
+
+
+def test__griddap_check_variables():
+    """Check all variables for griddap query exist in target dataset"""
+    original_variables = ["foo", "bar"]
+    good_variables = ["foo"]
+    bad_variables = ["foo", "bar", "baz"]
+
+    _griddap_check_variables(good_variables, original_variables)
+    with pytest.raises(ValueError):
+        _griddap_check_variables(bad_variables, original_variables)
