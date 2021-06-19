@@ -72,7 +72,7 @@ def _griddap_get_constraints(dataset_url, step=1000):
 
     """
 
-    dds_url = dataset_url + ".dds"
+    dds_url = f"{dataset_url}.dds"
     with urlopen(dds_url) as url:
         data = url.read().decode()
         dims, *variables = data.split("GRID")
@@ -87,7 +87,7 @@ def _griddap_get_constraints(dataset_url, step=1000):
             variable_names.append(var_name)
     table = pd.DataFrame({"dimension name": [], "min": [], "max": [], "length": []})
     for dim in dim_names:
-        url = dataset_url + ".csvp?" + dim
+        url = f"{dataset_url}.csvp?{dim}"
         data = pd.read_csv(url).values
         table = table.append(
             {
@@ -103,9 +103,9 @@ def _griddap_get_constraints(dataset_url, step=1000):
     print(f"Dimensions:\n{table}\n \nVariables:\n \n{variable_names}")
     constraints_dict = {}
     for dim, data in table.iterrows():
-        constraints_dict[dim + ">="] = data["min"]
-        constraints_dict[dim + "<="] = data["max"]
-        constraints_dict[dim + "_step"] = step
+        constraints_dict[f"{dim}>="] = data["min"]
+        constraints_dict[f"{dim}<="] = data["max"]
+        constraints_dict[f"{dim}_step"] = step
 
     return constraints_dict, dim_names, variable_names
 
@@ -200,13 +200,16 @@ class ERDDAP:
         self._variables: Dict = {}
 
     def griddap_initialise(self):
-        if self.protocol == "griddap":
-            metadata_url = self.server + "/griddap/" + self.dataset_id
-            (
-                self.constraints,
-                self.dim_names,
-                self.variables,
-            ) = _griddap_get_constraints(metadata_url)
+        if self.protocol != "griddap":
+            raise ValueError(
+                f"Method only valid using griddap protocol, got {self.protocol}",
+            )
+        metadata_url = f"{self.server}/griddap/{self.dataset_id}"
+        (
+            self.constraints,
+            self.dim_names,
+            self.variables,
+        ) = _griddap_get_constraints(metadata_url)
 
     def get_search_url(
         self,
