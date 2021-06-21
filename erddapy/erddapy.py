@@ -65,7 +65,7 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
     return parse_date_time.timestamp()
 
 
-def _griddap_get_constraints(dataset_url, step=1000):
+def _griddap_get_constraints(dataset_url: str, step=1000) -> [Dict, List, List]:
     """
     Fetch metadata of griddap dataset and set initial constraints
     Step size is applied to all dimensions
@@ -110,7 +110,7 @@ def _griddap_get_constraints(dataset_url, step=1000):
     return constraints_dict, dim_names, variable_names
 
 
-def _griddap_check_constraints(user_constraints, original_constraints):
+def _griddap_check_constraints(user_constraints: Dict, original_constraints: Dict):
     """Check that constraints changed by user match those expected by dataset"""
     if user_constraints.keys() != original_constraints.keys():
         raise ValueError(
@@ -118,7 +118,7 @@ def _griddap_check_constraints(user_constraints, original_constraints):
         )
 
 
-def _griddap_check_variables(user_variables, original_variables):
+def _griddap_check_variables(user_variables: List, original_variables: List):
     """Check user has not requested variables that do not exist in dataset"""
     invalid_variables = []
     for variable in user_variables:
