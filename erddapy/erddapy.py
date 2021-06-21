@@ -219,7 +219,7 @@ class ERDDAP:
         self._dataset_id: OptionalStr = None
         self._variables: Dict = {}
 
-    def griddap_initialise(self):
+    def griddap_initialize(self):
         """Fetch metadata of dataset and initialise constraints and variables"""
         if self.protocol != "griddap":
             raise ValueError(
