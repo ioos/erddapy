@@ -451,8 +451,9 @@ class ERDDAP:
         if not protocol:
             raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
 
-        if protocol == "griddap":
+        if protocol == "griddap" and constraints is not None and variables is not None:
             # Check that dimensions, constraints and variables are valid for this dataset
+
             _griddap_check_constraints(self.constraints, self._constraints_original)
             _griddap_check_variables(self.variables, self._variables_original)
             download_url = [
