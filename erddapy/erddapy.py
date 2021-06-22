@@ -65,7 +65,7 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
     return parse_date_time.timestamp()
 
 
-def _griddap_get_constraints(dataset_url: str, step: int = 1000) -> [Dict, List, List]:
+def _griddap_get_constraints(dataset_url: str, step: int = 1) -> [Dict, List, List]:
     """
     Fetch metadata of griddap dataset and set initial constraints
     Step size is applied to all dimensions
@@ -89,10 +89,14 @@ def _griddap_get_constraints(dataset_url: str, step: int = 1000) -> [Dict, List,
     for dim in dim_names:
         url = f"{dataset_url}.csvp?{dim}"
         data = pd.read_csv(url).values
+        if dim == "time":
+            data_start = data[-1][0]
+        else:
+            data_start = data[0][0]
         table = table.append(
             {
                 "dimension name": dim,
-                "min": data[0][0],
+                "min": data_start,
                 "max": data[-1][0],
                 "length": len(data),
             },
