@@ -100,7 +100,6 @@ def _griddap_get_constraints(dataset_url: str, step: int = 1000) -> [Dict, List,
         )
     table.index = table["dimension name"]
     table = table.drop("dimension name", axis=1)
-    print(f"Dimensions:\n{table}\n \nVariables:\n \n{variable_names}")
     constraints_dict = {}
     for dim, data in table.iterrows():
         constraints_dict[f"{dim}>="] = data["min"]
