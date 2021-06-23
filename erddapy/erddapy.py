@@ -65,7 +65,10 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
     return parse_date_time.timestamp()
 
 
-def _griddap_get_constraints(dataset_url: str, step: int = 1000) -> [Dict, List, List]:
+def _griddap_get_constraints(
+    dataset_url: str,
+    step: int = 1000,
+) -> Tuple[Dict, List, List]:
     """
     Fetch metadata of griddap dataset and set initial constraints
     Step size is applied to all dimensions
