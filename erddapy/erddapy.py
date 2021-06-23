@@ -121,7 +121,7 @@ def _griddap_check_constraints(user_constraints: Dict, original_constraints: Dic
         )
 
 
-def _griddap_check_variables(user_variables: List, original_variables: List):
+def _griddap_check_variables(user_variables: ListLike, original_variables: ListLike):
     """Check user has not requested variables that do not exist in dataset"""
     invalid_variables = []
     for variable in user_variables:
@@ -457,8 +457,8 @@ class ERDDAP:
         if protocol == "griddap" and constraints is not None and variables is not None:
             # Check that dimensions, constraints and variables are valid for this dataset
 
-            _griddap_check_constraints(self.constraints, self._constraints_original)
-            _griddap_check_variables(self.variables, self._variables_original)
+            _griddap_check_constraints(constraints, self._constraints_original)
+            _griddap_check_variables(variables, self._variables_original)
             download_url = [
                 self.server,
                 "/",
@@ -469,13 +469,13 @@ class ERDDAP:
                 response,
                 "?",
             ]
-            for var in self.variables:
+            for var in variables:
                 sub_url = [var]
                 for dim in self.dim_names:
                     sub_url.append(
-                        f"[({self.constraints[dim + '>=']}):"
-                        f"{self.constraints[dim + '_step']}:"
-                        f"({self.constraints[dim + '<=']})]",
+                        f"[({constraints[dim + '>=']}):"
+                        f"{constraints[dim + '_step']}:"
+                        f"({constraints[dim + '<=']})]",
                     )
                 sub_url.append(",")
                 download_url.append("".join(sub_url))
