@@ -387,6 +387,7 @@ class ERDDAP:
 
         Args:
             categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
+                Valid attributes are shown in the https://coastwatch.pfeg.noaa.gov/erddap/categorize page.
             value: an attribute value.
             response: default is HTML.
 
