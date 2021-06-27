@@ -65,7 +65,10 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
     return parse_date_time.timestamp()
 
 
-def _griddap_get_constraints(dataset_url: str, step: int = 1) -> [Dict, List, List]:
+def _griddap_get_constraints(
+    dataset_url: str,
+    step: int = 1000,
+) -> Tuple[Dict, List, List]:
     """
     Fetch metadata of griddap dataset and set initial constraints
     Step size is applied to all dimensions
@@ -121,7 +124,7 @@ def _griddap_check_constraints(user_constraints: Dict, original_constraints: Dic
         )
 
 
-def _griddap_check_variables(user_variables: List, original_variables: List):
+def _griddap_check_variables(user_variables: ListLike, original_variables: ListLike):
     """Check user has not requested variables that do not exist in dataset"""
     invalid_variables = []
     for variable in user_variables:
@@ -390,6 +393,7 @@ class ERDDAP:
 
         Args:
             categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
+                Valid attributes are shown in the https://coastwatch.pfeg.noaa.gov/erddap/categorize page.
             value: an attribute value.
             response: default is HTML.
 
@@ -457,8 +461,8 @@ class ERDDAP:
         if protocol == "griddap" and constraints is not None and variables is not None:
             # Check that dimensions, constraints and variables are valid for this dataset
 
-            _griddap_check_constraints(self.constraints, self._constraints_original)
-            _griddap_check_variables(self.variables, self._variables_original)
+            _griddap_check_constraints(constraints, self._constraints_original)
+            _griddap_check_variables(variables, self._variables_original)
             download_url = [
                 self.server,
                 "/",
@@ -469,13 +473,13 @@ class ERDDAP:
                 response,
                 "?",
             ]
-            for var in self.variables:
+            for var in variables:
                 sub_url = [var]
                 for dim in self.dim_names:
                     sub_url.append(
-                        f"[({self.constraints[dim + '>=']}):"
-                        f"{self.constraints[dim + '_step']}:"
-                        f"({self.constraints[dim + '<=']})]",
+                        f"[({constraints[dim + '>=']}):"
+                        f"{constraints[dim + '_step']}:"
+                        f"({constraints[dim + '<=']})]",
                     )
                 sub_url.append(",")
                 download_url.append("".join(sub_url))
