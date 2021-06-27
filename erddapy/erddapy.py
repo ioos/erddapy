@@ -201,8 +201,8 @@ class ERDDAP:
         protocol: OptionalStr = None,
         response: str = "html",
     ):
-        if server in servers.keys():
-            server = servers[server].url
+        if server.lower() in servers.keys():
+            server = servers[server.lower()].url
         self.server = server.rstrip("/")
         self.protocol = protocol
         self.response = response

@@ -34,4 +34,5 @@ def servers_list():
     }
 
 
-servers = servers_list()
+servers_upper_case = servers_list()
+servers = {k.lower(): v for k, v in servers_upper_case.items()}
