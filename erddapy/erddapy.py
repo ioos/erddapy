@@ -410,6 +410,7 @@ class ERDDAP:
         dataset_id: OptionalStr = None,
         protocol: OptionalStr = None,
         variables: Optional[ListLike] = None,
+        dim_names: Optional[ListLike] = None,
         response=None,
         constraints=None,
         relative_constraints=None,
@@ -443,6 +444,7 @@ class ERDDAP:
         dataset_id = dataset_id if dataset_id else self.dataset_id
         protocol = protocol if protocol else self.protocol
         variables = variables if variables else self.variables
+        dim_names = dim_names if dim_names else self.dim_names
         response = response if response else self.response
         constraints = constraints if constraints else self.constraints
         relative_constraints = (
@@ -455,7 +457,12 @@ class ERDDAP:
         if not protocol:
             raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
 
-        if protocol == "griddap" and constraints is not None and variables is not None:
+        if (
+            protocol == "griddap"
+            and constraints is not None
+            and variables is not None
+            and dim_names is not None
+        ):
             # Check that dimensions, constraints and variables are valid for this dataset
 
             _griddap_check_constraints(constraints, self._constraints_original)
@@ -472,7 +479,7 @@ class ERDDAP:
             ]
             for var in variables:
                 sub_url = [var]
-                for dim in self.dim_names:
+                for dim in dim_names:
                     sub_url.append(
                         f"[({constraints[dim + '>=']}):"
                         f"{constraints[dim + '_step']}:"
