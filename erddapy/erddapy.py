@@ -228,6 +228,8 @@ class ERDDAP:
             raise ValueError(
                 f"Method only valid using griddap protocol, got {self.protocol}",
             )
+        if self.dataset_id is None:
+            raise ValueError(f"Must set a valid dataset_id, got {self.dataset_id}")
         metadata_url = f"{self.server}/griddap/{self.dataset_id}"
         (
             self.constraints,
