@@ -225,12 +225,22 @@ class ERDDAP:
         self._dataset_id: OptionalStr = None
         self._variables: Dict = {}
 
-    def griddap_initialize(self):
-        """Fetch metadata of dataset and initialise constraints and variables"""
+    def griddap_initialize(
+        self,
+        dataset_id: OptionalStr = None,
+    ):
+        """Fetch metadata of dataset and initialise constraints and variables
+
+        Args:
+        dataset_id: a dataset unique id."""
+
+        dataset_id = dataset_id if dataset_id else self.dataset_id
         if self.protocol != "griddap":
             raise ValueError(
                 f"Method only valid using griddap protocol, got {self.protocol}",
             )
+        if dataset_id is None:
+            raise ValueError(f"Must set a valid dataset_id, got {self.dataset_id}")
         metadata_url = f"{self.server}/griddap/{self.dataset_id}"
         (
             self.constraints,
