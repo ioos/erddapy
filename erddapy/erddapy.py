@@ -204,8 +204,8 @@ class ERDDAP:
         protocol: OptionalStr = None,
         response: str = "html",
     ):
-        if server in servers.keys():
-            server = servers[server].url
+        if server.lower() in servers.keys():
+            server = servers[server.lower()].url
         self.server = server.rstrip("/")
         self.protocol = protocol
         self.response = response
@@ -403,7 +403,7 @@ class ERDDAP:
 
         Args:
             categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
-                Valid attributes are shown in the https://coastwatch.pfeg.noaa.gov/erddap/categorize page.
+                Valid attributes are shown in https://coastwatch.pfeg.noaa.gov/erddap/categorize page.
             value: an attribute value.
             response: default is HTML.
 

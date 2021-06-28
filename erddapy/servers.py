@@ -28,7 +28,7 @@ def servers_list():
         df = pd.read_json(path.joinpath("erddaps.json"))
     _server = namedtuple("server", ["description", "url"])
     return {
-        row["short_name"]: _server(row["name"], row["url"])
+        row["short_name"].lower(): _server(row["name"], row["url"])
         for k, row in df.iterrows()
         if row["short_name"]
     }
