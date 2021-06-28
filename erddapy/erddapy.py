@@ -92,10 +92,14 @@ def _griddap_get_constraints(
     for dim in dim_names:
         url = f"{dataset_url}.csvp?{dim}"
         data = pd.read_csv(url).values
+        if dim == "time":
+            data_start = data[-1][0]
+        else:
+            data_start = data[0][0]
         table = table.append(
             {
                 "dimension name": dim,
-                "min": data[0][0],
+                "min": data_start,
                 "max": data[-1][0],
                 "length": len(data),
             },
@@ -103,7 +107,6 @@ def _griddap_get_constraints(
         )
     table.index = table["dimension name"]
     table = table.drop("dimension name", axis=1)
-    print(f"Dimensions:\n{table}\n \nVariables:\n \n{variable_names}")
     constraints_dict = {}
     for dim, data in table.iterrows():
         constraints_dict[f"{dim}>="] = data["min"]
