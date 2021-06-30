@@ -67,7 +67,7 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
 
 def _griddap_get_constraints(
     dataset_url: str,
-    step: int = 1000,
+    step: int,
 ) -> Tuple[Dict, List, List]:
     """
     Fetch metadata of griddap dataset and set initial constraints
@@ -228,11 +228,13 @@ class ERDDAP:
     def griddap_initialize(
         self,
         dataset_id: OptionalStr = None,
+        step: int = 1,
     ):
         """Fetch metadata of dataset and initialise constraints and variables
 
         Args:
-        dataset_id: a dataset unique id."""
+        dataset_id: a dataset unique id.
+        step: step used to subset dataset"""
 
         dataset_id = dataset_id if dataset_id else self.dataset_id
         if self.protocol != "griddap":
@@ -246,7 +248,7 @@ class ERDDAP:
             self.constraints,
             self.dim_names,
             self.variables,
-        ) = _griddap_get_constraints(metadata_url)
+        ) = _griddap_get_constraints(metadata_url, step)
         self._constraints_original = self.constraints.copy()
         self._variables_original = self.variables.copy()
 
