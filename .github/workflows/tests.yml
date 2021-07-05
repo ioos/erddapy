@@ -18,7 +18,7 @@ jobs:
 
     - name: Setup Conda
       #uses: s-weigand/setup-conda@v1.0.5
-      uses: s-weigand/setup-conda@fix-env-activation
+      uses: s-weigand/setup-conda@fix-env-activation-dist
       with:
         activate-conda: false
         update-conda: true
