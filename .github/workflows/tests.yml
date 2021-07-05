@@ -20,6 +20,7 @@ jobs:
       uses: s-weigand/setup-conda@v1
       with:
         activate-conda: false
+        update-conda: true
         conda-channels: conda-forge
 
     - name: Python ${{ matrix.python-version }}
@@ -27,12 +28,16 @@ jobs:
       run: |
         conda create --name TEST python=${{ matrix.python-version }} --file requirements.txt --file requirements-dev.txt
         source activate TEST
-        pip install -e . --no-deps --force-reinstall
-        conda info --all
-        conda list
+        python -m pip install -e . --no-deps --force-reinstall
+
+    - name: Debug Installation
+      shell: bash -l {0}
+      run: |
+        source activate TEST
+        which python
 
     - name: Tests
       shell: bash -l {0}
       run: |
         source activate TEST
-        pytest -rxs --cov=erddapy --vcr-record=none tests
+        python -m pytest -rxs --cov=erddapy --vcr-record=none tests
