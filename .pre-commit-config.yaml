@@ -14,7 +14,7 @@ repos:
     - id: file-contents-sorter
       files: requirements-dev.txt
 
-- repo: https://gitlab.com/pycqa/flake8
+- repo: https://github.com/PyCQA/flake8
   rev: 3.9.2
   hooks:
     - id: flake8
