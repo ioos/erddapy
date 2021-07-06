@@ -28,5 +28,7 @@ pytest-xdist
 setuptools_scm
 sphinx
 twine
+types-pytz
+types-requests
 wheel
 xarray

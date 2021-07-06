@@ -7,29 +7,35 @@ erddapy: ERDDAP + Python.
 </h4>
 
 <p align="center">
-<!-- https://shields.io/ is a good source of these -->
 <a href="https://anaconda.org/conda-forge/erddapy">
 <img src="https://img.shields.io/conda/dn/conda-forge/erddapy.svg"
  alt="conda-forge downloads" /></a>
 <a href="https://github.com/ioos/erddapy/releases">
 <img src="https://img.shields.io/github/tag/ioos/erddapy.svg"
  alt="Latest version" /></a>
-<a href="https://github.com/ioos/erddapy/commits/master">
+<a href="https://github.com/ioos/erddapy/commits/main">
 <img src="https://img.shields.io/github/commits-since/ioos/erddapy/latest.svg"
  alt="Commits since last release" /></a>
 <a href="https://github.com/ioos/erddapy/graphs/contributors">
 <img src="https://img.shields.io/github/contributors/ioos/erddapy.svg"
  alt="# contributors" /></a>
-<a href="https://travis-ci.org/ioos/erddapy/branches">
-<img src="https://api.travis-ci.org/repositories/ioos/erddapy.svg?branch=master"
- alt="Travis-CI" /></a>
 <a href="https://zenodo.org/badge/latestdoi/104919828">
 <img src="https://zenodo.org/badge/104919828.svg"
  alt="zenodo" /></a>
 <a href="https://pypi.org/project/erddapy">
 <img src="https://img.shields.io/pypi/pyversions/erddapy.svg"
  alt="zenodo" /></a>
+<a href="https://results.pre-commit.ci/latest/github/ioos/erddapy/main">
+<img src="https://results.pre-commit.ci/badge/github/ioos/erddapy/main.svg"
+ alt="pre-commit.ci status" /></a>
+ 
+ <a href="https://github.com/ioos/erddapy/actions">
+<img src="https://github.com/ioos/erddapy/actions/workflows/tests.yml/badge.svg"
+ alt="GHA-tests" /></a>
+ 
+
 </p>
+
 <br>
 
 
