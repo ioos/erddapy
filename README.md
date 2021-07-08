@@ -28,11 +28,11 @@ erddapy: ERDDAP + Python.
 <a href="https://results.pre-commit.ci/latest/github/ioos/erddapy/main">
 <img src="https://results.pre-commit.ci/badge/github/ioos/erddapy/main.svg"
  alt="pre-commit.ci status" /></a>
- 
+
  <a href="https://github.com/ioos/erddapy/actions">
 <img src="https://github.com/ioos/erddapy/actions/workflows/tests.yml/badge.svg"
  alt="GHA-tests" /></a>
- 
+
 
 </p>
 
