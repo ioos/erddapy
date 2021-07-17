@@ -5,16 +5,18 @@ Pythonic way to access ERDDAP data
 
 import copy
 import functools
+import multiprocessing
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Union
 from urllib.parse import quote_plus
 
 import pandas as pd
 import pytz
+from joblib import Parallel, delayed
 
 from erddapy.netcdf_handling import _nc_dataset, _tempnc
 from erddapy.servers import servers
-from erddapy.url_handling import _distinct, urlopen
+from erddapy.url_handling import _distinct, multi_urlopen, urlopen
 
 try:
     from pandas.core.indexes.period import parse_time_string
@@ -134,6 +136,22 @@ def _griddap_check_variables(user_variables: ListLike, original_variables: ListL
         raise ValueError(
             f"variables {invalid_variables} are not present in dataset. Re-run e.griddap_initialise",
         )
+
+
+def parse_results(url: str, key: str, protocol="tabledap") -> Optional[Dict]:
+    """
+    Parse search results from multiple servers
+    """
+    data = multi_urlopen(url)
+    if data is None:
+        return None
+    df = pd.read_csv(data)
+    try:
+        df.dropna(subset=[protocol], inplace=True)
+    except KeyError:
+        return None
+    df["Server url"] = url.split("/search")[0]
+    return {key: df[["Title", "Institution", "Dataset ID", "Server url"]]}
 
 
 class ERDDAP:
@@ -370,6 +388,25 @@ class ERDDAP:
         # Removing them entirely should be OK for older versions too.
         url = url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
         return url
+
+    def search_all_servers(self, query="glider"):
+        """
+        Search all servers for a query string
+        Returns a dataframe of details for all matching datasets
+        """
+        urls = {
+            key: f'{server.url}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
+            for key, server in servers.items()
+        }
+        num_cores = multiprocessing.cpu_count()
+        returns = Parallel(n_jobs=num_cores)(
+            delayed(parse_results)(url, key, protocol="tabledap")
+            for key, url in urls.items()
+        )
+        dfs = [x for x in returns if x is not None]
+        df_all = pd.concat([list(df.values())[0] for df in dfs])
+        df_all.reset_index(drop=True, inplace=True)
+        return df_all
 
     def get_info_url(
         self,

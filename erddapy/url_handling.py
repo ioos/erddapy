@@ -33,6 +33,23 @@ def urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
     return data
 
 
+def multi_urlopen(url: str) -> BinaryIO:
+    """
+    A more simple url open to work with joblib and multiprocessing
+    """
+    try:
+        response = requests.get(url, allow_redirects=True)
+    except requests.exceptions.ConnectionError:
+        return None
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError:
+        return None
+    data = io.BytesIO(response.content)
+    data.seek(0)
+    return data
+
+
 @functools.lru_cache(maxsize=None)
 def check_url_response(url: str, **kwargs: Dict) -> str:
     """
