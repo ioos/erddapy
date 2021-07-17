@@ -150,7 +150,7 @@ def parse_results(url: str, key: str, protocol="tabledap") -> Optional[Dict]:
         df.dropna(subset=[protocol], inplace=True)
     except KeyError:
         return None
-    df["Server url"] = url.split("/search")[0]
+    df["Server url"] = url.split("search")[0]
     return {key: df[["Title", "Institution", "Dataset ID", "Server url"]]}
 
 
@@ -389,15 +389,24 @@ class ERDDAP:
         url = url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
         return url
 
-    def search_all_servers(self, query="glider"):
+    def search_all_servers(self, query="glider", servers_list=None):
         """
         Search all servers for a query string
         Returns a dataframe of details for all matching datasets
+        Args:
+            query: string to search for
+            servers_list: optional list of servers. Defaults to searching all servers
         """
-        urls = {
-            key: f'{server.url}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
-            for key, server in servers.items()
-        }
+        if servers_list:
+            urls = {
+                server: f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
+                for server in servers_list
+            }
+        else:
+            urls = {
+                key: f'{server.url}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
+                for key, server in servers.items()
+            }
         num_cores = multiprocessing.cpu_count()
         returns = Parallel(n_jobs=num_cores)(
             delayed(parse_results)(url, key, protocol="tabledap")
