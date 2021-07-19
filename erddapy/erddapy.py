@@ -137,7 +137,7 @@ def _griddap_check_variables(user_variables: ListLike, original_variables: ListL
         )
 
 
-def parse_results(url: str, key: str, protocol="tabledap") -> Optional[Dict]:
+def fetch_results(url: str, key: str, protocol="tabledap") -> Optional[Dict]:
     """
     Parse search results from multiple servers
     """
@@ -173,7 +173,7 @@ def search_all_servers(query="glider", servers_list=None, protocol="tabledap"):
         }
     num_cores = multiprocessing.cpu_count()
     returns = Parallel(n_jobs=num_cores)(
-        delayed(parse_results)(url, key, protocol=protocol) for key, url in urls.items()
+        delayed(fetch_results)(url, key, protocol=protocol) for key, url in urls.items()
     )
     dfs = [x for x in returns if x is not None]
     df_all = pd.concat([list(df.values())[0] for df in dfs])
