@@ -1,4 +1,4 @@
-from erddapy.multiple_server_search import fetch_results
+from erddapy.multiple_server_search import fetch_results, search_servers
 
 
 def test_fetch_results():
@@ -18,3 +18,20 @@ def test_fetch_no_results():
     key = "ioos"
     data = fetch_results(url, key)
     assert data is None
+
+
+def test_search_servers():
+    """Check that downloads are made and that serial and parallel results are identical"""
+    servers = [
+        "https://coastwatch.pfeg.noaa.gov/erddap/",
+        "https://gliders.ioos.us/erddap/",
+    ]
+    parallel = search_servers(query="sst", servers_list=servers, protocol="griddap")
+    serial = search_servers(
+        query="sst",
+        servers_list=servers,
+        protocol="griddap",
+        parallel=False,
+    )
+    assert parallel is not None
+    assert (parallel == serial).all().all()
