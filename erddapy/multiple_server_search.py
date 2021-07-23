@@ -3,7 +3,7 @@ from typing import Dict, Optional
 
 import pandas as pd
 from joblib import Parallel, delayed
-from url_handling import format_search_string, multi_urlopen
+from erddapy.url_handling import format_search_string, multi_urlopen
 
 from erddapy.servers import servers
 
