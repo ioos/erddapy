@@ -89,3 +89,10 @@ def _distinct(url: str, **kwargs: Dict) -> str:
     if distinct is True:
         return f"{url}&distinct()"
     return url
+
+
+def format_search_string(server: str, query: str) -> str:
+    """
+    Generate a search string for an erddap server with user defined query
+    """
+    return f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'

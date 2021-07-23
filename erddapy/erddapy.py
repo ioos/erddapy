@@ -16,7 +16,7 @@ from joblib import Parallel, delayed
 
 from erddapy.netcdf_handling import _nc_dataset, _tempnc
 from erddapy.servers import servers
-from erddapy.url_handling import _distinct, multi_urlopen, urlopen
+from erddapy.url_handling import _distinct, format_search_string, multi_urlopen, urlopen
 
 try:
     from pandas.core.indexes.period import parse_time_string
@@ -173,14 +173,10 @@ def search_all_servers(
             f"Protocol must be tabledap or griddap, got {protocol}",
         )
     if servers_list:
-        urls = {
-            server: f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
-            for server in servers_list
-        }
+        urls = {server: format_search_string(server, query) for server in servers_list}
     else:
         urls = {
-            key: f'{server.url}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
-            for key, server in servers.items()
+            key: format_search_string(server, query) for key, server in servers.items()
         }
     if parallel:
         num_cores = multiprocessing.cpu_count()
