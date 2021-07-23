@@ -137,13 +137,10 @@ def _griddap_check_variables(user_variables: ListLike, original_variables: ListL
         )
 
 
-def fetch_results(url: str, key: str, protocol="tabledap") -> Optional[Dict]:
+def parse_results(data: bytes, protocol, key, url) -> Dict[str, pd.DataFrame]:
     """
-    Parse search results from multiple servers
+    Parse server search results into a pandas DataFrame
     """
-    data = multi_urlopen(url)
-    if data is None:
-        return None
     df = pd.read_csv(data)
     try:
         df.dropna(subset=[protocol], inplace=True)
@@ -151,6 +148,20 @@ def fetch_results(url: str, key: str, protocol="tabledap") -> Optional[Dict]:
         return None
     df["Server url"] = url.split("search")[0]
     return {key: df[["Title", "Institution", "Dataset ID", "Server url"]]}
+
+
+def fetch_results(
+    url: str,
+    key: str,
+    protocol="tabledap",
+) -> Optional[Dict[str, pd.DataFrame]]:
+    """
+    Fetch search results from multiple servers
+    """
+    data = multi_urlopen(url)
+    if data is None:
+        return None
+    return parse_results(data, protocol, key, url)
 
 
 def search_all_servers(
