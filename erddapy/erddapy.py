@@ -164,6 +164,11 @@ def fetch_results(
     return parse_results(data, protocol, key, url)
 
 
+def format_results(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+    df_all = pd.concat([list(df.values())[0] for df in dfs])
+    return df_all.reset_index(drop=True)
+
+
 def search_all_servers(
     query="glider",
     servers_list=None,
@@ -200,8 +205,7 @@ def search_all_servers(
         dfs = []
         for key, url in urls.items():
             dfs.append(fetch_results(url, key, protocol=protocol))
-    df_all = pd.concat([list(df.values())[0] for df in dfs])
-    df_all.reset_index(drop=True, inplace=True)
+    df_all = format_results(dfs)
     return df_all
 
 
