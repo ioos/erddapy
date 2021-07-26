@@ -21,7 +21,6 @@ try:
 except ImportError:
     from pandas._libs.tslibs.parsing import parse_time_string
 
-
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
 
