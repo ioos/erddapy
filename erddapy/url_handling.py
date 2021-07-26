@@ -35,7 +35,7 @@ def urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
 
 def multi_urlopen(url: str) -> BinaryIO:
     """
-    A more simple url open to work with joblib and multiprocessing
+    A more simple url open to work with multiprocessing
     """
     try:
         response = requests.get(url, allow_redirects=True)
