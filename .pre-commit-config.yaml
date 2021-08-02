@@ -22,7 +22,7 @@ repos:
       args: [--max-line-length=105]
 
 - repo: https://github.com/pycqa/isort
-  rev: 5.9.2
+  rev: 5.9.3
   hooks:
     - id: isort
       additional_dependencies: [toml]
@@ -66,7 +66,7 @@ repos:
         - --quiet-level=2
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v2.23.0
+  rev: v2.23.1
   hooks:
     - id: pyupgrade
       args:
