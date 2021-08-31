@@ -3,13 +3,7 @@ import io
 import pytest
 from requests.exceptions import HTTPError, ReadTimeout
 
-from erddapy.url_handling import (
-    _clean_response,
-    check_url_response,
-    format_search_string,
-    multi_urlopen,
-    urlopen,
-)
+from erddapy.url_handling import _clean_response, check_url_response, urlopen
 
 
 @pytest.mark.web
@@ -62,25 +56,3 @@ def test_check_url_response():
 def test__clean_response():
     """Test if users can pass responses with or without the '.'."""
     assert _clean_response("html") == _clean_response(".html")
-
-
-@pytest.mark.web
-@pytest.mark.vcr()
-def test_multi_urlopen():
-    """Assure that multi_urlopen is always a BytesIO object."""
-    url = "http://erddap.sensors.ioos.us/erddap/tabledap/"
-    ret = multi_urlopen(url)
-    isinstance(ret, io.BytesIO)
-
-
-@pytest.mark.web
-@pytest.mark.vcr()
-def test_format_search_string():
-    """Check that string is correctly formatted for search"""
-    server = "https://gliders.ioos.us/erddap/"
-    query = "sst"
-    url = format_search_string(server, query)
-    assert (
-        url
-        == 'https://gliders.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor="sst"'
-    )
