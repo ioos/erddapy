@@ -27,6 +27,8 @@ def servers_list():
         path = Path(__file__).absolute().parent
         df = pd.read_json(path.joinpath("erddaps.json"))
     _server = namedtuple("server", ["description", "url"])
+    # drop non-public servers
+    df = df[df["public"]]
     return {
         row["short_name"].lower(): _server(row["name"], row["url"])
         for k, row in df.iterrows()
