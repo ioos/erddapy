@@ -3,7 +3,7 @@ name: Tests
 on:
   pull_request:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   run:
@@ -12,6 +12,7 @@ jobs:
       matrix:
         python-version: ["3.7", "3.8", "3.9"]
         os: [windows-latest, ubuntu-latest, macos-latest]
+      fail-fast: false
 
     steps:
     - uses: actions/checkout@v2
