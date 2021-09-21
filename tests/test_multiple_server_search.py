@@ -28,8 +28,9 @@ def test_fetch_no_results():
     assert data is None
 
 
+# FIXME: https://github.com/kevin1024/vcrpy/issues/533
+# @pytest.mark.vcr()
 @pytest.mark.web
-@pytest.mark.vcr()
 @pytest.mark.parametrize("parallel", [True, False])
 def test_search_awesome_erddap_servers(parallel):
     query = "glider"
