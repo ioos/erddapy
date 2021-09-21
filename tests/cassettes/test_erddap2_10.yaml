@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.24.0
+      - python-requests/2.26.0
     method: HEAD
     uri: https://coastwatch.pfeg.noaa.gov/erddap/search/advanced.csv?page=1&itemsPerPage=1000&protocol=(ANY)&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&searchFor=whoi
   response:
@@ -23,11 +23,11 @@ interactions:
       Content-Encoding:
       - gzip
       Content-Length:
-      - '5231'
+      - '5908'
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Wed, 11 Nov 2020 13:50:28 GMT
+      - Thu, 16 Sep 2021 23:45:19 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       X-Frame-Options:

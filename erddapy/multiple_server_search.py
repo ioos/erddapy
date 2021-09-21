@@ -1,18 +1,55 @@
 import multiprocessing
-from typing import Dict, Optional
+from typing import Dict
+from typing.io import BinaryIO
 
 import pandas as pd
+import requests
 from joblib import Parallel, delayed
 
 from erddapy.servers import servers
-from erddapy.url_handling import format_search_string, multi_urlopen
+from erddapy.url_handling import urlopen
 
 
-def parse_results(data: bytes, protocol, key, url) -> Dict[str, pd.DataFrame]:
+def _format_search_string(server: str, query: str) -> str:
     """
-    Parse server search results into a pandas DataFrame
+    Generate a search string for an erddap server with user defined query
     """
-    df = pd.read_csv(data)
+    return f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
+
+
+def _format_results(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+    # we return None for bad server, so we need to filter them here
+    df_all = pd.concat([list(df.values())[0] for df in dfs if df is not None])
+    return df_all.reset_index(drop=True)
+
+
+def _multi_urlopen(url: str) -> BinaryIO:
+    """
+    A more simple url open to work with multiprocessing
+    """
+    try:
+        data = urlopen(url)
+    except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError):
+        return None
+    return data
+
+
+def fetch_results(
+    url: str,
+    key: str,
+    protocol,
+) -> Dict[str, pd.DataFrame]:
+    """
+    Fetch search results from multiple servers.
+    If the server fails to response this function returns None
+    and the failed search should be parsed downstream.
+
+    """
+    data = _multi_urlopen(url)
+    if data is None:
+        return None
+    else:
+        df = pd.read_csv(data)
     try:
         df.dropna(subset=[protocol], inplace=True)
     except KeyError:
@@ -21,27 +58,8 @@ def parse_results(data: bytes, protocol, key, url) -> Dict[str, pd.DataFrame]:
     return {key: df[["Title", "Institution", "Dataset ID", "Server url"]]}
 
 
-def fetch_results(
-    url: str,
-    key: str,
-    protocol="tabledap",
-) -> Optional[Dict[str, pd.DataFrame]]:
-    """
-    Fetch search results from multiple servers
-    """
-    data = multi_urlopen(url)
-    if data is None:
-        return None
-    return parse_results(data, protocol, key, url)
-
-
-def format_results(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
-    df_all = pd.concat([list(df.values())[0] for df in dfs])
-    return df_all.reset_index(drop=True)
-
-
 def search_servers(
-    query="glider",
+    query,
     servers_list=None,
     parallel=True,
     protocol="tabledap",
@@ -60,10 +78,11 @@ def search_servers(
             f"Protocol must be tabledap or griddap, got {protocol}",
         )
     if servers_list:
-        urls = {server: format_search_string(server, query) for server in servers_list}
+        urls = {server: _format_search_string(server, query) for server in servers_list}
     else:
         urls = {
-            key: format_search_string(server, query) for key, server in servers.items()
+            key: _format_search_string(server.url, query)
+            for key, server in servers.items()
         }
     if parallel:
         num_cores = multiprocessing.cpu_count()
@@ -76,5 +95,5 @@ def search_servers(
         dfs = []
         for key, url in urls.items():
             dfs.append(fetch_results(url, key, protocol=protocol))
-    df_all = format_results(dfs)
+    df_all = _format_results(dfs)
     return df_all
