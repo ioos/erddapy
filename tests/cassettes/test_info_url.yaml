@@ -1,0 +1,72 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: HEAD
+    uri: https://upwell.pfeg.noaa.gov/erddap/info/gtoppAT/index.htmlTable
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - close
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '2725'
+      Content-Type:
+      - text/html;charset=UTF-8
+      Date:
+      - Fri, 24 Sep 2021 23:05:32 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Frame-Options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: ''
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: HEAD
+    uri: https://upwell.pfeg.noaa.gov/erddap/info/gtoppAT/index.csv
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - close
+      Content-Disposition:
+      - attachment;filename=gtoppAT_info.csv
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1667'
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 24 Sep 2021 23:05:33 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Frame-Options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: ''
+version: 1

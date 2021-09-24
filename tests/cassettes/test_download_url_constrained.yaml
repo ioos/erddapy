@@ -1,0 +1,42 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: HEAD
+    uri: https://upwell.pfeg.noaa.gov/erddap/tabledap/gtoppAT.csv?commonName,yearDeployed,serialNumber&time%3E=1025445196.0&time%3C=1540616040.0&latitude%3E=-42&latitude%3C=42&longitude%3E=0&longitude%3C=360
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/csv
+      Date:
+      - Fri, 24 Sep 2021 23:05:35 GMT
+      Last-Modified:
+      - Fri, 24 Sep 2021 23:05:35 GMT
+      Location:
+      - https://oceanview.pfeg.noaa.gov/erddap/tabledap/gtoppAT.csv?commonName%2CyearDeployed%2CserialNumber&time%3E=1025445196.0&time%3C=1540616040.0&latitude%3E=-42&latitude%3C=42&longitude%3E=0&longitude%3C=360
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Frame-Options:
+      - SAMEORIGIN
+      erddap-server:
+      - '2.02'
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 302
+      message: ''
+version: 1
