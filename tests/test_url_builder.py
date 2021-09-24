@@ -59,6 +59,7 @@ def test_search_url_valid_request(e):
         else:
             assert v == "(ANY)"
 
+
 @pytest.mark.web
 @pytest.mark.vcr()
 def test_search_url_valid_request_with_relative_time_constraints(e):
