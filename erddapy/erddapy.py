@@ -330,10 +330,14 @@ class ERDDAP:
         # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
         min_time = kwargs.pop("min_time", None)
         max_time = kwargs.pop("max_time", None)
-        if min_time:
+        if min_time and not _check_substrings(min_time):
             kwargs.update({"min_time": parse_dates(min_time)})
-        if max_time:
+        else:
+            kwargs.update({"min_time": min_time})
+        if max_time and not _check_substrings(max_time):
             kwargs.update({"max_time": parse_dates(max_time)})
+        else:
+            kwargs.update({"max_time": max_time})
 
         protocol = protocol if protocol else self.protocol
         response = response if response else self.response
