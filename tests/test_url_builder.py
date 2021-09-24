@@ -59,6 +59,26 @@ def test_search_url_valid_request(e):
         else:
             assert v == "(ANY)"
 
+@pytest.mark.web
+@pytest.mark.vcr()
+def test_search_url_valid_request_with_relative_time_constraints(e):
+    """Test if a bad request returns HTTPError."""
+    min_time = "now-14days"
+    max_time = "now-7days"
+    kw = {"min_time": min_time, "max_time": max_time}
+    url = e.get_search_url(dataset_id="scrippsGliders", **kw)
+    assert url == check_url_response(url)
+    assert url.startswith(f"{e.server}/search/advanced.{e.response}?")
+    options = _url_to_dict(url)
+    assert options.pop("minTime") == min_time
+    assert options.pop("maxTime") == max_time
+    assert options.pop("itemsPerPage") == str(1000)
+    for k, v in options.items():
+        if k == "protocol":
+            assert v == e.protocol
+        else:
+            assert v == "(ANY)"
+
 
 @pytest.mark.web
 @pytest.mark.vcr()
