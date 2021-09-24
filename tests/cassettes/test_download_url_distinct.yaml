@@ -1,0 +1,42 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: HEAD
+    uri: https://upwell.pfeg.noaa.gov/erddap/tabledap/gtoppAT.htmlTable?commonName,yearDeployed,serialNumber&distinct()
+  response:
+    body:
+      string: ''
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Fri, 24 Sep 2021 23:36:03 GMT
+      Last-Modified:
+      - Fri, 24 Sep 2021 23:36:03 GMT
+      Location:
+      - https://oceanview.pfeg.noaa.gov/erddap/tabledap/gtoppAT.htmlTable?commonName%2CyearDeployed%2CserialNumber&distinct()
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Frame-Options:
+      - SAMEORIGIN
+      erddap-server:
+      - '2.02'
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 302
+      message: ''
+version: 1
