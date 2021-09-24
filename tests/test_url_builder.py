@@ -10,7 +10,6 @@ def _url_to_dict(url):
 
 
 @pytest.fixture
-@pytest.mark.web
 def e():
     yield ERDDAP(
         server="https://upwell.pfeg.noaa.gov/erddap",
@@ -48,6 +47,7 @@ def test_search_url_valid_request(e):
     max_time = "1950-01-01T12:00:00Z"
     kw = {"min_time": min_time, "max_time": max_time}
     url = e.get_search_url(**kw)
+    assert url == check_url_response(url)
     assert url.startswith(f"{e.server}/search/advanced.{e.response}?")
     options = _url_to_dict(url)
     assert options.pop("minTime") == str(parse_dates(min_time))
@@ -66,15 +66,18 @@ def test_search_url_change_protocol(e):
     """Test if we change the protocol it show in the URL."""
     kw = {"search_for": "salinity"}
     url = e.get_search_url(protocol="tabledap", **kw)
+    assert url == check_url_response(url)
     options = _url_to_dict(url)
     assert options.pop("protocol") == "tabledap"
 
     url = e.get_search_url(protocol="griddap", **kw)
+    assert url == check_url_response(url)
     options = _url_to_dict(url)
     assert options.pop("protocol") == "griddap"
 
     e.protocol = None
     url = e.get_search_url(**kw)
+    assert url == check_url_response(url)
     options = _url_to_dict(url)
     assert options.pop("protocol") == "(ANY)"
 
@@ -85,9 +88,11 @@ def test_info_url(e):
     """Check info URL results."""
     dataset_id = "gtoppAT"
     url = e.get_info_url(dataset_id=dataset_id)
+    assert url == check_url_response(url)
     assert url == f"{e.server}/info/{dataset_id}/index.{e.response}"
 
     url = e.get_info_url(dataset_id=dataset_id, response="csv")
+    assert url == check_url_response(url)
     assert url == f"{e.server}/info/{dataset_id}/index.csv"
 
 
@@ -110,6 +115,7 @@ def test_download_url_unconstrained(e):
     dataset_id = "gtoppAT"
     variables = ["commonName", "yearDeployed", "serialNumber"]
     url = e.get_download_url(dataset_id=dataset_id, variables=variables)
+    assert url == check_url_response(url)
     assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?")
     assert sorted(url.split("?")[1].split(",")) == sorted(variables)
 
@@ -142,6 +148,7 @@ def test_download_url_constrained(e):
         response="csv",
         constraints=constraints,
     )
+    assert url == check_url_response(url)
     assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.csv?")
     options = _url_to_dict(url)
     assert options["time>"] == str(parse_dates(min_time))
@@ -177,7 +184,6 @@ def test_get_var_by_attr(e):
     ]
 
 
-# Test URL modifiers (server-side functions).
 def test_download_url_distinct(e):
     """Check download URL results with and without the distinct option."""
     dataset_id = "gtoppAT"
@@ -190,6 +196,8 @@ def test_download_url_distinct(e):
     )
     assert not no_distinct_url.endswith("&distinct()")
     assert with_distinct_url.endswith("&distinct()")
+    assert no_distinct_url == check_url_response(no_distinct_url)
+    assert with_distinct_url == check_url_response(with_distinct_url)
 
 
 # Test generic sever-side functions
