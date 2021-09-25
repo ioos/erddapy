@@ -86,14 +86,14 @@ def test_search_url_valid_request_with_relative_time_constraints(e):
 def test_search_url_change_protocol(e):
     """Test if we change the protocol it show in the URL."""
     kw = {"search_for": "salinity"}
-    url = e.get_search_url(protocol="tabledap", **kw)
-    assert url == check_url_response(url)
-    options = _url_to_dict(url)
+    tabledap_url = e.get_search_url(protocol="tabledap", **kw)
+    assert tabledap_url == check_url_response(tabledap_url)
+    options = _url_to_dict(tabledap_url)
     assert options.pop("protocol") == "tabledap"
 
-    url = e.get_search_url(protocol="griddap", **kw)
-    assert url == check_url_response(url)
-    options = _url_to_dict(url)
+    griddap_url = e.get_search_url(protocol="griddap", **kw)
+    assert griddap_url == check_url_response(griddap_url)
+    options = _url_to_dict(griddap_url)
     assert options.pop("protocol") == "griddap"
 
     e.protocol = None
