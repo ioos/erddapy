@@ -9,7 +9,6 @@ flake8-comprehensions
 flake8-mutable
 flake8-print
 interrogate
-iris>=3
 isort
 joblib
 jupyter
@@ -25,6 +24,7 @@ pytest-flake8
 pytest-sugar
 pytest-vcr
 pytest-xdist
+scitools-iris>=3
 setuptools_scm
 sphinx
 twine
