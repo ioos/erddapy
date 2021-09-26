@@ -28,10 +28,13 @@ OptionalStr = Optional[str]
 def _quote_string_constraints(kwargs: Dict) -> Dict:
     """
     For constraints of String variables,
-    the right-hand-side value must be surrounded by double quotes.
+    the right-hand-side value must be surrounded by double quotes if they are not relative constraints.
 
     """
-    return {k: f'"{v}"' if isinstance(v, str) else v for k, v in kwargs.items()}
+    return {
+        k: f'"{v}"' if isinstance(v, str) and not _check_substrings(v) else v
+        for k, v in kwargs.items()
+    }
 
 
 def _format_constraints_url(kwargs: Dict) -> str:
@@ -40,6 +43,16 @@ def _format_constraints_url(kwargs: Dict) -> str:
 
     """
     return "".join([f"&{k}{v}" for k, v in kwargs.items()])
+
+
+def _check_substrings(constraint):
+    """
+    The tabledap protocol extends the OPeNDAP with these strings and we
+    need to pass them intact to the URL builder.
+
+    """
+    substrings = ["now", "min", "max"]
+    return any([True for substring in substrings if substring in str(constraint)])
 
 
 def parse_dates(date_time: Union[datetime, str]) -> float:
@@ -147,7 +160,6 @@ class ERDDAP:
         variables: a list variables to download.
         response: default is HTML.
         constraints: download constraints, default None (opendap-like url)
-        relative_constraints: download constraints based on ERDDAP server calculations, default None
         params and requests_kwargs: `request.get` options
 
     Returns:
@@ -211,7 +223,6 @@ class ERDDAP:
 
         # Initialized only via properties.
         self.constraints: Optional[Dict] = None
-        self.relative_constraints: Optional[Dict] = None
         self.server_functions: Optional[Dict] = None
         self.dataset_id: OptionalStr = None
         self.requests_kwargs: Dict = {}
@@ -317,12 +328,16 @@ class ERDDAP:
             base += "&searchFor={searchFor}"
 
         # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
-        min_time = kwargs.pop("min_time", None)
-        max_time = kwargs.pop("max_time", None)
-        if min_time:
+        min_time = kwargs.pop("min_time", "")
+        max_time = kwargs.pop("max_time", "")
+        if min_time and not _check_substrings(min_time):
             kwargs.update({"min_time": parse_dates(min_time)})
-        if max_time:
+        else:
+            kwargs.update({"min_time": min_time})
+        if max_time and not _check_substrings(max_time):
             kwargs.update({"max_time": parse_dates(max_time)})
+        else:
+            kwargs.update({"max_time": max_time})
 
         protocol = protocol if protocol else self.protocol
         response = response if response else self.response
@@ -427,7 +442,6 @@ class ERDDAP:
         dim_names: Optional[ListLike] = None,
         response=None,
         constraints=None,
-        relative_constraints=None,
         **kwargs,
     ) -> str:
         """The download URL for the `server` endpoint.
@@ -445,11 +459,9 @@ class ERDDAP:
                                     'time<=': '2017-02-10T00:00:00+00:00',
                                     'time>=': '2016-07-10T00:00:00+00:00',}
 
-            relative_constraints (dict): advanced download constraints , default None
-            example: relative_constraints = {'time>': 'now-7days',
-                                         'latitude<':'min(longitude)+180'
-                                         'depth>':'max(depth)-23'
-                                            }
+            One can also use relative constraints like {'time>': 'now-7days',
+                                                        'latitude<': 'min(longitude)+180',
+                                                        'depth>': 'max(depth)-23',}
 
         Returns:
             url (str): the download URL for the `response` chosen.
@@ -461,9 +473,6 @@ class ERDDAP:
         dim_names = dim_names if dim_names else self.dim_names
         response = response if response else self.response
         constraints = constraints if constraints else self.constraints
-        relative_constraints = (
-            relative_constraints if relative_constraints else self.relative_constraints
-        )
 
         if not dataset_id:
             raise ValueError(f"Please specify a valid `dataset_id`, got {dataset_id}")
@@ -517,16 +526,14 @@ class ERDDAP:
         if constraints:
             _constraints = copy.copy(constraints)
             for k, v in _constraints.items():
+                if _check_substrings(v):
+                    continue
                 if k.startswith("time"):
                     _constraints.update({k: parse_dates(v)})
             _constraints = _quote_string_constraints(_constraints)
             _constraints_url = _format_constraints_url(_constraints)
 
             url += f"{_constraints_url}"
-
-        if relative_constraints:
-            _relative_constraints_url = _format_constraints_url(relative_constraints)
-            url += f"{_relative_constraints_url}"
 
         url = _distinct(url, **kwargs)
         return url

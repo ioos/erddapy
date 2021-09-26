@@ -62,17 +62,38 @@ def test_search_url_valid_request(e):
 
 @pytest.mark.web
 @pytest.mark.vcr()
+def test_search_url_valid_request_with_relative_time_constraints(e):
+    """Test if a bad request returns HTTPError."""
+    min_time = "now-14days"
+    max_time = "now-7days"
+    kw = {"min_time": min_time, "max_time": max_time}
+    url = e.get_search_url(dataset_id="scrippsGliders", **kw)
+    assert url == check_url_response(url)
+    assert url.startswith(f"{e.server}/search/advanced.{e.response}?")
+    options = _url_to_dict(url)
+    assert options.pop("minTime") == min_time
+    assert options.pop("maxTime") == max_time
+    assert options.pop("itemsPerPage") == str(1000)
+    for k, v in options.items():
+        if k == "protocol":
+            assert v == e.protocol
+        else:
+            assert v == "(ANY)"
+
+
+@pytest.mark.web
+@pytest.mark.vcr()
 def test_search_url_change_protocol(e):
     """Test if we change the protocol it show in the URL."""
     kw = {"search_for": "salinity"}
-    url = e.get_search_url(protocol="tabledap", **kw)
-    assert url == check_url_response(url)
-    options = _url_to_dict(url)
+    tabledap_url = e.get_search_url(protocol="tabledap", **kw)
+    assert tabledap_url == check_url_response(tabledap_url)
+    options = _url_to_dict(tabledap_url)
     assert options.pop("protocol") == "tabledap"
 
-    url = e.get_search_url(protocol="griddap", **kw)
-    assert url == check_url_response(url)
-    options = _url_to_dict(url)
+    griddap_url = e.get_search_url(protocol="griddap", **kw)
+    assert griddap_url == check_url_response(griddap_url)
+    options = _url_to_dict(griddap_url)
     assert options.pop("protocol") == "griddap"
 
     e.protocol = None
@@ -159,6 +180,46 @@ def test_download_url_constrained(e):
     assert options["longitude<"] == str(max_lon)
 
 
+def test_download_url_relative_constrains(e):
+    dataset_id = "scrippsGliders"
+    variables = ["wmo_id", "platform_id", "platform_type"]
+
+    min_time = "now-14days"
+    max_time = "now-7days"
+    min_lat = "min(latitude)+5"
+    max_lat = "max(latitude)-5"
+    min_lon = "min(longitude)+5"
+    max_lon = "min(longitude)+10"
+    min_depth = "min(depth)+5"
+    max_depth = "max(depth)-40"
+
+    constraints = {
+        "time>=": min_time,
+        "time<=": max_time,
+        "latitude>=": min_lat,
+        "latitude<=": max_lat,
+        "longitude>=": min_lon,
+        "longitude<=": max_lon,
+        "depth>=": min_depth,
+        "depth<=": max_depth,
+    }
+
+    url = e.get_download_url(
+        dataset_id=dataset_id,
+        variables=variables,
+        response="csv",
+        constraints=constraints,
+    )
+    assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.csv?")
+    options = _url_to_dict(url)
+    assert options["time>"] == min_time
+    assert options["time<"] == max_time
+    assert options["latitude>"] == min_lat
+    assert options["latitude<"] == max_lat
+    assert options["longitude>"] == min_lon
+    assert options["longitude<"] == max_lon
+
+
 @pytest.mark.web
 @pytest.mark.vcr()
 def test_get_var_by_attr(e):
@@ -184,6 +245,8 @@ def test_get_var_by_attr(e):
     ]
 
 
+@pytest.mark.web
+@pytest.mark.vcr()
 def test_download_url_distinct(e):
     """Check download URL results with and without the distinct option."""
     dataset_id = "gtoppAT"
@@ -198,21 +261,3 @@ def test_download_url_distinct(e):
     assert with_distinct_url.endswith("&distinct()")
     assert no_distinct_url == check_url_response(no_distinct_url)
     assert with_distinct_url == check_url_response(with_distinct_url)
-
-
-# Test generic sever-side functions
-def test_download_url_server_functions(e):
-    """Check download URL results with and without the relative constraint option."""
-    dataset_id = "gtoppAT"
-    variables = ["commonName", "yearDeployed", "serialNumber"]
-    no_relative_constraints_url = e.get_download_url(
-        dataset_id=dataset_id,
-        variables=variables,
-    )
-    with_relative_constraints_url = e.get_download_url(
-        dataset_id=dataset_id,
-        variables=variables,
-        relative_constraints={"time=": "max(time)+0minutes"},
-    )
-    assert not no_relative_constraints_url.endswith("&time=max(time)+0minutes")
-    assert with_relative_constraints_url.endswith("&time=max(time)+0minutes")
