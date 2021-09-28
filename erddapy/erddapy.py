@@ -148,6 +148,95 @@ def _griddap_check_variables(user_variables: ListLike, original_variables: ListL
         )
 
 
+def _search_url(
+    server: str,
+    response: str = "html",
+    search_for: Optional[str] = None,
+    protocol: str = "tabledap",
+    items_per_page: int = 1000,
+    page: int = 1,
+    **kwargs,
+):
+    base = (
+        "{server}/search/advanced.{response}"
+        "?page={page}"
+        "&itemsPerPage={itemsPerPage}"
+        "&protocol={protocol}"
+        "&cdm_data_type={cdm_data_type}"
+        "&institution={institution}"
+        "&ioos_category={ioos_category}"
+        "&keywords={keywords}"
+        "&long_name={long_name}"
+        "&standard_name={standard_name}"
+        "&variableName={variableName}"
+        "&minLon={minLon}"
+        "&maxLon={maxLon}"
+        "&minLat={minLat}"
+        "&maxLat={maxLat}"
+        "&minTime={minTime}"
+        "&maxTime={maxTime}"
+    )
+    if search_for:
+        search_for = quote_plus(search_for)
+        base += "&searchFor={searchFor}"
+
+    # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
+    min_time = kwargs.pop("min_time", "")
+    max_time = kwargs.pop("max_time", "")
+    if min_time and not _check_substrings(min_time):
+        kwargs.update({"min_time": parse_dates(min_time)})
+    else:
+        kwargs.update({"min_time": min_time})
+    if max_time and not _check_substrings(max_time):
+        kwargs.update({"max_time": parse_dates(max_time)})
+    else:
+        kwargs.update({"max_time": max_time})
+
+    if protocol:
+        kwargs.update({"protocol": protocol})
+
+    lower_case_search_terms = (
+        "cdm_data_type",
+        "institution",
+        "ioos_category",
+        "keywords",
+        "long_name",
+        "standard_name",
+        "variableName",
+    )
+    for search_term in lower_case_search_terms:
+        if search_term in kwargs.keys():
+            lowercase = kwargs[search_term].lower()
+            kwargs.update({search_term: lowercase})
+
+    default = "(ANY)"
+    url = base.format(
+        server=server,
+        response=response,
+        page=page,
+        itemsPerPage=items_per_page,
+        protocol=kwargs.get("protocol", default),
+        cdm_data_type=kwargs.get("cdm_data_type", default),
+        institution=kwargs.get("institution", default),
+        ioos_category=kwargs.get("ioos_category", default),
+        keywords=kwargs.get("keywords", default),
+        long_name=kwargs.get("long_name", default),
+        standard_name=kwargs.get("standard_name", default),
+        variableName=kwargs.get("variableName", default),
+        minLon=kwargs.get("min_lon", default),
+        maxLon=kwargs.get("max_lon", default),
+        minLat=kwargs.get("min_lat", default),
+        maxLat=kwargs.get("max_lat", default),
+        minTime=kwargs.get("min_time", default),
+        maxTime=kwargs.get("max_time", default),
+        searchFor=search_for,
+    )
+    # ERDDAP 2.10 no longer accepts strings placeholder for dates.
+    # Removing them entirely should be OK for older versions too.
+    url = url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
+    return url
+
+
 class ERDDAP:
     """Creates an ERDDAP instance for a specific server endpoint.
 
@@ -304,86 +393,17 @@ class ERDDAP:
             url: the search URL.
 
         """
-        base = (
-            "{server}/search/advanced.{response}"
-            "?page={page}"
-            "&itemsPerPage={itemsPerPage}"
-            "&protocol={protocol}"
-            "&cdm_data_type={cdm_data_type}"
-            "&institution={institution}"
-            "&ioos_category={ioos_category}"
-            "&keywords={keywords}"
-            "&long_name={long_name}"
-            "&standard_name={standard_name}"
-            "&variableName={variableName}"
-            "&minLon={minLon}"
-            "&maxLon={maxLon}"
-            "&minLat={minLat}"
-            "&maxLat={maxLat}"
-            "&minTime={minTime}"
-            "&maxTime={maxTime}"
-        )
-        if search_for:
-            search_for = quote_plus(search_for)
-            base += "&searchFor={searchFor}"
-
-        # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
-        min_time = kwargs.pop("min_time", "")
-        max_time = kwargs.pop("max_time", "")
-        if min_time and not _check_substrings(min_time):
-            kwargs.update({"min_time": parse_dates(min_time)})
-        else:
-            kwargs.update({"min_time": min_time})
-        if max_time and not _check_substrings(max_time):
-            kwargs.update({"max_time": parse_dates(max_time)})
-        else:
-            kwargs.update({"max_time": max_time})
-
         protocol = protocol if protocol else self.protocol
         response = response if response else self.response
-        if protocol:
-            kwargs.update({"protocol": protocol})
-
-        lower_case_search_terms = (
-            "cdm_data_type",
-            "institution",
-            "ioos_category",
-            "keywords",
-            "long_name",
-            "standard_name",
-            "variableName",
-        )
-        for search_term in lower_case_search_terms:
-            if search_term in kwargs.keys():
-                lowercase = kwargs[search_term].lower()
-                kwargs.update({search_term: lowercase})
-
-        default = "(ANY)"
-        url = base.format(
-            server=self.server,
+        return _search_url(
+            self.server,
             response=response,
+            search_for=search_for,
+            protocol=protocol,
+            items_per_page=items_per_page,
             page=page,
-            itemsPerPage=items_per_page,
-            protocol=kwargs.get("protocol", default),
-            cdm_data_type=kwargs.get("cdm_data_type", default),
-            institution=kwargs.get("institution", default),
-            ioos_category=kwargs.get("ioos_category", default),
-            keywords=kwargs.get("keywords", default),
-            long_name=kwargs.get("long_name", default),
-            standard_name=kwargs.get("standard_name", default),
-            variableName=kwargs.get("variableName", default),
-            minLon=kwargs.get("min_lon", default),
-            maxLon=kwargs.get("max_lon", default),
-            minLat=kwargs.get("min_lat", default),
-            maxLat=kwargs.get("max_lat", default),
-            minTime=kwargs.get("min_time", default),
-            maxTime=kwargs.get("max_time", default),
-            searchFor=search_for,
+            **kwargs,
         )
-        # ERDDAP 2.10 no longer accepts strings placeholder for dates.
-        # Removing them entirely should be OK for older versions too.
-        url = url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
-        return url
 
     def get_info_url(
         self,

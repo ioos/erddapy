@@ -6,7 +6,7 @@ import pandas as pd
 import requests
 from joblib import Parallel, delayed
 
-from erddapy.servers import servers
+from erddapy.servers import _search_url, servers
 from erddapy.url_handling import urlopen
 
 
@@ -97,3 +97,10 @@ def search_servers(
             dfs.append(fetch_results(url, key, protocol=protocol))
     df_all = _format_results(dfs)
     return df_all
+
+
+def advanced_search_servers(kwargs):
+    return [
+        _search_url(server.url, response="html", **kwargs)
+        for key, server in servers.items()
+    ]
