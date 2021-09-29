@@ -157,6 +157,7 @@ def _search_url(
     page: int = 1,
     **kwargs,
 ):
+    server = server.rstrip("/")
     base = (
         "{server}/search/advanced.{response}"
         "?page={page}"
