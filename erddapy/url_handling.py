@@ -46,15 +46,6 @@ def check_url_response(url: str, **kwargs: Dict) -> str:
     return url
 
 
-def _clean_response(response: str) -> str:
-    """Allow for `ext` or `.ext` format.
-
-    The user can, for example, use either `.csv` or `csv` in the response kwarg.
-
-    """
-    return response.lstrip(".")
-
-
 def _distinct(url: str, **kwargs: Dict) -> str:
     """
     Sort all of the rows in the results table
