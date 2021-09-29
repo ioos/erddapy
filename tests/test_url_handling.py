@@ -51,8 +51,3 @@ def test_check_url_response():
     )
     with pytest.raises(HTTPError):
         check_url_response(bad_request)
-
-
-def test__clean_response():
-    """Test if users can pass responses with or without the '.'."""
-    assert _clean_response("html") == _clean_response(".html")
