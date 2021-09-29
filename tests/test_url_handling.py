@@ -3,7 +3,7 @@ import io
 import pytest
 from requests.exceptions import HTTPError, ReadTimeout
 
-from erddapy.url_handling import _clean_response, check_url_response, urlopen
+from erddapy.url_handling import check_url_response, urlopen
 
 
 @pytest.mark.web
