@@ -6,6 +6,7 @@ import pandas as pd
 import requests
 from joblib import Parallel, delayed
 
+from erddapy.erddapy import _search_url
 from erddapy.servers import servers
 from erddapy.url_handling import urlopen
 
@@ -84,6 +85,40 @@ def search_servers(
             key: _format_search_string(server.url, query)
             for key, server in servers.items()
         }
+    if parallel:
+        num_cores = multiprocessing.cpu_count()
+        returns = Parallel(n_jobs=num_cores)(
+            delayed(fetch_results)(url, key, protocol=protocol)
+            for key, url in urls.items()
+        )
+        dfs = [x for x in returns if x is not None]
+    else:
+        dfs = []
+        for key, url in urls.items():
+            dfs.append(fetch_results(url, key, protocol=protocol))
+    df_all = _format_results(dfs)
+    return df_all
+
+
+def advanced_search_servers(
+    servers_list=None, parallel=True, protocol="tabledap", **kwargs
+):
+    if protocol not in ["tabledap", "griddap"]:
+        raise ValueError(
+            f"Protocol must be tabledap or griddap, got {protocol}",
+        )
+    response = "csv"
+    if servers_list:
+        urls = {
+            server: _search_url(server, response=response, **kwargs)
+            for server in servers_list
+        }
+    else:
+        urls = {
+            key: _search_url(server.url, response=response, **kwargs)
+            for key, server in servers.items()
+        }
+
     if parallel:
         num_cores = multiprocessing.cpu_count()
         returns = Parallel(n_jobs=num_cores)(
