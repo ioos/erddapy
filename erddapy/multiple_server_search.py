@@ -4,7 +4,12 @@ from typing.io import BinaryIO
 
 import pandas as pd
 import requests
-from joblib import Parallel, delayed
+
+try:
+    joblib = True
+    from joblib import Parallel, delayed
+except ImportError:
+    joblib = False
 
 from erddapy.erddapy import _search_url
 from erddapy.servers import servers
@@ -62,7 +67,7 @@ def fetch_results(
 def search_servers(
     query,
     servers_list=None,
-    parallel=True,
+    parallel=False,
     protocol="tabledap",
 ):
     """
@@ -87,6 +92,10 @@ def search_servers(
         }
     if parallel:
         num_cores = multiprocessing.cpu_count()
+        if not joblib:
+            raise ImportError(
+                "Missing joblib. Please install it to use parallel searches.",
+            )
         returns = Parallel(n_jobs=num_cores)(
             delayed(fetch_results)(url, key, protocol=protocol)
             for key, url in urls.items()
@@ -101,7 +110,7 @@ def search_servers(
 
 
 def advanced_search_servers(
-    servers_list=None, parallel=True, protocol="tabledap", **kwargs
+    servers_list=None, parallel=False, protocol="tabledap", **kwargs
 ):
     if protocol not in ["tabledap", "griddap"]:
         raise ValueError(
@@ -121,6 +130,10 @@ def advanced_search_servers(
 
     if parallel:
         num_cores = multiprocessing.cpu_count()
+        if not joblib:
+            raise ImportError(
+                "Missing joblib. Please install it to use parallel searches.",
+            )
         returns = Parallel(n_jobs=num_cores)(
             delayed(fetch_results)(url, key, protocol=protocol)
             for key, url in urls.items()
