@@ -6,14 +6,7 @@ env:
     - secure: "K7/ZsuH+mp28YhBgnHARRmneKyMqODpMcrzTBd4tK0rqtzRJYP7fel9JGhD/3mIqyp/E2qCF3Rk/YbonHvmsyjh0yBmyI1BtHIKEcsUgwYCMvkjWYTR0k5LYWqtyEl1pW5RSs5PAAKCcXDdxDoXkmLdJViDiKv6Mv8bnfppYJzPH7Z2xjfr9YxvhMiIngfLxtjPAm1GZKO75Ldhw1uE9eMqdxYHrENvTkbXTfS2o5ERCJppd8o8zeEsnUjE7fDXsvBTYP5Cdng9tYMVCFiIubQXLuYUGKjwVObR7AIczwx5so4yTly0k2gNrXtTpTW+hm6D8VQCGfJAXgfq3zpzKtUwBKpXVAP8K+NWy91eXOyr/rgcmFXjlzsN25/gPonyac92a7OQXRs5nsXKBY1KfUR2LyQapVZ89RpoA6w98X7OWeqvUg7uDuCdYAcsM3zVJMqIHvlr9UpqMvuluRMvX4iq9P/fD5Bq1WT3uJ3olLEXpbcaOeeaBpb3vO8IwiOEaNXR7A9iug3cpz4bP5nd5DET8Ki+lew6bkfiC5SaP+emS9WXD4uoKbiwrL6wz1kAdjOH6Exn4R0q8paJuaORiIfDEXAay39ZwBl3qzvt6Y7O3Y8i9oXG59+UKojSXxkPdF4byWA1nUF6wl4bpC4f/oJMoDtXiUdNv6WM8Jcndwdk="
 
 matrix:
-  fast_finish: true
   include:
-    - name: "python-3.7"
-      env: PY=3.7
-    - name: "python-3.8"
-      env: PY=3.8
-    - name: "tarball"
-      env: PY=3
     - name: "docs"
       env: PY=3
 
@@ -34,23 +27,6 @@ install:
   - pip install -e . --no-deps --force-reinstall
 
 script:
-  - |
-    if [[ $TRAVIS_JOB_NAME == python-* ]]; then
-      cp -r tests/ /tmp
-      pushd /tmp
-      pytest -n 2 -rxs --cov=erddapy --vcr-record=none tests
-      popd
-    fi
-
-  - |
-    if [[ $TRAVIS_JOB_NAME == 'tarball' ]]; then
-      python setup.py --version
-      python setup.py sdist
-      pip wheel . -w dist --no-deps
-      check-manifest --verbose
-      twine check dist/*
-    fi
-
   - |
     if [[ $TRAVIS_JOB_NAME == 'docs' ]]; then
       set -e
