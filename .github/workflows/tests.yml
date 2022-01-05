@@ -42,3 +42,10 @@ jobs:
       run: |
         source activate TEST
         python -m pytest -rxs --cov=erddapy --vcr-record=none tests
+
+    - name: Pydocstyle
+      shell: bash -l {0}
+      run: |
+        source activate TEST
+        python -m pytest -rxs --cov=erddapy --vcr-record=none tests
+        pydocstyle erddapy
