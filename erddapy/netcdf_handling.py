@@ -1,7 +1,4 @@
-"""
-utilities
-
-"""
+"""Handles netCDF responses."""
 
 from contextlib import contextmanager
 from pathlib import Path
@@ -13,7 +10,7 @@ from erddapy.url_handling import urlopen
 
 
 def _nc_dataset(url, auth, **requests_kwargs: Dict):
-    """Returns a netCDF4-python Dataset from memory and fallbacks to disk if that fails."""
+    """Return a netCDF4-python Dataset from memory and fallbacks to disk if that fails."""
     from netCDF4 import Dataset
 
     data = urlopen(url=url, auth=auth, **requests_kwargs)
@@ -27,7 +24,7 @@ def _nc_dataset(url, auth, **requests_kwargs: Dict):
 
 @contextmanager
 def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
-    """Creates a temporary netcdf file."""
+    """Create a temporary netcdf file."""
     from tempfile import NamedTemporaryFile
 
     tmp = None

@@ -1,3 +1,5 @@
+"""Test netCDF loading."""
+
 import os
 
 import pytest
@@ -9,6 +11,7 @@ from erddapy.url_handling import urlopen
 @pytest.mark.web
 @pytest.mark.vcr()
 def test__tempnc():
+    """Test temporary netcdf file."""
     url = "https://data.ioos.us/gliders/erddap/tabledap/cp_336-20170116T1254.nc"
     data = urlopen(url)
     with _tempnc(data) as tmp:
@@ -24,6 +27,8 @@ def test__tempnc():
 @pytest.mark.vcr()
 def test__nc_dataset():
     """
+    Test loading a netcdf dataset.
+
     FIXME: we need to test both in-memory and local file.
     That can be achieve with a different libnetcdf but having two environments for testing is cumbersome.
     However, it turns out sometimes a server can fail to provide files can be loaded in memory (#137).

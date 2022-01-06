@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.0.1
+  rev: v4.1.0
   hooks:
     - id: trailing-whitespace
     - id: check-ast
@@ -35,7 +35,7 @@ repos:
     language_version: python3
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v0.910-1
+  rev: v0.930
   hooks:
   - id: mypy
     exclude: docs/source/conf.py
@@ -66,7 +66,7 @@ repos:
         - --quiet-level=2
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v2.29.1
+  rev: v2.31.0
   hooks:
     - id: pyupgrade
       args:
@@ -81,6 +81,12 @@ repos:
   rev: f5bdb72a400f1a56fe88109936c83aa12cc349fa
   hooks:
     - id: prenotebook
+
+-   repo: https://github.com/pycqa/pydocstyle
+    rev: 6.1.1
+    hooks:
+      - id: pydocstyle
+        exclude: ^(docs|setup.py)
 
 ci:
     autofix_commit_msg: |

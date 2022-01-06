@@ -1,6 +1,4 @@
-"""
-Easier access to scientific data
-"""
+"""Easier access to scientific data."""
 
 from erddapy.erddapy import ERDDAP
 from erddapy.servers import servers

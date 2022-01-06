@@ -1,3 +1,5 @@
+"""Multiple Server Search."""
+
 import multiprocessing
 from typing import Dict
 from typing.io import BinaryIO
@@ -17,9 +19,7 @@ from erddapy.url_handling import urlopen
 
 
 def _format_search_string(server: str, query: str) -> str:
-    """
-    Generate a search string for an erddap server with user defined query
-    """
+    """Generate a search string for an erddap server with user defined query."""
     return f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
 
 
@@ -30,9 +30,7 @@ def _format_results(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
 
 
 def _multi_urlopen(url: str) -> BinaryIO:
-    """
-    A more simple url open to work with multiprocessing
-    """
+    """Simpler url open to work with multiprocessing."""
     try:
         data = urlopen(url)
     except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError):
@@ -47,9 +45,9 @@ def fetch_results(
 ) -> Dict[str, pd.DataFrame]:
     """
     Fetch search results from multiple servers.
+
     If the server fails to response this function returns None
     and the failed search should be parsed downstream.
-
     """
     data = _multi_urlopen(url)
     if data is None:
@@ -71,7 +69,8 @@ def search_servers(
     protocol="tabledap",
 ):
     """
-    Search all servers for a query string
+    Search all servers for a query string.
+
     Returns a dataframe of details for all matching datasets
     Args:
         query: string to search for
@@ -112,6 +111,16 @@ def search_servers(
 def advanced_search_servers(
     servers_list=None, parallel=False, protocol="tabledap", **kwargs
 ):
+    """
+    Search multiple ERDDAP servers.
+
+    Returns a dataframe of details for all matching datasets
+    Args:
+        servers_list: optional list of servers. if None, will search all servers in erddapy.servers
+        protocol: tabledap or griddap
+        parallel: If True, uses joblib to parallelize the search
+
+    """
     if protocol not in ["tabledap", "griddap"]:
         raise ValueError(
             f"Protocol must be tabledap or griddap, got {protocol}",

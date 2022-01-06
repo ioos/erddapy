@@ -1,7 +1,4 @@
-"""
-servers
-
-"""
+"""Servers."""
 
 import functools
 from collections import namedtuple
@@ -13,6 +10,7 @@ import pandas as pd
 def servers_list():
     """
     Download a new server list from awesome-erddap.
+
     If loading the latest one fails it falls back to the default one shipped with the package.
 
     """

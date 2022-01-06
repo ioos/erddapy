@@ -1,7 +1,4 @@
-"""
-Pythonic way to access ERDDAP data
-
-"""
+"""Pythonic way to access ERDDAP data."""
 
 import copy
 import functools
@@ -27,8 +24,9 @@ OptionalStr = Optional[str]
 
 def _quote_string_constraints(kwargs: Dict) -> Dict:
     """
-    For constraints of String variables,
-    the right-hand-side value must be surrounded by double quotes if they are not relative constraints.
+    Quote constraints of String variables.
+
+    The right-hand-side value must be surrounded by double quotes if they are not relative constraints.
 
     """
     return {
@@ -38,25 +36,20 @@ def _quote_string_constraints(kwargs: Dict) -> Dict:
 
 
 def _format_constraints_url(kwargs: Dict) -> str:
-    """
-    Join the constraint variables with separator '&' to add to the download link.
-
-    """
+    """Join the constraint variables with separator '&' to add to the download link."""
     return "".join([f"&{k}{v}" for k, v in kwargs.items()])
 
 
 def _check_substrings(constraint):
-    """
-    The tabledap protocol extends the OPeNDAP with these strings and we
-    need to pass them intact to the URL builder.
-
-    """
+    """Extend the OPeNDAP with extra strings."""
     substrings = ["now", "min", "max"]
     return any([True for substring in substrings if substring in str(constraint)])
 
 
 def parse_dates(date_time: Union[datetime, str]) -> float:
     """
+    Parse dates to ERDDAP internal format.
+
     ERDDAP ReSTful API standardizes the representation of dates as either ISO
     strings or seconds since 1970, but internally ERDDAPY uses datetime-like
     objects. `timestamp` returns the expected strings in seconds since 1970.
@@ -82,11 +75,11 @@ def _griddap_get_constraints(
     step: int,
 ) -> Tuple[Dict, List, List]:
     """
-    Fetch metadata of griddap dataset and set initial constraints
+    Fetch metadata of griddap dataset and set initial constraints.
+
     Step size is applied to all dimensions
 
     """
-
     dds_url = f"{dataset_url}.dds"
     url = urlopen(dds_url)
     data = url.read().decode()
@@ -129,7 +122,7 @@ def _griddap_get_constraints(
 
 
 def _griddap_check_constraints(user_constraints: Dict, original_constraints: Dict):
-    """Check that constraints changed by user match those expected by dataset"""
+    """Check that constraints changed by user match those expected by dataset."""
     if user_constraints.keys() != original_constraints.keys():
         raise ValueError(
             "keys in e.constraints have changed. Re-run e.griddap_initialise",
@@ -137,7 +130,7 @@ def _griddap_check_constraints(user_constraints: Dict, original_constraints: Dic
 
 
 def _griddap_check_variables(user_variables: ListLike, original_variables: ListLike):
-    """Check user has not requested variables that do not exist in dataset"""
+    """Check user has not requested variables that do not exist in dataset."""
     invalid_variables = []
     for variable in user_variables:
         if variable not in original_variables:
@@ -305,6 +298,14 @@ class ERDDAP:
         protocol: OptionalStr = None,
         response: str = "html",
     ):
+        """
+        Instantiate main class attributes.
+
+        Attributes:
+          server: the server URL.
+          protocol: ERDDAP's protocol (tabledap/griddap)
+          response: default is HTML.
+        """
         if server.lower() in servers.keys():
             server = servers[server.lower()].url
         self.server = server.rstrip("/")
@@ -330,12 +331,14 @@ class ERDDAP:
         dataset_id: OptionalStr = None,
         step: int = 1,
     ):
-        """Fetch metadata of dataset and initialise constraints and variables
+        """
+        Fetch metadata of dataset and initialise constraints and variables.
 
         Args:
         dataset_id: a dataset unique id.
-        step: step used to subset dataset"""
+        step: step used to subset dataset
 
+        """
         dataset_id = dataset_id if dataset_id else self.dataset_id
         if self.protocol != "griddap":
             raise ValueError(
@@ -361,8 +364,8 @@ class ERDDAP:
         page: int = 1,
         **kwargs,
     ) -> str:
-
-        """The search URL for the `server` endpoint provided.
+        """
+        Build the search URL for the `server` endpoint provided.
 
         Args:
             search_for: "Google-like" search of the datasets' metadata.
@@ -411,7 +414,8 @@ class ERDDAP:
         dataset_id: OptionalStr = None,
         response: OptionalStr = None,
     ) -> str:
-        """The info URL for the `server` endpoint.
+        """
+        Build the info URL for the `server` endpoint.
 
         Args:
             dataset_id: a dataset unique id.
@@ -436,7 +440,8 @@ class ERDDAP:
         value: OptionalStr = None,
         response: OptionalStr = None,
     ) -> str:
-        """The categorize URL for the `server` endpoint.
+        """
+        Build the categorize URL for the `server` endpoint.
 
         Args:
             categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
@@ -465,7 +470,8 @@ class ERDDAP:
         constraints=None,
         **kwargs,
     ) -> str:
-        """The download URL for the `server` endpoint.
+        """
+        Build the download URL for the `server` endpoint.
 
         Args:
             dataset_id: a dataset unique id.
@@ -637,11 +643,12 @@ class ERDDAP:
         return variables
 
     def get_var_by_attr(self, dataset_id: OptionalStr = None, **kwargs) -> List[str]:
-        """Similar to netCDF4-python `get_variables_by_attributes` for an ERDDAP
-        `dataset_id`.
+        """
+        Return a variable based on its attributes.
 
         The `get_var_by_attr` method will create an info `csv` return,
-        for the `dataset_id`, and the variables attribute dictionary.
+        for the `dataset_id`, and the variables attribute dictionary,
+        similar to netCDF4-python `get_variables_by_attributes`.
 
         Examples:
             >>> e = ERDDAP(server_url="https://gliders.ioos.us/erddap")

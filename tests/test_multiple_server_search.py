@@ -1,3 +1,5 @@
+"""Test Multiple ERDDAP search."""
+
 import pytest
 
 from erddapy.multiple_server_search import fetch_results, search_servers
@@ -6,7 +8,7 @@ from erddapy.multiple_server_search import fetch_results, search_servers
 @pytest.mark.web
 @pytest.mark.vcr()
 def test_fetch_results():
-    "This search should return results"
+    """This search should return results."""
     url = 'https://gliders.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor="sst"'
     key = "ioos"
     protocol = "tabledap"
@@ -17,7 +19,7 @@ def test_fetch_results():
 @pytest.mark.web
 @pytest.mark.vcr()
 def test_fetch_no_results():
-    """This search should return no results"""
+    """This search should return no results."""
     url = (
         "https://gliders.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor"
         '="incredibly_long_string_that_should_never_match_a_real_dataset" '
@@ -33,6 +35,7 @@ def test_fetch_no_results():
 @pytest.mark.web
 @pytest.mark.parametrize("parallel", [True, False])
 def test_search_awesome_erddap_servers(parallel):
+    """Test multiple server search on awesome ERDDAP list."""
     query = "glider"
     protocol = "tabledap"
     df = search_servers(
@@ -50,6 +53,7 @@ def test_search_awesome_erddap_servers(parallel):
 def test_search_servers_with_a_list(parallel):
     """
     Check that downloads are made and that serial and parallel results are similar.
+
     Ideally they should be identical but the servers are live
     and changes from one request to another can happen.
 
