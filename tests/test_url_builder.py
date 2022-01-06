@@ -1,3 +1,5 @@
+"""Test URL builders."""
+
 import pytest
 from requests.exceptions import HTTPError
 
@@ -11,6 +13,7 @@ def _url_to_dict(url):
 
 @pytest.fixture
 def e():
+    """Instantiate ERDDAP class for testing."""
     yield ERDDAP(
         server="https://upwell.pfeg.noaa.gov/erddap",
         protocol="tabledap",
@@ -31,6 +34,7 @@ def test_search_url_bad_request(e):
 
 
 def test_search_normalization(e):
+    """Test search text normalization."""
     search_url = e.get_search_url(
         cdm_data_type="TimeSeries",
         standard_name="Sea_Water_Practical_Salinity",
@@ -144,6 +148,7 @@ def test_download_url_unconstrained(e):
 @pytest.mark.web
 @pytest.mark.vcr()
 def test_download_url_constrained(e):
+    """Test a constraint download URL."""
     dataset_id = "gtoppAT"
     variables = ["commonName", "yearDeployed", "serialNumber"]
 
@@ -180,7 +185,8 @@ def test_download_url_constrained(e):
     assert options["longitude<"] == str(max_lon)
 
 
-def test_download_url_relative_constrains(e):
+def test_download_url_relative_constraints(e):
+    """Test download URL with relative constraints."""
     dataset_id = "scrippsGliders"
     variables = ["wmo_id", "platform_id", "platform_type"]
 
@@ -223,6 +229,7 @@ def test_download_url_relative_constrains(e):
 @pytest.mark.web
 @pytest.mark.vcr()
 def test_get_var_by_attr(e):
+    """Test get_var_by_attr."""
     variables = e.get_var_by_attr(dataset_id="gtoppAT", axis="X")
     assert isinstance(variables, list)
     assert variables == ["longitude"]

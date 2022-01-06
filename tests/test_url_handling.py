@@ -1,3 +1,5 @@
+"""Test URL handling."""
+
 import io
 
 import pytest
@@ -26,7 +28,7 @@ def test_urlopen_raise():
 
 @pytest.mark.web
 def test_urlopen_requests_kwargs():
-    """Test that urlopen can pass kwargs to requests"""
+    """Test that urlopen can pass kwargs to requests."""
     base_url = "http://erddap.sensors.ioos.us/erddap/tabledap/"
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000

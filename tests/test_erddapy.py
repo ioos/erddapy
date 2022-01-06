@@ -1,3 +1,5 @@
+"""Test ERDDAP functionality."""
+
 from datetime import datetime
 
 import pendulum
@@ -83,6 +85,7 @@ def test__quote_string_constraints():
 
 
 def test__format_constraints_url():
+    """Test constraint formatting."""
     kw_url = _format_constraints_url(
         {
             "latitude>=": 42,
@@ -95,9 +98,7 @@ def test__format_constraints_url():
 
 @pytest.mark.web
 def test_erddap_requests_kwargs():
-    """Test that an ERDDAP instance can have requests_kwargs attribute assigned
-    and are passed to the underlying methods"""
-
+    """Test that an ERDDAP instance can have requests_kwargs attribute assigned."""
     base_url = "http://www.neracoos.org/erddap"
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000
@@ -118,6 +119,7 @@ def test_erddap_requests_kwargs():
 @pytest.mark.web
 @pytest.mark.vcr()
 def test_erddap2_10():
+    """Check regression for ERDDAP 2.10."""
     e = ERDDAP(server="https://coastwatch.pfeg.noaa.gov/erddap")
     url = e.get_search_url(search_for="whoi", response="csv")
     r = requests.head(url)
@@ -125,7 +127,7 @@ def test_erddap2_10():
 
 
 def test__griddap_check_constraints():
-    """Check griddap constraints dict has not changed keys"""
+    """Check griddap constraints dict has not changed keys."""
     constraints_dict = {
         "time>=": "2012-01-01T00:00:00Z",
         "time<=": "2021-06-19T05:00:00Z",
@@ -151,7 +153,7 @@ def test__griddap_check_constraints():
 
 
 def test__griddap_check_variables():
-    """Check all variables for griddap query exist in target dataset"""
+    """Check all variables for griddap query exist in target dataset."""
     original_variables = ["foo", "bar"]
     good_variables = ["foo"]
     bad_variables = ["foo", "bar", "baz"]
