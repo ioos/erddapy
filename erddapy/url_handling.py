@@ -1,7 +1,4 @@
-"""
-URL handling
-
-"""
+"""URL handling."""
 
 import functools
 import io
@@ -37,6 +34,7 @@ def urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
 def check_url_response(url: str, **kwargs: Dict) -> str:
     """
     Shortcut to `raise_for_status` instead of fetching the whole content.
+
     One should only use this is passing URLs that are known to work is necessary.
     Otherwise let it fail later and avoid fetching the head.
 
@@ -48,9 +46,10 @@ def check_url_response(url: str, **kwargs: Dict) -> str:
 
 def _distinct(url: str, **kwargs: Dict) -> str:
     """
-    Sort all of the rows in the results table
-    (starting with the first requested variable,
-    then using the second requested variable if the first variable has a tie, ...),
+    Sort all of the rows in the results table.
+
+    Starting with the first requested variable,
+    then using the second requested variable if the first variable has a tie, ...,
     then remove all non-unique rows of data.
 
     For example, a query for the variables ["stationType", "stationID"] with `distinct=True`
