@@ -25,7 +25,7 @@ OptionalStr = Optional[str]
 def _quote_string_constraints(kwargs: Dict) -> Dict:
     """
     Quote constraints of String variables.
-    
+
     The right-hand-side value must be surrounded by double quotes if they are not relative constraints.
 
     """
@@ -647,7 +647,8 @@ class ERDDAP:
         Return a variable based on its attributes.
 
         The `get_var_by_attr` method will create an info `csv` return,
-        for the `dataset_id`, and the variables attribute dictionary, similar to netCDF4-python `get_variables_by_attributes`.
+        for the `dataset_id`, and the variables attribute dictionary,
+        similar to netCDF4-python `get_variables_by_attributes`.
 
         Examples:
             >>> e = ERDDAP(server_url="https://gliders.ioos.us/erddap")

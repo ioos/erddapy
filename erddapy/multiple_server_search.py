@@ -119,7 +119,7 @@ def advanced_search_servers(
         servers_list: optional list of servers. if None, will search all servers in erddapy.servers
         protocol: tabledap or griddap
         parallel: If True, uses joblib to parallelize the search
-    
+
     """
     if protocol not in ["tabledap", "griddap"]:
         raise ValueError(
