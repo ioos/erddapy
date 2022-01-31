@@ -125,7 +125,7 @@ def _griddap_check_constraints(user_constraints: Dict, original_constraints: Dic
     """Check that constraints changed by user match those expected by dataset."""
     if user_constraints.keys() != original_constraints.keys():
         raise ValueError(
-            "keys in e.constraints have changed. Re-run e.griddap_initialise",
+            "keys in e.constraints have changed. Re-run e.griddap_initialize",
         )
 
 
@@ -137,7 +137,7 @@ def _griddap_check_variables(user_variables: ListLike, original_variables: ListL
             invalid_variables.append(variable)
     if invalid_variables:
         raise ValueError(
-            f"variables {invalid_variables} are not present in dataset. Re-run e.griddap_initialise",
+            f"variables {invalid_variables} are not present in dataset. Re-run e.griddap_initialize",
         )
 
 
@@ -332,7 +332,7 @@ class ERDDAP:
         step: int = 1,
     ):
         """
-        Fetch metadata of dataset and initialise constraints and variables.
+        Fetch metadata of dataset and initialize constraints and variables.
 
         Args:
         dataset_id: a dataset unique id.
