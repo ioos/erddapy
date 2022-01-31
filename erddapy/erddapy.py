@@ -116,7 +116,7 @@ def _griddap_get_constraints(
                 ),
             ],
         )
-    table.set_index("dimension name", drop=True)
+    table = table.set_index("dimension name", drop=True)
     constraints_dict = {}
     for dim, data in table.iterrows():
         constraints_dict[f"{dim}>="] = data["min"]
