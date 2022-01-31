@@ -101,17 +101,16 @@ def _griddap_get_constraints(
             data_start = data[-1][0]
         else:
             data_start = data[0][0]
-        table = table.append(
-            {
+        table = pd.concat([
+            table,
+            pd.DataFrame([{
                 "dimension name": dim,
                 "min": data_start,
                 "max": data[-1][0],
                 "length": len(data),
-            },
-            ignore_index=True,
+            }])],
         )
-    table.index = table["dimension name"]
-    table = table.drop("dimension name", axis=1)
+    table.set_index("dimension name", drop=True)
     constraints_dict = {}
     for dim, data in table.iterrows():
         constraints_dict[f"{dim}>="] = data["min"]
