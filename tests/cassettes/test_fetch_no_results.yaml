@@ -41,4 +41,88 @@ interactions:
     status:
       code: 404
       message: ''
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://gliders.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor=%22incredibly_long_string_that_should_never_match_a_real_dataset%22%20
+  response:
+    body:
+      string: "Error {\n    code=404;\n    message=\"Not Found: Resource not found:
+        Your query produced no matching results. Check the spelling of the word(s)
+        you searched for.\";\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Mon, 14 Mar 2022 18:15:04 GMT
+      Last-Modified:
+      - Mon, 14 Mar 2022 18:15:04 GMT
+      Server:
+      - nginx/1.18.0
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - '2.12'
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 404
+      message: ''
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://gliders.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor=%22incredibly_long_string_that_should_never_match_a_real_dataset%22%20
+  response:
+    body:
+      string: "Error {\n    code=404;\n    message=\"Not Found: Resource not found:
+        Your query produced no matching results. Check the spelling of the word(s)
+        you searched for.\";\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Mon, 14 Mar 2022 18:23:38 GMT
+      Last-Modified:
+      - Mon, 14 Mar 2022 18:23:38 GMT
+      Server:
+      - nginx/1.18.0
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - '2.12'
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 404
+      message: ''
 version: 1

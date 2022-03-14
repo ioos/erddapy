@@ -1,5 +1,7 @@
 """Test Multiple ERDDAP search."""
 
+import sys
+
 import pytest
 
 from erddapy.multiple_server_search import fetch_results, search_servers
@@ -30,9 +32,16 @@ def test_fetch_no_results():
     assert data is None
 
 
-# FIXME: https://github.com/kevin1024/vcrpy/issues/533
-# @pytest.mark.vcr()
+@pytest.mark.vcr()
 @pytest.mark.web
+@pytest.mark.skipif(
+    sys.platform == "win32",
+    reason="run only on linux to avoid extra load on the server",
+)
+@pytest.mark.skipif(
+    sys.platform == "darwin",
+    reason="run only on linux to avoid extra load on the server",
+)
 @pytest.mark.parametrize("parallel", [True, False])
 def test_search_awesome_erddap_servers(parallel):
     """Test multiple server search on awesome ERDDAP list."""
@@ -49,6 +58,14 @@ def test_search_awesome_erddap_servers(parallel):
 
 @pytest.mark.web
 @pytest.mark.vcr()
+@pytest.mark.skipif(
+    sys.platform == "win32",
+    reason="run only on linux to avoid extra load on the server",
+)
+@pytest.mark.skipif(
+    sys.platform == "darwin",
+    reason="run only on linux to avoid extra load on the server",
+)
 @pytest.mark.parametrize("parallel", [True, False])
 def test_search_servers_with_a_list(parallel):
     """
