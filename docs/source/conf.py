@@ -35,7 +35,6 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
     "nbsphinx",
-    "doctr_versions_menu",
 ]
 
 autodoc_typehints = "description"
@@ -54,7 +53,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "erddapy"
-copyright = "2017, Filipe Fernandes"
+copyright = "2022, Filipe Fernandes"
 author = "Filipe Fernandes"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -101,7 +100,6 @@ html_theme_options = {
     "github_user": "ioos",
     "github_repo": "erddapy",
     "github_banner": True,
-    "travis_button": True,
     "fixed_sidebar": True,
 }
 
@@ -122,7 +120,6 @@ html_sidebars = {
         "navigation.html",
         "relations.html",  # needs 'show_related': True theme option to display
         "searchbox.html",
-        "donate.html",
     ],
 }
 
