@@ -76,7 +76,7 @@ def test_search_awesome_erddap_servers_False():
 # @pytest.mark.vcr()
 @pytest.mark.web
 @pytest.mark.skipif(
-    (sys.platform in ["win32", "darwin"] or sys.version_info < (3, 9)),
+    (sys.platform in ["win32", "darwin"] or sys.version_info < (3, 10)),
     reason="run only on linux and latest to avoid extra load on the server",
 )
 def test_search_servers_with_a_list_True():
