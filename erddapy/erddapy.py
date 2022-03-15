@@ -559,8 +559,16 @@ class ERDDAP:
                     continue
                 # The valid operators are
                 # =, != (not equals), =~ (a regular expression test), <, <=, >, and >=
-                seps = ["=", "!=", "=~", "<", "<=", ">", ">="]
-                if k.startswith("time") and any([sep in k for sep in seps]):
+                valid_time_constraints = (
+                    "time=",
+                    "time!=",
+                    "time=~",
+                    "time<",
+                    "time<=",
+                    "time>",
+                    "time>=",
+                )
+                if k.startswith(valid_time_constraints):
                     _constraints.update({k: parse_dates(v)})
             _constraints = _quote_string_constraints(_constraints)
             _constraints_url = _format_constraints_url(_constraints)
