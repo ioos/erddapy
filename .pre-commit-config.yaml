@@ -66,11 +66,7 @@ repos:
         - --quiet-level=2
 
 - repo: https://github.com/asottile/pyupgrade
-<<<<<<< HEAD
-  rev: v2.31.0
-=======
   rev: v2.23.3
->>>>>>> updated
   hooks:
     - id: pyupgrade
       args:
