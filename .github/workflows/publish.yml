@@ -38,7 +38,7 @@ jobs:
       shell: bash
 
     - name: Publish a Python distribution to PyPI
-      if: ${{ github.event_name == 'create' && github.event.ref_type == 'tag' }}
+      if: ${{ github.event_name == 'release' }}
       uses: pypa/gh-action-pypi-publish@master
       with:
         user: __token__
