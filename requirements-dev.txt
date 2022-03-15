@@ -24,7 +24,6 @@ pytest-cov
 pytest-flake8
 pytest-sugar
 pytest-vcr
-pytest-xdist
 scitools-iris>=3
 setuptools_scm
 sphinx
