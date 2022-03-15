@@ -37,8 +37,8 @@ See https://coastwatch.pfeg.noaa.gov/erddap/index.html for more information.
    :caption: Contents:
 
    00-quick_intro-output.ipynb
-   01a-griddap.ipynb
-   01b-tabledap.ipynb
+   01a-griddap-output.ipynb
+   01b-tabledap-output.ipynb
    02-extras-output.ipynb
    03-searchfor-output.ipynb
    erddapy

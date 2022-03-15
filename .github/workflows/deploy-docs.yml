@@ -1,0 +1,54 @@
+name: Build and Deploy docs
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup Conda
+      uses: s-weigand/setup-conda@v1
+      with:
+        activate-conda: false
+        conda-channels: conda-forge
+
+    - name: Build environment
+      shell: bash -l {0}
+      run: |
+        conda create --name TEST python=3 --file requirements.txt --file requirements-dev.txt
+        source activate TEST
+        python -m pip install -e . --no-deps --force-reinstall
+
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::$(python setup.py --version)
+
+    - name: Build documentation
+      shell: bash -l {0}
+      run: |
+        set -e
+        source activate TEST
+        jupyter nbconvert --to notebook --execute notebooks/00-quick_intro.ipynb --output=00-quick_intro-output.ipynb
+        jupyter nbconvert --to notebook --execute notebooks/01a-griddap.ipynb --output=01a-griddap-output.ipynb
+        jupyter nbconvert --to notebook --execute notebooks/01b-tabledap.ipynb --output=01b-tabledap-output.ipynb
+        jupyter nbconvert --to notebook --execute notebooks/02-extras.ipynb --output=02-extras-output.ipynb
+        jupyter nbconvert --to notebook --execute notebooks/03-searchfor.ipynb --output=03-searchfor-output.ipynb
+        mv notebooks/*output.ipynb docs/source/
+        pushd docs
+        make clean html linkcheck
+        popd
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/build/html
