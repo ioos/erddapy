@@ -70,6 +70,7 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
     return parse_date_time.timestamp()
 
 
+@functools.lru_cache(maxsize=256)
 def _griddap_get_constraints(
     dataset_url: str,
     step: int,
