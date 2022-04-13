@@ -80,7 +80,7 @@ conda install --channel conda-forge erddapy
 or, if you are a `pip` users
 
 ```shell
-pip install erddapy
+python -m pip install erddapy
 ```
 
 Note that, if you are installing the `requirements-dev.txt`, the `iris` package
