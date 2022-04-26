@@ -1,20 +1,21 @@
 interactions:
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.22.0
     method: HEAD
     uri: http://erddap.sensors.ioos.us/erddap/tabledap/gov_usgs_waterdata_340800117235901.htmlTable?time,&time%3E=2017-08-29T00:00:00Z&time%3C=2015-09-05T19:00:00Z
   response:
-    body:
-      string: ''
+    content: ''
     headers:
       Connection:
       - keep-alive
@@ -27,18 +28,17 @@ interactions:
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Fri, 17 Sep 2021 00:05:38 GMT
+      - Tue, 26 Apr 2022 16:51:48 GMT
       Last-Modified:
-      - Fri, 17 Sep 2021 00:05:38 GMT
+      - Tue, 26 Apr 2022 16:51:48 GMT
       Server:
       - nginx/1.20.1
       Set-Cookie:
-      - cid=CgIHBWFD29G6/C2XA6ezAg==; expires=Sun, 17-Sep-23 00:05:38 GMT; path=/
+      - cid=CgIHBWJoIyOwq2aMBCVkAg==; expires=Thu, 25-Apr-24 16:51:48 GMT; path=/
       erddap-server:
       - 2.02_axiom-r1
       xdods-server:
       - dods/3.7
-    status:
-      code: 400
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 400
 version: 1

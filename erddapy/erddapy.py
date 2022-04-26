@@ -8,15 +8,11 @@ from urllib.parse import quote_plus
 
 import pandas as pd
 import pytz
+from pandas._libs.tslibs.parsing import parse_time_string
 
 from erddapy.netcdf_handling import _nc_dataset, _tempnc
 from erddapy.servers import servers
 from erddapy.url_handling import _distinct, urlopen
-
-try:
-    from pandas.core.indexes.period import parse_time_string
-except ImportError:
-    from pandas._libs.tslibs.parsing import parse_time_string
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
@@ -246,7 +242,7 @@ class ERDDAP:
         variables: a list variables to download.
         response: default is HTML.
         constraints: download constraints, default None (opendap-like url)
-        params and requests_kwargs: `request.get` options
+        params and request_kwargs: `httpx.get` options
 
     Returns:
         instance: the ERDDAP URL builder.
@@ -319,7 +315,7 @@ class ERDDAP:
         self.constraints: Optional[Dict] = None
         self.server_functions: Optional[Dict] = None
         self.dataset_id: OptionalStr = None
-        self.requests_kwargs: Dict = {}
+        self.request_kwargs: Dict = {}
         self.auth: Optional[tuple] = None
         self.variables: Optional[ListLike] = None
         self.dim_names: Optional[ListLike] = None
@@ -592,7 +588,7 @@ class ERDDAP:
         """
         response = kw.pop("response", "csvp")
         url = self.get_download_url(response=response, **kw)
-        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
+        data = urlopen(url, auth=self.auth, **self.request_kwargs)
         return pd.read_csv(data, **kw)
 
     def to_ncCF(self, **kw):
@@ -600,7 +596,7 @@ class ERDDAP:
         if self.protocol == "griddap":
             return ValueError("Cannot use ncCF with griddap.")
         url = self.get_download_url(response="ncCF", **kw)
-        nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
+        nc = _nc_dataset(url, auth=self.auth, **self.request_kwargs)
         return nc
 
     def to_xarray(self, **kw):
@@ -612,7 +608,7 @@ class ERDDAP:
 
         response = "nc" if self.protocol == "griddap" else "ncCF"
         url = self.get_download_url(response=response)
-        nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
+        nc = _nc_dataset(url, auth=self.auth, **self.request_kwargs)
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
     def to_iris(self, **kw):
@@ -624,7 +620,7 @@ class ERDDAP:
 
         response = "nc" if self.protocol == "griddap" else "ncCF"
         url = self.get_download_url(response=response, **kw)
-        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
+        data = urlopen(url, auth=self.auth, **self.request_kwargs)
         with _tempnc(data) as tmp:
             cubes = iris.load_raw(tmp, **kw)
             try:
@@ -644,7 +640,7 @@ class ERDDAP:
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
         variables = {}
-        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
+        data = urlopen(url, auth=self.auth, **self.request_kwargs)
         _df = pd.read_csv(data)
         self._dataset_id = dataset_id
         for variable in set(_df["Variable Name"]):

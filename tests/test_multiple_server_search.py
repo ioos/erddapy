@@ -32,7 +32,7 @@ def test_fetch_no_results():
     assert data is None
 
 
-# I guess we cannot record vcrs with parallel requests.
+# I guess we cannot record vcrs with a parallel request.
 # @pytest.mark.vcr()
 @pytest.mark.web
 @pytest.mark.skipif(
@@ -72,7 +72,7 @@ def test_search_awesome_erddap_servers_False():
     assert not df.empty
 
 
-# I guess we cannot record vcrs with parallel requests.
+# I guess we cannot record vcrs with a parallel request.
 # @pytest.mark.vcr()
 @pytest.mark.web
 @pytest.mark.skipif(

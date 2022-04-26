@@ -2,11 +2,10 @@
 
 from datetime import datetime
 
+import httpx
 import pendulum
 import pytest
 import pytz
-import requests
-from requests.exceptions import ReadTimeout
 
 from erddapy.erddapy import (
     ERDDAP,
@@ -97,8 +96,8 @@ def test__format_constraints_url():
 
 
 @pytest.mark.web
-def test_erddap_requests_kwargs():
-    """Test that an ERDDAP instance can have requests_kwargs attribute assigned."""
+def test_erddap_request_kwargs():
+    """Test that an ERDDAP instance can have request_kwargs attribute assigned."""
     base_url = "http://www.neracoos.org/erddap"
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000
@@ -110,9 +109,9 @@ def test_erddap_requests_kwargs():
     connection.dataset_id = "M01_sbe37_all"
     connection.protocol = "tabledap"
 
-    connection.requests_kwargs["timeout"] = timeout_seconds
+    connection.request_kwargs["timeout"] = timeout_seconds
 
-    with pytest.raises(ReadTimeout):
+    with pytest.raises(httpx.ReadTimeout):
         connection.to_xarray()
 
 
@@ -122,7 +121,7 @@ def test_erddap2_10():
     """Check regression for ERDDAP 2.10."""
     e = ERDDAP(server="https://coastwatch.pfeg.noaa.gov/erddap")
     url = e.get_search_url(search_for="whoi", response="csv")
-    r = requests.head(url)
+    r = httpx.head(url)
     assert r.raise_for_status() is None
 
 

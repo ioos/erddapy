@@ -1,121 +1,258 @@
 interactions:
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - developer.mozilla.org
+      user-agent:
+      - python-httpx/0.22.0
     method: GET
     uri: https://developer.mozilla.org/en-US/404
   response:
-    body:
-      string: !!binary |
-        cbh+iKho9RBAI2Xh/P0uVbOqheF5GZgDlsyK0DmELCcEkqICwCMp6e55nHHR/Lj+Khf9565x0bzN
-        /6UVogJE9b5KGS7LdHhfbOABvrDB9qb22irkLtkZveHKlasY0LvqNe/tEnhLnoE9ngzsBQN7JwfS
-        kVI+hSXvf+FOMXWOsQqZirFUV6i029aLzJYMx+QvdKbNpD5yOhUnIJ53GvpoU4Ezy188w6iTagR2
-        xQQt27YSoNO6ooJt5tnmIp5fN87MTvJIkOrfTOBdm/MRjmFaaCYaw2jy5SkmBEoJ6wem+/lEgOez
-        TWnXqM42AndXCyM5V4J5Ph6PTuMRjId+nI7SpBvL+YhSP85bt9NLXkZl5ObgZ9LPpR9uIfZEf5a8
-        8FWpgXKN1f8HI6pJB9ZAkqpAZ0aDKJfzTTakAmrNUsuDeLTiFJBBV5dVzMTRr8ugqghSsargKz9c
-        XOAH1x+iV5lC151u8HyWf935lbqWZ8AtAgK838Fg0dyYn58bp/WiAZ5vkUtlbQd9b+pfVG5zlpeb
-        DZTO20dBSl1rVtuhQGDN78JrWZNiIw00e5fobFcx6nV8++n3P7799OW/r59/+Prj5////ILEJEfW
-        tUgsjkHnqMXBVe3CPo4r6T8NRrIROHe27W7sD3kHl+chRkqGRfhVgbuYBdN4wnLL3ttys5HPNlLx
-        q25joNmpJmvBV5nUYaqgsDLvhJQLp2OfLzO0BQlkA53ztHeDRNMgIc7RoyqzOYITd0yZFrTypS2Q
-        pvkCQ9eePbuPt0ddeXznDtZGd1EWeVGJaeK1ijh9uc/QIVNIVlUDiJe10dG7erNqigenMiWg5Okk
-        rNFlECnCz21Jy9Hl/m/3KSnlUqewhh2ZfCpuyNQI8La3NZbresOtwC+Br+XYKCN1WVCHMvgyMVdh
-        PcqUmI/Wg92DCn6uNhZN62zR6wxZdyJdSfDIkr5WaqmupsVFZKgMkjaI7Q+UtsVzMFgTzUUtVzBQ
-        Th/irdNxMF3ZThYZt5dhEBvX8zBwlhdlu9wpBtXMvo36gCU7ZVbzrSwts3IPXoFnuw04J8It7GT3
-        ffrwTEDbQ07Di1J9tAMWDGMaeWOfJKxO+2QVF+mhkxLZLlKGsdm9U1b9XKGjvG4ar7zzQZpmSRT4
-        Gejlzq59TeUVU37yUQOT8OH7L16LE8ylc3z6UhB8viG8vMzgC0Joy9/L5eT+i9d0MIi+TSjkA1mv
-        G3oc0Jks3vuMe8aUazPppQWvKizaVl0JfP/F648ujsGfyfrgehz8HIrc+Q0iqKNjm2PwdBNyXbYZ
-        WHc4fn6D0MmRu9onlFIn+nbWg8Ea2nJb2uJxDC6+0imdvVzXJ6LdRsQ3egq8i3JCu1J71h18WYNC
-        HKF9Mw7NCdy0a3+U45vyO4rYR4YEXMSwEgR1iKVOPiX6KYdMrcv2QdIgAhk6fS/dZ+k0RHtimWsL
-        p9dOcKFNzAgDn3dokhPKzK5uem/i94gGSK62JRVr2RQSar74Dy0dDJZkRWnXilXfHOYKCjEtNGFb
-        xylUDdzIkQkOivarfip1ja62cquo0PRkG6qFz5zICcvErZjljViSNnBG80YtGuitoL6RzOUW7fs8
-        YdDOcd4Km9Tp+75rUP/Mk9l2xsnL48TJTPsE99zYCcMqT66400rbWP30dcTxmn6OL6n8M5pYVhBK
-        U1xCk4o52uWuJqVwYzsn48G0nAt/WnLeEw+ywi3K94VKCGEBv6jgru37vYgbgzr2LYg05UXW3rBn
-        pDebqw0LGaMyOiaiMULUdvJWOVNIFJUWIZvIHekiuxPFerc32TJ1vLdkGrRl+l+5kxXesxWUPJda
-        LN7vHaO35vLTHUm7FEzrtqR9OhzJBe+8FvTWkAWObeH3G46qHwGmaPphacx12cqa92Eqg0rzDmaS
-        qXzuo8xwVhah8hi4SfDB8f4wa8tdH2VGTV/yUW6gnHTy8C0cwkgfqcNvWLVppB6+72zxXDbr5yIU
-        U7bUEbooETQYVUVgs2Od+WglNL85Qqf8z9b8HX8qZ0oOBlN5dJRpDSPUQr5vHzd4hvmpPZ229VmH
-        SgIDQZZ0bXGTBR5RoJ87sRK/7+no5hcz2vX9GM3IA8W+NhZGMHK9q/fZeElh1Xib3ekTjY8VR2M/
-        DaPRgZo7s/owLDNZntU75cMzuJbm7AdS7B/Pq41yUf3aQfqKVeMVciCljGeY1tQ/LiLeXti3xoIK
-        xlKqNM8eFT/Nck4RQ2q0GYbJyBHbhkVQ9X/AOBwnUSLDLRzpKV8iE8NhGOKawL8CFEIGVu756FM0
-        /JPLIDjjg24rZ5tyPnDYb9Zl1XLtsScXndIfxvNn67JCd0teHwDsxOw7zVExejhDfSLfXvzkjZME
-        JQR/RhBgr/Ajdzi45l0DDVGRk6xGmvbN6uQcvHxOZK3GO7AKxlr52qFjaKR2xOjI3vviTyTC/Oom
-        njcK2TxER1cYXi54zb7AaPjqOq+6U4F95KM4CWAYoyBK8Hw2LHeDyAj8YAhBjEYQJfsgCMBPl6BN
-        Xgaf5/tt4EcwDFCSag4jVjcc8gAFMBzzAOIUhTAMZARxjIAL+cgPeARJjEIUQrzetI98nweQJJBo
-        HnwI3lglukq6J2AzVH413OWdppqCJzyEiwJDXNzJDsqVYoZ+oyhZlE4RcBMLTEAUfQ9hbrk4CNE9
-        6WklXGjw2fOFk9N1qzWK6giqByyVBx6P0s+vZnDeao58LLrw2cjzVitM4Oy+wfhoRO1XP4gUjysO
-        VgC0rmGJC+O/Nwyth1IG64pcYH7Lhu4HEY52TIIpDsPmZUSWQGhesUDD2a5oec+oRyafM5kWE4CI
-        LGBSFQ4a3Bnl1DrKJBEruUgzhNjzLpwSMPudYGP6eEEGOtcXejkg41WYsptjkzCpI076dAyglltY
-        Fuu/M5ylIFsTgmipyxJLhoj86IMbl8Hx1zfngVF8UbwSQQGItBJ9RvQdNLwWxXAXbgmEfye8rgJH
-        JiRQ62olifIZUS7gbUMViS28SHLLZuwPi5bltxpnSfQ1sG5uGG8WUa2JLCL1AhSuwnbVTL2++TR8
-        mtRNv9K/kpP0mqcM5laXHDuFBgs6wG2xOXGSlcWzMNYoSRhFpF1RNkk0BswWG8Al2Rq8t7PsQt3Y
-        yAalXYCa+kUlfRx3iVgMg+cV8koAL14Ny0Bp5kwx3jEr+uIqJ+5FqwgZbqvt2w5iroLLrUpAiqW4
-        8/rm2Uqszg86P3ryO0WmeCeaz0TIHGXm1f+jUF33oPJ5NBGuxIwOMv/TkfzMYfYyTNCFoUa0Rn3F
-        n5v1wdxOV4fXGwRNSETeGm8Zt6Pmu6jKrR9SZrh3e3MZ2ehW2D50yViwhfFWRyfgQ+2oLSINZ9sr
-        sqi5tqAGSHiN75qg5qO5P8xQtbmsuwbkSUfDCo1+vbMyJHLVTw0LOWxy1JeZ3eKtFjhVrqu9C0dV
-        7c77iaI2ntsc48/mjvRIvVCikFdalVZxYhbScocQYTXUKXDbyF7vPphF0VbXkdV8Z/fExvWVZ3BG
-        VOjy6WHfbe9A9f0E+RKxNXfjzMMK+7DorE7VRc5rrRHO13s4RmoFYU750Ma40mFDHmlyq8BTOTwf
-        OuhRPJPs+y7Tcbtex/RXZkoetN2gPwplFF1j7SNzl5ZZpj7Rk0xEmdHMHIkQkGgHmWujjNc7C604
-        fNq1BCBA2cbNgkKxg4liZrRYhRJmzs4uENXVxzUQvecb61YE1mIeC0SFDtukKzbKNdwGClVFWgQQ
-        5wud1hraKK1cuBQfKaUu3jFHNUSYQfEiV/aRe542By2zUma/UOgroWJYBcbeZjF1Rqo4njjSrGiC
-        PAQFHoc0egTQDMMyLIHK1zvTujqU94Sk0ZFQHpZi56y2/cNe9q8mRks1uRFE2qHfj4Cp6D3U4A39
-        L6cUxBCh+c9j6I9+9ndYqYlTIDRjoj5F+6IRhyAgb8H6c6vvSuYhFsbqMt/8AbmcCCOAogUKOw5H
-        fCFS3osNkcYATBCs/Z4nuRiKkfZm9iqXBUoA1UsPZEtjGvoaDLJfC/0wuzsfPURtPL50xHQ+SBuk
-        YZ9wAtSWBKQmxPBkmWwEM9S+7Pg/BCmeNuuqObFzo8Lb5ZqysZBqoxnpBmc3bFH9CiK31597mcNl
-        FvffSG8PLqPYepIE9J9U2Y2BqAbQw+3rXY15QzZ3wQ2yVb0CH6SQWqjZsdeaMgIU0nAhPbqekOEu
-        3qiJYuIIT42gCGWUkVoDLJFxsoa1vEGwdwx5Af5m0hDHUY/6fGBcAGJO+NF2tG545vaabiWAZlBE
-        lBHM3qrw1NcXke1lApQplnAqyD6avVW+iPZCUjrAPkchQvg7BVCOiNpWAzg8AEDM2v5VNsJk5za/
-        S4SraO3zzDMIEDUI4AnnXoss3ax+d/fhklGaUTrVdQjqq86hnFSkTkTZcuAcDtRrujSNZVkO6otr
-        nmuClyOeRTJHscyfIa4kmaEGGuw8sJZbLKNBkiqUFChT1JLu0rBlHln9GxaSN3thBXeVoG0cW54f
-        mQqEWflNt7SPbM0z5mrDdHIu5UA9Gj2Ne/YSXT1fslruDg829GZaJoIIuSKxF1qbAq1glPXqjTxa
-        x56lnt0sQ/qcz8Ssqu+aAuIGCmjLNLDVg/ZY8o23G0AlsIRQLazpTVeiLz4MES8vMIXG4bvw4yP4
-        3pN5etJ8U4rRmNEM6Tox9JYoMJg0W5NNLpGEZy9GyyJOEOhOUaqWLnkwCZm8Uo62Pvq9ozJHGdqj
-        jP0uwAyvufAYsI1lGMqEuL4wAnCsM7fGTKfCtPO/kZMlovIbxddEVfn+gTJnRZU+PddykpP47fGN
-        7PeP6RnmhzWn2qOFltQItn4d4OnlNpHbMDx5QuTeSlJcI/mOEgUci2GjjHW00udVhj1W15vFMWwk
-        Tzd6pq8rGE8toPwZ+slpTyNn+ofD/ByQn6lfoevRarUcAV9oSENq0UbMsQ0lO4oi0hfn5CL49J+n
-        ETwLNgN3fqVu0wFUE+i40Qx9LXIklsV8/W76vWchnKB79q8hS7Ga6rgqiKE4BtMgLFs2Y4a4sZ5b
-        HCP5C4WUMwzt8Km0AjVK3E2HWPdQ+Fe01ZbdkDrLmSJ0V+I6tMAP6b1pC612nodLtqvKKYD5xDak
-        05HhOmgIJBDJdNENyzEms8gWHLXHU+b4gkLOMjSGytqCfyjZmlIQ2z28l9xtemwuVTApxlP4xRxp
-        VGdJWTri9sM9V/Pj7SBDiRLFH1yQIwB6Gx5twcPbyas4EHUejIVks8kNkXy39vfetPGJLQTvVT0J
-        Lyiuot57SdVP2Ee+9NjuSTEXFPNLW481cfzyDJi9dwLoXjKbc5zAU23yUv/VVsdujhjqmGdZ4FcJ
-        rFaq+sIHXnE+H0MisB+JU8TofkiaIkXD4QgAqaPfsZpmmWqx2FIRy/qCedRrSQktD+PKBwHCaGoO
-        MwC4LABA7n9dqc7bPl84MQl54ZOtfr9VLNTC7r0vqCfxiqd7aGVIJplQGGxN8UwyTF61ACpq3h/a
-        HLEbluhlerrkED+SS4qwHW4zG/NpBO8VqImXrhFwwsN1hBnGZVx2yoc30SHGwCE3RMJ54Qu3PQ2j
-        IGfcjLn5CSMyITNmMeFIzRl1RYysGjFVJkGgIRy80B8BvljWmERTYsZdZkRIx6GAoEqwcYx5NaEy
-        ErBY78ed/p/Qk/GcFWGC82YtQhzmDW4/gHExI92eV9JZVE/Ym20Uc30ZMDFlNG8U5QTOYDErOWXF
-        I/SahNljPw4Jl6HcUabltpLBynhLSDTTwc0w85wS5xc2YMDOD+cSRqahj8kHLtY8yovL4wmTk35i
-        SCcGfa4X4YP/aZjxNiS9vCkuH5il55dWEbwGFdfslBkIOq1zWIVaAejbgmOzyolTUtxQ18I6nC8n
-        Ioqr23persgOjeMZraLVpAPXAfNblCmXfby+TVYJXd0YNFCSEFdLacIUPuxsNal2Ub5YlhQhIApr
-        oWyIL45pEv2spvPyTTB5eIKg2OAXkAfnCT+SS/yghzTSJlxqy9ghLN7p/aTAOh7ZtaYY5Z+tUYeS
-        vUq/MtxsnqcON5vHoj2vVKHK96rJ+iu1/9DpPbwWZfzQ5pQauN8AQO7db6neW8K2hYKIRf1y+G5f
-        FAhRQyOEyv8cSxC4KLNfi2q6N4qiH1elywQdD9RvNNCRToc479oOasySWZXTIOFymtHltEBt2gN8
-        YdUqPjrC0R2UNdvmmoTNtRL2RRRTjN6vAXdVDdmTIyM45lr6z+vdJ7IqaHqQiHAAyUKfg9z71f5M
-        zMUxhh+zXmyKfM3KskelBaXi0T88JE4EMY9/IRiVoZaNVB/biifzl5ZhoL2Tcc1TA39XVc5A5Afr
-        gW33fTsSCBlvolIHUryahR17ujPBMCr2xknV5D3ZMRRaw79iKMwCgZBzQgilPQRX1S/kwlXp07I9
-        1pYSFmbRoKwy7GpaeZN9pDmWDU0UpHGpWhDP7xZINmherZqElRoIU/8DSOOWRs2xQJdeSmDjadK0
-        lCJ6QNroXeqhhwInGDYCgfaUTRJXMipJSk9KwtgOANp6HgwQygh4QK7av8V5Gf6/51f3V0gN73QS
-        Blbpe1WG6NtFMqK2AW4RYJRNTXkO8AYYZJTq7EC80U8j3DU/iMom+g5UEPM68By4VWHCrQ6R1uau
-        Ke0Vcif4o9yCz3AQlKIGEQdGXfabV13WB72OcEbaMIunaQt5bYB0Gl6QOMjlvhACMosTRc9G4aj8
-        CDkW6W5rWQYku+9KLCMeKz+bWy3ukL7bbnjyrMEA+a0RU/qz0FSnoG2OtRQrJL6d1jeJwGEZyWpa
-        skyqPTTC4Gj2yBV/ojQNWvh2SAecFAMUDGiZg0gURJZ1zX8oMcqKAZprpDzyKIdng3zR3qKDmSqy
-        ckeDBTRLkQ3H+zQMIih3rjjlIizNCQBxJwZQZvSToyD/bsPoK92ERQH5HeHgrR+K7RoGGhux/H7D
-        DgBwXtB8AEAu51T2L9VJBoy6DJ9uLMWM3dXaQujEuPKmiEWGKB752ztEM4nooURy+cQAJuZcv8Rz
-        XKBLNfgB+KJb3AV9EHg7qzRwUdDQiJ6aNtBKvd4taCECk/CktJGSz8o9vMUJk8QgBXmPvuFwTnqt
-        ooJnOKWtPR7pyYyoQOnnQqX4ZYljcHtdoVIhaetSXGwjHwzCbxkC0mLAoIwDdNxMaHEx/ensm7Oo
-        AsO881usYV70ETWMC+pFMJ7uhnBFewxB/T7v5yKUMc4z3exitDDOCoxosR2DrpxiDwO8VjcPu8EC
-        NteGHGCspuHD+8QgC6CVt5fMqcxspHh6nUnIY7VA9mIIVDJRcuVBtKwn4pdh3iL1ckMh3+twN2Ut
-        E1aEXhzBxZLFSpWWjy7EpASvow+XK6j+3Iacklwsio/SEsFtFxJaYcqxVOANy+Isvenmlwv/yV+f
-        7EwNyRZlj6CEHfr9H3cgWpo0XmB+op8yM9ZWNi39kwe1e/8fXbhepbEG+qVCqdgdgVkgERaJupEe
-        p2MpzpDBOMpEDMRXZBvF2XsVDhTCgWVH+oIYcyirkSGHrIOkx9mNoB/46DOxuBithp25n2mrwXED
-        p/I5u3bjaxnSdze4j2VAbsShvptbMRjkvE2rgUQqviAeUnAy/QoW8EWg0dcZQBzBmqvq+syk0YBo
-        kVmL62zXeRqErg7pvd/1aheL/yw1I63Y7btfPA2BaXyOFTYAAw==
+    content: "<!DOCTYPE html><html lang=\"en-US\" prefix=\"og: https://ogp.me/ns#\"><head><meta
+      charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link
+      rel=\"icon\" href=\"/favicon-48x48.cbbd161b.png\"><link rel=\"apple-touch-icon\"
+      href=\"/apple-touch-icon.6803c6f0.png\"><meta name=\"theme-color\" content=\"#ffffff\"><link
+      rel=\"manifest\" href=\"/manifest.56b1cedc.json\"><link rel=\"search\" type=\"application/opensearchdescription+xml\"
+      href=\"/opensearch.xml\" title=\"MDN Web Docs\"><script>Array.prototype.flat&&Array.prototype.includes||document.write('<script
+      src=\"https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.flat%2Ces6\"><\\/script>')</script><title>\U0001F937\U0001F3FD\u200D\u2640\uFE0F
+      Page not found | MDN Web Docs</title><meta name=\"description\" content=\"The
+      MDN Web Docs site provides information about Open Web technologies including
+      HTML, CSS, and APIs for both Web sites and progressive web apps.\"><meta property=\"og:url\"
+      content=\"https://developer.mozilla.org\"><meta property=\"og:title\" content=\"\U0001F937\U0001F3FD\u200D\u2640\uFE0F
+      Page not found | MDN Web Docs\"><meta property=\"og:description\" content=\"The
+      MDN Web Docs site provides information about Open Web technologies including
+      HTML, CSS, and APIs for both Web sites and progressive web apps.\"><meta property=\"og:locale\"
+      content=\"en-US\"><meta property=\"og:image\" content=\"https://developer.mozilla.org/mdn-social-share.cd6c4a5a.png\"><meta
+      property=\"twitter:card\" content=\"summary_large_image\"><meta name=\"robots\"
+      content=\"noindex, nofollow\"><link rel=\"canonical\" href=\"https://developer.mozilla.org\"><style
+      media=\"print\">.breadcrumbs-container,.document-toc-container,.language-menu,.language-toggle,.on-github,.page-footer,.top-navigation-main,nav.sidebar,ul.prev-next{display:none!important}.main-page-content,.main-page-content
+      pre{padding:2px}.main-page-content pre{border-left-width:2px}</style><link href=\"/static/css/main.debb3e6d.chunk.css\"
+      rel=\"stylesheet\"><script>LUX=(function(){var a=(\"undefined\"!==typeof(LUX)&&\"undefined\"!==typeof(LUX.gaMarks)?LUX.gaMarks:[]);var
+      d=(\"undefined\"!==typeof(LUX)&&\"undefined\"!==typeof(LUX.gaMeasures)?LUX.gaMeasures:[]);var
+      j=\"LUX_start\";var k=window.performance;var l=(\"undefined\"!==typeof(LUX)&&LUX.ns?LUX.ns:(Date.now?Date.now():+(new
+      Date())));if(k&&k.timing&&k.timing.navigationStart){l=k.timing.navigationStart}function
+      f(){if(k&&k.now){return k.now()}var o=Date.now?Date.now():+(new Date());return
+      o-l}function b(n){if(k){if(k.mark){return k.mark(n)}else{if(k.webkitMark){return
+      k.webkitMark(n)}}}a.push({name:n,entryType:\"mark\",startTime:f(),duration:0});return}function
+      m(p,t,n){if(\"undefined\"===typeof(t)&&h(j)){t=j}if(k){if(k.measure){if(t){if(n){return
+      k.measure(p,t,n)}else{return k.measure(p,t)}}else{return k.measure(p)}}else{if(k.webkitMeasure){return
+      k.webkitMeasure(p,t,n)}}}var r=0,o=f();if(t){var s=h(t);if(s){r=s.startTime}else{if(k&&k.timing&&k.timing[t]){r=k.timing[t]-k.timing.navigationStart}else{return}}}if(n){var
+      q=h(n);if(q){o=q.startTime}else{if(k&&k.timing&&k.timing[n]){o=k.timing[n]-k.timing.navigationStart}else{return}}}d.push({name:p,entryType:\"measure\",startTime:r,duration:(o-r)});return}function
+      h(n){return c(n,g())}function c(p,o){for(i=o.length-1;i>=0;i--){var n=o[i];if(p===n.name){return
+      n}}return undefined}function g(){if(k){if(k.getEntriesByType){return k.getEntriesByType(\"mark\")}else{if(k.webkitGetEntriesByType){return
+      k.webkitGetEntriesByType(\"mark\")}}}return a}return{mark:b,measure:m,gaMarks:a,gaMeasures:d}})();LUX.ns=(Date.now?Date.now():+(new
+      Date()));LUX.ac=[];LUX.cmd=function(a){LUX.ac.push(a)};LUX.init=function(){LUX.cmd([\"init\"])};LUX.send=function(){LUX.cmd([\"send\"])};LUX.addData=function(a,b){LUX.cmd([\"addData\",a,b])};LUX_ae=[];window.addEventListener(\"error\",function(a){LUX_ae.push(a)});LUX_al=[];if(\"function\"===typeof(PerformanceObserver)&&\"function\"===typeof(PerformanceLongTaskTiming)){var
+      LongTaskObserver=new PerformanceObserver(function(c){var b=c.getEntries();for(var
+      a=0;a<b.length;a++){var d=b[a];LUX_al.push(d)}});try{LongTaskObserver.observe({type:[\"longtask\"]})}catch(e){}};</script><script
+      src=\"https://cdn.speedcurve.com/js/lux.js?id=108906238\" async=\"\" defer=\"\"
+      crossorigin=\"anonymous\"></script><script defer=\"\" src=\"/static/js/ga.js\"></script><script
+      src=\"/static/js/runtime-main.d7fd73eb.js\" defer=\"\"></script><script src=\"/static/js/4.77e3f5b8.chunk.js\"
+      defer=\"\"></script><script src=\"/static/js/main.b1af5a31.chunk.js\" defer=\"\"></script></head><body><script>const
+      c={light:\"#ffffff\",dark:\"#1b1b1b\"};if(window&&document.body){const o=window.localStorage.getItem(\"theme\");o&&(document.body.className=o,document.body.style.backgroundColor=c[o])}</script><div
+      id=\"root\"><ul id=\"nav-access\" class=\"a11y-nav\"><li><a id=\"skip-main\"
+      href=\"#content\">Skip to main content</a></li><li><a id=\"skip-search\" href=\"#top-nav-search-q\">Skip
+      to search</a></li></ul><div class=\"page-wrapper   standard-page \"><header
+      class=\"main-document-header-container top-navigation \n      \n      \"><div
+      class=\"container \"><div class=\"top-navigation-wrap\"><a href=\"/en-US/\"
+      class=\"logo\" aria-label=\"MDN homepage\"><svg xmlns=\"http://www.w3.org/2000/svg\"
+      viewBox=\"0 0 361 104.2\"><path d=\"M197.6 73.2h-17.1v-5.5h3.8V51.9c0-3.7-.7-6.3-2.1-7.9-1.4-1.6-3.3-2.3-5.7-2.3-3.2
+      0-5.6 1.1-7.2 3.4s-2.4 4.6-2.5 6.9v15.6h6v5.5h-17.1v-5.5h3.8V51.9c0-3.8-.7-6.4-2.1-7.9-1.4-1.5-3.3-2.3-5.6-2.3-3.2
+      0-5.5 1.1-7.2 3.3-1.6 2.2-2.4 4.5-2.5 6.9v15.8h6.9v5.5h-20.2v-5.5h6V42.4h-6.1v-5.6h13.4v6.4c1.2-2.1
+      2.7-3.8 4.7-5.2 2-1.3 4.4-2 7.3-2s5.3.7 7.5 2.1c2.2 1.4 3.7 3.5 4.5 6.4 1.1-2.5
+      2.7-4.5 4.9-6.1s4.8-2.4 7.9-2.4c3.5 0 6.5 1.1 8.9 3.3s3.7 5.6 3.7 10.2v18.2h6.1v5.5zm42.5
+      0h-13.2V66c-1.2 2.2-2.8 4.1-4.9 5.6-2.1 1.6-4.8 2.4-8.3 2.4-4.8 0-8.7-1.6-11.6-4.9-2.9-3.2-4.3-7.7-4.3-13.3
+      0-5 1.3-9.6 4-13.7 2.6-4.1 6.9-6.2 12.8-6.2s9.8 2.2 12.3 6.5V22.7h-8.6v-5.6h15.8v50.6h6v5.5zm-13.3-16.8V52c-.1-3-1.2-5.5-3.2-7.3s-4.4-2.8-7.2-2.8c-3.6
+      0-6.3 1.3-8.2 3.9-1.9 2.6-2.8 5.8-2.8 9.6 0 4.1 1 7.3 3 9.5s4.5 3.3 7.4 3.3c3.2
+      0 5.8-1.3 7.8-3.8 2.1-2.6 3.1-5.3 3.2-8zm61.5 16.8H269v-5.5h6V51.9c0-3.7-.7-6.3-2.2-7.9-1.4-1.6-3.4-2.3-5.7-2.3-3.1
+      0-5.6 1-7.4 3s-2.8 4.4-2.9 7v15.9h6v5.5h-19.3v-5.5h6V42.4h-6.2v-5.6h13.6V43c2.6-4.6
+      6.8-6.9 12.7-6.9 3.6 0 6.7 1.1 9.2 3.3s3.7 5.6 3.7 10.2v18.2h6v5.4h-.2z\" fill=\"var(--text-primary)\"></path><path
+      d=\"M42 .2L13.4 92.3H1.7L30.2.2H42zm10.4 0v92.1H42V.2h10.4zm40.3 0L64.2 92.3H52.5L81
+      .2h11.7zm10.4 0v92.1H92.7V.2h10.4zM294 95h67v8.8h-67V95z\" fill=\"var(--text-link)\"></path></svg></a><button
+      aria-expanded=\"false\" aria-haspopup=\"menu\" aria-label=\"Open main menu\"
+      title=\"Open main menu\" type=\"button\" class=\"button action has-icon main-menu-toggle\"><span
+      class=\"button-wrap\"><span class=\"icon icon-menu \"></span><span class=\"visually-hidden\">Open
+      main menu</span></span></button></div><div class=\"top-navigation-main\"><nav
+      class=\"main-nav\" aria-label=\"Main menu\"><ul class=\"main-menu nojs\"><li
+      class=\"top-level-entry-container\"><button type=\"button\" id=\"references-button\"
+      class=\"top-level-entry menu-toggle\" aria-controls=\"references-menu\" aria-haspopup=\"menu\"
+      aria-expanded=\"false\">References</button><a class=\"top-level-entry\" href=\"/en-US/docs/Web\">References</a><ul
+      id=\"references-menu\" class=\"submenu references hidden\" role=\"menu\" aria-labelledby=\"references-button\"><li
+      role=\"menuitem\" class=\"apis-link-container mobile-only \"><a href=\"/en-US/docs/Web\"
+      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div
+      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Overview
+      / Web Technology</div><p class=\"submenu-item-description\">Web technology reference
+      for developers</p></div></a></li><li role=\"menuitem\" class=\"html-link-container
+      \"><a href=\"/en-US/docs/Web/HTML\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon html\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">HTML</div><p class=\"submenu-item-description\">Structure
+      of content on the web</p></div></a></li><li role=\"menuitem\" class=\"css-link-container
+      \"><a href=\"/en-US/docs/Web/CSS\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon css\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">CSS</div><p class=\"submenu-item-description\">Code
+      used to describe document style</p></div></a></li><li role=\"menuitem\" class=\"javascript-link-container
+      \"><a href=\"/en-US/docs/Web/JavaScript\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon javascript\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">JavaScript</div><p class=\"submenu-item-description\">General-purpose
+      scripting language</p></div></a></li><li role=\"menuitem\" class=\"http-link-container
+      \"><a href=\"/en-US/docs/Web/HTTP\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon http\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">HTTP</div><p class=\"submenu-item-description\">Protocol
+      for transmitting web resources</p></div></a></li><li role=\"menuitem\" class=\"apis-link-container
+      \"><a href=\"/en-US/docs/Web/API\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon apis\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">Web APIs</div><p class=\"submenu-item-description\">Interfaces
+      for building web applications</p></div></a></li><li role=\"menuitem\" class=\"apis-link-container
+      desktop-only \"><a href=\"/en-US/docs/Web\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon\"></div><div class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Web
+      Technology</div><p class=\"submenu-item-description\">Web technology reference
+      for developers</p></div></a></li></ul></li><li class=\"top-level-entry-container\"><button
+      type=\"button\" id=\"guides-button\" class=\"top-level-entry menu-toggle\" aria-controls=\"guides-menu\"
+      aria-haspopup=\"menu\" aria-expanded=\"false\">Guides</button><a class=\"top-level-entry\"
+      href=\"/en-US/docs/Learn\">Guides</a><ul id=\"guides-menu\" class=\"submenu
+      guides hidden\" role=\"menu\" aria-labelledby=\"guides-button\"><li role=\"menuitem\"
+      class=\"apis-link-container mobile-only \"><a href=\"/en-US/docs/Learn\" class=\"submenu-item
+      \" role=\"menuitem\"><div class=\"submenu-icon learn\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">Overview / MDN Learning Area</div><p class=\"submenu-item-description\">Learn
+      web development</p></div></a></li><li role=\"menuitem\" class=\"apis-link-container
+      desktop-only \"><a href=\"/en-US/docs/Learn\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon learn\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">MDN Learning Area</div><p class=\"submenu-item-description\">Learn
+      web development</p></div></a></li><li role=\"menuitem\" class=\"html-link-container
+      \"><a href=\"/en-US/docs/Learn/HTML\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon html\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">HTML</div><p class=\"submenu-item-description\">Learn
+      to structure web content with HTML</p></div></a></li><li role=\"menuitem\" class=\"css-link-container
+      \"><a href=\"/en-US/docs/Learn/CSS\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon css\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">CSS</div><p class=\"submenu-item-description\">Learn
+      to style content using CSS</p></div></a></li><li role=\"menuitem\" class=\"javascript-link-container
+      \"><a href=\"/en-US/docs/Learn/JavaScript\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon javascript\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">JavaScript</div><p class=\"submenu-item-description\">Learn
+      to run scripts in the browser</p></div></a></li><li role=\"menuitem\" class=\"
+      \"><a href=\"/en-US/docs/Web/Accessibility\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon\"></div><div class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Accessibility</div><p
+      class=\"submenu-item-description\">Learn to make the web accessible to all</p></div></a></li></ul></li><li
+      class=\"top-level-entry-container\"><button type=\"button\" id=\"mdn-plus-button\"
+      class=\"top-level-entry menu-toggle\" aria-controls=\"mdn-plus-menu\" aria-haspopup=\"menu\"
+      aria-expanded=\"false\">MDN Plus</button><a class=\"top-level-entry\" href=\"/en-US/plus\">MDN
+      Plus</a><ul id=\"mdn-plus-menu\" class=\"submenu mdn-plus hidden\" role=\"menu\"
+      aria-labelledby=\"mdn-plus-button\"><li role=\"menuitem\" class=\"mobile-only
+      \"><a href=\"/en-US/plus\" class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div
+      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Overview</div><p
+      class=\"submenu-item-description\">More MDN. Your MDN.</p></div></a></li><li
+      role=\"menuitem\" class=\" \"><a href=\"/en-US/plus/docs/faq\" class=\"submenu-item
+      \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">FAQ</div><p class=\"submenu-item-description\">Frequently
+      asked questions about MDN Plus</p></div></a></li></ul></li></ul></nav><div class=\"header-search\"><form
+      action=\"/en-US/search\" role=\"search\" aria-haspopup=\"listbox\" aria-owns=\"downshift-0-menu\"
+      aria-expanded=\"false\" class=\"search-form search-widget\" id=\"top-nav-search-form\"><label
+      for=\"top-nav-search-q\" class=\"visually-hidden\">Search MDN</label><input
+      type=\"search\" id=\"top-nav-search-q\" aria-autocomplete=\"list\" aria-controls=\"downshift-0-menu\"
+      aria-labelledby=\"downshift-0-label\" autocomplete=\"off\" value=\"\" class=\"search-input-field\"
+      name=\"q\" placeholder=\"\u2004\u2004\u2004\" required=\"\"><button type=\"button\"
+      class=\"button action has-icon clear-search-button\"><span class=\"button-wrap\"><span
+      class=\"icon icon-cancel \"></span><span class=\"visually-hidden\">Clear search
+      input</span></span></button><button type=\"submit\" class=\"button action has-icon
+      search-button\"><span class=\"button-wrap\"><span class=\"icon icon-search \"></span><span
+      class=\"visually-hidden\">Search</span></span></button><div id=\"downshift-0-menu\"
+      role=\"listbox\" aria-labelledby=\"downshift-0-label\"></div></form></div><div
+      class=\"theme-switcher-menu\"><button aria-haspopup=\"menu\" type=\"button\"
+      class=\"button action has-icon theme-switcher-menu small\"><span class=\"button-wrap\"><span
+      class=\"icon icon-theme-os-default \"></span>Theme</span></button></div></div></div></header><div
+      class=\"main-wrapper page-not-found\"><main id=\"content\" class=\"main-content
+      page-content-container \" role=\"main\"><article class=\"main-page-content\"><h1>Page
+      not found</h1><p><a href=\"/\">Go back to the home page</a></p></article></main></div></div><footer
+      id=\"nav-footer\" class=\"page-footer\"><div class=\"page-footer-grid\"><div
+      class=\"page-footer-logo-col\"><a href=\"/\" class=\"mdn-footer-logo\" aria-label=\"MDN
+      homepage\"><svg width=\"48\" height=\"17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path
+      d=\"M20.04 16.512h-4.536v-6.096c0-.928-.16-1.592-.48-1.992-.304-.4-.76-.6-1.368-.6-.736
+      0-1.272.24-1.608.72-.32.48-.48 1.096-.48 1.848v3.792h1.44v2.328H8.472v-6.096c0-.928-.16-1.592-.48-1.992-.304-.4-.76-.6-1.368-.6-.752
+      0-1.288.24-1.608.72-.32.48-.48 1.096-.48 1.848v3.792H6.6v2.328H0v-2.328h1.44V8.04H.024V5.688h4.512V7.32c.688-1.232
+      1.784-1.848 3.288-1.848.784 0 1.504.192 2.16.576.656.384 1.112.968 1.368 1.752.64-1.552
+      1.816-2.328 3.528-2.328.976 0 1.84.304 2.592.912.752.608 1.128 1.552 1.128 2.832v4.968h1.44v2.328zM33.671
+      16.512h-4.536v-2.016a4.446 4.446 0 01-1.344 1.608c-.592.432-1.376.648-2.352.648-1.424
+      0-2.544-.488-3.36-1.464-.816-.976-1.224-2.304-1.224-3.984 0-1.616.4-2.992 1.2-4.128.8-1.136
+      2.008-1.704 3.624-1.704.88 0 1.6.176 2.16.528.56.352.992.8 1.296 1.344V2.352h-2.16V0h5.256v14.184h1.44v2.328zm-4.536-5.472v-.264c0-.896-.24-1.592-.72-2.088-.464-.512-1.048-.768-1.752-.768-.688
+      0-1.296.256-1.824.768-.512.512-.768 1.32-.768 2.424 0 1.04.24 1.832.72 2.376.48.544
+      1.048.816 1.704.816.816 0 1.456-.344 1.92-1.032.48-.688.72-1.432.72-2.232zM47.959
+      16.512h-5.976v-2.328h1.44v-3.768c0-.928-.16-1.592-.48-1.992-.304-.4-.76-.6-1.368-.6-.736
+      0-1.304.232-1.704.696-.4.448-.608 1.04-.624 1.776v3.888h1.44v2.328H34.71v-2.328h1.44V8.04h-1.56V5.688h4.656v1.656c.72-1.248
+      1.88-1.872 3.48-1.872 1.024 0 1.912.304 2.664.912.752.608 1.128 1.552 1.128
+      2.832v4.968h1.44v2.328z\" fill=\"currentColor\"></path></svg></a><p>Your blueprint
+      for a better internet.</p><ul class=\"social-icons\"><li><a class=\"icon icon-twitter\"
+      href=\"https://twitter.com/mozdevnet\" target=\"_blank\" rel=\"noopener noreferrer\"><span
+      class=\"visually-hidden\">MDN on Twitter</span></a></li><li><a class=\"icon
+      icon-github-mark-small\" href=\"https://github.com/mdn/\" target=\"_blank\"
+      rel=\"noopener noreferrer\"><span class=\"visually-hidden\">MDN on Github</span></a></li></ul></div><div
+      class=\"page-footer-nav-col-1\"><h2 class=\"footer-nav-heading\">MDN</h2><ul
+      class=\"footer-nav-list\"><li class=\"footer-nav-item\"><a href=\"/en-US/about\">About</a></li><li
+      class=\"footer-nav-item\"><a href=\"https://hacks.mozilla.org/\" target=\"_blank\"
+      rel=\"noopener noreferrer\">Hacks Blog</a></li><li class=\"footer-nav-item\"><a
+      href=\"https://www.mozilla.org/en-US/careers/listings/?team=Marketing\" target=\"_blank\"
+      rel=\"noopener noreferrer\">Careers</a></li></ul></div><div class=\"page-footer-nav-col-2\"><h2
+      class=\"footer-nav-heading\">Support</h2><ul class=\"footer-nav-list\"><li class=\"footer-nav-item\"><a
+      class=\"footer-nav-link\" href=\"https://support.mozilla.org/products/mdn-plus\">Product
+      help</a></li><li class=\"footer-nav-item\"><a class=\"footer-nav-link\" href=\"/en-US/docs/MDN/Contribute/Feedback#documentation_issues\">Report
+      a page issue</a></li><li class=\"footer-nav-item\"><a class=\"footer-nav-link\"
+      href=\"/en-US/docs/MDN/Contribute/Feedback#site_issues\">Report a site issue</a></li></ul></div><div
+      class=\"page-footer-nav-col-3\"><h2 class=\"footer-nav-heading\">Our communities</h2><ul
+      class=\"footer-nav-list\"><li class=\"footer-nav-item\"><a class=\"footer-nav-link\"
+      href=\"/en-US/community\">MDN Community</a></li><li class=\"footer-nav-item\"><a
+      class=\"footer-nav-link\" href=\"https://discourse.mozilla.org/c/mdn/236\" target=\"_blank\"
+      rel=\"noopener noreferrer\">MDN Forum</a></li><li class=\"footer-nav-item\"><a
+      class=\"footer-nav-link\" href=\"https://wiki.mozilla.org/Matrix\" target=\"_blank\"
+      rel=\"noopener noreferrer\">MDN Chat</a></li></ul></div><div class=\"page-footer-nav-col-4\"><h2
+      class=\"footer-nav-heading\">Developers</h2><ul class=\"footer-nav-list\"><li
+      class=\"footer-nav-item\"><a class=\"footer-nav-link\" href=\"/en-US/docs/Web\">Web
+      Technologies</a></li><li class=\"footer-nav-item\"><a class=\"footer-nav-link\"
+      href=\"/en-US/docs/Learn\">Learn Web Development</a></li><li class=\"footer-nav-item\"><a
+      class=\"footer-nav-link\" href=\"/en-US/plus\">MDN Plus</a></li></ul></div><div
+      class=\"page-footer-moz\"><a href=\"https://www.mozilla.org/\" class=\"footer-moz-logo-link\"
+      target=\"_blank\" rel=\"noopener noreferrer\"><svg width=\"112\" height=\"32\"
+      fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M41.753 14.218c-2.048
+      0-3.324 1.522-3.324 4.157 0 2.423 1.119 4.286 3.29 4.286 2.082 0 3.447-1.678
+      3.447-4.347 0-2.826-1.522-4.096-3.413-4.096zm54.89 7.044c0 .901.437 1.618 1.645
+      1.618 1.427 0 2.949-1.024 3.044-3.352-.649-.095-1.365-.185-2.02-.185-1.426-.005-2.668.397-2.668
+      1.92z\" fill=\"currentColor\"></path><path d=\"M0 0v32h111.908V0H0zm32.56 25.426h-5.87v-7.884c0-2.423-.806-3.352-2.39-3.352-1.924
+      0-2.702 1.365-2.702 3.324v4.868h1.864v3.044h-5.864v-7.884c0-2.423-.806-3.352-2.39-3.352-1.924
+      0-2.702 1.365-2.702 3.324v4.868h2.669v3.044H6.642v-3.044h1.863v-7.918H6.642V11.42h5.864v2.11c.839-1.489
+      2.3-2.39 4.252-2.39 2.02 0 3.878.963 4.566 3.01.778-1.862 2.361-3.01 4.566-3.01
+      2.512 0 4.812 1.522 4.812 4.84v6.402h1.863v3.044h-.005zm9.036.307c-4.314 0-7.296-2.635-7.296-7.106
+      0-4.096 2.484-7.481 7.514-7.481s7.481 3.38 7.481 7.29c0 4.472-3.228 7.297-7.699
+      7.297zm22.578-.307H51.942l-.403-2.11 7.7-8.846h-4.376l-.621 2.17-2.888-.313.498-4.907h12.294l.313
+      2.11-7.767 8.852h4.533l.654-2.172 3.167.308-.872 4.908zm7.99 0h-4.191v-5.03h4.19v5.03zm0-8.976h-4.191v-5.03h4.19v5.03zm2.618
+      8.976l6.054-21.358h3.945l-6.054 21.358h-3.945zm8.136 0l6.048-21.358h3.945l-6.054
+      21.358h-3.939zm21.486.307c-1.863 0-2.887-1.085-3.072-2.792-.805 1.427-2.232
+      2.792-4.498 2.792-2.02 0-4.314-1.085-4.314-4.006 0-3.447 3.323-4.253 6.518-4.253.778
+      0 1.584.034 2.3.124v-.465c0-1.427-.034-3.133-2.3-3.133-.84 0-1.488.061-2.143.402l-.453
+      1.578-3.195-.34.549-3.224c2.45-.996 3.692-1.27 5.992-1.27 3.01 0 5.556 1.55
+      5.556 4.75v6.083c0 .805.314 1.085.963 1.085.184 0 .375-.034.587-.095l.034 2.11a5.432
+      5.432 0 01-2.524.654z\" fill=\"currentColor\"></path></svg></a><ul class=\"footer-moz-list\"><li
+      class=\"footer-moz-item\"><a href=\"https://www.mozilla.org/privacy/websites/\"
+      class=\"footer-moz-link\" target=\"_blank\" rel=\"noopener noreferrer\">Website
+      Privacy Notice</a></li><li class=\"footer-moz-item\"><a href=\"https://www.mozilla.org/privacy/websites/#cookies\"
+      class=\"footer-moz-link\" target=\"_blank\" rel=\"noopener noreferrer\">Cookies</a></li><li
+      class=\"footer-moz-item\"><a href=\"https://www.mozilla.org/about/legal/terms/mozilla\"
+      class=\"footer-moz-link\" target=\"_blank\" rel=\"noopener noreferrer\">Legal</a></li><li
+      class=\"footer-moz-item\"><a href=\"https://www.mozilla.org/about/governance/policies/participation/\"
+      class=\"footer-moz-link\" target=\"_blank\" rel=\"noopener noreferrer\">Community
+      Participation Guidelines</a></li></ul></div><div class=\"page-footer-legal\"><p
+      id=\"license\" class=\"page-footer-legal-text\">Visit<!-- --> <a href=\"https://www.mozilla.org\"
+      target=\"_blank\" rel=\"noopener noreferrer\">Mozilla Corporation\u2019s</a>
+      <!-- -->not-for-profit parent, the<!-- --> <a target=\"_blank\" rel=\"noopener
+      noreferrer\" href=\"https://foundation.mozilla.org/\">Mozilla Foundation</a>.<br>Portions
+      of this content are \xA91998\u2013<!-- -->2022<!-- --> by individual mozilla.org
+      contributors. Content available under<!-- --> <a href=\"/docs/MDN/About#Copyrights_and_licenses\">a
+      Creative Commons license</a>.</p></div></div></footer></div><script type=\"application/json\"
+      id=\"hydration\">{\"pageNotFound\":true}</script></body></html>"
     headers:
       Cache-Control:
       - no-store, must-revalidate
@@ -126,27 +263,33 @@ interactions:
       Content-Security-Policy:
       - default-src 'self'; script-src 'report-sample' 'self' *.speedcurve.com 'sha256-q7cJjDqNO2e1L5UltvJ1LhvnYN7yJXgGO7b6h9xkL1o='
         www.google-analytics.com/analytics.js 'sha256-JEt9Nmc3BP88wxuTZm9aKNu87vEgGmKW1zzy/vb1KPs='
-        polyfill.io/v3/polyfill.min.js assets.codepen.io production-assets.codepen.io;
-        script-src-elem 'report-sample' 'self' *.speedcurve.com 'sha256-q7cJjDqNO2e1L5UltvJ1LhvnYN7yJXgGO7b6h9xkL1o='
+        polyfill.io/v3/polyfill.min.js assets.codepen.io production-assets.codepen.io
+        'sha256-x6Tv+AdV5e6dcolO0TEo+3BG4H2nG2ACjyG8mz6QCes='; script-src-elem 'report-sample'
+        'self' *.speedcurve.com 'sha256-q7cJjDqNO2e1L5UltvJ1LhvnYN7yJXgGO7b6h9xkL1o='
         www.google-analytics.com/analytics.js 'sha256-JEt9Nmc3BP88wxuTZm9aKNu87vEgGmKW1zzy/vb1KPs='
-        polyfill.io/v3/polyfill.min.js assets.codepen.io production-assets.codepen.io;
-        style-src 'report-sample' 'self' 'unsafe-inline'; object-src 'none'; base-uri
-        'self'; connect-src 'self' www.google-analytics.com stats.g.doubleclick.net;
-        font-src 'self'; frame-src 'self' interactive-examples.mdn.mozilla.net mdn.github.io
-        yari-demos.prod.mdn.mozit.cloud mdn.mozillademos.org yari-demos.stage.mdn.mozit.cloud
+        polyfill.io/v3/polyfill.min.js assets.codepen.io production-assets.codepen.io
+        'sha256-x6Tv+AdV5e6dcolO0TEo+3BG4H2nG2ACjyG8mz6QCes='; style-src 'report-sample'
+        'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; connect-src 'self'
+        updates.developer.allizom.org updates.developer.mozilla.org www.google-analytics.com
+        stats.g.doubleclick.net; font-src 'self'; frame-src 'self' interactive-examples.mdn.mozilla.net
+        interactive-examples.prod.mdn.mozilla.net interactive-examples.stage.mdn.mozilla.net
+        mdn.github.io yari-demos.prod.mdn.mozit.cloud mdn.mozillademos.org yari-demos.stage.mdn.mozit.cloud
         jsfiddle.net www.youtube-nocookie.com codepen.io; img-src 'self' *.githubusercontent.com
-        *.googleusercontent.com lux.speedcurve.com mdn.mozillademos.org media.prod.mdn.mozit.cloud
-        media.stage.mdn.mozit.cloud interactive-examples.mdn.mozilla.net wikipedia.org
-        www.google-analytics.com www.gstatic.com; manifest-src 'self'; media-src 'self'
-        archive.org videos.cdn.mozilla.net; worker-src 'none';
+        *.googleusercontent.com *.gravatar.com mozillausercontent.com firefoxusercontent.com
+        profile.stage.mozaws.net profile.accounts.firefox.com lux.speedcurve.com mdn.mozillademos.org
+        media.prod.mdn.mozit.cloud media.stage.mdn.mozit.cloud interactive-examples.mdn.mozilla.net
+        interactive-examples.prod.mdn.mozilla.net interactive-examples.stage.mdn.mozilla.net
+        wikipedia.org www.google-analytics.com www.gstatic.com; manifest-src 'self';
+        media-src 'self' archive.org videos.cdn.mozilla.net; child-src 'self'; worker-src
+        'self';
       Content-Type:
       - text/html; charset=utf-8
       Date:
-      - Fri, 17 Sep 2021 00:05:34 GMT
+      - Tue, 26 Apr 2022 16:51:41 GMT
       ETag:
-      - W/"8fab215d123fc26674634cd9e7e66f69"
+      - W/"6754e047eabb56845eb9f4070b626f95"
       Last-Modified:
-      - Fri, 10 Sep 2021 01:56:14 GMT
+      - Sat, 23 Apr 2022 01:06:00 GMT
       Server:
       - AmazonS3
       Strict-Transport-Security:
@@ -156,9 +299,9 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 d5488e7054c0eb6827749a115e047e78.cloudfront.net (CloudFront)
+      - 1.1 4a156fb7a0ed64b1f65b1ccc792773cc.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - bOG3Khh4ICZ1XtpEX0RkHvbK1OOhW5SUNulUYBV44LtuY8xNwy9MBQ==
+      - ZxAwqt8QFPdUdrkqfsfBqVLkOmP25fWbDqDR-Y7UHwWuI4ObnwRtTw==
       X-Amz-Cf-Pop:
       - GRU1-C1
       X-Cache:
@@ -169,7 +312,6 @@ interactions:
       - DENY
       X-XSS-Protection:
       - 1; mode=block
-    status:
-      code: 404
-      message: Not Found
+    http_version: HTTP/1.1
+    status_code: 404
 version: 1

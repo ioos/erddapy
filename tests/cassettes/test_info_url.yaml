@@ -1,54 +1,60 @@
 interactions:
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - upwell.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
     method: HEAD
     uri: https://upwell.pfeg.noaa.gov/erddap/info/gtoppAT/index.htmlTable
   response:
-    body:
-      string: ''
+    content: ''
     headers:
       Connection:
       - close
       Content-Encoding:
       - gzip
       Content-Length:
-      - '2725'
+      - '3982'
+      Content-Security-Policy:
+      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
+        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
+        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
+        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/html;charset=UTF-8
       Date:
-      - Fri, 24 Sep 2021 23:05:32 GMT
+      - Tue, 26 Apr 2022 16:47:12 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
-    status:
-      code: 200
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 200
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - upwell.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
     method: HEAD
     uri: https://upwell.pfeg.noaa.gov/erddap/info/gtoppAT/index.csv
   response:
-    body:
-      string: ''
+    content: ''
     headers:
       Connection:
       - close
@@ -57,16 +63,20 @@ interactions:
       Content-Encoding:
       - gzip
       Content-Length:
-      - '1667'
+      - '1668'
+      Content-Security-Policy:
+      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
+        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
+        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
+        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Fri, 24 Sep 2021 23:05:33 GMT
+      - Tue, 26 Apr 2022 16:47:13 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
-    status:
-      code: 200
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 200
 version: 1

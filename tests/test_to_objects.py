@@ -29,7 +29,6 @@ def bermuda_1_msl(e):
 
 
 @pytest.fixture
-@pytest.mark.vcr()
 def taodata(e):
     """Load taodata for testing."""
     e.dataset_id = "pmelTao5dayIso"
@@ -61,7 +60,7 @@ def test_to_pandas(taodata):
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
+# @pytest.mark.vcr()
 def test_to_xarray_tabledap(taodata):
     """Test converting tabledap to an xarray Dataset."""
     ds = taodata.to_xarray()
@@ -73,7 +72,7 @@ def test_to_xarray_tabledap(taodata):
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
+# @pytest.mark.vcr()
 def test_to_xarray_griddap(bermuda_1_msl):
     """Test converting griddap to an xarray Dataset."""
     ds = bermuda_1_msl.to_xarray()
@@ -82,7 +81,7 @@ def test_to_xarray_griddap(bermuda_1_msl):
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
+# @pytest.mark.vcr()
 @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
 def test_to_iris_tabledap(taodata):
     """Test converting tabledap to an iris cube."""
@@ -94,7 +93,7 @@ def test_to_iris_tabledap(taodata):
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
+# @pytest.mark.vcr()
 @pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
 def test_to_iris_griddap(bermuda_1_msl):
     """Test converting griddap to an iris cube."""
