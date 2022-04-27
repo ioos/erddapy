@@ -15,17 +15,16 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Setup Conda
-      uses: s-weigand/setup-conda@v1
+    - name: Setup Mamba
+      uses: mamba-org/provision-with-micromamba@main
       with:
-        activate-conda: false
-        conda-channels: conda-forge
+        environment-file: false
 
     - name: Build environment
       shell: bash -l {0}
       run: |
-        conda create --name TEST python=3 --file requirements.txt --file requirements-dev.txt
-        source activate TEST
+        micromamba create --name TEST python=3 --file requirements.txt --file requirements-dev.txt --channel conda-forge
+        micromamba activate TEST
         python -m pip install -e . --no-deps --force-reinstall
 
     - name: Get the version
@@ -36,7 +35,7 @@ jobs:
       shell: bash -l {0}
       run: |
         set -e
-        source activate TEST
+        micromamba activate TEST
         jupyter nbconvert --to notebook --execute notebooks/00-quick_intro.ipynb --output=00-quick_intro-output.ipynb
         jupyter nbconvert --to notebook --execute notebooks/01a-griddap.ipynb --output=01a-griddap-output.ipynb
         jupyter nbconvert --to notebook --execute notebooks/01b-tabledap.ipynb --output=01b-tabledap-output.ipynb
