@@ -96,8 +96,8 @@ def test__format_constraints_url():
 
 
 @pytest.mark.web
-def test_erddap_request_kwargs():
-    """Test that an ERDDAP instance can have request_kwargs attribute assigned."""
+def test_erddap_requests_kwargs():
+    """Test that an ERDDAP instance can have requests_kwargs attribute assigned."""
     base_url = "http://www.neracoos.org/erddap"
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000
@@ -109,7 +109,7 @@ def test_erddap_request_kwargs():
     connection.dataset_id = "M01_sbe37_all"
     connection.protocol = "tabledap"
 
-    connection.request_kwargs["timeout"] = timeout_seconds
+    connection.requests_kwargs["timeout"] = timeout_seconds
 
     with pytest.raises(httpx.ReadTimeout):
         connection.to_xarray()
