@@ -33,7 +33,7 @@ def test_urlopen_requests_kwargs():
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000
     slowwly_url = (
-        f"https://flash.siwalik.in/delay/{slowwly_milliseconds}/url/{base_url}"
+        f"https://flash-the-slow-api.herokuapp.com/delay/{slowwly_milliseconds}/url/{base_url}"
     )
 
     with pytest.raises(httpx.ReadTimeout):
