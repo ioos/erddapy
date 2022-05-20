@@ -9,8 +9,7 @@ from erddapy.url_handling import urlopen
 
 
 @pytest.mark.web
-# @pytest.mark.vcr()
-# For some reason we cannot use vcr with httpx in this test.
+# For some reason we cannot use vcr with httpx with in_memory (also all the to_objects that uses in_memory).
 def test__nc_dataset_in_memory_https():
     """Test loading a netcdf dataset in-memory."""
     from netCDF4 import Dataset
