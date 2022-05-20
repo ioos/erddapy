@@ -32,8 +32,6 @@ def test_fetch_no_results():
     assert data is None
 
 
-# I guess we cannot record vcrs with parallel requests.
-# @pytest.mark.vcr()
 @pytest.mark.web
 @pytest.mark.skipif(
     sys.platform in ["win32", "darwin"],
@@ -52,8 +50,6 @@ def test_search_awesome_erddap_servers_True():
     assert not df.empty
 
 
-# https://github.com/kevin1024/vcrpy/issues/533
-# @pytest.mark.vcr()
 @pytest.mark.web
 @pytest.mark.skipif(
     sys.platform in ["win32", "darwin"],
@@ -72,8 +68,6 @@ def test_search_awesome_erddap_servers_False():
     assert not df.empty
 
 
-# I guess we cannot record vcrs with parallel requests.
-# @pytest.mark.vcr()
 @pytest.mark.web
 @pytest.mark.skipif(
     (sys.platform in ["win32", "darwin"] or sys.version_info < (3, 10)),

@@ -1,20 +1,21 @@
 interactions:
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - upwell.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
     method: HEAD
     uri: https://upwell.pfeg.noaa.gov/erddap/search/advanced.htmlTable?page=1&itemsPerPage=1000&protocol=tabledap&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&minTime=-8520292800.0&maxTime=-6942456000.0
   response:
-    body:
-      string: ''
+    content: ''
     headers:
       Connection:
       - close
@@ -24,21 +25,25 @@ interactions:
       - identity
       Content-Length:
       - '103'
+      Content-Security-Policy:
+      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
+        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
+        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
+        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Thu, 16 Sep 2021 23:53:03 GMT
+      - Tue, 26 Apr 2022 16:47:04 GMT
       Last-Modified:
-      - Thu, 16 Sep 2021 23:53:03 GMT
+      - Tue, 26 Apr 2022 16:47:04 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       X-Frame-Options:
       - SAMEORIGIN
       erddap-server:
-      - '2.02'
+      - '2.18'
       xdods-server:
       - dods/3.7
-    status:
-      code: 404
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 404
 version: 1

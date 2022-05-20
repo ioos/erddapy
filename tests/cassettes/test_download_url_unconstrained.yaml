@@ -1,29 +1,35 @@
 interactions:
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - upwell.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
     method: HEAD
     uri: https://upwell.pfeg.noaa.gov/erddap/tabledap/gtoppAT.htmlTable?commonName,yearDeployed,serialNumber
   response:
-    body:
-      string: ''
+    content: ''
     headers:
       Connection:
       - close
+      Content-Security-Policy:
+      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
+        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
+        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
+        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/plain; charset=UTF-8
       Date:
-      - Fri, 24 Sep 2021 23:05:34 GMT
+      - Tue, 26 Apr 2022 16:47:15 GMT
       Last-Modified:
-      - Fri, 24 Sep 2021 23:05:34 GMT
+      - Tue, 26 Apr 2022 16:47:15 GMT
       Location:
       - https://oceanview.pfeg.noaa.gov/erddap/tabledap/gtoppAT.htmlTable?commonName%2CyearDeployed%2CserialNumber
       Strict-Transport-Security:
@@ -33,10 +39,64 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       erddap-server:
-      - '2.02'
+      - '2.18'
       xdods-server:
       - dods/3.7
-    status:
-      code: 302
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 302
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - oceanview.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
+    method: HEAD
+    uri: https://oceanview.pfeg.noaa.gov/erddap/tabledap/gtoppAT.htmlTable?commonName%2CyearDeployed%2CserialNumber
+  response:
+    content: ''
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1'
+      Content-Security-Policy:
+      - frame-ancestors https://oceanview.pfeg.noaa.gov https://www.integratedecosystemassessment.noaa.gov
+        http://gtopp.org http://www.topp.org http://topp.org http://www.gtopp.org;
+      Content-Type:
+      - text/html;charset=UTF-8
+      Date:
+      - Tue, 26 Apr 2022 16:51:22 GMT
+      Feature-Policy:
+      - camera 'self'
+      Last-Modified:
+      - Tue, 26 Apr 2022 16:51:22 GMT
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000;includeSubDomains;preload
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      erddap-server:
+      - '1.82'
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 200
 version: 1

@@ -1,31 +1,37 @@
 interactions:
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - upwell.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
     method: GET
     uri: https://upwell.pfeg.noaa.gov/erddap/tabledap/pmelTao5dayIso.csvp?ISO_6,time&time%3E=248011200.0&time%3C=1548504000.0&latitude%3E=10&latitude%3C=10&longitude%3E=265&longitude%3C=265
   response:
-    body:
-      string: ''
+    content: ''
     headers:
       Connection:
       - close
       Content-Length:
       - '0'
+      Content-Security-Policy:
+      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
+        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
+        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
+        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/plain; charset=UTF-8
       Date:
-      - Thu, 16 Sep 2021 23:48:03 GMT
+      - Tue, 26 Apr 2022 16:46:38 GMT
       Last-Modified:
-      - Thu, 16 Sep 2021 23:48:03 GMT
+      - Tue, 26 Apr 2022 16:46:38 GMT
       Location:
       - https://coastwatch.pfeg.noaa.gov/erddap/tabledap/pmelTao5dayIso.csvp?ISO_6%2Ctime&time%3E=248011200.0&time%3C=1548504000.0&latitude%3E=10&latitude%3C=10&longitude%3E=265&longitude%3C=265
       Strict-Transport-Security:
@@ -33,70 +39,602 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       erddap-server:
-      - '2.02'
+      - '2.18'
       xdods-server:
       - dods/3.7
-    status:
-      code: 302
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 302
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - coastwatch.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
     method: GET
     uri: https://coastwatch.pfeg.noaa.gov/erddap/tabledap/pmelTao5dayIso.csvp?ISO_6%2Ctime&time%3E=248011200.0&time%3C=1548504000.0&latitude%3E=10&latitude%3C=10&longitude%3E=265&longitude%3C=265
   response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAAHWZsbLttg1Fe3+FS3vmWUMABECmTZXGKeI0aTIpUqRw5/+fbN4jAQTld+d2a0Dx
-        UCCwSP3tH3//t/340+8/f/vjf7//98ef/vnbX3/+gfo1Gvep32jO+QvxL41/I/5La/j/1w9kV/Np
-        Y8O+43kpi2gPTHs0t6vZ1CmJ92j2S+YgosC8R0v7mlqOzXuwdDy6+fjGrbVfGuF/p3oJmbkntg33
-        dql2NQ1Me3Qfl5joRkvwvMx5GgfmEqwXI5bz0Xw8mkjcJbCUiWPBqbVnbKy37is2Lu7DhwamtgeP
-        taAsSbXOexq1OQLzHqx2KVa6e+I92vtlGNtuKnW9h1yzT9Kk+7saDUsyrQctWaITWUJY8MR7cOfL
-        hsVqS02Sblef0vLBJUlMrpWddNNeJz3H5d37SGqVcm99WOCSI5OvMdvQnniPHuNC7pIELTnidGmX
-        beiSIsYXsWssiNZpY71EyDnpHqx8qQjHq9AjtfvVhL154j1a5sXqMvPRZd7ilzXvG7VKCQk2Ep+p
-        rdRbbAyruS14V+Qag9uR21iUQV00cYkmLMrkkdEluRmFqpFJPrskN8s1ZPTeA8sejTLX3HNNvc4c
-        RdJHs9EDl5mTX1NVpycu0cjCoRQFwevMMbjYlD4Tax18DKx6Dl5njjQkzkUdSLYa7SJtzsSzYlZW
-        HYHpiBan/GHAsz7behsclEuwXvhVfRubZ/3ZTFi2Z+tO7O2jdWBi8T6BR001sx4bCN1jD15lUt01
-        aYntWHAaLTFLTTRl8zYTl2h0Ftf5/Cxqdd7ANuZ8yujCR/Qk5ud1AdPxbMMWkp74iEZf4eeHAZeZ
-        Yw8MFBXixKNibBB53hdRNQG0HrSHp7cserTyjkyJmdEhAqvSipon9vq7GjQjx64ewNg/NLslLsFy
-        oUw/7+MUGNA2vEnSI3YMZrXAZdpIhYlyl7DEYu9QQ1sLXGeNbkt99owus+74yfCPL0ovfUGrJqe7
-        99BLX2x5VVMegUuNN2S/IoeT7sGOxrVKRtDamRRyc2cYveTF7RrkPjVwqfDWUaPvBKOXvBjhRZmq
-        Bi5lUlGq0Jpm0j1Y0bdmHz1odRdBr54zRy41cq1HJ37WQ2qGDHQt/EnSYriNUKeGzMAlQ4jWT4Y1
-        JS7R9KlTQbkGwwWhsJ54D4ZhTLyLZzUPecGPco7fdLjLUgTSW5ro5S4QDL01kV7mgpfI7JEBh7nY
-        gOihTmjikiANOubzWa3DXJABrQuJJC6zRv1CfaKg1VygmPBT6omLV/PVrVGs9WEu8ET13nJsPoKJ
-        5l2B6GUucPY2hsWrOMwFe5kJZT1xNZe1aUabllgr5okWH7RkNkpQM/TJDC6pDUxCkfiHt6zih+yL
-        NDi8BWW3EwxWA9d5t9VEfVJirZjhLXMErhNHn9Rh3hOXaFh9t1u+6eUtq1f1ES/z1BbQOT3W7NAW
-        HDsJZ8MY+9AWyB6GJpXEsw6OdsOSg/MreubvOrwFPxtHqDGeJT+8BU0DLzvK2KEtSNJV48QDl/aP
-        KqfDo64f3gLxh3gM0sCl+ysmZjJ9JC6PRsVAXR939OktONQ2JjZPPOrPwoFXmgWmw3ocTdBG4j0a
-        ojjRNUwCl5kTQ9foqSmntoDigCftGfvQFqK1dfkpdqe3EATA+Klmp7Ysue40Exbl6Vd3FJx8cCnu
-        S6caNDMfXIo7r/Ohtf4s6Kkt64IC62mJvQ5ug6RTYDqebUzeeuIjeiARGgc+711woIg2/rp4IWgk
-        asrXzPl984I0ZLRqSXycEQV14ZNn/L556Zi5f8SG3zcvA2Uaq8aBa43HQQsHjp5j8xEtNm6x57e8
-        LJ8z+SgZv+zFZZm7e9BSK0EncnijJdYunC1tauBSKtE0oYKfBOeXvcCLtNn8tA9+6Qv2dcM5KRb0
-        8Bdg18YigevdC68qLZy0BCPFsbc8H10SxfTS2Zon3YMdBYeFnthDX9zXy1DfcLk+6eiZ92meX/6C
-        4NHuMslvgZnIwPHZG/wSGFVY6L0t+eUvv/7n1xsc6oJ3xJ01YZktUsfv+sUvcYHHrQLlScs1E7YT
-        stKCVh3HbnqOPvzSFqiaddUcWc5fis0kz2Y6rUUwaRoctCQ0lGeOSWKJte5TwamLe+CS0cu2zG+z
-        5Ze1oJvAq2fA0vr7KslT5jMxf00bnURZAtMRTZa74XCWJYnSPdbzcBaIHPQzdvGpLDjEzjY4x66y
-        tZpFn5EFh7Ose1/0iyhOh7Msu93K4qEs604ZBxhOesSOPjdahCVT+lCVBIekFDC+A+h7EfS9CP5e
-        BP9pxKkgBRT5wIHWVZ/q+pIP/lJJS1qC15GEnSQwH+YiaxtsuNyZQO1xZm33NviTOxPBgYU3XPow
-        QwZhNhL4/HpCKFXPJnr5B/ZvV+egZxNn7z1jaw9fPaW1Z00O+Vh9tD0HFn7Jx9f3D+/UA5dpL1VU
-        ugWZX/KB6I7N/xTvUz70qxd2G4lLNFRxtvsmVt73Jo5nf8xd3h99FCVNPntfXuaBY5iIc8ZW81iX
-        TDheSmA+DrbIAt5oOdfiTSnT5ypIXuIBPJzoc0qTt3ggx6A8I2ipd2gfUCLZaLkdbmve4hS43i23
-        9f1OJ2vyPRydC24xnomdFycwoluI5P3JBxXL79YkL+3wVc8oXtSpHTgbOrqPBK4p0i83lZxV1Q6k
-        H0Yez086vGNYOou8v/mgP2jnLbh28nUYv91BXt6BYOhOT1pSZKAMQS5nDl1buaMlctcHn9981gUX
-        U8z7fXMinXkmrlatl6NDjBy8fvRZb6NrpO/50Qe9HmfWtmGrG8dWqQlaP/osGZvCDz4/+qxLvzY8
-        KB33F+saXzP4vIHAQSWW7P3JZ2BJzRKXTz62vuIK5dj1AmJ9xQV9Bj8sBNGtzfsIJS8LwbP7bM6W
-        +Jg4MtjjZ59XJ+uG1jwfzUdwG7dmyPviBEumnFn4vjnBtCZz4vODDw5v5IHp/GZDEI2RuESvLyes
-        RoHrF5+1P6Q1TVyiCSveZnuKwiEltL59uEW9OdSEvuqgxd48BAXPXl/BiBKXaGwvlx3XGwhsTm7Z
-        Og5lWZe81M3vRT3FBX0cO7dvdByJZvBwCkxHMD3fbOR9c7KSuNkWfM4b02o0Eu/R/wcb1ujxESIA
-        AA==
+    content: 'ISO_6 (m),time (UTC)
+
+      14.802495,1999-12-02T12:00:00Z
+
+      16.079685,1999-12-07T12:00:00Z
+
+      19.523354,1999-12-12T12:00:00Z
+
+      20.069593,1999-12-17T12:00:00Z
+
+      27.398111,1999-12-22T12:00:00Z
+
+      30.80244,1999-12-27T12:00:00Z
+
+      34.52078,2000-01-01T12:00:00Z
+
+      35.316677,2000-01-06T12:00:00Z
+
+      40.554565,2000-01-11T12:00:00Z
+
+      48.36355,2000-01-16T12:00:00Z
+
+      49.672962,2000-01-21T12:00:00Z
+
+      45.235527,2000-01-26T12:00:00Z
+
+      40.113773,2000-01-31T12:00:00Z
+
+      36.01002,2000-02-05T12:00:00Z
+
+      28.248785,2000-02-10T12:00:00Z
+
+      38.39823,2000-02-15T12:00:00Z
+
+      49.961098,2000-02-20T12:00:00Z
+
+      56.519947,2000-02-25T12:00:00Z
+
+      74.69826,2000-03-01T12:00:00Z
+
+      83.94915,2000-03-07T12:00:00Z
+
+      80.23964,2000-03-12T12:00:00Z
+
+      59.061363,2000-03-17T12:00:00Z
+
+      42.68662,2000-03-22T12:00:00Z
+
+      46.49305,2000-03-27T12:00:00Z
+
+      63.33541,2000-04-01T12:00:00Z
+
+      98.74748,2000-04-06T12:00:00Z
+
+      98.240486,2000-04-11T12:00:00Z
+
+      92.890854,2000-04-16T12:00:00Z
+
+      88.02413,2000-04-21T12:00:00Z
+
+      71.54386,2000-04-26T12:00:00Z
+
+      62.127563,2000-05-01T12:00:00Z
+
+      59.33172,2000-05-06T12:00:00Z
+
+      52.533215,2000-05-11T12:00:00Z
+
+      44.032707,2000-05-16T12:00:00Z
+
+      39.257393,2000-05-21T12:00:00Z
+
+      37.60743,2000-05-26T12:00:00Z
+
+      37.161083,2000-05-31T12:00:00Z
+
+      36.514027,2000-06-05T12:00:00Z
+
+      33.317543,2000-06-10T12:00:00Z
+
+      32.181435,2000-06-15T12:00:00Z
+
+      31.339283,2000-06-20T12:00:00Z
+
+      29.501637,2000-06-25T12:00:00Z
+
+      23.838444,2000-06-30T12:00:00Z
+
+      19.077215,2000-07-05T12:00:00Z
+
+      16.780684,2000-07-10T12:00:00Z
+
+      17.955597,2000-07-15T12:00:00Z
+
+      18.785173,2000-07-20T12:00:00Z
+
+      16.369349,2000-07-25T12:00:00Z
+
+      17.881617,2000-07-30T12:00:00Z
+
+      18.012543,2000-08-04T12:00:00Z
+
+      17.733099,2000-08-09T12:00:00Z
+
+      17.252558,2000-08-14T12:00:00Z
+
+      17.371597,2000-08-19T12:00:00Z
+
+      18.64082,2000-08-24T12:00:00Z
+
+      15.934458,2000-08-29T12:00:00Z
+
+      16.219551,2000-09-03T12:00:00Z
+
+      27.325537,2000-09-08T12:00:00Z
+
+      36.66463,2000-09-13T12:00:00Z
+
+      38.35775,2000-09-18T12:00:00Z
+
+      34.361805,2000-09-23T12:00:00Z
+
+      31.526709,2000-09-28T12:00:00Z
+
+      30.575958,2000-10-03T12:00:00Z
+
+      30.689926,2000-10-08T12:00:00Z
+
+      30.912243,2000-10-13T12:00:00Z
+
+      31.651434,2000-10-18T12:00:00Z
+
+      30.773275,2000-10-23T12:00:00Z
+
+      29.856312,2000-10-28T12:00:00Z
+
+      29.163382,2000-11-02T12:00:00Z
+
+      28.51923,2000-11-07T12:00:00Z
+
+      27.452534,2000-11-12T12:00:00Z
+
+      28.743567,2000-11-17T12:00:00Z
+
+      31.00793,2000-11-22T12:00:00Z
+
+      32.951946,2000-11-27T12:00:00Z
+
+      33.40409,2000-12-02T12:00:00Z
+
+      33.08703,2000-12-07T12:00:00Z
+
+      33.882256,2000-12-12T12:00:00Z
+
+      34.9074,2000-12-17T12:00:00Z
+
+      37.710396,2000-12-22T12:00:00Z
+
+      39.914944,2000-12-27T12:00:00Z
+
+      41.05654,2001-01-01T12:00:00Z
+
+      49.171486,2001-01-06T12:00:00Z
+
+      60.060528,2001-01-11T12:00:00Z
+
+      66.65361,2001-01-16T12:00:00Z
+
+      72.88816,2001-01-21T12:00:00Z
+
+      75.67434,2001-01-26T12:00:00Z
+
+      76.817795,2001-01-31T12:00:00Z
+
+      64.18312,2001-02-05T12:00:00Z
+
+      61.406555,2001-02-10T12:00:00Z
+
+      58.00329,2001-02-15T12:00:00Z
+
+      54.09484,2001-02-20T12:00:00Z
+
+      53.24995,2001-02-25T12:00:00Z
+
+      66.64121,2001-03-02T12:00:00Z
+
+      87.11113,2001-03-07T12:00:00Z
+
+      101.93839,2001-03-12T12:00:00Z
+
+      114.18994,2001-03-17T12:00:00Z
+
+      117.3255,2001-03-22T12:00:00Z
+
+      110.10787,2001-03-27T12:00:00Z
+
+      92.96742,2001-04-01T12:00:00Z
+
+      66.7221,2001-04-06T12:00:00Z
+
+      59.315662,2001-04-11T12:00:00Z
+
+      62.5823,2001-04-16T12:00:00Z
+
+      64.22734,2001-04-21T12:00:00Z
+
+      68.941635,2001-04-26T12:00:00Z
+
+      70.49799,2001-05-01T12:00:00Z
+
+      61.043133,2001-05-06T12:00:00Z
+
+      50.76311,2001-05-11T12:00:00Z
+
+      43.919914,2001-05-16T12:00:00Z
+
+      42.460155,2001-05-21T12:00:00Z
+
+      46.57401,2001-05-26T12:00:00Z
+
+      42.119793,2001-05-31T12:00:00Z
+
+      40.088642,2001-06-05T12:00:00Z
+
+      41.216892,2001-06-10T12:00:00Z
+
+      36.818096,2001-06-15T12:00:00Z
+
+      36.29369,2001-06-20T12:00:00Z
+
+      34.063446,2001-06-25T12:00:00Z
+
+      34.13195,2001-06-30T12:00:00Z
+
+      33.025562,2001-07-05T12:00:00Z
+
+      31.418545,2001-07-10T12:00:00Z
+
+      30.664791,2001-07-15T12:00:00Z
+
+      30.285198,2001-07-20T12:00:00Z
+
+      31.558674,2001-07-25T12:00:00Z
+
+      32.646748,2001-07-30T12:00:00Z
+
+      29.84855,2001-08-04T12:00:00Z
+
+      19.899769,2001-08-09T12:00:00Z
+
+      20.152048,2001-08-14T12:00:00Z
+
+      23.485153,2001-08-19T12:00:00Z
+
+      19.951239,2001-08-24T12:00:00Z
+
+      23.489674,2001-08-29T12:00:00Z
+
+      31.947882,2001-09-03T12:00:00Z
+
+      37.29384,2001-09-08T12:00:00Z
+
+      46.948437,2001-09-13T12:00:00Z
+
+      53.58761,2001-09-18T12:00:00Z
+
+      52.759815,2001-09-23T12:00:00Z
+
+      51.963978,2001-09-28T12:00:00Z
+
+      49.379585,2001-10-03T12:00:00Z
+
+      45.021267,2001-10-08T12:00:00Z
+
+      37.527306,2001-10-13T12:00:00Z
+
+      30.700068,2001-10-18T12:00:00Z
+
+      18.931263,2001-10-23T12:00:00Z
+
+      12.35199,2001-10-28T12:00:00Z
+
+      12.541308,2001-11-02T12:00:00Z
+
+      11.088223,2001-11-07T12:00:00Z
+
+      13.86235,2001-11-12T12:00:00Z
+
+      17.8419,2001-11-17T12:00:00Z
+
+      24.470158,2001-11-22T12:00:00Z
+
+      29.103573,2001-11-27T12:00:00Z
+
+      28.026047,2001-12-02T12:00:00Z
+
+      30.553066,2001-12-07T12:00:00Z
+
+      29.681341,2001-12-12T12:00:00Z
+
+      29.621704,2001-12-17T12:00:00Z
+
+      29.897802,2001-12-22T12:00:00Z
+
+      30.161312,2001-12-27T12:00:00Z
+
+      31.855627,2002-01-01T12:00:00Z
+
+      32.720943,2002-01-06T12:00:00Z
+
+      37.355885,2002-01-11T12:00:00Z
+
+      44.62728,2002-01-16T12:00:00Z
+
+      48.112602,2002-01-21T12:00:00Z
+
+      47.940845,2002-01-26T12:00:00Z
+
+      48.368805,2002-01-31T12:00:00Z
+
+      67.716354,2002-02-05T12:00:00Z
+
+      73.68977,2002-02-10T12:00:00Z
+
+      73.99317,2002-02-15T12:00:00Z
+
+      76.444695,2002-02-20T12:00:00Z
+
+      70.56599,2002-02-25T12:00:00Z
+
+      58.506996,2002-03-02T12:00:00Z
+
+      51.095585,2002-03-07T12:00:00Z
+
+      51.750233,2002-03-12T12:00:00Z
+
+      52.55832,2002-03-17T12:00:00Z
+
+      54.441376,2002-03-22T12:00:00Z
+
+      65.59007,2002-03-27T12:00:00Z
+
+      71.92316,2002-04-01T12:00:00Z
+
+      77.368576,2002-04-06T12:00:00Z
+
+      84.81283,2002-04-11T12:00:00Z
+
+      77.80437,2002-04-16T12:00:00Z
+
+      69.72841,2002-04-21T12:00:00Z
+
+      55.40573,2002-04-26T12:00:00Z
+
+      NaN,2002-05-01T12:00:00Z
+
+      70.2425,2002-05-06T12:00:00Z
+
+      87.77263,2002-05-11T12:00:00Z
+
+      92.41307,2002-05-16T12:00:00Z
+
+      91.86886,2002-05-21T12:00:00Z
+
+      72.71946,2002-05-26T12:00:00Z
+
+      64.64557,2002-05-31T12:00:00Z
+
+      55.462738,2002-06-05T12:00:00Z
+
+      43.77182,2002-06-10T12:00:00Z
+
+      40.989136,2002-06-15T12:00:00Z
+
+      44.340424,2002-06-20T12:00:00Z
+
+      46.567787,2002-06-25T12:00:00Z
+
+      45.1019,2002-06-30T12:00:00Z
+
+      43.869392,2002-07-05T12:00:00Z
+
+      43.006523,2002-07-10T12:00:00Z
+
+      43.16585,2002-07-15T12:00:00Z
+
+      42.434746,2002-07-20T12:00:00Z
+
+      41.31117,2002-07-25T12:00:00Z
+
+      38.790825,2002-07-30T12:00:00Z
+
+      37.844963,2002-08-04T12:00:00Z
+
+      40.147045,2002-08-09T12:00:00Z
+
+      43.95885,2002-08-14T12:00:00Z
+
+      45.21212,2002-08-19T12:00:00Z
+
+      43.84912,2002-08-24T12:00:00Z
+
+      NaN,2002-08-29T12:00:00Z
+
+      NaN,2002-09-03T12:00:00Z
+
+      NaN,2002-09-08T12:00:00Z
+
+      NaN,2002-09-13T12:00:00Z
+
+      NaN,2002-09-18T12:00:00Z
+
+      NaN,2002-09-23T12:00:00Z
+
+      NaN,2002-09-28T12:00:00Z
+
+      NaN,2002-10-03T12:00:00Z
+
+      NaN,2002-10-08T12:00:00Z
+
+      32.875595,2002-10-13T12:00:00Z
+
+      32.84856,2002-10-18T12:00:00Z
+
+      31.042713,2002-10-23T12:00:00Z
+
+      30.389133,2002-10-28T12:00:00Z
+
+      26.803204,2002-11-02T12:00:00Z
+
+      28.391424,2002-11-07T12:00:00Z
+
+      22.295193,2002-11-12T12:00:00Z
+
+      20.140587,2002-11-17T12:00:00Z
+
+      23.74572,2002-11-22T12:00:00Z
+
+      30.27447,2002-11-27T12:00:00Z
+
+      38.50006,2002-12-02T12:00:00Z
+
+      47.908096,2002-12-07T12:00:00Z
+
+      49.677414,2002-12-12T12:00:00Z
+
+      45.051674,2002-12-17T12:00:00Z
+
+      49.410137,2002-12-22T12:00:00Z
+
+      50.565468,2002-12-27T12:00:00Z
+
+      48.990215,2003-01-01T12:00:00Z
+
+      47.0539,2003-01-06T12:00:00Z
+
+      45.98346,2003-01-11T12:00:00Z
+
+      36.33729,2003-01-16T12:00:00Z
+
+      43.406013,2003-01-21T12:00:00Z
+
+      61.32023,2003-01-26T12:00:00Z
+
+      53.752144,2003-01-31T12:00:00Z
+
+      53.871162,2003-02-05T12:00:00Z
+
+      76.86028,2003-02-10T12:00:00Z
+
+      91.11238,2003-02-15T12:00:00Z
+
+      103.40371,2003-02-20T12:00:00Z
+
+      109.525925,2003-02-25T12:00:00Z
+
+      92.09582,2003-03-02T12:00:00Z
+
+      83.6977,2003-03-07T12:00:00Z
+
+      85.27557,2003-03-12T12:00:00Z
+
+      75.21139,2003-03-17T12:00:00Z
+
+      52.679893,2003-03-22T12:00:00Z
+
+      54.76532,2003-03-27T12:00:00Z
+
+      75.013985,2003-04-01T12:00:00Z
+
+      86.59007,2003-04-06T12:00:00Z
+
+      92.454285,2003-04-11T12:00:00Z
+
+      94.06573,2003-04-16T12:00:00Z
+
+      92.31643,2003-04-21T12:00:00Z
+
+      82.835495,2003-04-26T12:00:00Z
+
+      67.102455,2003-05-01T12:00:00Z
+
+      53.242107,2003-05-06T12:00:00Z
+
+      50.342297,2003-05-11T12:00:00Z
+
+      45.784985,2003-05-16T12:00:00Z
+
+      35.214523,2003-05-21T12:00:00Z
+
+      34.393803,2003-05-26T12:00:00Z
+
+      36.62744,2003-05-31T12:00:00Z
+
+      39.729324,2003-06-05T12:00:00Z
+
+      38.00087,2003-06-10T12:00:00Z
+
+      33.664654,2003-06-15T12:00:00Z
+
+      30.16155,2003-06-20T12:00:00Z
+
+      29.810266,2003-06-25T12:00:00Z
+
+      26.672314,2003-06-30T12:00:00Z
+
+      25.233145,2003-07-05T12:00:00Z
+
+      26.009802,2003-07-10T12:00:00Z
+
+      29.490726,2003-07-15T12:00:00Z
+
+      30.765787,2003-07-20T12:00:00Z
+
+      32.88675,2003-07-25T12:00:00Z
+
+      30.08963,2003-07-30T12:00:00Z
+
+      23.652643,2003-08-04T12:00:00Z
+
+      19.072922,2003-08-09T12:00:00Z
+
+      17.220917,2003-08-14T12:00:00Z
+
+      15.919128,2003-08-19T12:00:00Z
+
+      14.362561,2003-08-24T12:00:00Z
+
+      12.313005,2003-08-29T12:00:00Z
+
+      11.230909,2003-09-03T12:00:00Z
+
+      11.657677,2003-09-08T12:00:00Z
+
+      11.112673,2003-09-13T12:00:00Z
+
+      12.254311,2003-09-18T12:00:00Z
+
+      13.273311,2003-09-23T12:00:00Z
+
+      17.120346,2003-09-28T12:00:00Z
+
+      17.314672,2003-10-03T12:00:00Z
+
+      20.21042,2003-10-08T12:00:00Z
+
+      25.267181,2003-10-13T12:00:00Z
+
+      20.16312,2003-10-18T12:00:00Z
+
+      16.670681,2003-10-23T12:00:00Z
+
+      17.467018,2003-10-28T12:00:00Z
+
+      '
     headers:
       Connection:
       - close
@@ -107,20 +645,257 @@ interactions:
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Fri, 17 Sep 2021 00:02:37 GMT
+      - Tue, 26 Apr 2022 16:50:51 GMT
       Last-Modified:
-      - Fri, 17 Sep 2021 00:02:37 GMT
+      - Tue, 26 Apr 2022 16:50:51 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Transfer-Encoding:
       - chunked
-      X-Frame-Options:
-      - SAMEORIGIN
       erddap-server:
-      - '2.14'
+      - '2.18'
       xdods-server:
       - dods/3.7
-    status:
-      code: 200
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.22.0
+    method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/tabledap/osmc_23091.csvp?sea_water_temperature,time&time%3E=1538103600.0&time%3C=1538427600.0&latitude%3E=10&latitude%3C=20&longitude%3E=80&longitude%3C=90
+  response:
+    content: 'sea_water_temperature (degree_Celsius),time (UTC)
+
+      30.2,2018-10-01T21:00:00Z
+
+      30.4,2018-10-01T18:00:00Z
+
+      30.4,2018-10-01T15:00:00Z
+
+      31.1,2018-10-01T12:00:00Z
+
+      31.3,2018-10-01T09:00:00Z
+
+      31.9,2018-10-01T06:00:00Z
+
+      30.7,2018-10-01T03:00:00Z
+
+      30.3,2018-10-01T00:00:00Z
+
+      30.4,2018-09-30T21:00:00Z
+
+      30.4,2018-09-30T18:00:00Z
+
+      30.6,2018-09-30T12:00:00Z
+
+      31.2,2018-09-30T09:00:00Z
+
+      30.8,2018-09-30T06:00:00Z
+
+      29.9,2018-09-30T03:00:00Z
+
+      29.9,2018-09-30T00:00:00Z
+
+      30.1,2018-09-29T21:00:00Z
+
+      30.3,2018-09-29T18:00:00Z
+
+      30.6,2018-09-29T15:00:00Z
+
+      31.3,2018-09-29T12:00:00Z
+
+      31.5,2018-09-29T09:00:00Z
+
+      31.7,2018-09-28T09:00:00Z
+
+      30.4,2018-09-28T06:00:00Z
+
+      29.9,2018-09-28T03:00:00Z
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=osmc_23091_8268_5402_0bce.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 20 May 2022 15:12:48 GMT
+      Last-Modified:
+      - Fri, 20 May 2022 15:12:48 GMT
+      Server:
+      - nginx/1.20.1
+      Set-Cookie:
+      - cid=CgIHBWKHr/B8Z7ogA+40Ag==; expires=Sun, 19-May-24 15:12:48 GMT; path=/
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - 2.02_axiom-r1
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.22.0
+    method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/tabledap/osmc_23091.csvp?sea_water_temperature,time&time%3E=1538103600.0&time%3C=1538427600.0&latitude%3E=10&latitude%3C=20&longitude%3E=80&longitude%3C=90
+  response:
+    content: 'sea_water_temperature (degree_Celsius),time (UTC)
+
+      30.2,2018-10-01T21:00:00Z
+
+      30.4,2018-10-01T18:00:00Z
+
+      30.4,2018-10-01T15:00:00Z
+
+      31.1,2018-10-01T12:00:00Z
+
+      31.3,2018-10-01T09:00:00Z
+
+      31.9,2018-10-01T06:00:00Z
+
+      30.7,2018-10-01T03:00:00Z
+
+      30.3,2018-10-01T00:00:00Z
+
+      30.4,2018-09-30T21:00:00Z
+
+      30.4,2018-09-30T18:00:00Z
+
+      30.6,2018-09-30T12:00:00Z
+
+      31.2,2018-09-30T09:00:00Z
+
+      30.8,2018-09-30T06:00:00Z
+
+      29.9,2018-09-30T03:00:00Z
+
+      29.9,2018-09-30T00:00:00Z
+
+      30.1,2018-09-29T21:00:00Z
+
+      30.3,2018-09-29T18:00:00Z
+
+      30.6,2018-09-29T15:00:00Z
+
+      31.3,2018-09-29T12:00:00Z
+
+      31.5,2018-09-29T09:00:00Z
+
+      31.7,2018-09-28T09:00:00Z
+
+      30.4,2018-09-28T06:00:00Z
+
+      29.9,2018-09-28T03:00:00Z
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=osmc_23091_8268_5402_0bce.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 20 May 2022 15:13:57 GMT
+      Last-Modified:
+      - Fri, 20 May 2022 15:13:57 GMT
+      Server:
+      - nginx/1.20.1
+      Set-Cookie:
+      - cid=CgIIBGKHsDV66DZXAxhFAg==; expires=Sun, 19-May-24 15:13:57 GMT; path=/
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - 2.02_axiom-r1
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.22.0
+    method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/tabledap/osmc_23091.csvp?sea_water_temperature,time&time%3E=1538352000.0&time%3C=1538427600.0&latitude%3E=10&latitude%3C=20&longitude%3E=80&longitude%3C=90
+  response:
+    content: 'sea_water_temperature (degree_Celsius),time (UTC)
+
+      30.2,2018-10-01T21:00:00Z
+
+      30.4,2018-10-01T18:00:00Z
+
+      30.4,2018-10-01T15:00:00Z
+
+      31.1,2018-10-01T12:00:00Z
+
+      31.3,2018-10-01T09:00:00Z
+
+      31.9,2018-10-01T06:00:00Z
+
+      30.7,2018-10-01T03:00:00Z
+
+      30.3,2018-10-01T00:00:00Z
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=osmc_23091_6a0a_997d_9e51.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 20 May 2022 16:10:24 GMT
+      Last-Modified:
+      - Fri, 20 May 2022 16:10:24 GMT
+      Server:
+      - nginx/1.20.1
+      Set-Cookie:
+      - cid=CgIHBWKHvXB8Z7ogBCAtAg==; expires=Sun, 19-May-24 16:10:24 GMT; path=/
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - 2.02_axiom-r1
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 200
 version: 1

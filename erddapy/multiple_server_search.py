@@ -4,8 +4,8 @@ import multiprocessing
 from typing import Dict
 from typing.io import BinaryIO
 
+import httpx
 import pandas as pd
-import requests
 
 try:
     joblib = True
@@ -33,7 +33,7 @@ def _multi_urlopen(url: str) -> BinaryIO:
     """Simpler url open to work with multiprocessing."""
     try:
         data = urlopen(url)
-    except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError):
+    except (httpx.HTTPError, httpx.ConnectError):
         return None
     return data
 

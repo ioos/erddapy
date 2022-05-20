@@ -15,9 +15,9 @@ jobs:
       fail-fast: false
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Setup Mamba
+    - name: Setup Micromamba
       uses: mamba-org/provision-with-micromamba@main
       with:
         environment-file: false
@@ -28,12 +28,6 @@ jobs:
         micromamba create --name TEST python=${{ matrix.python-version }} --file requirements.txt --file requirements-dev.txt --channel conda-forge
         micromamba activate TEST
         python -m pip install -e . --no-deps --force-reinstall
-
-    - name: Debug Installation
-      shell: bash -l {0}
-      run: |
-        micromamba activate TEST
-        which python
 
     - name: Tests
       shell: bash -l {0}

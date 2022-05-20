@@ -1,50 +1,207 @@
 interactions:
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - upwell.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
     method: GET
     uri: https://upwell.pfeg.noaa.gov/erddap/info/gtoppAT/index.csv
   response:
-    body:
-      string: !!binary |
-        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
-        Ywjy3b88TCO+NhQAAA==
+    content: 'Row Type,Variable Name,Attribute Name,Data Type,Value
+
+      attribute,NC_GLOBAL,cdm_data_type,String,Trajectory
+
+      attribute,NC_GLOBAL,cdm_trajectory_variables,String,"commonName, yearDeployed,
+      project, toppID, serialNumber, isDrifter"
+
+      attribute,NC_GLOBAL,Conventions,String,"COARDS, CF-1.4, Unidata Dataset Discovery
+      v1.0, NCCSV-1.0"
+
+      attribute,NC_GLOBAL,creator_email,String,Lynn.Dewitt@noaa.gov
+
+      attribute,NC_GLOBAL,Easternmost_Easting,double,359.971
+
+      attribute,NC_GLOBAL,featureType,String,Trajectory
+
+      attribute,NC_GLOBAL,geospatial_lat_max,double,73.667
+
+      attribute,NC_GLOBAL,geospatial_lat_min,double,-77.891
+
+      attribute,NC_GLOBAL,geospatial_lat_units,String,degrees_north
+
+      attribute,NC_GLOBAL,geospatial_lon_max,double,359.971
+
+      attribute,NC_GLOBAL,geospatial_lon_min,double,0.01
+
+      attribute,NC_GLOBAL,geospatial_lon_units,String,degrees_east
+
+      attribute,NC_GLOBAL,infoUrl,String,https://gtopp.org/
+
+      attribute,NC_GLOBAL,institution,String,Stanford
+
+      attribute,NC_GLOBAL,license,String,"The data may be used and redistributed for
+      free but is not intended\nfor legal use, since it may contain inaccuracies.
+      Neither the data\nContributor, ERD, NOAA, nor the United States Government,
+      nor any\nof their employees or contractors, makes any warranty, express or\nimplied,
+      including warranties of merchantability and fitness for a\nparticular purpose,
+      or assumes any legal liability for the accuracy,\ncompleteness, or usefulness,
+      of this information."
+
+      attribute,NC_GLOBAL,Metadata_Conventions,String,"COARDS, CF-1.4, Unidata Dataset
+      Discovery v1.0"
+
+      attribute,NC_GLOBAL,Northernmost_Northing,double,73.667
+
+      attribute,NC_GLOBAL,sourceUrl,String,(local files)
+
+      attribute,NC_GLOBAL,Southernmost_Northing,double,-77.891
+
+      attribute,NC_GLOBAL,standard_name_vocabulary,String,CF-12
+
+      attribute,NC_GLOBAL,subsetVariables,String,"commonName, yearDeployed, project,
+      toppID, serialNumber, isDrifter"
+
+      attribute,NC_GLOBAL,summary,String,See topp.org for a description of this data
+
+      attribute,NC_GLOBAL,time_coverage_end,String,2021-11-27T19:43:48Z
+
+      attribute,NC_GLOBAL,time_coverage_start,String,2002-06-26T21:10:31Z
+
+      attribute,NC_GLOBAL,title,String,TOPP Historical Tagged Animals
+
+      attribute,NC_GLOBAL,Westernmost_Easting,double,0.01
+
+      variable,commonName,,String,
+
+      attribute,commonName,ioos_category,String,Taxonomy
+
+      attribute,commonName,long_name,String,Common Name
+
+      variable,yearDeployed,,int,
+
+      attribute,yearDeployed,actual_range,int,"1995, 9999"
+
+      attribute,yearDeployed,ioos_category,String,Time
+
+      attribute,yearDeployed,long_name,String,Year Deployed
+
+      variable,project,,int,
+
+      attribute,project,actual_range,int,"0, 1"
+
+      attribute,project,description,String,"Project:\n0=TOPPP - ''TOPP Partner'' species\n1=GTOPP
+      - ''TOPP'' designated species\n2=TAGAG - ''TagAGiant''\n5=CMRCL - commercial
+      species"
+
+      attribute,project,ioos_category,String,Identifier
+
+      attribute,project,long_name,String,Project
+
+      variable,toppID,,String,
+
+      attribute,toppID,cf_role,String,trajectory_id
+
+      attribute,toppID,comment,String,This ID is unique to a given tagged animal.
+
+      attribute,toppID,ioos_category,String,Identifier
+
+      attribute,toppID,long_name,String,TOPP ID (unique)
+
+      variable,serialNumber,,String,
+
+      attribute,serialNumber,comment,String,"Tags were reused, so this is not a unique
+      identifier."
+
+      attribute,serialNumber,ioos_category,String,Identifier
+
+      attribute,serialNumber,long_name,String,The Tag''s Serial Number (not unique)
+
+      variable,isDrifter,,int,
+
+      attribute,isDrifter,actual_range,int,"0, 1"
+
+      attribute,isDrifter,comment,String,"0=no, 1=yes=tag popped off animal then drifted"
+
+      attribute,isDrifter,ioos_category,String,Other
+
+      attribute,isDrifter,long_name,String,Is Drifter?
+
+      variable,time,,double,
+
+      attribute,time,_CoordinateAxisType,String,Time
+
+      attribute,time,actual_range,double,"1.025125831E9, 1.638042228E9"
+
+      attribute,time,axis,String,T
+
+      attribute,time,ioos_category,String,Time
+
+      attribute,time,long_name,String,Time
+
+      attribute,time,standard_name,String,time
+
+      attribute,time,time_origin,String,01-JAN-1970 00:00:00
+
+      attribute,time,units,String,seconds since 1970-01-01T00:00:00Z
+
+      variable,longitude,,float,
+
+      attribute,longitude,_CoordinateAxisType,String,Lon
+
+      attribute,longitude,_FillValue,float,-1.0E34
+
+      attribute,longitude,actual_range,float,"0.01, 359.971"
+
+      attribute,longitude,axis,String,X
+
+      attribute,longitude,ioos_category,String,Location
+
+      attribute,longitude,long_name,String,Longitude
+
+      attribute,longitude,missing_value,float,-1.0E34
+
+      attribute,longitude,standard_name,String,longitude
+
+      attribute,longitude,units,String,degrees_east
+
+      variable,latitude,,float,
+
+      attribute,latitude,_CoordinateAxisType,String,Lat
+
+      attribute,latitude,_FillValue,float,-1.0E34
+
+      attribute,latitude,actual_range,float,"-77.891, 73.667"
+
+      attribute,latitude,axis,String,Y
+
+      attribute,latitude,ioos_category,String,Location
+
+      attribute,latitude,long_name,String,Latitude
+
+      attribute,latitude,missing_value,float,-1.0E34
+
+      attribute,latitude,standard_name,String,latitude
+
+      attribute,latitude,units,String,degrees_north
+
+      variable,LC,,String,
+
+      attribute,LC,comment,String,"Quality codes from the ARGOS satellite (in meters):
+      0,A,B,Z=no claim, 1=1000m, 2=350m, 3=150m. See https://www.aoml.noaa.gov/phod/dac/loc-rep.html"
+
+      attribute,LC,ioos_category,String,Quality
+
+      attribute,LC,long_name,String,Location Quality Code
+
+      '
     headers:
       Connection:
       - close
@@ -52,85 +209,327 @@ interactions:
       - attachment;filename=gtoppAT_info.csv
       Content-Encoding:
       - gzip
+      Content-Security-Policy:
+      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
+        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
+        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
+        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Thu, 16 Sep 2021 23:53:04 GMT
+      - Tue, 26 Apr 2022 16:47:20 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Transfer-Encoding:
       - chunked
       X-Frame-Options:
       - SAMEORIGIN
-    status:
-      code: 200
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 200
 - request:
-    body: null
+    body: ''
     headers:
-      Accept:
+      accept:
       - '*/*'
-      Accept-Encoding:
+      accept-encoding:
       - gzip, deflate, br
-      Connection:
+      connection:
       - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
+      host:
+      - upwell.pfeg.noaa.gov
+      user-agent:
+      - python-httpx/0.22.0
     method: GET
     uri: https://upwell.pfeg.noaa.gov/erddap/info/pmelTao5dayIso/index.csv
   response:
-    body:
-      string: !!binary |
-        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
-        3f/yb3eZdLBtIwAA
+    content: 'Row Type,Variable Name,Attribute Name,Data Type,Value
+
+      attribute,NC_GLOBAL,cdm_data_type,String,TimeSeries
+
+      attribute,NC_GLOBAL,cdm_timeseries_variables,String,"array, station, wmo_platform_code,
+      longitude, latitude, depth"
+
+      attribute,NC_GLOBAL,Conventions,String,"COARDS, CF-1.6, ACDD-1.3, NCCSV-1.1"
+
+      attribute,NC_GLOBAL,creator_email,String,Dai.C.McClurg@noaa.gov
+
+      attribute,NC_GLOBAL,creator_name,String,GTMBA Project Office/NOAA/PMEL
+
+      attribute,NC_GLOBAL,creator_type,String,group
+
+      attribute,NC_GLOBAL,creator_url,String,https://www.pmel.noaa.gov/gtmba/mission
+
+      attribute,NC_GLOBAL,Data_Source,String,Global Tropical Moored Buoy Array Project
+      Office/NOAA/PMEL
+
+      attribute,NC_GLOBAL,defaultGraphQuery,String,"longitude,latitude,ISO_6&time>=now-10days"
+
+      attribute,NC_GLOBAL,Easternmost_Easting,double,357.0
+
+      attribute,NC_GLOBAL,featureType,String,TimeSeries
+
+      attribute,NC_GLOBAL,File_info,String,Contact: Dai.C.McClurg@noaa.gov
+
+      attribute,NC_GLOBAL,geospatial_lat_max,double,21.0
+
+      attribute,NC_GLOBAL,geospatial_lat_min,double,-25.0
+
+      attribute,NC_GLOBAL,geospatial_lat_units,String,degrees_north
+
+      attribute,NC_GLOBAL,geospatial_lon_max,double,357.0
+
+      attribute,NC_GLOBAL,geospatial_lon_min,double,0.0
+
+      attribute,NC_GLOBAL,geospatial_lon_units,String,degrees_east
+
+      attribute,NC_GLOBAL,geospatial_vertical_max,double,0.0
+
+      attribute,NC_GLOBAL,geospatial_vertical_min,double,0.0
+
+      attribute,NC_GLOBAL,geospatial_vertical_positive,String,down
+
+      attribute,NC_GLOBAL,geospatial_vertical_units,String,m
+
+      attribute,NC_GLOBAL,history,String,"This dataset has data from the TAO/TRITON,
+      RAMA, and PIRATA projects.\nThis dataset is a product of the TAO Project Office
+      at NOAA/PMEL.\n2022-04-04 Bob Simons at NOAA/NMFS/SWFSC/ERD (bob.simons@noaa.gov)
+      fully refreshed ERD''s copy of this dataset by downloading all of the .cdf files
+      from the PMEL TAO FTP site.  Since then, the dataset has been partially refreshed
+      everyday by downloading and merging the latest version of the last 25 days worth
+      of data."
+
+      attribute,NC_GLOBAL,infoUrl,String,https://www.pmel.noaa.gov/gtmba/mission
+
+      attribute,NC_GLOBAL,institution,String,"NOAA PMEL, TAO/TRITON, RAMA, PIRATA"
+
+      attribute,NC_GLOBAL,keywords,String,"20c, 5-day, buoys, centered, day, depth,
+      identifier, isotherm, noaa, pirata, pmel, quality, rama, station, tao, temperature,
+      time, triton"
+
+      attribute,NC_GLOBAL,keywords_vocabulary,String,GCMD Science Keywords
+
+      attribute,NC_GLOBAL,license,String,"Request for Acknowledgement: If you use
+      these data in publications or presentations, please acknowledge the GTMBA Project
+      Office of NOAA/PMEL. Also, we would appreciate receiving a preprint and/or reprint
+      of publications utilizing the data for inclusion in our bibliography. Relevant
+      publications should be sent to: GTMBA Project Office, NOAA/Pacific Marine Environmental
+      Laboratory, 7600 Sand Point Way NE, Seattle, WA 98115\n\nThe data may be used
+      and redistributed for free but is not intended\nfor legal use, since it may
+      contain inaccuracies. Neither the data\nContributor, ERD, NOAA, nor the United
+      States Government, nor any\nof their employees or contractors, makes any warranty,
+      express or\nimplied, including warranties of merchantability and fitness for
+      a\nparticular purpose, or assumes any legal liability for the accuracy,\ncompleteness,
+      or usefulness, of this information."
+
+      attribute,NC_GLOBAL,Northernmost_Northing,double,21.0
+
+      attribute,NC_GLOBAL,project,String,"TAO/TRITON, RAMA, PIRATA"
+
+      attribute,NC_GLOBAL,Request_for_acknowledgement,String,"If you use these data
+      in publications or presentations, please acknowledge the GTMBA Project Office
+      of NOAA/PMEL. Also, we would appreciate receiving a preprint and/or reprint
+      of publications utilizing the data for inclusion in our bibliography. Relevant
+      publications should be sent to: GTMBA Project Office, NOAA/Pacific Marine Environmental
+      Laboratory, 7600 Sand Point Way NE, Seattle, WA 98115"
+
+      attribute,NC_GLOBAL,sourceUrl,String,(local files)
+
+      attribute,NC_GLOBAL,Southernmost_Northing,double,-25.0
+
+      attribute,NC_GLOBAL,standard_name_vocabulary,String,CF Standard Name Table v70
+
+      attribute,NC_GLOBAL,subsetVariables,String,"array, station, wmo_platform_code,
+      longitude, latitude, depth"
+
+      attribute,NC_GLOBAL,summary,String,"This dataset has 5-day 20C Isotherm Depth
+      data (the depth at which the ocean temperature is 20C) from the \nTAO/TRITON
+      (Pacific Ocean, https://www.pmel.noaa.gov/gtmba/ ),\nRAMA (Indian Ocean, https://www.pmel.noaa.gov/gtmba/pmel-theme/indian-ocean-rama
+      ), and\nPIRATA (Atlantic Ocean, https://www.pmel.noaa.gov/gtmba/pirata/ )\narrays
+      of moored buoys which transmit oceanographic and meteorological data to shore
+      in real-time via the Argos satellite system.  These buoys are major components
+      of the CLIVAR climate analysis project and the GOOS, GCOS, and GEOSS observing
+      systems.  5-day data is an average of daily values collected during consecutive
+      five day intervals.  A minimum of 2 daily values are required to compute a 5-day
+      average.  This dataset contains realtime and delayed mode data (see the ''source''
+      variable).  For more information, see\nhttps://www.pmel.noaa.gov/gtmba/mission
+      ."
+
+      attribute,NC_GLOBAL,testOutOfDate,String,now-9days
+
+      attribute,NC_GLOBAL,time_coverage_end,String,2022-04-23T12:00:00Z
+
+      attribute,NC_GLOBAL,time_coverage_start,String,1977-11-07T12:00:00Z
+
+      attribute,NC_GLOBAL,title,String,"TAO/TRITON, RAMA, and PIRATA Buoys, 5-Day,
+      1977-present, 20C Isotherm Depth"
+
+      attribute,NC_GLOBAL,Westernmost_Easting,double,0.0
+
+      variable,array,,String,
+
+      attribute,array,ioos_category,String,Identifier
+
+      attribute,array,long_name,String,Array
+
+      variable,station,,String,
+
+      attribute,station,cf_role,String,timeseries_id
+
+      attribute,station,ioos_category,String,Identifier
+
+      attribute,station,long_name,String,Station
+
+      variable,wmo_platform_code,,int,
+
+      attribute,wmo_platform_code,actual_range,int,"13001, 56055"
+
+      attribute,wmo_platform_code,ioos_category,String,Identifier
+
+      attribute,wmo_platform_code,long_name,String,WMO Platform Code
+
+      attribute,wmo_platform_code,missing_value,int,2147483647
+
+      variable,longitude,,float,
+
+      attribute,longitude,_CoordinateAxisType,String,Lon
+
+      attribute,longitude,actual_range,float,"0.0, 357.0"
+
+      attribute,longitude,axis,String,X
+
+      attribute,longitude,epic_code,int,502
+
+      attribute,longitude,ioos_category,String,Location
+
+      attribute,longitude,long_name,String,Nominal Longitude
+
+      attribute,longitude,missing_value,float,1.0E35
+
+      attribute,longitude,standard_name,String,longitude
+
+      attribute,longitude,type,String,EVEN
+
+      attribute,longitude,units,String,degrees_east
+
+      variable,latitude,,float,
+
+      attribute,latitude,_CoordinateAxisType,String,Lat
+
+      attribute,latitude,actual_range,float,"-25.0, 21.0"
+
+      attribute,latitude,axis,String,Y
+
+      attribute,latitude,epic_code,int,500
+
+      attribute,latitude,ioos_category,String,Location
+
+      attribute,latitude,long_name,String,Nominal Latitude
+
+      attribute,latitude,missing_value,float,1.0E35
+
+      attribute,latitude,standard_name,String,latitude
+
+      attribute,latitude,type,String,EVEN
+
+      attribute,latitude,units,String,degrees_north
+
+      variable,time,,double,
+
+      attribute,time,_CoordinateAxisType,String,Time
+
+      attribute,time,actual_range,double,"2.47752E8, 1.6507152E9"
+
+      attribute,time,axis,String,T
+
+      attribute,time,ioos_category,String,Time
+
+      attribute,time,long_name,String,Centered Time
+
+      attribute,time,point_spacing,String,uneven
+
+      attribute,time,standard_name,String,time
+
+      attribute,time,time_origin,String,01-JAN-1970 00:00:00
+
+      attribute,time,type,String,UNEVEN
+
+      attribute,time,units,String,seconds since 1970-01-01T00:00:00Z
+
+      variable,depth,,float,
+
+      attribute,depth,_CoordinateAxisType,String,Height
+
+      attribute,depth,_CoordinateZisPositive,String,down
+
+      attribute,depth,actual_range,float,"0.0, 0.0"
+
+      attribute,depth,axis,String,Z
+
+      attribute,depth,epic_code,int,3
+
+      attribute,depth,ioos_category,String,Location
+
+      attribute,depth,long_name,String,Depth
+
+      attribute,depth,missing_value,float,1.0E35
+
+      attribute,depth,positive,String,down
+
+      attribute,depth,standard_name,String,depth
+
+      attribute,depth,type,String,EVEN
+
+      attribute,depth,units,String,m
+
+      variable,ISO_6,,float,
+
+      attribute,ISO_6,actual_range,float,"1.348975, 272.2733"
+
+      attribute,ISO_6,colorBarMaximum,double,300.0
+
+      attribute,ISO_6,colorBarMinimum,double,0.0
+
+      attribute,ISO_6,epic_code,int,6
+
+      attribute,ISO_6,generic_name,String,depth
+
+      attribute,ISO_6,ioos_category,String,Temperature
+
+      attribute,ISO_6,long_name,String,20C Isotherm Depth
+
+      attribute,ISO_6,missing_value,float,1.0E35
+
+      attribute,ISO_6,name,String,ISO
+
+      attribute,ISO_6,units,String,m
+
+      variable,QI_5006,,float,
+
+      attribute,QI_5006,actual_range,float,"0.0, 2.0"
+
+      attribute,QI_5006,colorBarContinuous,String,false
+
+      attribute,QI_5006,colorBarMaximum,double,6.0
+
+      attribute,QI_5006,colorBarMinimum,double,0.0
+
+      attribute,QI_5006,description,String,"Quality: 0=missing data, 1=highest, 2=standard,
+      3=lower, 4=questionable, 5=bad, -9=contact Dai.C.McClurg@noaa.gov.  To get probably
+      valid data only, request QI_5006>=1 and QI_5006<=3."
+
+      attribute,QI_5006,epic_code,int,5006
+
+      attribute,QI_5006,generic_name,String,qi
+
+      attribute,QI_5006,ioos_category,String,Quality
+
+      attribute,QI_5006,long_name,String,20C Depth Quality
+
+      attribute,QI_5006,missing_value,float,1.0E35
+
+      attribute,QI_5006,name,String,QI
+
+      '
     headers:
       Connection:
       - close
@@ -138,17 +537,21 @@ interactions:
       - attachment;filename=pmelTao5dayIso_info.csv
       Content-Encoding:
       - gzip
+      Content-Security-Policy:
+      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
+        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
+        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
+        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Thu, 16 Sep 2021 23:53:05 GMT
+      - Tue, 26 Apr 2022 16:47:21 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Transfer-Encoding:
       - chunked
       X-Frame-Options:
       - SAMEORIGIN
-    status:
-      code: 200
-      message: ''
+    http_version: HTTP/1.1
+    status_code: 200
 version: 1

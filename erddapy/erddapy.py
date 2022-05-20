@@ -8,15 +8,11 @@ from urllib.parse import quote_plus
 
 import pandas as pd
 import pytz
+from pandas._libs.tslibs.parsing import parse_time_string
 
 from erddapy.netcdf_handling import _nc_dataset, _tempnc
 from erddapy.servers import servers
 from erddapy.url_handling import _distinct, urlopen
-
-try:
-    from pandas.core.indexes.period import parse_time_string
-except ImportError:
-    from pandas._libs.tslibs.parsing import parse_time_string
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
@@ -246,7 +242,7 @@ class ERDDAP:
         variables: a list variables to download.
         response: default is HTML.
         constraints: download constraints, default None (opendap-like url)
-        params and requests_kwargs: `request.get` options
+        params and requests_kwargs: `httpx.get` options
 
     Returns:
         instance: the ERDDAP URL builder.

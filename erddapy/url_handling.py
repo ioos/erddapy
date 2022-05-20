@@ -5,23 +5,23 @@ import io
 from typing import Dict, Optional
 from typing.io import BinaryIO
 
-import requests
+import httpx
 
 
 @functools.lru_cache(maxsize=256)
 def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
-    response = requests.get(url, allow_redirects=True, auth=auth, **kwargs)
+    response = httpx.get(url, follow_redirects=True, auth=auth, **kwargs)
     try:
         response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        raise requests.exceptions.HTTPError(f"{response.content.decode()}") from err
+    except httpx.HTTPError as err:
+        raise httpx.HTTPError(f"{response.content.decode()}") from err
     return io.BytesIO(response.content)
 
 
 def urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
-    """Thin wrapper around requests get content.
+    """Thin wrapper around httpx get content.
 
-    See requests.get docs for the `params` and `kwargs` options.
+    See httpx.get docs for the `params` and `kwargs` options.
 
     """
     # Ignoring type checks here b/c mypy does not support decorated functions.
@@ -39,7 +39,7 @@ def check_url_response(url: str, **kwargs: Dict) -> str:
     Otherwise let it fail later and avoid fetching the head.
 
     """
-    r = requests.head(url, **kwargs)
+    r = httpx.head(url, **kwargs)
     r.raise_for_status()
     return url
 
