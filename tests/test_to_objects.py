@@ -11,91 +11,102 @@ from erddapy import ERDDAP
 
 @pytest.fixture
 @pytest.mark.web
-def e():
+def sensors():
     """Instantiate ERDDAP class for testing."""
     yield ERDDAP(
-        server="https://upwell.pfeg.noaa.gov/erddap",
+        server="https://erddap.sensors.ioos.us/erddap/",
         response="htmlTable",
     )
 
 
 @pytest.fixture
-def bermuda_1_msl(e):
-    """Load bermuda_1_msl for testing."""
-    e.dataset_id = "noaa_ngdc_9cfa_244d_0065"
-    e.constraints = None
-    e.protocol = "griddap"
-    yield e
+@pytest.mark.web
+def neracoos():
+    """Instantiate ERDDAP class for testing."""
+    yield ERDDAP(
+        server="http://www.neracoos.org/erddap/",
+        response="htmlTable",
+    )
 
 
 @pytest.fixture
-def taodata(e):
-    """Load taodata for testing."""
-    e.dataset_id = "pmelTao5dayIso"
-    e.protocol = "tabledap"
-    e.constraints = {
-        "time>=": "1977-11-10T12:00:00Z",
-        "time<=": "2019-01-26T12:00:00Z",
+def dataset_griddap(neracoos):
+    """Load griddap data for testing."""
+    neracoos.dataset_id = "WW3_EastCoast_latest"
+    neracoos.protocol = "griddap"
+    neracoos.griddap_initialize()
+    yield neracoos
+
+
+@pytest.fixture
+def dataset_tabledap(sensors):
+    """Load tabledap for testing."""
+    sensors.dataset_id = "osmc_23091"
+    sensors.protocol = "tabledap"
+    sensors.variables = ["sea_water_temperature", "time"]
+    sensors.constraints = {
+        "time>=": "2018-10-01T00:00:00Z",
+        "time<=": "2018-10-01T21:00:00Z",
         "latitude>=": 10,
-        "latitude<=": 10,
-        "longitude>=": 265,
-        "longitude<=": 265,
+        "latitude<=": 20,
+        "longitude>=": 80,
+        "longitude<=": 90,
     }
-    e.variables = ["ISO_6", "time"]
-    yield e
+    yield sensors
 
 
 @pytest.mark.web
 @pytest.mark.vcr()
-def test_to_pandas(taodata):
+def test_to_pandas(dataset_tabledap):
     """Test converting tabledap to a pandas DataFrame."""
     import pandas as pd
 
-    df = taodata.to_pandas(index_col="time (UTC)", parse_dates=True).dropna()
+    df = dataset_tabledap.to_pandas(index_col="time (UTC)", parse_dates=True).dropna()
 
     assert isinstance(df, pd.DataFrame)
     assert df.index.name == "time (UTC)"
     assert len(df.columns) == 1
-    assert df.columns[0] == "ISO_6 (m)"
+    assert df.columns[0] == "sea_water_temperature (degree_Celsius)"
 
 
 @pytest.mark.web
-# @pytest.mark.vcr()
-def test_to_xarray_tabledap(taodata):
+def test_to_xarray_tabledap(dataset_tabledap):
     """Test converting tabledap to an xarray Dataset."""
-    ds = taodata.to_xarray()
+    ds = dataset_tabledap.to_xarray()
 
     assert isinstance(ds, xr.Dataset)
-    assert len(ds.variables) == 7
+    assert len(ds.variables) == 6
     assert ds["time"].name == "time"
-    assert ds["ISO_6"].name == "ISO_6"
+    assert ds["sea_water_temperature"].name == "sea_water_temperature"
 
 
 @pytest.mark.web
-# @pytest.mark.vcr()
-def test_to_xarray_griddap(bermuda_1_msl):
+def test_to_xarray_griddap(dataset_griddap):
     """Test converting griddap to an xarray Dataset."""
-    ds = bermuda_1_msl.to_xarray()
-
+    ds = dataset_griddap.to_xarray()
     assert isinstance(ds, xr.Dataset)
 
 
 @pytest.mark.web
-# @pytest.mark.vcr()
-@pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
-def test_to_iris_tabledap(taodata):
+@pytest.mark.skipif(
+    (sys.platform == "win32" or sys.platform == "darwin"),
+    reason="run this test only once until we figure out a better way to mock it.",
+)
+def test_to_iris_tabledap(dataset_tabledap):
     """Test converting tabledap to an iris cube."""
-    cubes = taodata.to_iris()
+    cubes = dataset_tabledap.to_iris()
 
     assert isinstance(cubes, iris.cube.CubeList)
-    assert isinstance(cubes.extract_cube("depth"), iris.cube.Cube)
-    assert isinstance(cubes.extract_cube("20C Isotherm Depth"), iris.cube.Cube)
+    assert isinstance(cubes.extract_cube("23091 - Moored Buoy"), iris.cube.Cube)
+    assert isinstance(cubes.extract_cube("sea_water_temperature"), iris.cube.Cube)
 
 
 @pytest.mark.web
-# @pytest.mark.vcr()
-@pytest.mark.skipif(sys.platform == "win32", reason="does not run on windows")
-def test_to_iris_griddap(bermuda_1_msl):
+@pytest.mark.skipif(
+    (sys.platform == "win32" or sys.platform == "darwin"),
+    reason="run this test only once until we figure out a better way to mock it.",
+)
+def test_to_iris_griddap(dataset_griddap):
     """Test converting griddap to an iris cube."""
-    cubes = bermuda_1_msl.to_iris()
+    cubes = dataset_griddap.to_iris()
     assert isinstance(cubes, iris.cube.CubeList)

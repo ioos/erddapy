@@ -101,9 +101,7 @@ def test_erddap_requests_kwargs():
     base_url = "http://www.neracoos.org/erddap"
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000
-    slowwly_url = (
-        f"https://flash-the-slow-api.herokuapp.com/delay/{slowwly_milliseconds}/url/{base_url}"
-    )
+    slowwly_url = f"https://flash-the-slow-api.herokuapp.com/delay/{slowwly_milliseconds}/url/{base_url}"
 
     connection = ERDDAP(slowwly_url)
     connection.dataset_id = "M01_sbe37_all"

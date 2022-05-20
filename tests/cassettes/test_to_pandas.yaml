@@ -658,4 +658,244 @@ interactions:
       - dods/3.7
     http_version: HTTP/1.1
     status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.22.0
+    method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/tabledap/osmc_23091.csvp?sea_water_temperature,time&time%3E=1538103600.0&time%3C=1538427600.0&latitude%3E=10&latitude%3C=20&longitude%3E=80&longitude%3C=90
+  response:
+    content: 'sea_water_temperature (degree_Celsius),time (UTC)
+
+      30.2,2018-10-01T21:00:00Z
+
+      30.4,2018-10-01T18:00:00Z
+
+      30.4,2018-10-01T15:00:00Z
+
+      31.1,2018-10-01T12:00:00Z
+
+      31.3,2018-10-01T09:00:00Z
+
+      31.9,2018-10-01T06:00:00Z
+
+      30.7,2018-10-01T03:00:00Z
+
+      30.3,2018-10-01T00:00:00Z
+
+      30.4,2018-09-30T21:00:00Z
+
+      30.4,2018-09-30T18:00:00Z
+
+      30.6,2018-09-30T12:00:00Z
+
+      31.2,2018-09-30T09:00:00Z
+
+      30.8,2018-09-30T06:00:00Z
+
+      29.9,2018-09-30T03:00:00Z
+
+      29.9,2018-09-30T00:00:00Z
+
+      30.1,2018-09-29T21:00:00Z
+
+      30.3,2018-09-29T18:00:00Z
+
+      30.6,2018-09-29T15:00:00Z
+
+      31.3,2018-09-29T12:00:00Z
+
+      31.5,2018-09-29T09:00:00Z
+
+      31.7,2018-09-28T09:00:00Z
+
+      30.4,2018-09-28T06:00:00Z
+
+      29.9,2018-09-28T03:00:00Z
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=osmc_23091_8268_5402_0bce.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 20 May 2022 15:12:48 GMT
+      Last-Modified:
+      - Fri, 20 May 2022 15:12:48 GMT
+      Server:
+      - nginx/1.20.1
+      Set-Cookie:
+      - cid=CgIHBWKHr/B8Z7ogA+40Ag==; expires=Sun, 19-May-24 15:12:48 GMT; path=/
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - 2.02_axiom-r1
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.22.0
+    method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/tabledap/osmc_23091.csvp?sea_water_temperature,time&time%3E=1538103600.0&time%3C=1538427600.0&latitude%3E=10&latitude%3C=20&longitude%3E=80&longitude%3C=90
+  response:
+    content: 'sea_water_temperature (degree_Celsius),time (UTC)
+
+      30.2,2018-10-01T21:00:00Z
+
+      30.4,2018-10-01T18:00:00Z
+
+      30.4,2018-10-01T15:00:00Z
+
+      31.1,2018-10-01T12:00:00Z
+
+      31.3,2018-10-01T09:00:00Z
+
+      31.9,2018-10-01T06:00:00Z
+
+      30.7,2018-10-01T03:00:00Z
+
+      30.3,2018-10-01T00:00:00Z
+
+      30.4,2018-09-30T21:00:00Z
+
+      30.4,2018-09-30T18:00:00Z
+
+      30.6,2018-09-30T12:00:00Z
+
+      31.2,2018-09-30T09:00:00Z
+
+      30.8,2018-09-30T06:00:00Z
+
+      29.9,2018-09-30T03:00:00Z
+
+      29.9,2018-09-30T00:00:00Z
+
+      30.1,2018-09-29T21:00:00Z
+
+      30.3,2018-09-29T18:00:00Z
+
+      30.6,2018-09-29T15:00:00Z
+
+      31.3,2018-09-29T12:00:00Z
+
+      31.5,2018-09-29T09:00:00Z
+
+      31.7,2018-09-28T09:00:00Z
+
+      30.4,2018-09-28T06:00:00Z
+
+      29.9,2018-09-28T03:00:00Z
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=osmc_23091_8268_5402_0bce.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 20 May 2022 15:13:57 GMT
+      Last-Modified:
+      - Fri, 20 May 2022 15:13:57 GMT
+      Server:
+      - nginx/1.20.1
+      Set-Cookie:
+      - cid=CgIIBGKHsDV66DZXAxhFAg==; expires=Sun, 19-May-24 15:13:57 GMT; path=/
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - 2.02_axiom-r1
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.22.0
+    method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/tabledap/osmc_23091.csvp?sea_water_temperature,time&time%3E=1538352000.0&time%3C=1538427600.0&latitude%3E=10&latitude%3C=20&longitude%3E=80&longitude%3C=90
+  response:
+    content: 'sea_water_temperature (degree_Celsius),time (UTC)
+
+      30.2,2018-10-01T21:00:00Z
+
+      30.4,2018-10-01T18:00:00Z
+
+      30.4,2018-10-01T15:00:00Z
+
+      31.1,2018-10-01T12:00:00Z
+
+      31.3,2018-10-01T09:00:00Z
+
+      31.9,2018-10-01T06:00:00Z
+
+      30.7,2018-10-01T03:00:00Z
+
+      30.3,2018-10-01T00:00:00Z
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=osmc_23091_6a0a_997d_9e51.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 20 May 2022 16:10:24 GMT
+      Last-Modified:
+      - Fri, 20 May 2022 16:10:24 GMT
+      Server:
+      - nginx/1.20.1
+      Set-Cookie:
+      - cid=CgIHBWKHvXB8Z7ogBCAtAg==; expires=Sun, 19-May-24 16:10:24 GMT; path=/
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - 2.02_axiom-r1
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 200
 version: 1
