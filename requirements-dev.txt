@@ -8,6 +8,7 @@ flake8-builtins
 flake8-comprehensions
 flake8-mutable
 flake8-print
+geopandas
 interrogate
 isort
 joblib
@@ -16,14 +17,17 @@ mypy
 nbsphinx
 netcdf4
 pendulum>=2.0.1
+pooch
 pre-commit
 pydocstyle
+pygeos
 pylint
 pytest
 pytest-cov
 pytest-flake8
 pytest-sugar
 pytest-vcr
+regionmask
 scitools-iris>=3
 setuptools_scm
 sphinx
