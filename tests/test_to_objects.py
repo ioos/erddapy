@@ -39,6 +39,14 @@ def dataset_griddap(neracoos):
 
 
 @pytest.fixture
+def dataset_opendap():
+    """Load griddap data with OPeNDAP response for testing."""
+    cswc = ERDDAP(server="CSWC", protocol="griddap", response="opendap")
+    cswc.dataset_id = "jplAquariusSSS3MonthV5"
+    yield cswc
+
+
+@pytest.fixture
 def dataset_tabledap(sensors):
     """Load tabledap for testing."""
     sensors.dataset_id = "osmc_23091"
@@ -84,6 +92,13 @@ def test_to_xarray_tabledap(dataset_tabledap):
 def test_to_xarray_griddap(dataset_griddap):
     """Test converting griddap to an xarray Dataset."""
     ds = dataset_griddap.to_xarray()
+    assert isinstance(ds, xr.Dataset)
+
+
+@pytest.mark.web
+def test_to_xarray_opendap(dataset_opendap):
+    """Test converting griddap to an xarray Dataset, use lazy loading for OPeNDAP response."""
+    ds = dataset_opendap.to_xarray()
     assert isinstance(ds, xr.Dataset)
 
 

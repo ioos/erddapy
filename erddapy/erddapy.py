@@ -606,10 +606,14 @@ class ERDDAP:
         """
         import xarray as xr
 
-        response = "nc" if self.protocol == "griddap" else "ncCF"
-        url = self.get_download_url(response=response)
-        nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
-        return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
+        if self.response == "opendap":
+            url = self.get_download_url()
+            return xr.open_dataset(url, **kw)
+        else:
+            response = "nc" if self.protocol == "griddap" else "ncCF"
+            url = self.get_download_url(response=response)
+            nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
+            return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
     def to_iris(self, **kw):
         """Load the data request into an iris.CubeList.
