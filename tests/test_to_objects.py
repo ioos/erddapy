@@ -2,6 +2,7 @@
 
 import sys
 
+import httpx
 import iris
 import pytest
 import xarray as xr
@@ -15,6 +16,16 @@ def sensors():
     """Instantiate ERDDAP class for testing."""
     yield ERDDAP(
         server="https://erddap.sensors.ioos.us/erddap/",
+        response="htmlTable",
+    )
+
+
+@pytest.fixture
+@pytest.mark.web
+def gliders():
+    """Instantiate ERDDAP class for testing."""
+    yield ERDDAP(
+        server="https://gliders.ioos.us/erddap/",
         response="htmlTable",
     )
 
@@ -61,6 +72,28 @@ def dataset_tabledap(sensors):
         "longitude<=": 90,
     }
     yield sensors
+
+
+@pytest.mark.web
+@pytest.mark.vcr()
+def test_csv_search(gliders):
+    """Test if a CSV search returns all items (instead of the first 1000)."""
+    # The gliders server has 1244 datasets at time of writing
+    url = gliders.get_search_url(search_for="all", response="csv")
+    handle = httpx.get(url)
+    nrows = len(list(handle.iter_lines())) - 1
+    assert nrows > 1000
+
+
+@pytest.mark.web
+@pytest.mark.vcr()
+def test_json_search(gliders):
+    """Test if a JSON search returns all items (instead of the first 1000)."""
+    # The gliders server has 1244 datasets at time of writing
+    url = gliders.get_search_url(search_for="all", response="json")
+    handle = httpx.get(url)
+    nrows = len(handle.json()["table"]["rows"])
+    assert nrows > 1000
 
 
 @pytest.mark.web
