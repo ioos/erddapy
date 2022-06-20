@@ -385,7 +385,7 @@ class ERDDAP:
 
             response: default is HTML.
             items_per_page: how many items per page in the return,
-                default is 1000.
+                default is 1000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
             page: which page to display, default is the first page (1).
             kwargs: extra search constraints based on metadata and/or coordinates ke/value.
                 metadata: `cdm_data_type`, `institution`, `ioos_category`,
@@ -398,6 +398,12 @@ class ERDDAP:
         """
         protocol = protocol if protocol else self.protocol
         response = response if response else self.response
+
+        # Different protocol if not dealing with pagination, return all records
+        non_paginated_responses = ["csv", "json"]
+        if response in non_paginated_responses:
+            items_per_page = int(1e6)
+
         return _search_url(
             self.server,
             response=response,
