@@ -11,9 +11,9 @@ interactions:
       host:
       - coastwatch.pfeg.noaa.gov
       user-agent:
-      - python-httpx/0.22.0
+      - python-httpx/0.23.0
     method: HEAD
-    uri: https://coastwatch.pfeg.noaa.gov/erddap/search/advanced.csv?page=1&itemsPerPage=1000&protocol=(ANY)&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&minTime=&maxTime=&searchFor=whoi
+    uri: https://coastwatch.pfeg.noaa.gov/erddap/search/advanced.csv?page=1&itemsPerPage=1000000&protocol=(ANY)&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&minTime=&maxTime=&searchFor=whoi
   response:
     content: ''
     headers:
@@ -28,7 +28,7 @@ interactions:
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Tue, 26 Apr 2022 16:45:16 GMT
+      - Tue, 21 Jun 2022 03:37:37 GMT
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     http_version: HTTP/1.1
