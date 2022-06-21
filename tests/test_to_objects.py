@@ -76,7 +76,6 @@ def dataset_tabledap(sensors):
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
 def test_csv_search(gliders):
     """Test if a CSV search returns all items (instead of the first 1000)."""
     # The gliders server has 1244 datasets at time of writing
@@ -87,7 +86,6 @@ def test_csv_search(gliders):
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
 def test_json_search(gliders):
     """Test if a JSON search returns all items (instead of the first 1000)."""
     # The gliders server has 1244 datasets at time of writing
