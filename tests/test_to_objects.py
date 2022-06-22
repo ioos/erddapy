@@ -39,11 +39,12 @@ def dataset_griddap(neracoos):
 
 
 @pytest.fixture
-def dataset_opendap():
+def dataset_opendap(neracoos):
     """Load griddap data with OPeNDAP response for testing."""
-    cswc = ERDDAP(server="CSWC", protocol="griddap", response="opendap")
-    cswc.dataset_id = "jplAquariusSSS3MonthV5"
-    yield cswc
+    neracoos.dataset_id = "WW3_EastCoast_latest"
+    neracoos.protocol = "griddap"
+    neracoos.response = "opendap"
+    yield neracoos
 
 
 @pytest.fixture
