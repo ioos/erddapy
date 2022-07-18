@@ -10,8 +10,8 @@ import pandas as pd
 import pytz
 from pandas._libs.tslibs.parsing import parse_time_string
 
+from erddapy.core.netcdf_handling import _nc_dataset, _tempnc
 from erddapy.core.url_handling import _distinct, urlopen
-from erddapy.netcdf_handling import _nc_dataset, _tempnc
 from erddapy.servers import servers
 
 ListLike = Union[List[str], Tuple[str]]
