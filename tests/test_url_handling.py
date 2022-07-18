@@ -5,7 +5,7 @@ import io
 import httpx
 import pytest
 
-from erddapy.url_handling import check_url_response, urlopen
+from erddapy.core.url_handling import check_url_response, urlopen
 
 
 @pytest.mark.web

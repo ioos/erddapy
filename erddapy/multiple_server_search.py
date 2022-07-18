@@ -13,9 +13,9 @@ try:
 except ImportError:
     joblib = False
 
+from erddapy.core.url_handling import urlopen
 from erddapy.erddapy import _search_url
 from erddapy.servers import servers
-from erddapy.url_handling import urlopen
 
 
 def _format_search_string(server: str, query: str) -> str:
