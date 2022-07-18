@@ -7,3 +7,6 @@ _version.py
 build/
 dist/
 *-output.ipynb
+.vscode/
+*.code-workspace
+**/__pycache__
