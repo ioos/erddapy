@@ -399,8 +399,20 @@ class ERDDAP:
         protocol = protocol if protocol else self.protocol
         response = response if response else self.response
 
-        # Different protocol if not dealing with pagination, return all records
-        non_paginated_responses = ["csv", "json"]
+        # Different protocol if not dealing with pagination, return all records.
+        # This is done for all CSV, JSON and TSV-style responses.
+        non_paginated_responses = [
+            "csv",
+            "csvp",
+            "csv0",
+            "json",
+            "jsonlCSV1",
+            "jsonlCSV",
+            "jsonlKVP",
+            "tsv",
+            "tsvp",
+            "tsv0",
+        ]
         if response in non_paginated_responses:
             items_per_page = int(1e6)
 
