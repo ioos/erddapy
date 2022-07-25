@@ -98,7 +98,7 @@ def test__format_constraints_url():
 @pytest.mark.web
 def test_erddap_requests_kwargs():
     """Test that an ERDDAP instance can have requests_kwargs attribute assigned."""
-    base_url = "http://www.neracoos.org/erddap"
+    base_url = "http://erddap.ioos.us/erddap/"
     timeout_seconds = 1  # request timeout in seconds
     slowwly_milliseconds = (timeout_seconds + 1) * 1000
     slowwly_url = f"https://flash-the-slow-api.herokuapp.com/delay/{slowwly_milliseconds}/url/{base_url}"
@@ -117,8 +117,8 @@ def test_erddap_requests_kwargs():
 @pytest.mark.vcr()
 def test_erddap2_10():
     """Check regression for ERDDAP 2.10."""
-    e = ERDDAP(server="https://coastwatch.pfeg.noaa.gov/erddap")
-    url = e.get_search_url(search_for="whoi", response="csv")
+    e = ERDDAP(server="http://erddap.ioos.us/erddap/")
+    url = e.get_search_url(search_for="NOAA", response="csv")
     r = httpx.head(url)
     assert r.raise_for_status() is None
 
