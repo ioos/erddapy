@@ -69,9 +69,9 @@ def test_search_awesome_erddap_servers_False():
 
 @pytest.fixture
 @pytest.mark.web
-def servers():
+def servers_list():
     """Objects for server search."""
-    servers = {
+    servers_list = {
         "servers_list": [
             "https://coastwatch.pfeg.noaa.gov/erddap/",
             "https://gliders.ioos.us/erddap/",
@@ -79,7 +79,7 @@ def servers():
         "query": "sst",
         "protocol": "griddap",
     }
-    yield servers
+    yield servers_list
 
 
 @pytest.mark.web
@@ -87,7 +87,7 @@ def servers():
     (sys.platform in ["win32", "darwin"] or sys.version_info < (3, 10)),
     reason="run only on linux and latest to avoid extra load on the server",
 )
-def test_search_servers_with_a_list_True(servers):
+def test_search_servers_with_a_list_True(servers_list):
     """
     Check that downloads are made and that serial and parallel results are similar.
 
@@ -96,9 +96,9 @@ def test_search_servers_with_a_list_True(servers):
 
     """
     df = search_servers(
-        query=servers["query"],
-        servers_list=servers["servers_list"],
-        protocol=servers["protocol"],
+        query=servers_list["query"],
+        servers_list=servers_list["servers_list"],
+        protocol=servers_list["protocol"],
         parallel=True,
     )
 
@@ -112,7 +112,7 @@ def test_search_servers_with_a_list_True(servers):
     sys.platform in ["win32", "darwin"],
     reason="run only on linux to avoid extra load on the server",
 )
-def test_search_servers_with_a_list_False(servers):
+def test_search_servers_with_a_list_False(servers_list):
     """
     Check that downloads are made and that serial and parallel results are similar.
 
@@ -121,9 +121,9 @@ def test_search_servers_with_a_list_False(servers):
 
     """
     df = search_servers(
-        query=servers["query"],
-        servers_list=servers["servers_list"],
-        protocol=servers["protocol"],
+        query=servers_list["query"],
+        servers_list=servers_list["servers_list"],
+        protocol=servers_list["protocol"],
         parallel=False,
     )
 
