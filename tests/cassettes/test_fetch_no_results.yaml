@@ -9,15 +9,14 @@ interactions:
       connection:
       - keep-alive
       host:
-      - gliders.ioos.us
+      - standards.sensors.ioos.us
       user-agent:
-      - python-httpx/0.22.0
+      - python-httpx/0.23.0
     method: GET
-    uri: https://gliders.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor=%22incredibly_long_string_that_should_never_match_a_real_dataset%22%20
+    uri: https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor=%22incredibly_long_string_that_should_never_match_a_real_dataset%22%20
   response:
-    content: "Error {\n    code=404;\n    message=\"Not Found: Resource not found:
-      Your query produced no matching results. Check the spelling of the word(s) you
-      searched for.\";\n}\n"
+    content: "Error {\n    code=404;\n    message=\"Not Found: Your query produced
+      no matching results. Check the spelling of the word(s) you searched for.\";\n}\n"
     headers:
       Connection:
       - keep-alive
@@ -28,15 +27,15 @@ interactions:
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Tue, 26 Apr 2022 16:45:21 GMT
+      - Wed, 27 Jul 2022 15:36:20 GMT
       Last-Modified:
-      - Tue, 26 Apr 2022 16:45:21 GMT
+      - Wed, 27 Jul 2022 15:36:11 GMT
       Server:
-      - nginx/1.18.0
+      - nginx/1.20.1
       Transfer-Encoding:
       - chunked
       erddap-server:
-      - '2.12'
+      - 2.02_axiom-r1
       xdods-server:
       - dods/3.7
     http_version: HTTP/1.1
