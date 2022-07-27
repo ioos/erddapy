@@ -15,7 +15,7 @@ def _url_to_dict(url):
 def e():
     """Instantiate ERDDAP class for testing."""
     yield ERDDAP(
-        server="https://upwell.pfeg.noaa.gov/erddap",
+        server="https://standards.sensors.ioos.us/erddap/",
         protocol="tabledap",
         response="htmlTable",
     )
@@ -47,8 +47,8 @@ def test_search_normalization(e):
 @pytest.mark.vcr()
 def test_search_url_valid_request(e):
     """Test if a bad request returns HTTPError."""
-    min_time = "1800-01-01T12:00:00Z"
-    max_time = "1950-01-01T12:00:00Z"
+    min_time = "2000-03-23T00:00:00Z"
+    max_time = "2000-03-30T14:08:00Z"
     kw = {"min_time": min_time, "max_time": max_time}
     url = e.get_search_url(**kw)
     assert url == check_url_response(url)
@@ -68,10 +68,10 @@ def test_search_url_valid_request(e):
 @pytest.mark.vcr()
 def test_search_url_valid_request_with_relative_time_constraints(e):
     """Test if a bad request returns HTTPError."""
-    min_time = "now-14days"
-    max_time = "now-7days"
+    min_time = "now-25years"
+    max_time = "now-20years"
     kw = {"min_time": min_time, "max_time": max_time}
-    url = e.get_search_url(dataset_id="scrippsGliders", **kw)
+    url = e.get_search_url(dataset_id="org_cormp_cap2", **kw)
     assert url == check_url_response(url)
     assert url.startswith(f"{e.server}/search/advanced.{e.response}?")
     options = _url_to_dict(url)
@@ -96,7 +96,9 @@ def test_search_url_change_protocol(e):
     assert options.pop("protocol") == "tabledap"
 
     griddap_url = e.get_search_url(protocol="griddap", **kw)
-    assert griddap_url == check_url_response(griddap_url)
+    # Turn this off while no griddap datasets are available
+    # assert griddap_url == check_url_response(griddap_url)
+    assert griddap_url == tabledap_url.replace("tabledap", "griddap")
     options = _url_to_dict(griddap_url)
     assert options.pop("protocol") == "griddap"
 
@@ -111,7 +113,7 @@ def test_search_url_change_protocol(e):
 @pytest.mark.vcr()
 def test_info_url(e):
     """Check info URL results."""
-    dataset_id = "gtoppAT"
+    dataset_id = "org_cormp_cap2"
     url = e.get_info_url(dataset_id=dataset_id)
     assert url == check_url_response(url)
     assert url == f"{e.server}/info/{dataset_id}/index.{e.response}"
@@ -137,8 +139,8 @@ def test_categorize_url(e):
 @pytest.mark.vcr()
 def test_download_url_unconstrained(e):
     """Check download URL results."""
-    dataset_id = "gtoppAT"
-    variables = ["commonName", "yearDeployed", "serialNumber"]
+    dataset_id = "org_cormp_cap2"
+    variables = ["station", "z"]
     url = e.get_download_url(dataset_id=dataset_id, variables=variables)
     assert url == check_url_response(url, follow_redirects=True)
     assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?")
@@ -149,15 +151,15 @@ def test_download_url_unconstrained(e):
 @pytest.mark.vcr()
 def test_download_url_constrained(e):
     """Test a constraint download URL."""
-    dataset_id = "gtoppAT"
-    variables = ["commonName", "yearDeployed", "serialNumber"]
+    dataset_id = "org_cormp_cap2"
+    variables = ["station", "z"]
 
-    min_time = "2002-06-30T13:53:16Z"
-    max_time = "2018-10-27T04:54:00Z"
-    min_lat = -42
-    max_lat = 42
-    min_lon = 0
-    max_lon = 360
+    min_time = "2000-03-23T00:00:00Z"
+    max_time = "2000-03-30T14:08:00Z"
+    min_lat = 32.8032
+    max_lat = 32.8032
+    min_lon = -79.6204
+    max_lon = -79.6204
 
     constraints = {
         "time>=": min_time,
@@ -187,11 +189,11 @@ def test_download_url_constrained(e):
 
 def test_download_url_relative_constraints(e):
     """Test download URL with relative constraints."""
-    dataset_id = "scrippsGliders"
-    variables = ["wmo_id", "platform_id", "platform_type"]
+    dataset_id = "org_cormp_cap2"
+    variables = ["station", "z"]
 
-    min_time = "now-14days"
-    max_time = "now-7days"
+    min_time = "now-25years"
+    max_time = "now-20years"
     min_lat = "min(latitude)+5"
     max_lat = "max(latitude)-5"
     min_lon = "min(longitude)+5"
@@ -230,24 +232,24 @@ def test_download_url_relative_constraints(e):
 @pytest.mark.vcr()
 def test_get_var_by_attr(e):
     """Test get_var_by_attr."""
-    variables = e.get_var_by_attr(dataset_id="gtoppAT", axis="X")
+    variables = e.get_var_by_attr(dataset_id="org_cormp_cap2", axis="X")
     assert isinstance(variables, list)
     assert variables == ["longitude"]
 
     variables = e.get_var_by_attr(
-        dataset_id="gtoppAT",
+        dataset_id="org_cormp_cap2",
         axis=lambda v: v in ["X", "Y", "Z", "T"],
     )
-    assert sorted(variables) == ["latitude", "longitude", "time"]
+    assert sorted(variables) == ["latitude", "longitude", "time", "z"]
 
     assert (
         e.get_var_by_attr(
-            dataset_id="pmelTao5dayIso",
+            dataset_id="org_cormp_cap2",
             standard_name="northward_sea_water_velocity",
         )
         == []
     )
-    assert e.get_var_by_attr(dataset_id="pmelTao5dayIso", standard_name="time") == [
+    assert e.get_var_by_attr(dataset_id="org_cormp_cap2", standard_name="time") == [
         "time",
     ]
 
@@ -256,8 +258,8 @@ def test_get_var_by_attr(e):
 @pytest.mark.vcr()
 def test_download_url_distinct(e):
     """Check download URL results with and without the distinct option."""
-    dataset_id = "gtoppAT"
-    variables = ["commonName", "yearDeployed", "serialNumber"]
+    dataset_id = "org_cormp_cap2"
+    variables = ["station", "z"]
     no_distinct_url = e.get_download_url(dataset_id=dataset_id, variables=variables)
     with_distinct_url = e.get_download_url(
         dataset_id=dataset_id,

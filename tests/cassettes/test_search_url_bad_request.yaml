@@ -9,39 +9,32 @@ interactions:
       connection:
       - keep-alive
       host:
-      - upwell.pfeg.noaa.gov
+      - standards.sensors.ioos.us
       user-agent:
-      - python-httpx/0.22.0
+      - python-httpx/0.23.0
     method: HEAD
-    uri: https://upwell.pfeg.noaa.gov/erddap/search/advanced.htmlTable?page=1&itemsPerPage=1000&protocol=tabledap&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&minTime=-8520292800.0&maxTime=-6942456000.0
+    uri: https://standards.sensors.ioos.us/erddap/search/advanced.htmlTable?page=1&itemsPerPage=1000&protocol=tabledap&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&minTime=-8520292800.0&maxTime=-6942456000.0
   response:
     content: ''
     headers:
       Connection:
-      - close
+      - keep-alive
       Content-Description:
       - dods-error
       Content-Encoding:
       - identity
       Content-Length:
       - '103'
-      Content-Security-Policy:
-      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
-        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
-        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
-        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Tue, 26 Apr 2022 16:47:04 GMT
+      - Wed, 27 Jul 2022 14:53:37 GMT
       Last-Modified:
-      - Tue, 26 Apr 2022 16:47:04 GMT
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Frame-Options:
-      - SAMEORIGIN
+      - Wed, 27 Jul 2022 14:53:28 GMT
+      Server:
+      - nginx/1.20.1
       erddap-server:
-      - '2.18'
+      - 2.02_axiom-r1
       xdods-server:
       - dods/3.7
     http_version: HTTP/1.1
