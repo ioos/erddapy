@@ -13,7 +13,7 @@ interactions:
       user-agent:
       - python-httpx/0.23.0
     method: HEAD
-    uri: https://standards.sensors.ioos.us/erddap/tabledap/gov_usgs_waterdata_340800117235901.htmlTable?time,&time%3E=2017-08-29T00:00:00Z&time%3C=2015-09-05T19:00:00Z
+    uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?time,&time%3E=2017-08-29T00:00:00Z&time%3C=2015-09-05T19:00:00Z
   response:
     content: ''
     headers:
@@ -24,13 +24,13 @@ interactions:
       Content-Encoding:
       - identity
       Content-Length:
-      - '113'
+      - '93'
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Wed, 27 Jul 2022 14:58:02 GMT
+      - Wed, 27 Jul 2022 20:46:55 GMT
       Last-Modified:
-      - Wed, 27 Jul 2022 14:57:53 GMT
+      - Wed, 27 Jul 2022 20:46:46 GMT
       Server:
       - nginx/1.20.1
       erddap-server:
@@ -38,5 +38,5 @@ interactions:
       xdods-server:
       - dods/3.7
     http_version: HTTP/1.1
-    status_code: 404
+    status_code: 400
 version: 1

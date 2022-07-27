@@ -44,7 +44,7 @@ def test_check_url_response():
     """Test if a bad request returns HTTPError."""
     bad_request = (
         "https://standards.sensors.ioos.us/erddap/tabledap/"
-        "gov_usgs_waterdata_340800117235901.htmlTable?"
+        "org_cormp_cap2.htmlTable?"
         "time,"
         "&time>=2017-08-29T00:00:00Z"
         "&time<=2015-09-05T19:00:00Z"
