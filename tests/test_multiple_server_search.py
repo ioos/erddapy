@@ -11,7 +11,10 @@ from erddapy.multiple_server_search import fetch_results, search_servers
 @pytest.mark.vcr()
 def test_fetch_results():
     """This search should return results."""
-    url = 'https://gliders.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor="sst"'
+    url = (
+        "https://standards.sensors.ioos.us/erddap/search/index.csv?"
+        'page=1&itemsPerPage=100000&searchFor="sea_water_temperature"'
+    )
     key = "ioos"
     protocol = "tabledap"
     data = fetch_results(url, key, protocol)
@@ -23,7 +26,7 @@ def test_fetch_results():
 def test_fetch_no_results():
     """This search should return no results."""
     url = (
-        "https://gliders.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor"
+        "https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor"
         '="incredibly_long_string_that_should_never_match_a_real_dataset" '
     )
     key = "ioos"
@@ -39,11 +42,9 @@ def test_fetch_no_results():
 )
 def test_search_awesome_erddap_servers_True():
     """Test multiple server search on awesome ERDDAP list parallel=True."""
-    query = "glider"
-    protocol = "tabledap"
     df = search_servers(
-        query=query,
-        protocol=protocol,
+        query="glider",
+        protocol="tabledap",
         parallel=True,
     )
     assert df is not None
@@ -57,15 +58,28 @@ def test_search_awesome_erddap_servers_True():
 )
 def test_search_awesome_erddap_servers_False():
     """Test multiple server search on awesome ERDDAP list with parallel=False."""
-    query = "glider"
-    protocol = "tabledap"
     df = search_servers(
-        query=query,
-        protocol=protocol,
+        query="glider",
+        protocol="tabledap",
         parallel=False,
     )
     assert df is not None
     assert not df.empty
+
+
+@pytest.fixture
+@pytest.mark.web
+def servers_list():
+    """Objects for server search."""
+    servers_list = {
+        "servers_list": [
+            "https://coastwatch.pfeg.noaa.gov/erddap/",
+            "https://gliders.ioos.us/erddap/",
+        ],
+        "query": "sst",
+        "protocol": "griddap",
+    }
+    yield servers_list
 
 
 @pytest.mark.web
@@ -73,7 +87,7 @@ def test_search_awesome_erddap_servers_False():
     (sys.platform in ["win32", "darwin"] or sys.version_info < (3, 10)),
     reason="run only on linux and latest to avoid extra load on the server",
 )
-def test_search_servers_with_a_list_True():
+def test_search_servers_with_a_list_True(servers_list):
     """
     Check that downloads are made and that serial and parallel results are similar.
 
@@ -81,16 +95,10 @@ def test_search_servers_with_a_list_True():
     and changes from one request to another can happen.
 
     """
-    servers_list = [
-        "https://coastwatch.pfeg.noaa.gov/erddap/",
-        "https://gliders.ioos.us/erddap/",
-    ]
-    query = "sst"
-    protocol = "griddap"
     df = search_servers(
-        query=query,
-        servers_list=servers_list,
-        protocol=protocol,
+        query=servers_list["query"],
+        servers_list=servers_list["servers_list"],
+        protocol=servers_list["protocol"],
         parallel=True,
     )
 
@@ -104,7 +112,7 @@ def test_search_servers_with_a_list_True():
     sys.platform in ["win32", "darwin"],
     reason="run only on linux to avoid extra load on the server",
 )
-def test_search_servers_with_a_list_False():
+def test_search_servers_with_a_list_False(servers_list):
     """
     Check that downloads are made and that serial and parallel results are similar.
 
@@ -112,16 +120,10 @@ def test_search_servers_with_a_list_False():
     and changes from one request to another can happen.
 
     """
-    servers_list = [
-        "https://coastwatch.pfeg.noaa.gov/erddap/",
-        "https://gliders.ioos.us/erddap/",
-    ]
-    query = "sst"
-    protocol = "griddap"
     df = search_servers(
-        query=query,
-        servers_list=servers_list,
-        protocol=protocol,
+        query=servers_list["query"],
+        servers_list=servers_list["servers_list"],
+        protocol=servers_list["protocol"],
         parallel=False,
     )
 

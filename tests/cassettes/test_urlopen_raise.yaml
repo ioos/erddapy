@@ -11,58 +11,41 @@ interactions:
       host:
       - developer.mozilla.org
       user-agent:
-      - python-httpx/0.22.0
+      - python-httpx/0.23.0
     method: GET
     uri: https://developer.mozilla.org/en-US/404
   response:
-    content: "<!DOCTYPE html><html lang=\"en-US\" prefix=\"og: https://ogp.me/ns#\"><head><meta
-      charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link
-      rel=\"icon\" href=\"/favicon-48x48.cbbd161b.png\"><link rel=\"apple-touch-icon\"
-      href=\"/apple-touch-icon.6803c6f0.png\"><meta name=\"theme-color\" content=\"#ffffff\"><link
-      rel=\"manifest\" href=\"/manifest.56b1cedc.json\"><link rel=\"search\" type=\"application/opensearchdescription+xml\"
-      href=\"/opensearch.xml\" title=\"MDN Web Docs\"><script>Array.prototype.flat&&Array.prototype.includes||document.write('<script
+    content: "<!doctype html><html lang=\"en-US\" prefix=\"og: https://ogp.me/ns#\"><head><meta
+      charset=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><link
+      rel=\"icon\" href=\"/favicon-48x48.cbbd161b.png\"/><link rel=\"apple-touch-icon\"
+      href=\"/apple-touch-icon.6803c6f0.png\"/><meta name=\"theme-color\" content=\"#ffffff\"/><link
+      rel=\"manifest\" href=\"/manifest.56b1cedc.json\"/><link rel=\"search\" type=\"application/opensearchdescription+xml\"
+      href=\"/opensearch.xml\" title=\"MDN Web Docs\"/><script>Array.prototype.flat&&Array.prototype.includes||document.write('<script
       src=\"https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.flat%2Ces6\"><\\/script>')</script><title>\U0001F937\U0001F3FD\u200D\u2640\uFE0F
-      Page not found | MDN Web Docs</title><meta name=\"description\" content=\"The
-      MDN Web Docs site provides information about Open Web technologies including
-      HTML, CSS, and APIs for both Web sites and progressive web apps.\"><meta property=\"og:url\"
-      content=\"https://developer.mozilla.org\"><meta property=\"og:title\" content=\"\U0001F937\U0001F3FD\u200D\u2640\uFE0F
-      Page not found | MDN Web Docs\"><meta property=\"og:description\" content=\"The
-      MDN Web Docs site provides information about Open Web technologies including
-      HTML, CSS, and APIs for both Web sites and progressive web apps.\"><meta property=\"og:locale\"
-      content=\"en-US\"><meta property=\"og:image\" content=\"https://developer.mozilla.org/mdn-social-share.cd6c4a5a.png\"><meta
-      property=\"twitter:card\" content=\"summary_large_image\"><meta name=\"robots\"
-      content=\"noindex, nofollow\"><link rel=\"canonical\" href=\"https://developer.mozilla.org\"><style
-      media=\"print\">.breadcrumbs-container,.document-toc-container,.language-menu,.language-toggle,.on-github,.page-footer,.top-navigation-main,nav.sidebar,ul.prev-next{display:none!important}.main-page-content,.main-page-content
-      pre{padding:2px}.main-page-content pre{border-left-width:2px}</style><link href=\"/static/css/main.debb3e6d.chunk.css\"
-      rel=\"stylesheet\"><script>LUX=(function(){var a=(\"undefined\"!==typeof(LUX)&&\"undefined\"!==typeof(LUX.gaMarks)?LUX.gaMarks:[]);var
-      d=(\"undefined\"!==typeof(LUX)&&\"undefined\"!==typeof(LUX.gaMeasures)?LUX.gaMeasures:[]);var
-      j=\"LUX_start\";var k=window.performance;var l=(\"undefined\"!==typeof(LUX)&&LUX.ns?LUX.ns:(Date.now?Date.now():+(new
-      Date())));if(k&&k.timing&&k.timing.navigationStart){l=k.timing.navigationStart}function
-      f(){if(k&&k.now){return k.now()}var o=Date.now?Date.now():+(new Date());return
-      o-l}function b(n){if(k){if(k.mark){return k.mark(n)}else{if(k.webkitMark){return
-      k.webkitMark(n)}}}a.push({name:n,entryType:\"mark\",startTime:f(),duration:0});return}function
-      m(p,t,n){if(\"undefined\"===typeof(t)&&h(j)){t=j}if(k){if(k.measure){if(t){if(n){return
-      k.measure(p,t,n)}else{return k.measure(p,t)}}else{return k.measure(p)}}else{if(k.webkitMeasure){return
-      k.webkitMeasure(p,t,n)}}}var r=0,o=f();if(t){var s=h(t);if(s){r=s.startTime}else{if(k&&k.timing&&k.timing[t]){r=k.timing[t]-k.timing.navigationStart}else{return}}}if(n){var
-      q=h(n);if(q){o=q.startTime}else{if(k&&k.timing&&k.timing[n]){o=k.timing[n]-k.timing.navigationStart}else{return}}}d.push({name:p,entryType:\"measure\",startTime:r,duration:(o-r)});return}function
-      h(n){return c(n,g())}function c(p,o){for(i=o.length-1;i>=0;i--){var n=o[i];if(p===n.name){return
-      n}}return undefined}function g(){if(k){if(k.getEntriesByType){return k.getEntriesByType(\"mark\")}else{if(k.webkitGetEntriesByType){return
-      k.webkitGetEntriesByType(\"mark\")}}}return a}return{mark:b,measure:m,gaMarks:a,gaMeasures:d}})();LUX.ns=(Date.now?Date.now():+(new
-      Date()));LUX.ac=[];LUX.cmd=function(a){LUX.ac.push(a)};LUX.init=function(){LUX.cmd([\"init\"])};LUX.send=function(){LUX.cmd([\"send\"])};LUX.addData=function(a,b){LUX.cmd([\"addData\",a,b])};LUX_ae=[];window.addEventListener(\"error\",function(a){LUX_ae.push(a)});LUX_al=[];if(\"function\"===typeof(PerformanceObserver)&&\"function\"===typeof(PerformanceLongTaskTiming)){var
-      LongTaskObserver=new PerformanceObserver(function(c){var b=c.getEntries();for(var
-      a=0;a<b.length;a++){var d=b[a];LUX_al.push(d)}});try{LongTaskObserver.observe({type:[\"longtask\"]})}catch(e){}};</script><script
-      src=\"https://cdn.speedcurve.com/js/lux.js?id=108906238\" async=\"\" defer=\"\"
-      crossorigin=\"anonymous\"></script><script defer=\"\" src=\"/static/js/ga.js\"></script><script
-      src=\"/static/js/runtime-main.d7fd73eb.js\" defer=\"\"></script><script src=\"/static/js/4.77e3f5b8.chunk.js\"
-      defer=\"\"></script><script src=\"/static/js/main.b1af5a31.chunk.js\" defer=\"\"></script></head><body><script>const
-      c={light:\"#ffffff\",dark:\"#1b1b1b\"};if(window&&document.body){const o=window.localStorage.getItem(\"theme\");o&&(document.body.className=o,document.body.style.backgroundColor=c[o])}</script><div
+      Page not found | null</title><meta name=\"robots\" content=\"noindex, nofollow\"><meta
+      name=\"description\" content=\"The MDN Web Docs site provides information about
+      Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive
+      web apps.\"/><meta property=\"og:url\" content=\"https://developer.mozilla.org\"/><meta
+      property=\"og:title\" content=\"\U0001F937\U0001F3FD\u200D\u2640\uFE0F Page
+      not found | null\"/><meta property=\"og:locale\" content=\"en-US\"/><meta property=\"og:description\"
+      content=\"The MDN Web Docs site provides information about Open Web technologies
+      including HTML, CSS, and APIs for both Web sites and progressive web apps.\"/><meta
+      property=\"og:image\" content=\"https://developer.mozilla.org/mdn-social-share.cd6c4a5a.png\"/><meta
+      property=\"twitter:card\" content=\"summary_large_image\"/><link rel=\"canonical\"
+      href=\"https://developer.mozilla.org\"/><style media=\"print\">.breadcrumbs-container,.document-toc-container,.language-menu,.language-toggle,.on-github,.page-footer,.top-navigation-main,nav.sidebar,ul.prev-next{display:none!important}.main-page-content,.main-page-content
+      pre{padding:2px}.main-page-content pre{border-left-width:2px}</style><script
+      src=\"/static/js/ga.js\" defer=\"\"></script><script defer=\"defer\" src=\"/static/js/main.f61b1259.js\"></script><link
+      href=\"/static/css/main.58dd71ae.css\" rel=\"stylesheet\"></head><body><script>const
+      c={light:\"#ffffff\",dark:\"#1b1b1b\"};if(window&&document.documentElement){const
+      e=window.localStorage.getItem(\"theme\");e&&(document.documentElement.className=e,document.documentElement.style.backgroundColor=c[e])}</script><div
       id=\"root\"><ul id=\"nav-access\" class=\"a11y-nav\"><li><a id=\"skip-main\"
       href=\"#content\">Skip to main content</a></li><li><a id=\"skip-search\" href=\"#top-nav-search-q\">Skip
       to search</a></li></ul><div class=\"page-wrapper   standard-page \"><header
       class=\"main-document-header-container top-navigation \n      \n      \"><div
       class=\"container \"><div class=\"top-navigation-wrap\"><a href=\"/en-US/\"
-      class=\"logo\" aria-label=\"MDN homepage\"><svg xmlns=\"http://www.w3.org/2000/svg\"
-      viewBox=\"0 0 361 104.2\"><path d=\"M197.6 73.2h-17.1v-5.5h3.8V51.9c0-3.7-.7-6.3-2.1-7.9-1.4-1.6-3.3-2.3-5.7-2.3-3.2
+      class=\"logo\" aria-label=\"MDN homepage\"><svg id=\"mdn-docs-logo\" xmlns=\"http://www.w3.org/2000/svg\"
+      viewBox=\"0 0 361 104.2\" style=\"enable-background:new 0 0 361 104.2\" xml:space=\"preserve\"
+      role=\"img\"><title>MDN Web Docs</title><path d=\"M197.6 73.2h-17.1v-5.5h3.8V51.9c0-3.7-.7-6.3-2.1-7.9-1.4-1.6-3.3-2.3-5.7-2.3-3.2
       0-5.6 1.1-7.2 3.4s-2.4 4.6-2.5 6.9v15.6h6v5.5h-17.1v-5.5h3.8V51.9c0-3.8-.7-6.4-2.1-7.9-1.4-1.5-3.3-2.3-5.6-2.3-3.2
       0-5.5 1.1-7.2 3.3-1.6 2.2-2.4 4.5-2.5 6.9v15.8h6.9v5.5h-20.2v-5.5h6V42.4h-6.1v-5.6h13.4v6.4c1.2-2.1
       2.7-3.8 4.7-5.2 2-1.3 4.4-2 7.3-2s5.3.7 7.5 2.1c2.2 1.4 3.7 3.5 4.5 6.4 1.1-2.5
@@ -72,9 +55,9 @@ interactions:
       0-6.3 1.3-8.2 3.9-1.9 2.6-2.8 5.8-2.8 9.6 0 4.1 1 7.3 3 9.5s4.5 3.3 7.4 3.3c3.2
       0 5.8-1.3 7.8-3.8 2.1-2.6 3.1-5.3 3.2-8zm61.5 16.8H269v-5.5h6V51.9c0-3.7-.7-6.3-2.2-7.9-1.4-1.6-3.4-2.3-5.7-2.3-3.1
       0-5.6 1-7.4 3s-2.8 4.4-2.9 7v15.9h6v5.5h-19.3v-5.5h6V42.4h-6.2v-5.6h13.6V43c2.6-4.6
-      6.8-6.9 12.7-6.9 3.6 0 6.7 1.1 9.2 3.3s3.7 5.6 3.7 10.2v18.2h6v5.4h-.2z\" fill=\"var(--text-primary)\"></path><path
-      d=\"M42 .2L13.4 92.3H1.7L30.2.2H42zm10.4 0v92.1H42V.2h10.4zm40.3 0L64.2 92.3H52.5L81
-      .2h11.7zm10.4 0v92.1H92.7V.2h10.4zM294 95h67v8.8h-67V95z\" fill=\"var(--text-link)\"></path></svg></a><button
+      6.8-6.9 12.7-6.9 3.6 0 6.7 1.1 9.2 3.3s3.7 5.6 3.7 10.2v18.2h6v5.4h-.2z\" style=\"fill:var(--text-primary)\"></path><g
+      style=\"fill:var(--text-link)\"><path d=\"M42 .2 13.4 92.3H1.7L30.2.2H42zM52.4.2v92.1H42V.2h10.4zm40.3
+      0L64.2 92.3H52.5L81 .2h11.7zM103.1.2v92.1H92.7V.2h10.4zM294 95h67v8.8h-67V95z\"></path></g></svg></a><button
       aria-expanded=\"false\" aria-haspopup=\"menu\" aria-label=\"Open main menu\"
       title=\"Open main menu\" type=\"button\" class=\"button action has-icon main-menu-toggle\"><span
       class=\"button-wrap\"><span class=\"icon icon-menu \"></span><span class=\"visually-hidden\">Open
@@ -83,10 +66,10 @@ interactions:
       class=\"top-level-entry-container\"><button type=\"button\" id=\"references-button\"
       class=\"top-level-entry menu-toggle\" aria-controls=\"references-menu\" aria-haspopup=\"menu\"
       aria-expanded=\"false\">References</button><a class=\"top-level-entry\" href=\"/en-US/docs/Web\">References</a><ul
-      id=\"references-menu\" class=\"submenu references hidden\" role=\"menu\" aria-labelledby=\"references-button\"><li
-      role=\"menuitem\" class=\"apis-link-container mobile-only \"><a href=\"/en-US/docs/Web\"
-      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div
-      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Overview
+      id=\"references-menu\" class=\"submenu references hidden inline-submenu-lg\"
+      role=\"menu\" aria-labelledby=\"references-button\"><li role=\"menuitem\" class=\"apis-link-container
+      mobile-only \"><a href=\"/en-US/docs/Web\" class=\"submenu-item \" role=\"menuitem\"><div
+      class=\"submenu-icon\"></div><div class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Overview
       / Web Technology</div><p class=\"submenu-item-description\">Web technology reference
       for developers</p></div></a></li><li role=\"menuitem\" class=\"html-link-container
       \"><a href=\"/en-US/docs/Web/HTML\" class=\"submenu-item \" role=\"menuitem\"><div
@@ -116,82 +99,101 @@ interactions:
       type=\"button\" id=\"guides-button\" class=\"top-level-entry menu-toggle\" aria-controls=\"guides-menu\"
       aria-haspopup=\"menu\" aria-expanded=\"false\">Guides</button><a class=\"top-level-entry\"
       href=\"/en-US/docs/Learn\">Guides</a><ul id=\"guides-menu\" class=\"submenu
-      guides hidden\" role=\"menu\" aria-labelledby=\"guides-button\"><li role=\"menuitem\"
-      class=\"apis-link-container mobile-only \"><a href=\"/en-US/docs/Learn\" class=\"submenu-item
-      \" role=\"menuitem\"><div class=\"submenu-icon learn\"></div><div class=\"submenu-content-container\"><div
-      class=\"submenu-item-heading\">Overview / MDN Learning Area</div><p class=\"submenu-item-description\">Learn
-      web development</p></div></a></li><li role=\"menuitem\" class=\"apis-link-container
-      desktop-only \"><a href=\"/en-US/docs/Learn\" class=\"submenu-item \" role=\"menuitem\"><div
-      class=\"submenu-icon learn\"></div><div class=\"submenu-content-container\"><div
-      class=\"submenu-item-heading\">MDN Learning Area</div><p class=\"submenu-item-description\">Learn
-      web development</p></div></a></li><li role=\"menuitem\" class=\"html-link-container
-      \"><a href=\"/en-US/docs/Learn/HTML\" class=\"submenu-item \" role=\"menuitem\"><div
-      class=\"submenu-icon html\"></div><div class=\"submenu-content-container\"><div
-      class=\"submenu-item-heading\">HTML</div><p class=\"submenu-item-description\">Learn
-      to structure web content with HTML</p></div></a></li><li role=\"menuitem\" class=\"css-link-container
-      \"><a href=\"/en-US/docs/Learn/CSS\" class=\"submenu-item \" role=\"menuitem\"><div
-      class=\"submenu-icon css\"></div><div class=\"submenu-content-container\"><div
-      class=\"submenu-item-heading\">CSS</div><p class=\"submenu-item-description\">Learn
-      to style content using CSS</p></div></a></li><li role=\"menuitem\" class=\"javascript-link-container
-      \"><a href=\"/en-US/docs/Learn/JavaScript\" class=\"submenu-item \" role=\"menuitem\"><div
-      class=\"submenu-icon javascript\"></div><div class=\"submenu-content-container\"><div
-      class=\"submenu-item-heading\">JavaScript</div><p class=\"submenu-item-description\">Learn
-      to run scripts in the browser</p></div></a></li><li role=\"menuitem\" class=\"
-      \"><a href=\"/en-US/docs/Web/Accessibility\" class=\"submenu-item \" role=\"menuitem\"><div
-      class=\"submenu-icon\"></div><div class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Accessibility</div><p
-      class=\"submenu-item-description\">Learn to make the web accessible to all</p></div></a></li></ul></li><li
-      class=\"top-level-entry-container\"><button type=\"button\" id=\"mdn-plus-button\"
-      class=\"top-level-entry menu-toggle\" aria-controls=\"mdn-plus-menu\" aria-haspopup=\"menu\"
-      aria-expanded=\"false\">MDN Plus</button><a class=\"top-level-entry\" href=\"/en-US/plus\">MDN
-      Plus</a><ul id=\"mdn-plus-menu\" class=\"submenu mdn-plus hidden\" role=\"menu\"
-      aria-labelledby=\"mdn-plus-button\"><li role=\"menuitem\" class=\"mobile-only
-      \"><a href=\"/en-US/plus\" class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div
+      guides hidden inline-submenu-lg\" role=\"menu\" aria-labelledby=\"guides-button\"><li
+      role=\"menuitem\" class=\"apis-link-container mobile-only \"><a href=\"/en-US/docs/Learn\"
+      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon learn\"></div><div
+      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Overview
+      / MDN Learning Area</div><p class=\"submenu-item-description\">Learn web development</p></div></a></li><li
+      role=\"menuitem\" class=\"apis-link-container desktop-only \"><a href=\"/en-US/docs/Learn\"
+      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon learn\"></div><div
+      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">MDN
+      Learning Area</div><p class=\"submenu-item-description\">Learn web development</p></div></a></li><li
+      role=\"menuitem\" class=\"html-link-container \"><a href=\"/en-US/docs/Learn/HTML\"
+      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon html\"></div><div
+      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">HTML</div><p
+      class=\"submenu-item-description\">Learn to structure web content with HTML</p></div></a></li><li
+      role=\"menuitem\" class=\"css-link-container \"><a href=\"/en-US/docs/Learn/CSS\"
+      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon css\"></div><div
+      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">CSS</div><p
+      class=\"submenu-item-description\">Learn to style content using CSS</p></div></a></li><li
+      role=\"menuitem\" class=\"javascript-link-container \"><a href=\"/en-US/docs/Learn/JavaScript\"
+      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon javascript\"></div><div
+      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">JavaScript</div><p
+      class=\"submenu-item-description\">Learn to run scripts in the browser</p></div></a></li><li
+      role=\"menuitem\" class=\" \"><a href=\"/en-US/docs/Web/Accessibility\" class=\"submenu-item
+      \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div class=\"submenu-content-container\"><div
+      class=\"submenu-item-heading\">Accessibility</div><p class=\"submenu-item-description\">Learn
+      to make the web accessible to all</p></div></a></li></ul></li><li class=\"top-level-entry-container\"><button
+      type=\"button\" id=\"mdn-plus-button\" class=\"top-level-entry menu-toggle\"
+      aria-controls=\"mdn-plus-menu\" aria-haspopup=\"menu\" aria-expanded=\"false\">MDN
+      Plus</button><a class=\"top-level-entry\" href=\"/en-US/plus\">MDN Plus</a><ul
+      id=\"mdn-plus-menu\" class=\"submenu mdn-plus hidden inline-submenu-lg\" role=\"menu\"
+      aria-labelledby=\"mdn-plus-button\"><li role=\"menuitem\" class=\" \"><a href=\"/en-US/plus\"
+      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div
       class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Overview</div><p
-      class=\"submenu-item-description\">More MDN. Your MDN.</p></div></a></li><li
+      class=\"submenu-item-description\">A customized MDN experience</p></div></a></li><li
+      role=\"menuitem\" class=\" \"><a href=\"/en-US/plus/docs/features/overview\"
+      class=\"submenu-item \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div
+      class=\"submenu-content-container\"><div class=\"submenu-item-heading\">Documentation</div><p
+      class=\"submenu-item-description\">Learn how to use MDN Plus</p></div></a></li><li
       role=\"menuitem\" class=\" \"><a href=\"/en-US/plus/docs/faq\" class=\"submenu-item
       \" role=\"menuitem\"><div class=\"submenu-icon\"></div><div class=\"submenu-content-container\"><div
       class=\"submenu-item-heading\">FAQ</div><p class=\"submenu-item-description\">Frequently
       asked questions about MDN Plus</p></div></a></li></ul></li></ul></nav><div class=\"header-search\"><form
-      action=\"/en-US/search\" role=\"search\" aria-haspopup=\"listbox\" aria-owns=\"downshift-0-menu\"
+      action=\"/en-US/search\" role=\"search\" aria-haspopup=\"listbox\" aria-owns=\"top-nav-search-menu\"
       aria-expanded=\"false\" class=\"search-form search-widget\" id=\"top-nav-search-form\"><label
-      for=\"top-nav-search-q\" class=\"visually-hidden\">Search MDN</label><input
-      type=\"search\" id=\"top-nav-search-q\" aria-autocomplete=\"list\" aria-controls=\"downshift-0-menu\"
-      aria-labelledby=\"downshift-0-label\" autocomplete=\"off\" value=\"\" class=\"search-input-field\"
-      name=\"q\" placeholder=\"\u2004\u2004\u2004\" required=\"\"><button type=\"button\"
-      class=\"button action has-icon clear-search-button\"><span class=\"button-wrap\"><span
-      class=\"icon icon-cancel \"></span><span class=\"visually-hidden\">Clear search
-      input</span></span></button><button type=\"submit\" class=\"button action has-icon
-      search-button\"><span class=\"button-wrap\"><span class=\"icon icon-search \"></span><span
-      class=\"visually-hidden\">Search</span></span></button><div id=\"downshift-0-menu\"
-      role=\"listbox\" aria-labelledby=\"downshift-0-label\"></div></form></div><div
+      id=\"top-nav-search-label\" for=\"top-nav-search-input\" class=\"visually-hidden\">Search
+      MDN</label><input id=\"top-nav-search-input\" aria-autocomplete=\"list\" aria-controls=\"top-nav-search-menu\"
+      aria-labelledby=\"top-nav-search-label\" autoComplete=\"off\" type=\"search\"
+      class=\"search-input-field\" name=\"q\" placeholder=\"\u2004\u2004\u2004\" required=\"\"
+      value=\"\"/><button type=\"button\" class=\"button action has-icon clear-search-button\"><span
+      class=\"button-wrap\"><span class=\"icon icon-cancel \"></span><span class=\"visually-hidden\">Clear
+      search input</span></span></button><button type=\"submit\" class=\"button action
+      has-icon search-button\"><span class=\"button-wrap\"><span class=\"icon icon-search
+      \"></span><span class=\"visually-hidden\">Search</span></span></button><div
+      id=\"top-nav-search-menu\" role=\"listbox\" aria-labelledby=\"top-nav-search-label\"></div></form></div><div
       class=\"theme-switcher-menu\"><button aria-haspopup=\"menu\" type=\"button\"
       class=\"button action has-icon theme-switcher-menu small\"><span class=\"button-wrap\"><span
-      class=\"icon icon-theme-os-default \"></span>Theme</span></button></div></div></div></header><div
+      class=\"icon icon-theme-os-default \"></span>Theme</span></button></div><ul
+      class=\"auth-container\"><li><a href=\"/users/fxa/login/authenticate/?next=%2Fen-US%2F404.html\"
+      class=\"signin-link\" rel=\"nofollow\">Already a subscriber?</a></li><li><a
+      class=\"button primary mdn-plus-subscribe-link\" href=\"/en-US/plus\"><span
+      class=\"button-wrap\">Get MDN Plus</span></a></li></ul></div></div></header><div
       class=\"main-wrapper page-not-found\"><main id=\"content\" class=\"main-content
       page-content-container \" role=\"main\"><article class=\"main-page-content\"><h1>Page
       not found</h1><p><a href=\"/\">Go back to the home page</a></p></article></main></div></div><footer
       id=\"nav-footer\" class=\"page-footer\"><div class=\"page-footer-grid\"><div
       class=\"page-footer-logo-col\"><a href=\"/\" class=\"mdn-footer-logo\" aria-label=\"MDN
-      homepage\"><svg width=\"48\" height=\"17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path
-      d=\"M20.04 16.512h-4.536v-6.096c0-.928-.16-1.592-.48-1.992-.304-.4-.76-.6-1.368-.6-.736
-      0-1.272.24-1.608.72-.32.48-.48 1.096-.48 1.848v3.792h1.44v2.328H8.472v-6.096c0-.928-.16-1.592-.48-1.992-.304-.4-.76-.6-1.368-.6-.752
-      0-1.288.24-1.608.72-.32.48-.48 1.096-.48 1.848v3.792H6.6v2.328H0v-2.328h1.44V8.04H.024V5.688h4.512V7.32c.688-1.232
-      1.784-1.848 3.288-1.848.784 0 1.504.192 2.16.576.656.384 1.112.968 1.368 1.752.64-1.552
-      1.816-2.328 3.528-2.328.976 0 1.84.304 2.592.912.752.608 1.128 1.552 1.128 2.832v4.968h1.44v2.328zM33.671
-      16.512h-4.536v-2.016a4.446 4.446 0 01-1.344 1.608c-.592.432-1.376.648-2.352.648-1.424
-      0-2.544-.488-3.36-1.464-.816-.976-1.224-2.304-1.224-3.984 0-1.616.4-2.992 1.2-4.128.8-1.136
-      2.008-1.704 3.624-1.704.88 0 1.6.176 2.16.528.56.352.992.8 1.296 1.344V2.352h-2.16V0h5.256v14.184h1.44v2.328zm-4.536-5.472v-.264c0-.896-.24-1.592-.72-2.088-.464-.512-1.048-.768-1.752-.768-.688
-      0-1.296.256-1.824.768-.512.512-.768 1.32-.768 2.424 0 1.04.24 1.832.72 2.376.48.544
-      1.048.816 1.704.816.816 0 1.456-.344 1.92-1.032.48-.688.72-1.432.72-2.232zM47.959
-      16.512h-5.976v-2.328h1.44v-3.768c0-.928-.16-1.592-.48-1.992-.304-.4-.76-.6-1.368-.6-.736
-      0-1.304.232-1.704.696-.4.448-.608 1.04-.624 1.776v3.888h1.44v2.328H34.71v-2.328h1.44V8.04h-1.56V5.688h4.656v1.656c.72-1.248
-      1.88-1.872 3.48-1.872 1.024 0 1.912.304 2.664.912.752.608 1.128 1.552 1.128
-      2.832v4.968h1.44v2.328z\" fill=\"currentColor\"></path></svg></a><p>Your blueprint
-      for a better internet.</p><ul class=\"social-icons\"><li><a class=\"icon icon-twitter\"
-      href=\"https://twitter.com/mozdevnet\" target=\"_blank\" rel=\"noopener noreferrer\"><span
-      class=\"visually-hidden\">MDN on Twitter</span></a></li><li><a class=\"icon
-      icon-github-mark-small\" href=\"https://github.com/mdn/\" target=\"_blank\"
-      rel=\"noopener noreferrer\"><span class=\"visually-hidden\">MDN on Github</span></a></li></ul></div><div
+      homepage\"><svg width=\"48\" height=\"17\" viewBox=\"0 0 48 17\" fill=\"none\"
+      xmlns=\"http://www.w3.org/2000/svg\"><title id=\"mdn-footer-logo-svg\">MDN logo</title><path
+      d=\"M20.04 16.512H15.504V10.416C15.504 9.488 15.344 8.824 15.024 8.424C14.72
+      8.024 14.264 7.824 13.656 7.824C12.92 7.824 12.384 8.064 12.048 8.544C11.728
+      9.024 11.568 9.64 11.568 10.392V14.184H13.008V16.512H8.472V10.416C8.472 9.488
+      8.312 8.824 7.992 8.424C7.688 8.024 7.232 7.824 6.624 7.824C5.872 7.824 5.336
+      8.064 5.016 8.544C4.696 9.024 4.536 9.64 4.536 10.392V14.184H6.6V16.512H0V14.184H1.44V8.04H0.024V5.688H4.536V7.32C5.224
+      6.088 6.32 5.472 7.824 5.472C8.608 5.472 9.328 5.664 9.984 6.048C10.64 6.432
+      11.096 7.016 11.352 7.8C11.992 6.248 13.168 5.472 14.88 5.472C15.856 5.472 16.72
+      5.776 17.472 6.384C18.224 6.992 18.6 7.936 18.6 9.216V14.184H20.04V16.512Z\"
+      fill=\"currentColor\"></path><path d=\"M33.6714 16.512H29.1354V14.496C28.8314
+      15.12 28.3834 15.656 27.7914 16.104C27.1994 16.536 26.4154 16.752 25.4394 16.752C24.0154
+      16.752 22.8954 16.264 22.0794 15.288C21.2634 14.312 20.8554 12.984 20.8554 11.304C20.8554
+      9.688 21.2554 8.312 22.0554 7.176C22.8554 6.04 24.0634 5.472 25.6794 5.472C26.5594
+      5.472 27.2794 5.648 27.8394 6C28.3994 6.352 28.8314 6.8 29.1354 7.344V2.352H26.9754V0H32.2314V14.184H33.6714V16.512ZM29.1354
+      11.04V10.776C29.1354 9.88 28.8954 9.184 28.4154 8.688C27.9514 8.176 27.3674
+      7.92 26.6634 7.92C25.9754 7.92 25.3674 8.176 24.8394 8.688C24.3274 9.2 24.0714
+      10.008 24.0714 11.112C24.0714 12.152 24.3114 12.944 24.7914 13.488C25.2714 14.032
+      25.8394 14.304 26.4954 14.304C27.3114 14.304 27.9514 13.96 28.4154 13.272C28.8954
+      12.584 29.1354 11.84 29.1354 11.04Z\" fill=\"currentColor\"></path><path d=\"M47.9589
+      16.512H41.9829V14.184H43.4229V10.416C43.4229 9.488 43.2629 8.824 42.9429 8.424C42.6389
+      8.024 42.1829 7.824 41.5749 7.824C40.8389 7.824 40.2709 8.056 39.8709 8.52C39.4709
+      8.968 39.2629 9.56 39.2469 10.296V14.184H40.6869V16.512H34.7109V14.184H36.1509V8.04H34.5909V5.688H39.2469V7.344C39.9669
+      6.096 41.1269 5.472 42.7269 5.472C43.7509 5.472 44.6389 5.776 45.3909 6.384C46.1429
+      6.992 46.5189 7.936 46.5189 9.216V14.184H47.9589V16.512Z\" fill=\"currentColor\"></path></svg></a><p>Your
+      blueprint for a better internet.</p><ul class=\"social-icons\"><li><a class=\"icon
+      icon-twitter\" href=\"https://twitter.com/mozdevnet\" target=\"_blank\" rel=\"noopener
+      noreferrer\"><span class=\"visually-hidden\">MDN on Twitter</span></a></li><li><a
+      class=\"icon icon-github-mark-small\" href=\"https://github.com/mdn/\" target=\"_blank\"
+      rel=\"noopener noreferrer\"><span class=\"visually-hidden\">MDN on GitHub</span></a></li></ul></div><div
       class=\"page-footer-nav-col-1\"><h2 class=\"footer-nav-heading\">MDN</h2><ul
       class=\"footer-nav-list\"><li class=\"footer-nav-item\"><a href=\"/en-US/about\">About</a></li><li
       class=\"footer-nav-item\"><a href=\"https://hacks.mozilla.org/\" target=\"_blank\"
@@ -217,25 +219,25 @@ interactions:
       class=\"footer-nav-link\" href=\"/en-US/plus\">MDN Plus</a></li></ul></div><div
       class=\"page-footer-moz\"><a href=\"https://www.mozilla.org/\" class=\"footer-moz-logo-link\"
       target=\"_blank\" rel=\"noopener noreferrer\"><svg width=\"112\" height=\"32\"
-      fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M41.753 14.218c-2.048
-      0-3.324 1.522-3.324 4.157 0 2.423 1.119 4.286 3.29 4.286 2.082 0 3.447-1.678
-      3.447-4.347 0-2.826-1.522-4.096-3.413-4.096zm54.89 7.044c0 .901.437 1.618 1.645
-      1.618 1.427 0 2.949-1.024 3.044-3.352-.649-.095-1.365-.185-2.02-.185-1.426-.005-2.668.397-2.668
-      1.92z\" fill=\"currentColor\"></path><path d=\"M0 0v32h111.908V0H0zm32.56 25.426h-5.87v-7.884c0-2.423-.806-3.352-2.39-3.352-1.924
+      fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><title id=\"mozilla-footer-logo-svg\">Mozilla
+      logo</title><path d=\"M41.753 14.218c-2.048 0-3.324 1.522-3.324 4.157 0 2.423
+      1.119 4.286 3.29 4.286 2.082 0 3.447-1.678 3.447-4.347 0-2.826-1.522-4.096-3.413-4.096Zm54.89
+      7.044c0 .901.437 1.618 1.645 1.618 1.427 0 2.949-1.024 3.044-3.352-.649-.095-1.365-.185-2.02-.185-1.426-.005-2.668.397-2.668
+      1.92Z\" fill=\"currentColor\"></path><path d=\"M0 0v32h111.908V0H0Zm32.56 25.426h-5.87v-7.884c0-2.423-.806-3.352-2.39-3.352-1.924
       0-2.702 1.365-2.702 3.324v4.868h1.864v3.044h-5.864v-7.884c0-2.423-.806-3.352-2.39-3.352-1.924
       0-2.702 1.365-2.702 3.324v4.868h2.669v3.044H6.642v-3.044h1.863v-7.918H6.642V11.42h5.864v2.11c.839-1.489
       2.3-2.39 4.252-2.39 2.02 0 3.878.963 4.566 3.01.778-1.862 2.361-3.01 4.566-3.01
-      2.512 0 4.812 1.522 4.812 4.84v6.402h1.863v3.044h-.005zm9.036.307c-4.314 0-7.296-2.635-7.296-7.106
+      2.512 0 4.812 1.522 4.812 4.84v6.402h1.863v3.044h-.005Zm9.036.307c-4.314 0-7.296-2.635-7.296-7.106
       0-4.096 2.484-7.481 7.514-7.481s7.481 3.38 7.481 7.29c0 4.472-3.228 7.297-7.699
-      7.297zm22.578-.307H51.942l-.403-2.11 7.7-8.846h-4.376l-.621 2.17-2.888-.313.498-4.907h12.294l.313
-      2.11-7.767 8.852h4.533l.654-2.172 3.167.308-.872 4.908zm7.99 0h-4.191v-5.03h4.19v5.03zm0-8.976h-4.191v-5.03h4.19v5.03zm2.618
-      8.976l6.054-21.358h3.945l-6.054 21.358h-3.945zm8.136 0l6.048-21.358h3.945l-6.054
-      21.358h-3.939zm21.486.307c-1.863 0-2.887-1.085-3.072-2.792-.805 1.427-2.232
+      7.297Zm22.578-.307H51.942l-.403-2.11 7.7-8.846h-4.376l-.621 2.17-2.888-.313.498-4.907h12.294l.313
+      2.11-7.767 8.852h4.533l.654-2.172 3.167.308-.872 4.908Zm7.99 0h-4.191v-5.03h4.19v5.03Zm0-8.976h-4.191v-5.03h4.19v5.03Zm2.618
+      8.976 6.054-21.358h3.945l-6.054 21.358h-3.945Zm8.136 0 6.048-21.358h3.945l-6.054
+      21.358h-3.939Zm21.486.307c-1.863 0-2.887-1.085-3.072-2.792-.805 1.427-2.232
       2.792-4.498 2.792-2.02 0-4.314-1.085-4.314-4.006 0-3.447 3.323-4.253 6.518-4.253.778
       0 1.584.034 2.3.124v-.465c0-1.427-.034-3.133-2.3-3.133-.84 0-1.488.061-2.143.402l-.453
       1.578-3.195-.34.549-3.224c2.45-.996 3.692-1.27 5.992-1.27 3.01 0 5.556 1.55
       5.556 4.75v6.083c0 .805.314 1.085.963 1.085.184 0 .375-.034.587-.095l.034 2.11a5.432
-      5.432 0 01-2.524.654z\" fill=\"currentColor\"></path></svg></a><ul class=\"footer-moz-list\"><li
+      5.432 0 0 1-2.524.654Z\" fill=\"currentColor\"></path></svg></a><ul class=\"footer-moz-list\"><li
       class=\"footer-moz-item\"><a href=\"https://www.mozilla.org/privacy/websites/\"
       class=\"footer-moz-link\" target=\"_blank\" rel=\"noopener noreferrer\">Website
       Privacy Notice</a></li><li class=\"footer-moz-item\"><a href=\"https://www.mozilla.org/privacy/websites/#cookies\"
@@ -248,7 +250,7 @@ interactions:
       id=\"license\" class=\"page-footer-legal-text\">Visit<!-- --> <a href=\"https://www.mozilla.org\"
       target=\"_blank\" rel=\"noopener noreferrer\">Mozilla Corporation\u2019s</a>
       <!-- -->not-for-profit parent, the<!-- --> <a target=\"_blank\" rel=\"noopener
-      noreferrer\" href=\"https://foundation.mozilla.org/\">Mozilla Foundation</a>.<br>Portions
+      noreferrer\" href=\"https://foundation.mozilla.org/\">Mozilla Foundation</a>.<br/>Portions
       of this content are \xA91998\u2013<!-- -->2022<!-- --> by individual mozilla.org
       contributors. Content available under<!-- --> <a href=\"/docs/MDN/About#Copyrights_and_licenses\">a
       Creative Commons license</a>.</p></div></div></footer></div><script type=\"application/json\"
@@ -261,35 +263,34 @@ interactions:
       Content-Encoding:
       - br
       Content-Security-Policy:
-      - default-src 'self'; script-src 'report-sample' 'self' *.speedcurve.com 'sha256-q7cJjDqNO2e1L5UltvJ1LhvnYN7yJXgGO7b6h9xkL1o='
-        www.google-analytics.com/analytics.js 'sha256-JEt9Nmc3BP88wxuTZm9aKNu87vEgGmKW1zzy/vb1KPs='
+      - default-src 'self'; script-src 'report-sample' 'self' www.google-analytics.com/analytics.js
+        'sha256-JEt9Nmc3BP88wxuTZm9aKNu87vEgGmKW1zzy/vb1KPs=' polyfill.io/v3/polyfill.min.js
+        assets.codepen.io production-assets.codepen.io 'sha256-x6Tv+AdV5e6dcolO0TEo+3BG4H2nG2ACjyG8mz6QCes='
+        'sha256-GA8+DpFnqAM/vwERTpb5zyLUaN5KnOhctfTsqWfhaUA='; script-src-elem 'report-sample'
+        'self' www.google-analytics.com/analytics.js 'sha256-JEt9Nmc3BP88wxuTZm9aKNu87vEgGmKW1zzy/vb1KPs='
         polyfill.io/v3/polyfill.min.js assets.codepen.io production-assets.codepen.io
-        'sha256-x6Tv+AdV5e6dcolO0TEo+3BG4H2nG2ACjyG8mz6QCes='; script-src-elem 'report-sample'
-        'self' *.speedcurve.com 'sha256-q7cJjDqNO2e1L5UltvJ1LhvnYN7yJXgGO7b6h9xkL1o='
-        www.google-analytics.com/analytics.js 'sha256-JEt9Nmc3BP88wxuTZm9aKNu87vEgGmKW1zzy/vb1KPs='
-        polyfill.io/v3/polyfill.min.js assets.codepen.io production-assets.codepen.io
-        'sha256-x6Tv+AdV5e6dcolO0TEo+3BG4H2nG2ACjyG8mz6QCes='; style-src 'report-sample'
-        'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; connect-src 'self'
-        updates.developer.allizom.org updates.developer.mozilla.org www.google-analytics.com
-        stats.g.doubleclick.net; font-src 'self'; frame-src 'self' interactive-examples.mdn.mozilla.net
-        interactive-examples.prod.mdn.mozilla.net interactive-examples.stage.mdn.mozilla.net
-        mdn.github.io yari-demos.prod.mdn.mozit.cloud mdn.mozillademos.org yari-demos.stage.mdn.mozit.cloud
-        jsfiddle.net www.youtube-nocookie.com codepen.io; img-src 'self' *.githubusercontent.com
-        *.googleusercontent.com *.gravatar.com mozillausercontent.com firefoxusercontent.com
-        profile.stage.mozaws.net profile.accounts.firefox.com lux.speedcurve.com mdn.mozillademos.org
-        media.prod.mdn.mozit.cloud media.stage.mdn.mozit.cloud interactive-examples.mdn.mozilla.net
-        interactive-examples.prod.mdn.mozilla.net interactive-examples.stage.mdn.mozilla.net
-        wikipedia.org www.google-analytics.com www.gstatic.com; manifest-src 'self';
-        media-src 'self' archive.org videos.cdn.mozilla.net; child-src 'self'; worker-src
-        'self';
+        'sha256-x6Tv+AdV5e6dcolO0TEo+3BG4H2nG2ACjyG8mz6QCes=' 'sha256-GA8+DpFnqAM/vwERTpb5zyLUaN5KnOhctfTsqWfhaUA=';
+        style-src 'report-sample' 'self' 'unsafe-inline'; object-src 'none'; base-uri
+        'self'; connect-src 'self' updates.developer.allizom.org updates.developer.mozilla.org
+        www.google-analytics.com stats.g.doubleclick.net; font-src 'self'; frame-src
+        'self' interactive-examples.mdn.mozilla.net interactive-examples.prod.mdn.mozilla.net
+        interactive-examples.stage.mdn.mozilla.net mdn.github.io yari-demos.prod.mdn.mozit.cloud
+        mdn.mozillademos.org yari-demos.stage.mdn.mozit.cloud jsfiddle.net www.youtube-nocookie.com
+        codepen.io www.surveygizmo.com; img-src 'self' *.githubusercontent.com *.googleusercontent.com
+        *.gravatar.com mozillausercontent.com firefoxusercontent.com profile.stage.mozaws.net
+        profile.accounts.firefox.com mdn.mozillademos.org media.prod.mdn.mozit.cloud
+        media.stage.mdn.mozit.cloud interactive-examples.mdn.mozilla.net interactive-examples.prod.mdn.mozilla.net
+        interactive-examples.stage.mdn.mozilla.net wikipedia.org www.google-analytics.com
+        www.gstatic.com; manifest-src 'self'; media-src 'self' archive.org videos.cdn.mozilla.net;
+        child-src 'self'; worker-src 'self';
       Content-Type:
       - text/html; charset=utf-8
       Date:
-      - Tue, 26 Apr 2022 16:51:41 GMT
+      - Wed, 27 Jul 2022 14:57:55 GMT
       ETag:
-      - W/"6754e047eabb56845eb9f4070b626f95"
+      - W/"eb71930fca1bf0f5a1c58df01562ab83"
       Last-Modified:
-      - Sat, 23 Apr 2022 01:06:00 GMT
+      - Wed, 27 Jul 2022 00:41:56 GMT
       Server:
       - AmazonS3
       Strict-Transport-Security:
@@ -299,9 +300,9 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 4a156fb7a0ed64b1f65b1ccc792773cc.cloudfront.net (CloudFront)
+      - 1.1 c59efe844fd614ff20a756172908fed0.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - ZxAwqt8QFPdUdrkqfsfBqVLkOmP25fWbDqDR-Y7UHwWuI4ObnwRtTw==
+      - OI75oo7LYqVH6UtsN-ZM_Npub4Dwab18TTS_VaLnbdwgwRjCJaY0uA==
       X-Amz-Cf-Pop:
       - GRU1-C1
       X-Cache:

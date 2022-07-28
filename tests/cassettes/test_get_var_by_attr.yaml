@@ -9,43 +9,109 @@ interactions:
       connection:
       - keep-alive
       host:
-      - upwell.pfeg.noaa.gov
+      - standards.sensors.ioos.us
       user-agent:
-      - python-httpx/0.22.0
+      - python-httpx/0.23.0
     method: GET
-    uri: https://upwell.pfeg.noaa.gov/erddap/info/gtoppAT/index.csv
+    uri: https://standards.sensors.ioos.us/erddap/info/org_cormp_cap2/index.csv
   response:
     content: 'Row Type,Variable Name,Attribute Name,Data Type,Value
 
-      attribute,NC_GLOBAL,cdm_data_type,String,Trajectory
+      attribute,NC_GLOBAL,cdm_data_type,String,TimeSeries
 
-      attribute,NC_GLOBAL,cdm_trajectory_variables,String,"commonName, yearDeployed,
-      project, toppID, serialNumber, isDrifter"
+      attribute,NC_GLOBAL,cdm_timeseries_variables,String,"station,longitude,latitude"
 
-      attribute,NC_GLOBAL,Conventions,String,"COARDS, CF-1.4, Unidata Dataset Discovery
-      v1.0, NCCSV-1.0"
+      attribute,NC_GLOBAL,contributor_email,String,"None,,feedback@axiomdatascience.com"
 
-      attribute,NC_GLOBAL,creator_email,String,Lynn.Dewitt@noaa.gov
+      attribute,NC_GLOBAL,contributor_name,String,"Southeast Coastal Ocean Observing
+      Regional Association (SECOORA),World Meteorological Organization (WMO),Axiom
+      Data Science"
 
-      attribute,NC_GLOBAL,Easternmost_Easting,double,359.971
+      attribute,NC_GLOBAL,contributor_role,String,"funder,contributor,processor"
 
-      attribute,NC_GLOBAL,featureType,String,Trajectory
+      attribute,NC_GLOBAL,contributor_role_vocabulary,String,NERC
 
-      attribute,NC_GLOBAL,geospatial_lat_max,double,73.667
+      attribute,NC_GLOBAL,contributor_url,String,"https://secoora.org/,https://www.wmo.int/pages/prog/amp/mmop/wmo-number-rules.html,https://www.axiomdatascience.com"
 
-      attribute,NC_GLOBAL,geospatial_lat_min,double,-77.891
+      attribute,NC_GLOBAL,Conventions,String,"IOOS-1.2, CF-1.6, ACDD-1.3, COARDS"
+
+      attribute,NC_GLOBAL,creator_country,String,USA
+
+      attribute,NC_GLOBAL,creator_email,String,info@cormp.org
+
+      attribute,NC_GLOBAL,creator_institution,String,UNCW - Coastal Ocean Research
+      and Monitoring Program (CORMP)
+
+      attribute,NC_GLOBAL,creator_name,String,UNCW - Coastal Ocean Research and Monitoring
+      Program (CORMP)
+
+      attribute,NC_GLOBAL,creator_sector,String,gov_federal
+
+      attribute,NC_GLOBAL,creator_type,String,institution
+
+      attribute,NC_GLOBAL,creator_url,String,http://www.cormp.org/index.php
+
+      attribute,NC_GLOBAL,date_created,String,2020-04-22T22:49:00Z
+
+      attribute,NC_GLOBAL,Easternmost_Easting,double,-79.6204
+
+      attribute,NC_GLOBAL,featureType,String,TimeSeries
+
+      attribute,NC_GLOBAL,geospatial_lat_max,double,32.8032
+
+      attribute,NC_GLOBAL,geospatial_lat_min,double,32.8032
 
       attribute,NC_GLOBAL,geospatial_lat_units,String,degrees_north
 
-      attribute,NC_GLOBAL,geospatial_lon_max,double,359.971
+      attribute,NC_GLOBAL,geospatial_lon_max,double,-79.6204
 
-      attribute,NC_GLOBAL,geospatial_lon_min,double,0.01
+      attribute,NC_GLOBAL,geospatial_lon_min,double,-79.6204
 
       attribute,NC_GLOBAL,geospatial_lon_units,String,degrees_east
 
-      attribute,NC_GLOBAL,infoUrl,String,https://gtopp.org/
+      attribute,NC_GLOBAL,geospatial_vertical_positive,String,up
 
-      attribute,NC_GLOBAL,institution,String,Stanford
+      attribute,NC_GLOBAL,geospatial_vertical_units,String,m
+
+      attribute,NC_GLOBAL,history,String,Downloaded from UNCW - Coastal Ocean Research
+      and Monitoring Program (CORMP) at http://services.cormp.org/data.php?format=json&platform=cap2\n2020-04-22T22:33:09Z
+      http://services.cormp.org/data.php?format=json&platform=cap2\n2020-04-22T22:33:09Z
+      http://erddap.stage.sensors.axds.co/erddap/tabledap/org_cormp_cap2.nc
+
+      attribute,NC_GLOBAL,id,String,cap2
+
+      attribute,NC_GLOBAL,infoUrl,String,https://sensors.ioos.us/#metadata/60417/station
+
+      attribute,NC_GLOBAL,institution,String,CORMP
+
+      attribute,NC_GLOBAL,keywords,String,"aggregate, aggregate_quality_flag, air,
+      air_pressure, air_pressure quality_flag, air_pressure_qc_agg, air_pressure_qc_tests,
+      air_temperature, air_temperature quality_flag, air_temperature_qc_agg, air_temperature_qc_tests,
+      altitude, atmosphere, atmospheric, barometric, cap2, capers, coastal, cormp,
+      crs, data, density, direction, earth, Earth Science > Atmosphere > Altitude
+      > Station Height, Earth Science > Atmosphere > Atmospheric Pressure > Atmospheric
+      Pressure Measurements, Earth Science > Atmosphere > Atmospheric Pressure > Sea
+      Level Pressure, Earth Science > Atmosphere > Atmospheric Pressure > Static Pressure,
+      Earth Science > Atmosphere > Atmospheric Temperature > Air Temperature, Earth
+      Science > Atmosphere > Atmospheric Temperature > Surface Air Temperature, Earth
+      Science > Atmosphere > Atmospheric Water Vapor > Humidity, Earth Science > Atmosphere
+      > Atmospheric Winds > Surface Winds, Earth Science > Oceans > Ocean Temperature
+      > Water Temperature, Earth Science > Oceans > Salinity/Density > Salinity, flag,
+      gust, height, humidity, identifier, individual, latitude, level, longitude,
+      measurements, monitoring, nearshore, ocean, oceans, practical, pressure, program,
+      qartod, quality, relative, relative_humidity, relative_humidity quality_flag,
+      relative_humidity_qc_agg, relative_humidity_qc_tests, research, salinity, science,
+      sea, sea_water_practical_salinity, sea_water_practical_salinity quality_flag,
+      sea_water_practical_salinity_qc_agg, sea_water_practical_salinity_qc_tests,
+      sea_water_temperature, sea_water_temperature quality_flag, sea_water_temperature_qc_agg,
+      sea_water_temperature_qc_tests, seawater, speed, static, station, surface, temperature,
+      tests, time, uncw, vapor, water, wind, wind_from_direction, wind_from_direction
+      quality_flag, wind_from_direction_qc_agg, wind_from_direction_qc_tests, wind_speed,
+      wind_speed quality_flag, wind_speed_of_gust, wind_speed_of_gust quality_flag,
+      wind_speed_of_gust_qc_agg, wind_speed_of_gust_qc_tests, wind_speed_qc_agg, wind_speed_qc_tests,
+      winds"
+
+      attribute,NC_GLOBAL,keywords_vocabulary,String,GCMD Science Keywords
 
       attribute,NC_GLOBAL,license,String,"The data may be used and redistributed for
       free but is not intended\nfor legal use, since it may contain inaccuracies.
@@ -55,92 +121,81 @@ interactions:
       or assumes any legal liability for the accuracy,\ncompleteness, or usefulness,
       of this information."
 
-      attribute,NC_GLOBAL,Metadata_Conventions,String,"COARDS, CF-1.4, Unidata Dataset
-      Discovery v1.0"
+      attribute,NC_GLOBAL,naming_authority,String,org.cormp
 
-      attribute,NC_GLOBAL,Northernmost_Northing,double,73.667
+      attribute,NC_GLOBAL,Northernmost_Northing,double,32.8032
+
+      attribute,NC_GLOBAL,platform,String,41029
+
+      attribute,NC_GLOBAL,platform_name,String,(41029 / CAP2) Capers Nearshore
+
+      attribute,NC_GLOBAL,platform_vocabulary,String,http://mmisw.org/ont/ioos/platform
+
+      attribute,NC_GLOBAL,processing_level,String,Level 2
+
+      attribute,NC_GLOBAL,publisher_country,String,USA
+
+      attribute,NC_GLOBAL,publisher_email,String,info@cormp.org
+
+      attribute,NC_GLOBAL,publisher_institution,String,UNCW - Coastal Ocean Research
+      and Monitoring Program (CORMP)
+
+      attribute,NC_GLOBAL,publisher_name,String,UNCW - Coastal Ocean Research and
+      Monitoring Program (CORMP)
+
+      attribute,NC_GLOBAL,publisher_sector,String,gov_federal
+
+      attribute,NC_GLOBAL,publisher_type,String,institution
+
+      attribute,NC_GLOBAL,publisher_url,String,http://www.cormp.org/index.php
+
+      attribute,NC_GLOBAL,references,String,"http://www.cormp.org/?platform=CAP2,http://services.cormp.org/data.php?format=json&platform=cap2,http://mwp.secoora.org/?platform=41029,http://services.cormp.org/quality.php"
 
       attribute,NC_GLOBAL,sourceUrl,String,(local files)
 
-      attribute,NC_GLOBAL,Southernmost_Northing,double,-77.891
+      attribute,NC_GLOBAL,Southernmost_Northing,double,32.8032
 
-      attribute,NC_GLOBAL,standard_name_vocabulary,String,CF-12
+      attribute,NC_GLOBAL,standard_name_vocabulary,String,CF Standard Name Table v72
 
-      attribute,NC_GLOBAL,subsetVariables,String,"commonName, yearDeployed, project,
-      toppID, serialNumber, isDrifter"
+      attribute,NC_GLOBAL,subsetVariables,String,"crs, station, latitude, longitude,
+      z, air_temperature_qc_tests, air_pressure_qc_tests, relative_humidity_qc_tests,
+      sea_water_practical_salinity_qc_tests, sea_water_temperature_qc_tests, wind_speed_of_gust_qc_tests,
+      wind_speed_qc_tests, wind_from_direction_qc_tests"
 
-      attribute,NC_GLOBAL,summary,String,See topp.org for a description of this data
+      attribute,NC_GLOBAL,summary,String,Timeseries data from ''(41029 / CAP2) Capers
+      Nearshore'' (org_cormp_cap2)
 
-      attribute,NC_GLOBAL,time_coverage_end,String,2021-11-27T19:43:48Z
+      attribute,NC_GLOBAL,time_coverage_end,String,2000-03-30T15:08:00Z
 
-      attribute,NC_GLOBAL,time_coverage_start,String,2002-06-26T21:10:31Z
+      attribute,NC_GLOBAL,time_coverage_start,String,1998-10-01T08:08:00Z
 
-      attribute,NC_GLOBAL,title,String,TOPP Historical Tagged Animals
+      attribute,NC_GLOBAL,title,String,41029 / CAP2 Capers Nearshore
 
-      attribute,NC_GLOBAL,Westernmost_Easting,double,0.01
+      attribute,NC_GLOBAL,Westernmost_Easting,double,-79.6204
 
-      variable,commonName,,String,
+      attribute,NC_GLOBAL,wmo_platform_code,String,41029
 
-      attribute,commonName,ioos_category,String,Taxonomy
+      variable,crs,,int,
 
-      attribute,commonName,long_name,String,Common Name
+      attribute,crs,actual_range,int,"-2147483647, -2147483647"
 
-      variable,yearDeployed,,int,
+      attribute,crs,ioos_category,String,Unknown
 
-      attribute,yearDeployed,actual_range,int,"1995, 9999"
-
-      attribute,yearDeployed,ioos_category,String,Time
-
-      attribute,yearDeployed,long_name,String,Year Deployed
-
-      variable,project,,int,
-
-      attribute,project,actual_range,int,"0, 1"
-
-      attribute,project,description,String,"Project:\n0=TOPPP - ''TOPP Partner'' species\n1=GTOPP
-      - ''TOPP'' designated species\n2=TAGAG - ''TagAGiant''\n5=CMRCL - commercial
-      species"
-
-      attribute,project,ioos_category,String,Identifier
-
-      attribute,project,long_name,String,Project
-
-      variable,toppID,,String,
-
-      attribute,toppID,cf_role,String,trajectory_id
-
-      attribute,toppID,comment,String,This ID is unique to a given tagged animal.
-
-      attribute,toppID,ioos_category,String,Identifier
-
-      attribute,toppID,long_name,String,TOPP ID (unique)
-
-      variable,serialNumber,,String,
-
-      attribute,serialNumber,comment,String,"Tags were reused, so this is not a unique
-      identifier."
-
-      attribute,serialNumber,ioos_category,String,Identifier
-
-      attribute,serialNumber,long_name,String,The Tag''s Serial Number (not unique)
-
-      variable,isDrifter,,int,
-
-      attribute,isDrifter,actual_range,int,"0, 1"
-
-      attribute,isDrifter,comment,String,"0=no, 1=yes=tag popped off animal then drifted"
-
-      attribute,isDrifter,ioos_category,String,Other
-
-      attribute,isDrifter,long_name,String,Is Drifter?
+      attribute,crs,long_name,String,CRS
 
       variable,time,,double,
 
       attribute,time,_CoordinateAxisType,String,Time
 
-      attribute,time,actual_range,double,"1.025125831E9, 1.638042228E9"
+      attribute,time,actual_range,double,"9.0722928E8, 9.5442888E8"
 
       attribute,time,axis,String,T
+
+      attribute,time,calendar,String,gregorian
+
+      attribute,time,colorBarMaximum,double,1.59E9
+
+      attribute,time,colorBarMinimum,double,1.53E9
 
       attribute,time,ioos_category,String,Time
 
@@ -152,406 +207,772 @@ interactions:
 
       attribute,time,units,String,seconds since 1970-01-01T00:00:00Z
 
-      variable,longitude,,float,
-
-      attribute,longitude,_CoordinateAxisType,String,Lon
-
-      attribute,longitude,_FillValue,float,-1.0E34
-
-      attribute,longitude,actual_range,float,"0.01, 359.971"
-
-      attribute,longitude,axis,String,X
-
-      attribute,longitude,ioos_category,String,Location
-
-      attribute,longitude,long_name,String,Longitude
-
-      attribute,longitude,missing_value,float,-1.0E34
-
-      attribute,longitude,standard_name,String,longitude
-
-      attribute,longitude,units,String,degrees_east
-
-      variable,latitude,,float,
-
-      attribute,latitude,_CoordinateAxisType,String,Lat
-
-      attribute,latitude,_FillValue,float,-1.0E34
-
-      attribute,latitude,actual_range,float,"-77.891, 73.667"
-
-      attribute,latitude,axis,String,Y
-
-      attribute,latitude,ioos_category,String,Location
-
-      attribute,latitude,long_name,String,Latitude
-
-      attribute,latitude,missing_value,float,-1.0E34
-
-      attribute,latitude,standard_name,String,latitude
-
-      attribute,latitude,units,String,degrees_north
-
-      variable,LC,,String,
-
-      attribute,LC,comment,String,"Quality codes from the ARGOS satellite (in meters):
-      0,A,B,Z=no claim, 1=1000m, 2=350m, 3=150m. See https://www.aoml.noaa.gov/phod/dac/loc-rep.html"
-
-      attribute,LC,ioos_category,String,Quality
-
-      attribute,LC,long_name,String,Location Quality Code
-
-      '
-    headers:
-      Connection:
-      - close
-      Content-Disposition:
-      - attachment;filename=gtoppAT_info.csv
-      Content-Encoding:
-      - gzip
-      Content-Security-Policy:
-      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
-        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
-        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
-        https://fonts.googleapis.com  https://fonts.gstatic.com;
-      Content-Type:
-      - text/csv;charset=ISO-8859-1
-      Date:
-      - Tue, 26 Apr 2022 16:47:20 GMT
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      X-Frame-Options:
-      - SAMEORIGIN
-    http_version: HTTP/1.1
-    status_code: 200
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate, br
-      connection:
-      - keep-alive
-      host:
-      - upwell.pfeg.noaa.gov
-      user-agent:
-      - python-httpx/0.22.0
-    method: GET
-    uri: https://upwell.pfeg.noaa.gov/erddap/info/pmelTao5dayIso/index.csv
-  response:
-    content: 'Row Type,Variable Name,Attribute Name,Data Type,Value
-
-      attribute,NC_GLOBAL,cdm_data_type,String,TimeSeries
-
-      attribute,NC_GLOBAL,cdm_timeseries_variables,String,"array, station, wmo_platform_code,
-      longitude, latitude, depth"
-
-      attribute,NC_GLOBAL,Conventions,String,"COARDS, CF-1.6, ACDD-1.3, NCCSV-1.1"
-
-      attribute,NC_GLOBAL,creator_email,String,Dai.C.McClurg@noaa.gov
-
-      attribute,NC_GLOBAL,creator_name,String,GTMBA Project Office/NOAA/PMEL
-
-      attribute,NC_GLOBAL,creator_type,String,group
-
-      attribute,NC_GLOBAL,creator_url,String,https://www.pmel.noaa.gov/gtmba/mission
-
-      attribute,NC_GLOBAL,Data_Source,String,Global Tropical Moored Buoy Array Project
-      Office/NOAA/PMEL
-
-      attribute,NC_GLOBAL,defaultGraphQuery,String,"longitude,latitude,ISO_6&time>=now-10days"
-
-      attribute,NC_GLOBAL,Easternmost_Easting,double,357.0
-
-      attribute,NC_GLOBAL,featureType,String,TimeSeries
-
-      attribute,NC_GLOBAL,File_info,String,Contact: Dai.C.McClurg@noaa.gov
-
-      attribute,NC_GLOBAL,geospatial_lat_max,double,21.0
-
-      attribute,NC_GLOBAL,geospatial_lat_min,double,-25.0
-
-      attribute,NC_GLOBAL,geospatial_lat_units,String,degrees_north
-
-      attribute,NC_GLOBAL,geospatial_lon_max,double,357.0
-
-      attribute,NC_GLOBAL,geospatial_lon_min,double,0.0
-
-      attribute,NC_GLOBAL,geospatial_lon_units,String,degrees_east
-
-      attribute,NC_GLOBAL,geospatial_vertical_max,double,0.0
-
-      attribute,NC_GLOBAL,geospatial_vertical_min,double,0.0
-
-      attribute,NC_GLOBAL,geospatial_vertical_positive,String,down
-
-      attribute,NC_GLOBAL,geospatial_vertical_units,String,m
-
-      attribute,NC_GLOBAL,history,String,"This dataset has data from the TAO/TRITON,
-      RAMA, and PIRATA projects.\nThis dataset is a product of the TAO Project Office
-      at NOAA/PMEL.\n2022-04-04 Bob Simons at NOAA/NMFS/SWFSC/ERD (bob.simons@noaa.gov)
-      fully refreshed ERD''s copy of this dataset by downloading all of the .cdf files
-      from the PMEL TAO FTP site.  Since then, the dataset has been partially refreshed
-      everyday by downloading and merging the latest version of the last 25 days worth
-      of data."
-
-      attribute,NC_GLOBAL,infoUrl,String,https://www.pmel.noaa.gov/gtmba/mission
-
-      attribute,NC_GLOBAL,institution,String,"NOAA PMEL, TAO/TRITON, RAMA, PIRATA"
-
-      attribute,NC_GLOBAL,keywords,String,"20c, 5-day, buoys, centered, day, depth,
-      identifier, isotherm, noaa, pirata, pmel, quality, rama, station, tao, temperature,
-      time, triton"
-
-      attribute,NC_GLOBAL,keywords_vocabulary,String,GCMD Science Keywords
-
-      attribute,NC_GLOBAL,license,String,"Request for Acknowledgement: If you use
-      these data in publications or presentations, please acknowledge the GTMBA Project
-      Office of NOAA/PMEL. Also, we would appreciate receiving a preprint and/or reprint
-      of publications utilizing the data for inclusion in our bibliography. Relevant
-      publications should be sent to: GTMBA Project Office, NOAA/Pacific Marine Environmental
-      Laboratory, 7600 Sand Point Way NE, Seattle, WA 98115\n\nThe data may be used
-      and redistributed for free but is not intended\nfor legal use, since it may
-      contain inaccuracies. Neither the data\nContributor, ERD, NOAA, nor the United
-      States Government, nor any\nof their employees or contractors, makes any warranty,
-      express or\nimplied, including warranties of merchantability and fitness for
-      a\nparticular purpose, or assumes any legal liability for the accuracy,\ncompleteness,
-      or usefulness, of this information."
-
-      attribute,NC_GLOBAL,Northernmost_Northing,double,21.0
-
-      attribute,NC_GLOBAL,project,String,"TAO/TRITON, RAMA, PIRATA"
-
-      attribute,NC_GLOBAL,Request_for_acknowledgement,String,"If you use these data
-      in publications or presentations, please acknowledge the GTMBA Project Office
-      of NOAA/PMEL. Also, we would appreciate receiving a preprint and/or reprint
-      of publications utilizing the data for inclusion in our bibliography. Relevant
-      publications should be sent to: GTMBA Project Office, NOAA/Pacific Marine Environmental
-      Laboratory, 7600 Sand Point Way NE, Seattle, WA 98115"
-
-      attribute,NC_GLOBAL,sourceUrl,String,(local files)
-
-      attribute,NC_GLOBAL,Southernmost_Northing,double,-25.0
-
-      attribute,NC_GLOBAL,standard_name_vocabulary,String,CF Standard Name Table v70
-
-      attribute,NC_GLOBAL,subsetVariables,String,"array, station, wmo_platform_code,
-      longitude, latitude, depth"
-
-      attribute,NC_GLOBAL,summary,String,"This dataset has 5-day 20C Isotherm Depth
-      data (the depth at which the ocean temperature is 20C) from the \nTAO/TRITON
-      (Pacific Ocean, https://www.pmel.noaa.gov/gtmba/ ),\nRAMA (Indian Ocean, https://www.pmel.noaa.gov/gtmba/pmel-theme/indian-ocean-rama
-      ), and\nPIRATA (Atlantic Ocean, https://www.pmel.noaa.gov/gtmba/pirata/ )\narrays
-      of moored buoys which transmit oceanographic and meteorological data to shore
-      in real-time via the Argos satellite system.  These buoys are major components
-      of the CLIVAR climate analysis project and the GOOS, GCOS, and GEOSS observing
-      systems.  5-day data is an average of daily values collected during consecutive
-      five day intervals.  A minimum of 2 daily values are required to compute a 5-day
-      average.  This dataset contains realtime and delayed mode data (see the ''source''
-      variable).  For more information, see\nhttps://www.pmel.noaa.gov/gtmba/mission
-      ."
-
-      attribute,NC_GLOBAL,testOutOfDate,String,now-9days
-
-      attribute,NC_GLOBAL,time_coverage_end,String,2022-04-23T12:00:00Z
-
-      attribute,NC_GLOBAL,time_coverage_start,String,1977-11-07T12:00:00Z
-
-      attribute,NC_GLOBAL,title,String,"TAO/TRITON, RAMA, and PIRATA Buoys, 5-Day,
-      1977-present, 20C Isotherm Depth"
-
-      attribute,NC_GLOBAL,Westernmost_Easting,double,0.0
-
-      variable,array,,String,
-
-      attribute,array,ioos_category,String,Identifier
-
-      attribute,array,long_name,String,Array
-
       variable,station,,String,
 
       attribute,station,cf_role,String,timeseries_id
 
       attribute,station,ioos_category,String,Identifier
 
-      attribute,station,long_name,String,Station
+      attribute,station,ioos_code,String,urn:ioos:station:com.axiomdatascience:60417
 
-      variable,wmo_platform_code,,int,
+      attribute,station,long_name,String,(41029 / CAP2) Capers Nearshore
 
-      attribute,wmo_platform_code,actual_range,int,"13001, 56055"
+      attribute,station,short_name,String,org_cormp_cap2
 
-      attribute,wmo_platform_code,ioos_category,String,Identifier
+      attribute,station,type,String,buoy
 
-      attribute,wmo_platform_code,long_name,String,WMO Platform Code
-
-      attribute,wmo_platform_code,missing_value,int,2147483647
-
-      variable,longitude,,float,
-
-      attribute,longitude,_CoordinateAxisType,String,Lon
-
-      attribute,longitude,actual_range,float,"0.0, 357.0"
-
-      attribute,longitude,axis,String,X
-
-      attribute,longitude,epic_code,int,502
-
-      attribute,longitude,ioos_category,String,Location
-
-      attribute,longitude,long_name,String,Nominal Longitude
-
-      attribute,longitude,missing_value,float,1.0E35
-
-      attribute,longitude,standard_name,String,longitude
-
-      attribute,longitude,type,String,EVEN
-
-      attribute,longitude,units,String,degrees_east
-
-      variable,latitude,,float,
+      variable,latitude,,double,
 
       attribute,latitude,_CoordinateAxisType,String,Lat
 
-      attribute,latitude,actual_range,float,"-25.0, 21.0"
+      attribute,latitude,actual_range,double,"32.8032, 32.8032"
 
       attribute,latitude,axis,String,Y
 
-      attribute,latitude,epic_code,int,500
+      attribute,latitude,colorBarMaximum,double,90.0
+
+      attribute,latitude,colorBarMinimum,double,-90.0
 
       attribute,latitude,ioos_category,String,Location
 
-      attribute,latitude,long_name,String,Nominal Latitude
-
-      attribute,latitude,missing_value,float,1.0E35
+      attribute,latitude,long_name,String,Latitude
 
       attribute,latitude,standard_name,String,latitude
 
-      attribute,latitude,type,String,EVEN
-
       attribute,latitude,units,String,degrees_north
 
-      variable,time,,double,
+      variable,longitude,,double,
 
-      attribute,time,_CoordinateAxisType,String,Time
+      attribute,longitude,_CoordinateAxisType,String,Lon
 
-      attribute,time,actual_range,double,"2.47752E8, 1.6507152E9"
+      attribute,longitude,actual_range,double,"-79.6204, -79.6204"
 
-      attribute,time,axis,String,T
+      attribute,longitude,axis,String,X
 
-      attribute,time,ioos_category,String,Time
+      attribute,longitude,colorBarMaximum,double,180.0
 
-      attribute,time,long_name,String,Centered Time
+      attribute,longitude,colorBarMinimum,double,-180.0
 
-      attribute,time,point_spacing,String,uneven
+      attribute,longitude,ioos_category,String,Location
 
-      attribute,time,standard_name,String,time
+      attribute,longitude,long_name,String,Longitude
 
-      attribute,time,time_origin,String,01-JAN-1970 00:00:00
+      attribute,longitude,standard_name,String,longitude
 
-      attribute,time,type,String,UNEVEN
+      attribute,longitude,units,String,degrees_east
 
-      attribute,time,units,String,seconds since 1970-01-01T00:00:00Z
+      variable,z,,double,
 
-      variable,depth,,float,
+      attribute,z,_CoordinateAxisType,String,Height
 
-      attribute,depth,_CoordinateAxisType,String,Height
+      attribute,z,_CoordinateZisPositive,String,up
 
-      attribute,depth,_CoordinateZisPositive,String,down
+      attribute,z,_FillValue,double,-9999.9
 
-      attribute,depth,actual_range,float,"0.0, 0.0"
+      attribute,z,actual_range,double,"0.0, 0.0"
 
-      attribute,depth,axis,String,Z
+      attribute,z,axis,String,Z
 
-      attribute,depth,epic_code,int,3
+      attribute,z,colorBarMaximum,double,8000.0
 
-      attribute,depth,ioos_category,String,Location
+      attribute,z,colorBarMinimum,double,-8000.0
 
-      attribute,depth,long_name,String,Depth
+      attribute,z,colorBarPalette,String,Topography
 
-      attribute,depth,missing_value,float,1.0E35
+      attribute,z,ioos_category,String,Location
 
-      attribute,depth,positive,String,down
+      attribute,z,long_name,String,Altitude
 
-      attribute,depth,standard_name,String,depth
+      attribute,z,positive,String,up
 
-      attribute,depth,type,String,EVEN
+      attribute,z,standard_name,String,altitude
 
-      attribute,depth,units,String,m
+      attribute,z,units,String,m
 
-      variable,ISO_6,,float,
+      variable,air_temperature,,double,
 
-      attribute,ISO_6,actual_range,float,"1.348975, 272.2733"
+      attribute,air_temperature,_FillValue,double,-9999.9
 
-      attribute,ISO_6,colorBarMaximum,double,300.0
+      attribute,air_temperature,actual_range,double,"0.0, 29.53"
 
-      attribute,ISO_6,colorBarMinimum,double,0.0
+      attribute,air_temperature,ancillary_variables,String,air_temperature_qc_agg
+      air_temperature_qc_tests
 
-      attribute,ISO_6,epic_code,int,6
+      attribute,air_temperature,colorBarMaximum,double,40.0
 
-      attribute,ISO_6,generic_name,String,depth
+      attribute,air_temperature,colorBarMinimum,double,-10.0
 
-      attribute,ISO_6,ioos_category,String,Temperature
+      attribute,air_temperature,id,String,1000315
 
-      attribute,ISO_6,long_name,String,20C Isotherm Depth
+      attribute,air_temperature,ioos_category,String,Other
 
-      attribute,ISO_6,missing_value,float,1.0E35
+      attribute,air_temperature,long_name,String,Air Temperature
 
-      attribute,ISO_6,name,String,ISO
+      attribute,air_temperature,platform,String,station
 
-      attribute,ISO_6,units,String,m
+      attribute,air_temperature,standard_name,String,air_temperature
 
-      variable,QI_5006,,float,
+      attribute,air_temperature,standard_name_url,String,http://mmisw.org/ont/cf/parameter/air_temperature
 
-      attribute,QI_5006,actual_range,float,"0.0, 2.0"
+      attribute,air_temperature,units,String,degree_Celsius
 
-      attribute,QI_5006,colorBarContinuous,String,false
+      variable,air_temperature_qc_agg,,long,
 
-      attribute,QI_5006,colorBarMaximum,double,6.0
+      attribute,air_temperature_qc_agg,_FillValue,long,-9999
 
-      attribute,QI_5006,colorBarMinimum,double,0.0
+      attribute,air_temperature_qc_agg,_Unsigned,String,true
 
-      attribute,QI_5006,description,String,"Quality: 0=missing data, 1=highest, 2=standard,
-      3=lower, 4=questionable, 5=bad, -9=contact Dai.C.McClurg@noaa.gov.  To get probably
-      valid data only, request QI_5006>=1 and QI_5006<=3."
+      attribute,air_temperature_qc_agg,actual_range,long,"1, 4"
 
-      attribute,QI_5006,epic_code,int,5006
+      attribute,air_temperature_qc_agg,colorBarMaximum,double,10.0
 
-      attribute,QI_5006,generic_name,String,qi
+      attribute,air_temperature_qc_agg,colorBarMinimum,double,0.0
 
-      attribute,QI_5006,ioos_category,String,Quality
+      attribute,air_temperature_qc_agg,flag_meanings,String,PASS NOT_EVALUATED SUSPECT
+      FAIL MISSING
 
-      attribute,QI_5006,long_name,String,20C Depth Quality
+      attribute,air_temperature_qc_agg,flag_values,int,"1, 2, 3, 4, 9"
 
-      attribute,QI_5006,missing_value,float,1.0E35
+      attribute,air_temperature_qc_agg,ioos_category,String,Other
 
-      attribute,QI_5006,name,String,QI
+      attribute,air_temperature_qc_agg,long_name,String,Air Temperature QARTOD Aggregate
+      Quality Flag
+
+      attribute,air_temperature_qc_agg,references,String,http://services.cormp.org/quality.php
+
+      attribute,air_temperature_qc_agg,standard_name,String,aggregate_quality_flag
+
+      variable,air_temperature_qc_tests,,double,
+
+      attribute,air_temperature_qc_tests,_FillValue,double,-9999.9
+
+      attribute,air_temperature_qc_tests,_Unsigned,String,true
+
+      attribute,air_temperature_qc_tests,colorBarMaximum,double,10.0
+
+      attribute,air_temperature_qc_tests,colorBarMinimum,double,0.0
+
+      attribute,air_temperature_qc_tests,comment,String,"11-character string with
+      results of individual QARTOD tests. 1: Gap Test, 2: Syntax Test, 3: Location
+      Test, 4: Gross Range Test, 5: Climatology Test, 6: Spike Test, 7: Rate of Change
+      Test, 8: Flat-line Test, 9: Multi-variate Test, 10: Attenuated Signal Test,
+      11: Neighbor Test"
+
+      attribute,air_temperature_qc_tests,flag_meanings,String,PASS NOT_EVALUATED SUSPECT
+      FAIL MISSING
+
+      attribute,air_temperature_qc_tests,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,air_temperature_qc_tests,ioos_category,String,Other
+
+      attribute,air_temperature_qc_tests,long_name,String,Air Temperature QARTOD Individual
+      Tests
+
+      attribute,air_temperature_qc_tests,references,String,http://services.cormp.org/quality.php
+
+      attribute,air_temperature_qc_tests,standard_name,String,air_temperature quality_flag
+
+      variable,air_pressure,,double,
+
+      attribute,air_pressure,_FillValue,double,-9999.9
+
+      attribute,air_pressure,actual_range,double,"0.0, 1049.385"
+
+      attribute,air_pressure,ancillary_variables,String,air_pressure_qc_agg air_pressure_qc_tests
+
+      attribute,air_pressure,colorBarMaximum,double,1050.0
+
+      attribute,air_pressure,colorBarMinimum,double,950.0
+
+      attribute,air_pressure,id,String,1000314
+
+      attribute,air_pressure,ioos_category,String,Other
+
+      attribute,air_pressure,long_name,String,Barometric Pressure
+
+      attribute,air_pressure,platform,String,station
+
+      attribute,air_pressure,standard_name,String,air_pressure
+
+      attribute,air_pressure,standard_name_url,String,http://mmisw.org/ont/cf/parameter/air_pressure
+
+      attribute,air_pressure,units,String,millibars
+
+      variable,air_pressure_qc_agg,,long,
+
+      attribute,air_pressure_qc_agg,_FillValue,long,-9999
+
+      attribute,air_pressure_qc_agg,_Unsigned,String,true
+
+      attribute,air_pressure_qc_agg,actual_range,long,"1, 4"
+
+      attribute,air_pressure_qc_agg,colorBarMaximum,double,10.0
+
+      attribute,air_pressure_qc_agg,colorBarMinimum,double,0.0
+
+      attribute,air_pressure_qc_agg,flag_meanings,String,PASS NOT_EVALUATED SUSPECT
+      FAIL MISSING
+
+      attribute,air_pressure_qc_agg,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,air_pressure_qc_agg,ioos_category,String,Other
+
+      attribute,air_pressure_qc_agg,long_name,String,Barometric Pressure QARTOD Aggregate
+      Quality Flag
+
+      attribute,air_pressure_qc_agg,references,String,http://services.cormp.org/quality.php
+
+      attribute,air_pressure_qc_agg,standard_name,String,aggregate_quality_flag
+
+      variable,air_pressure_qc_tests,,double,
+
+      attribute,air_pressure_qc_tests,_FillValue,double,-9999.9
+
+      attribute,air_pressure_qc_tests,_Unsigned,String,true
+
+      attribute,air_pressure_qc_tests,colorBarMaximum,double,10.0
+
+      attribute,air_pressure_qc_tests,colorBarMinimum,double,0.0
+
+      attribute,air_pressure_qc_tests,comment,String,"11-character string with results
+      of individual QARTOD tests. 1: Gap Test, 2: Syntax Test, 3: Location Test, 4:
+      Gross Range Test, 5: Climatology Test, 6: Spike Test, 7: Rate of Change Test,
+      8: Flat-line Test, 9: Multi-variate Test, 10: Attenuated Signal Test, 11: Neighbor
+      Test"
+
+      attribute,air_pressure_qc_tests,flag_meanings,String,PASS NOT_EVALUATED SUSPECT
+      FAIL MISSING
+
+      attribute,air_pressure_qc_tests,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,air_pressure_qc_tests,ioos_category,String,Other
+
+      attribute,air_pressure_qc_tests,long_name,String,Barometric Pressure QARTOD
+      Individual Tests
+
+      attribute,air_pressure_qc_tests,references,String,http://services.cormp.org/quality.php
+
+      attribute,air_pressure_qc_tests,standard_name,String,air_pressure quality_flag
+
+      variable,relative_humidity,,double,
+
+      attribute,relative_humidity,_FillValue,double,-9999.9
+
+      attribute,relative_humidity,actual_range,double,"0.0, 100.0"
+
+      attribute,relative_humidity,ancillary_variables,String,relative_humidity_qc_agg
+      relative_humidity_qc_tests
+
+      attribute,relative_humidity,colorBarMaximum,double,100.0
+
+      attribute,relative_humidity,colorBarMinimum,double,0.0
+
+      attribute,relative_humidity,id,String,1000316
+
+      attribute,relative_humidity,ioos_category,String,Other
+
+      attribute,relative_humidity,long_name,String,Relative Humidity
+
+      attribute,relative_humidity,platform,String,station
+
+      attribute,relative_humidity,standard_name,String,relative_humidity
+
+      attribute,relative_humidity,standard_name_url,String,http://mmisw.org/ont/cf/parameter/relative_humidity
+
+      attribute,relative_humidity,units,String,percent
+
+      variable,relative_humidity_qc_agg,,long,
+
+      attribute,relative_humidity_qc_agg,_FillValue,long,-9999
+
+      attribute,relative_humidity_qc_agg,_Unsigned,String,true
+
+      attribute,relative_humidity_qc_agg,actual_range,long,"1, 4"
+
+      attribute,relative_humidity_qc_agg,colorBarMaximum,double,10.0
+
+      attribute,relative_humidity_qc_agg,colorBarMinimum,double,0.0
+
+      attribute,relative_humidity_qc_agg,flag_meanings,String,PASS NOT_EVALUATED SUSPECT
+      FAIL MISSING
+
+      attribute,relative_humidity_qc_agg,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,relative_humidity_qc_agg,ioos_category,String,Other
+
+      attribute,relative_humidity_qc_agg,long_name,String,Relative Humidity QARTOD
+      Aggregate Quality Flag
+
+      attribute,relative_humidity_qc_agg,references,String,http://services.cormp.org/quality.php
+
+      attribute,relative_humidity_qc_agg,standard_name,String,aggregate_quality_flag
+
+      variable,relative_humidity_qc_tests,,double,
+
+      attribute,relative_humidity_qc_tests,_FillValue,double,-9999.9
+
+      attribute,relative_humidity_qc_tests,_Unsigned,String,true
+
+      attribute,relative_humidity_qc_tests,colorBarMaximum,double,10.0
+
+      attribute,relative_humidity_qc_tests,colorBarMinimum,double,0.0
+
+      attribute,relative_humidity_qc_tests,comment,String,"11-character string with
+      results of individual QARTOD tests. 1: Gap Test, 2: Syntax Test, 3: Location
+      Test, 4: Gross Range Test, 5: Climatology Test, 6: Spike Test, 7: Rate of Change
+      Test, 8: Flat-line Test, 9: Multi-variate Test, 10: Attenuated Signal Test,
+      11: Neighbor Test"
+
+      attribute,relative_humidity_qc_tests,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,relative_humidity_qc_tests,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,relative_humidity_qc_tests,ioos_category,String,Other
+
+      attribute,relative_humidity_qc_tests,long_name,String,Relative Humidity QARTOD
+      Individual Tests
+
+      attribute,relative_humidity_qc_tests,references,String,http://services.cormp.org/quality.php
+
+      attribute,relative_humidity_qc_tests,standard_name,String,relative_humidity
+      quality_flag
+
+      variable,sea_water_practical_salinity,,double,
+
+      attribute,sea_water_practical_salinity,_FillValue,double,-9999.9
+
+      attribute,sea_water_practical_salinity,actual_range,double,"5.164, 35.71"
+
+      attribute,sea_water_practical_salinity,ancillary_variables,String,sea_water_practical_salinity_qc_agg
+      sea_water_practical_salinity_qc_tests
+
+      attribute,sea_water_practical_salinity,colorBarMaximum,double,37.0
+
+      attribute,sea_water_practical_salinity,colorBarMinimum,double,32.0
+
+      attribute,sea_water_practical_salinity,id,String,1000317
+
+      attribute,sea_water_practical_salinity,ioos_category,String,Other
+
+      attribute,sea_water_practical_salinity,long_name,String,Salinity
+
+      attribute,sea_water_practical_salinity,platform,String,station
+
+      attribute,sea_water_practical_salinity,standard_name,String,sea_water_practical_salinity
+
+      attribute,sea_water_practical_salinity,standard_name_url,String,http://mmisw.org/ont/cf/parameter/sea_water_practical_salinity
+
+      attribute,sea_water_practical_salinity,units,String,1e-3
+
+      variable,sea_water_practical_salinity_qc_agg,,long,
+
+      attribute,sea_water_practical_salinity_qc_agg,_FillValue,long,-9999
+
+      attribute,sea_water_practical_salinity_qc_agg,_Unsigned,String,true
+
+      attribute,sea_water_practical_salinity_qc_agg,actual_range,long,"1, 4"
+
+      attribute,sea_water_practical_salinity_qc_agg,colorBarMaximum,double,10.0
+
+      attribute,sea_water_practical_salinity_qc_agg,colorBarMinimum,double,0.0
+
+      attribute,sea_water_practical_salinity_qc_agg,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,sea_water_practical_salinity_qc_agg,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,sea_water_practical_salinity_qc_agg,ioos_category,String,Other
+
+      attribute,sea_water_practical_salinity_qc_agg,long_name,String,Salinity QARTOD
+      Aggregate Quality Flag
+
+      attribute,sea_water_practical_salinity_qc_agg,references,String,http://services.cormp.org/quality.php
+
+      attribute,sea_water_practical_salinity_qc_agg,standard_name,String,aggregate_quality_flag
+
+      variable,sea_water_practical_salinity_qc_tests,,double,
+
+      attribute,sea_water_practical_salinity_qc_tests,_FillValue,double,-9999.9
+
+      attribute,sea_water_practical_salinity_qc_tests,_Unsigned,String,true
+
+      attribute,sea_water_practical_salinity_qc_tests,colorBarMaximum,double,10.0
+
+      attribute,sea_water_practical_salinity_qc_tests,colorBarMinimum,double,0.0
+
+      attribute,sea_water_practical_salinity_qc_tests,comment,String,"11-character
+      string with results of individual QARTOD tests. 1: Gap Test, 2: Syntax Test,
+      3: Location Test, 4: Gross Range Test, 5: Climatology Test, 6: Spike Test, 7:
+      Rate of Change Test, 8: Flat-line Test, 9: Multi-variate Test, 10: Attenuated
+      Signal Test, 11: Neighbor Test"
+
+      attribute,sea_water_practical_salinity_qc_tests,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,sea_water_practical_salinity_qc_tests,flag_values,int,"1, 2, 3, 4,
+      9"
+
+      attribute,sea_water_practical_salinity_qc_tests,ioos_category,String,Other
+
+      attribute,sea_water_practical_salinity_qc_tests,long_name,String,Salinity QARTOD
+      Individual Tests
+
+      attribute,sea_water_practical_salinity_qc_tests,references,String,http://services.cormp.org/quality.php
+
+      attribute,sea_water_practical_salinity_qc_tests,standard_name,String,sea_water_practical_salinity
+      quality_flag
+
+      variable,sea_water_temperature,,double,
+
+      attribute,sea_water_temperature,_FillValue,double,-9999.9
+
+      attribute,sea_water_temperature,actual_range,double,"2.958, 29.63"
+
+      attribute,sea_water_temperature,ancillary_variables,String,sea_water_temperature_qc_agg
+      sea_water_temperature_qc_tests
+
+      attribute,sea_water_temperature,colorBarMaximum,double,32.0
+
+      attribute,sea_water_temperature,colorBarMinimum,double,0.0
+
+      attribute,sea_water_temperature,id,String,1000318
+
+      attribute,sea_water_temperature,ioos_category,String,Other
+
+      attribute,sea_water_temperature,long_name,String,Water Temperature
+
+      attribute,sea_water_temperature,platform,String,station
+
+      attribute,sea_water_temperature,standard_name,String,sea_water_temperature
+
+      attribute,sea_water_temperature,standard_name_url,String,http://mmisw.org/ont/cf/parameter/sea_water_temperature
+
+      attribute,sea_water_temperature,units,String,degree_Celsius
+
+      variable,sea_water_temperature_qc_agg,,long,
+
+      attribute,sea_water_temperature_qc_agg,_FillValue,long,-9999
+
+      attribute,sea_water_temperature_qc_agg,_Unsigned,String,true
+
+      attribute,sea_water_temperature_qc_agg,actual_range,long,"1, 4"
+
+      attribute,sea_water_temperature_qc_agg,colorBarMaximum,double,10.0
+
+      attribute,sea_water_temperature_qc_agg,colorBarMinimum,double,0.0
+
+      attribute,sea_water_temperature_qc_agg,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,sea_water_temperature_qc_agg,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,sea_water_temperature_qc_agg,ioos_category,String,Other
+
+      attribute,sea_water_temperature_qc_agg,long_name,String,Water Temperature QARTOD
+      Aggregate Quality Flag
+
+      attribute,sea_water_temperature_qc_agg,references,String,http://services.cormp.org/quality.php
+
+      attribute,sea_water_temperature_qc_agg,standard_name,String,aggregate_quality_flag
+
+      variable,sea_water_temperature_qc_tests,,double,
+
+      attribute,sea_water_temperature_qc_tests,_FillValue,double,-9999.9
+
+      attribute,sea_water_temperature_qc_tests,_Unsigned,String,true
+
+      attribute,sea_water_temperature_qc_tests,colorBarMaximum,double,10.0
+
+      attribute,sea_water_temperature_qc_tests,colorBarMinimum,double,0.0
+
+      attribute,sea_water_temperature_qc_tests,comment,String,"11-character string
+      with results of individual QARTOD tests. 1: Gap Test, 2: Syntax Test, 3: Location
+      Test, 4: Gross Range Test, 5: Climatology Test, 6: Spike Test, 7: Rate of Change
+      Test, 8: Flat-line Test, 9: Multi-variate Test, 10: Attenuated Signal Test,
+      11: Neighbor Test"
+
+      attribute,sea_water_temperature_qc_tests,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,sea_water_temperature_qc_tests,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,sea_water_temperature_qc_tests,ioos_category,String,Other
+
+      attribute,sea_water_temperature_qc_tests,long_name,String,Water Temperature
+      QARTOD Individual Tests
+
+      attribute,sea_water_temperature_qc_tests,references,String,http://services.cormp.org/quality.php
+
+      attribute,sea_water_temperature_qc_tests,standard_name,String,sea_water_temperature
+      quality_flag
+
+      variable,wind_speed_of_gust,,double,
+
+      attribute,wind_speed_of_gust,_FillValue,double,-9999.9
+
+      attribute,wind_speed_of_gust,actual_range,double,"0.0, 59.779812737936"
+
+      attribute,wind_speed_of_gust,ancillary_variables,String,wind_speed_of_gust_qc_agg
+      wind_speed_of_gust_qc_tests
+
+      attribute,wind_speed_of_gust,colorBarMaximum,double,30.0
+
+      attribute,wind_speed_of_gust,colorBarMinimum,double,0.0
+
+      attribute,wind_speed_of_gust,id,String,1000321
+
+      attribute,wind_speed_of_gust,ioos_category,String,Other
+
+      attribute,wind_speed_of_gust,long_name,String,Wind Gust
+
+      attribute,wind_speed_of_gust,platform,String,station
+
+      attribute,wind_speed_of_gust,standard_name,String,wind_speed_of_gust
+
+      attribute,wind_speed_of_gust,standard_name_url,String,http://mmisw.org/ont/cf/parameter/wind_speed_of_gust
+
+      attribute,wind_speed_of_gust,units,String,m.s-1
+
+      variable,wind_speed_of_gust_qc_agg,,long,
+
+      attribute,wind_speed_of_gust_qc_agg,_FillValue,long,-9999
+
+      attribute,wind_speed_of_gust_qc_agg,_Unsigned,String,true
+
+      attribute,wind_speed_of_gust_qc_agg,actual_range,long,"1, 4"
+
+      attribute,wind_speed_of_gust_qc_agg,colorBarMaximum,double,10.0
+
+      attribute,wind_speed_of_gust_qc_agg,colorBarMinimum,double,0.0
+
+      attribute,wind_speed_of_gust_qc_agg,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,wind_speed_of_gust_qc_agg,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,wind_speed_of_gust_qc_agg,ioos_category,String,Other
+
+      attribute,wind_speed_of_gust_qc_agg,long_name,String,Wind Gust QARTOD Aggregate
+      Quality Flag
+
+      attribute,wind_speed_of_gust_qc_agg,references,String,http://services.cormp.org/quality.php
+
+      attribute,wind_speed_of_gust_qc_agg,standard_name,String,aggregate_quality_flag
+
+      variable,wind_speed_of_gust_qc_tests,,double,
+
+      attribute,wind_speed_of_gust_qc_tests,_FillValue,double,-9999.9
+
+      attribute,wind_speed_of_gust_qc_tests,_Unsigned,String,true
+
+      attribute,wind_speed_of_gust_qc_tests,colorBarMaximum,double,10.0
+
+      attribute,wind_speed_of_gust_qc_tests,colorBarMinimum,double,0.0
+
+      attribute,wind_speed_of_gust_qc_tests,comment,String,"11-character string with
+      results of individual QARTOD tests. 1: Gap Test, 2: Syntax Test, 3: Location
+      Test, 4: Gross Range Test, 5: Climatology Test, 6: Spike Test, 7: Rate of Change
+      Test, 8: Flat-line Test, 9: Multi-variate Test, 10: Attenuated Signal Test,
+      11: Neighbor Test"
+
+      attribute,wind_speed_of_gust_qc_tests,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,wind_speed_of_gust_qc_tests,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,wind_speed_of_gust_qc_tests,ioos_category,String,Other
+
+      attribute,wind_speed_of_gust_qc_tests,long_name,String,Wind Gust QARTOD Individual
+      Tests
+
+      attribute,wind_speed_of_gust_qc_tests,references,String,http://services.cormp.org/quality.php
+
+      attribute,wind_speed_of_gust_qc_tests,standard_name,String,wind_speed_of_gust
+      quality_flag
+
+      variable,wind_speed,,double,
+
+      attribute,wind_speed,_FillValue,double,-9999.9
+
+      attribute,wind_speed,actual_range,double,"0.0, 24.524128"
+
+      attribute,wind_speed,ancillary_variables,String,wind_speed_qc_agg wind_speed_qc_tests
+
+      attribute,wind_speed,colorBarMaximum,double,15.0
+
+      attribute,wind_speed,colorBarMinimum,double,0.0
+
+      attribute,wind_speed,id,String,1000320
+
+      attribute,wind_speed,ioos_category,String,Other
+
+      attribute,wind_speed,long_name,String,Wind Speed
+
+      attribute,wind_speed,platform,String,station
+
+      attribute,wind_speed,standard_name,String,wind_speed
+
+      attribute,wind_speed,standard_name_url,String,http://mmisw.org/ont/cf/parameter/wind_speed
+
+      attribute,wind_speed,units,String,m.s-1
+
+      variable,wind_speed_qc_agg,,long,
+
+      attribute,wind_speed_qc_agg,_FillValue,long,-9999
+
+      attribute,wind_speed_qc_agg,_Unsigned,String,true
+
+      attribute,wind_speed_qc_agg,actual_range,long,"1, 4"
+
+      attribute,wind_speed_qc_agg,colorBarMaximum,double,10.0
+
+      attribute,wind_speed_qc_agg,colorBarMinimum,double,0.0
+
+      attribute,wind_speed_qc_agg,flag_meanings,String,PASS NOT_EVALUATED SUSPECT
+      FAIL MISSING
+
+      attribute,wind_speed_qc_agg,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,wind_speed_qc_agg,ioos_category,String,Other
+
+      attribute,wind_speed_qc_agg,long_name,String,Wind Speed QARTOD Aggregate Quality
+      Flag
+
+      attribute,wind_speed_qc_agg,references,String,http://services.cormp.org/quality.php
+
+      attribute,wind_speed_qc_agg,standard_name,String,aggregate_quality_flag
+
+      variable,wind_speed_qc_tests,,double,
+
+      attribute,wind_speed_qc_tests,_FillValue,double,-9999.9
+
+      attribute,wind_speed_qc_tests,_Unsigned,String,true
+
+      attribute,wind_speed_qc_tests,colorBarMaximum,double,10.0
+
+      attribute,wind_speed_qc_tests,colorBarMinimum,double,0.0
+
+      attribute,wind_speed_qc_tests,comment,String,"11-character string with results
+      of individual QARTOD tests. 1: Gap Test, 2: Syntax Test, 3: Location Test, 4:
+      Gross Range Test, 5: Climatology Test, 6: Spike Test, 7: Rate of Change Test,
+      8: Flat-line Test, 9: Multi-variate Test, 10: Attenuated Signal Test, 11: Neighbor
+      Test"
+
+      attribute,wind_speed_qc_tests,flag_meanings,String,PASS NOT_EVALUATED SUSPECT
+      FAIL MISSING
+
+      attribute,wind_speed_qc_tests,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,wind_speed_qc_tests,ioos_category,String,Other
+
+      attribute,wind_speed_qc_tests,long_name,String,Wind Speed QARTOD Individual
+      Tests
+
+      attribute,wind_speed_qc_tests,references,String,http://services.cormp.org/quality.php
+
+      attribute,wind_speed_qc_tests,standard_name,String,wind_speed quality_flag
+
+      variable,wind_from_direction,,double,
+
+      attribute,wind_from_direction,_FillValue,double,-9999.9
+
+      attribute,wind_from_direction,actual_range,double,"0.0, 359.4"
+
+      attribute,wind_from_direction,ancillary_variables,String,wind_from_direction_qc_agg
+      wind_from_direction_qc_tests
+
+      attribute,wind_from_direction,colorBarMaximum,double,360.0
+
+      attribute,wind_from_direction,colorBarMinimum,double,0.0
+
+      attribute,wind_from_direction,id,String,1000319
+
+      attribute,wind_from_direction,ioos_category,String,Other
+
+      attribute,wind_from_direction,long_name,String,Wind From Direction
+
+      attribute,wind_from_direction,platform,String,station
+
+      attribute,wind_from_direction,standard_name,String,wind_from_direction
+
+      attribute,wind_from_direction,standard_name_url,String,http://mmisw.org/ont/cf/parameter/wind_from_direction
+
+      attribute,wind_from_direction,units,String,degrees
+
+      variable,wind_from_direction_qc_agg,,long,
+
+      attribute,wind_from_direction_qc_agg,_FillValue,long,-9999
+
+      attribute,wind_from_direction_qc_agg,_Unsigned,String,true
+
+      attribute,wind_from_direction_qc_agg,actual_range,long,"1, 4"
+
+      attribute,wind_from_direction_qc_agg,colorBarMaximum,double,10.0
+
+      attribute,wind_from_direction_qc_agg,colorBarMinimum,double,0.0
+
+      attribute,wind_from_direction_qc_agg,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,wind_from_direction_qc_agg,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,wind_from_direction_qc_agg,ioos_category,String,Other
+
+      attribute,wind_from_direction_qc_agg,long_name,String,Wind From Direction QARTOD
+      Aggregate Quality Flag
+
+      attribute,wind_from_direction_qc_agg,references,String,http://services.cormp.org/quality.php
+
+      attribute,wind_from_direction_qc_agg,standard_name,String,aggregate_quality_flag
+
+      variable,wind_from_direction_qc_tests,,double,
+
+      attribute,wind_from_direction_qc_tests,_FillValue,double,-9999.9
+
+      attribute,wind_from_direction_qc_tests,_Unsigned,String,true
+
+      attribute,wind_from_direction_qc_tests,colorBarMaximum,double,10.0
+
+      attribute,wind_from_direction_qc_tests,colorBarMinimum,double,0.0
+
+      attribute,wind_from_direction_qc_tests,comment,String,"11-character string with
+      results of individual QARTOD tests. 1: Gap Test, 2: Syntax Test, 3: Location
+      Test, 4: Gross Range Test, 5: Climatology Test, 6: Spike Test, 7: Rate of Change
+      Test, 8: Flat-line Test, 9: Multi-variate Test, 10: Attenuated Signal Test,
+      11: Neighbor Test"
+
+      attribute,wind_from_direction_qc_tests,flag_meanings,String,PASS NOT_EVALUATED
+      SUSPECT FAIL MISSING
+
+      attribute,wind_from_direction_qc_tests,flag_values,int,"1, 2, 3, 4, 9"
+
+      attribute,wind_from_direction_qc_tests,ioos_category,String,Other
+
+      attribute,wind_from_direction_qc_tests,long_name,String,Wind From Direction
+      QARTOD Individual Tests
+
+      attribute,wind_from_direction_qc_tests,references,String,http://services.cormp.org/quality.php
+
+      attribute,wind_from_direction_qc_tests,standard_name,String,wind_from_direction
+      quality_flag
 
       '
     headers:
       Connection:
-      - close
+      - keep-alive
       Content-Disposition:
-      - attachment;filename=pmelTao5dayIso_info.csv
+      - attachment;filename=org_cormp_cap2_info.csv
       Content-Encoding:
       - gzip
-      Content-Security-Policy:
-      - script-src 'self' https://apis.google.com https://code.jquery.com/ https://www.google-analytics.com
-        stackpath.bootstrapcdn.com https://polarwatch.noaa.gov https://www.googletagmanager.com
-        https://upwell.pfeg.oaa.gov 'unsafe-inline' 'unsafe-eval'; font-src 'self'
-        https://fonts.googleapis.com  https://fonts.gstatic.com;
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Tue, 26 Apr 2022 16:47:21 GMT
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - Wed, 27 Jul 2022 14:54:33 GMT
+      Server:
+      - nginx/1.20.1
       Transfer-Encoding:
       - chunked
-      X-Frame-Options:
-      - SAMEORIGIN
     http_version: HTTP/1.1
     status_code: 200
 version: 1

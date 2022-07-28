@@ -9,11 +9,11 @@ interactions:
       connection:
       - keep-alive
       host:
-      - erddap.sensors.ioos.us
+      - standards.sensors.ioos.us
       user-agent:
-      - python-httpx/0.22.0
+      - python-httpx/0.23.0
     method: HEAD
-    uri: http://erddap.sensors.ioos.us/erddap/tabledap/gov_usgs_waterdata_340800117235901.htmlTable?time,&time%3E=2017-08-29T00:00:00Z&time%3C=2015-09-05T19:00:00Z
+    uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?time,&time%3E=2017-08-29T00:00:00Z&time%3C=2015-09-05T19:00:00Z
   response:
     content: ''
     headers:
@@ -28,13 +28,11 @@ interactions:
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Tue, 26 Apr 2022 16:51:48 GMT
+      - Wed, 27 Jul 2022 20:46:55 GMT
       Last-Modified:
-      - Tue, 26 Apr 2022 16:51:48 GMT
+      - Wed, 27 Jul 2022 20:46:46 GMT
       Server:
       - nginx/1.20.1
-      Set-Cookie:
-      - cid=CgIHBWJoIyOwq2aMBCVkAg==; expires=Thu, 25-Apr-24 16:51:48 GMT; path=/
       erddap-server:
       - 2.02_axiom-r1
       xdods-server:
