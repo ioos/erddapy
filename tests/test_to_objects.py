@@ -24,6 +24,7 @@ def sensors():
 @pytest.mark.web
 def gliders():
     """Instantiate ERDDAP class for testing."""
+    # The gliders server has 1244 datasets at time of writing
     yield ERDDAP(
         server="https://gliders.ioos.us/erddap/",
         response="htmlTable",
@@ -78,7 +79,6 @@ def dataset_tabledap(sensors):
 @pytest.mark.web
 def test_csv_search(gliders):
     """Test if a CSV search returns all items (instead of the first 1000)."""
-    # The gliders server has 1244 datasets at time of writing
     url = gliders.get_search_url(search_for="all", response="csv")
     handle = httpx.get(url)
     nrows = len(list(handle.iter_lines())) - 1
@@ -88,7 +88,6 @@ def test_csv_search(gliders):
 @pytest.mark.web
 def test_json_search(gliders):
     """Test if a JSON search returns all items (instead of the first 1000)."""
-    # The gliders server has 1244 datasets at time of writing
     url = gliders.get_search_url(search_for="all", response="json")
     handle = httpx.get(url)
     nrows = len(handle.json()["table"]["rows"])
