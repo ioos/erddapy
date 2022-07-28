@@ -74,8 +74,7 @@ def _griddap_get_constraints(
     """
     Fetch metadata of griddap dataset and set initial constraints.
 
-    Step size is applied to all dimensions
-
+    Step size is applied to all dimensions.
     """
     dds_url = f"{dataset_url}.dds"
     url = urlopen(dds_url)
@@ -385,7 +384,7 @@ class ERDDAP:
 
             response: default is HTML.
             items_per_page: how many items per page in the return,
-                default is 1000.
+                default is 1000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
             page: which page to display, default is the first page (1).
             kwargs: extra search constraints based on metadata and/or coordinates ke/value.
                 metadata: `cdm_data_type`, `institution`, `ioos_category`,
@@ -398,6 +397,26 @@ class ERDDAP:
         """
         protocol = protocol if protocol else self.protocol
         response = response if response else self.response
+
+        # These responses should not be paginated b/c that hinders the correct amount of data silently
+        # and can surprise users when the number of items is greater than ERDDAP's defaults (1000 items).
+        # Ideally there should be no pagination for this on the ERDDAP side but for now we settled for a
+        # "really big" `items_per_page` number.
+        non_paginated_responses = [
+            "csv",
+            "csvp",
+            "csv0",
+            "json",
+            "jsonlCSV1",
+            "jsonlCSV",
+            "jsonlKVP",
+            "tsv",
+            "tsvp",
+            "tsv0",
+        ]
+        if response in non_paginated_responses:
+            items_per_page = int(1e6)
+
         return _search_url(
             self.server,
             response=response,
