@@ -13,7 +13,7 @@ except ImportError:
 
 from erddapy.core.url_handling import _format_search_string, _multi_urlopen
 from erddapy.erddapy import _search_url
-from erddapy.servers import servers
+from erddapy.servers.servers import servers
 
 
 def _format_results(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
