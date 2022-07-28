@@ -45,4 +45,50 @@ interactions:
       - Origin
     http_version: HTTP/1.1
     status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - erddap.ioos.us
+      user-agent:
+      - python-httpx/0.23.0
+    method: HEAD
+    uri: http://erddap.ioos.us/erddap/search/advanced.csv?page=1&itemsPerPage=1000000&protocol=(ANY)&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&minTime=&maxTime=&searchFor=NOAA
+  response:
+    content: ''
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=AdvancedSearch.csv
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '3960'
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Thu, 28 Jul 2022 15:33:50 GMT
+      Keep-Alive:
+      - timeout=20
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      vary:
+      - Origin
+    http_version: HTTP/1.1
+    status_code: 200
 version: 1
