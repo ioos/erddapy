@@ -2,9 +2,7 @@
 
 import multiprocessing
 from typing import Dict
-from typing.io import BinaryIO
 
-import httpx
 import pandas as pd
 
 try:
@@ -13,29 +11,16 @@ try:
 except ImportError:
     joblib = False
 
-from erddapy.core.url_handling import urlopen
+from erddapy.core.url_handling import _format_search_string, _multi_urlopen
 from erddapy.erddapy import _search_url
 from erddapy.servers import servers
 
 
-def _format_search_string(server: str, query: str) -> str:
-    """Generate a search string for an erddap server with user defined query."""
-    return f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
-
-
 def _format_results(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+    """Format dictionary of results into a Pandas dataframe."""
     # we return None for bad server, so we need to filter them here
     df_all = pd.concat([list(df.values())[0] for df in dfs if df is not None])
     return df_all.reset_index(drop=True)
-
-
-def _multi_urlopen(url: str) -> BinaryIO:
-    """Simpler url open to work with multiprocessing."""
-    try:
-        data = urlopen(url)
-    except (httpx.HTTPError, httpx.ConnectError):
-        return None
-    return data
 
 
 def fetch_results(
