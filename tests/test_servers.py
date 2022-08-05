@@ -3,7 +3,7 @@
 import pytest
 
 from erddapy import servers
-from erddapy.core.url_handling import check_url_response
+from erddapy.core.url import check_url_response
 
 
 @pytest.mark.web

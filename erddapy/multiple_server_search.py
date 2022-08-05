@@ -11,7 +11,7 @@ try:
 except ImportError:
     joblib = False
 
-from erddapy.core.url_handling import _format_search_string, _multi_urlopen
+from erddapy.core.url import _format_search_string, _multi_urlopen
 from erddapy.erddapy import _search_url
 from erddapy.servers.servers import servers
 
