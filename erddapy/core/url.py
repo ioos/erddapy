@@ -129,7 +129,7 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
     return parse_date_time.timestamp()
 
 
-def _search_url(
+def get_search_url(
     server: str,
     response: str = "html",
     search_for: Optional[str] = None,
@@ -138,6 +138,39 @@ def _search_url(
     page: int = 1,
     **kwargs,
 ):
+    """
+    Build the search URL for the `server` endpoint provided.
+
+    Args:
+        search_for: "Google-like" search of the datasets' metadata.
+
+            - Type the words you want to search for, with spaces between the words.
+                ERDDAP will search for the words separately, not as a phrase.
+            - To search for a phrase, put double quotes around the phrase
+                (for example, `"wind speed"`).
+            - To exclude datasets with a specific word, use `-excludedWord`.
+            - To exclude datasets with a specific phrase, use `-"excluded phrase"`
+            - Searches are not case-sensitive.
+            - You can search for any part of a word. For example,
+                searching for `spee` will find datasets with `speed` and datasets with
+                `WindSpeed`
+            - The last word in a phrase may be a partial word. For example,
+                to find datasets from a specific website (usually the start of the datasetID),
+                include (for example) `"datasetID=erd"` in your search.
+
+        response: default is HTML.
+        items_per_page: how many items per page in the return,
+            default is 1000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
+        page: which page to display, default is the first page (1).
+        kwargs: extra search constraints based on metadata and/or coordinates ke/value.
+            metadata: `cdm_data_type`, `institution`, `ioos_category`,
+            `keywords`, `long_name`, `standard_name`, and `variableName`.
+            coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`, `minTime`, and `maxTime`.
+
+    Returns:
+        url: the search URL.
+
+    """
     server = server.rstrip("/")
     base = (
         "{server}/search/advanced.{response}"
@@ -190,6 +223,25 @@ def _search_url(
         if search_term in kwargs.keys():
             lowercase = kwargs[search_term].lower()
             kwargs.update({search_term: lowercase})
+
+    # These responses should not be paginated b/c that hinders the correct amount of data silently
+    # and can surprise users when the number of items is greater than ERDDAP's defaults (1000 items).
+    # Ideally there should be no pagination for this on the ERDDAP side but for now we settled for a
+    # "really big" `items_per_page` number.
+    non_paginated_responses = [
+        "csv",
+        "csvp",
+        "csv0",
+        "json",
+        "jsonlCSV1",
+        "jsonlCSV",
+        "jsonlKVP",
+        "tsv",
+        "tsvp",
+        "tsv0",
+    ]
+    if response in non_paginated_responses:
+        items_per_page = int(1e6)
 
     default = "(ANY)"
     url = base.format(
