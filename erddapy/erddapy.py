@@ -17,6 +17,8 @@ from erddapy.core.url import (
     _distinct,
     _format_constraints_url,
     _quote_string_constraints,
+    get_categorize_url,
+    get_info_url,
     get_search_url,
     parse_dates,
     urlopen,
@@ -225,11 +227,7 @@ class ERDDAP:
         dataset_id = dataset_id if dataset_id else self.dataset_id
         response = response if response else self.response
 
-        if not dataset_id:
-            raise ValueError(f"You must specify a valid dataset_id, got {dataset_id}")
-
-        url = f"{self.server}/info/{dataset_id}/index.{response}"
-        return url
+        return get_info_url(self.server, dataset_id, response)
 
     def get_categorize_url(
         self,
@@ -242,7 +240,7 @@ class ERDDAP:
 
         Args:
             categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
-                Valid attributes are shown in https://coastwatch.pfeg.noaa.gov/erddap/categorize page.
+                Valid attributes are shown in http://erddap.ioos.us/erddap/categorize page.
             value: an attribute value.
             response: default is HTML.
 
@@ -251,11 +249,7 @@ class ERDDAP:
 
         """
         response = response if response else self.response
-        if value:
-            url = f"{self.server}/categorize/{categorize_by}/{value}/index.{response}"
-        else:
-            url = f"{self.server}/categorize/{categorize_by}/index.{response}"
-        return url
+        return get_categorize_url(self.server, categorize_by, value, response)
 
     def get_download_url(
         self,

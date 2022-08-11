@@ -11,6 +11,8 @@ import httpx
 import pytz
 from pandas._libs.tslibs.parsing import parse_time_string
 
+OptionalStr = Optional[str]
+
 
 @functools.lru_cache(maxsize=256)
 def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
@@ -59,7 +61,7 @@ def _distinct(url: str, **kwargs: Dict) -> str:
     For example, a query for the variables ["stationType", "stationID"] with `distinct=True`
     will return a sorted list of "stationIDs" associated with each "stationType".
 
-    See https://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html#distinct
+    See http://erddap.ioos.us/erddap/tabledap/documentation.html#distinct
 
     """
     distinct = kwargs.pop("distinct", False)
@@ -268,4 +270,53 @@ def get_search_url(
     # ERDDAP 2.10 no longer accepts strings placeholder for dates.
     # Removing them entirely should be OK for older versions too.
     url = url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
+    return url
+
+
+def get_info_url(
+    server: str,
+    dataset_id: OptionalStr = None,
+    response: OptionalStr = None,
+) -> str:
+    """
+    Build the info URL for the `server` endpoint.
+
+    Args:
+        dataset_id: a dataset unique id.
+        response: default is HTML.
+
+    Returns:
+        url: the info URL for the `response` chosen.
+
+    """
+    if not dataset_id:
+        raise ValueError(f"You must specify a valid dataset_id, got {dataset_id}")
+
+    url = f"{server}/info/{dataset_id}/index.{response}"
+    return url
+
+
+def get_categorize_url(
+    server: str,
+    categorize_by: str,
+    value: OptionalStr = None,
+    response: OptionalStr = None,
+) -> str:
+    """
+    Build the categorize URL for the `server` endpoint.
+
+    Args:
+        categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
+            Valid attributes are shown in http://erddap.ioos.us/erddap/categorize page.
+        value: an attribute value.
+        response: default is HTML.
+
+    Returns:
+        url: the categorized URL for the `response` chosen.
+
+    """
+    if value:
+        url = f"{server}/categorize/{categorize_by}/{value}/index.{response}"
+    else:
+        url = f"{server}/categorize/{categorize_by}/index.{response}"
     return url
