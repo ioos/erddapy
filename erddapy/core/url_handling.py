@@ -62,3 +62,17 @@ def _distinct(url: str, **kwargs: Dict) -> str:
     if distinct is True:
         return f"{url}&distinct()"
     return url
+
+
+def _format_search_string(server: str, query: str) -> str:
+    """Generate a search string for an erddap server with user defined query."""
+    return f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
+
+
+def _multi_urlopen(url: str) -> BinaryIO:
+    """Simpler url open to work with multiprocessing."""
+    try:
+        data = urlopen(url)
+    except (httpx.HTTPError, httpx.ConnectError):
+        return None
+    return data

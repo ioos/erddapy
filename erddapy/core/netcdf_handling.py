@@ -6,7 +6,7 @@ from typing import Dict, Generator
 from typing.io import BinaryIO
 from urllib.parse import urlparse
 
-from erddapy.url_handling import urlopen
+from erddapy.core.url_handling import urlopen
 
 
 def _nc_dataset(url, auth, **requests_kwargs: Dict):
