@@ -3,7 +3,7 @@
 import httpx
 import pytest
 
-from erddapy.core.url_handling import check_url_response
+from erddapy.core.url import check_url_response
 from erddapy.erddapy import ERDDAP, parse_dates
 
 

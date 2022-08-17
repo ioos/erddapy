@@ -2,231 +2,29 @@
 
 import copy
 import functools
-from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Union
-from urllib.parse import quote_plus
 
 import pandas as pd
-import pytz
-from pandas._libs.tslibs.parsing import parse_time_string
 
-from erddapy.core.netcdf_handling import _nc_dataset, _tempnc
-from erddapy.core.url_handling import _distinct, urlopen
+from erddapy.core.griddap import (
+    _griddap_check_constraints,
+    _griddap_check_variables,
+    _griddap_get_constraints,
+)
+from erddapy.core.netcdf import _nc_dataset, _tempnc
+from erddapy.core.url import (
+    _check_substrings,
+    _distinct,
+    _format_constraints_url,
+    _quote_string_constraints,
+    _search_url,
+    parse_dates,
+    urlopen,
+)
 from erddapy.servers.servers import servers
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
-
-
-def _quote_string_constraints(kwargs: Dict) -> Dict:
-    """
-    Quote constraints of String variables.
-
-    The right-hand-side value must be surrounded by double quotes if they are not relative constraints.
-
-    """
-    return {
-        k: f'"{v}"' if isinstance(v, str) and not _check_substrings(v) else v
-        for k, v in kwargs.items()
-    }
-
-
-def _format_constraints_url(kwargs: Dict) -> str:
-    """Join the constraint variables with separator '&' to add to the download link."""
-    return "".join([f"&{k}{v}" for k, v in kwargs.items()])
-
-
-def _check_substrings(constraint):
-    """Extend the OPeNDAP with extra strings."""
-    substrings = ["now", "min", "max"]
-    return any([True for substring in substrings if substring in str(constraint)])
-
-
-def parse_dates(date_time: Union[datetime, str]) -> float:
-    """
-    Parse dates to ERDDAP internal format.
-
-    ERDDAP ReSTful API standardizes the representation of dates as either ISO
-    strings or seconds since 1970, but internally ERDDAPY uses datetime-like
-    objects. `timestamp` returns the expected strings in seconds since 1970.
-
-    """
-    if isinstance(date_time, str):
-        # pandas returns a tuple with datetime, dateutil, and string representation.
-        # we want only the datetime obj.
-        parse_date_time = parse_time_string(date_time)[0]
-    else:
-        parse_date_time = date_time
-
-    if not parse_date_time.tzinfo:
-        parse_date_time = pytz.utc.localize(parse_date_time)
-    else:
-        parse_date_time = parse_date_time.astimezone(pytz.utc)
-
-    return parse_date_time.timestamp()
-
-
-@functools.lru_cache(maxsize=256)
-def _griddap_get_constraints(
-    dataset_url: str,
-    step: int,
-) -> Tuple[Dict, List, List]:
-    """
-    Fetch metadata of griddap dataset and set initial constraints.
-
-    Step size is applied to all dimensions.
-    """
-    dds_url = f"{dataset_url}.dds"
-    url = urlopen(dds_url)
-    data = url.read().decode()
-    dims, *variables = data.split("GRID")
-    dim_list = dims.split("[")[:-1]
-    dim_names, variable_names = [], []
-    for dim in dim_list:
-        dim_name = dim.split(" ")[-1]
-        dim_names.append(dim_name)
-    for var in variables:
-        phrase, *__ = var.split("[")
-        var_name = phrase.split(" ")[-1]
-        variable_names.append(var_name)
-    table = pd.DataFrame({"dimension name": [], "min": [], "max": [], "length": []})
-    for dim in dim_names:
-        url = f"{dataset_url}.csvp?{dim}"
-        data = pd.read_csv(url).values
-        if dim == "time":
-            data_start = data[-1][0]
-        else:
-            data_start = data[0][0]
-
-        meta = pd.DataFrame(
-            [
-                {
-                    "dimension name": dim,
-                    "min": data_start,
-                    "max": data[-1][0],
-                    "length": len(data),
-                },
-            ],
-        )
-        table = pd.concat([table, meta])
-    table = table.set_index("dimension name", drop=True)
-    constraints_dict = {}
-    for dim, data in table.iterrows():
-        constraints_dict[f"{dim}>="] = data["min"]
-        constraints_dict[f"{dim}<="] = data["max"]
-        constraints_dict[f"{dim}_step"] = step
-
-    return constraints_dict, dim_names, variable_names
-
-
-def _griddap_check_constraints(user_constraints: Dict, original_constraints: Dict):
-    """Check that constraints changed by user match those expected by dataset."""
-    if user_constraints.keys() != original_constraints.keys():
-        raise ValueError(
-            "keys in e.constraints have changed. Re-run e.griddap_initialize",
-        )
-
-
-def _griddap_check_variables(user_variables: ListLike, original_variables: ListLike):
-    """Check user has not requested variables that do not exist in dataset."""
-    invalid_variables = []
-    for variable in user_variables:
-        if variable not in original_variables:
-            invalid_variables.append(variable)
-    if invalid_variables:
-        raise ValueError(
-            f"variables {invalid_variables} are not present in dataset. Re-run e.griddap_initialize",
-        )
-
-
-def _search_url(
-    server: str,
-    response: str = "html",
-    search_for: Optional[str] = None,
-    protocol: str = "tabledap",
-    items_per_page: int = 1000,
-    page: int = 1,
-    **kwargs,
-):
-    server = server.rstrip("/")
-    base = (
-        "{server}/search/advanced.{response}"
-        "?page={page}"
-        "&itemsPerPage={itemsPerPage}"
-        "&protocol={protocol}"
-        "&cdm_data_type={cdm_data_type}"
-        "&institution={institution}"
-        "&ioos_category={ioos_category}"
-        "&keywords={keywords}"
-        "&long_name={long_name}"
-        "&standard_name={standard_name}"
-        "&variableName={variableName}"
-        "&minLon={minLon}"
-        "&maxLon={maxLon}"
-        "&minLat={minLat}"
-        "&maxLat={maxLat}"
-        "&minTime={minTime}"
-        "&maxTime={maxTime}"
-    )
-    if search_for:
-        search_for = quote_plus(search_for)
-        base += "&searchFor={searchFor}"
-
-    # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
-    min_time = kwargs.pop("min_time", "")
-    max_time = kwargs.pop("max_time", "")
-    if min_time and not _check_substrings(min_time):
-        kwargs.update({"min_time": parse_dates(min_time)})
-    else:
-        kwargs.update({"min_time": min_time})
-    if max_time and not _check_substrings(max_time):
-        kwargs.update({"max_time": parse_dates(max_time)})
-    else:
-        kwargs.update({"max_time": max_time})
-
-    if protocol:
-        kwargs.update({"protocol": protocol})
-
-    lower_case_search_terms = (
-        "cdm_data_type",
-        "institution",
-        "ioos_category",
-        "keywords",
-        "long_name",
-        "standard_name",
-        "variableName",
-    )
-    for search_term in lower_case_search_terms:
-        if search_term in kwargs.keys():
-            lowercase = kwargs[search_term].lower()
-            kwargs.update({search_term: lowercase})
-
-    default = "(ANY)"
-    url = base.format(
-        server=server,
-        response=response,
-        page=page,
-        itemsPerPage=items_per_page,
-        protocol=kwargs.get("protocol", default),
-        cdm_data_type=kwargs.get("cdm_data_type", default),
-        institution=kwargs.get("institution", default),
-        ioos_category=kwargs.get("ioos_category", default),
-        keywords=kwargs.get("keywords", default),
-        long_name=kwargs.get("long_name", default),
-        standard_name=kwargs.get("standard_name", default),
-        variableName=kwargs.get("variableName", default),
-        minLon=kwargs.get("min_lon", default),
-        maxLon=kwargs.get("max_lon", default),
-        minLat=kwargs.get("min_lat", default),
-        maxLat=kwargs.get("max_lat", default),
-        minTime=kwargs.get("min_time", default),
-        maxTime=kwargs.get("max_time", default),
-        searchFor=search_for,
-    )
-    # ERDDAP 2.10 no longer accepts strings placeholder for dates.
-    # Removing them entirely should be OK for older versions too.
-    url = url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
-    return url
 
 
 class ERDDAP:
