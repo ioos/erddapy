@@ -15,7 +15,7 @@ def test__nc_dataset_in_memory_https():
     """Test loading a netcdf dataset in-memory."""
     from netCDF4 import Dataset
 
-    url = "https://podaac-opendap.jpl.nasa.gov/opendap/allData/modis/L3/aqua/11um/v2019.0/4km/daily/2017/365/AQUA_MODIS.20171231.L3m.DAY.NSST.sst.4km.nc"  # noqa
+    url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"  # noqa
     auth = None
     _nc = _nc_dataset(url, auth)
     assert isinstance(_nc, Dataset)
@@ -26,7 +26,7 @@ def test__nc_dataset_in_memory_https():
 @pytest.mark.vcr()
 def test__tempnc():
     """Test temporary netcdf file."""
-    url = "https://podaac-opendap.jpl.nasa.gov/opendap/allData/modis/L3/aqua/11um/v2019.0/4km/daily/2017/365/AQUA_MODIS.20171231.L3m.DAY.NSST.sst.4km.nc"  # noqa
+    url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"  # noqa
     data = urlopen(url)
     with _tempnc(data) as tmp:
         # Check that the file was exists.
