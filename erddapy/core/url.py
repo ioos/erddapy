@@ -1,9 +1,10 @@
 """URL handling."""
 
+import copy
 import functools
 import io
 from datetime import datetime
-from typing import Dict, Optional, Union
+from typing import Dict, List, Optional, Tuple, Union
 from typing.io import BinaryIO
 from urllib.parse import quote_plus
 
@@ -11,6 +12,7 @@ import httpx
 import pytz
 from pandas._libs.tslibs.parsing import parse_time_string
 
+ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
 
 
@@ -319,4 +321,110 @@ def get_categorize_url(
         url = f"{server}/categorize/{categorize_by}/{value}/index.{response}"
     else:
         url = f"{server}/categorize/{categorize_by}/index.{response}"
+    return url
+
+
+def get_download_url(
+    server: str,
+    dataset_id: OptionalStr = None,
+    protocol: OptionalStr = None,
+    variables: Optional[ListLike] = None,
+    dim_names: Optional[ListLike] = None,
+    response=None,
+    constraints=None,
+    **kwargs,
+) -> str:
+    """
+    Build the download URL for the `server` endpoint.
+
+    Args:
+        dataset_id: a dataset unique id.
+        protocol: tabledap or griddap.
+        variables (list/tuple): a list of the variables to download.
+        response (str): default is HTML.
+        constraints (dict): download constraints, default None (opendap-like url)
+        example: constraints = {'latitude<=': 41.0,
+                                'latitude>=': 38.0,
+                                'longitude<=': -69.0,
+                                'longitude>=': -72.0,
+                                'time<=': '2017-02-10T00:00:00+00:00',
+                                'time>=': '2016-07-10T00:00:00+00:00',}
+
+        One can also use relative constraints like {'time>': 'now-7days',
+                                                    'latitude<': 'min(longitude)+180',
+                                                    'depth>': 'max(depth)-23',}
+
+    Returns:
+        url (str): the download URL for the `response` chosen.
+
+    """
+    if not dataset_id:
+        raise ValueError(f"Please specify a valid `dataset_id`, got {dataset_id}")
+
+    if not protocol:
+        raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
+
+    if (
+        protocol == "griddap"
+        and constraints is not None
+        and variables is not None
+        and dim_names is not None
+    ):
+        download_url = [
+            server,
+            "/",
+            protocol,
+            "/",
+            dataset_id,
+            ".",
+            response,
+            "?",
+        ]
+        for var in variables:
+            sub_url = [var]
+            for dim in dim_names:
+                sub_url.append(
+                    f"[({constraints[dim + '>=']}):"
+                    f"{constraints[dim + '_step']}:"
+                    f"({constraints[dim + '<=']})]",
+                )
+            sub_url.append(",")
+            download_url.append("".join(sub_url))
+        url = "".join(download_url)[:-1]
+        return url
+
+    # This is an unconstrained OPeNDAP response b/c
+    # the integer based constrained version is just not worth supporting ;-p
+    if response == "opendap":
+        return f"{server}/{protocol}/{dataset_id}"
+    else:
+        url = f"{server}/{protocol}/{dataset_id}.{response}?"
+
+    if variables:
+        url += ",".join(variables)
+
+    if constraints:
+        _constraints = copy.copy(constraints)
+        for k, v in _constraints.items():
+            if _check_substrings(v):
+                continue
+            # The valid operators are
+            # =, != (not equals), =~ (a regular expression test), <, <=, >, and >=
+            valid_time_constraints = (
+                "time=",
+                "time!=",
+                "time=~",
+                "time<",
+                "time<=",
+                "time>",
+                "time>=",
+            )
+            if k.startswith(valid_time_constraints):
+                _constraints.update({k: parse_dates(v)})
+        _constraints = _quote_string_constraints(_constraints)
+        _constraints_url = _format_constraints_url(_constraints)
+
+        url += f"{_constraints_url}"
+
+    url = _distinct(url, **kwargs)
     return url

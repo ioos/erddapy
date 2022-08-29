@@ -3,8 +3,8 @@
 import httpx
 import pytest
 
-from erddapy.core.url import check_url_response
-from erddapy.erddapy import ERDDAP, parse_dates
+from erddapy.core.url import check_url_response, parse_dates
+from erddapy.erddapy import ERDDAP
 
 
 def _url_to_dict(url):

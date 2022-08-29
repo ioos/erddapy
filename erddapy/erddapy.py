@@ -1,6 +1,5 @@
 """Pythonic way to access ERDDAP data."""
 
-import copy
 import functools
 from typing import Dict, List, Optional, Tuple, Union
 
@@ -18,12 +17,24 @@ from erddapy.core.url import (
     _format_constraints_url,
     _quote_string_constraints,
     get_categorize_url,
+    get_download_url,
     get_info_url,
     get_search_url,
     parse_dates,
     urlopen,
 )
 from erddapy.servers.servers import servers
+
+# Objects used by downstream packages
+__all__ = [
+    "_check_substrings",
+    "_distinct",
+    "_format_constraints_url",
+    "_quote_string_constraints",
+    "parse_dates",
+    "urlopen",
+    "ERDDAP",
+]
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
@@ -308,64 +319,17 @@ class ERDDAP:
 
             _griddap_check_constraints(constraints, self._constraints_original)
             _griddap_check_variables(variables, self._variables_original)
-            download_url = [
-                self.server,
-                "/",
-                protocol,
-                "/",
-                dataset_id,
-                ".",
-                response,
-                "?",
-            ]
-            for var in variables:
-                sub_url = [var]
-                for dim in dim_names:
-                    sub_url.append(
-                        f"[({constraints[dim + '>=']}):"
-                        f"{constraints[dim + '_step']}:"
-                        f"({constraints[dim + '<=']})]",
-                    )
-                sub_url.append(",")
-                download_url.append("".join(sub_url))
-            url = "".join(download_url)[:-1]
-            return url
 
-        # This is an unconstrained OPeNDAP response b/c
-        # the integer based constrained version is just not worth supporting ;-p
-        if response == "opendap":
-            return f"{self.server}/{protocol}/{dataset_id}"
-        else:
-            url = f"{self.server}/{protocol}/{dataset_id}.{response}?"
-
-        if variables:
-            url += ",".join(variables)
-
-        if constraints:
-            _constraints = copy.copy(constraints)
-            for k, v in _constraints.items():
-                if _check_substrings(v):
-                    continue
-                # The valid operators are
-                # =, != (not equals), =~ (a regular expression test), <, <=, >, and >=
-                valid_time_constraints = (
-                    "time=",
-                    "time!=",
-                    "time=~",
-                    "time<",
-                    "time<=",
-                    "time>",
-                    "time>=",
-                )
-                if k.startswith(valid_time_constraints):
-                    _constraints.update({k: parse_dates(v)})
-            _constraints = _quote_string_constraints(_constraints)
-            _constraints_url = _format_constraints_url(_constraints)
-
-            url += f"{_constraints_url}"
-
-        url = _distinct(url, **kwargs)
-        return url
+        return get_download_url(
+            self.server,
+            dataset_id,
+            protocol,
+            variables,
+            dim_names,
+            response,
+            constraints,
+            **kwargs,
+        )
 
     def to_pandas(self, **kw):
         """Save a data request to a pandas.DataFrame.
