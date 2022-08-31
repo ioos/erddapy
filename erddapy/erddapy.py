@@ -1,6 +1,5 @@
 """Pythonic way to access ERDDAP data."""
 
-import copy
 import functools
 from typing import Dict, List, Optional, Tuple, Union
 
@@ -17,11 +16,25 @@ from erddapy.core.url import (
     _distinct,
     _format_constraints_url,
     _quote_string_constraints,
-    _search_url,
+    get_categorize_url,
+    get_download_url,
+    get_info_url,
+    get_search_url,
     parse_dates,
     urlopen,
 )
 from erddapy.servers.servers import servers
+
+# Objects used by downstream packages
+__all__ = [
+    "_check_substrings",
+    "_distinct",
+    "_format_constraints_url",
+    "_quote_string_constraints",
+    "parse_dates",
+    "urlopen",
+    "ERDDAP",
+]
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
@@ -196,26 +209,7 @@ class ERDDAP:
         protocol = protocol if protocol else self.protocol
         response = response if response else self.response
 
-        # These responses should not be paginated b/c that hinders the correct amount of data silently
-        # and can surprise users when the number of items is greater than ERDDAP's defaults (1000 items).
-        # Ideally there should be no pagination for this on the ERDDAP side but for now we settled for a
-        # "really big" `items_per_page` number.
-        non_paginated_responses = [
-            "csv",
-            "csvp",
-            "csv0",
-            "json",
-            "jsonlCSV1",
-            "jsonlCSV",
-            "jsonlKVP",
-            "tsv",
-            "tsvp",
-            "tsv0",
-        ]
-        if response in non_paginated_responses:
-            items_per_page = int(1e6)
-
-        return _search_url(
+        return get_search_url(
             self.server,
             response=response,
             search_for=search_for,
@@ -244,11 +238,7 @@ class ERDDAP:
         dataset_id = dataset_id if dataset_id else self.dataset_id
         response = response if response else self.response
 
-        if not dataset_id:
-            raise ValueError(f"You must specify a valid dataset_id, got {dataset_id}")
-
-        url = f"{self.server}/info/{dataset_id}/index.{response}"
-        return url
+        return get_info_url(self.server, dataset_id, response)
 
     def get_categorize_url(
         self,
@@ -261,7 +251,7 @@ class ERDDAP:
 
         Args:
             categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
-                Valid attributes are shown in https://coastwatch.pfeg.noaa.gov/erddap/categorize page.
+                Valid attributes are shown in http://erddap.ioos.us/erddap/categorize page.
             value: an attribute value.
             response: default is HTML.
 
@@ -270,11 +260,7 @@ class ERDDAP:
 
         """
         response = response if response else self.response
-        if value:
-            url = f"{self.server}/categorize/{categorize_by}/{value}/index.{response}"
-        else:
-            url = f"{self.server}/categorize/{categorize_by}/index.{response}"
-        return url
+        return get_categorize_url(self.server, categorize_by, value, response)
 
     def get_download_url(
         self,
@@ -333,64 +319,17 @@ class ERDDAP:
 
             _griddap_check_constraints(constraints, self._constraints_original)
             _griddap_check_variables(variables, self._variables_original)
-            download_url = [
-                self.server,
-                "/",
-                protocol,
-                "/",
-                dataset_id,
-                ".",
-                response,
-                "?",
-            ]
-            for var in variables:
-                sub_url = [var]
-                for dim in dim_names:
-                    sub_url.append(
-                        f"[({constraints[dim + '>=']}):"
-                        f"{constraints[dim + '_step']}:"
-                        f"({constraints[dim + '<=']})]",
-                    )
-                sub_url.append(",")
-                download_url.append("".join(sub_url))
-            url = "".join(download_url)[:-1]
-            return url
 
-        # This is an unconstrained OPeNDAP response b/c
-        # the integer based constrained version is just not worth supporting ;-p
-        if response == "opendap":
-            return f"{self.server}/{protocol}/{dataset_id}"
-        else:
-            url = f"{self.server}/{protocol}/{dataset_id}.{response}?"
-
-        if variables:
-            url += ",".join(variables)
-
-        if constraints:
-            _constraints = copy.copy(constraints)
-            for k, v in _constraints.items():
-                if _check_substrings(v):
-                    continue
-                # The valid operators are
-                # =, != (not equals), =~ (a regular expression test), <, <=, >, and >=
-                valid_time_constraints = (
-                    "time=",
-                    "time!=",
-                    "time=~",
-                    "time<",
-                    "time<=",
-                    "time>",
-                    "time>=",
-                )
-                if k.startswith(valid_time_constraints):
-                    _constraints.update({k: parse_dates(v)})
-            _constraints = _quote_string_constraints(_constraints)
-            _constraints_url = _format_constraints_url(_constraints)
-
-            url += f"{_constraints_url}"
-
-        url = _distinct(url, **kwargs)
-        return url
+        return get_download_url(
+            self.server,
+            dataset_id,
+            protocol,
+            variables,
+            dim_names,
+            response,
+            constraints,
+            **kwargs,
+        )
 
     def to_pandas(self, **kw):
         """Save a data request to a pandas.DataFrame.

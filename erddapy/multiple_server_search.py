@@ -11,7 +11,7 @@ try:
 except ImportError:
     joblib = False
 
-from erddapy.core.url import _format_search_string, _multi_urlopen, _search_url
+from erddapy.core.url import _format_search_string, _multi_urlopen, get_search_url
 from erddapy.servers.servers import servers
 
 
@@ -112,12 +112,12 @@ def advanced_search_servers(
     response = "csv"
     if servers_list:
         urls = {
-            server: _search_url(server, response=response, **kwargs)
+            server: get_search_url(server, response=response, **kwargs)
             for server in servers_list
         }
     else:
         urls = {
-            key: _search_url(server.url, response=response, **kwargs)
+            key: get_search_url(server.url, response=response, **kwargs)
             for key, server in servers.items()
         }
 

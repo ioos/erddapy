@@ -7,14 +7,13 @@ import pendulum
 import pytest
 import pytz
 
-from erddapy.erddapy import (
-    ERDDAP,
+from erddapy.core.griddap import _griddap_check_constraints, _griddap_check_variables
+from erddapy.core.url import (
     _format_constraints_url,
-    _griddap_check_constraints,
-    _griddap_check_variables,
     _quote_string_constraints,
     parse_dates,
 )
+from erddapy.erddapy import ERDDAP
 
 
 def test_parse_dates_naive_datetime():
