@@ -6,7 +6,7 @@ layer between a database (in this case, ERDDAP), and the programming language.
 """
 
 
-from objects import (
+from .objects import (
     ERDDAPConnection,
     ERDDAPDataset,
     ERDDAPServer,
