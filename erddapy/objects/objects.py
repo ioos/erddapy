@@ -1,7 +1,9 @@
 """Main module of the 'objects' subpackage containing most classes."""
 
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Dict, Union
+from typing import Dict, Union  # noqa
 
 StrLike = Union[str, bytes]
 FilePath = Union[str, Path]
@@ -170,11 +172,11 @@ class ERDDAPServer:
         """Set private ._connection attribute."""
         self._connection = ERDDAPConnection(ERDDAPConnection.to_string(value))
 
-    def full_text_search(self, query: str) -> Dict[str, ERDDAPDataset]:
+    def full_text_search(self, query: str) -> dict[str, ERDDAPDataset]:
         """Search the server with native ERDDAP full text search capabilities."""
         pass
 
-    def search(self, query: str) -> Dict[str, ERDDAPDataset]:
+    def search(self, query: str) -> dict[str, ERDDAPDataset]:
         """
         Search the server with native ERDDAP full text search capabilities.
 
@@ -182,6 +184,6 @@ class ERDDAPServer:
         """
         return self.full_text_search(query)
 
-    def advanced_search(self, **kwargs) -> Dict[str, ERDDAPDataset]:
+    def advanced_search(self, **kwargs) -> dict[str, ERDDAPDataset]:
         """Search server with ERDDAP advanced search capabilities (may return pre-filtered datasets)."""
         pass
