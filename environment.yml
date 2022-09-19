@@ -7,5 +7,6 @@ dependencies:
   - erddapy
   - iris>=3.3.0
   - jupyter
+  - netcdf4<1.6.1
   - pendulum>=2.0.1
   - xarray
