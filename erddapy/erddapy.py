@@ -386,7 +386,7 @@ class ERDDAP:
             try:
                 cubes.realise_data()
             except ValueError:
-                iris.cube.CubeList([cube.data for cube in cubes])
+                _ = [cube.data for cube in cubes]
             return cubes
 
     @functools.lru_cache(maxsize=None)
