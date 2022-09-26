@@ -33,4 +33,4 @@ jobs:
       shell: bash -l {0}
       run: |
         micromamba activate TEST
-        python -m pytest -rxs --cov=erddapy --vcr-record=none tests
+        python -m pytest -rxs -Werror --cov=erddapy --vcr-record=none tests
