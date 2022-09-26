@@ -15,7 +15,7 @@ joblib
 jupyter
 mypy
 nbsphinx
-netcdf4<1.6.1
+netcdf4
 pendulum>=2.0.1
 pooch
 pre-commit
