@@ -158,9 +158,13 @@ class GridDataset(ERDDAPDataset):
 class ERDDAPServer:
     """Instance of an ERDDAP server, with support to ERDDAP's native functionalities."""
 
-    def __init__(self, connection: str | ERDDAPConnection):
+    def __init__(self, url: str, connection: ERDDAPConnection | None):
         """Initialize instance of ERDDAPServer."""
-        self._connection = ERDDAPConnection(ERDDAPConnection.to_string(connection))
+        if "http" in url:
+            self.url = url
+        else:
+            # get URL from dict of ERDDAP servers
+        self._connection = connection or ERDDAPConnection()
 
     @property
     def connection(self) -> ERDDAPConnection:
