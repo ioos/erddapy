@@ -15,7 +15,7 @@ from erddapy import ERDDAP
 def sensors():
     """Instantiate ERDDAP class for testing."""
     yield ERDDAP(
-        server="https://erddap.sensors.ioos.us/erddap/",
+        server="https://standards.sensors.ioos.us/erddap/",
         response="htmlTable",
     )
 
@@ -23,8 +23,12 @@ def sensors():
 @pytest.fixture
 @pytest.mark.web
 def gliders():
-    """Instantiate ERDDAP class for testing."""
-    # The gliders server has 1244 datasets at time of writing
+    """
+    Instantiate ERDDAP class for testing.
+
+    This fixture is used to check if more than 1000 items can be loaded at once.
+    The gliders server has 1244 datasets at time of writing.
+    """
     yield ERDDAP(
         server="https://gliders.ioos.us/erddap/",
         response="htmlTable",
@@ -62,16 +66,16 @@ def dataset_opendap(neracoos):
 @pytest.fixture
 def dataset_tabledap(sensors):
     """Load tabledap for testing."""
-    sensors.dataset_id = "osmc_23091"
+    sensors.dataset_id = "org_cormp_cap2"
     sensors.protocol = "tabledap"
     sensors.variables = ["sea_water_temperature", "time"]
     sensors.constraints = {
-        "time>=": "2018-10-01T00:00:00Z",
-        "time<=": "2018-10-01T21:00:00Z",
-        "latitude>=": 10,
-        "latitude<=": 20,
-        "longitude>=": 80,
-        "longitude<=": 90,
+        "time>=": "2000-03-23T00:08:00Z",
+        "time<=": "2000-03-23T23:08:00Z",
+        "latitude>=": 30,
+        "latitude<=": 40,
+        "longitude>=": -85,
+        "longitude<=": -75,
     }
     yield sensors
 
@@ -143,7 +147,10 @@ def test_to_iris_tabledap(dataset_tabledap):
     cubes = dataset_tabledap.to_iris()
 
     assert isinstance(cubes, iris.cube.CubeList)
-    assert isinstance(cubes.extract_cube("23091 - Moored Buoy"), iris.cube.Cube)
+    assert isinstance(
+        cubes.extract_cube("(41029 / CAP2) Capers Nearshore"),
+        iris.cube.Cube,
+    )
     assert isinstance(cubes.extract_cube("sea_water_temperature"), iris.cube.Cube)
 
 
