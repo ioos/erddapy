@@ -1,7 +1,7 @@
 """Easier access to scientific data."""
 
+from erddapy.array_like import ERDDAPConnection, ERDDAPServer, GridDataset, TableDataset
 from erddapy.erddapy import ERDDAP
-from erddapy.objects import ERDDAPConnection, ERDDAPServer, GridDataset, TableDataset
 from erddapy.servers.servers import servers
 
 __all__ = [

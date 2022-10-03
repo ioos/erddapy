@@ -164,7 +164,7 @@ class ERDDAPServer:
             self.url = url
         else:
             # get URL from dict of ERDDAP servers
-        self._connection = connection or ERDDAPConnection()
+            self._connection = connection or ERDDAPConnection()
 
     @property
     def connection(self) -> ERDDAPConnection:
