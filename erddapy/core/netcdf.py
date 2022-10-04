@@ -42,6 +42,5 @@ def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
         yield name
     finally:
         if tmp is not None:
+            tmp.delete = True
             tmp.close()
-            if not delete:
-                Path(name).unlink(missing_ok=True)
