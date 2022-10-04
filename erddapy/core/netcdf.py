@@ -30,7 +30,7 @@ def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
 
     tmp = None
     try:
-        tmp = NamedTemporaryFile(suffix=".nc", prefix="erddapy_")
+        tmp = NamedTemporaryFile(suffix=".nc", prefix="erddapy_", delete=False)
         tmp.write(data.read())
         tmp.flush()
         yield tmp.name
