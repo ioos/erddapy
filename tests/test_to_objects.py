@@ -2,12 +2,15 @@
 
 import sys
 
+import dask
 import httpx
 import iris
 import pytest
 import xarray as xr
 
 from erddapy import ERDDAP
+
+dask.config.set(scheduler="single-threaded")
 
 
 @pytest.fixture
