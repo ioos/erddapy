@@ -42,6 +42,4 @@ def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
     finally:
         if tmp is not None:
             tmp.close()
-            _path = Path(tmp.name)
-            if _path.exists():
-                _path.unlink(missing_ok=True)
+            Path(tmp.name).unlink(missing_ok=True)
