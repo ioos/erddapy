@@ -30,7 +30,12 @@ def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
 
     tmp = None
     try:
-        tmp = NamedTemporaryFile(suffix=".nc", prefix="erddapy_", delete=False)
+        from sys import platform
+
+        # Delete flag must be False when using Windows
+        # The file will be closed in the 'finally' block
+        delete = False if platform == "win32" else True
+        tmp = NamedTemporaryFile(suffix=".nc", prefix="erddapy_", delete=delete)
         tmp.write(data.read())
         tmp.flush()
         yield tmp.name
