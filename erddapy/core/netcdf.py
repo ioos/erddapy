@@ -38,8 +38,10 @@ def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
         tmp = NamedTemporaryFile(suffix=".nc", prefix="erddapy_", delete=delete)
         tmp.write(data.read())
         tmp.flush()
-        yield tmp.name
+        name = tmp.name
+        yield name
     finally:
         if tmp is not None:
             tmp.close()
-            Path(tmp.name).unlink(missing_ok=True)
+            if not delete:
+                Path(name).unlink(missing_ok=True)
