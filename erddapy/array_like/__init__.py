@@ -6,13 +6,9 @@ layer between a database (in this case, ERDDAP), and the programming language.
 """
 
 
-from .array_like import (
-    ERDDAPConnection,
-    ERDDAPDataset,
-    ERDDAPServer,
-    GridDataset,
-    TableDataset,
-)
+from .connection import ERDDAPConnection
+from .datasets import ERDDAPDataset, GridDataset, TableDataset
+from .server import ERDDAPServer
 
 __all__ = [
     "ERDDAPDataset",
