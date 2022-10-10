@@ -1,5 +1,7 @@
 """Class ERDDAPServer to represent an ERDDAP server connection."""
 
+from __future__ import annotations
+
 from erddapy.array_like.connection import ERDDAPConnection
 from erddapy.array_like.datasets import ERDDAPDataset
 
