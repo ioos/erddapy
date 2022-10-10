@@ -19,7 +19,7 @@ dask.config.set(scheduler="single-threaded")  # noqa
 def sensors():
     """Instantiate ERDDAP class for testing."""
     yield ERDDAP(
-        server="https://erddap.sensors.ioos.us/erddap/",
+        server="https://standards.sensors.ioos.us/erddap/",
         response="htmlTable",
     )
 
