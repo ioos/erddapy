@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: checkout
-      uses: actions/checkout@v3.1.0
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
@@ -47,7 +47,7 @@ jobs:
         popd
 
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3.8.0
+      uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs/build/html
