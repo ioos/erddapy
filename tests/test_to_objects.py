@@ -62,16 +62,16 @@ def dataset_opendap(neracoos):
 @pytest.fixture
 def dataset_tabledap(sensors):
     """Load tabledap for testing."""
-    sensors.dataset_id = "osmc_23091"
+    sensors.dataset_id = "amelia_20180501t0000"
     sensors.protocol = "tabledap"
-    sensors.variables = ["sea_water_temperature", "time"]
+    sensors.variables = ["temperature", "time"]
     sensors.constraints = {
-        "time>=": "2018-10-01T00:00:00Z",
-        "time<=": "2018-10-01T21:00:00Z",
-        "latitude>=": 10,
-        "latitude<=": 20,
-        "longitude>=": 80,
-        "longitude<=": 90,
+        "time>=": "2018-05-08T00:00:00Z",
+        "time<=": "2018-05-13T21:00:00Z",
+        "latitude>=": 36,
+        "latitude<=": 38,
+        "longitude>=": -76,
+        "longitude<=": -73,
     }
     yield sensors
 
@@ -105,7 +105,7 @@ def test_to_pandas(dataset_tabledap):
     assert isinstance(df, pd.DataFrame)
     assert df.index.name == "time (UTC)"
     assert len(df.columns) == 1
-    assert df.columns[0] == "sea_water_temperature (degree_Celsius)"
+    assert df.columns[0] == "temperature (degree_Celsius)"
 
 
 @pytest.mark.web
@@ -114,9 +114,9 @@ def test_to_xarray_tabledap(dataset_tabledap):
     ds = dataset_tabledap.to_xarray()
 
     assert isinstance(ds, xr.Dataset)
-    assert len(ds.variables) == 6
+    assert len(ds.variables) == 9
     assert ds["time"].name == "time"
-    assert ds["sea_water_temperature"].name == "sea_water_temperature"
+    assert ds["temperature"].name == "temperature"
 
 
 @pytest.mark.web
@@ -143,7 +143,7 @@ def test_to_iris_tabledap(dataset_tabledap):
     cubes = dataset_tabledap.to_iris()
 
     assert isinstance(cubes, iris.cube.CubeList)
-    assert isinstance(cubes.extract_cube("23091 - Moored Buoy"), iris.cube.Cube)
+    assert isinstance(cubes.extract_cube("Profile ID"), iris.cube.Cube)
     assert isinstance(cubes.extract_cube("sea_water_temperature"), iris.cube.Cube)
 
 
