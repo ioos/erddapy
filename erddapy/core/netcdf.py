@@ -18,6 +18,7 @@ def _nc_dataset(url, auth, **requests_kwargs: Dict):
         return Dataset(Path(urlparse(url).path).name, memory=data.read())
     except OSError:
         # if libnetcdf is not compiled with in-memory support fallback to a local tmp file
+        data.seek(0)
         with _tempnc(data) as _nc:
             return Dataset(_nc)
 

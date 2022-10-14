@@ -912,6 +912,251 @@ interactions:
       user-agent:
       - python-httpx/0.23.0
     method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.csvp?sea_water_temperature,time&time%3E=953770080.0&time%3C=953852880.0&latitude%3E=30&latitude%3C=40&longitude%3E=-85&longitude%3C=-75
+  response:
+    content: "Error {\n    code=404;\n    message=\"Not Found: Currently unknown datasetID=org_cormp_cap2\";\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Mon, 10 Oct 2022 06:10:05 GMT
+      Last-Modified:
+      - Mon, 10 Oct 2022 06:10:05 GMT
+      Server:
+      - nginx/1.20.1
+      Set-Cookie:
+      - cid=CgIHBWNDtzxsb2jXTVFAAg==; expires=Wed, 09-Oct-24 06:10:05 GMT; path=/
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - '2.20'
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 404
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - standards.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.23.0
+    method: GET
+    uri: https://standards.sensors.ioos.us/tabledap/org_cormp_cap2.csvp?sea_water_temperature,time&time%3E=953770080.0&time%3C=953852880.0&latitude%3E=30&latitude%3C=40&longitude%3E=-85&longitude%3C=-75
+  response:
+    content: "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404
+      Not Found</h1></center>\r\n<hr><center>nginx/1.20.1</center>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html
+      Date:
+      - Mon, 10 Oct 2022 06:11:08 GMT
+      Server:
+      - nginx/1.20.1
+      Transfer-Encoding:
+      - chunked
+    http_version: HTTP/1.1
+    status_code: 404
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - standards.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.23.0
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.csvp?sea_water_temperature,time&time%3E=953770080.0&time%3C=953852880.0&latitude%3E=30&latitude%3C=40&longitude%3E=-85&longitude%3C=-75
+  response:
+    content: 'sea_water_temperature (degree_Celsius),time (UTC)
+
+      17.39,2000-03-23T00:08:00Z
+
+      17.6,2000-03-23T01:08:00Z
+
+      17.66,2000-03-23T02:08:00Z
+
+      17.65,2000-03-23T03:08:00Z
+
+      17.62,2000-03-23T04:08:00Z
+
+      17.6,2000-03-23T05:08:00Z
+
+      17.49,2000-03-23T06:08:00Z
+
+      17.47,2000-03-23T07:08:00Z
+
+      17.6,2000-03-23T08:08:00Z
+
+      17.76,2000-03-23T09:08:00Z
+
+      17.94,2000-03-23T10:08:00Z
+
+      17.99,2000-03-23T11:08:00Z
+
+      18.0,2000-03-23T12:08:00Z
+
+      17.96,2000-03-23T13:08:00Z
+
+      17.9,2000-03-23T14:08:00Z
+
+      17.88,2000-03-23T15:08:00Z
+
+      17.91,2000-03-23T16:08:00Z
+
+      18.01,2000-03-23T17:08:00Z
+
+      18.13,2000-03-23T18:08:00Z
+
+      18.41,2000-03-23T19:08:00Z
+
+      18.35,2000-03-23T20:08:00Z
+
+      18.5,2000-03-23T21:08:00Z
+
+      18.5,2000-03-23T22:08:00Z
+
+      18.43,2000-03-23T23:08:00Z
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=org_cormp_cap2_d43f_d487_d1e6.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Mon, 10 Oct 2022 06:12:11 GMT
+      Last-Modified:
+      - Mon, 10 Oct 2022 06:11:57 GMT
+      Server:
+      - nginx/1.20.1
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - '2.20'
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - standards.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.23.0
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.csvp?temperature,time&time%3E=1525737600.0&time%3C=1526245200.0&latitude%3E=36&latitude%3C=38&longitude%3E=-76&longitude%3C=-73
+  response:
+    content: "Error {\n    code=404;\n    message=\"Not Found: Currently unknown datasetID=amelia_20180501t0000\";\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Fri, 14 Oct 2022 22:38:49 GMT
+      Last-Modified:
+      - Fri, 14 Oct 2022 22:38:35 GMT
+      Server:
+      - nginx/1.20.1
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - '2.20'
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 404
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - standards.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.23.0
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.csvp?temperature,time&time%3E=1525737600.0&time%3C=1526245200.0&latitude%3E=36&latitude%3C=38&longitude%3E=-76&longitude%3C=-73
+  response:
+    content: "Error {\n    code=404;\n    message=\"Not Found: Currently unknown datasetID=amelia_20180501t0000\";\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Fri, 14 Oct 2022 22:41:30 GMT
+      Last-Modified:
+      - Fri, 14 Oct 2022 22:41:16 GMT
+      Server:
+      - nginx/1.20.1
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - '2.20'
+      xdods-server:
+      - dods/3.7
+    http_version: HTTP/1.1
+    status_code: 404
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.23.0
+    method: GET
     uri: https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.csvp?temperature,time&time%3E=1525737600.0&time%3C=1526245200.0&latitude%3E=36&latitude%3C=38&longitude%3E=-76&longitude%3C=-73
   response:
     content: 'temperature (degree_Celsius),time (UTC)
@@ -37153,13 +37398,13 @@ interactions:
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Fri, 14 Oct 2022 18:07:03 GMT
+      - Fri, 14 Oct 2022 22:42:11 GMT
       Last-Modified:
-      - Fri, 14 Oct 2022 18:07:03 GMT
+      - Fri, 14 Oct 2022 22:42:11 GMT
       Server:
       - nginx/1.20.1
       Set-Cookie:
-      - cid=CgIIBGNJpUdowCwCAwNXAg==; expires=Sun, 13-Oct-24 18:07:03 GMT; path=/
+      - cid=CgIHBWNJ5cNLO0auA0jeAg==; expires=Sun, 13-Oct-24 22:42:11 GMT; path=/
       Transfer-Encoding:
       - chunked
       erddap-server:
