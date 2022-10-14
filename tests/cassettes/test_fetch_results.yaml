@@ -60,4 +60,126 @@ interactions:
       - chunked
     http_version: HTTP/1.1
     status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - standards.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.23.0
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor=%22sea_water_temperature%22
+  response:
+    content: 'griddap,Subset,tabledap,Make A Graph,wms,files,Title,Summary,FGDC,ISO
+      19115,Info,Background Info,RSS,Email,Institution,Dataset ID
+
+      ,http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.subset,http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2,http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.graph,,http://standards.sensors.ioos.us/erddap/files/org_cormp_cap2/,41029
+      / CAP2 Capers Nearshore,"Timeseries data from ''(41029 / CAP2) Capers Nearshore''
+      (org_cormp_cap2)\n\ncdm_data_type = TimeSeries\nVARIABLES:\ncrs\ntime (seconds
+      since 1970-01-01T00:00:00Z)\nstation ((41029 / CAP2) Capers Nearshore)\nlatitude
+      (degrees_north)\nlongitude (degrees_east)\nz (Altitude, m)\nair_temperature
+      (degree_Celsius)\nair_temperature_qc_agg (Air Temperature QARTOD Aggregate Quality
+      Flag)\nair_temperature_qc_tests (Air Temperature QARTOD Individual Tests)\nair_pressure
+      (Barometric Pressure, millibars)\nair_pressure_qc_agg (Barometric Pressure QARTOD
+      Aggregate Quality Flag)\nair_pressure_qc_tests (Barometric Pressure QARTOD Individual
+      Tests)\nrelative_humidity (percent)\nrelative_humidity_qc_agg (Relative Humidity
+      QARTOD Aggregate Quality Flag)\nrelative_humidity_qc_tests (Relative Humidity
+      QARTOD Individual Tests)\nsea_water_practical_salinity (Salinity, 1e-3)\nsea_water_practical_salinity_qc_agg
+      (Salinity QARTOD Aggregate Quality Flag)\nsea_water_practical_salinity_qc_tests
+      (Salinity QARTOD Individual Tests)\nsea_water_temperature (Water Temperature,
+      degree_Celsius)\nsea_water_temperature_qc_agg (Water Temperature QARTOD Aggregate
+      Quality Flag)\nsea_water_temperature_qc_tests (Water Temperature QARTOD Individual
+      Tests)\nwind_speed_of_gust (Wind Gust, m.s-1)\nwind_speed_of_gust_qc_agg (Wind
+      Gust QARTOD Aggregate Quality Flag)\nwind_speed_of_gust_qc_tests (Wind Gust
+      QARTOD Individual Tests)\nwind_speed (m.s-1)\nwind_speed_qc_agg (Wind Speed
+      QARTOD Aggregate Quality Flag)\nwind_speed_qc_tests (Wind Speed QARTOD Individual
+      Tests)\nwind_from_direction (degrees)\nwind_from_direction_qc_agg (Wind From
+      Direction QARTOD Aggregate Quality Flag)\nwind_from_direction_qc_tests (Wind
+      From Direction QARTOD Individual Tests)\n",http://standards.sensors.ioos.us/erddap/metadata/fgdc/xml/org_cormp_cap2_fgdc.xml,http://standards.sensors.ioos.us/erddap/metadata/iso19115/xml/org_cormp_cap2_iso19115.xml,http://standards.sensors.ioos.us/erddap/info/org_cormp_cap2/index.csv,https://sensors.ioos.us/#metadata/60417/station,http://standards.sensors.ioos.us/erddap/rss/org_cormp_cap2.rss,http://standards.sensors.ioos.us/erddap/subscriptions/add.html?datasetID=org_cormp_cap2&showErrors=false&email=,CORMP,org_cormp_cap2
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=search.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 14 Oct 2022 19:30:18 GMT
+      Server:
+      - nginx/1.20.1
+      Transfer-Encoding:
+      - chunked
+    http_version: HTTP/1.1
+    status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - standards.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.23.0
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor=%22sea_water_temperature%22
+  response:
+    content: 'griddap,Subset,tabledap,Make A Graph,wms,files,Title,Summary,FGDC,ISO
+      19115,Info,Background Info,RSS,Email,Institution,Dataset ID
+
+      ,http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.subset,http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2,http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.graph,,http://standards.sensors.ioos.us/erddap/files/org_cormp_cap2/,41029
+      / CAP2 Capers Nearshore,"Timeseries data from ''(41029 / CAP2) Capers Nearshore''
+      (org_cormp_cap2)\n\ncdm_data_type = TimeSeries\nVARIABLES:\ncrs\ntime (seconds
+      since 1970-01-01T00:00:00Z)\nstation ((41029 / CAP2) Capers Nearshore)\nlatitude
+      (degrees_north)\nlongitude (degrees_east)\nz (Altitude, m)\nair_temperature
+      (degree_Celsius)\nair_temperature_qc_agg (Air Temperature QARTOD Aggregate Quality
+      Flag)\nair_temperature_qc_tests (Air Temperature QARTOD Individual Tests)\nair_pressure
+      (Barometric Pressure, millibars)\nair_pressure_qc_agg (Barometric Pressure QARTOD
+      Aggregate Quality Flag)\nair_pressure_qc_tests (Barometric Pressure QARTOD Individual
+      Tests)\nrelative_humidity (percent)\nrelative_humidity_qc_agg (Relative Humidity
+      QARTOD Aggregate Quality Flag)\nrelative_humidity_qc_tests (Relative Humidity
+      QARTOD Individual Tests)\nsea_water_practical_salinity (Salinity, 1e-3)\nsea_water_practical_salinity_qc_agg
+      (Salinity QARTOD Aggregate Quality Flag)\nsea_water_practical_salinity_qc_tests
+      (Salinity QARTOD Individual Tests)\nsea_water_temperature (Water Temperature,
+      degree_Celsius)\nsea_water_temperature_qc_agg (Water Temperature QARTOD Aggregate
+      Quality Flag)\nsea_water_temperature_qc_tests (Water Temperature QARTOD Individual
+      Tests)\nwind_speed_of_gust (Wind Gust, m.s-1)\nwind_speed_of_gust_qc_agg (Wind
+      Gust QARTOD Aggregate Quality Flag)\nwind_speed_of_gust_qc_tests (Wind Gust
+      QARTOD Individual Tests)\nwind_speed (m.s-1)\nwind_speed_qc_agg (Wind Speed
+      QARTOD Aggregate Quality Flag)\nwind_speed_qc_tests (Wind Speed QARTOD Individual
+      Tests)\nwind_from_direction (degrees)\nwind_from_direction_qc_agg (Wind From
+      Direction QARTOD Aggregate Quality Flag)\nwind_from_direction_qc_tests (Wind
+      From Direction QARTOD Individual Tests)\n",http://standards.sensors.ioos.us/erddap/metadata/fgdc/xml/org_cormp_cap2_fgdc.xml,http://standards.sensors.ioos.us/erddap/metadata/iso19115/xml/org_cormp_cap2_iso19115.xml,http://standards.sensors.ioos.us/erddap/info/org_cormp_cap2/index.csv,https://sensors.ioos.us/#metadata/60417/station,http://standards.sensors.ioos.us/erddap/rss/org_cormp_cap2.rss,http://standards.sensors.ioos.us/erddap/subscriptions/add.html?datasetID=org_cormp_cap2&showErrors=false&email=,CORMP,org_cormp_cap2
+
+      '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=search.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Fri, 14 Oct 2022 19:37:20 GMT
+      Server:
+      - nginx/1.20.1
+      Transfer-Encoding:
+      - chunked
+    http_version: HTTP/1.1
+    status_code: 200
 version: 1

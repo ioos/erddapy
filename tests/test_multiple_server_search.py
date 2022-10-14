@@ -73,11 +73,11 @@ def servers_list():
     """Objects for server search."""
     servers_list = {
         "servers_list": [
-            "https://coastwatch.pfeg.noaa.gov/erddap/",
+            "https://standards.sensors.ioos.us/erddap/",
             "https://gliders.ioos.us/erddap/",
         ],
-        "query": "sst",
-        "protocol": "griddap",
+        "query": "sea_water_temperature",
+        "protocol": "tabledap",
     }
     yield servers_list
 
@@ -87,7 +87,7 @@ def servers_list():
     (sys.platform in ["win32", "darwin"] or sys.version_info < (3, 10)),
     reason="run only on linux and latest to avoid extra load on the server",
 )
-def test_search_servers_with_a_list_True(servers_list):
+def test_search_servers_with_a_list_parallel_True(servers_list):
     """
     Check that downloads are made and that serial and parallel results are similar.
 
@@ -112,7 +112,7 @@ def test_search_servers_with_a_list_True(servers_list):
     sys.platform in ["win32", "darwin"],
     reason="run only on linux to avoid extra load on the server",
 )
-def test_search_servers_with_a_list_False(servers_list):
+def test_search_servers_with_a_list_parallel_False(servers_list):
     """
     Check that downloads are made and that serial and parallel results are similar.
 
