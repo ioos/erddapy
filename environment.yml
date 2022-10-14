@@ -2,11 +2,11 @@ name: ERDDAPY
 channels:
   - conda-forge
 dependencies:
-  - python=3.9
+  - python=3
   - cartopy
   - erddapy
   - iris>=3.3.0
   - jupyter
-  - netcdf4<1.6.1
+  - netcdf4
   - pendulum>=2.0.1
   - xarray

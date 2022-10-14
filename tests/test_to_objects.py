@@ -2,12 +2,16 @@
 
 import sys
 
+import dask
 import httpx
 import iris
 import pytest
 import xarray as xr
 
 from erddapy import ERDDAP
+
+# netcdf-c is not thread safe and iris doesn't limit that.
+dask.config.set(scheduler="single-threaded")  # noqa
 
 
 @pytest.fixture
