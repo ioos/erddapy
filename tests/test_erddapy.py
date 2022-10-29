@@ -103,13 +103,13 @@ def test_erddap_requests_kwargs():
     slowwly_url = f"https://flash-the-slow-api.herokuapp.com/delay/{slowwly_milliseconds}/url/{base_url}"
 
     connection = ERDDAP(slowwly_url)
-    connection.dataset_id = "M01_sbe37_all"
+    connection.dataset_id = "raw_asset_inventory"
     connection.protocol = "tabledap"
 
     connection.requests_kwargs["timeout"] = timeout_seconds
 
     with pytest.raises(httpx.ReadTimeout):
-        connection.to_xarray()
+        connection.to_pandas(requests_kwargs=connection.requests_kwargs)
 
 
 @pytest.mark.web
