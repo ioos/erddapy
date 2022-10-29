@@ -38,7 +38,7 @@ def to_xarray(url: str, response="opendap", **kw) -> xr.Dataset:
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
 
-def to_iris(url: str, **kw) -> iris.CubeList:
+def to_iris(url: str, **kw):
     """Convert a URL to an iris CubeList."""
     data = urlopen(url, **kw)
     with _tempnc(data) as tmp:
