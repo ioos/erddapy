@@ -14,9 +14,9 @@ from erddapy.core.netcdf import _nc_dataset, _tempnc
 from erddapy.core.url import urlopen
 
 
-def to_pandas(url: str, **kw) -> pd.DataFrame:
+def to_pandas(url: str, requests_kwargs=dict(), **kw) -> pd.DataFrame:
     """Convert a URL to Pandas DataFrame."""
-    data = urlopen(url, **kw)
+    data = urlopen(url, **requests_kwargs)
     try:
         return pd.read_csv(data, **kw)
     except Exception:
@@ -26,15 +26,17 @@ def to_pandas(url: str, **kw) -> pd.DataFrame:
 
 def to_ncCF(url: str, **kw) -> ncDataset:
     """Convert a URL to a netCDF4 Dataset."""
-    return _nc_dataset(url, **kw)
+    auth = kw.pop("auth", None)
+    return _nc_dataset(url, auth=auth, **kw)
 
 
 def to_xarray(url: str, response="opendap", **kw) -> xr.Dataset:
     """Convert a URL to an xarray dataset."""
+    auth = kw.pop("auth", None)
     if response == "opendap":
         return xr.open_dataset(url, **kw)
     else:
-        nc = _nc_dataset(url, **kw)
+        nc = _nc_dataset(url, auth=auth, **kw)
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
 
