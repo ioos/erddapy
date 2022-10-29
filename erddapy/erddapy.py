@@ -10,7 +10,7 @@ from erddapy.core.griddap import (
     _griddap_check_variables,
     _griddap_get_constraints,
 )
-from erddapy.core.netcdf import _nc_dataset, _tempnc
+from erddapy.core.interfaces import to_iris, to_ncCF, to_pandas, to_xarray
 from erddapy.core.url import (
     _check_substrings,
     _distinct,
@@ -344,50 +344,37 @@ class ERDDAP:
         """
         response = kw.pop("response", "csvp")
         url = self.get_download_url(response=response, **kw)
-        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
-        return pd.read_csv(data, **kw)
+        return to_pandas(url, **kw)
 
     def to_ncCF(self, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
         if self.protocol == "griddap":
             return ValueError("Cannot use ncCF with griddap.")
         url = self.get_download_url(response="ncCF", **kw)
-        nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
-        return nc
+        return to_ncCF(url, **kw)
 
     def to_xarray(self, **kw):
         """Load the data request into a xarray.Dataset.
 
         Accepts any `xr.open_dataset` keyword arguments.
         """
-        import xarray as xr
-
         if self.response == "opendap":
-            url = self.get_download_url()
-            return xr.open_dataset(url, **kw)
+            response = "opendap"
+        elif self.protocol == "griddap":
+            response = "nc"
         else:
-            response = "nc" if self.protocol == "griddap" else "ncCF"
-            url = self.get_download_url(response=response)
-            nc = _nc_dataset(url, auth=self.auth, **self.requests_kwargs)
-            return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
+            response = "ncCF"
+        url = self.get_download_url(response=response)
+        return to_xarray(url, response=response, auth=self.auth, **kw)
 
     def to_iris(self, **kw):
         """Load the data request into an iris.CubeList.
 
         Accepts any `iris.load_raw` keyword arguments.
         """
-        import iris
-
         response = "nc" if self.protocol == "griddap" else "ncCF"
         url = self.get_download_url(response=response, **kw)
-        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
-        with _tempnc(data) as tmp:
-            cubes = iris.load_raw(tmp, **kw)
-            try:
-                cubes.realise_data()
-            except ValueError:
-                _ = [cube.data for cube in cubes]
-            return cubes
+        return to_iris(url, **kw)
 
     @functools.lru_cache(maxsize=None)
     def _get_variables(self, dataset_id: OptionalStr = None) -> Dict:
