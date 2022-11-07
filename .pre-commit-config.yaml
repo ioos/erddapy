@@ -43,7 +43,7 @@ repos:
     args: ["--ignore-missing-imports", "--python-executable=CONDA_PREFIX"]
 
 - repo: https://github.com/keewis/blackdoc
-  rev: v0.3.7
+  rev: v0.3.8
   hooks:
     - id: blackdoc
 
@@ -55,7 +55,7 @@ repos:
       args: [--config=pyproject.toml]
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.2.1
+  rev: v2.2.2
   hooks:
     - id: codespell
       exclude: >
@@ -66,7 +66,7 @@ repos:
         - --quiet-level=2
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.1.0
+  rev: v3.2.0
   hooks:
     - id: pyupgrade
       args:
