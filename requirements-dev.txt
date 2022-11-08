@@ -1,5 +1,5 @@
 black
-cartopy
+cartopy>=0.21
 check-manifest
 doctr
 doctr-versions-menu
@@ -13,7 +13,6 @@ interrogate
 isort
 joblib
 jupyter
-mypy
 nbsphinx
 netcdf4
 pendulum>=2.0.1
