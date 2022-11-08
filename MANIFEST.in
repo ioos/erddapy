@@ -14,3 +14,4 @@ exclude .pre-commit-config.yaml
 exclude .gitignore
 exclude .isort.cfg
 exclude erddapy/_version.py
+exclude code-of-conduct.md
