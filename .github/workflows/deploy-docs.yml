@@ -45,7 +45,7 @@ jobs:
         jupyter nbconvert --to notebook --execute notebooks/01a-griddap.ipynb --output=01a-griddap-output.ipynb
         jupyter nbconvert --to notebook --execute notebooks/01b-tabledap.ipynb --output=01b-tabledap-output.ipynb
         jupyter nbconvert --to notebook --execute notebooks/02-extras.ipynb --output=02-extras-output.ipynb
-        jupyter nbconvert --to notebook --execute notebooks/03-searchfor.ipynb --output=03-searchfor-output.ipynb
+        jupyter nbconvert --to notebook --execute notebooks/03-advanced_search.ipynb --output=03-advanced_search-output.ipynb
         mv notebooks/*output.ipynb docs/source/
         pushd docs
         make clean html linkcheck
