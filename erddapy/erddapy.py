@@ -346,12 +346,11 @@ class ERDDAP:
         url = self.get_download_url(response=response, **kw)
         return to_pandas(url, **kw)
 
-    def to_ncCF(self, **kw):
+    def to_ncCF(self, protocol: str = None, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
-        if self.protocol == "griddap":
-            return ValueError("Cannot use ncCF with griddap.")
+        protocol = protocol if protocol else self.protocol
         url = self.get_download_url(response="ncCF", **kw)
-        return to_ncCF(url, **kw)
+        return to_ncCF(url, protocol=protocol, **kw)
 
     def to_xarray(self, **kw):
         """Load the data request into a xarray.Dataset.

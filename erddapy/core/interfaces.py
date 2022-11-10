@@ -24,8 +24,10 @@ def to_pandas(url: str, requests_kwargs=dict(), **kw) -> pd.DataFrame:
         raise
 
 
-def to_ncCF(url: str, **kw) -> ncDataset:
+def to_ncCF(url: str, protocol: str = None, **kw) -> ncDataset:
     """Convert a URL to a netCDF4 Dataset."""
+    if protocol == "griddap":
+        return ValueError("Cannot use ncCF with griddap.")
     auth = kw.pop("auth", None)
     return _nc_dataset(url, auth=auth, **kw)
 
