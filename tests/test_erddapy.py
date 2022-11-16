@@ -12,6 +12,7 @@ from erddapy.core.url import (
     _format_constraints_url,
     _quote_string_constraints,
     parse_dates,
+    urlopen,
 )
 from erddapy.erddapy import ERDDAP
 
@@ -109,7 +110,8 @@ def test_erddap_requests_kwargs():
     connection.requests_kwargs["timeout"] = timeout_seconds
 
     with pytest.raises(httpx.ReadTimeout):
-        connection.to_pandas(requests_kwargs=connection.requests_kwargs)
+        url = connection.get_download_url()
+        _ = urlopen(url, **connection.requests_kwargs)
 
 
 @pytest.mark.web
