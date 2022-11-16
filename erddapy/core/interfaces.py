@@ -8,26 +8,29 @@ XArray, Iris, etc. objects.
 import iris
 import pandas as pd
 import xarray as xr
-from netCDF4 import Dataset as ncDataset
+from netCDF4 import Dataset
 
 from erddapy.core.netcdf import _nc_dataset, _tempnc
 from erddapy.core.url import urlopen
 
 
-def to_pandas(url: str, requests_kwargs=dict(), **kw) -> pd.DataFrame:
+def to_pandas(url: str, requests_kwargs=None, **kw) -> pd.DataFrame:
     """Convert a URL to Pandas DataFrame."""
+    if requests_kwargs is None:
+        requests_kwargs = dict()
     data = urlopen(url, **requests_kwargs)
     try:
         return pd.read_csv(data, **kw)
-    except Exception:
+    except Exception as e:
         print("Couldn't process response into Pandas DataFrame.")
+        print(f"{type(e)} occurred. Please see below for the traceback.")
         raise
 
 
-def to_ncCF(url: str, protocol: str = None, **kw) -> ncDataset:
+def to_ncCF(url: str, protocol: str = None, **kw) -> Dataset:
     """Convert a URL to a netCDF4 Dataset."""
     if protocol == "griddap":
-        return ValueError("Cannot use ncCF with griddap.")
+        raise ValueError("Cannot use ncCF with griddap.")
     auth = kw.pop("auth", None)
     return _nc_dataset(url, auth=auth, **kw)
 
@@ -47,8 +50,5 @@ def to_iris(url: str, **kw):
     data = urlopen(url, **kw)
     with _tempnc(data) as tmp:
         cubes = iris.load_raw(tmp, **kw)
-        try:
-            cubes.realise_data()
-        except ValueError:
-            _ = [cube.data for cube in cubes]
+        _ = [cube.data for cube in cubes]
         return cubes
