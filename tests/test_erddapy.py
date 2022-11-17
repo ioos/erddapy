@@ -12,6 +12,7 @@ from erddapy.core.url import (
     _format_constraints_url,
     _quote_string_constraints,
     parse_dates,
+    urlopen,
 )
 from erddapy.erddapy import ERDDAP
 
@@ -103,13 +104,14 @@ def test_erddap_requests_kwargs():
     slowwly_url = f"https://flash-the-slow-api.herokuapp.com/delay/{slowwly_milliseconds}/url/{base_url}"
 
     connection = ERDDAP(slowwly_url)
-    connection.dataset_id = "M01_sbe37_all"
+    connection.dataset_id = "raw_asset_inventory"
     connection.protocol = "tabledap"
 
     connection.requests_kwargs["timeout"] = timeout_seconds
 
     with pytest.raises(httpx.ReadTimeout):
-        connection.to_xarray()
+        url = connection.get_download_url()
+        _ = urlopen(url, **connection.requests_kwargs)
 
 
 @pytest.mark.web

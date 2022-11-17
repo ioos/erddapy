@@ -28,7 +28,7 @@ pytest-flake8
 pytest-sugar
 pytest-vcr
 regionmask
-scitools-iris>=3
+scitools-iris>=3.3.0
 setuptools_scm
 sphinx
 twine
