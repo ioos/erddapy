@@ -6,6 +6,8 @@ XArray, Iris, etc. objects.
 """
 from typing import TYPE_CHECKING
 
+from typing import Dict
+
 import pandas as pd
 
 from erddapy.core.netcdf import _nc_dataset, _tempnc
@@ -15,9 +17,14 @@ if TYPE_CHECKING:
     import xarray as xr
     from netCDF4 import Dataset
 
+def to_pandas(url: str, requests_kwargs: Dict = None, **kw) -> "pd.DataFrame":
+    """
+    Convert a URL to Pandas DataFrame.
 
-def to_pandas(url: str, requests_kwargs=None, **kw) -> "pd.DataFrame":
-    """Convert a URL to Pandas DataFrame."""
+    url: URL to request data from.
+    requests_kwargs: arguments to be passed to urlopen method.
+    **kw: kwargs to be passed to third-party library (pandas).
+    """
     if requests_kwargs is None:
         requests_kwargs = {}
     data = urlopen(url, **requests_kwargs)
@@ -37,23 +44,42 @@ def to_ncCF(url: str, protocol: str = None, **kw) -> "Dataset":
     return _nc_dataset(url, auth=auth, **kw)
 
 
-def to_xarray(url: str, response="opendap", **kw) -> "xr.Dataset":
-    """Convert a URL to an xarray dataset."""
+def to_xarray(
+    url: str, response="opendap", requests_kwargs: Dict = None, **kw
+) -> "xr.Dataset":
+    """
+    Convert a URL to an xarray dataset.
+
+    url: URL to request data from.
+    response: type of response to be requested from the server.
+    requests_kwargs: arguments to be passed to urlopen method.
+    **kw: kwargs to be passed to third-party library (xarray).
+    """
     import xarray as xr
 
     auth = kw.pop("auth", None)
     if response == "opendap":
         return xr.open_dataset(url, **kw)
     else:
-        nc = _nc_dataset(url, auth=auth, **kw)
+        if requests_kwargs is None:
+            requests_kwargs = {}
+        nc = _nc_dataset(url, auth=auth, **requests_kwargs)
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
 
-def to_iris(url: str, **kw):
-    """Convert a URL to an iris CubeList."""
+def to_iris(url: str, requests_kwargs: Dict = None, **kw):
+    """
+    Convert a URL to an iris CubeList.
+
+    url: URL to request data from.
+    requests_kwargs: arguments to be passed to urlopen method.
+    **kw: kwargs to be passed to third-party library (iris).
+    """
     import iris
 
-    data = urlopen(url, **kw)
+    if requests_kwargs is None:
+        requests_kwargs = {}
+    data = urlopen(url, **requests_kwargs)
     with _tempnc(data) as tmp:
         cubes = iris.load_raw(tmp, **kw)
         _ = [cube.data for cube in cubes]
