@@ -6,7 +6,7 @@ XArray, Iris, etc. objects.
 """
 from typing import TYPE_CHECKING
 
-from typing import Dict
+from typing import Dict, Optional
 
 import pandas as pd
 
@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     import xarray as xr
     from netCDF4 import Dataset
 
-def to_pandas(url: str, requests_kwargs: Dict = None, **kw) -> "pd.DataFrame":
+def to_pandas(url: str, requests_kwargs: Optional[Dict] = None, **kw) -> "pd.DataFrame":
     """
     Convert a URL to Pandas DataFrame.
 
@@ -45,7 +45,7 @@ def to_ncCF(url: str, protocol: str = None, **kw) -> "Dataset":
 
 
 def to_xarray(
-    url: str, response="opendap", requests_kwargs: Dict = None, **kw
+    url: str, response="opendap", requests_kwargs: Optional[Dict] = None, **kw
 ) -> "xr.Dataset":
     """
     Convert a URL to an xarray dataset.
@@ -67,7 +67,7 @@ def to_xarray(
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **kw)
 
 
-def to_iris(url: str, requests_kwargs: Dict = None, **kw):
+def to_iris(url: str, requests_kwargs: Optional[Dict] = None, **kw):
     """
     Convert a URL to an iris CubeList.
 
