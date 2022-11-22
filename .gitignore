@@ -8,5 +8,6 @@ build/
 dist/
 *-output.ipynb
 .vscode/
+.idea/
 *.code-workspace
 **/__pycache__
