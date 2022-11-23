@@ -16,8 +16,7 @@ def test__nc_dataset_in_memory_https():
     from netCDF4 import Dataset
 
     url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"  # noqa
-    auth = None
-    _nc = _nc_dataset(url, auth)
+    _nc = _nc_dataset(url)
     assert isinstance(_nc, Dataset)
     assert _nc.filepath() == url.split("/")[-1]
 

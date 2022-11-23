@@ -364,7 +364,8 @@ class ERDDAP:
         else:
             response = "ncCF"
         url = self.get_download_url(response=response)
-        return to_xarray(url, response=response, auth=self.auth, **kw)
+        requests_kwargs = dict(auth=self.auth)
+        return to_xarray(url, response, requests_kwargs, **kw)
 
     def to_iris(self, **kw):
         """Load the data request into an iris.CubeList.

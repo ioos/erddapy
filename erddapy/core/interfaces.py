@@ -63,8 +63,7 @@ def to_ncCF(
         )
     if requests_kwargs is None:
         requests_kwargs = {}
-    auth = requests_kwargs.pop("auth", None)
-    return _nc_dataset(url, auth=auth, **requests_kwargs)
+    return _nc_dataset(url, **requests_kwargs)
 
 
 def to_xarray(
@@ -78,18 +77,17 @@ def to_xarray(
 
     url: URL to request data from.
     response: type of response to be requested from the server.
-    requests_kwargs: arguments to be passed to urlopen method.
+    requests_kwargs: arguments to be passed to urlopen method (including auth)
     xarray_kwargs: kwargs to be passed to third-party library (xarray).
     """
     import xarray as xr
 
     if requests_kwargs is None:
         requests_kwargs = {}
-    auth = requests_kwargs.pop("auth", None)
     if response == "opendap":
         return xr.open_dataset(url, **xarray_kwargs)
     else:
-        nc = _nc_dataset(url, auth=auth, **requests_kwargs)
+        nc = _nc_dataset(url, **requests_kwargs)
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **xarray_kwargs)
 
 
