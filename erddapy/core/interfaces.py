@@ -77,7 +77,7 @@ def to_xarray(
 
     url: URL to request data from.
     response: type of response to be requested from the server.
-    requests_kwargs: arguments to be passed to urlopen method (including auth)
+    requests_kwargs: arguments to be passed to urlopen method
     xarray_kwargs: kwargs to be passed to third-party library (xarray).
     """
     import xarray as xr
