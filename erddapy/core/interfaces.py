@@ -58,7 +58,7 @@ def to_ncCF(
         )
     if requests_kwargs is None:
         requests_kwargs = {}
-    return _nc_dataset(url, **requests_kwargs)
+    return _nc_dataset(url, requests_kwargs)
 
 
 def to_xarray(
@@ -84,7 +84,7 @@ def to_xarray(
     if response == "opendap":
         return xr.open_dataset(url, **xarray_kwargs)
     else:
-        nc = _nc_dataset(url, **requests_kwargs)
+        nc = _nc_dataset(url, requests_kwargs)
         return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **xarray_kwargs)
 
 
@@ -106,7 +106,7 @@ def to_iris(
         requests_kwargs = {}
     if iris_kwargs is None:
         iris_kwargs = {}
-    data = urlopen(url, **requests_kwargs)
+    data = urlopen(url, requests_kwargs)
     with _tempnc(data) as tmp:
         cubes = iris.load_raw(tmp, **iris_kwargs)
         _ = [cube.data for cube in cubes]

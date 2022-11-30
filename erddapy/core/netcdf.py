@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 from erddapy.core.url import urlopen
 
 
-def _nc_dataset(url, **requests_kwargs: Dict):
+def _nc_dataset(url, requests_kwargs: Optional[Dict] = None):
     """Return a netCDF4-python Dataset from memory and fallbacks to disk if that fails."""
     from netCDF4 import Dataset
 
