@@ -393,7 +393,7 @@ class ERDDAP:
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
         variables = {}
-        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
+        data = urlopen(url, self.requests_kwargs)
         _df = pd.read_csv(data)
         self._dataset_id = dataset_id
         for variable in set(_df["Variable Name"]):

@@ -33,7 +33,7 @@ def to_pandas(
         requests_kwargs = {}
     if pandas_kwargs is None:
         pandas_kwargs = {}
-    data = urlopen(url, **requests_kwargs)
+    data = urlopen(url, requests_kwargs)
     try:
         return pd.read_csv(data, **pandas_kwargs)
     except Exception as e:
