@@ -25,14 +25,20 @@ def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO
     return io.BytesIO(response.content)
 
 
-def urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
+def urlopen(
+    url: str,
+    auth: Optional[tuple] = None,
+    requests_kwargs: Optional[Dict] = None,
+) -> BinaryIO:
     """Thin wrapper around httpx get content.
 
     See httpx.get docs for the `params` and `kwargs` options.
 
     """
     # Ignoring type checks here b/c mypy does not support decorated functions.
-    data = _urlopen(url=url, auth=auth, **kwargs)  # type: ignore
+    if requests_kwargs is None:
+        requests_kwargs = {}
+    data = _urlopen(url=url, auth=auth, **requests_kwargs)  # type: ignore
     data.seek(0)
     return data
 
