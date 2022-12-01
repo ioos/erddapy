@@ -29,11 +29,9 @@ def to_pandas(
     requests_kwargs: arguments to be passed to urlopen method.
     **pandas_kwargs: kwargs to be passed to third-party library (pandas).
     """
-    if requests_kwargs is None:
-        requests_kwargs = {}
     if pandas_kwargs is None:
         pandas_kwargs = {}
-    data = urlopen(url, requests_kwargs)
+    data = urlopen(url, **(requests_kwargs or {}))
     try:
         return pd.read_csv(data, **pandas_kwargs)
     except Exception as e:
@@ -56,8 +54,6 @@ def to_ncCF(
         raise ValueError(
             f"Cannot use .ncCF with griddap protocol. The URL you tried to access is: '{url}'.",
         )
-    if requests_kwargs is None:
-        requests_kwargs = {}
     return _nc_dataset(url, requests_kwargs)
 
 
@@ -77,8 +73,6 @@ def to_xarray(
     """
     import xarray as xr
 
-    if requests_kwargs is None:
-        requests_kwargs = {}
     if xarray_kwargs is None:
         xarray_kwargs = {}
     if response == "opendap":
@@ -102,11 +96,9 @@ def to_iris(
     """
     import iris
 
-    if requests_kwargs is None:
-        requests_kwargs = {}
     if iris_kwargs is None:
         iris_kwargs = {}
-    data = urlopen(url, requests_kwargs)
+    data = urlopen(url, **(requests_kwargs or {}))
     with _tempnc(data) as tmp:
         cubes = iris.load_raw(tmp, **iris_kwargs)
         _ = [cube.data for cube in cubes]
