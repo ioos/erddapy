@@ -3,7 +3,6 @@
 from datetime import datetime
 
 import httpx
-import pendulum
 import pytest
 import pytz
 
@@ -28,21 +27,9 @@ def test_parse_dates_utc_datetime():
     assert parse_dates(d) == 0
 
 
-def test_parse_dates_utc_pendulum():
-    """UTC timestamp at 1970-1-1 must be 0."""
-    d = pendulum.datetime(1970, 1, 1, 0, 0, 0, tz="UTC")
-    assert parse_dates(d) == 0
-
-
 def test_parse_dates_nonutc_datetime():
     """Non-UTC timestamp at 1970-1-1 must have the zone offset."""
     d = datetime(1970, 1, 1, tzinfo=pytz.timezone("US/Eastern"))
-    assert parse_dates(d) == abs(d.utcoffset().total_seconds())
-
-
-def test_parse_dates_nonutc_pendulum():
-    """Non-UTC timestamp at 1970-1-1 must have the zone offset."""
-    d = pendulum.datetime(1970, 1, 1, 0, 0, 0, tz="America/Vancouver")
     assert parse_dates(d) == abs(d.utcoffset().total_seconds())
 
 
