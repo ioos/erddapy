@@ -40,7 +40,7 @@ See https://coastwatch.pfeg.noaa.gov/erddap/index.html for more information.
    01a-griddap-output.ipynb
    01b-tabledap-output.ipynb
    02-extras-output.ipynb
-   03-searchfor-output.ipynb
+   03-advanced_search-output.ipynb
    erddapy
 
 Indices and tables
