@@ -12,7 +12,6 @@ from erddapy.core.url import (
     _format_constraints_url,
     _quote_string_constraints,
     parse_dates,
-    urlopen,
 )
 from erddapy.erddapy import ERDDAP
 
@@ -93,25 +92,6 @@ def test__format_constraints_url():
     )
 
     assert kw_url == "&latitude>=42&longitude<=42.0"
-
-
-@pytest.mark.web
-def test_erddap_requests_kwargs():
-    """Test that an ERDDAP instance can have requests_kwargs attribute assigned."""
-    base_url = "http://erddap.ioos.us/erddap/"
-    timeout_seconds = 1  # request timeout in seconds
-    slowwly_milliseconds = (timeout_seconds + 1) * 1000
-    slowwly_url = f"https://flash-the-slow-api.herokuapp.com/delay/{slowwly_milliseconds}/url/{base_url}"
-
-    connection = ERDDAP(slowwly_url)
-    connection.dataset_id = "raw_asset_inventory"
-    connection.protocol = "tabledap"
-
-    connection.requests_kwargs["timeout"] = timeout_seconds
-
-    with pytest.raises(httpx.ReadTimeout):
-        url = connection.get_download_url()
-        _ = urlopen(url, **connection.requests_kwargs)
 
 
 @pytest.mark.web
