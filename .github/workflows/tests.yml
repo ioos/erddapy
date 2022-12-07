@@ -1,4 +1,4 @@
-name: Tests
+name: Full Tests
 
 on:
   pull_request:
@@ -25,19 +25,12 @@ jobs:
     - name: Python ${{ matrix.python-version }}
       shell: bash -l {0}
       run: >
-        micromamba create --name TEST python=${{ matrix.python-version }} pytest --file requirements.txt --channel conda-forge
+        micromamba create --name TEST python=${{ matrix.python-version }} --file requirements.txt --file requirements-dev.txt --channel conda-forge
         && micromamba activate TEST
         && python -m pip install -e . --no-deps --force-reinstall
-
-    - name: Core Tests
-      shell: bash -l {0}
-      run: |
-        micromamba activate TEST
-        python -m pytest -rxs tests/test_erddapy.py
 
     - name: Full Tests
       shell: bash -l {0}
       run: |
         micromamba activate TEST
-        micromamba install --file requirements-dev.txt
         python -m pytest -rxs --cov=erddapy --vcr-record=none tests
