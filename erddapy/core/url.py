@@ -4,8 +4,7 @@ import copy
 import functools
 import io
 from datetime import datetime
-from typing import Dict, List, Optional, Tuple, Union
-from typing.io import BinaryIO
+from typing import BinaryIO, Dict, List, Optional, Tuple, Union
 from urllib.parse import quote_plus
 
 import httpx
