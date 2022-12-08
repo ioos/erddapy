@@ -2,7 +2,7 @@
 
 from contextlib import contextmanager
 from pathlib import Path
-from typing import BinaryIO, Dict, Generator
+from typing import BinaryIO, Dict, Generator, Optional
 from urllib.parse import urlparse
 
 from erddapy.core.url import urlopen

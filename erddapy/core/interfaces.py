@@ -4,9 +4,7 @@ Interface between URL responses and third-party libraries.
 This module takes an URL or the bytes response of a request and converts it to Pandas,
 XArray, Iris, etc. objects.
 """
-from typing import TYPE_CHECKING
-
-from typing import Dict, Optional
+from typing import TYPE_CHECKING, Dict, Optional
 
 import pandas as pd
 
@@ -16,6 +14,7 @@ from erddapy.core.url import urlopen
 if TYPE_CHECKING:
     import xarray as xr
     from netCDF4 import Dataset
+
 
 def to_pandas(
     url: str,
