@@ -1,4 +1,4 @@
-name: Tests
+name: Full Tests
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
         os: [windows-latest, ubuntu-latest, macos-latest]
       fail-fast: false
 
@@ -24,12 +24,12 @@ jobs:
 
     - name: Python ${{ matrix.python-version }}
       shell: bash -l {0}
-      run: |
+      run: >
         micromamba create --name TEST python=${{ matrix.python-version }} --file requirements.txt --file requirements-dev.txt --channel conda-forge
-        micromamba activate TEST
-        python -m pip install -e . --no-deps --force-reinstall
+        && micromamba activate TEST
+        && python -m pip install -e . --no-deps --force-reinstall
 
-    - name: Tests
+    - name: Full Tests
       shell: bash -l {0}
       run: |
         micromamba activate TEST
