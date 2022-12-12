@@ -105,7 +105,8 @@ def test_to_pandas(dataset_tabledap):
     import pandas as pd
 
     df = dataset_tabledap.to_pandas(
-        pandas_kwargs={"index_col": "time (UTC)", "parse_dates": True},
+        index_col="time (UTC)",
+        parse_dates=True,
     ).dropna()
 
     assert isinstance(df, pd.DataFrame)
