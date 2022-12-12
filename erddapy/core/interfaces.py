@@ -28,11 +28,9 @@ def to_pandas(
     requests_kwargs: arguments to be passed to urlopen method.
     **pandas_kwargs: kwargs to be passed to third-party library (pandas).
     """
-    if pandas_kwargs is None:
-        pandas_kwargs = {}
     data = urlopen(url, **(requests_kwargs or {}))
     try:
-        return pd.read_csv(data, **pandas_kwargs)
+        return pd.read_csv(data, **(pandas_kwargs or {}))
     except Exception as e:
         raise ValueError(f"Could not read url {url} with Pandas.read_csv.") from e
 
@@ -72,13 +70,13 @@ def to_xarray(
     """
     import xarray as xr
 
-    if xarray_kwargs is None:
-        xarray_kwargs = {}
     if response == "opendap":
-        return xr.open_dataset(url, **xarray_kwargs)
+        return xr.open_dataset(url, **(xarray_kwargs or {}))
     else:
         nc = _nc_dataset(url, requests_kwargs)
-        return xr.open_dataset(xr.backends.NetCDF4DataStore(nc), **xarray_kwargs)
+        return xr.open_dataset(
+            xr.backends.NetCDF4DataStore(nc), **(xarray_kwargs or {})
+        )
 
 
 def to_iris(
@@ -95,10 +93,8 @@ def to_iris(
     """
     import iris
 
-    if iris_kwargs is None:
-        iris_kwargs = {}
     data = urlopen(url, **(requests_kwargs or {}))
     with _tempnc(data) as tmp:
-        cubes = iris.load_raw(tmp, **iris_kwargs)
+        cubes = iris.load_raw(tmp, **(iris_kwargs or {}))
         _ = [cube.data for cube in cubes]
         return cubes
