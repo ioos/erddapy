@@ -350,7 +350,7 @@ class ERDDAP:
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
         protocol = protocol if protocol else self.protocol
         url = self.get_download_url(response="ncCF", **kw)
-        return to_ncCF(url, protocol=protocol, **kw)
+        return to_ncCF(url, protocol=protocol, requests_kwargs=dict(**kw))
 
     def to_xarray(self, **kw):
         """Load the data request into a xarray.Dataset.
@@ -365,7 +365,7 @@ class ERDDAP:
             response = "ncCF"
         url = self.get_download_url(response=response)
         requests_kwargs = dict(auth=self.auth)
-        return to_xarray(url, response, requests_kwargs, **kw)
+        return to_xarray(url, response, requests_kwargs, xarray_kwargs=dict(**kw))
 
     def to_iris(self, **kw):
         """Load the data request into an iris.CubeList.
@@ -374,7 +374,7 @@ class ERDDAP:
         """
         response = "nc" if self.protocol == "griddap" else "ncCF"
         url = self.get_download_url(response=response, **kw)
-        return to_iris(url, **kw)
+        return to_iris(url, iris_kwargs=dict(**kw))
 
     @functools.lru_cache(maxsize=None)
     def _get_variables(self, dataset_id: OptionalStr = None) -> Dict:
