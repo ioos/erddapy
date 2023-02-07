@@ -22,14 +22,14 @@ repos:
       args: [--max-line-length=105]
 
 - repo: https://github.com/pycqa/isort
-  rev: 5.10.1
+  rev: 5.12.0
   hooks:
     - id: isort
       additional_dependencies: [toml]
       args: ["--profile", "black", "--filter-files"]
 
 - repo: https://github.com/psf/black
-  rev: 22.10.0
+  rev: 23.1.0
   hooks:
   - id: black
     language_version: python3
@@ -66,19 +66,19 @@ repos:
         - --quiet-level=2
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.3.0
+  rev: v3.3.1
   hooks:
     - id: pyupgrade
       args:
         - --py36-plus
 
 - repo: https://github.com/asottile/add-trailing-comma
-  rev: v2.3.0
+  rev: v2.4.0
   hooks:
     - id: add-trailing-comma
 
 -   repo: https://github.com/pycqa/pydocstyle
-    rev: 6.1.1
+    rev: 6.3.0
     hooks:
       - id: pydocstyle
         exclude: ^(docs|setup.py)
