@@ -104,7 +104,10 @@ def test_to_pandas(dataset_tabledap):
     """Test converting tabledap to a pandas DataFrame."""
     import pandas as pd
 
-    df = dataset_tabledap.to_pandas(index_col="time (UTC)", parse_dates=True).dropna()
+    df = dataset_tabledap.to_pandas(
+        index_col="time (UTC)",
+        parse_dates=True,
+    ).dropna()
 
     assert isinstance(df, pd.DataFrame)
     assert df.index.name == "time (UTC)"

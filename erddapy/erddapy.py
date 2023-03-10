@@ -334,7 +334,7 @@ class ERDDAP:
     def to_pandas(self, **kw):
         """Save a data request to a pandas.DataFrame.
 
-        Accepts any `pandas.read_csv` keyword arguments.
+        Accepts any `pandas.read_csv` keyword arguments, passed as a dictionary to pandas_kwargs.
 
         This method uses the .csvp [1] response as the default for simplicity,
         please check ERDDAP's documentation for the other csv options available.
@@ -344,13 +344,13 @@ class ERDDAP:
         """
         response = kw.pop("response", "csvp")
         url = self.get_download_url(response=response, **kw)
-        return to_pandas(url, **kw)
+        return to_pandas(url, pandas_kwargs=dict(**kw))
 
     def to_ncCF(self, protocol: str = None, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
         protocol = protocol if protocol else self.protocol
         url = self.get_download_url(response="ncCF", **kw)
-        return to_ncCF(url, protocol=protocol, **kw)
+        return to_ncCF(url, protocol=protocol, requests_kwargs=dict(**kw))
 
     def to_xarray(self, **kw):
         """Load the data request into a xarray.Dataset.
@@ -364,7 +364,8 @@ class ERDDAP:
         else:
             response = "ncCF"
         url = self.get_download_url(response=response)
-        return to_xarray(url, response=response, auth=self.auth, **kw)
+        requests_kwargs = dict(auth=self.auth)
+        return to_xarray(url, response, requests_kwargs, xarray_kwargs=dict(**kw))
 
     def to_iris(self, **kw):
         """Load the data request into an iris.CubeList.
@@ -373,7 +374,7 @@ class ERDDAP:
         """
         response = "nc" if self.protocol == "griddap" else "ncCF"
         url = self.get_download_url(response=response, **kw)
-        return to_iris(url, **kw)
+        return to_iris(url, iris_kwargs=dict(**kw))
 
     @functools.lru_cache(maxsize=None)
     def _get_variables(self, dataset_id: OptionalStr = None) -> Dict:
@@ -386,7 +387,7 @@ class ERDDAP:
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
         variables = {}
-        data = urlopen(url, auth=self.auth, **self.requests_kwargs)
+        data = urlopen(url, self.requests_kwargs)
         _df = pd.read_csv(data)
         self._dataset_id = dataset_id
         for variable in set(_df["Variable Name"]):

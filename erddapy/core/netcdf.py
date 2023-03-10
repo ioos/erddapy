@@ -2,17 +2,17 @@
 
 from contextlib import contextmanager
 from pathlib import Path
-from typing import BinaryIO, Dict, Generator
+from typing import BinaryIO, Dict, Generator, Optional
 from urllib.parse import urlparse
 
 from erddapy.core.url import urlopen
 
 
-def _nc_dataset(url, auth, **requests_kwargs: Dict):
+def _nc_dataset(url, requests_kwargs: Optional[Dict] = None):
     """Return a netCDF4-python Dataset from memory and fallbacks to disk if that fails."""
     from netCDF4 import Dataset
 
-    data = urlopen(url=url, auth=auth, **requests_kwargs)
+    data = urlopen(url, requests_kwargs)
     try:
         return Dataset(Path(urlparse(url).path).name, memory=data.read())
     except OSError:
