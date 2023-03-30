@@ -16,11 +16,8 @@ authors = [
 ]
 requires-python = ">=3.8"
 dynamic = [
+  "dependencies",
   "version",
-]
-dependencies = [
-  "httpx",
-  "pandas>=1",
 ]
 [project.urls]
 documentation = "https://ioos.github.io/erddapy"
@@ -30,6 +27,9 @@ repository = "https://github.com/ioos/erddapy"
 [tool.setuptools]
 packages = ["erddapy"]
 include-package-data = true
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
 
 [tool.setuptools_scm]
 write_to = "erddapy/_version.py"
