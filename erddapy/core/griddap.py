@@ -11,7 +11,7 @@ ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
 
 
-@functools.lru_cache(maxsize=256)
+@functools.lru_cache(maxsize=128)
 def _griddap_get_constraints(
     dataset_url: str,
     step: int,

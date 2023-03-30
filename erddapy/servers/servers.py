@@ -6,7 +6,7 @@ from collections import namedtuple
 import pandas as pd
 
 
-@functools.lru_cache(maxsize=None)
+@functools.lru_cache(maxsize=128)
 def servers_list():
     """
     Download a new server list from awesome-erddap.
