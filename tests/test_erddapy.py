@@ -6,7 +6,10 @@ import httpx
 import pytest
 import pytz
 
-from erddapy.core.griddap import _griddap_check_constraints, _griddap_check_variables
+from erddapy.core.griddap import (
+    _griddap_check_constraints,
+    _griddap_check_variables,
+)
 from erddapy.core.url import (
     _format_constraints_url,
     _quote_string_constraints,
