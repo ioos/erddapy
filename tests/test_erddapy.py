@@ -67,7 +67,7 @@ def test__quote_string_constraints():
     assert kw["min_time"].startswith('"') and kw["min_time"].endswith('"')
     assert kw["cdm_data_type"].startswith('"') and kw["cdm_data_type"].endswith('"')
 
-    for k, v in kw.items():
+    for _k, v in kw.items():
         if isinstance(v, str):
             assert v.startswith('"') and v.endswith('"')
 
