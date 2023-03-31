@@ -15,7 +15,7 @@ ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
 
 
-@functools.lru_cache(maxsize=256)
+@functools.lru_cache(maxsize=128)
 def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
     response = httpx.get(url, follow_redirects=True, auth=auth, **kwargs)
     try:
@@ -42,7 +42,7 @@ def urlopen(
     return data
 
 
-@functools.lru_cache(maxsize=None)
+@functools.lru_cache(maxsize=128)
 def check_url_response(url: str, **kwargs: Dict) -> str:
     """
     Shortcut to `raise_for_status` instead of fetching the whole content.

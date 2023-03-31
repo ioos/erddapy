@@ -130,6 +130,9 @@ class ERDDAP:
         self.variables: Optional[ListLike] = None
         self.dim_names: Optional[ListLike] = None
 
+        self._get_variables = functools.lru_cache(maxsize=128)(
+            self._get_variables_uncached,
+        )
         # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
         self._dataset_id: OptionalStr = None
@@ -364,7 +367,7 @@ class ERDDAP:
         else:
             response = "ncCF"
         url = self.get_download_url(response=response)
-        requests_kwargs = dict(auth=self.auth)
+        requests_kwargs = {"auth": self.auth}
         return to_xarray(url, response, requests_kwargs, xarray_kwargs=dict(**kw))
 
     def to_iris(self, **kw):
@@ -376,8 +379,7 @@ class ERDDAP:
         url = self.get_download_url(response=response, **kw)
         return to_iris(url, iris_kwargs=dict(**kw))
 
-    @functools.lru_cache(maxsize=None)
-    def _get_variables(self, dataset_id: OptionalStr = None) -> Dict:
+    def _get_variables_uncached(self, dataset_id: OptionalStr = None) -> Dict:
         if not dataset_id:
             dataset_id = self.dataset_id
 

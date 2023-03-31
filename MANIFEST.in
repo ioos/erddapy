@@ -4,14 +4,16 @@ include pyproject.toml
 
 graft erddapy
 
-prune docs
-prune tests
-prune notebooks
+prune .github
 prune *.egg-info
+prune docs
+prune notebooks
+prune tests
 
-exclude *.yml
-exclude .pre-commit-config.yaml
+exclude .coveragerc
 exclude .gitignore
 exclude .isort.cfg
-exclude erddapy/_version.py
+exclude .pre-commit-config.yaml
+exclude *.yml
 exclude code-of-conduct.md
+exclude erddapy/_version.py

@@ -6,7 +6,6 @@ repos:
     - id: check-ast
     - id: debug-statements
     - id: end-of-file-fixer
-      exclude: github_deploy_key_ioos_erddapy.enc
     - id: check-docstring-first
     - id: check-added-large-files
       exclude_types: [yaml]
@@ -14,28 +13,14 @@ repos:
     - id: file-contents-sorter
       files: requirements-dev.txt
 
-- repo: https://github.com/PyCQA/flake8
-  rev: 6.0.0
-  hooks:
-    - id: flake8
-      exclude: docs/source/conf.py
-      args: [--max-line-length=105]
-
-- repo: https://github.com/pycqa/isort
-  rev: 5.12.0
-  hooks:
-    - id: isort
-      additional_dependencies: [toml]
-      args: ["--profile", "black", "--filter-files"]
-
 - repo: https://github.com/psf/black
-  rev: 23.1.0
+  rev: 23.3.0
   hooks:
   - id: black
     language_version: python3
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.0.1
+  rev: v1.1.1
   hooks:
   - id: mypy
     exclude: docs/source/conf.py
@@ -55,7 +40,7 @@ repos:
       args: [--config=pyproject.toml]
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.2.2
+  rev: v2.2.4
   hooks:
     - id: codespell
       exclude: >
@@ -65,23 +50,20 @@ repos:
       args:
         - --ignore-words-list=pres
 
-- repo: https://github.com/asottile/pyupgrade
-  rev: v3.3.1
-  hooks:
-    - id: pyupgrade
-      args:
-        - --py36-plus
-
 - repo: https://github.com/asottile/add-trailing-comma
   rev: v2.4.0
   hooks:
     - id: add-trailing-comma
 
--   repo: https://github.com/pycqa/pydocstyle
-    rev: 6.3.0
-    hooks:
-      - id: pydocstyle
-        exclude: ^(docs|setup.py)
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: v0.0.260
+  hooks:
+    - id: ruff
+
+- repo: https://github.com/tox-dev/pyproject-fmt
+  rev: 0.9.2
+  hooks:
+    - id: pyproject-fmt
 
 ci:
     autofix_commit_msg: |

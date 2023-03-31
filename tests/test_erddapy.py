@@ -6,7 +6,10 @@ import httpx
 import pytest
 import pytz
 
-from erddapy.core.griddap import _griddap_check_constraints, _griddap_check_variables
+from erddapy.core.griddap import (
+    _griddap_check_constraints,
+    _griddap_check_variables,
+)
 from erddapy.core.url import (
     _format_constraints_url,
     _quote_string_constraints,
@@ -64,7 +67,7 @@ def test__quote_string_constraints():
     assert kw["min_time"].startswith('"') and kw["min_time"].endswith('"')
     assert kw["cdm_data_type"].startswith('"') and kw["cdm_data_type"].endswith('"')
 
-    for k, v in kw.items():
+    for _k, v in kw.items():
         if isinstance(v, str):
             assert v.startswith('"') and v.endswith('"')
 
