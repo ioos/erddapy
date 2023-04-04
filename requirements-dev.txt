@@ -5,6 +5,7 @@ geopandas
 interrogate
 joblib
 jupyter
+nbconvert<7.3.0
 nbsphinx
 netcdf4
 pendulum>=2.0.1
