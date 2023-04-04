@@ -9,7 +9,9 @@ from urllib.parse import quote_plus
 
 import httpx
 import pytz
-from pandas._libs.tslibs.parsing import parse_time_string
+from pandas._libs.tslibs.parsing import (
+    py_parse_datetime_string as _py_parse_datetime_string,
+)
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
@@ -113,7 +115,11 @@ def _check_substrings(constraint):
     return any([True for substring in substrings if substring in str(constraint)])
 
 
-def parse_dates(date_time: Union[datetime, str]) -> float:
+def parse_dates(
+    date_time: Union[datetime, str],
+    dayfirst=False,
+    yearfirst=False,
+) -> float:
     """
     Parse dates to ERDDAP internal format.
 
@@ -123,9 +129,11 @@ def parse_dates(date_time: Union[datetime, str]) -> float:
 
     """
     if isinstance(date_time, str):
-        # pandas returns a tuple with datetime, dateutil, and string representation.
-        # we want only the datetime obj.
-        parse_date_time = parse_time_string(date_time)[0]
+        parse_date_time = _py_parse_datetime_string(
+            date_time,
+            dayfirst=dayfirst,
+            yearfirst=yearfirst,
+        )
     else:
         parse_date_time = date_time
 
