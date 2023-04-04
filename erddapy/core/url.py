@@ -9,9 +9,7 @@ from urllib.parse import quote_plus
 
 import httpx
 import pytz
-from pandas._libs.tslibs.parsing import (
-    py_parse_datetime_string as _py_parse_datetime_string,
-)
+from pandas import to_datetime
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
@@ -129,11 +127,11 @@ def parse_dates(
 
     """
     if isinstance(date_time, str):
-        parse_date_time = _py_parse_datetime_string(
+        parse_date_time = to_datetime(
             date_time,
             dayfirst=dayfirst,
             yearfirst=yearfirst,
-        )
+        ).to_pydatetime()
     else:
         parse_date_time = date_time
 
