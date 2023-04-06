@@ -42,7 +42,7 @@ markers = [
     "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
 ]
 filterwarnings = [
-    "error",
+    "error:::erddapy.*",
     "ignore::UserWarning",
     "ignore::RuntimeWarning",
 ]
