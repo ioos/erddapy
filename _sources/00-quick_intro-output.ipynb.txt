@@ -16,16 +16,12 @@
     "\n",
     "```shell\n",
     "pip install erddapy\n",
-    "```\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "First we need to instantiate the ERDDAP URL constructor for a server. In this\n",
-    "example we will use\n",
-    "[https://gliders.ioos.us/erddap](https://gliders.ioos.us/erddap/index.html).\n"
+    "```\n",
+    "\n",
+    "\n",
+    "First we need to instantiate the ERDDAP URL constructor for a server.\n",
+    "In these examples we will use\n",
+    "[https://standards.sensors.ioos.us/erddap/index.html](https://standards.sensors.ioos.us/erddap/index.html) and [https://erddap.ioos.us/erddap/index.html](https://erddap.ioos.us/erddap/index.html)."
    ]
   },
   {
@@ -33,10 +29,10 @@
    "execution_count": 1,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2021-08-16T17:25:28.046265Z",
-     "iopub.status.busy": "2021-08-16T17:25:28.045678Z",
-     "iopub.status.idle": "2021-08-16T17:25:28.965466Z",
-     "shell.execute_reply": "2021-08-16T17:25:28.964984Z"
+     "iopub.execute_input": "2023-04-19T11:44:04.919350Z",
+     "iopub.status.busy": "2023-04-19T11:44:04.918898Z",
+     "iopub.status.idle": "2023-04-19T11:44:05.542712Z",
+     "shell.execute_reply": "2023-04-19T11:44:05.541885Z"
     }
    },
    "outputs": [],
@@ -44,8 +40,9 @@
     "from erddapy import ERDDAP\n",
     "\n",
     "\n",
+    "server = \"https://standards.sensors.ioos.us/erddap\"\n",
     "e = ERDDAP(\n",
-    "    server=\"NGDAC\",  # \"NOAA IOOS NGDAC (National Glider Data Assembly Center)\"\n",
+    "    server=server,\n",
     "    protocol=\"tabledap\",\n",
     "    response=\"csv\",\n",
     ")"
@@ -56,7 +53,8 @@
    "metadata": {},
    "source": [
     "Now we can populate the object a dataset id, variables of interest, and its\n",
-    "constraints. We can download the csvp response with the `.to_pandas` method.\n"
+    "constraints (last week gliders). Use the method `to_pandas` to download the\n",
+    "csv(p) response, a comma separated values with units and explore the Dataframe.\n"
    ]
   },
   {
@@ -64,10 +62,10 @@
    "execution_count": 2,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2021-08-16T17:25:28.970807Z",
-     "iopub.status.busy": "2021-08-16T17:25:28.970303Z",
-     "iopub.status.idle": "2021-08-16T17:25:30.608780Z",
-     "shell.execute_reply": "2021-08-16T17:25:30.609233Z"
+     "iopub.execute_input": "2023-04-19T11:44:05.546220Z",
+     "iopub.status.busy": "2023-04-19T11:44:05.545819Z",
+     "iopub.status.idle": "2023-04-19T11:44:06.045629Z",
+     "shell.execute_reply": "2023-04-19T11:44:06.045095Z"
     }
    },
    "outputs": [
@@ -92,15 +90,13 @@
        "  <thead>\n",
        "    <tr style=\"text-align: right;\">\n",
        "      <th></th>\n",
-       "      <th>depth (m)</th>\n",
        "      <th>latitude (degrees_north)</th>\n",
        "      <th>longitude (degrees_east)</th>\n",
-       "      <th>salinity (1)</th>\n",
-       "      <th>temperature (Celsius)</th>\n",
+       "      <th>sea_water_temperature (degree_Celsius)</th>\n",
+       "      <th>air_temperature (degree_Celsius)</th>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>time (UTC)</th>\n",
-       "      <th></th>\n",
        "      <th></th>\n",
        "      <th></th>\n",
        "      <th></th>\n",
@@ -109,73 +105,68 @@
        "  </thead>\n",
        "  <tbody>\n",
        "    <tr>\n",
-       "      <th>2016-09-03 20:15:46+00:00</th>\n",
-       "      <td>5.35</td>\n",
-       "      <td>40.990881</td>\n",
-       "      <td>-71.12439</td>\n",
-       "      <td>32.245422</td>\n",
-       "      <td>20.6620</td>\n",
+       "      <th>2000-01-01 00:08:00+00:00</th>\n",
+       "      <td>32.8032</td>\n",
+       "      <td>-79.6204</td>\n",
+       "      <td>14.01</td>\n",
+       "      <td>14.42</td>\n",
        "    </tr>\n",
        "    <tr>\n",
-       "      <th>2016-09-03 20:15:46+00:00</th>\n",
-       "      <td>6.09</td>\n",
-       "      <td>40.990881</td>\n",
-       "      <td>-71.12439</td>\n",
-       "      <td>32.223183</td>\n",
-       "      <td>20.6512</td>\n",
+       "      <th>2000-01-01 01:08:00+00:00</th>\n",
+       "      <td>32.8032</td>\n",
+       "      <td>-79.6204</td>\n",
+       "      <td>13.92</td>\n",
+       "      <td>13.91</td>\n",
        "    </tr>\n",
        "    <tr>\n",
-       "      <th>2016-09-03 20:15:46+00:00</th>\n",
-       "      <td>6.72</td>\n",
-       "      <td>40.990881</td>\n",
-       "      <td>-71.12439</td>\n",
-       "      <td>32.237950</td>\n",
-       "      <td>20.6047</td>\n",
+       "      <th>2000-01-01 02:08:00+00:00</th>\n",
+       "      <td>32.8032</td>\n",
+       "      <td>-79.6204</td>\n",
+       "      <td>13.90</td>\n",
+       "      <td>13.60</td>\n",
        "    </tr>\n",
        "    <tr>\n",
-       "      <th>2016-09-03 20:15:46+00:00</th>\n",
-       "      <td>7.37</td>\n",
-       "      <td>40.990881</td>\n",
-       "      <td>-71.12439</td>\n",
-       "      <td>32.235470</td>\n",
-       "      <td>20.5843</td>\n",
+       "      <th>2000-01-01 03:08:00+00:00</th>\n",
+       "      <td>32.8032</td>\n",
+       "      <td>-79.6204</td>\n",
+       "      <td>13.92</td>\n",
+       "      <td>13.47</td>\n",
        "    </tr>\n",
        "    <tr>\n",
-       "      <th>2016-09-03 20:15:46+00:00</th>\n",
-       "      <td>8.43</td>\n",
-       "      <td>40.990881</td>\n",
-       "      <td>-71.12439</td>\n",
-       "      <td>32.224503</td>\n",
-       "      <td>20.5691</td>\n",
+       "      <th>2000-01-01 04:08:00+00:00</th>\n",
+       "      <td>32.8032</td>\n",
+       "      <td>-79.6204</td>\n",
+       "      <td>13.93</td>\n",
+       "      <td>13.28</td>\n",
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
        "</div>"
       ],
       "text/plain": [
-       "                           depth (m)  latitude (degrees_north)  \\\n",
-       "time (UTC)                                                       \n",
-       "2016-09-03 20:15:46+00:00       5.35                 40.990881   \n",
-       "2016-09-03 20:15:46+00:00       6.09                 40.990881   \n",
-       "2016-09-03 20:15:46+00:00       6.72                 40.990881   \n",
-       "2016-09-03 20:15:46+00:00       7.37                 40.990881   \n",
-       "2016-09-03 20:15:46+00:00       8.43                 40.990881   \n",
+       "                           latitude (degrees_north)  longitude (degrees_east)   \n",
+       "time (UTC)                                                                      \n",
+       "2000-01-01 00:08:00+00:00                   32.8032                  -79.6204  \\\n",
+       "2000-01-01 01:08:00+00:00                   32.8032                  -79.6204   \n",
+       "2000-01-01 02:08:00+00:00                   32.8032                  -79.6204   \n",
+       "2000-01-01 03:08:00+00:00                   32.8032                  -79.6204   \n",
+       "2000-01-01 04:08:00+00:00                   32.8032                  -79.6204   \n",
        "\n",
-       "                           longitude (degrees_east)  salinity (1)  \\\n",
+       "                           sea_water_temperature (degree_Celsius)   \n",
        "time (UTC)                                                          \n",
-       "2016-09-03 20:15:46+00:00                 -71.12439     32.245422   \n",
-       "2016-09-03 20:15:46+00:00                 -71.12439     32.223183   \n",
-       "2016-09-03 20:15:46+00:00                 -71.12439     32.237950   \n",
-       "2016-09-03 20:15:46+00:00                 -71.12439     32.235470   \n",
-       "2016-09-03 20:15:46+00:00                 -71.12439     32.224503   \n",
+       "2000-01-01 00:08:00+00:00                                   14.01  \\\n",
+       "2000-01-01 01:08:00+00:00                                   13.92   \n",
+       "2000-01-01 02:08:00+00:00                                   13.90   \n",
+       "2000-01-01 03:08:00+00:00                                   13.92   \n",
+       "2000-01-01 04:08:00+00:00                                   13.93   \n",
        "\n",
-       "                           temperature (Celsius)  \n",
-       "time (UTC)                                        \n",
-       "2016-09-03 20:15:46+00:00                20.6620  \n",
-       "2016-09-03 20:15:46+00:00                20.6512  \n",
-       "2016-09-03 20:15:46+00:00                20.6047  \n",
-       "2016-09-03 20:15:46+00:00                20.5843  \n",
-       "2016-09-03 20:15:46+00:00                20.5691  "
+       "                           air_temperature (degree_Celsius)  \n",
+       "time (UTC)                                                   \n",
+       "2000-01-01 00:08:00+00:00                             14.42  \n",
+       "2000-01-01 01:08:00+00:00                             13.91  \n",
+       "2000-01-01 02:08:00+00:00                             13.60  \n",
+       "2000-01-01 03:08:00+00:00                             13.47  \n",
+       "2000-01-01 04:08:00+00:00                             13.28  "
       ]
      },
      "execution_count": 2,
@@ -184,24 +175,18 @@
     }
    ],
    "source": [
-    "e.dataset_id = \"whoi_406-20160902T1700\"\n",
+    "e.dataset_id = \"org_cormp_cap2\"\n",
     "\n",
     "e.variables = [\n",
-    "    \"depth\",\n",
+    "    \"time\",\n",
     "    \"latitude\",\n",
     "    \"longitude\",\n",
-    "    \"salinity\",\n",
-    "    \"temperature\",\n",
-    "    \"time\",\n",
+    "    \"sea_water_temperature\",\n",
+    "    \"air_temperature\"\n",
     "]\n",
     "\n",
     "e.constraints = {\n",
-    "    \"time>=\": \"2016-09-03T00:00:00Z\",\n",
-    "    \"time<=\": \"2016-09-04T00:00:00Z\",\n",
-    "    \"latitude>=\": 38.0,\n",
-    "    \"latitude<=\": 41.0,\n",
-    "    \"longitude>=\": -72.0,\n",
-    "    \"longitude<=\": -69.0,\n",
+    "    \"time>=\": \"2000-01-01\",\n",
     "}\n",
     "\n",
     "\n",
@@ -209,6 +194,171 @@
     "    index_col=\"time (UTC)\",\n",
     "    parse_dates=True,\n",
     ").dropna()\n",
+    "\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can constraint the in time and space with relative constraints like in the\n",
+    "example below. For more ways to access the data please check the \"Longer\n",
+    "introduction.\"\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2023-04-19T11:44:06.083182Z",
+     "iopub.status.busy": "2023-04-19T11:44:06.082517Z",
+     "iopub.status.idle": "2023-04-19T11:44:06.089056Z",
+     "shell.execute_reply": "2023-04-19T11:44:06.088402Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "https://erddap.ioos.us/erddap/tabledap/processed_asset_inventory.htmlTable?&longitude<=min(longitude)+10&longitude>=min(longitude)&latitude<=min(latitude)+10&latitude>=min(latitude)\n"
+     ]
+    }
+   ],
+   "source": [
+    "server = \"https://erddap.ioos.us/erddap\"\n",
+    "e = ERDDAP(\n",
+    "    server=server,\n",
+    "    protocol=\"tabledap\",\n",
+    "    response=\"csv\",\n",
+    ")\n",
+    "\n",
+    "e.dataset_id = \"processed_asset_inventory\"\n",
+    "\n",
+    "# Get the box of the first 10 degrees bbox.\n",
+    "constraints = {\n",
+    "    \"longitude<=\": \"min(longitude)+10\",\n",
+    "    \"longitude>=\": \"min(longitude)\",\n",
+    "    \"latitude<=\": \"min(latitude)+10\",\n",
+    "    \"latitude>=\": \"min(latitude)\",\n",
+    "}\n",
+    "\n",
+    "\n",
+    "url = e.get_download_url(\n",
+    "    response=\"htmlTable\",\n",
+    "    constraints=constraints,\n",
+    ")\n",
+    "\n",
+    "print(url)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can search all datasets with a set of constraints by setting `dataset_id` to `\"allDatasets\"`. Note that these variables are different than the ones available at the individual dataset level. For a reference of the possible variables to query all datasets see the `<server-url>/erddap/<protocol>/allDatasets.html` page, like [this one](https://erddap.ifremer.fr/erddap/tabledap/allDatasets.html) for the Ifremer ERDDAP server."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2023-04-19T11:44:06.091809Z",
+     "iopub.status.busy": "2023-04-19T11:44:06.091269Z",
+     "iopub.status.idle": "2023-04-19T11:44:06.413382Z",
+     "shell.execute_reply": "2023-04-19T11:44:06.412155Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "https://erddap.ioos.us/erddap/tabledap/allDatasets.html?datasetID,institution\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>institution</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>datasetID</th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>allDatasets</th>\n",
+       "      <td>Axiom Docker Install</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>processed_asset_inventory</th>\n",
+       "      <td>NOAA/NOS/IOOS</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>raw_asset_inventory</th>\n",
+       "      <td>NOAA/NOS/IOOS</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>gts_statistics</th>\n",
+       "      <td>NOAA NDBC</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                    institution\n",
+       "datasetID                                      \n",
+       "allDatasets                Axiom Docker Install\n",
+       "processed_asset_inventory         NOAA/NOS/IOOS\n",
+       "raw_asset_inventory               NOAA/NOS/IOOS\n",
+       "gts_statistics                        NOAA NDBC"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "e.dataset_id = \"allDatasets\"\n",
+    "\n",
+    "e.variables = [\n",
+    "    \"datasetID\",\n",
+    "    \"institution\",\n",
+    "]\n",
+    "\n",
+    "\n",
+    "url = e.get_download_url(response=\"html\")\n",
+    "print(url)\n",
+    "\n",
+    "df = e.to_pandas(\n",
+    "    index_col=\"datasetID\",\n",
+    ").dropna()\n",
+    "\n",
     "\n",
     "df.head()"
    ]
@@ -227,7 +377,7 @@
   },
   "gist_id": "3f0f25b13ade0c64c84607bd92903d1b",
   "kernelspec": {
-   "display_name": "Python 3",
+   "display_name": "Python 3 (ipykernel)",
    "language": "python",
    "name": "python3"
   },
@@ -241,7 +391,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.6"
+   "version": "3.11.3"
   }
  },
  "nbformat": 4,

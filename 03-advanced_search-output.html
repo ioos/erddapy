@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Searching datasets &#8212; erddapy 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ERDDAP class API" href="erddapy.html" />
+    <link rel="prev" title="Extra convenience methods for common responses" href="02-extras-output.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=ioos&repo=erddapy&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-quick_intro-output.html">Quick introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01a-griddap-output.html">Griddap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01b-tabledap-output.html">Longer introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-extras-output.html">Extra convenience methods for common responses</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Searching datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="erddapy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code></a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="02-extras-output.html" title="previous chapter">Extra convenience methods for common responses</a></li>
+      <li>Next: <a href="erddapy.html" title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="Searching-datasets">
+<h1>Searching datasets<a class="headerlink" href="#Searching-datasets" title="Permalink to this heading">¶</a></h1>
+<p>erddapy can wrap the same form-like search capabilities of ERDDAP with the <em>search_for</em> keyword.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy</span> <span class="kn">import</span> <span class="n">ERDDAP</span>
+
+
+<span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="s2">&quot;https://pae-paha.pacioos.hawaii.edu/erddap&quot;</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;griddap&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Single word search.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">search_for</span> <span class="o">=</span> <span class="s2">&quot;etopo&quot;</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0           etopo1_bedrock
+1    etopo1_bedrock_lon360
+2               etopo1_ice
+3        etopo1_ice_lon360
+4                   etopo5
+5            etopo5_lon180
+Name: Dataset ID, dtype: object
+</pre></div></div>
+</div>
+<p>Filtering the search with extra words.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">search_for</span> <span class="o">=</span> <span class="s2">&quot;etopo5&quot;</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0           etopo5
+1    etopo5_lon180
+Name: Dataset ID, dtype: object
+</pre></div></div>
+</div>
+<p>Filtering the search with words that should <strong>not</strong> be found.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">search_for</span> <span class="o">=</span> <span class="s2">&quot;etopo5 -lon360&quot;</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0           etopo5
+1    etopo5_lon180
+Name: Dataset ID, dtype: object
+</pre></div></div>
+</div>
+<p>Quoted search or “phrase search,” first let us try the unquoted search.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">search_for</span> <span class="o">=</span> <span class="s2">&quot;ocean bathymetry&quot;</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+70
+</pre></div></div>
+</div>
+<p>Too many datasets because wind, speed, and wind speed are matched. Now let’s use the quoted search to reduce the number of results to only wind speed.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">search_for</span> <span class="o">=</span> <span class="s1">&#39;&quot;ocean bathymetry&quot;&#39;</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+6
+</pre></div></div>
+</div>
+<p>Another common search operation would be to search multiple servers instead of only one. In erddapy we can achieve that with <code class="docutils literal notranslate"><span class="pre">search_servers</span></code>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy.multiple_server_search</span> <span class="kn">import</span> <span class="n">search_servers</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">search_servers</span><span class="p">(</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;glider&quot;</span><span class="p">,</span>
+    <span class="n">servers_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tabledap&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> entries in this search!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+There are 3092 entries in this search!
+</pre></div></div>
+</div>
+<p>These are the servers that have glider data according to our query.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Server url&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;http://erddap.cencoos.org/erddap/&#39;,
+ &#39;http://erddap.secoora.org/erddap/&#39;,
+ &#39;http://erddap.sochic-h2020.eu/erddap/&#39;,
+ &#39;http://tds.marine.rutgers.edu/erddap/&#39;,
+ &#39;https://cwcgom.aoml.noaa.gov/erddap/&#39;,
+ &#39;https://erddap-goldcopy.dataexplorer.oceanobservatories.org/erddap/&#39;,
+ &#39;https://erddap.axiomdatascience.com/erddap/&#39;,
+ &#39;https://erddap.bco-dmo.org/erddap/&#39;,
+ &#39;https://erddap.emodnet-physics.eu/erddap/&#39;,
+ &#39;https://erddap.griidc.org/erddap/&#39;,
+ &#39;https://gliders.ioos.us/erddap/&#39;,
+ &#39;https://pae-paha.pacioos.hawaii.edu/erddap/&#39;,
+ &#39;https://spraydata.ucsd.edu/erddap/&#39;,
+ &#39;https://www.ifremer.fr/erddap/&#39;,
+ &#39;https://www.smartatlantic.ca/erddap/&#39;}
+</pre></div></div>
+</div>
+<p>One way to reduce is to search a subset of the servers with the <code class="docutils literal notranslate"><span class="pre">servers_list</span></code> argument. We can also use it to search servers that are not part of the awesome ERDDAP list (<a class="reference external" href="https://github.com/IrishMarineInstitute/awesome-erddap">https://github.com/IrishMarineInstitute/awesome-erddap</a>).</p>
+<p>One can also perform an advanced search with ERDDAP constraints <code class="docutils literal notranslate"><span class="pre">advanced_search_servers</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy.multiple_server_search</span> <span class="kn">import</span> <span class="n">advanced_search_servers</span>
+
+
+<span class="n">min_time</span> <span class="o">=</span> <span class="s2">&quot;2017-07-01T00:00:00Z&quot;</span>
+<span class="n">max_time</span> <span class="o">=</span> <span class="s2">&quot;2017-09-01T00:00:00Z&quot;</span>
+<span class="n">min_lon</span><span class="p">,</span> <span class="n">max_lon</span> <span class="o">=</span> <span class="o">-</span><span class="mi">127</span><span class="p">,</span> <span class="o">-</span><span class="mf">123.75</span>
+<span class="n">min_lat</span><span class="p">,</span> <span class="n">max_lat</span> <span class="o">=</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">48</span>
+<span class="n">standard_name</span> <span class="o">=</span> <span class="s2">&quot;sea_water_practical_salinity&quot;</span>
+
+
+<span class="n">kw</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;standard_name&quot;</span><span class="p">:</span> <span class="n">standard_name</span><span class="p">,</span>
+    <span class="s2">&quot;min_lon&quot;</span><span class="p">:</span> <span class="n">min_lon</span><span class="p">,</span>
+    <span class="s2">&quot;max_lon&quot;</span><span class="p">:</span> <span class="n">max_lon</span><span class="p">,</span>
+    <span class="s2">&quot;min_lat&quot;</span><span class="p">:</span> <span class="n">min_lat</span><span class="p">,</span>
+    <span class="s2">&quot;max_lat&quot;</span><span class="p">:</span> <span class="n">max_lat</span><span class="p">,</span>
+    <span class="s2">&quot;min_time&quot;</span><span class="p">:</span> <span class="n">min_time</span><span class="p">,</span>
+    <span class="s2">&quot;max_time&quot;</span><span class="p">:</span> <span class="n">max_time</span><span class="p">,</span>
+    <span class="s2">&quot;cdm_data_type&quot;</span><span class="p">:</span> <span class="s2">&quot;timeseries&quot;</span><span class="p">,</span>  <span class="c1"># let&#39;s exclude AUV&#39;s tracks</span>
+<span class="p">}</span>
+
+
+<span class="n">servers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;ooi&quot;</span><span class="p">:</span> <span class="s2">&quot;https://erddap.dataexplorer.oceanobservatories.org/erddap/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ioos&quot;</span><span class="p">:</span> <span class="s2">&quot;https://erddap.sensors.ioos.us/erddap/&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">advanced_search_servers</span><span class="p">(</span><span class="n">servers_list</span><span class="o">=</span><span class="n">servers</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Title</th>
+      <th>Institution</th>
+      <th>Dataset ID</th>
+      <th>Server url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Coastal Endurance: Oregon Inshore Surface Moor...</td>
+      <td>Ocean Observatories Initiative (OOI)</td>
+      <td>ooi-ce01issm-rid16-02-flortd000</td>
+      <td>https://erddap.dataexplorer.oceanobservatories...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Coastal Endurance: Oregon Inshore Surface Moor...</td>
+      <td>Ocean Observatories Initiative (OOI)</td>
+      <td>ooi-ce01issm-rid16-03-ctdbpc000</td>
+      <td>https://erddap.dataexplorer.oceanobservatories...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Coastal Endurance: Oregon Inshore Surface Moor...</td>
+      <td>Ocean Observatories Initiative (OOI)</td>
+      <td>ooi-ce01issm-rid16-03-dostad000</td>
+      <td>https://erddap.dataexplorer.oceanobservatories...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Coastal Endurance: Oregon Inshore Surface Moor...</td>
+      <td>Ocean Observatories Initiative (OOI)</td>
+      <td>ooi-ce01issm-rid16-07-nutnrb000</td>
+      <td>https://erddap.dataexplorer.oceanobservatories...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Coastal Endurance: Oregon Inshore Surface Moor...</td>
+      <td>Ocean Observatories Initiative (OOI)</td>
+      <td>ooi-ce01issm-rid16-06-phsend000</td>
+      <td>https://erddap.dataexplorer.oceanobservatories...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Filipe Fernandes.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/03-advanced_search-output.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/ioos/erddapy" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
