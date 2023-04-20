@@ -1,6 +1,7 @@
 """Test netCDF loading."""
 
 import os
+import platform
 
 import pytest
 
@@ -23,6 +24,10 @@ def test__nc_dataset_in_memory_https():
 
 @pytest.mark.web
 @pytest.mark.vcr()
+@pytest.mark.skipif(
+    platform.system().lower() == "windows",
+    reason="does not remove the file on windows",
+)
 def test__tempnc():
     """Test temporary netcdf file."""
     url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"  # noqa
