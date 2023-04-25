@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import copy
 import functools
 import io
@@ -61,12 +62,13 @@ def _sort_url(url: str) -> str:
 def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     if "timeout" not in kwargs:
         kwargs["timeout"] = 60
-    response = httpx.get(
-        quote_url(url),
-        follow_redirects=True,
-        auth=auth,
-        **kwargs,
-    )
+    with httpx.Client() as client:
+        p = parse.urlparse(url)
+        protocol = 'tabledap' if 'tabledap' in p.path else 'griddap'
+        login_page = "%s://%s%s/login.html" % (p.scheme, p.netloc, p.path.split('/%s/' % protocol)[0])
+        client.post(login_page, data={'user': os.getenv("ERDDAP_USERNAME"), 'password': os.getenv("ERDDAP_PASSWORD")})
+        response = client.get(url, follow_redirects=True, auth=auth, **kwargs)
+
     try:
         response.raise_for_status()
     except httpx.HTTPError as err:
