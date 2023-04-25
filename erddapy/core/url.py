@@ -1,11 +1,12 @@
 """URL handling."""
 
+import os
 import copy
 import functools
 import io
 from datetime import datetime
 from typing import BinaryIO, Dict, List, Optional, Tuple, Union
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, urlparse
 
 import httpx
 import pytz
@@ -17,7 +18,13 @@ OptionalStr = Optional[str]
 
 @functools.lru_cache(maxsize=128)
 def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
-    response = httpx.get(url, follow_redirects=True, auth=auth, **kwargs)
+    with httpx.Client() as client:
+        p = urlparse(url)
+        protocol = 'tabledap' if 'tabledap' in p.path else 'griddap'
+        login_page = "%s://%s%s/login.html" % (p.scheme, p.netloc, p.path.split('/%s/' % protocol)[0])
+        client.post(login_page, data={'user': os.getenv("ERDDAP_USERNAME"), 'password': os.getenv("ERDDAP_PASSWORD")})
+        response = client.get(url, follow_redirects=True, auth=auth, **kwargs)
+
     try:
         response.raise_for_status()
     except httpx.HTTPError as err:
