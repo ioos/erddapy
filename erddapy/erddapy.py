@@ -334,7 +334,10 @@ class ERDDAP:
             distinct,
         )
 
-    def to_pandas(self, **kw):
+    def to_pandas(self,
+        requests_kwargs: Optional[Dict] = None,
+        **kw,
+    ) -> "pd.DataFrame":
         """Save a data request to a pandas.DataFrame.
 
         Accepts any `pandas.read_csv` keyword arguments, passed as a dictionary to pandas_kwargs.
@@ -344,11 +347,13 @@ class ERDDAP:
 
         [1] Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
 
+        requests_kwargs: kwargs to be passed to urlopen method.
+        **kw: kwargs to be passed to third-party library (pandas).
         """
         response = kw.pop("response", "csvp")
         distinct = kw.pop("distinct", False)
         url = self.get_download_url(response=response, distinct=distinct)
-        return to_pandas(url, pandas_kwargs=dict(**kw))
+        return to_pandas(url, requests_kwargs=requests_kwargs, pandas_kwargs=dict(**kw))
 
     def to_ncCF(self, protocol: str = None, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
