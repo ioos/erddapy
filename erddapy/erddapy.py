@@ -334,7 +334,8 @@ class ERDDAP:
             distinct,
         )
 
-    def to_pandas(self,
+    def to_pandas(
+        self,
         requests_kwargs: Optional[Dict] = None,
         **kw,
     ) -> "pd.DataFrame":
