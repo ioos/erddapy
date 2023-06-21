@@ -158,6 +158,10 @@ class ERDDAP:
             )
         if dataset_id is None:
             raise ValueError(f"Must set a valid dataset_id, got {self.dataset_id}")
+        # Return the opendap URL without any slicing so the user can do it later.
+        if self.response == "opendap":
+            return
+
         metadata_url = f"{self.server}/griddap/{self.dataset_id}"
         (
             self.constraints,
