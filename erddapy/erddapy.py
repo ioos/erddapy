@@ -273,7 +273,7 @@ class ERDDAP:
         dim_names: Optional[ListLike] = None,
         response=None,
         constraints=None,
-        **kwargs,
+        distinct=False,
     ) -> str:
         """
         Build the download URL for the `server` endpoint.
@@ -331,10 +331,14 @@ class ERDDAP:
             dim_names,
             response,
             constraints,
-            **kwargs,
+            distinct,
         )
 
-    def to_pandas(self, **kw):
+    def to_pandas(
+        self,
+        requests_kwargs: Optional[Dict] = None,
+        **kw,
+    ) -> "pd.DataFrame":
         """Save a data request to a pandas.DataFrame.
 
         Accepts any `pandas.read_csv` keyword arguments, passed as a dictionary to pandas_kwargs.
@@ -344,15 +348,19 @@ class ERDDAP:
 
         [1] Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
 
+        requests_kwargs: kwargs to be passed to urlopen method.
+        **kw: kwargs to be passed to third-party library (pandas).
         """
         response = kw.pop("response", "csvp")
-        url = self.get_download_url(response=response, **kw)
-        return to_pandas(url, pandas_kwargs=dict(**kw))
+        distinct = kw.pop("distinct", False)
+        url = self.get_download_url(response=response, distinct=distinct)
+        return to_pandas(url, requests_kwargs=requests_kwargs, pandas_kwargs=dict(**kw))
 
     def to_ncCF(self, protocol: str = None, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
+        distinct = kw.pop("distinct", False)
         protocol = protocol if protocol else self.protocol
-        url = self.get_download_url(response="ncCF", **kw)
+        url = self.get_download_url(response="ncCF", distinct=distinct)
         return to_ncCF(url, protocol=protocol, requests_kwargs=dict(**kw))
 
     def to_xarray(self, **kw):
@@ -366,7 +374,8 @@ class ERDDAP:
             response = "nc"
         else:
             response = "ncCF"
-        url = self.get_download_url(response=response)
+        distinct = kw.pop("distinct", False)
+        url = self.get_download_url(response=response, distinct=distinct)
         requests_kwargs = {"auth": self.auth}
         return to_xarray(url, response, requests_kwargs, xarray_kwargs=dict(**kw))
 
@@ -376,7 +385,8 @@ class ERDDAP:
         Accepts any `iris.load_raw` keyword arguments.
         """
         response = "nc" if self.protocol == "griddap" else "ncCF"
-        url = self.get_download_url(response=response, **kw)
+        distinct = kw.pop("distinct", False)
+        url = self.get_download_url(response=response, distinct=distinct)
         return to_iris(url, iris_kwargs=dict(**kw))
 
     def _get_variables_uncached(self, dataset_id: OptionalStr = None) -> Dict:

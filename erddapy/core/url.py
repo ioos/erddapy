@@ -56,7 +56,7 @@ def check_url_response(url: str, **kwargs: Dict) -> str:
     return url
 
 
-def _distinct(url: str, **kwargs: Dict) -> str:
+def _distinct(url: str, distinct: Optional[bool] = False) -> str:
     """
     Sort all of the rows in the results table.
 
@@ -70,8 +70,7 @@ def _distinct(url: str, **kwargs: Dict) -> str:
     See http://erddap.ioos.us/erddap/tabledap/documentation.html#distinct
 
     """
-    distinct = kwargs.pop("distinct", False)
-    if distinct is True:
+    if distinct:
         return f"{url}&distinct()"
     return url
 
@@ -342,7 +341,7 @@ def get_download_url(
     dim_names: Optional[ListLike] = None,
     response=None,
     constraints=None,
-    **kwargs,
+    distinct=False,
 ) -> str:
     """
     Build the download URL for the `server` endpoint.
@@ -436,5 +435,5 @@ def get_download_url(
 
         url += f"{_constraints_url}"
 
-    url = _distinct(url, **kwargs)
+    url = _distinct(url, distinct)
     return url

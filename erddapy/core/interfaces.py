@@ -28,7 +28,7 @@ def to_pandas(
     requests_kwargs: arguments to be passed to urlopen method.
     **pandas_kwargs: kwargs to be passed to third-party library (pandas).
     """
-    data = urlopen(url, **(requests_kwargs or {}))
+    data = urlopen(url, requests_kwargs or {})
     try:
         return pd.read_csv(data, **(pandas_kwargs or {}))
     except Exception as e:
