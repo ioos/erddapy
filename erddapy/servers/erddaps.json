@@ -1,5 +1,11 @@
 [
 	{
+		"name": "St. Lawrence Global Observatory - CIOOS | Observatoire global du Saint-Laurent - SIOOC",
+		"short_name": "SLGO-OGSL",
+		"url": "https://erddap.ogsl.ca/erddap/",
+		"public": true
+	},
+	{
 		"name": "CoastWatch West Coast Node",
 		"short_name": "CSWC",
 		"url": "https://coastwatch.pfeg.noaa.gov/erddap/",
@@ -44,13 +50,19 @@
     {
 		"name": "NOAA IOOS Sensors ERDDAP",
 		"short_name": "IOOS-Sensors",
-		"url": "http://erddap.sensors.ioos.us/erddap/",
+		"url": "https://erddap.sensors.ioos.us/erddap/",
 		"public": true
 	},
     {
 		"name": "NOAA IOOS CeNCOOS (Central and Northern California Ocean Observing System)",
 		"short_name": "CeNCOOS",
-		"url": "http://erddap.axiomdatascience.com/erddap/",
+		"url": "https://erddap.axiomdatascience.com/erddap/",
+		"public": true
+	},
+	  {
+		"name": "CeNCOOS (Central and Northern California Ocean Observing System) ERDDAP",
+		"short_name": "CeNCOOS ERDDAP",
+		"url": "http://erddap.cencoos.org/erddap/",
 		"public": true
 	},
     {
@@ -74,19 +86,13 @@
     {
 		"name": "Southern California Coastal Ocean Observing System (SCCOOS)",
 		"short_name": "SCCOOS",
-		"url": "http://sccoos.org/erddap/",
+		"url": "https://sccoos.org/erddap/",
 		"public": true
 	},
     {
 		"name": "NOAA IOOS SECOORA (Southeast Coastal Ocean Observing Regional Association)",
 		"short_name": "SECOORA",
 		"url": "http://erddap.secoora.org/erddap/",
-		"public": true
-	},
-    {
-		"name": "NOAA NCEI (National Centers for Environmental Information) / NCDDC",
-		"short_name": "NCDDC",
-		"url": "https://ecowatch.ncddc.noaa.gov/erddap/",
 		"public": true
 	},
     {
@@ -110,7 +116,13 @@
     {
 		"name": "Ocean Observatories Initiative (OOI)",
 		"short_name": "OOI",
-		"url": "https://erddap-uncabled.oceanobservatories.org/uncabled/erddap/",
+		"url": "https://erddap.dataexplorer.oceanobservatories.org/erddap/",
+		"public": true
+	},
+    {
+		"name": "Ocean Observatories Initiative (OOI) Goldcopy",
+		"short_name": "OOI Goldcopy",
+		"url": "https://erddap-goldcopy.dataexplorer.oceanobservatories.org/erddap/",
 		"public": true
 	},
     {
@@ -120,7 +132,7 @@
 		"public": true
 	},
     {
-		"name": "",
+		"name": "Regional Ocean Modelling System",
 		"short_name": "MYROMS",
 		"url": "http://www.myroms.org:8080/erddap/",
 		"public": false
@@ -144,15 +156,15 @@
 		"public": true
 	},
     {
-		"name": "",
+		"name": "GCOOS Atmospheric and Oceanographic: Historical Data",
 		"short_name": "GCOO5-TAMU",
-		"url": "http://gcoos5.geos.tamu.edu:6060/erddap/",
+		"url": "https://gcoos5.geos.tamu.edu/erddap/",
 		"public": false
 	},
     {
-		"name": "",
+		"name": "GCOOS Biological and Socioeconomics",
 		"short_name": "GCOO4-TAMU",
-		"url": "http://gcoos4.tamu.edu:8080/erddap/",
+		"url": "https://gcoos4.tamu.edu/erddap/",
 		"public": false
 	},
     {
@@ -160,12 +172,6 @@
 		"short_name": "GLERL",
 		"url": "https://coastwatch.glerl.noaa.gov/erddap/",
 		"public": true
-	},
-    {
-		"name": "",
-		"short_name": "SFEI",
-		"url": "http://sfbaynutrients.sfei.org/erddap/",
-		"public": false
 	},
     {
 		"name": "Spray Underwater Glider data from Instrument Development Group, Scripps Institute of Oceanography, University of California, San Diego",
@@ -198,15 +204,9 @@
 		"public": true
 	},
 	{
-		"name": "R.Tech Engineering",
-		"short_name": "RTECH",
-		"url": "https://meteo.rtech.fr/erddap/",
-		"public": true
-	},
-	{
 		"name": "French Research Institute for the Exploitation of the Sea",
 		"short_name": "IFREMER",
-		"url": "http://www.ifremer.fr/erddap/",
+		"url": "https://www.ifremer.fr/erddap/",
 		"public": true
 	},
 	{
@@ -228,8 +228,8 @@
 		"public": true
 	},
 	{
-		"name": "HAKAI Institute",
-		"short_name": "HAKAI",
+		"name": "Hakai Institute",
+		"short_name": "Hakai",
 		"url": "https://catalogue.hakai.org/erddap/",
 		"public": true
 	},
@@ -240,7 +240,7 @@
 		"public": true
 	},
 	{
-		"name": "NOAH Polar Watch",
+		"name": "NOAA Polar Watch",
 		"short_name": "POLARWATCH",
 		"url": "https://polarwatch.noaa.gov/erddap/",
 		"public": true
@@ -282,7 +282,7 @@
 		"public": true
 	},
 	{
-		"name": "NOAH ATN IOOS (Animal Telemetry Network)",
+		"name": "NOAA ATN IOOS (Animal Telemetry Network)",
 		"short_name": "ATN-IOOS",
 		"url": "https://atn.ioos.us/erddap/",
 		"public": true
@@ -297,6 +297,66 @@
 		"name": "JEODPP ERDDAP server",
 		"short_name": "JEOPP",
 		"url": "https://jeodpp.jrc.ec.europa.eu/services/erddap/",
+		"public": true
+	},
+	{
+		"name": "GCOOS Atmospheric and Oceanographic: Observing System",
+		"short_name": "GCOOS",
+		"url": "https://erddap.gcoos.org/erddap/",
+		"public": true
+	},
+	{
+		"name": "University of Delaware, College of Earth, Ocean and Environment",
+		"short_name": "CEOE",
+		"url": "https://basin.ceoe.udel.edu/erddap/",
+		"public": true
+	},
+	{
+		"name": "Canadian Integrated Ocean Observatory System Atlantic",
+		"short_name": "CIOOS Atlantic",
+		"url": "https://cioosatlantic.ca/erddap/",
+		"public": true
+	},
+	{
+		"name": "Canadian Integrated Ocean Observatory System Pacific",
+		"short_name": "CIOOS Pacific",
+		"url": "https://data.cioospacific.ca/erddap/",
+		"public": true
+	},
+	{
+		"name": "European Multidisciplinary Seafloor and water column Observatory (EMSO)",
+		"short_name": "EMSO ERIC",
+		"url": "http://erddap.emso.eu:8080/erddap/",
+		"public": true
+	},
+	{
+		"name": "Southern Ocean Carbon and Heat Imact on Climate (SO-CHIC)",
+		"short_name": "SO-CHIC",
+		"url": "http://erddap.sochic-h2020.eu/erddap/",
+		"public": true
+	},
+	{
+		"name": "NOAA CoastWatch Central Operations",
+		"short_name": "NCCO",
+		"url": "https://coastwatch.noaa.gov/erddap/",
+		"public": true
+	},
+	{
+		"name": "The Canadian Watershed Information Network at the University of Manitoba",
+		"short_name": "CanWIN",
+		"url": "https://canwinerddap.ad.umanitoba.ca/erddap/index.html",
+		"public": true
+	},
+	{
+		"name": "NOAA Oceanview",
+		"short_name": "NOAA Oceanview",
+		"url": "https://oceanview.pfeg.noaa.gov/erddap/index.html",
+		"public": true
+	},
+	{
+		"name": "UNESCO IOC-IODE Ocean Acidification",
+		"short_name": "IOC-IODE-OA",
+		"url": "https://erddap.oa.iode.org/erddap/",
 		"public": true
 	}
 ]
