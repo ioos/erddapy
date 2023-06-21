@@ -156,6 +156,14 @@ def test_to_xarray_opendap(dataset_opendap):
 
 
 @pytest.mark.web
+def test_to_xarray_opendap_griddap_initialize(dataset_opendap):
+    """Test converting griddap aftert calling griddap_initialize."""
+    dataset_opendap.griddap_initialize()
+    ds = dataset_opendap.to_xarray()
+    assert isinstance(ds, xr.Dataset)
+
+
+@pytest.mark.web
 @pytest.mark.skipif(
     (sys.platform == "win32" or sys.platform == "darwin"),
     reason="run this test only once until we figure out a better way to mock it.",
