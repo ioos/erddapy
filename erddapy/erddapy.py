@@ -273,7 +273,7 @@ class ERDDAP:
         dim_names: Optional[ListLike] = None,
         response=None,
         constraints=None,
-        **kwargs,
+        distinct=False,
     ) -> str:
         """
         Build the download URL for the `server` endpoint.
@@ -331,7 +331,7 @@ class ERDDAP:
             dim_names,
             response,
             constraints,
-            **kwargs,
+            distinct,
         )
 
     def to_pandas(self, **kw):
@@ -346,7 +346,8 @@ class ERDDAP:
 
         """
         response = kw.pop("response", "csvp")
-        url = self.get_download_url(response=response, **kw)
+        distinct = kw.pop("distinct", False)
+        url = self.get_download_url(response=response, distinct=distinct)
         return to_pandas(url, pandas_kwargs=dict(**kw))
 
     def to_ncCF(self, protocol: str = None, **kw):
