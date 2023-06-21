@@ -358,8 +358,9 @@ class ERDDAP:
 
     def to_ncCF(self, protocol: str = None, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
+        distinct = kw.pop("distinct", False)
         protocol = protocol if protocol else self.protocol
-        url = self.get_download_url(response="ncCF", **kw)
+        url = self.get_download_url(response="ncCF", distinct=distinct)
         return to_ncCF(url, protocol=protocol, requests_kwargs=dict(**kw))
 
     def to_xarray(self, **kw):
@@ -373,7 +374,8 @@ class ERDDAP:
             response = "nc"
         else:
             response = "ncCF"
-        url = self.get_download_url(response=response)
+        distinct = kw.pop("distinct", False)
+        url = self.get_download_url(response=response, distinct=distinct)
         requests_kwargs = {"auth": self.auth}
         return to_xarray(url, response, requests_kwargs, xarray_kwargs=dict(**kw))
 
@@ -383,7 +385,8 @@ class ERDDAP:
         Accepts any `iris.load_raw` keyword arguments.
         """
         response = "nc" if self.protocol == "griddap" else "ncCF"
-        url = self.get_download_url(response=response, **kw)
+        distinct = kw.pop("distinct", False)
+        url = self.get_download_url(response=response, distinct=distinct)
         return to_iris(url, iris_kwargs=dict(**kw))
 
     def _get_variables_uncached(self, dataset_id: OptionalStr = None) -> Dict:
