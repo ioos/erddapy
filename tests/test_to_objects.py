@@ -116,6 +116,21 @@ def test_to_pandas(dataset_tabledap):
 
 
 @pytest.mark.web
+@pytest.mark.vcr()
+def test_to_pandas_requests_kwargs(dataset_tabledap):
+    import pandas as pd
+    from pandas.api.types import is_datetime64_any_dtype
+
+    df = dataset_tabledap.to_pandas(
+        **{"index_col": "time (UTC)", "parse_dates": True},
+        requests_kwargs={"timeout": 60},
+    )
+    assert isinstance(df, pd.DataFrame)
+    assert df.index.name == "time (UTC)"
+    assert is_datetime64_any_dtype(df.index)
+
+
+@pytest.mark.web
 def test_to_xarray_tabledap(dataset_tabledap):
     """Test converting tabledap to an xarray Dataset."""
     ds = dataset_tabledap.to_xarray()
