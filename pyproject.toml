@@ -15,6 +15,13 @@ authors = [
     {name = "Filipe Fernandes", email = "ocefpaf+erddapy@gmail.com"},
 ]
 requires-python = ">=3.8"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+]
 dynamic = [
   "dependencies",
   "version",
@@ -36,17 +43,6 @@ write_to = "erddapy/_version.py"
 write_to_template = "__version__ = '{version}'"
 tag_regex = "^(?P<prefix>v)?(?P<version>[^\\+]+)(?P<suffix>.*)?$"
 
-[tool.pytest.ini_options]
-markers = [
-    "web: marks tests require connection (deselect with '-m \"not web\"')",
-    "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
-]
-filterwarnings = [
-    "error:::erddapy.*",
-    "ignore::UserWarning",
-    "ignore::RuntimeWarning",
-]
-
 [tool.ruff]
 select = [
     "A", # flake8-builtins
@@ -64,6 +60,17 @@ line-length = 79
 "docs/source/conf.py" = [
   "E402",
   "A001",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "web: marks tests require connection (deselect with '-m \"not web\"')",
+    "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
+]
+filterwarnings = [
+    "error:::erddapy.*",
+    "ignore::UserWarning",
+    "ignore::RuntimeWarning",
 ]
 
 [tool.check-manifest]
@@ -87,7 +94,7 @@ ignore-semiprivate = false
 ignore-private = false
 ignore-module = false
 fail-under = 85
-exclude = ["setup.py", "docs", "tests"]
+exclude = ["docs", "tests"]
 verbose = 1
 quiet = false
 color = true

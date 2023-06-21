@@ -110,7 +110,7 @@ def _format_constraints_url(kwargs: Dict) -> str:
 def _check_substrings(constraint):
     """Extend the OPeNDAP with extra strings."""
     substrings = ["now", "min", "max"]
-    return any([True for substring in substrings if substring in str(constraint)])
+    return any(True for substring in substrings if substring in str(constraint))
 
 
 def parse_dates(
