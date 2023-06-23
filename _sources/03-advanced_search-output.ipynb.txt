@@ -15,10 +15,10 @@
    "execution_count": 1,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:46:39.576187Z",
-     "iopub.status.busy": "2023-04-19T11:46:39.575744Z",
-     "iopub.status.idle": "2023-04-19T11:46:40.045669Z",
-     "shell.execute_reply": "2023-04-19T11:46:40.044946Z"
+     "iopub.execute_input": "2023-06-23T17:01:22.186486Z",
+     "iopub.status.busy": "2023-06-23T17:01:22.186289Z",
+     "iopub.status.idle": "2023-06-23T17:01:22.613166Z",
+     "shell.execute_reply": "2023-06-23T17:01:22.612605Z"
     }
    },
    "outputs": [],
@@ -41,10 +41,10 @@
    "execution_count": 2,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:46:40.049047Z",
-     "iopub.status.busy": "2023-04-19T11:46:40.048645Z",
-     "iopub.status.idle": "2023-04-19T11:46:40.513684Z",
-     "shell.execute_reply": "2023-04-19T11:46:40.513104Z"
+     "iopub.execute_input": "2023-06-23T17:01:22.615916Z",
+     "iopub.status.busy": "2023-06-23T17:01:22.615708Z",
+     "iopub.status.idle": "2023-06-23T17:01:23.156691Z",
+     "shell.execute_reply": "2023-06-23T17:01:23.156234Z"
     }
    },
    "outputs": [
@@ -87,10 +87,10 @@
    "execution_count": 3,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:46:40.552067Z",
-     "iopub.status.busy": "2023-04-19T11:46:40.551373Z",
-     "iopub.status.idle": "2023-04-19T11:46:40.944475Z",
-     "shell.execute_reply": "2023-04-19T11:46:40.943264Z"
+     "iopub.execute_input": "2023-06-23T17:01:23.188926Z",
+     "iopub.status.busy": "2023-06-23T17:01:23.188453Z",
+     "iopub.status.idle": "2023-06-23T17:01:23.587266Z",
+     "shell.execute_reply": "2023-06-23T17:01:23.586501Z"
     }
    },
    "outputs": [
@@ -127,10 +127,10 @@
    "execution_count": 4,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:46:40.947838Z",
-     "iopub.status.busy": "2023-04-19T11:46:40.947348Z",
-     "iopub.status.idle": "2023-04-19T11:46:41.198216Z",
-     "shell.execute_reply": "2023-04-19T11:46:41.197283Z"
+     "iopub.execute_input": "2023-06-23T17:01:23.589749Z",
+     "iopub.status.busy": "2023-06-23T17:01:23.589449Z",
+     "iopub.status.idle": "2023-06-23T17:01:24.066479Z",
+     "shell.execute_reply": "2023-06-23T17:01:24.065918Z"
     }
    },
    "outputs": [
@@ -167,10 +167,10 @@
    "execution_count": 5,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:46:41.201838Z",
-     "iopub.status.busy": "2023-04-19T11:46:41.201256Z",
-     "iopub.status.idle": "2023-04-19T11:46:41.573892Z",
-     "shell.execute_reply": "2023-04-19T11:46:41.573095Z"
+     "iopub.execute_input": "2023-06-23T17:01:24.069223Z",
+     "iopub.status.busy": "2023-06-23T17:01:24.068784Z",
+     "iopub.status.idle": "2023-06-23T17:01:25.145807Z",
+     "shell.execute_reply": "2023-06-23T17:01:25.145235Z"
     },
     "scrolled": true
    },
@@ -207,10 +207,10 @@
    "execution_count": 6,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:46:41.576873Z",
-     "iopub.status.busy": "2023-04-19T11:46:41.576445Z",
-     "iopub.status.idle": "2023-04-19T11:46:41.774131Z",
-     "shell.execute_reply": "2023-04-19T11:46:41.773312Z"
+     "iopub.execute_input": "2023-06-23T17:01:25.148106Z",
+     "iopub.status.busy": "2023-06-23T17:01:25.147807Z",
+     "iopub.status.idle": "2023-06-23T17:01:25.624032Z",
+     "shell.execute_reply": "2023-06-23T17:01:25.623447Z"
     }
    },
    "outputs": [
@@ -246,10 +246,10 @@
    "execution_count": 7,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:46:41.777520Z",
-     "iopub.status.busy": "2023-04-19T11:46:41.776938Z",
-     "iopub.status.idle": "2023-04-19T11:47:40.199691Z",
-     "shell.execute_reply": "2023-04-19T11:47:40.198677Z"
+     "iopub.execute_input": "2023-06-23T17:01:25.626286Z",
+     "iopub.status.busy": "2023-06-23T17:01:25.625985Z",
+     "iopub.status.idle": "2023-06-23T17:02:18.792903Z",
+     "shell.execute_reply": "2023-06-23T17:02:18.792198Z"
     }
    },
    "outputs": [],
@@ -269,10 +269,10 @@
    "execution_count": 8,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:47:40.203454Z",
-     "iopub.status.busy": "2023-04-19T11:47:40.203024Z",
-     "iopub.status.idle": "2023-04-19T11:47:40.209360Z",
-     "shell.execute_reply": "2023-04-19T11:47:40.208762Z"
+     "iopub.execute_input": "2023-06-23T17:02:18.795704Z",
+     "iopub.status.busy": "2023-06-23T17:02:18.795390Z",
+     "iopub.status.idle": "2023-06-23T17:02:18.799818Z",
+     "shell.execute_reply": "2023-06-23T17:02:18.799290Z"
     }
    },
    "outputs": [
@@ -280,7 +280,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "There are 3092 entries in this search!\n"
+      "There are 4767 entries in this search!\n"
      ]
     }
    ],
@@ -300,10 +300,10 @@
    "execution_count": 9,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:47:40.212383Z",
-     "iopub.status.busy": "2023-04-19T11:47:40.211818Z",
-     "iopub.status.idle": "2023-04-19T11:47:40.218607Z",
-     "shell.execute_reply": "2023-04-19T11:47:40.218066Z"
+     "iopub.execute_input": "2023-06-23T17:02:18.802175Z",
+     "iopub.status.busy": "2023-06-23T17:02:18.801701Z",
+     "iopub.status.idle": "2023-06-23T17:02:18.807518Z",
+     "shell.execute_reply": "2023-06-23T17:02:18.807026Z"
     },
     "scrolled": false
    },
@@ -321,8 +321,10 @@
        " 'https://erddap.bco-dmo.org/erddap/',\n",
        " 'https://erddap.emodnet-physics.eu/erddap/',\n",
        " 'https://erddap.griidc.org/erddap/',\n",
+       " 'https://erddap.sensors.ioos.us/erddap/',\n",
        " 'https://gliders.ioos.us/erddap/',\n",
        " 'https://pae-paha.pacioos.hawaii.edu/erddap/',\n",
+       " 'https://polarwatch.noaa.gov/erddap/',\n",
        " 'https://spraydata.ucsd.edu/erddap/',\n",
        " 'https://www.ifremer.fr/erddap/',\n",
        " 'https://www.smartatlantic.ca/erddap/'}"
@@ -354,10 +356,10 @@
    "execution_count": 10,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2023-04-19T11:47:40.221045Z",
-     "iopub.status.busy": "2023-04-19T11:47:40.220713Z",
-     "iopub.status.idle": "2023-04-19T11:47:40.898108Z",
-     "shell.execute_reply": "2023-04-19T11:47:40.897349Z"
+     "iopub.execute_input": "2023-06-23T17:02:18.809650Z",
+     "iopub.status.busy": "2023-06-23T17:02:18.809376Z",
+     "iopub.status.idle": "2023-06-23T17:02:19.875505Z",
+     "shell.execute_reply": "2023-06-23T17:02:19.875003Z"
     }
    },
    "outputs": [
@@ -429,15 +431,15 @@
        "</div>"
       ],
       "text/plain": [
-       "                                               Title   \n",
-       "0  Coastal Endurance: Oregon Inshore Surface Moor...  \\\n",
+       "                                               Title  \\\n",
+       "0  Coastal Endurance: Oregon Inshore Surface Moor...   \n",
        "1  Coastal Endurance: Oregon Inshore Surface Moor...   \n",
        "2  Coastal Endurance: Oregon Inshore Surface Moor...   \n",
        "3  Coastal Endurance: Oregon Inshore Surface Moor...   \n",
        "4  Coastal Endurance: Oregon Inshore Surface Moor...   \n",
        "\n",
-       "                            Institution                       Dataset ID   \n",
-       "0  Ocean Observatories Initiative (OOI)  ooi-ce01issm-rid16-02-flortd000  \\\n",
+       "                            Institution                       Dataset ID  \\\n",
+       "0  Ocean Observatories Initiative (OOI)  ooi-ce01issm-rid16-02-flortd000   \n",
        "1  Ocean Observatories Initiative (OOI)  ooi-ce01issm-rid16-03-ctdbpc000   \n",
        "2  Ocean Observatories Initiative (OOI)  ooi-ce01issm-rid16-03-dostad000   \n",
        "3  Ocean Observatories Initiative (OOI)  ooi-ce01issm-rid16-07-nutnrb000   \n",
@@ -518,7 +520,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.11.3"
+   "version": "3.11.4"
   }
  },
  "nbformat": 4,
