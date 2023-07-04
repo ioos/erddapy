@@ -97,7 +97,7 @@ def search_servers(
 
 
 def advanced_search_servers(
-    servers_list=None, parallel=False, protocol="tabledap", **kwargs
+    servers_list=None, parallel=False, protocol="tabledap", **kwargs,
 ):
     """
     Search multiple ERDDAP servers.

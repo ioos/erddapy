@@ -75,7 +75,7 @@ def to_xarray(
     else:
         nc = _nc_dataset(url, requests_kwargs)
         return xr.open_dataset(
-            xr.backends.NetCDF4DataStore(nc), **(xarray_kwargs or {})
+            xr.backends.NetCDF4DataStore(nc), **(xarray_kwargs or {}),
         )
 
 
