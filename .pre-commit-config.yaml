@@ -20,7 +20,7 @@ repos:
     language_version: python3
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.4.0
+  rev: v1.4.1
   hooks:
   - id: mypy
     exclude: docs/source/conf.py
@@ -51,17 +51,17 @@ repos:
         - --ignore-words-list=pres
 
 - repo: https://github.com/asottile/add-trailing-comma
-  rev: v2.5.1
+  rev: v3.0.0
   hooks:
     - id: add-trailing-comma
 
-- repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.274
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.0.276
   hooks:
     - id: ruff
 
 - repo: https://github.com/tox-dev/pyproject-fmt
-  rev: 0.12.1
+  rev: 0.13.0
   hooks:
     - id: pyproject-fmt
 
