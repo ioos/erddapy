@@ -369,9 +369,9 @@ class ERDDAP:
         return to_ncCF(url, protocol=protocol, requests_kwargs=dict(**kw))
 
     def to_xarray(
-            self,
-            requests_kwargs: Optional[Dict] = None,
-            **kw,
+        self,
+        requests_kwargs: Optional[Dict] = None,
+        **kw,
     ) -> "xr.Dataset":
         """Load the data request into a xarray.Dataset.
 
