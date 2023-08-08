@@ -386,7 +386,7 @@ class ERDDAP:
         distinct = kw.pop("distinct", False)
         url = self.get_download_url(response=response, distinct=distinct)
         if requests_kwargs:
-            requests_kwargs = {"auth": self.auth} | requests_kwargs
+            requests_kwargs = {**{"auth": self.auth}, **requests_kwargs}
         else:
             requests_kwargs = {"auth": self.auth}
         return to_xarray(url, response, requests_kwargs, xarray_kwargs=dict(**kw))
