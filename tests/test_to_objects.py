@@ -142,6 +142,18 @@ def test_to_xarray_tabledap(dataset_tabledap):
 
 
 @pytest.mark.web
+@pytest.mark.vcr()
+def test_to_xarray_requests_kwargs(dataset_tabledap):
+    """Test converting tabledap to an xarray Dataset manually setting timeout"""
+    ds = dataset_tabledap.to_xarray(requests_kwargs={"timeout": 30})
+
+    assert isinstance(ds, xr.Dataset)
+    assert len(ds.variables) == 9
+    assert ds["time"].name == "time"
+    assert ds["temperature"].name == "temperature"
+
+
+@pytest.mark.web
 def test_to_xarray_griddap(dataset_griddap):
     """Test converting griddap to an xarray Dataset."""
     ds = dataset_griddap.to_xarray()
