@@ -23,4 +23,3 @@ twine
 types-pytz
 types-requests
 wheel
-xarray

@@ -1,3 +1,4 @@
 httpx
 pandas>=0.25.2,<3
+xarray
 pytz
