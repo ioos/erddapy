@@ -17,6 +17,8 @@ OptionalStr = Optional[str]
 
 @functools.lru_cache(maxsize=128)
 def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
+    if "timeout" not in kwargs.keys():
+        kwargs["timeout"] = 60
     response = httpx.get(url, follow_redirects=True, auth=auth, **kwargs)
     try:
         response.raise_for_status()
