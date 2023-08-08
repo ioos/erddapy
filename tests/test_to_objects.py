@@ -142,7 +142,6 @@ def test_to_xarray_tabledap(dataset_tabledap):
 
 
 @pytest.mark.web
-@pytest.mark.vcr()
 def test_to_xarray_requests_kwargs(dataset_tabledap):
     """Test converting tabledap to an xarray Dataset manually setting timeout"""
     ds = dataset_tabledap.to_xarray(requests_kwargs={"timeout": 30})
