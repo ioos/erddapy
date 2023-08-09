@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Longer introduction &#8212; erddapy 2.0.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <title>Longer introduction &#8212; erddapy 2.2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=28c8e701" />
     <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=90673249"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -177,7 +177,7 @@ https://gliders.ioos.us/erddap/search/advanced.html?page=1&amp;itemsPerPage=1000
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-We have 307 tabledap, 0 griddap, and 0 wms endpoints.
+We have 312 tabledap, 0 griddap, and 0 wms endpoints.
 </pre></div></div>
 </div>
 <p>We can refine our search by providing some constraints.</p>
@@ -416,8 +416,8 @@ whoi_406-20160902T1700
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-CPU times: user 87 ms, sys: 3.86 ms, total: 90.9 ms
-Wall time: 353 ms
+CPU times: user 118 ms, sys: 228 µs, total: 118 ms
+Wall time: 416 ms
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -448,8 +448,8 @@ Wall time: 353 ms
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-CPU times: user 41 µs, sys: 0 ns, total: 41 µs
-Wall time: 44.6 µs
+CPU times: user 42 µs, sys: 8 µs, total: 50 µs
+Wall time: 52.9 µs
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -481,15 +481,15 @@ Wall time: 44.6 µs
 0                                                  _null
 1                                 aggregate_quality_flag
 2                                               altitude
-3                                                  c_fin
-4                          climatology_test_quality_flag
+3                 barotropic_eastward_sea_water_velocity
+4                barotropic_northward_sea_water_velocity
                              ...
-129    volume_beam_attenuation_coefficient_of_radiati...
-130               volume_fraction_of_oxygen_in_sea_water
-131    volume_fraction_of_oxygen_in_sea_water_status_...
-132    volume_scattering_coefficient_of_radiative_flu...
-133    volume_scattering_function_of_radiative_flux_i...
-Name: Category, Length: 134, dtype: object
+141    volume_fraction_of_oxygen_in_sea_water_status_...
+142    volume_scattering_coefficient_of_radiative_flu...
+143    volume_scattering_function_of_radiative_flux_i...
+144                              water_velocity_eastward
+145                             water_velocity_northward
+Name: Category, Length: 146, dtype: object
 </pre></div></div>
 </div>
 <p>We can also pass a <strong>value</strong> to filter the categorize results.</p>
@@ -568,6 +568,7 @@ Name: Category, Length: 134, dtype: object
  &#39;sp069-20200319T1317&#39;,
  &#39;sp069-20210408T1555&#39;,
  &#39;sp069-20230507T1437&#39;,
+ &#39;sp069-20230731T1323&#39;,
  &#39;sp070-20220824T1510&#39;,
  &#39;sp070-20230316T1541&#39;,
  &#39;sp071-20211215T2041&#39;,
@@ -786,7 +787,7 @@ Text(0, 0.5, &#39;Depth (m)&#39;)
       &copy;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.0.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
