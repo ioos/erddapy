@@ -4,7 +4,6 @@ import functools
 from typing import Dict, List, Optional, Tuple, Union
 
 import pandas as pd
-import xarray as xr
 
 from erddapy.core.griddap import (
     _griddap_check_constraints,
@@ -372,7 +371,7 @@ class ERDDAP:
         self,
         requests_kwargs: Optional[Dict] = None,
         **kw,
-    ) -> "xr.Dataset":
+    ):
         """Load the data request into a xarray.Dataset.
 
         Accepts any `xr.open_dataset` keyword arguments.
