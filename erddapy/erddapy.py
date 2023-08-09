@@ -367,7 +367,11 @@ class ERDDAP:
         url = self.get_download_url(response="ncCF", distinct=distinct)
         return to_ncCF(url, protocol=protocol, requests_kwargs=dict(**kw))
 
-    def to_xarray(self, **kw):
+    def to_xarray(
+        self,
+        requests_kwargs: Optional[Dict] = None,
+        **kw,
+    ):
         """Load the data request into a xarray.Dataset.
 
         Accepts any `xr.open_dataset` keyword arguments.
@@ -380,7 +384,10 @@ class ERDDAP:
             response = "ncCF"
         distinct = kw.pop("distinct", False)
         url = self.get_download_url(response=response, distinct=distinct)
-        requests_kwargs = {"auth": self.auth}
+        if requests_kwargs:
+            requests_kwargs = {**{"auth": self.auth}, **requests_kwargs}
+        else:
+            requests_kwargs = {"auth": self.auth}
         return to_xarray(url, response, requests_kwargs, xarray_kwargs=dict(**kw))
 
     def to_iris(self, **kw):
