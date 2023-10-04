@@ -91,7 +91,7 @@ def test_erddap2_10():
     e = ERDDAP(server="http://erddap.ioos.us/erddap/")
     url = e.get_search_url(search_for="NOAA", response="csv")
     r = httpx.head(url)
-    assert r.raise_for_status() is None
+    assert r.status_code == 200
 
 
 def test__griddap_check_constraints():
