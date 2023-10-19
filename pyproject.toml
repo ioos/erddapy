@@ -11,7 +11,9 @@ name = "erddapy"
 description = "Python interface for ERDDAP"
 readme = "README.md"
 license = {file = "LICENSE.txt"}
-authors = [
+maintainers = [
+    {name = "Alex Kerney", email = "akerney@gmri.org"},
+    {name = "Callum Rollo", email = "c.rollo@outlook.com"},
     {name = "Filipe Fernandes", email = "ocefpaf+erddapy@gmail.com"},
 ]
 requires-python = ">=3.8"
