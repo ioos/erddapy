@@ -41,7 +41,11 @@ def fetch_results(
     if data is None:
         return None
     else:
-        df = pd.read_csv(data)
+        try:
+            df = pd.read_csv(data)
+        except pd.errors.ParserError:
+            # bad servers will return data that is not a csv but with valid html code :-/
+            return None
     try:
         df.dropna(subset=[protocol], inplace=True)
     except KeyError:
