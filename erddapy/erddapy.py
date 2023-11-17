@@ -417,11 +417,8 @@ class ERDDAP:
         response = kw.pop("response", "csvp")
         distinct = kw.pop("distinct", False)
         url = self.get_download_url(response=response, distinct=distinct)
-        return to_pandas(
-            url,
-            requests_kwargs=requests_kwargs,
-            pandas_kwargs=dict(**kw),
-        )
+        requests_kwargs = requests_kwargs if requests_kwargs else self.requests_kwargs
+        return to_pandas(url, requests_kwargs=requests_kwargs, pandas_kwargs=dict(**kw))
 
     def to_ncCF(  # noqa: N802
         self: ERDDAP,
