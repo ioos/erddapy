@@ -18,7 +18,6 @@ def test_urlopen():
 
 
 @pytest.mark.web()
-@pytest.mark.vcr()
 def test_urlopen_raise():
     """Assure that urlopen will raise for bad URLs."""
     url = "https://developer.mozilla.org/en-US/404"
