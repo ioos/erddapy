@@ -6,6 +6,7 @@ import os
 import copy
 import functools
 import io
+import os
 from collections import OrderedDict
 from typing import TYPE_CHECKING
 
@@ -64,9 +65,16 @@ def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
         kwargs["timeout"] = 60
     with httpx.Client() as client:
         p = parse.urlparse(url)
-        protocol = 'tabledap' if 'tabledap' in p.path else 'griddap'
-        login_page = "%s://%s%s/login.html" % (p.scheme, p.netloc, p.path.split('/%s/' % protocol)[0])
-        client.post(login_page, data={'user': os.getenv("ERDDAP_USERNAME"), 'password': os.getenv("ERDDAP_PASSWORD")})
+        protocol = "tabledap" if "tabledap" in p.path else "griddap"
+        base = p.path.split(f"/{protocol}/")[0]
+        login_page = f"{p.scheme}://{p.netloc}{base}/login.html"
+        client.post(
+            login_page,
+            data={
+                "user": os.getenv("ERDDAP_USERNAME"),
+                "password": os.getenv("ERDDAP_PASSWORD"),
+            },
+        )
         response = client.get(url, follow_redirects=True, auth=auth, **kwargs)
 
     try:
