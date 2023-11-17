@@ -9,7 +9,6 @@ from erddapy.core.url import _sort_url, check_url_response, urlopen
 
 
 @pytest.mark.web()
-@pytest.mark.vcr()
 def test_urlopen():
     """Assure that urlopen is always a BytesIO object."""
     url = "https://standards.sensors.ioos.us/erddap/tabledap/"
@@ -26,7 +25,6 @@ def test_urlopen_raise():
 
 
 @pytest.mark.web()
-@pytest.mark.vcr()
 def test_check_url_response():
     """Test if a bad request returns HTTPError."""
     bad_request = (
