@@ -14,7 +14,7 @@ repos:
       files: requirements-dev.txt
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.8.0
+  rev: v1.7.0
   hooks:
   - id: mypy
     exclude: docs/source/conf.py
