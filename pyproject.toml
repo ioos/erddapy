@@ -65,17 +65,6 @@ line-length = 79
   "A001",
 ]
 
-[tool.pytest.ini_options]
-markers = [
-    "web: marks tests require connection (deselect with '-m \"not web\"')",
-    "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
-]
-filterwarnings = [
-    "error:::erddapy.*",
-    "ignore::UserWarning",
-    "ignore::RuntimeWarning",
-]
-
 [tool.check-manifest]
 ignore = [
     "*.yml",
@@ -87,6 +76,17 @@ ignore = [
     "notebooks/*",
     "tests",
     "tests/*",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "web: marks tests require connection (deselect with '-m \"not web\"')",
+    "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
+]
+filterwarnings = [
+    "error:::erddapy.*",
+    "ignore::UserWarning",
+    "ignore::RuntimeWarning",
 ]
 
 [tool.interrogate]
