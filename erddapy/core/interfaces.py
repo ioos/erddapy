@@ -4,7 +4,6 @@ Interface between URL responses and third-party libraries.
 This module takes an URL or the bytes response of a request and converts it to Pandas,
 XArray, Iris, etc. objects.
 """
-
 from typing import TYPE_CHECKING
 
 import pandas as pd
