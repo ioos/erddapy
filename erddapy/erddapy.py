@@ -3,7 +3,6 @@
 import functools
 import hashlib
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
 from urllib.request import urlretrieve
 
 import pandas as pd
@@ -41,8 +40,8 @@ __all__ = [
     "ERDDAP",
 ]
 
-ListLike = Union[List[str], Tuple[str]]
-OptionalStr = Optional[str]
+ListLike = list[str] | tuple[str]
+OptionalStr = str | None
 
 
 class ERDDAP:
@@ -127,13 +126,13 @@ class ERDDAP:
         self.response = response
 
         # Initialized only via properties.
-        self.constraints: Optional[Dict] = None
-        self.server_functions: Optional[Dict] = None
+        self.constraints: dict | None = None
+        self.server_functions: dict | None = None
         self.dataset_id: OptionalStr = None
-        self.requests_kwargs: Dict = {}
-        self.auth: Optional[tuple] = None
-        self.variables: Optional[ListLike] = None
-        self.dim_names: Optional[ListLike] = None
+        self.requests_kwargs: dict = {}
+        self.auth: tuple | None = None
+        self.variables: ListLike | None = None
+        self.dim_names: ListLike | None = None
 
         self._get_variables = functools.lru_cache(maxsize=128)(
             self._get_variables_uncached,
@@ -141,7 +140,7 @@ class ERDDAP:
         # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
         # will be overridden when requesting a new `dataset_id`.
         self._dataset_id: OptionalStr = None
-        self._variables: Dict = {}
+        self._variables: dict = {}
 
     def griddap_initialize(
         self,
@@ -278,8 +277,8 @@ class ERDDAP:
         self,
         dataset_id: OptionalStr = None,
         protocol: OptionalStr = None,
-        variables: Optional[ListLike] = None,
-        dim_names: Optional[ListLike] = None,
+        variables: ListLike | None = None,
+        dim_names: ListLike | None = None,
         response=None,
         constraints=None,
         distinct=False,
@@ -345,7 +344,7 @@ class ERDDAP:
 
     def to_pandas(
         self,
-        requests_kwargs: Optional[Dict] = None,
+        requests_kwargs: dict | None = None,
         **kw,
     ) -> "pd.DataFrame":
         """Save a data request to a pandas.DataFrame.
@@ -374,7 +373,7 @@ class ERDDAP:
 
     def to_xarray(
         self,
-        requests_kwargs: Optional[Dict] = None,
+        requests_kwargs: dict | None = None,
         **kw,
     ):
         """Load the data request into a xarray.Dataset.
@@ -405,7 +404,7 @@ class ERDDAP:
         url = self.get_download_url(response=response, distinct=distinct)
         return to_iris(url, iris_kwargs=dict(**kw))
 
-    def _get_variables_uncached(self, dataset_id: OptionalStr = None) -> Dict:
+    def _get_variables_uncached(self, dataset_id: OptionalStr = None) -> dict:
         if not dataset_id:
             dataset_id = self.dataset_id
 
@@ -427,7 +426,7 @@ class ERDDAP:
             variables.update({variable: attributes})
         return variables
 
-    def get_var_by_attr(self, dataset_id: OptionalStr = None, **kwargs) -> List[str]:
+    def get_var_by_attr(self, dataset_id: OptionalStr = None, **kwargs) -> list[str]:
         """
         Return a variable based on its attributes.
 

@@ -1,15 +1,16 @@
 """Handles netCDF responses."""
 
 import platform
+from collections.abc import Generator
 from contextlib import contextmanager
 from pathlib import Path
-from typing import BinaryIO, Dict, Generator, Optional
+from typing import BinaryIO
 from urllib.parse import urlparse
 
 from erddapy.core.url import urlopen
 
 
-def _nc_dataset(url, requests_kwargs: Optional[Dict] = None):
+def _nc_dataset(url, requests_kwargs: dict | None = None):
     """Return a netCDF4-python Dataset from memory and fallbacks to disk if that fails."""
     from netCDF4 import Dataset
 

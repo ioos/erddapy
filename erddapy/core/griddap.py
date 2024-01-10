@@ -1,21 +1,19 @@
 """Griddap handling."""
 
 import functools
-from typing import Dict, List, Optional, Tuple, Union
 
 import pandas as pd
 
 from erddapy.core.url import urlopen
 
-ListLike = Union[List[str], Tuple[str]]
-OptionalStr = Optional[str]
+ListLike = list[str] | tuple[str]
 
 
 @functools.lru_cache(maxsize=128)
 def _griddap_get_constraints(
     dataset_url: str,
     step: int,
-) -> Tuple[Dict, List, List]:
+) -> tuple[dict, list, list]:
     """
     Fetch metadata of griddap dataset and set initial constraints.
 
@@ -64,7 +62,7 @@ def _griddap_get_constraints(
     return constraints_dict, dim_names, variable_names
 
 
-def _griddap_check_constraints(user_constraints: Dict, original_constraints: Dict):
+def _griddap_check_constraints(user_constraints: dict, original_constraints: dict):
     """Check that constraints changed by user match those expected by dataset."""
     if user_constraints.keys() != original_constraints.keys():
         raise ValueError(

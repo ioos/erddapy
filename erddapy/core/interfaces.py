@@ -4,8 +4,7 @@ Interface between URL responses and third-party libraries.
 This module takes an URL or the bytes response of a request and converts it to Pandas,
 XArray, Iris, etc. objects.
 """
-
-from typing import TYPE_CHECKING, Dict, Optional
+from typing import TYPE_CHECKING
 
 import pandas as pd
 
@@ -19,8 +18,8 @@ if TYPE_CHECKING:
 
 def to_pandas(
     url: str,
-    requests_kwargs: Optional[Dict] = None,
-    pandas_kwargs: Optional[Dict] = None,
+    requests_kwargs: dict | None = None,
+    pandas_kwargs: dict | None = None,
 ) -> "pd.DataFrame":
     """
     Convert a URL to Pandas DataFrame.
@@ -39,7 +38,7 @@ def to_pandas(
 def to_ncCF(
     url: str,
     protocol: str = None,
-    requests_kwargs: Optional[Dict] = None,
+    requests_kwargs: dict | None = None,
 ) -> "Dataset":
     """
     Convert a URL to a netCDF4 Dataset.
@@ -58,8 +57,8 @@ def to_ncCF(
 def to_xarray(
     url: str,
     response="opendap",
-    requests_kwargs: Optional[Dict] = None,
-    xarray_kwargs: Optional[Dict] = None,
+    requests_kwargs: dict | None = None,
+    xarray_kwargs: dict | None = None,
 ) -> "xr.Dataset":
     """
     Convert a URL to an xarray dataset.
@@ -83,8 +82,8 @@ def to_xarray(
 
 def to_iris(
     url: str,
-    requests_kwargs: Optional[Dict] = None,
-    iris_kwargs: Optional[Dict] = None,
+    requests_kwargs: dict | None = None,
+    iris_kwargs: dict | None = None,
 ):
     """
     Convert a URL to an iris CubeList.
