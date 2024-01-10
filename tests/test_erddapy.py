@@ -1,6 +1,6 @@
 """Test ERDDAP functionality."""
 
-from datetime import datetime
+import datetime
 
 import httpx
 import pytest
@@ -20,19 +20,19 @@ from erddapy.erddapy import ERDDAP
 
 def test_parse_dates_naive_datetime():
     """Naive timestamp at 1970-1-1 must be 0."""
-    d = datetime(1970, 1, 1, 0, 0)
+    d = datetime.datetime(1970, 1, 1, 0, 0)
     assert parse_dates(d) == 0
 
 
 def test_parse_dates_utc_datetime():
     """UTC timestamp at 1970-1-1 must be 0."""
-    d = datetime(1970, 1, 1, 0, 0, tzinfo=pytz.utc)
+    d = datetime.datetime(1970, 1, 1, 0, 0, tzinfo=pytz.utc)
     assert parse_dates(d) == 0
 
 
 def test_parse_dates_nonutc_datetime():
     """Non-UTC timestamp at 1970-1-1 must have the zone offset."""
-    d = datetime(1970, 1, 1, tzinfo=pytz.timezone("US/Eastern"))
+    d = datetime.datetime(1970, 1, 1, tzinfo=pytz.timezone("US/Eastern"))
     assert parse_dates(d) == abs(d.utcoffset().total_seconds())
 
 
@@ -52,7 +52,7 @@ def test__quote_string_constraints():
         {
             "latitude": 42,
             "longitude": 42.0,
-            "max_time": datetime.utcnow(),
+            "max_time": datetime.datetime.now(datetime.UTC),
             "min_time": "1970-01-01T00:00:00Z",
             "cdm_data_type": "trajectoryprofile",
         },
@@ -60,7 +60,7 @@ def test__quote_string_constraints():
 
     assert isinstance(kw["latitude"], int)
     assert isinstance(kw["longitude"], float)
-    assert isinstance(kw["max_time"], datetime)
+    assert isinstance(kw["max_time"], datetime.datetime)
     assert isinstance(kw["min_time"], str)
     assert isinstance(kw["cdm_data_type"], str)
 
