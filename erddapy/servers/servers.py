@@ -1,8 +1,10 @@
 """Servers."""
 
 import functools
+import io
 from collections import namedtuple
 
+import httpx
 import pandas as pd
 
 
@@ -14,12 +16,11 @@ def servers_list():
     If loading the latest one fails it falls back to the default one shipped with the package.
 
     """
-    from urllib.error import URLError
-
     try:
         url = "https://raw.githubusercontent.com/IrishMarineInstitute/awesome-erddap/master/erddaps.json"
-        df = pd.read_json(url)
-    except URLError:
+        r = httpx.get(url, timeout=10)
+        df = pd.read_json(io.StringIO(r.text))
+    except httpx.HTTPError:
         from pathlib import Path
 
         path = Path(__file__).absolute().parent
