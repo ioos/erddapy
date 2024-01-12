@@ -1,7 +1,10 @@
 """Pythonic way to access ERDDAP data."""
 
 import functools
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
+from urllib.parse import urlparse
+from urllib.request import urlretrieve
 
 import pandas as pd
 
@@ -471,3 +474,12 @@ class ERDDAP:
             if has_value_flag is True:
                 vs.append(vname)
         return vs
+
+    def download_file(
+        self,
+        file_type,
+    ):
+        """Download the dataset to a file in a user specified format"""
+        url = self.get_download_url(response=file_type)
+        fname = Path(Path(urlparse(url).path).name)
+        urlretrieve(url, fname)
