@@ -481,7 +481,9 @@ class ERDDAP:
     ):
         """Download the dataset to a file in a user specified format"""
         url = self.get_download_url(response=file_type)
-        constraints_str = str(self.constraints) + str(self.variables)
+        constraints_str = str(dict(sorted(self.constraints.items()))) + str(
+            sorted(self.variables),
+        )
         constraints_hash = hashlib.sha1(constraints_str.encode("UTF-8")).hexdigest()
         file_name = Path(f"{self.dataset_id}_{constraints_hash}.{file_type}")
         if not file_name.exists():
