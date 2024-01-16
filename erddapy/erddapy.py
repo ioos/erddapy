@@ -488,3 +488,4 @@ class ERDDAP:
         file_name = Path(f"{self.dataset_id}_{constraints_hash}.{file_type}")
         if not file_name.exists():
             urlretrieve(url, file_name)
+        return file_name
