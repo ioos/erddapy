@@ -1,9 +1,9 @@
 """Pythonic way to access ERDDAP data."""
 
 import functools
+import hashlib
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
-from urllib.parse import urlparse
 from urllib.request import urlretrieve
 
 import pandas as pd
@@ -481,5 +481,8 @@ class ERDDAP:
     ):
         """Download the dataset to a file in a user specified format"""
         url = self.get_download_url(response=file_type)
-        fname = Path(Path(urlparse(url).path).name)
-        urlretrieve(url, fname)
+        constraints_str = str(self.constraints) + str(self.variables)
+        constraints_hash = hashlib.sha1(constraints_str.encode("UTF-8")).hexdigest()
+        file_name = Path(f"{self.dataset_id}_{constraints_hash}.{file_type}")
+        if not file_name.exists():
+            urlretrieve(url, file_name)
