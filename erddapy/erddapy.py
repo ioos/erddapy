@@ -490,7 +490,7 @@ class ERDDAP:
         constraints_str = str(dict(sorted(self.constraints.items()))) + str(
             sorted(self.variables),
         )
-        constraints_hash = hashlib.sha1(constraints_str.encode("UTF-8")).hexdigest()
+        constraints_hash = hashlib.shake_256(constraints_str.encode()).hexdigest(5)
         file_name = Path(f"{self.dataset_id}_{constraints_hash}.{file_type}")
         if not file_name.exists():
             urlretrieve(url, file_name)
