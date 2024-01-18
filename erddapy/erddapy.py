@@ -19,6 +19,7 @@ from erddapy.core.url import (
     _distinct,
     _format_constraints_url,
     _quote_string_constraints,
+    download_formats,
     get_categorize_url,
     get_download_url,
     get_info_url,
@@ -480,6 +481,11 @@ class ERDDAP:
         file_type,
     ):
         """Download the dataset to a file in a user specified format"""
+        file_type = file_type.lstrip(".")
+        if file_type not in download_formats:
+            raise ValueError(
+                f"Requested filetype {file_type} not available on ERDDAP",
+            )
         url = self.get_download_url(response=file_type)
         constraints_str = str(dict(sorted(self.constraints.items()))) + str(
             sorted(self.variables),
