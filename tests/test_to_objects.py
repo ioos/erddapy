@@ -209,4 +209,3 @@ def test_download_file(dataset_tabledap):
     dataset_tabledap.variables = dataset_tabledap.variables[::-1]
     fn_new = dataset_tabledap.download_file("nc")
     assert fn_new == fn
-
