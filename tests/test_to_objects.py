@@ -197,3 +197,15 @@ def test_to_iris_griddap(dataset_griddap):
     """Test converting griddap to an iris cube."""
     cubes = dataset_griddap.to_iris()
     assert isinstance(cubes, iris.cube.CubeList)
+
+
+@pytest.mark.web
+def test_download_file(dataset_tabledap):
+    """Test direct download of tabledap dataset"""
+    fn = dataset_tabledap.download_file("nc")
+    ds = xr.load_dataset(fn)
+    assert ds["time"].name == "time"
+    assert ds["temperature"].name == "temperature"
+    dataset_tabledap.variables = dataset_tabledap.variables[::-1]
+    fn_new = dataset_tabledap.download_file("nc")
+    assert fn_new == fn
