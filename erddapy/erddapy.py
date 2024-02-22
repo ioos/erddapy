@@ -181,7 +181,7 @@ class ERDDAP:
         response: OptionalStr = None,
         search_for: OptionalStr = None,
         protocol: OptionalStr = None,
-        items_per_page: int = 1000,
+        items_per_page: int = 1_000_000,
         page: int = 1,
         **kwargs,
     ) -> str:
@@ -207,7 +207,7 @@ class ERDDAP:
 
             response: default is HTML.
             items_per_page: how many items per page in the return,
-                default is 1000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
+                default is 1_000_000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
             page: which page to display, default is the first page (1).
             kwargs: extra search constraints based on metadata and/or coordinates ke/value.
                 metadata: `cdm_data_type`, `institution`, `ioos_category`,
