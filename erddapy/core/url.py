@@ -102,7 +102,7 @@ def _distinct(url: str, distinct: Optional[bool] = False) -> str:
 
 def _format_search_string(server: str, query: str) -> str:
     """Generate a search string for an erddap server with user defined query."""
-    return f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
+    return f'{server}search/index.csv?page=1&itemsPerPage=1000000&searchFor="{query}"'
 
 
 def _multi_urlopen(url: str) -> BinaryIO:
