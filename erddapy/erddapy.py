@@ -19,6 +19,7 @@ from erddapy.core.url import (
     _distinct,
     _format_constraints_url,
     _quote_string_constraints,
+    _sort_url,
     download_formats,
     get_categorize_url,
     get_download_url,
@@ -486,12 +487,9 @@ class ERDDAP:
             raise ValueError(
                 f"Requested filetype {file_type} not available on ERDDAP",
             )
-        url = self.get_download_url(response=file_type)
-        constraints_str = str(dict(sorted(self.constraints.items()))) + str(
-            sorted(self.variables),
-        )
-        constraints_hash = hashlib.shake_256(constraints_str.encode()).hexdigest(5)
-        file_name = Path(f"{self.dataset_id}_{constraints_hash}.{file_type}")
+        url = _sort_url(self.get_download_url(response=file_type))
+        fname_hash = hashlib.shake_256(url.encode()).hexdigest(5)
+        file_name = Path(f"{self.dataset_id}_{fname_hash}.{file_type}")
         if not file_name.exists():
             urlretrieve(url, file_name)
         return file_name

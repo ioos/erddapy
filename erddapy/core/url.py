@@ -3,9 +3,10 @@
 import copy
 import functools
 import io
+from collections import OrderedDict
 from datetime import datetime
 from typing import BinaryIO, Dict, List, Optional, Tuple, Union
-from urllib.parse import quote_plus
+from urllib import parse
 
 import httpx
 import pytz
@@ -13,6 +14,28 @@ from pandas import to_datetime
 
 ListLike = Union[List[str], Tuple[str]]
 OptionalStr = Optional[str]
+
+
+def _sort_url(url):
+    """
+    Returns a URL with sorted variables and constraints to ensure unique hash.
+
+    """
+    parts = parse.urlparse(url)
+    if parts.query:
+        query = parts.query.split("&", maxsplit=1)
+        if len(query) == 1:
+            variables = parts.query
+            constraints = ""
+        else:
+            variables, constraints = parts.query.split("&", maxsplit=1)
+        sorted_variables = ",".join(sorted(variables.split(",")))
+        sorted_query = OrderedDict(sorted(dict(parse.parse_qsl(constraints)).items()))
+        sorted_query_str = parse.unquote(parse.urlencode(sorted_query))
+        sorted_url = f"{parts.scheme}://{parts.netloc}{parts.path}?{parts.params}{sorted_variables}&{sorted_query_str}{parts.fragment}"
+    else:
+        sorted_url = url
+    return sorted_url.strip("&")
 
 
 @functools.lru_cache(maxsize=128)
@@ -207,7 +230,7 @@ def get_search_url(
         "&maxTime={maxTime}"
     )
     if search_for:
-        search_for = quote_plus(search_for)
+        search_for = parse.quote_plus(search_for)
         base += "&searchFor={searchFor}"
 
     # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
