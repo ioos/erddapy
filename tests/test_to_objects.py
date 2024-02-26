@@ -201,7 +201,47 @@ def test_to_iris_griddap(dataset_griddap):
 
 @pytest.mark.web
 def test_download_file(dataset_tabledap):
-    """Test direct download of tabledap dataset"""
+    """Test direct download of tabledap dataset with defined variable and constraints."""
+    fn = dataset_tabledap.download_file("nc")
+    ds = xr.load_dataset(fn)
+    assert ds["time"].name == "time"
+    assert ds["temperature"].name == "temperature"
+    dataset_tabledap.variables = dataset_tabledap.variables[::-1]
+    fn_new = dataset_tabledap.download_file("nc")
+    assert fn_new == fn
+
+
+@pytest.mark.web
+def test_download_file_variables_only(dataset_tabledap):
+    """Test direct download of tabledap dataset with undefined constraints."""
+    dataset_tabledap.constraints = {}
+    fn = dataset_tabledap.download_file("nc")
+    ds = xr.load_dataset(fn)
+    assert ds["time"].name == "time"
+    assert ds["temperature"].name == "temperature"
+    dataset_tabledap.variables = dataset_tabledap.variables[::-1]
+    fn_new = dataset_tabledap.download_file("nc")
+    assert fn_new == fn
+
+
+@pytest.mark.web
+def test_download_file_constraints_only(dataset_tabledap):
+    """Test direct download of tabledap dataset with undefined variables."""
+    dataset_tabledap.variables = []
+    fn = dataset_tabledap.download_file("nc")
+    ds = xr.load_dataset(fn)
+    assert ds["time"].name == "time"
+    assert ds["temperature"].name == "temperature"
+    dataset_tabledap.variables = dataset_tabledap.variables[::-1]
+    fn_new = dataset_tabledap.download_file("nc")
+    assert fn_new == fn
+
+
+@pytest.mark.web
+def test_download_file_undefined_query(dataset_tabledap):
+    """Test direct download of tabledap dataset with undefined query."""
+    dataset_tabledap.variables = []
+    dataset_tabledap.constraints = {}
     fn = dataset_tabledap.download_file("nc")
     ds = xr.load_dataset(fn)
     assert ds["time"].name == "time"
