@@ -13,7 +13,7 @@ def test_fetch_results():
     """This search should return results."""
     url = (
         "https://standards.sensors.ioos.us/erddap/search/index.csv?"
-        'page=1&itemsPerPage=100000&searchFor="sea_water_temperature"'
+        'page=1&itemsPerPage=1000000&searchFor="sea_water_temperature"'
     )
     key = "ioos"
     protocol = "tabledap"
@@ -26,7 +26,7 @@ def test_fetch_results():
 def test_fetch_no_results():
     """This search should return no results."""
     url = (
-        "https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=100000&searchFor"
+        "https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=1000000&searchFor"
         '="incredibly_long_string_that_should_never_match_a_real_dataset" '
     )
     key = "ioos"

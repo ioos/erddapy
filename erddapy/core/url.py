@@ -102,7 +102,7 @@ def _distinct(url: str, distinct: Optional[bool] = False) -> str:
 
 def _format_search_string(server: str, query: str) -> str:
     """Generate a search string for an erddap server with user defined query."""
-    return f'{server}search/index.csv?page=1&itemsPerPage=100000&searchFor="{query}"'
+    return f'{server}search/index.csv?page=1&itemsPerPage=1000000&searchFor="{query}"'
 
 
 def _multi_urlopen(url: str) -> BinaryIO:
@@ -172,7 +172,7 @@ def get_search_url(
     response: str = "html",
     search_for: Optional[str] = None,
     protocol: str = "tabledap",
-    items_per_page: int = 1000,
+    items_per_page: int = 1_000_000,
     page: int = 1,
     **kwargs,
 ):
@@ -198,7 +198,7 @@ def get_search_url(
 
         response: default is HTML.
         items_per_page: how many items per page in the return,
-            default is 1000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
+            default is 1_000_000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
         page: which page to display, default is the first page (1).
         kwargs: extra search constraints based on metadata and/or coordinates ke/value.
             metadata: `cdm_data_type`, `institution`, `ioos_category`,
@@ -263,7 +263,7 @@ def get_search_url(
             kwargs.update({search_term: lowercase})
 
     # These responses should not be paginated b/c that hinders the correct amount of data silently
-    # and can surprise users when the number of items is greater than ERDDAP's defaults (1000 items).
+    # and can surprise users when the number of items is greater than ERDDAP's defaults (1_000_000 items).
     # Ideally there should be no pagination for this on the ERDDAP side but for now we settled for a
     # "really big" `items_per_page` number.
     non_paginated_responses = [

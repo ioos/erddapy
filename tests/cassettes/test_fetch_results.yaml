@@ -182,4 +182,63 @@ interactions:
       - chunked
     http_version: HTTP/1.1
     status_code: 200
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br
+      connection:
+      - keep-alive
+      host:
+      - standards.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.27.0
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=1000000&searchFor=%22sea_water_temperature%22
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAA/6WWbU/bMBDH3/MpLCZBkUzSMjYEUjWVFlilMVhbbdKEZJn4mlrkaT6Hh336nUPa
+        tWlKWyHlRXIPP//PdnwOjVZKZnyY3yNYbuV9BO77Wj4A67ArI7MJf4qRj3UEyEfaRkDBcSzNC7+8
+        6nV5f3jDWqet1ifeT8YpP5fBQ2jSPFGs+B4Mh/wiljoiN1ptc6vThPeklTQe6/d2+MTa7Mz30cpE
+        SaPQQ0gwNejpNEUvRx+Mk+hPtfmpCUWQmjgTgcyOPHyV/k7Mu2WExVRtjCnms8Lw+XGreXTKfNbt
+        3B6xrszAIPsO0uAkNcB3RzoGBKMBmaIZZGOTxmy/MZ91sJS2zxqLwxzcJXdJoGLhGMK+ZMDazKGH
+        Bfou+dkZ9Dvn3y6GZxRnyGDJyRoIQZooZKiTAGjNT5qHzRY9o2bzrHh+E5kKdyvMGmtUUWgk3X5Q
+        RFYQGgAUSWrsxHnSJKy4QKIlz1/W6ESvaZzFZJDaCAsxwaXNzSxBdCFCneNyhPgTCBmGxNGGjeYy
+        f3QGo5se64SUH0pLhlxG2r6wy0iG9RwLaHElqZ8o/agVUchLgSUjM4BYSD2XtH5gjQ7YbWmkonQU
+        6XuapUr4THdN1kba50Gl8DdQNeINuBV7BDHJY60cvUElB5DYOudM76D0sK/TtHVqa1ml5JW0GsEI
+        UjwR39UuA6sDGQmkkZJC+7B846wFhx/XhM+qmWatLWIdraynynuzjIWN/suZ5vcdZ0t7vzZ1VssS
+        YYui6v+ElcSasp50ogRmAEqkYxHmaCmfbOyKXuk/8PCwVRv2X/80eq3ueshUdBXzpljWqFG2oGhY
+        hG0hqSJlIX+VFnf0C6UNBK/HbXlO1rsX9V26rtGbpW4kdJk3r7ieWCN9d+P+SMeSdP3JH4cq8J/j
+        qNIrhbN7ZN+eqDEtLix11KlvK7Kmi061ldO0wLMX4GNBQYepJH+YCfrcPG6d+GXn3HhUg9X7g0em
+        jdPdtSkwOnNjoi+V8iY2jr6o15tZv9deZO9R1366MIZI7bGMEPbA3eravHszuL7li8E7/wCpE6pq
+        VwoAAA==
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=search.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Thu, 22 Feb 2024 17:19:37 GMT
+      Server:
+      - nginx/1.22.1
+      Strict-Transport-Security:
+      - max-age=0
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: ''
 version: 1

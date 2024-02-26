@@ -56,7 +56,7 @@ def test_search_url_valid_request(e):
     options = _url_to_dict(url)
     assert options.pop("minTime") == str(parse_dates(min_time))
     assert options.pop("maxTime") == str(parse_dates(max_time))
-    assert options.pop("itemsPerPage") == str(1000)
+    assert options.pop("itemsPerPage") == str(1000000)
     for k, v in options.items():
         if k == "protocol":
             assert v == e.protocol
@@ -77,7 +77,7 @@ def test_search_url_valid_request_with_relative_time_constraints(e):
     options = _url_to_dict(url)
     assert options.pop("minTime") == min_time
     assert options.pop("maxTime") == max_time
-    assert options.pop("itemsPerPage") == str(1000)
+    assert options.pop("itemsPerPage") == str(1000000)
     for k, v in options.items():
         if k == "protocol":
             assert v == e.protocol
