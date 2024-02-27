@@ -1,7 +1,6 @@
 """Multiple Server Search."""
 
 import multiprocessing
-from typing import Dict
 
 import pandas as pd
 
@@ -19,7 +18,7 @@ from erddapy.core.url import (
 from erddapy.servers.servers import servers
 
 
-def _format_results(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+def _format_results(dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
     """Format dictionary of results into a Pandas dataframe."""
     # we return None for bad server, so we need to filter them here
     df_all = pd.concat([list(df.values())[0] for df in dfs if df is not None])
@@ -30,7 +29,7 @@ def fetch_results(
     url: str,
     key: str,
     protocol,
-) -> Dict[str, pd.DataFrame]:
+) -> dict[str, pd.DataFrame]:
     """
     Fetch search results from multiple servers.
 

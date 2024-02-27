@@ -5,15 +5,15 @@ import functools
 import io
 from collections import OrderedDict
 from datetime import datetime
-from typing import BinaryIO, Dict, List, Optional, Tuple, Union
+from typing import BinaryIO
 from urllib import parse
 
 import httpx
 import pytz
 from pandas import to_datetime
 
-ListLike = Union[List[str], Tuple[str]]
-OptionalStr = Optional[str]
+ListLike = list[str] | tuple[str]
+OptionalStr = str | None
 
 
 def _sort_url(url):
@@ -39,7 +39,7 @@ def _sort_url(url):
 
 
 @functools.lru_cache(maxsize=128)
-def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO:
+def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     if "timeout" not in kwargs.keys():
         kwargs["timeout"] = 60
     response = httpx.get(url, follow_redirects=True, auth=auth, **kwargs)
@@ -52,7 +52,7 @@ def _urlopen(url: str, auth: Optional[tuple] = None, **kwargs: Dict) -> BinaryIO
 
 def urlopen(
     url: str,
-    requests_kwargs: Optional[Dict] = None,
+    requests_kwargs: dict | None = None,
 ) -> BinaryIO:
     """Thin wrapper around httpx get content.
 
@@ -68,7 +68,7 @@ def urlopen(
 
 
 @functools.lru_cache(maxsize=128)
-def check_url_response(url: str, **kwargs: Dict) -> str:
+def check_url_response(url: str, **kwargs: dict) -> str:
     """
     Shortcut to `raise_for_status` instead of fetching the whole content.
 
@@ -81,7 +81,7 @@ def check_url_response(url: str, **kwargs: Dict) -> str:
     return url
 
 
-def _distinct(url: str, distinct: Optional[bool] = False) -> str:
+def _distinct(url: str, distinct: bool | None = False) -> str:
     """
     Sort all of the rows in the results table.
 
@@ -114,7 +114,7 @@ def _multi_urlopen(url: str) -> BinaryIO:
     return data
 
 
-def _quote_string_constraints(kwargs: Dict) -> Dict:
+def _quote_string_constraints(kwargs: dict) -> dict:
     """
     Quote constraints of String variables.
 
@@ -126,7 +126,7 @@ def _quote_string_constraints(kwargs: Dict) -> Dict:
     }
 
 
-def _format_constraints_url(kwargs: Dict) -> str:
+def _format_constraints_url(kwargs: dict) -> str:
     """Join the constraint variables with separator '&' to add to the download link."""
     return "".join([f"&{k}{v}" for k, v in kwargs.items()])
 
@@ -138,7 +138,7 @@ def _check_substrings(constraint):
 
 
 def parse_dates(
-    date_time: Union[datetime, str],
+    date_time: datetime | str,
     dayfirst=False,
     yearfirst=False,
 ) -> float:
@@ -170,7 +170,7 @@ def parse_dates(
 def get_search_url(
     server: str,
     response: str = "html",
-    search_for: Optional[str] = None,
+    search_for: str | None = None,
     protocol: str = "tabledap",
     items_per_page: int = 1_000_000,
     page: int = 1,
@@ -362,8 +362,8 @@ def get_download_url(
     server: str,
     dataset_id: OptionalStr = None,
     protocol: OptionalStr = None,
-    variables: Optional[ListLike] = None,
-    dim_names: Optional[ListLike] = None,
+    variables: ListLike | None = None,
+    dim_names: ListLike | None = None,
     response=None,
     constraints=None,
     distinct=False,
