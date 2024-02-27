@@ -185,7 +185,10 @@ def test_to_iris_tabledap(dataset_tabledap):
 
     assert isinstance(cubes, iris.cube.CubeList)
     assert isinstance(cubes.extract_cube("Profile ID"), iris.cube.Cube)
-    assert isinstance(cubes.extract_cube("sea_water_temperature"), iris.cube.Cube)
+    assert isinstance(
+        cubes.extract_cube("sea_water_temperature"),
+        iris.cube.Cube,
+    )
 
 
 @pytest.mark.web

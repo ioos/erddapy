@@ -143,7 +143,9 @@ def test_download_url_unconstrained(e):
     variables = ["station", "z"]
     url = e.get_download_url(dataset_id=dataset_id, variables=variables)
     assert url == check_url_response(url, follow_redirects=True)
-    assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?")
+    assert url.startswith(
+        f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?",
+    )
     assert sorted(url.split("?")[1].split(",")) == sorted(variables)
 
 
@@ -249,7 +251,10 @@ def test_get_var_by_attr(e):
         )
         == []
     )
-    assert e.get_var_by_attr(dataset_id="org_cormp_cap2", standard_name="time") == [
+    assert e.get_var_by_attr(
+        dataset_id="org_cormp_cap2",
+        standard_name="time",
+    ) == [
         "time",
     ]
 
@@ -260,7 +265,10 @@ def test_download_url_distinct(e):
     """Check download URL results with and without the distinct option."""
     dataset_id = "org_cormp_cap2"
     variables = ["station", "z"]
-    no_distinct_url = e.get_download_url(dataset_id=dataset_id, variables=variables)
+    no_distinct_url = e.get_download_url(
+        dataset_id=dataset_id,
+        variables=variables,
+    )
     with_distinct_url = e.get_download_url(
         dataset_id=dataset_id,
         variables=variables,
@@ -268,7 +276,10 @@ def test_download_url_distinct(e):
     )
     assert not no_distinct_url.endswith("&distinct()")
     assert with_distinct_url.endswith("&distinct()")
-    assert no_distinct_url == check_url_response(no_distinct_url, follow_redirects=True)
+    assert no_distinct_url == check_url_response(
+        no_distinct_url,
+        follow_redirects=True,
+    )
     assert with_distinct_url == check_url_response(
         with_distinct_url,
         follow_redirects=True,

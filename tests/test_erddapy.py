@@ -74,7 +74,9 @@ def test__quote_string_constraints():
     assert isinstance(kw["cdm_data_type"], str)
 
     assert kw["min_time"].startswith('"') and kw["min_time"].endswith('"')
-    assert kw["cdm_data_type"].startswith('"') and kw["cdm_data_type"].endswith('"')
+    assert kw["cdm_data_type"].startswith('"') and kw[
+        "cdm_data_type"
+    ].endswith('"')
 
     for _k, v in kw.items():
         if isinstance(v, str):

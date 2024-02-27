@@ -17,4 +17,6 @@ def test_servers():
     """
     for server in servers.values():
         # Should raise HTTPError if broken, otherwise returns the URL.
-        assert check_url_response(server.url, follow_redirects=True) == server.url
+        assert (
+            check_url_response(server.url, follow_redirects=True) == server.url
+        )

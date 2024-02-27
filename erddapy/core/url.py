@@ -30,7 +30,9 @@ def _sort_url(url):
         else:
             variables, constraints = parts.query.split("&", maxsplit=1)
         sorted_variables = ",".join(sorted(variables.split(",")))
-        sorted_query = OrderedDict(sorted(dict(parse.parse_qsl(constraints)).items()))
+        sorted_query = OrderedDict(
+            sorted(dict(parse.parse_qsl(constraints)).items()),
+        )
         sorted_query_str = parse.unquote(parse.urlencode(sorted_query))
         sorted_url = f"{parts.scheme}://{parts.netloc}{parts.path}?{parts.params}{sorted_variables}&{sorted_query_str}{parts.fragment}"
     else:
@@ -134,7 +136,9 @@ def _format_constraints_url(kwargs: dict) -> str:
 def _check_substrings(constraint):
     """Extend the OPeNDAP with extra strings."""
     substrings = ["now", "min", "max"]
-    return any(True for substring in substrings if substring in str(constraint))
+    return any(
+        True for substring in substrings if substring in str(constraint)
+    )
 
 
 def parse_dates(
@@ -326,7 +330,9 @@ def get_info_url(
 
     """
     if not dataset_id:
-        raise ValueError(f"You must specify a valid dataset_id, got {dataset_id}")
+        raise ValueError(
+            f"You must specify a valid dataset_id, got {dataset_id}",
+        )
 
     url = f"{server}/info/{dataset_id}/index.{response}"
     return url
@@ -393,7 +399,9 @@ def get_download_url(
 
     """
     if not dataset_id:
-        raise ValueError(f"Please specify a valid `dataset_id`, got {dataset_id}")
+        raise ValueError(
+            f"Please specify a valid `dataset_id`, got {dataset_id}",
+        )
 
     if not protocol:
         raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
