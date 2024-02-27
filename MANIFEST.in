@@ -11,6 +11,7 @@ prune notebooks
 prune tests
 
 exclude .coveragerc
+exclude ruff.toml
 exclude .gitignore
 exclude .isort.cfg
 exclude .pre-commit-config.yaml
