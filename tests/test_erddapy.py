@@ -1,8 +1,10 @@
 """Test ERDDAP functionality."""
 
 import datetime
+import sys
 
 import httpx
+import packaging.version
 import pytest
 import pytz
 
@@ -16,6 +18,13 @@ from erddapy.core.url import (
     parse_dates,
 )
 from erddapy.erddapy import ERDDAP
+
+if packaging.version.parse(
+    f"{sys.version_info.major}.{sys.version_info.minor}",
+) < packaging.version.parse(
+    "3.11",
+):
+    datetime.UTC = datetime.timezone.utc
 
 
 def test_parse_dates_naive_datetime():
