@@ -16,9 +16,10 @@ maintainers = [
     {name = "Callum Rollo", email = "c.rollo@outlook.com"},
     {name = "Filipe Fernandes", email = "ocefpaf+erddapy@gmail.com"},
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
 ]
@@ -53,7 +54,6 @@ select = [
     "T20", # flake8-print
     "UP", # upgrade
 ]
-target-version = "py311"
 line-length = 79
 
 [tool.ruff.per-file-ignores]
