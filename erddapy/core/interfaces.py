@@ -33,7 +33,9 @@ def to_pandas(
     try:
         return pd.read_csv(data, **(pandas_kwargs or {}))
     except Exception as e:
-        raise ValueError(f"Could not read url {url} with Pandas.read_csv.") from e
+        raise ValueError(
+            f"Could not read url {url} with Pandas.read_csv.",
+        ) from e
 
 
 def to_ncCF(

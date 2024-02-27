@@ -1,0 +1,28 @@
+line-length = 79
+
+lint.select = [
+    "A", # flake8-builtins
+    "B", # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "F", # flakes
+    "I", # import sorting
+    "T20", # flake8-print
+    "UP", # upgrade
+]
+
+[lint.extend-per-file-ignores]
+"docs/source/conf.py" = [
+  "E402",  # Module level import not at top of file
+  "A001",  # builtin-variable-shadowing
+]
+# nbqa-ruff acts on converted .py so we cannot glob .ipynb :-/
+# https://github.com/nbQA-dev/nbQA/issues/823
+"notebooks/*" = [
+    "D100",  # Missing docstring in public module
+    "E402",  # Module level import not at top of file
+    "FBT003",  # Boolean positional value in function call
+    "T201",  # `print` found"
+    "B018",  # Found useless expression. Either assign it to a variable or remove it
+]
+[lint.pycodestyle]
+max-doc-length = 180

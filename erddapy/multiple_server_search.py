@@ -74,7 +74,10 @@ def search_servers(
             f"Protocol must be tabledap or griddap, got {protocol}",
         )
     if servers_list:
-        urls = {server: _format_search_string(server, query) for server in servers_list}
+        urls = {
+            server: _format_search_string(server, query)
+            for server in servers_list
+        }
     else:
         urls = {
             key: _format_search_string(server.url, query)

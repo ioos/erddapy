@@ -161,7 +161,9 @@ class ERDDAP:
                 f"Method only valid using griddap protocol, got {self.protocol}",
             )
         if dataset_id is None:
-            raise ValueError(f"Must set a valid dataset_id, got {self.dataset_id}")
+            raise ValueError(
+                f"Must set a valid dataset_id, got {self.dataset_id}",
+            )
         # Return the opendap URL without any slicing so the user can do it later.
         if self.response == "opendap":
             return
@@ -315,10 +317,14 @@ class ERDDAP:
         constraints = constraints if constraints else self.constraints
 
         if not dataset_id:
-            raise ValueError(f"Please specify a valid `dataset_id`, got {dataset_id}")
+            raise ValueError(
+                f"Please specify a valid `dataset_id`, got {dataset_id}",
+            )
 
         if not protocol:
-            raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
+            raise ValueError(
+                f"Please specify a valid `protocol`, got {protocol}",
+            )
 
         if (
             protocol == "griddap"
@@ -362,7 +368,11 @@ class ERDDAP:
         response = kw.pop("response", "csvp")
         distinct = kw.pop("distinct", False)
         url = self.get_download_url(response=response, distinct=distinct)
-        return to_pandas(url, requests_kwargs=requests_kwargs, pandas_kwargs=dict(**kw))
+        return to_pandas(
+            url,
+            requests_kwargs=requests_kwargs,
+            pandas_kwargs=dict(**kw),
+        )
 
     def to_ncCF(self, protocol: str = None, **kw):
         """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
@@ -392,7 +402,12 @@ class ERDDAP:
             requests_kwargs = {**{"auth": self.auth}, **requests_kwargs}
         else:
             requests_kwargs = {"auth": self.auth}
-        return to_xarray(url, response, requests_kwargs, xarray_kwargs=dict(**kw))
+        return to_xarray(
+            url,
+            response,
+            requests_kwargs,
+            xarray_kwargs=dict(**kw),
+        )
 
     def to_iris(self, **kw):
         """Load the data request into an iris.CubeList.
@@ -409,7 +424,9 @@ class ERDDAP:
             dataset_id = self.dataset_id
 
         if dataset_id is None:
-            raise ValueError(f"You must specify a valid dataset_id, got {dataset_id}")
+            raise ValueError(
+                f"You must specify a valid dataset_id, got {dataset_id}",
+            )
 
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
@@ -419,14 +436,21 @@ class ERDDAP:
         self._dataset_id = dataset_id
         for variable in set(_df["Variable Name"]):
             attributes = (
-                _df.loc[_df["Variable Name"] == variable, ["Attribute Name", "Value"]]
+                _df.loc[
+                    _df["Variable Name"] == variable,
+                    ["Attribute Name", "Value"],
+                ]
                 .set_index("Attribute Name")
                 .to_dict()["Value"]
             )
             variables.update({variable: attributes})
         return variables
 
-    def get_var_by_attr(self, dataset_id: OptionalStr = None, **kwargs) -> list[str]:
+    def get_var_by_attr(
+        self,
+        dataset_id: OptionalStr = None,
+        **kwargs,
+    ) -> list[str]:
         """
         Return a variable based on its attributes.
 

@@ -32,7 +32,9 @@ def _griddap_get_constraints(
         phrase, *__ = var.split("[")
         var_name = phrase.split(" ")[-1]
         variable_names.append(var_name)
-    table = pd.DataFrame({"dimension name": [], "min": [], "max": [], "length": []})
+    table = pd.DataFrame(
+        {"dimension name": [], "min": [], "max": [], "length": []},
+    )
     for dim in dim_names:
         url = f"{dataset_url}.csvp?{dim}"
         data = pd.read_csv(url).values
@@ -62,7 +64,10 @@ def _griddap_get_constraints(
     return constraints_dict, dim_names, variable_names
 
 
-def _griddap_check_constraints(user_constraints: dict, original_constraints: dict):
+def _griddap_check_constraints(
+    user_constraints: dict,
+    original_constraints: dict,
+):
     """Check that constraints changed by user match those expected by dataset."""
     if user_constraints.keys() != original_constraints.keys():
         raise ValueError(
@@ -70,7 +75,10 @@ def _griddap_check_constraints(user_constraints: dict, original_constraints: dic
         )
 
 
-def _griddap_check_variables(user_variables: ListLike, original_variables: ListLike):
+def _griddap_check_variables(
+    user_variables: ListLike,
+    original_variables: ListLike,
+):
     """Check user has not requested variables that do not exist in dataset."""
     invalid_variables = []
     for variable in user_variables:
