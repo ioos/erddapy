@@ -7,10 +7,10 @@ import pytest
 from erddapy.multiple_server_search import fetch_results, search_servers
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.vcr()
 def test_fetch_results():
-    """This search should return results."""
+    """Test searches should return results."""
     url = (
         "https://standards.sensors.ioos.us/erddap/search/index.csv?"
         'page=1&itemsPerPage=1000000&searchFor="sea_water_temperature"'
@@ -21,10 +21,10 @@ def test_fetch_results():
     assert data is not None
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.vcr()
 def test_fetch_no_results():
-    """This search should return no results."""
+    """Test searches that should return no results."""
     url = (
         "https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=1000000&searchFor"
         '="incredibly_long_string_that_should_never_match_a_real_dataset" '
@@ -35,13 +35,13 @@ def test_fetch_no_results():
     assert data is None
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.skipif(
     sys.platform in ["win32", "darwin"],
     reason="run only on linux to avoid extra load on the server",
 )
-def test_search_awesome_erddap_servers_True():
-    """Test multiple server search on awesome ERDDAP list parallel=True."""
+def test_search_awesome_erddap_servers_true():
+    """Test multiple server search on awesome ERDDAP list in parallel."""
     df = search_servers(
         query="glider",
         protocol="tabledap",
@@ -51,13 +51,13 @@ def test_search_awesome_erddap_servers_True():
     assert not df.empty
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.skipif(
     sys.platform in ["win32", "darwin"],
     reason="run only on linux to avoid extra load on the server",
 )
-def test_search_awesome_erddap_servers_False():
-    """Test multiple server search on awesome ERDDAP list with parallel=False."""
+def test_search_awesome_erddap_servers_false():
+    """Test multiple server search on awesome ERDDAP list in serial."""
     df = search_servers(
         query="glider",
         protocol="tabledap",
@@ -67,11 +67,11 @@ def test_search_awesome_erddap_servers_False():
     assert not df.empty
 
 
-@pytest.fixture
-@pytest.mark.web
+@pytest.fixture()
+@pytest.mark.web()
 def servers_list():
     """Objects for server search."""
-    servers_list = {
+    return {
         "servers_list": [
             "https://standards.sensors.ioos.us/erddap/",
             "https://gliders.ioos.us/erddap/",
@@ -79,17 +79,15 @@ def servers_list():
         "query": "sea_water_temperature",
         "protocol": "tabledap",
     }
-    yield servers_list
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.skipif(
     (sys.platform in ["win32", "darwin"] or sys.version_info < (3, 10)),
     reason="run only on linux and latest to avoid extra load on the server",
 )
-def test_search_servers_with_a_list_parallel_True(servers_list):
-    """
-    Check that downloads are made and that serial and parallel results are similar.
+def test_search_servers_with_a_list_parallel_true(servers_list):
+    """Check that downloads are made.
 
     Ideally they should be identical but the servers are live
     and changes from one request to another can happen.
@@ -107,14 +105,13 @@ def test_search_servers_with_a_list_parallel_True(servers_list):
 
 
 @pytest.mark.vcr()
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.skipif(
     sys.platform in ["win32", "darwin"],
     reason="run only on linux to avoid extra load on the server",
 )
-def test_search_servers_with_a_list_parallel_False(servers_list):
-    """
-    Check that downloads are made and that serial and parallel results are similar.
+def test_search_servers_with_a_list_parallel_false(servers_list):
+    """Check that downloads are made.
 
     Ideally they should be identical but the servers are live
     and changes from one request to another can happen.

@@ -1,9 +1,10 @@
-"""
-Interface between URL responses and third-party libraries.
+"""Interface between URL responses and third-party libraries.
 
-This module takes an URL or the bytes response of a request and converts it to Pandas,
-XArray, Iris, etc. objects.
+This module takes an URL or the bytes response of a request and converts it
+to Pandas, XArray, Iris, etc. objects.
 """
+
+from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
@@ -13,17 +14,21 @@ from erddapy.core.netcdf import _nc_dataset, _tempnc
 from erddapy.core.url import urlopen
 
 if TYPE_CHECKING:
+    import iris.cube
+    import netCDF4
     import xarray as xr
-    from netCDF4 import Dataset
+
+
+OptionalStr = str | None
+OptionalDict = dict | None
 
 
 def to_pandas(
     url: str,
     requests_kwargs: dict | None = None,
     pandas_kwargs: dict | None = None,
-) -> "pd.DataFrame":
-    """
-    Convert a URL to Pandas DataFrame.
+) -> pd.DataFrame:
+    """Convert a URL to Pandas DataFrame.
 
     url: URL to request data from.
     requests_kwargs: arguments to be passed to urlopen method.
@@ -32,39 +37,39 @@ def to_pandas(
     data = urlopen(url, requests_kwargs or {})
     try:
         return pd.read_csv(data, **(pandas_kwargs or {}))
-    except Exception as e:
-        raise ValueError(
-            f"Could not read url {url} with Pandas.read_csv.",
-        ) from e
+    except Exception as e:  # noqa: BLE001
+        msg = f"Could not read url {url} with Pandas.read_csv."
+        raise ValueError(msg) from e
 
 
-def to_ncCF(
+def to_ncCF(  # noqa: N802
     url: str,
-    protocol: str = None,
-    requests_kwargs: dict | None = None,
-) -> "Dataset":
-    """
-    Convert a URL to a netCDF4 Dataset.
+    protocol: OptionalStr = None,
+    requests_kwargs: OptionalDict = None,
+) -> netCDF4.Dataset:
+    """Convert a URL to a netCDF4 Dataset.
 
     url: URL to request data from.
     protocol: 'griddap' or 'tabledap'.
     requests_kwargs: arguments to be passed to urlopen method (including auth).
+
     """
+    msg = (
+        f"Cannot use .ncCF with griddap protocol."
+        f"The URL you tried to access is: '{url}'."
+    )
     if protocol == "griddap":
-        raise ValueError(
-            f"Cannot use .ncCF with griddap protocol. The URL you tried to access is: '{url}'.",
-        )
+        raise ValueError(msg)
     return _nc_dataset(url, requests_kwargs)
 
 
 def to_xarray(
     url: str,
-    response="opendap",
+    response: OptionalStr = "opendap",
     requests_kwargs: dict | None = None,
     xarray_kwargs: dict | None = None,
-) -> "xr.Dataset":
-    """
-    Convert a URL to an xarray dataset.
+) -> xr.Dataset:
+    """Convert a URL to an xarray dataset.
 
     url: URL to request data from.
     response: type of response to be requested from the server.
@@ -75,21 +80,20 @@ def to_xarray(
 
     if response == "opendap":
         return xr.open_dataset(url, **(xarray_kwargs or {}))
-    else:
-        nc = _nc_dataset(url, requests_kwargs)
-        return xr.open_dataset(
-            xr.backends.NetCDF4DataStore(nc),
-            **(xarray_kwargs or {}),
-        )
+
+    nc = _nc_dataset(url, requests_kwargs)
+    return xr.open_dataset(
+        xr.backends.NetCDF4DataStore(nc),
+        **(xarray_kwargs or {}),
+    )
 
 
 def to_iris(
     url: str,
     requests_kwargs: dict | None = None,
     iris_kwargs: dict | None = None,
-):
-    """
-    Convert a URL to an iris CubeList.
+) -> iris.cube.CubeList:
+    """Convert a URL to an iris CubeList.
 
     url: URL to request data from.
     requests_kwargs: arguments to be passed to urlopen method.

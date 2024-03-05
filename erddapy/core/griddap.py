@@ -1,12 +1,14 @@
 """Griddap handling."""
 
+from __future__ import annotations
+
 import functools
 
 import pandas as pd
 
 from erddapy.core.url import urlopen
 
-ListLike = list[str] | tuple[str]
+OptionalList = list[str] | tuple[str] | None
 
 
 @functools.lru_cache(maxsize=128)
@@ -14,8 +16,7 @@ def _griddap_get_constraints(
     dataset_url: str,
     step: int,
 ) -> tuple[dict, list, list]:
-    """
-    Fetch metadata of griddap dataset and set initial constraints.
+    """Fetch metadata of griddap dataset and set initial constraints.
 
     Step size is applied to all dimensions.
     """
@@ -37,11 +38,8 @@ def _griddap_get_constraints(
     )
     for dim in dim_names:
         url = f"{dataset_url}.csvp?{dim}"
-        data = pd.read_csv(url).values
-        if dim == "time":
-            data_start = data[-1][0]
-        else:
-            data_start = data[0][0]
+        data = pd.read_csv(url).to_numpy()
+        data_start = data[-1][0] if dim == "time" else data[0][0]
 
         meta = pd.DataFrame(
             [
@@ -67,24 +65,29 @@ def _griddap_get_constraints(
 def _griddap_check_constraints(
     user_constraints: dict,
     original_constraints: dict,
-):
-    """Check that constraints changed by user match those expected by dataset."""
+) -> None:
+    """Validate user constraints against the dataset."""
     if user_constraints.keys() != original_constraints.keys():
-        raise ValueError(
+        msg = (
             "keys in e.constraints have changed. Re-run e.griddap_initialize",
         )
+        raise ValueError(msg)
 
 
 def _griddap_check_variables(
-    user_variables: ListLike,
-    original_variables: ListLike,
-):
+    user_variables: OptionalList = None,
+    original_variables: OptionalList = None,
+) -> None:
     """Check user has not requested variables that do not exist in dataset."""
     invalid_variables = []
-    for variable in user_variables:
-        if variable not in original_variables:
-            invalid_variables.append(variable)
+    invalid_variables.extend(
+        variable
+        for variable in user_variables
+        if variable not in original_variables
+    )
     if invalid_variables:
-        raise ValueError(
-            f"variables {invalid_variables} are not present in dataset. Re-run e.griddap_initialize",
+        msg = (
+            f"variables {invalid_variables} are not present in dataset. "
+            "Re-run e.griddap_initialize"
         )
+        raise ValueError(msg)

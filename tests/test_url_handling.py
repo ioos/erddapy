@@ -8,7 +8,7 @@ import pytest
 from erddapy.core.url import _sort_url, check_url_response, urlopen
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.vcr()
 def test_urlopen():
     """Assure that urlopen is always a BytesIO object."""
@@ -17,7 +17,7 @@ def test_urlopen():
     isinstance(ret, io.BytesIO)
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.vcr()
 def test_urlopen_raise():
     """Assure that urlopen will raise for bad URLs."""
@@ -26,7 +26,7 @@ def test_urlopen_raise():
         urlopen(url)
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.vcr()
 def test_check_url_response():
     """Test if a bad request returns HTTPError."""

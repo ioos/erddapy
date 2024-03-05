@@ -1,8 +1,11 @@
 """Pythonic way to access ERDDAP data."""
 
+from __future__ import annotations
+
 import functools
 import hashlib
 from pathlib import Path
+from typing import TYPE_CHECKING
 from urllib.request import urlretrieve
 
 import pandas as pd
@@ -40,7 +43,14 @@ __all__ = [
     "ERDDAP",
 ]
 
-ListLike = list[str] | tuple[str]
+if TYPE_CHECKING:
+    import iris.cube
+    import netCDF4.Dataset
+    import xarray as xr
+
+OptionalBool = bool | None
+OptionalDict = dict | None
+OptionalList = list[str] | tuple[str] | None
 OptionalStr = str | None
 
 
@@ -48,10 +58,12 @@ class ERDDAP:
     """Creates an ERDDAP instance for a specific server endpoint.
 
     Args:
-        server: an ERDDAP server URL or an acronym for one of the builtin servers.
+    ----
+        server: an ERDDAP server URL or acronym is using the builtin servers.
         protocol: tabledap or griddap.
 
     Attributes:
+    ----------
         dataset_id: a dataset unique id.
         variables: a list variables to download.
         response: default is HTML.
@@ -59,9 +71,11 @@ class ERDDAP:
         params and requests_kwargs: `httpx.get` options
 
     Returns:
+    -------
         instance: the ERDDAP URL builder.
 
     Examples:
+    --------
         Specifying the server URL
 
         >>> e = ERDDAP(server="https://gliders.ioos.us/erddap")
@@ -106,20 +120,21 @@ class ERDDAP:
     """
 
     def __init__(
-        self,
+        self: ERDDAP,
         server: str,
         protocol: OptionalStr = None,
         response: str = "html",
-    ):
-        """
-        Instantiate main class attributes.
+    ) -> None:
+        """Instantiate main class attributes.
 
-        Attributes:
+        Attributes
+        ----------
           server: the server URL.
           protocol: ERDDAP's protocol (tabledap/griddap)
           response: default is HTML.
+
         """
-        if server.lower() in servers.keys():
+        if server.lower() in servers:
             server = servers[server.lower()].url
         self.server = server.rstrip("/")
         self.protocol = protocol
@@ -131,40 +146,38 @@ class ERDDAP:
         self.dataset_id: OptionalStr = None
         self.requests_kwargs: dict = {}
         self.auth: tuple | None = None
-        self.variables: ListLike | None = None
-        self.dim_names: ListLike | None = None
+        self.variables: OptionalList | None = None
+        self.dim_names: OptionalList | None = None
 
         self._get_variables = functools.lru_cache(maxsize=128)(
             self._get_variables_uncached,
         )
-        # Caching the last `dataset_id` and `variables` list request for quicker multiple accesses,
-        # will be overridden when requesting a new `dataset_id`.
+        # Caching the last dataset_id and variables list request for
+        # quicker access, will be overridden when requesting a new dataset_id.
         self._dataset_id: OptionalStr = None
         self._variables: dict = {}
 
     def griddap_initialize(
-        self,
+        self: ERDDAP,
         dataset_id: OptionalStr = None,
         step: int = 1,
-    ):
-        """
-        Fetch metadata of dataset and initialize constraints and variables.
+    ) -> None:
+        """Fetch metadata of dataset and initialize constraints and variables.
 
         Args:
+        ----
         dataset_id: a dataset unique id.
         step: step used to subset dataset
 
         """
         dataset_id = dataset_id if dataset_id else self.dataset_id
+        msg = f"Method only valid using griddap protocol, got {self.protocol}"
         if self.protocol != "griddap":
-            raise ValueError(
-                f"Method only valid using griddap protocol, got {self.protocol}",
-            )
+            raise ValueError(msg)
+        msg = f"Must set a valid dataset_id, got {self.dataset_id}"
         if dataset_id is None:
-            raise ValueError(
-                f"Must set a valid dataset_id, got {self.dataset_id}",
-            )
-        # Return the opendap URL without any slicing so the user can do it later.
+            raise ValueError(msg)
+        # Return the opendap URL without any slicing.
         if self.response == "opendap":
             return
 
@@ -177,45 +190,53 @@ class ERDDAP:
         self._constraints_original = self.constraints.copy()
         self._variables_original = self.variables.copy()
 
-    def get_search_url(
-        self,
+    def get_search_url(  # noqa: PLR0913
+        self: ERDDAP,
         response: OptionalStr = None,
         search_for: OptionalStr = None,
         protocol: OptionalStr = None,
         items_per_page: int = 1_000_000,
         page: int = 1,
-        **kwargs,
+        **kwargs: dict,
     ) -> str:
-        """
-        Build the search URL for the `server` endpoint provided.
+        """Build the search URL for the `server` endpoint provided.
 
         Args:
+        ----
             search_for: "Google-like" search of the datasets' metadata.
 
-                - Type the words you want to search for, with spaces between the words.
-                    ERDDAP will search for the words separately, not as a phrase.
+                - Type the words you want to search for,
+                  with spaces between the words.
+                  ERDDAP will search for the words separately, not as a phrase.
                 - To search for a phrase, put double quotes around the phrase
                     (for example, `"wind speed"`).
-                - To exclude datasets with a specific word, use `-excludedWord`.
-                - To exclude datasets with a specific phrase, use `-"excluded phrase"`
+                - To exclude datasets with a specific word use `-excludedWord`.
+                - To exclude datasets with a specific phrase,
+                  use `-"excluded phrase"`
                 - Searches are not case-sensitive.
                 - You can search for any part of a word. For example,
-                    searching for `spee` will find datasets with `speed` and datasets with
-                    `WindSpeed`
+                    searching for `spee` will find datasets with `speed`
+                    and datasets with `WindSpeed`
                 - The last word in a phrase may be a partial word. For example,
-                    to find datasets from a specific website (usually the start of the datasetID),
+                    to find datasets from a specific website
+                    (usually the start of the datasetID),
                     include (for example) `"datasetID=erd"` in your search.
 
             response: default is HTML.
+            protocol: tabledap or griddap.
             items_per_page: how many items per page in the return,
-                default is 1_000_000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
+                default is 1_000_000 for HTML,
+                1e6 (hopefully all items) for CSV, JSON.
             page: which page to display, default is the first page (1).
-            kwargs: extra search constraints based on metadata and/or coordinates ke/value.
-                metadata: `cdm_data_type`, `institution`, `ioos_category`,
+            kwargs: extra search constraints based on metadata and/or
+                coordinates key/value.
+            metadata: `cdm_data_type`, `institution`, `ioos_category`,
                 `keywords`, `long_name`, `standard_name`, and `variableName`.
-                coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`, `minTime`, and `maxTime`.
+                coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`,
+                `minTime`, and `maxTime`.
 
         Returns:
+        -------
             url: the search URL.
 
         """
@@ -233,18 +254,19 @@ class ERDDAP:
         )
 
     def get_info_url(
-        self,
+        self: ERDDAP,
         dataset_id: OptionalStr = None,
         response: OptionalStr = None,
     ) -> str:
-        """
-        Build the info URL for the `server` endpoint.
+        """Build the info URL for the `server` endpoint.
 
         Args:
+        ----
             dataset_id: a dataset unique id.
             response: default is HTML.
 
         Returns:
+        -------
             url: the info URL for the `response` chosen.
 
         """
@@ -254,58 +276,72 @@ class ERDDAP:
         return get_info_url(self.server, dataset_id, response)
 
     def get_categorize_url(
-        self,
+        self: ERDDAP,
         categorize_by: str,
         value: OptionalStr = None,
         response: OptionalStr = None,
     ) -> str:
-        """
-        Build the categorize URL for the `server` endpoint.
+        """Build the categorize URL for the `server` endpoint.
 
         Args:
-            categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
-                Valid attributes are shown in http://erddap.ioos.us/erddap/categorize page.
+        ----
+            categorize_by: a valid attribute, e.g. ioos_category
+                or standard_name. Valid attributes are shown in
+                http://erddap.ioos.us/erddap/categorize page.
             value: an attribute value.
             response: default is HTML.
 
         Returns:
+        -------
             url: the categorized URL for the `response` chosen.
 
         """
         response = response if response else self.response
         return get_categorize_url(self.server, categorize_by, value, response)
 
-    def get_download_url(
-        self,
+    def get_download_url(  # noqa: PLR0913
+        self: ERDDAP,
+        *,
         dataset_id: OptionalStr = None,
         protocol: OptionalStr = None,
-        variables: ListLike | None = None,
-        dim_names: ListLike | None = None,
-        response=None,
-        constraints=None,
-        distinct=False,
+        variables: OptionalList = None,
+        dim_names: OptionalList = None,
+        response: OptionalStr = None,
+        constraints: OptionalDict = None,
+        distinct: OptionalBool = False,
     ) -> str:
-        """
-        Build the download URL for the `server` endpoint.
+        """Build the download URL for the `server` endpoint.
 
         Args:
+        ----
             dataset_id: a dataset unique id.
             protocol: tabledap or griddap.
             variables (list/tuple): a list of the variables to download.
+            dim_names (list/tuple): a list of the dimensions (griddap only).
             response (str): default is HTML.
-            constraints (dict): download constraints, default None (opendap-like url)
-            example: constraints = {'latitude<=': 41.0,
-                                    'latitude>=': 38.0,
-                                    'longitude<=': -69.0,
-                                    'longitude>=': -72.0,
-                                    'time<=': '2017-02-10T00:00:00+00:00',
-                                    'time>=': '2016-07-10T00:00:00+00:00',}
+            constraints (dict): download constraints, default None (opendap).
+            distinct (bool): if true, only unique values will be downloaded.
 
-            One can also use relative constraints like {'time>': 'now-7days',
-                                                        'latitude<': 'min(longitude)+180',
-                                                        'depth>': 'max(depth)-23',}
+        Example:
+        -------
+            constraints = {
+                'latitude<=': 41.0,
+                'latitude>=': 38.0,
+                'longitude<=': -69.0,
+                'longitude>=': -72.0,
+                'time<=': '2017-02-10T00:00:00+00:00',
+                'time>=': '2016-07-10T00:00:00+00:00',
+            }
+
+            One can also use relative constraints like:
+            constraints = {
+                'time>': 'now-7days',
+                'latitude<': 'min(longitude)+180',
+                'depth>': 'max(depth)-23',
+            }
 
         Returns:
+        -------
             url (str): the download URL for the `response` chosen.
 
         """
@@ -317,14 +353,12 @@ class ERDDAP:
         constraints = constraints if constraints else self.constraints
 
         if not dataset_id:
-            raise ValueError(
-                f"Please specify a valid `dataset_id`, got {dataset_id}",
-            )
+            msg = f"Please specify a valid `dataset_id`, got {dataset_id}"
+            raise ValueError(msg)
 
         if not protocol:
-            raise ValueError(
-                f"Please specify a valid `protocol`, got {protocol}",
-            )
+            msg = f"Please specify a valid `protocol`, got {protocol}"
+            raise ValueError(msg)
 
         if (
             protocol == "griddap"
@@ -332,35 +366,38 @@ class ERDDAP:
             and variables is not None
             and dim_names is not None
         ):
-            # Check that dimensions, constraints and variables are valid for this dataset
+            # Check that dimensions, constraints,
+            # and variables are valid for this dataset.
 
             _griddap_check_constraints(constraints, self._constraints_original)
             _griddap_check_variables(variables, self._variables_original)
 
         return get_download_url(
             self.server,
-            dataset_id,
-            protocol,
-            variables,
-            dim_names,
-            response,
-            constraints,
-            distinct,
+            dataset_id=dataset_id,
+            protocol=protocol,
+            variables=variables,
+            dim_names=dim_names,
+            response=response,
+            constraints=constraints,
+            distinct=distinct,
         )
 
     def to_pandas(
-        self,
+        self: ERDDAP,
         requests_kwargs: dict | None = None,
-        **kw,
-    ) -> "pd.DataFrame":
+        **kw: dict,
+    ) -> pd.DataFrame:
         """Save a data request to a pandas.DataFrame.
 
-        Accepts any `pandas.read_csv` keyword arguments, passed as a dictionary to pandas_kwargs.
+        Accepts any `pandas.read_csv` keyword arguments,
+        passed as a dictionary to pandas_kwargs.
 
         This method uses the .csvp [1] response as the default for simplicity,
-        please check ERDDAP's documentation for the other csv options available.
+        please check ERDDAP's docs for the other csv options available.
 
-        [1] Download a ISO-8859-1 .csv file with line 1: name (units). Times are ISO 8601 strings.
+        [1] Download a ISO-8859-1 .csv file with line 1: name (units).
+            Times are ISO 8601 strings.
 
         requests_kwargs: kwargs to be passed to urlopen method.
         **kw: kwargs to be passed to third-party library (pandas).
@@ -374,18 +411,22 @@ class ERDDAP:
             pandas_kwargs=dict(**kw),
         )
 
-    def to_ncCF(self, protocol: str = None, **kw):
-        """Load the data request into a Climate and Forecast compliant netCDF4-python object."""
+    def to_ncCF(  # noqa: N802
+        self: ERDDAP,
+        protocol: OptionalStr = None,
+        **kw: dict,
+    ) -> netCDF4.Dataset:
+        """Load the data request into a CF compliant netCDF4-python object."""
         distinct = kw.pop("distinct", False)
         protocol = protocol if protocol else self.protocol
         url = self.get_download_url(response="ncCF", distinct=distinct)
         return to_ncCF(url, protocol=protocol, requests_kwargs=dict(**kw))
 
     def to_xarray(
-        self,
+        self: ERDDAP,
         requests_kwargs: dict | None = None,
-        **kw,
-    ):
+        **kw: dict,
+    ) -> xr.Dataset:
         """Load the data request into a xarray.Dataset.
 
         Accepts any `xr.open_dataset` keyword arguments.
@@ -399,7 +440,7 @@ class ERDDAP:
         distinct = kw.pop("distinct", False)
         url = self.get_download_url(response=response, distinct=distinct)
         if requests_kwargs:
-            requests_kwargs = {**{"auth": self.auth}, **requests_kwargs}
+            requests_kwargs = {"auth": self.auth, **requests_kwargs}
         else:
             requests_kwargs = {"auth": self.auth}
         return to_xarray(
@@ -409,8 +450,8 @@ class ERDDAP:
             xarray_kwargs=dict(**kw),
         )
 
-    def to_iris(self, **kw):
-        """Load the data request into an iris.CubeList.
+    def to_iris(self: ERDDAP, **kw: dict) -> iris.cube.CubeList:
+        """Load the data request into an iris.cube.CubeList.
 
         Accepts any `iris.load_raw` keyword arguments.
         """
@@ -419,14 +460,16 @@ class ERDDAP:
         url = self.get_download_url(response=response, distinct=distinct)
         return to_iris(url, iris_kwargs=dict(**kw))
 
-    def _get_variables_uncached(self, dataset_id: OptionalStr = None) -> dict:
+    def _get_variables_uncached(
+        self: ERDDAP,
+        dataset_id: OptionalStr = None,
+    ) -> dict:
         if not dataset_id:
             dataset_id = self.dataset_id
 
         if dataset_id is None:
-            raise ValueError(
-                f"You must specify a valid dataset_id, got {dataset_id}",
-            )
+            msg = f"You must specify a valid dataset_id, got {dataset_id}"
+            raise ValueError(msg)
 
         url = self.get_info_url(dataset_id=dataset_id, response="csv")
 
@@ -447,18 +490,18 @@ class ERDDAP:
         return variables
 
     def get_var_by_attr(
-        self,
+        self: ERDDAP,
         dataset_id: OptionalStr = None,
-        **kwargs,
+        **kwargs: dict,
     ) -> list[str]:
-        """
-        Return a variable based on its attributes.
+        """Return a variable based on its attributes.
 
         The `get_var_by_attr` method will create an info `csv` return,
         for the `dataset_id`, and the variables attribute dictionary,
         similar to netCDF4-python `get_variables_by_attributes`.
 
-        Examples:
+        Examples
+        --------
             >>> e = ERDDAP(server_url="https://gliders.ioos.us/erddap")
             >>> dataset_id = "whoi_406-20160902T1700"
 
@@ -476,7 +519,8 @@ class ERDDAP:
 
             Get Axis variables
 
-            >>> e.get_var_by_attr(dataset_id, axis=lambda v: v in ["X", "Y", "Z", "T"])
+            >>> axis = lambda v: v in ["X", "Y", "Z", "T"]
+            >>> e.get_var_by_attr(dataset_id, axis=axis)
             ['latitude', 'longitude', 'time', 'depth']
 
         """
@@ -501,18 +545,17 @@ class ERDDAP:
         return vs
 
     def download_file(
-        self,
-        file_type,
-    ):
-        """Download the dataset to a file in a user specified format"""
+        self: ERDDAP,
+        file_type: str,
+    ) -> str:
+        """Download the dataset to a file in a user specified format."""
         file_type = file_type.lstrip(".")
         if file_type not in download_formats:
-            raise ValueError(
-                f"Requested filetype {file_type} not available on ERDDAP",
-            )
+            msg = f"Requested filetype {file_type} not available on ERDDAP"
+            raise ValueError(msg)
         url = _sort_url(self.get_download_url(response=file_type))
         fname_hash = hashlib.shake_256(url.encode()).hexdigest(5)
         file_name = Path(f"{self.dataset_id}_{fname_hash}.{file_type}")
         if not file_name.exists():
-            urlretrieve(url, file_name)
+            urlretrieve(url, file_name)  # noqa: S310
         return file_name

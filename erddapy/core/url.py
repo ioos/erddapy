@@ -1,10 +1,15 @@
 """URL handling."""
 
+from __future__ import annotations
+
 import copy
 import functools
 import io
 from collections import OrderedDict
-from datetime import datetime
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from datetime import datetime
 from typing import BinaryIO
 from urllib import parse
 
@@ -12,15 +17,14 @@ import httpx
 import pytz
 from pandas import to_datetime
 
-ListLike = list[str] | tuple[str]
 OptionalStr = str | None
+OptionalBool = bool | None
+OptionalDict = dict | None
+OptionalList = list[str] | tuple[str] | None
 
 
-def _sort_url(url):
-    """
-    Returns a URL with sorted variables and constraints to ensure unique hash.
-
-    """
+def _sort_url(url: str) -> str:
+    """Return a URL with sorted variables and constraints for hashing."""
     parts = parse.urlparse(url)
     if parts.query:
         query = parts.query.split("&", maxsplit=1)
@@ -42,13 +46,14 @@ def _sort_url(url):
 
 @functools.lru_cache(maxsize=128)
 def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
-    if "timeout" not in kwargs.keys():
+    if "timeout" not in kwargs:
         kwargs["timeout"] = 60
     response = httpx.get(url, follow_redirects=True, auth=auth, **kwargs)
     try:
         response.raise_for_status()
     except httpx.HTTPError as err:
-        raise httpx.HTTPError(f"{response.content.decode()}") from err
+        msg = f"{response.content.decode()}"
+        raise httpx.HTTPError(msg) from err
     return io.BytesIO(response.content)
 
 
@@ -61,21 +66,19 @@ def urlopen(
     See httpx.get docs for the `params` and `kwargs` options.
 
     """
-    # Ignoring type checks here b/c mypy does not support decorated functions.
     if requests_kwargs is None:
         requests_kwargs = {}
-    data = _urlopen(url, **requests_kwargs)  # type: ignore
+    data = _urlopen(url, **requests_kwargs)
     data.seek(0)
     return data
 
 
 @functools.lru_cache(maxsize=128)
 def check_url_response(url: str, **kwargs: dict) -> str:
-    """
-    Shortcut to `raise_for_status` instead of fetching the whole content.
+    """Shortcut to `raise_for_status` instead of fetching the whole content.
 
-    One should only use this is passing URLs that are known to work is necessary.
-    Otherwise let it fail later and avoid fetching the head.
+    One should only use this is passing URLs that are known to work is
+    necessary. Otherwise let it fail later and avoid fetching the head.
 
     """
     r = httpx.head(url, **kwargs)
@@ -83,16 +86,16 @@ def check_url_response(url: str, **kwargs: dict) -> str:
     return url
 
 
-def _distinct(url: str, distinct: bool | None = False) -> str:
-    """
-    Sort all of the rows in the results table.
+def _distinct(url: str, *, distinct: OptionalBool = False) -> str:
+    """Sort all of the rows in the results table.
 
     Starting with the first requested variable,
-    then using the second requested variable if the first variable has a tie, ...,
+    then using the second requested variable if the first variable has a tie,
     then remove all non-unique rows of data.
 
-    For example, a query for the variables ["stationType", "stationID"] with `distinct=True`
-    will return a sorted list of "stationIDs" associated with each "stationType".
+    For example, a query for the variables ["stationType", "stationID"]
+    with `distinct=True` will return a sorted list of "stationIDs" associated
+    with each "stationType".
 
     See http://erddap.ioos.us/erddap/tabledap/documentation.html#distinct
 
@@ -103,8 +106,12 @@ def _distinct(url: str, distinct: bool | None = False) -> str:
 
 
 def _format_search_string(server: str, query: str) -> str:
-    """Generate a search string for an erddap server with user defined query."""
-    return f'{server}search/index.csv?page=1&itemsPerPage=1000000&searchFor="{query}"'
+    """Generate search string for an ERDDAP server with user defined query."""
+    return (
+        f"{server}search/index.csv?"
+        f"page=1&"
+        f'itemsPerPage=1000000&searchFor="{query}"'
+    )
 
 
 def _multi_urlopen(url: str) -> BinaryIO:
@@ -117,10 +124,10 @@ def _multi_urlopen(url: str) -> BinaryIO:
 
 
 def _quote_string_constraints(kwargs: dict) -> dict:
-    """
-    Quote constraints of String variables.
+    """Quote constraints of String variables.
 
-    The right-hand-side value must be surrounded by double quotes if they are not relative constraints.
+    The right-hand-side value must be surrounded by double quotes if they are
+    not relative constraints.
     """
     return {
         k: f'"{v}"' if isinstance(v, str) and not _check_substrings(v) else v
@@ -129,11 +136,14 @@ def _quote_string_constraints(kwargs: dict) -> dict:
 
 
 def _format_constraints_url(kwargs: dict) -> str:
-    """Join the constraint variables with separator '&' to add to the download link."""
+    """Join the constraint variables with separator '&' and
+    add to the download link.
+
+    """
     return "".join([f"&{k}{v}" for k, v in kwargs.items()])
 
 
-def _check_substrings(constraint):
+def _check_substrings(constraint: dict) -> bool:
     """Extend the OPeNDAP with extra strings."""
     substrings = ["now", "min", "max"]
     return any(
@@ -143,11 +153,11 @@ def _check_substrings(constraint):
 
 def parse_dates(
     date_time: datetime | str,
-    dayfirst=False,
-    yearfirst=False,
+    *,
+    dayfirst: OptionalBool = False,
+    yearfirst: OptionalBool = False,
 ) -> float:
-    """
-    Parse dates to ERDDAP internal format.
+    """Parse dates to ERDDAP internal format.
 
     ERDDAP ReSTful API standardizes the representation of dates as either ISO
     strings or seconds since 1970, but internally ERDDAPY uses datetime-like
@@ -171,45 +181,54 @@ def parse_dates(
     return parse_date_time.timestamp()
 
 
-def get_search_url(
+def get_search_url(  # noqa: PLR0913
     server: str,
     response: str = "html",
     search_for: str | None = None,
     protocol: str = "tabledap",
     items_per_page: int = 1_000_000,
     page: int = 1,
-    **kwargs,
-):
-    """
-    Build the search URL for the `server` endpoint provided.
+    **kwargs: dict,
+) -> str:
+    """Build the search URL for the `server` endpoint provided.
 
     Args:
+    ----
         search_for: "Google-like" search of the datasets' metadata.
 
-            - Type the words you want to search for, with spaces between the words.
+            - Type the words you want to search for,
+                with spaces between the words.
                 ERDDAP will search for the words separately, not as a phrase.
             - To search for a phrase, put double quotes around the phrase
                 (for example, `"wind speed"`).
-            - To exclude datasets with a specific word, use `-excludedWord`.
-            - To exclude datasets with a specific phrase, use `-"excluded phrase"`
+            - To exclude datasets with a specific word use `-excludedWord`.
+            - To exclude datasets with a specific phrase,
+                use `-"excluded phrase"`
             - Searches are not case-sensitive.
             - You can search for any part of a word. For example,
-                searching for `spee` will find datasets with `speed` and datasets with
-                `WindSpeed`
+                searching for `spee` will find datasets with `speed`
+                and datasets with `WindSpeed`
             - The last word in a phrase may be a partial word. For example,
-                to find datasets from a specific website (usually the start of the datasetID),
+                to find datasets from a specific website
+                (usually the start of the datasetID),
                 include (for example) `"datasetID=erd"` in your search.
 
+        server: data server endpoint.
         response: default is HTML.
+        protocol: tabledap or griddap.
         items_per_page: how many items per page in the return,
-            default is 1_000_000 for HTML, 1e6 (hopefully all items) for CSV, JSON.
+            default is 1_000_000 for HTML,
+            1e6 (hopefully all items) for CSV, JSON.
         page: which page to display, default is the first page (1).
-        kwargs: extra search constraints based on metadata and/or coordinates ke/value.
-            metadata: `cdm_data_type`, `institution`, `ioos_category`,
+        kwargs: extra search constraints based on metadata and/or
+            coordinates key/value.
+        metadata: `cdm_data_type`, `institution`, `ioos_category`,
             `keywords`, `long_name`, `standard_name`, and `variableName`.
-            coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`, `minTime`, and `maxTime`.
+            coordinates: `minLon`, `maxLon`, `minLat`, `maxLat`,
+            `minTime`, and `maxTime`.
 
     Returns:
+    -------
         url: the search URL.
 
     """
@@ -262,14 +281,15 @@ def get_search_url(
         "variableName",
     )
     for search_term in lower_case_search_terms:
-        if search_term in kwargs.keys():
+        if search_term in kwargs:
             lowercase = kwargs[search_term].lower()
             kwargs.update({search_term: lowercase})
 
-    # These responses should not be paginated b/c that hinders the correct amount of data silently
-    # and can surprise users when the number of items is greater than ERDDAP's defaults (1_000_000 items).
-    # Ideally there should be no pagination for this on the ERDDAP side but for now we settled for a
-    # "really big" `items_per_page` number.
+    # These responses should not be paginated b/c that hinders the correct
+    # amount of data silently and can surprise users when the number of items
+    # is greater than ERDDAP's defaults (1_000_000 items).
+    # Ideally there should be no pagination for this on the ERDDAP side but for
+    # now we settled for a "really big" `items_per_page` number.
     non_paginated_responses = [
         "csv",
         "csvp",
@@ -309,8 +329,7 @@ def get_search_url(
     )
     # ERDDAP 2.10 no longer accepts strings placeholder for dates.
     # Removing them entirely should be OK for older versions too.
-    url = url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
-    return url
+    return url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
 
 
 def get_info_url(
@@ -318,24 +337,24 @@ def get_info_url(
     dataset_id: OptionalStr = None,
     response: OptionalStr = None,
 ) -> str:
-    """
-    Build the info URL for the `server` endpoint.
+    """Build the info URL for the `server` endpoint.
 
     Args:
+    ----
+        server: data server endpoint.
         dataset_id: a dataset unique id.
         response: default is HTML.
 
     Returns:
+    -------
         url: the info URL for the `response` chosen.
 
     """
     if not dataset_id:
-        raise ValueError(
-            f"You must specify a valid dataset_id, got {dataset_id}",
-        )
+        msg = f"You must specify a valid dataset_id, got {dataset_id}"
+        raise ValueError(msg)
 
-    url = f"{server}/info/{dataset_id}/index.{response}"
-    return url
+    return f"{server}/info/{dataset_id}/index.{response}"
 
 
 def get_categorize_url(
@@ -344,16 +363,19 @@ def get_categorize_url(
     value: OptionalStr = None,
     response: OptionalStr = None,
 ) -> str:
-    """
-    Build the categorize URL for the `server` endpoint.
+    """Build the categorize URL for the `server` endpoint.
 
     Args:
+    ----
+        server: data server endpoint.
         categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
-            Valid attributes are shown in http://erddap.ioos.us/erddap/categorize page.
+            Valid attributes are shown in
+            http://erddap.ioos.us/erddap/categorize page.
         value: an attribute value.
         response: default is HTML.
 
     Returns:
+    -------
         url: the categorized URL for the `response` chosen.
 
     """
@@ -364,47 +386,60 @@ def get_categorize_url(
     return url
 
 
-def get_download_url(
+def get_download_url(  # noqa: PLR0913, C901
     server: str,
+    *,
     dataset_id: OptionalStr = None,
     protocol: OptionalStr = None,
-    variables: ListLike | None = None,
-    dim_names: ListLike | None = None,
-    response=None,
-    constraints=None,
-    distinct=False,
+    variables: OptionalList = None,
+    dim_names: OptionalList = None,
+    response: OptionalStr = None,
+    constraints: OptionalDict = None,
+    distinct: OptionalBool = False,
 ) -> str:
-    """
-    Build the download URL for the `server` endpoint.
+    """Build the download URL.
 
     Args:
+    ----
+        server: data server endpoint.
         dataset_id: a dataset unique id.
         protocol: tabledap or griddap.
         variables (list/tuple): a list of the variables to download.
+        dim_names (list/tuple): a list of the dimensions (griddap only).
         response (str): default is HTML.
-        constraints (dict): download constraints, default None (opendap-like url)
-        example: constraints = {'latitude<=': 41.0,
-                                'latitude>=': 38.0,
-                                'longitude<=': -69.0,
-                                'longitude>=': -72.0,
-                                'time<=': '2017-02-10T00:00:00+00:00',
-                                'time>=': '2016-07-10T00:00:00+00:00',}
+        constraints (dict): download constraints, default None (opendap url)
+        distinct (bool): if true, only unique values will be downloaded.
 
-        One can also use relative constraints like {'time>': 'now-7days',
-                                                    'latitude<': 'min(longitude)+180',
-                                                    'depth>': 'max(depth)-23',}
+    Example:
+    -------
+            constraints = {
+                'latitude<=': 41.0,
+                'latitude>=': 38.0,
+                'longitude<=': -69.0,
+                'longitude>=': -72.0,
+                'time<=': '2017-02-10T00:00:00+00:00',
+                'time>=': '2016-07-10T00:00:00+00:00',
+                }
+
+        One can also use relative constraints like:
+            constraints = {
+                'time>': 'now-7days',
+                'latitude<': 'min(longitude)+180',
+                'depth>': 'max(depth)-23',
+                }
 
     Returns:
+    -------
         url (str): the download URL for the `response` chosen.
 
     """
     if not dataset_id:
-        raise ValueError(
-            f"Please specify a valid `dataset_id`, got {dataset_id}",
-        )
+        msg = f"Please specify a valid `dataset_id`, got {dataset_id}"
+        raise ValueError(msg)
 
     if not protocol:
-        raise ValueError(f"Please specify a valid `protocol`, got {protocol}")
+        msg = f"Please specify a valid `protocol`, got {protocol}"
+        raise ValueError(msg)
 
     if (
         protocol == "griddap"
@@ -424,24 +459,22 @@ def get_download_url(
         ]
         for var in variables:
             sub_url = [var]
-            for dim in dim_names:
-                sub_url.append(
-                    f"[({constraints[dim + '>=']}):"
-                    f"{constraints[dim + '_step']}:"
-                    f"({constraints[dim + '<=']})]",
-                )
+            sub_url.extend(
+                f"[({constraints[dim + '>=']}):"
+                f"{constraints[dim + '_step']}:"
+                f"({constraints[dim + '<=']})]"
+                for dim in dim_names
+            )
             sub_url.append(",")
             download_url.append("".join(sub_url))
-        url = "".join(download_url)[:-1]
-        return url
+        return "".join(download_url)[:-1]
 
     # This is an unconstrained OPeNDAP response b/c
     # the integer based constrained version is just not worth supporting ;-p
     if response == "opendap":
         return f"{server}/{protocol}/{dataset_id}"
-    else:
-        url = f"{server}/{protocol}/{dataset_id}.{response}?"
 
+    url = f"{server}/{protocol}/{dataset_id}.{response}?"
     if variables:
         url += ",".join(variables)
 
@@ -450,8 +483,8 @@ def get_download_url(
         for k, v in _constraints.items():
             if _check_substrings(v):
                 continue
-            # The valid operators are
-            # =, != (not equals), =~ (a regular expression test), <, <=, >, and >=
+            # The valid operators are =, != (not equals),
+            # =~ (a regular expression test), <, <=, >, and >=
             valid_time_constraints = (
                 "time=",
                 "time!=",
@@ -468,8 +501,7 @@ def get_download_url(
 
         url += f"{_constraints_url}"
 
-    url = _distinct(url, distinct)
-    return url
+    return _distinct(url, distinct=distinct)
 
 
 download_formats = [
