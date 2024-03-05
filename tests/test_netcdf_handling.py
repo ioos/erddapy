@@ -1,7 +1,7 @@
 """Test netCDF loading."""
 
-import os
 import platform
+from pathlib import Path
 
 import pytest
 
@@ -9,20 +9,20 @@ from erddapy.core.netcdf import _nc_dataset, _tempnc
 from erddapy.core.url import urlopen
 
 
-@pytest.mark.web
+@pytest.mark.web()
 # For some reason we cannot use vcr with httpx with in_memory
 # (also all the to_objects that uses in_memory).
 def test__nc_dataset_in_memory_https():
     """Test loading a netcdf dataset in-memory."""
     from netCDF4 import Dataset
 
-    url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"  # noqa
+    url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"
     _nc = _nc_dataset(url)
     assert isinstance(_nc, Dataset)
     assert _nc.filepath() == url.split("/")[-1]
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.vcr()
 @pytest.mark.skipif(
     platform.system().lower() == "windows",
@@ -30,12 +30,12 @@ def test__nc_dataset_in_memory_https():
 )
 def test__tempnc():
     """Test temporary netcdf file."""
-    url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"  # noqa
+    url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"
     data = urlopen(url)
     with _tempnc(data) as tmp:
         # Check that the file was exists.
-        assert os.path.exists(tmp)
+        assert Path(tmp).exists()
         # Confirm that it is a netCDF file.
         assert tmp.endswith("nc")
     # Check that the file was removed.
-    assert not os.path.exists(tmp)
+    assert not Path(tmp).exists()

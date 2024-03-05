@@ -6,13 +6,12 @@ from erddapy import servers
 from erddapy.core.url import check_url_response
 
 
-@pytest.mark.web
-@pytest.mark.xfail
+@pytest.mark.web()
+@pytest.mark.xfail()
 def test_servers():
-    """
-    Tests if listed servers are responding.
+    """Tests if listed servers are responding.
 
-    We are OK with redirects here b/c we only want to update a URL if they are broken,
+    Redirects are fine here. We only want to update URLs if they are broken,
     most of the time a redirect is only adding '/index.html'.
     """
     for server in servers.values():

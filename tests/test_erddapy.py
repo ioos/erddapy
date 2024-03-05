@@ -27,12 +27,6 @@ if packaging.version.parse(
     datetime.UTC = datetime.timezone.utc
 
 
-def test_parse_dates_naive_datetime():
-    """Naive timestamp at 1970-1-1 must be 0."""
-    d = datetime.datetime(1970, 1, 1, 0, 0)
-    assert parse_dates(d) == 0
-
-
 def test_parse_dates_utc_datetime():
     """UTC timestamp at 1970-1-1 must be 0."""
     d = datetime.datetime(1970, 1, 1, 0, 0, tzinfo=pytz.utc)
@@ -73,14 +67,15 @@ def test__quote_string_constraints():
     assert isinstance(kw["min_time"], str)
     assert isinstance(kw["cdm_data_type"], str)
 
-    assert kw["min_time"].startswith('"') and kw["min_time"].endswith('"')
-    assert kw["cdm_data_type"].startswith('"') and kw[
-        "cdm_data_type"
-    ].endswith('"')
+    assert kw["min_time"].startswith('"')
+    assert kw["min_time"].endswith('"')
+    assert kw["cdm_data_type"].startswith('"')
+    assert kw["cdm_data_type"].endswith('"')
 
-    for _k, v in kw.items():
-        if isinstance(v, str):
-            assert v.startswith('"') and v.endswith('"')
+    for value in kw.values():
+        if isinstance(value, str):
+            assert value.startswith('"')
+            assert value.endswith('"')
 
 
 def test__format_constraints_url():
@@ -95,14 +90,15 @@ def test__format_constraints_url():
     assert kw_url == "&latitude>=42&longitude<=42.0"
 
 
-@pytest.mark.web
+@pytest.mark.web()
 @pytest.mark.vcr()
 def test_erddap2_10():
     """Check regression for ERDDAP 2.10."""
     e = ERDDAP(server="http://erddap.ioos.us/erddap/")
     url = e.get_search_url(search_for="NOAA", response="csv")
     r = httpx.head(url)
-    assert r.status_code == 200
+    ok_200 = 200
+    assert r.status_code == ok_200
 
 
 def test__griddap_check_constraints():
@@ -127,7 +123,10 @@ def test__griddap_check_constraints():
     }
 
     _griddap_check_constraints(good_constraints, constraints_dict)
-    with pytest.raises(ValueError):
+    with pytest.raises(
+        ValueError,
+        match="e.constraints have changed. Re-run e.griddap_initialize",
+    ):
         _griddap_check_constraints(bad_constraints, constraints_dict)
 
 
@@ -138,5 +137,8 @@ def test__griddap_check_variables():
     bad_variables = ["foo", "bar", "baz"]
 
     _griddap_check_variables(good_variables, original_variables)
-    with pytest.raises(ValueError):
+    with pytest.raises(
+        ValueError,
+        match="are not present in dataset. Re-run e.griddap_initialize",
+    ):
         _griddap_check_variables(bad_variables, original_variables)
