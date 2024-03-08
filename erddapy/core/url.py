@@ -343,6 +343,7 @@ def get_info_url(
     ----
         server: data server endpoint.
         dataset_id: a dataset unique id.
+        If empty the full dataset listing will be returned.
         response: default is HTML.
 
     Returns:
@@ -350,10 +351,8 @@ def get_info_url(
         url: the info URL for the `response` chosen.
 
     """
-    if not dataset_id:
-        msg = f"You must specify a valid dataset_id, got {dataset_id}"
-        raise ValueError(msg)
-
+    if dataset_id is None:
+        return f"{server}/info/index.{response}?itemsPerPage=1000000"
     return f"{server}/info/{dataset_id}/index.{response}"
 
 

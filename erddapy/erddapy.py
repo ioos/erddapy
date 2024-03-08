@@ -263,6 +263,7 @@ class ERDDAP:
         Args:
         ----
             dataset_id: a dataset unique id.
+            If empty the full dataset listing will be returned.
             response: default is HTML.
 
         Returns:
@@ -273,7 +274,11 @@ class ERDDAP:
         dataset_id = dataset_id if dataset_id else self.dataset_id
         response = response if response else self.response
 
-        return get_info_url(self.server, dataset_id, response)
+        return get_info_url(
+            self.server,
+            dataset_id=dataset_id,
+            response=response,
+        )
 
     def get_categorize_url(
         self: ERDDAP,
