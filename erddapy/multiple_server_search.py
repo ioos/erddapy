@@ -1,4 +1,5 @@
 """Multiple Server Search."""
+
 from __future__ import annotations
 
 import multiprocessing
