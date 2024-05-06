@@ -16,12 +16,12 @@ jobs:
 
     steps:
     - name: checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
       with:
         fetch-depth: 0
 
     - name: Setup Micromamba
-      uses: mamba-org/setup-micromamba@v1
+      uses: mamba-org/setup-micromamba@422500192359a097648154e8db4e39bdb6c6eed7 #v1
       with:
         environment-name: TEST
         init-shell: bash
@@ -49,7 +49,7 @@ jobs:
 
     - name: Deploy
       if: success() && github.event_name == 'release'
-      uses: peaceiris/actions-gh-pages@v4
+      uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e #v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs/build/html

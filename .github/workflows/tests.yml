@@ -15,10 +15,10 @@ jobs:
       fail-fast: false
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
 
     - name: Setup Micromamba Python ${{ matrix.python-version }}
-      uses: mamba-org/setup-micromamba@v1
+      uses: mamba-org/setup-micromamba@422500192359a097648154e8db4e39bdb6c6eed7 #v1
       with:
         environment-name: TEST
         init-shell: bash
