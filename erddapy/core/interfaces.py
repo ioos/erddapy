@@ -37,7 +37,7 @@ def to_pandas(
     data = urlopen(url, requests_kwargs or {})
     try:
         return pd.read_csv(data, **(pandas_kwargs or {}))
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         msg = f"Could not read url {url} with Pandas.read_csv."
         raise ValueError(msg) from e
 
