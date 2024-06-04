@@ -2,7 +2,7 @@
 build-backend = "setuptools.build_meta"
 requires = [
   "setuptools>=42",
-  "setuptools_scm",
+  "setuptools-scm",
   "wheel",
 ]
 
@@ -10,11 +10,11 @@ requires = [
 name = "erddapy"
 description = "Python interface for ERDDAP"
 readme = "README.md"
-license = {file = "LICENSE.txt"}
+license = { file = "LICENSE.txt" }
 maintainers = [
-    {name = "Alex Kerney", email = "akerney@gmri.org"},
-    {name = "Callum Rollo", email = "c.rollo@outlook.com"},
-    {name = "Filipe Fernandes", email = "ocefpaf+erddapy@gmail.com"},
+  { name = "Alex Kerney", email = "akerney@gmri.org" },
+  { name = "Callum Rollo", email = "c.rollo@outlook.com" },
+  { name = "Filipe Fernandes", email = "ocefpaf+erddapy@gmail.com" },
 ]
 requires-python = ">=3.10"
 classifiers = [
@@ -27,17 +27,20 @@ dynamic = [
   "dependencies",
   "version",
 ]
-[project.urls]
-documentation = "https://ioos.github.io/erddapy"
-homepage = "https://github.com/ioos/erddapy"
-repository = "https://github.com/ioos/erddapy"
+urls.documentation = "https://ioos.github.io/erddapy"
+urls.homepage = "https://github.com/ioos/erddapy"
+urls.repository = "https://github.com/ioos/erddapy"
 
 [tool.setuptools]
-packages = ["erddapy"]
+packages = [
+  "erddapy",
+]
 include-package-data = true
 
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+dependencies = { file = [
+  "requirements.txt",
+] }
 
 [tool.setuptools_scm]
 write_to = "erddapy/_version.py"
@@ -46,26 +49,26 @@ tag_regex = "^(?P<prefix>v)?(?P<version>[^\\+]+)(?P<suffix>.*)?$"
 
 [tool.check-manifest]
 ignore = [
-    "*.yml",
-    ".coveragerc",
-    "Makefile",
-    "docs",
-    "docs/*",
-    "notebooks",
-    "notebooks/*",
-    "tests",
-    "tests/*",
+  "*.yml",
+  ".coveragerc",
+  "Makefile",
+  "docs",
+  "docs/*",
+  "notebooks",
+  "notebooks/*",
+  "tests",
+  "tests/*",
 ]
 
 [tool.pytest.ini_options]
 markers = [
-    "web: marks tests require connection (deselect with '-m \"not web\"')",
-    "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
+  "web: marks tests require connection (deselect with '-m \"not web\"')",
+  "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
 ]
 filterwarnings = [
-    "error:::erddapy.*",
-    "ignore::UserWarning",
-    "ignore::RuntimeWarning",
+  "error:::erddapy.*",
+  "ignore::UserWarning",
+  "ignore::RuntimeWarning",
 ]
 
 [tool.interrogate]
@@ -76,7 +79,10 @@ ignore-semiprivate = false
 ignore-private = false
 ignore-module = false
 fail-under = 85
-exclude = ["docs", "tests"]
+exclude = [
+  "docs",
+  "tests",
+]
 verbose = 1
 quiet = false
 color = true
