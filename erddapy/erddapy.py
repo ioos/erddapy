@@ -190,7 +190,7 @@ class ERDDAP:
         self._constraints_original = self.constraints.copy()
         self._variables_original = self.variables.copy()
 
-    def get_search_url(  # noqa: PLR0913
+    def get_search_url(
         self: ERDDAP,
         response: OptionalStr = None,
         search_for: OptionalStr = None,
