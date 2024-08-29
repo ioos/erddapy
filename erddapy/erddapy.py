@@ -141,11 +141,11 @@ class ERDDAP:
         self.response = response
 
         # Initialized only via properties.
-        self.constraints: dict | None = None
         self.server_functions: dict | None = None
-        self.dataset_id: OptionalStr = None
         self.requests_kwargs: dict = {}
         self.auth: tuple | None = None
+
+        self.constraints: dict | None = None
         self.variables: OptionalList | None = None
         self.dim_names: OptionalList | None = None
 
@@ -156,6 +156,16 @@ class ERDDAP:
         # quicker access, will be overridden when requesting a new dataset_id.
         self._dataset_id: OptionalStr = None
         self._variables: dict = {}
+
+    @property
+    def dataset_id(self) -> str:
+        """dataset_id property."""
+        return self._dataset_id
+
+    @dataset_id.setter
+    def dataset_id(self, value: str) -> None:
+        self._dataset_id = value
+        self.griddap_initialize(dataset_id=value)
 
     def griddap_initialize(
         self: ERDDAP,
@@ -171,15 +181,12 @@ class ERDDAP:
 
         """
         dataset_id = dataset_id if dataset_id else self.dataset_id
-        msg = f"Method only valid using griddap protocol, got {self.protocol}"
-        if self.protocol != "griddap":
-            raise ValueError(msg)
+        # Short-circuit for opendap and/or non-griddap datasets.
+        if self.protocol != "griddap" or self.response == "opendap":
+            return
         msg = f"Must set a valid dataset_id, got {self.dataset_id}"
         if dataset_id is None:
             raise ValueError(msg)
-        # Return the opendap URL without any slicing.
-        if self.response == "opendap":
-            return
 
         metadata_url = f"{self.server}/griddap/{self.dataset_id}"
         (
