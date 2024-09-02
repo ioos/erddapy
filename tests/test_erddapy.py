@@ -90,8 +90,8 @@ def test__format_constraints_url():
     assert kw_url == "&latitude>=42&longitude<=42.0"
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_erddap2_10():
     """Check regression for ERDDAP 2.10."""
     e = ERDDAP(server="http://erddap.ioos.us/erddap/")

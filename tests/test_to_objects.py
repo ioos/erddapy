@@ -14,8 +14,8 @@ from erddapy import ERDDAP
 dask.config.set(scheduler="single-threaded")
 
 
-@pytest.fixture()
-@pytest.mark.web()
+@pytest.fixture
+@pytest.mark.web
 def sensors():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
@@ -24,8 +24,8 @@ def sensors():
     )
 
 
-@pytest.fixture()
-@pytest.mark.web()
+@pytest.fixture
+@pytest.mark.web
 def gliders():
     """Instantiate ERDDAP class for testing."""
     # The gliders server has 1244 datasets at time of writing
@@ -35,8 +35,8 @@ def gliders():
     )
 
 
-@pytest.fixture()
-@pytest.mark.web()
+@pytest.fixture
+@pytest.mark.web
 def neracoos():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
@@ -45,7 +45,7 @@ def neracoos():
     )
 
 
-@pytest.fixture()
+@pytest.fixture
 def dataset_griddap(neracoos):
     """Load griddap data for testing."""
     neracoos.dataset_id = "WW3_EastCoast_latest"
@@ -54,7 +54,7 @@ def dataset_griddap(neracoos):
     return neracoos
 
 
-@pytest.fixture()
+@pytest.fixture
 def dataset_opendap(neracoos):
     """Load griddap data with OPeNDAP response for testing."""
     neracoos.dataset_id = "WW3_EastCoast_latest"
@@ -63,7 +63,7 @@ def dataset_opendap(neracoos):
     return neracoos
 
 
-@pytest.fixture()
+@pytest.fixture
 def dataset_tabledap(sensors):
     """Load tabledap for testing."""
     sensors.dataset_id = "amelia_20180501t0000"
@@ -80,7 +80,7 @@ def dataset_tabledap(sensors):
     return sensors
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_csv_search(gliders):
     """Test if a CSV search returns all items (instead of the first 1000)."""
     url = gliders.get_search_url(search_for="all", response="csv")
@@ -90,7 +90,7 @@ def test_csv_search(gliders):
     assert nrows > expected
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_json_search(gliders):
     """Test if a JSON search returns all items (instead of the first 1000)."""
     url = gliders.get_search_url(search_for="all", response="json")
@@ -100,8 +100,8 @@ def test_json_search(gliders):
     assert nrows > expected
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_to_pandas(dataset_tabledap):
     """Test converting tabledap to a pandas DataFrame."""
     import pandas as pd
@@ -117,8 +117,8 @@ def test_to_pandas(dataset_tabledap):
     assert df.columns[0] == "temperature (degree_Celsius)"
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_to_pandas_requests_kwargs(dataset_tabledap):
     """Test if to_pandas_requests_kwargs are processed as expected."""
     import pandas as pd
@@ -134,7 +134,7 @@ def test_to_pandas_requests_kwargs(dataset_tabledap):
     assert is_datetime64_any_dtype(df.index)
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_to_xarray_tabledap(dataset_tabledap):
     """Test converting tabledap to an xarray Dataset."""
     ds = dataset_tabledap.to_xarray()
@@ -146,7 +146,7 @@ def test_to_xarray_tabledap(dataset_tabledap):
     assert ds["temperature"].name == "temperature"
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_to_xarray_requests_kwargs(dataset_tabledap):
     """Test converting tabledap to an xarray Dataset with manual timeout."""
     ds = dataset_tabledap.to_xarray(requests_kwargs={"timeout": 30})
@@ -158,21 +158,21 @@ def test_to_xarray_requests_kwargs(dataset_tabledap):
     assert ds["temperature"].name == "temperature"
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_to_xarray_griddap(dataset_griddap):
     """Test converting griddap to an xarray Dataset."""
     ds = dataset_griddap.to_xarray()
     assert isinstance(ds, xr.Dataset)
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_to_xarray_opendap(dataset_opendap):
     """Test converting griddap to xarray with the OPeNDAP response."""
     ds = dataset_opendap.to_xarray()
     assert isinstance(ds, xr.Dataset)
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_to_xarray_opendap_griddap_initialize(dataset_opendap):
     """Test converting griddap aftert calling griddap_initialize."""
     dataset_opendap.griddap_initialize()
@@ -180,7 +180,7 @@ def test_to_xarray_opendap_griddap_initialize(dataset_opendap):
     assert isinstance(ds, xr.Dataset)
 
 
-@pytest.mark.web()
+@pytest.mark.web
 @pytest.mark.skipif(
     (sys.platform in ("win32", "darwin")),
     reason="run this test until we figure out a way to mock it.",
@@ -197,7 +197,7 @@ def test_to_iris_tabledap(dataset_tabledap):
     )
 
 
-@pytest.mark.web()
+@pytest.mark.web
 @pytest.mark.skipif(
     (sys.platform in ("win32", "darwin")),
     reason="run this test until we figure out a way to mock it.",
@@ -208,7 +208,7 @@ def test_to_iris_griddap(dataset_griddap):
     assert isinstance(cubes, iris.cube.CubeList)
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_download_file(dataset_tabledap):
     """Test file download of tabledap with defined variable and constraints."""
     fn = dataset_tabledap.download_file("nc")
@@ -220,7 +220,7 @@ def test_download_file(dataset_tabledap):
     assert fn_new == fn
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_download_file_variables_only(dataset_tabledap):
     """Test direct download of tabledap dataset with undefined constraints."""
     dataset_tabledap.constraints = {}
@@ -233,7 +233,7 @@ def test_download_file_variables_only(dataset_tabledap):
     assert fn_new == fn
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_download_file_constraints_only(dataset_tabledap):
     """Test direct download of tabledap dataset with undefined variables."""
     dataset_tabledap.variables = []
@@ -246,7 +246,7 @@ def test_download_file_constraints_only(dataset_tabledap):
     assert fn_new == fn
 
 
-@pytest.mark.web()
+@pytest.mark.web
 def test_download_file_undefined_query(dataset_tabledap):
     """Test direct download of tabledap dataset with undefined query."""
     dataset_tabledap.variables = []

@@ -6,8 +6,8 @@ from erddapy import servers
 from erddapy.core.url import check_url_response
 
 
-@pytest.mark.web()
-@pytest.mark.xfail()
+@pytest.mark.web
+@pytest.mark.xfail
 def test_servers():
     """Tests if listed servers are responding.
 

@@ -11,7 +11,7 @@ def _url_to_dict(url):
     return {v.split("=")[0]: v.split("=")[1] for v in url.split("&")[1:]}
 
 
-@pytest.fixture()
+@pytest.fixture
 def e():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
@@ -21,8 +21,8 @@ def e():
     )
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_search_url_bad_request(e):
     """Test if a bad request returns HTTPError."""
     kw = {
@@ -43,8 +43,8 @@ def test_search_normalization(e):
     assert "timeseries" in search_url
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_search_url_valid_request(e):
     """Test if a bad request returns HTTPError."""
     min_time = "2000-03-23T00:00:00Z"
@@ -64,8 +64,8 @@ def test_search_url_valid_request(e):
             assert v == "(ANY)"
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_search_url_valid_request_with_relative_time_constraints(e):
     """Test if a bad request returns HTTPError."""
     min_time = "now-25years"
@@ -85,8 +85,8 @@ def test_search_url_valid_request_with_relative_time_constraints(e):
             assert v == "(ANY)"
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_search_url_change_protocol(e):
     """Test if we change the protocol it show in the URL."""
     kw = {"search_for": "salinity"}
@@ -109,8 +109,8 @@ def test_search_url_change_protocol(e):
     assert options.pop("protocol") == "(ANY)"
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_info_url(e):
     """Check info URL results."""
     dataset_id = "org_cormp_cap2"
@@ -123,8 +123,8 @@ def test_info_url(e):
     assert url == f"{e.server}/info/{dataset_id}/index.csv"
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_categorize_url(e):
     """Check categorize URL results."""
     categorize_by = "standard_name"
@@ -135,8 +135,8 @@ def test_categorize_url(e):
     assert url == f"{e.server}/categorize/{categorize_by}/index.csv"
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_download_url_unconstrained(e):
     """Check download URL results."""
     dataset_id = "org_cormp_cap2"
@@ -149,8 +149,8 @@ def test_download_url_unconstrained(e):
     assert sorted(url.split("?")[1].split(",")) == sorted(variables)
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_download_url_constrained(e):
     """Test a constraint download URL."""
     dataset_id = "org_cormp_cap2"
@@ -230,8 +230,8 @@ def test_download_url_relative_constraints(e):
     assert options["longitude<"] == max_lon
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_get_var_by_attr(e):
     """Test get_var_by_attr."""
     variables = e.get_var_by_attr(dataset_id="org_cormp_cap2", axis="X")
@@ -259,8 +259,8 @@ def test_get_var_by_attr(e):
     ]
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 def test_download_url_distinct(e):
     """Check download URL results with and without the distinct option."""
     dataset_id = "org_cormp_cap2"
