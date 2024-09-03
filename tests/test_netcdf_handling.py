@@ -9,7 +9,7 @@ from erddapy.core.netcdf import _nc_dataset, _tempnc
 from erddapy.core.url import urlopen
 
 
-@pytest.mark.web()
+@pytest.mark.web
 # For some reason we cannot use vcr with httpx with in_memory
 # (also all the to_objects that uses in_memory).
 def test__nc_dataset_in_memory_https():
@@ -22,8 +22,8 @@ def test__nc_dataset_in_memory_https():
     assert _nc.filepath() == url.split("/")[-1]
 
 
-@pytest.mark.web()
-@pytest.mark.vcr()
+@pytest.mark.web
+@pytest.mark.vcr
 @pytest.mark.skipif(
     platform.system().lower() == "windows",
     reason="does not remove the file on windows",
