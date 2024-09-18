@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>erddapy: ERDDAP servers + Python data &#8212; erddapy 2.2.0 documentation</title>
+    <title>erddapy: ERDDAP servers + Python data &#8212; erddapy 2.2.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=28c8e701" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=90673249"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
+    <script src="_static/documentation_options.js?v=16656018"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Quick introduction" href="00-quick_intro-output.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   <div class="document">
     
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <p class="logo">
   <a href="#">
-    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    <img class="logo" src="_static/logo.png" alt="Logo" />
+    
+    <h1 class="logo logo-name">erddapy</h1>
     
   </a>
 </p>
@@ -66,7 +72,7 @@
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -74,7 +80,7 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
@@ -85,15 +91,15 @@
           <div class="body" role="main">
             
   <section id="erddapy-erddap-servers-python-data">
-<h1>erddapy: ERDDAP servers + Python data<a class="headerlink" href="#erddapy-erddap-servers-python-data" title="Permalink to this heading">¶</a></h1>
+<h1>erddapy: ERDDAP servers + Python data<a class="headerlink" href="#erddapy-erddap-servers-python-data" title="Link to this heading">¶</a></h1>
 <section id="what-is-erddapy">
-<h2>What is erddapy?<a class="headerlink" href="#what-is-erddapy" title="Permalink to this heading">¶</a></h2>
+<h2>What is erddapy?<a class="headerlink" href="#what-is-erddapy" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">erddapy</span></code> takes advantage of ERDDAP’s RESTful web services to create the ERDDAP URLs.
 The users can create virtually any request like,
 searching for datasets, acquiring metadata, downloading data, etc.</p>
 </section>
 <section id="what-is-erddap">
-<h2>What is ERDDAP?<a class="headerlink" href="#what-is-erddap" title="Permalink to this heading">¶</a></h2>
+<h2>What is ERDDAP?<a class="headerlink" href="#what-is-erddap" title="Link to this heading">¶</a></h2>
 <p>ERDDAP is a data server that provides a consistent way to download subsets of scientific datasets.</p>
 <p>There are many scientific data server available,
 like OPeNDAP, WCS, SOS, OBIS, etc.
@@ -130,10 +136,7 @@ and reformats the data into the format that you requested.</p></li>
 <li class="toctree-l1"><a class="reference internal" href="03-advanced_search-output.html">Searching datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="erddapy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP"><code class="docutils literal notranslate"><span class="pre">ERDDAP</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP.dataset_id"><code class="docutils literal notranslate"><span class="pre">ERDDAP.dataset_id</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP.variables"><code class="docutils literal notranslate"><span class="pre">ERDDAP.variables</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP.response"><code class="docutils literal notranslate"><span class="pre">ERDDAP.response</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP.constraints"><code class="docutils literal notranslate"><span class="pre">ERDDAP.constraints</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP.download_file"><code class="docutils literal notranslate"><span class="pre">ERDDAP.download_file()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP.get_categorize_url"><code class="docutils literal notranslate"><span class="pre">ERDDAP.get_categorize_url()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP.get_download_url"><code class="docutils literal notranslate"><span class="pre">ERDDAP.get_download_url()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="erddapy.html#erddapy.erddapy.ERDDAP.get_info_url"><code class="docutils literal notranslate"><span class="pre">ERDDAP.get_info_url()</span></code></a></li>
@@ -155,7 +158,7 @@ and reformats the data into the format that you requested.</p></li>
 </section>
 </section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -171,11 +174,11 @@ and reformats the data into the format that you requested.</p></li>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2022, Filipe Fernandes.
+      &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="_sources/index.rst.txt"
@@ -184,7 +187,7 @@ and reformats the data into the format that you requested.</p></li>
 
     
     <a href="https://github.com/ioos/erddapy" class="github">
-        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+        <img src="_static/github-banner.svg" alt="Fork me on GitHub" class="github"/>
     </a>
     
 
