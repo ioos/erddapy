@@ -23,6 +23,15 @@ OptionalDict = dict | None
 OptionalList = list[str] | tuple[str] | None
 
 
+def quote_url(url: str) -> str:
+    """Quote URL args for modern ERDDAP servers."""
+    # We should always quote for queries.
+    if "?" in url and not "searchFor":
+        base, unquoted = url.split("?")
+        url = f"{base}?{parse.quote_plus(unquoted)}"
+    return url
+
+
 def _sort_url(url: str) -> str:
     """Return a URL with sorted variables and constraints for hashing."""
     parts = parse.urlparse(url)
@@ -48,7 +57,12 @@ def _sort_url(url: str) -> str:
 def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     if "timeout" not in kwargs:
         kwargs["timeout"] = 60
-    response = httpx.get(url, follow_redirects=True, auth=auth, **kwargs)
+    response = httpx.get(
+        quote_url(url),
+        follow_redirects=True,
+        auth=auth,
+        **kwargs,
+    )
     try:
         response.raise_for_status()
     except httpx.HTTPError as err:
