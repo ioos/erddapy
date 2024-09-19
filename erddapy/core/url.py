@@ -26,7 +26,7 @@ OptionalList = list[str] | tuple[str] | None
 def quote_url(url: str) -> str:
     """Quote URL args for modern ERDDAP servers."""
     # We should always quote for queries.
-    if "?" in url and "searchFor" not in url:
+    if "?" in url and "/erddap/search/" not in url:
         base, unquoted = url.split("?")
         url = f"{base}?{parse.quote_plus(unquoted)}"
     return url
