@@ -1,11 +1,12 @@
-black
 cartopy>=0.21
+cartopy_offlinedata
 check-manifest
 geopandas
 interrogate
 joblib
 jupyter
-nbconvert<7.3.0
+nbclassic
+nbconvert
 nbsphinx
 netcdf4
 pendulum>=2.0.1
