@@ -10,9 +10,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: [ "3.10", "3.11", "3.12" ]
         os: [windows-latest, ubuntu-latest, macos-latest]
       fail-fast: false
+    defaults:
+      run:
+        shell: bash -l {0}
 
     steps:
     - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
@@ -26,11 +29,9 @@ jobs:
           python=${{ matrix.python-version }} --file requirements.txt --file requirements-dev.txt --channel conda-forge
 
     - name: Install erddapy
-      shell: bash -l {0}
       run: |
         python -m pip install -e . --no-deps --force-reinstall
 
     - name: Full Tests
-      shell: bash -l {0}
       run: |
         python -m pytest -rxs --cov=erddapy --vcr-record=none tests

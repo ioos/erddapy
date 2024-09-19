@@ -66,3 +66,10 @@ def test__sort_url_undefined_query():
     """Test _sort_url with undefined query."""
     url = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?"
     assert _sort_url(url) == url
+
+
+def test_quoting():
+    """Test quoting query params for ERDDAP 2.23."""
+    url = 'https://opendap.co-ops.nos.noaa.gov/erddap/tabledap/IOOS_Hourly_Height_Verified_Water_Level.csvp?WL_VALUE,time&BEGIN_DATE="2016-10-04"&END_DATE="2016-10-12"&DATUM="MSL"&STATION_ID="8729840"'
+    data = urlopen(url)
+    assert data is not None
