@@ -147,6 +147,19 @@ def test_to_xarray_tabledap(dataset_tabledap):
 
 
 @pytest.mark.web
+def test_to_xarray_cannot_be_quoted():
+    """Test dataset that failed when quoted."""
+    e = ERDDAP(server="https://erddap.aoos.org/erddap/", protocol="tabledap")
+    e.dataset_id = "kotzebue-alaska-water-level"
+    e.constraints = {
+        "time>=": "2018-09-05T21:00:00Z",
+        "time<=": "2019-07-10T19:00:00Z",
+    }
+    ds = e.to_xarray()
+    assert isinstance(ds, xr.Dataset)
+
+
+@pytest.mark.web
 def test_to_xarray_requests_kwargs(dataset_tabledap):
     """Test converting tabledap to an xarray Dataset with manual timeout."""
     ds = dataset_tabledap.to_xarray(requests_kwargs={"timeout": 30})

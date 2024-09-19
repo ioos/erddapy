@@ -25,8 +25,12 @@ OptionalList = list[str] | tuple[str] | None
 
 def quote_url(url: str) -> str:
     """Quote URL args for modern ERDDAP servers."""
-    # We should always quote for queries.
-    if "?" in url and "/erddap/search/" not in url:
+    # No idea why csv must be quoted in 2.23 but ncCF doesn't :-/
+    do_not_quote = ["/erddap/search/", "ncCF"]
+    if any(True for string in do_not_quote if string in url):
+        return url
+    # We should always quote some queries.
+    if "?" in url:
         base, unquoted = url.split("?")
         url = f"{base}?{parse.quote_plus(unquoted)}"
     return url
