@@ -48,7 +48,7 @@ jobs:
 
     - name: Publish a Python distribution to PyPI
       if: success() && github.event_name == 'release'
-      uses: pypa/gh-action-pypi-publish@0ab0b79471669eb3a4d647e625009c62f9f3b241 #v1
+      uses: pypa/gh-action-pypi-publish@897895f1e160c830e369f9779632ebc134688e1b #v1
       with:
         user: __token__
         password: ${{ secrets.PYPI_PASSWORD }}
