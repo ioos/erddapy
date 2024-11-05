@@ -48,14 +48,14 @@ def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
 
     tmp = None
     try:
-        tmp = NamedTemporaryFile(
+        with NamedTemporaryFile(
             suffix=".nc",
             prefix="erddapy_",
             delete=delete,
-        )
-        tmp.write(data.read())
-        tmp.flush()
-        yield tmp.name
+        ) as tmp:
+            tmp.write(data.read())
+            tmp.flush()
+            yield tmp.name
     finally:
         if tmp is not None:
             tmp.close()
