@@ -34,13 +34,13 @@ from erddapy.servers.servers import servers
 
 # Objects used by downstream packages
 __all__ = [
+    "ERDDAP",
     "_check_substrings",
     "_distinct",
     "_format_constraints_url",
     "_quote_string_constraints",
     "parse_dates",
     "urlopen",
-    "ERDDAP",
 ]
 
 if TYPE_CHECKING:
