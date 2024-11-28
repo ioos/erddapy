@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import functools
-
 import pandas as pd
 
 from erddapy.core.url import urlopen
@@ -11,7 +9,6 @@ from erddapy.core.url import urlopen
 OptionalList = list[str] | tuple[str] | None
 
 
-@functools.lru_cache(maxsize=128)
 def _griddap_get_constraints(
     dataset_url: str,
     step: int,
