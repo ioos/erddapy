@@ -16,11 +16,62 @@ from urllib import parse
 import httpx
 import pytz
 from pandas import to_datetime
+from yarl import URL
 
 OptionalStr = str | None
 OptionalBool = bool | None
 OptionalDict = dict | None
 OptionalList = list[str] | tuple[str] | None
+
+
+_BIG_NUMBER = int(1e6)
+_DOWNLOAD_FORMATS = (
+    "asc",
+    "csv",
+    "csvp",
+    "csv0",
+    "dataTable",
+    "das",
+    "dds",
+    "dods",
+    "esriCsv",
+    "fgdc",
+    "geoJson",
+    "graph",
+    "help",
+    "html",
+    "iso19115",
+    "itx",
+    "json",
+    "jsonlCSV1",
+    "jsonlCSV",
+    "jsonlKVP",
+    "mat",
+    "nc",
+    "ncHeader",
+    "ncCF",
+    "ncCFHeader",
+    "ncCFMA",
+    "ncCFMAHeader",
+    "nccsv",
+    "nccsvMetadata",
+    "ncoJson",
+    "odvTxt",
+    "subset",
+    "tsv",
+    "tsvp",
+    "tsv0",
+    "wav",
+    "xhtml",
+    "kml",
+    "smallPdf",
+    "pdf",
+    "largePdf",
+    "smallPng",
+    "png",
+    "largePng",
+    "transparentPng",
+)
 
 
 def quote_url(url: str) -> str:
@@ -125,11 +176,13 @@ def _distinct(url: str, *, distinct: OptionalBool = False) -> str:
 
 def _format_search_string(server: str, query: str) -> str:
     """Generate search string for an ERDDAP server with user defined query."""
-    return (
-        f"{server}search/index.csv?"
-        f"page=1&"
-        f'itemsPerPage=1000000&searchFor="{query}"'
-    )
+    kw = {
+        "page": 1,
+        "itemsPerPage": _BIG_NUMBER,
+        "searchFor": query,
+    }
+    url = (URL(server) / "search" / "index.csv").with_query(kw)
+    return str(url)
 
 
 def _multi_urlopen(url: str) -> BinaryIO:
@@ -250,30 +303,6 @@ def get_search_url(  # noqa: PLR0913
         url: the search URL.
 
     """
-    server = server.rstrip("/")
-    base = (
-        "{server}/search/advanced.{response}"
-        "?page={page}"
-        "&itemsPerPage={itemsPerPage}"
-        "&protocol={protocol}"
-        "&cdm_data_type={cdm_data_type}"
-        "&institution={institution}"
-        "&ioos_category={ioos_category}"
-        "&keywords={keywords}"
-        "&long_name={long_name}"
-        "&standard_name={standard_name}"
-        "&variableName={variableName}"
-        "&minLon={minLon}"
-        "&maxLon={maxLon}"
-        "&minLat={minLat}"
-        "&maxLat={maxLat}"
-        "&minTime={minTime}"
-        "&maxTime={maxTime}"
-    )
-    if search_for:
-        search_for = parse.quote_plus(search_for)
-        base += "&searchFor={searchFor}"
-
     # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
     min_time = kwargs.pop("min_time", "")
     max_time = kwargs.pop("max_time", "")
@@ -321,33 +350,37 @@ def get_search_url(  # noqa: PLR0913
         "tsv0",
     ]
     if response in non_paginated_responses:
-        items_per_page = int(1e6)
+        items_per_page = _BIG_NUMBER
 
     default = "(ANY)"
-    url = base.format(
-        server=server,
-        response=response,
-        page=page,
-        itemsPerPage=items_per_page,
-        protocol=kwargs.get("protocol", default),
-        cdm_data_type=kwargs.get("cdm_data_type", default),
-        institution=kwargs.get("institution", default),
-        ioos_category=kwargs.get("ioos_category", default),
-        keywords=kwargs.get("keywords", default),
-        long_name=kwargs.get("long_name", default),
-        standard_name=kwargs.get("standard_name", default),
-        variableName=kwargs.get("variableName", default),
-        minLon=kwargs.get("min_lon", default),
-        maxLon=kwargs.get("max_lon", default),
-        minLat=kwargs.get("min_lat", default),
-        maxLat=kwargs.get("max_lat", default),
-        minTime=kwargs.get("min_time", default),
-        maxTime=kwargs.get("max_time", default),
-        searchFor=search_for,
-    )
-    # ERDDAP 2.10 no longer accepts strings placeholder for dates.
-    # Removing them entirely should be OK for older versions too.
-    return url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
+    query = {
+        "page": f"{page}",
+        "itemsPerPage": f"{items_per_page}",
+        "protocol": kwargs.get("protocol", default),
+        "cdm_data_type": kwargs.get("cdm_data_type", default),
+        "institution": kwargs.get("institution", default),
+        "ioos_category": kwargs.get("ioos_category", default),
+        "keywords": kwargs.get("keywords", default),
+        "long_name": kwargs.get("long_name", default),
+        "standard_name": kwargs.get("standard_name", default),
+        "variableName": kwargs.get("variableName", default),
+        "minLon": kwargs.get("min_lon", default),
+        "maxLon": kwargs.get("max_lon", default),
+        "minLat": kwargs.get("min_lat", default),
+        "maxLat": kwargs.get("max_lat", default),
+        # ERDDAP 2.10 no longer accepts strings placeholder for dates.
+        # Removing them entirely should be OK for older versions too.
+        "minTime": kwargs.get("min_time", ""),
+        "maxTime": kwargs.get("max_time", ""),
+    }
+    if search_for:
+        query.update({"searchFor": f"{search_for}"})
+
+    url = URL(server)
+    path = "search"
+    name = f"advanced.{response}"
+    url = (url / path / name).with_query(query)
+    return str(url)
 
 
 def get_info_url(
@@ -369,16 +402,20 @@ def get_info_url(
         url: the info URL for the `response` chosen.
 
     """
+    url = URL(server)
     if dataset_id is None:
-        return f"{server}/info/index.{response}?itemsPerPage=1000000"
-    return f"{server}/info/{dataset_id}/index.{response}"
+        url = (url / "info" / f"index.{response}").with_query(
+            {"itemsPerPage": _BIG_NUMBER},
+        )
+    url = url / "info" / f"{dataset_id}" / f"index.{response}"
+    return str(url)
 
 
 def get_categorize_url(
     server: str,
     categorize_by: str,
     value: OptionalStr = None,
-    response: OptionalStr = None,
+    response: str = "html",
 ) -> str:
     """Build the categorize URL for the `server` endpoint.
 
@@ -396,11 +433,12 @@ def get_categorize_url(
         url: the categorized URL for the `response` chosen.
 
     """
+    url = URL(server) / "categorize" / categorize_by
+
     if value:
-        url = f"{server}/categorize/{categorize_by}/{value}/index.{response}"
-    else:
-        url = f"{server}/categorize/{categorize_by}/index.{response}"
-    return url
+        url = url / "value"
+    url = url / f"index.{response}"
+    return str(url)
 
 
 def get_download_url(  # noqa: PLR0913, C901
@@ -519,52 +557,3 @@ def get_download_url(  # noqa: PLR0913, C901
         url += f"{_constraints_url}"
 
     return _distinct(url, distinct=distinct)
-
-
-download_formats = [
-    "asc",
-    "csv",
-    "csvp",
-    "csv0",
-    "dataTable",
-    "das",
-    "dds",
-    "dods",
-    "esriCsv",
-    "fgdc",
-    "geoJson",
-    "graph",
-    "help",
-    "html",
-    "iso19115",
-    "itx",
-    "json",
-    "jsonlCSV1",
-    "jsonlCSV",
-    "jsonlKVP",
-    "mat",
-    "nc",
-    "ncHeader",
-    "ncCF",
-    "ncCFHeader",
-    "ncCFMA",
-    "ncCFMAHeader",
-    "nccsv",
-    "nccsvMetadata",
-    "ncoJson",
-    "odvTxt",
-    "subset",
-    "tsv",
-    "tsvp",
-    "tsv0",
-    "wav",
-    "xhtml",
-    "kml",
-    "smallPdf",
-    "pdf",
-    "largePdf",
-    "smallPng",
-    "png",
-    "largePng",
-    "transparentPng",
-]
