@@ -12,7 +12,7 @@ from erddapy.multiple_server_search import fetch_results, search_servers
 def test_fetch_results():
     """Test searches should return results."""
     url = (
-        "https://standards.sensors.ioos.us/erddap/search/index.csv?"
+        "https://erddap.sensors.ioos.us/erddap/search/index.csv?"
         'page=1&itemsPerPage=1000000&searchFor="sea_water_temperature"'
     )
     key = "ioos"
@@ -26,7 +26,7 @@ def test_fetch_results():
 def test_fetch_no_results():
     """Test searches that should return no results."""
     url = (
-        "https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=1000000&searchFor"
+        "https://erddap.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=1000000&searchFor"
         '="incredibly_long_string_that_should_never_match_a_real_dataset" '
     )
     key = "ioos"
@@ -73,7 +73,7 @@ def servers_list():
     """Objects for server search."""
     return {
         "servers_list": [
-            "https://standards.sensors.ioos.us/erddap/",
+            "https://erddap.sensors.ioos.us/erddap",
             "https://gliders.ioos.us/erddap/",
         ],
         "query": "sea_water_temperature",
