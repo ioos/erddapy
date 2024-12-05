@@ -48,14 +48,14 @@ def test__sort_url():
     assert _sort_url(url) == expected
 
 
-def test__sort_url_variables_only():
+def test__sort_url_no_variables():
     """Test _sort_url with undefined constraints."""
     url = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?&time>=1525737600.0&time<=1526245200.0&latitude>=36&latitude<=38&longitude>=-76&longitude<=-73"
     expected = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?&latitude<=38&latitude>=36&longitude<=-73&longitude>=-76&time<=1526245200.0&time>=1525737600.0"
     assert _sort_url(url) == expected
 
 
-def test__sort_url_constraints_only():
+def test__sort_url_no_constraints():
     """Test _sort_url with undefined variables."""
     url = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?time,temperature"
     expected = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?temperature,time"
@@ -65,7 +65,7 @@ def test__sort_url_constraints_only():
 def test__sort_url_undefined_query():
     """Test _sort_url with undefined query."""
     url = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?"
-    assert _sort_url(url) == url
+    assert _sort_url(url) == url.strip("?")
 
 
 def test_quoting():

@@ -5,7 +5,6 @@ from __future__ import annotations
 import copy
 import functools
 import io
-from collections import OrderedDict
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -88,24 +87,33 @@ def quote_url(url: str) -> str:
 
 
 def _sort_url(url: str) -> str:
-    """Return a URL with sorted variables and constraints for hashing."""
-    parts = parse.urlparse(url)
-    if parts.query:
-        query = parts.query.split("&", maxsplit=1)
-        if len(query) == 1:
-            variables = parts.query
-            constraints = ""
-        else:
-            variables, constraints = parts.query.split("&", maxsplit=1)
-        sorted_variables = ",".join(sorted(variables.split(",")))
-        sorted_query = OrderedDict(
-            sorted(dict(parse.parse_qsl(constraints)).items()),
-        )
-        sorted_query_str = parse.unquote(parse.urlencode(sorted_query))
-        sorted_url = f"{parts.scheme}://{parts.netloc}{parts.path}?{parts.params}{sorted_variables}&{sorted_query_str}{parts.fragment}"
-    else:
-        sorted_url = url
-    return sorted_url.strip("&")
+    """Return a URL with sorted variables and constraints for hashing.
+
+    We have a few hacks to handled variables variables,
+    params without a value, and sort them.
+    xref.: https://github.com/aio-libs/yarl/issues/307
+
+    """
+    replace = ("?", "?&")
+    sorted_variables = None
+    url = URL(url)
+    query = url.query
+
+    variables = [k for k, v in query.items() if not v]
+    sorted_constraints = {k: v for k, v in sorted(query.items()) if v}
+
+    if variables:
+        sorted_variables = ",".join(sorted(variables[0].split(",")))
+        replace = ("=&", "&")
+
+    return (
+        url.with_query(sorted_variables)
+        .update_query(sorted_constraints)
+        .human_repr()
+        .replace(*replace)
+        .strip("=")
+        .strip("?")
+    )
 
 
 @functools.lru_cache(maxsize=128)
