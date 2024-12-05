@@ -176,4 +176,89 @@ interactions:
     status:
       code: 404
       message: ''
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br, zstd
+      connection:
+      - keep-alive
+      host:
+      - standards.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.27.2
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=1000000&searchFor="incredibly_long_string_that_should_never_match_a_real_dataset"%20
+  response:
+    body:
+      string: "<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502
+        Bad Gateway</h1></center>\r\n<hr><center>nginx/1.22.1</center>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '157'
+      Content-Type:
+      - text/html
+      Date:
+      - Thu, 05 Dec 2024 10:12:07 GMT
+      Server:
+      - nginx/1.22.1
+    status:
+      code: 502
+      message: Bad Gateway
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, br, zstd
+      connection:
+      - keep-alive
+      host:
+      - erddap.sensors.ioos.us
+      user-agent:
+      - python-httpx/0.27.2
+    method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=1000000&searchFor="incredibly_long_string_that_should_never_match_a_real_dataset"%20
+  response:
+    body:
+      string: "Error {\n    code=404;\n    message=\"Not Found: Resource not found:
+        Your query produced no matching results. Check the spelling of the word(s)
+        you searched for.\";\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Thu, 05 Dec 2024 10:13:09 GMT
+      Last-Modified:
+      - Thu, 05 Dec 2024 10:13:09 GMT
+      Server:
+      - nginx/1.22.1
+      Set-Cookie:
+      - cid=CgIHBWdRfLO7qVvUAycpAg==; expires=Sat, 05-Dec-26 10:13:09 GMT; path=/
+      Strict-Transport-Security:
+      - max-age=0
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      erddap-server:
+      - '2.25'
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 404
+      message: ''
 version: 1
