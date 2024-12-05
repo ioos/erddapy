@@ -563,7 +563,7 @@ class ERDDAP:
         """Download the dataset to a file in a user specified format."""
         file_type = file_type.lstrip(".")
         if file_type not in _DOWNLOAD_FORMATS:
-            msg = f"Requested filetype {file_type} not available on ERDDAP"
+            msg = f"Requested filetype {file_type} not available on ERDDAP."
             raise ValueError(msg)
         url = _sort_url(self.get_download_url(response=file_type))
         fname_hash = hashlib.shake_256(url.encode()).hexdigest(5)
