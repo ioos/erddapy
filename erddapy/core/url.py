@@ -10,7 +10,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from datetime import datetime
 from typing import BinaryIO
-from urllib import parse
 
 import httpx
 import pytz
@@ -75,15 +74,7 @@ _DOWNLOAD_FORMATS = (
 
 def quote_url(url: str) -> str:
     """Quote URL args for modern ERDDAP servers."""
-    # No idea why csv must be quoted in 2.23 but ncCF doesn't :-/
-    do_not_quote = ["/erddap/search/", "ncCF"]
-    if any(True for string in do_not_quote if string in url):
-        return url
-    # We should always quote some queries.
-    if "?" in url:
-        base, unquoted = url.split("?")
-        url = f"{base}?{parse.quote_plus(unquoted)}"
-    return url
+    return str(URL(url))
 
 
 def _sort_url(url: str) -> str:
@@ -92,6 +83,15 @@ def _sort_url(url: str) -> str:
     We have a few hacks to handled variables variables,
     params without a value, and sort them.
     xref.: https://github.com/aio-libs/yarl/issues/307
+
+    Other fixes:
+    ERDDAP separates variables from constrantains,
+    query without values from query with values, using &.
+    That means we need a & before the constranints when there are no variables.
+
+    We also strip = and ? from URLs ending. The first is due to yarl issue 307,
+    the second is harmless but we want to be able to have the same hash
+    for URLs that will give the same response, so we remove it from all URLs.
 
     """
     replace = ("?", "?&")
