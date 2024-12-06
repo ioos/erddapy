@@ -48,14 +48,14 @@ def test__sort_url():
     assert _sort_url(url) == expected
 
 
-def test__sort_url_variables_only():
+def test__sort_url_no_variables():
     """Test _sort_url with undefined constraints."""
     url = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?&time>=1525737600.0&time<=1526245200.0&latitude>=36&latitude<=38&longitude>=-76&longitude<=-73"
     expected = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?&latitude<=38&latitude>=36&longitude<=-73&longitude>=-76&time<=1526245200.0&time>=1525737600.0"
     assert _sort_url(url) == expected
 
 
-def test__sort_url_constraints_only():
+def test__sort_url_no_constraints():
     """Test _sort_url with undefined variables."""
     url = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?time,temperature"
     expected = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?temperature,time"
@@ -65,11 +65,12 @@ def test__sort_url_constraints_only():
 def test__sort_url_undefined_query():
     """Test _sort_url with undefined query."""
     url = "https://erddap.sensors.ioos.us/erddap/tabledap/amelia_20180501t0000.nc?"
-    assert _sort_url(url) == url
+    assert _sort_url(url) == url.strip("?")
 
 
 def test_quoting():
     """Test quoting query params for ERDDAP 2.23."""
-    url = 'https://opendap.co-ops.nos.noaa.gov/erddap/tabledap/IOOS_Hourly_Height_Verified_Water_Level.csvp?WL_VALUE,time&BEGIN_DATE="2016-10-04"&END_DATE="2016-10-12"&DATUM="MSL"&STATION_ID="8729840"'
-    data = urlopen(url)
-    assert data is not None
+    for response in ("csvp", "ncCF"):
+        url = f'https://opendap.co-ops.nos.noaa.gov/erddap/tabledap/IOOS_Hourly_Height_Verified_Water_Level.{response}?WL_VALUE,time&BEGIN_DATE="2016-10-04"&END_DATE="2016-10-12"&DATUM="MSL"&STATION_ID="8729840"'
+        data = urlopen(url)
+        assert data is not None
