@@ -178,7 +178,10 @@ def _distinct(url: str, *, distinct: OptionalBool = False) -> str:
 
     """
     if distinct:
-        return f"{url}&distinct()"
+        url = URL(url)
+        # yarl cannot handle query entry without values,
+        # so we need to strip the empty `=`.
+        return str(url.update_query("distinct()")).strip("=")
     return url
 
 
