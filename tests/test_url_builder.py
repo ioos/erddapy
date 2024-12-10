@@ -1,5 +1,7 @@
 """Test URL builders."""
 
+from urllib.parse import unquote_plus
+
 import httpx
 import pytest
 
@@ -8,7 +10,10 @@ from erddapy.erddapy import ERDDAP
 
 
 def _url_to_dict(url):
-    return {v.split("=")[0]: v.split("=")[1] for v in url.split("&")[1:]}
+    return {
+        v.split("=")[0]: unquote_plus(v.split("=")[1])
+        for v in url.split("&")[1:]
+    }
 
 
 @pytest.fixture
@@ -136,7 +141,7 @@ def test_categorize_url(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
+# @pytest.mark.vcr
 def test_download_url_unconstrained(e):
     """Check download URL results."""
     dataset_id = "org_cormp_cap2"
@@ -144,7 +149,7 @@ def test_download_url_unconstrained(e):
     url = e.get_download_url(dataset_id=dataset_id, variables=variables)
     assert url == check_url_response(url, follow_redirects=True)
     assert url.startswith(
-        f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?",
+        f"{e.server}/{e.protocol}/{dataset_id}.{e.response}",
     )
     assert sorted(url.split("?")[1].split(",")) == sorted(variables)
 

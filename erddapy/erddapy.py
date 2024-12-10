@@ -20,8 +20,6 @@ from erddapy.core.url import (
     _DOWNLOAD_FORMATS,
     _check_substrings,
     _distinct,
-    _format_constraints_url,
-    _quote_string_constraints,
     _sort_url,
     get_categorize_url,
     get_download_url,
@@ -37,8 +35,6 @@ __all__ = [
     "ERDDAP",
     "_check_substrings",
     "_distinct",
-    "_format_constraints_url",
-    "_quote_string_constraints",
     "parse_dates",
     "urlopen",
 ]

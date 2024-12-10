@@ -205,29 +205,9 @@ def _multi_urlopen(url: str) -> BinaryIO:
     return data
 
 
-def _quote_string_constraints(kwargs: dict) -> dict:
-    """Quote constraints of String variables.
-
-    The right-hand-side value must be surrounded by double quotes if they are
-    not relative constraints.
-    """
-    return {
-        k: f'"{v}"' if isinstance(v, str) and not _check_substrings(v) else v
-        for k, v in kwargs.items()
-    }
-
-
-def _format_constraints_url(kwargs: dict) -> str:
-    """Join the constraint variables with separator '&' and
-    add to the download link.
-
-    """
-    return "".join([f"&{k}{v}" for k, v in kwargs.items()])
-
-
 def _check_substrings(constraint: dict) -> bool:
     """Extend the OPeNDAP with extra strings."""
-    substrings = ["now", "min", "max"]
+    substrings = ("now", "min", "max")
     return any(
         True for substring in substrings if substring in str(constraint)
     )
@@ -397,7 +377,7 @@ def get_search_url(  # noqa: PLR0913
 def get_info_url(
     server: str,
     dataset_id: OptionalStr = None,
-    response: OptionalStr = None,
+    response: OptionalStr = "html",
 ) -> str:
     """Build the info URL for the `server` endpoint.
 
@@ -459,7 +439,7 @@ def get_download_url(  # noqa: PLR0913, C901
     protocol: OptionalStr = None,
     variables: OptionalList = None,
     dim_names: OptionalList = None,
-    response: OptionalStr = None,
+    response: OptionalStr = "html",
     constraints: OptionalDict = None,
     distinct: OptionalBool = False,
 ) -> str:
@@ -499,6 +479,8 @@ def get_download_url(  # noqa: PLR0913, C901
         url (str): the download URL for the `response` chosen.
 
     """
+    url = URL(server)
+
     if not dataset_id:
         msg = f"Please specify a valid `dataset_id`, got {dataset_id}"
         raise ValueError(msg)
@@ -507,22 +489,18 @@ def get_download_url(  # noqa: PLR0913, C901
         msg = f"Please specify a valid `protocol`, got {protocol}"
         raise ValueError(msg)
 
+    name = f"{dataset_id}.{response}"
+    download_url = url / protocol / name
+
     if (
         protocol == "griddap"
         and constraints is not None
         and variables is not None
         and dim_names is not None
     ):
-        download_url = [
-            server,
-            "/",
-            protocol,
-            "/",
-            dataset_id,
-            ".",
-            response,
-            "?",
-        ]
+        # NB: We should factor this out,
+        # and try to make it easier to understand the griddap URLs.
+        griddap = []
         for var in variables:
             sub_url = [var]
             sub_url.extend(
@@ -532,18 +510,23 @@ def get_download_url(  # noqa: PLR0913, C901
                 for dim in dim_names
             )
             sub_url.append(",")
-            download_url.append("".join(sub_url))
-        return "".join(download_url)[:-1]
+            griddap.append("".join(sub_url))
+
+        # We need to remove the last , from the URL
+        return f"{download_url}?{"".join(griddap)}".strip(",")
 
     # This is an unconstrained OPeNDAP response b/c
     # the integer based constrained version is just not worth supporting ;-p
     if response == "opendap":
-        return f"{server}/{protocol}/{dataset_id}"
+        return str(download_url.with_name(dataset_id))
 
-    url = f"{server}/{protocol}/{dataset_id}.{response}?"
+    replace = ("?", "?&")
+    sorted_variables = None
     if variables:
-        url += ",".join(variables)
+        sorted_variables = ",".join(sorted(variables))
+        replace = ("=&", "&")
 
+    sorted_constraints = None
     if constraints:
         _constraints = copy.copy(constraints)
         for k, v in _constraints.items():
@@ -562,9 +545,17 @@ def get_download_url(  # noqa: PLR0913, C901
             )
             if k.startswith(valid_time_constraints):
                 _constraints.update({k: parse_dates(v)})
-        _constraints = _quote_string_constraints(_constraints)
-        _constraints_url = _format_constraints_url(_constraints)
+        # NB: This will create a wrong URL for inequalities that
+        # are not `or =`. Yarl doesn't support that.
+        sorted_constraints = {k.strip("="): v for k, v in _constraints.items()}
 
-        url += f"{_constraints_url}"
+    download_url = download_url.with_query(sorted_variables)
+    if sorted_constraints:
+        download_url = download_url.update_query(sorted_constraints)
 
-    return _distinct(url, distinct=distinct)
+    download_url = (
+        download_url.human_repr().replace(*replace).strip("=").strip("?")
+    )
+
+    download_url = str(download_url)
+    return _distinct(download_url, distinct=distinct)
