@@ -427,7 +427,7 @@ def get_categorize_url(
     url = URL(server) / "categorize" / categorize_by
 
     if value:
-        url = url / "value"
+        url = url / value
     url = url / f"index.{response}"
     return str(url)
 
