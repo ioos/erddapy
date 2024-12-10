@@ -513,7 +513,7 @@ def get_download_url(  # noqa: PLR0913, C901
             griddap.append("".join(sub_url))
 
         # We need to remove the last , from the URL
-        return f"{download_url}?{"".join(griddap)}".strip(",")
+        return f"{download_url}?{''.join(griddap)}".strip(",")
 
     # This is an unconstrained OPeNDAP response b/c
     # the integer based constrained version is just not worth supporting ;-p
