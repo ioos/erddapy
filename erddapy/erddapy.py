@@ -17,12 +17,10 @@ from erddapy.core.griddap import (
 )
 from erddapy.core.interfaces import to_iris, to_ncCF, to_pandas, to_xarray
 from erddapy.core.url import (
+    _DOWNLOAD_FORMATS,
     _check_substrings,
     _distinct,
-    _format_constraints_url,
-    _quote_string_constraints,
     _sort_url,
-    download_formats,
     get_categorize_url,
     get_download_url,
     get_info_url,
@@ -37,8 +35,6 @@ __all__ = [
     "ERDDAP",
     "_check_substrings",
     "_distinct",
-    "_format_constraints_url",
-    "_quote_string_constraints",
     "parse_dates",
     "urlopen",
 ]
@@ -562,8 +558,8 @@ class ERDDAP:
     ) -> str:
         """Download the dataset to a file in a user specified format."""
         file_type = file_type.lstrip(".")
-        if file_type not in download_formats:
-            msg = f"Requested filetype {file_type} not available on ERDDAP"
+        if file_type not in _DOWNLOAD_FORMATS:
+            msg = f"Requested filetype {file_type} not available on ERDDAP."
             raise ValueError(msg)
         url = _sort_url(self.get_download_url(response=file_type))
         fname_hash = hashlib.shake_256(url.encode()).hexdigest(5)

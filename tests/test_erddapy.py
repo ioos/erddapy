@@ -13,8 +13,6 @@ from erddapy.core.griddap import (
     _griddap_check_variables,
 )
 from erddapy.core.url import (
-    _format_constraints_url,
-    _quote_string_constraints,
     parse_dates,
 )
 from erddapy.erddapy import ERDDAP
@@ -47,47 +45,6 @@ def test_parse_dates_from_string():
     assert parse_dates("1970/01/01") == 0
     assert parse_dates("1970-1-1") == 0
     assert parse_dates("1970/1/1") == 0
-
-
-def test__quote_string_constraints():
-    """Ensure that only string are quoted."""
-    kw = _quote_string_constraints(
-        {
-            "latitude": 42,
-            "longitude": 42.0,
-            "max_time": datetime.datetime.now(datetime.UTC),
-            "min_time": "1970-01-01T00:00:00Z",
-            "cdm_data_type": "trajectoryprofile",
-        },
-    )
-
-    assert isinstance(kw["latitude"], int)
-    assert isinstance(kw["longitude"], float)
-    assert isinstance(kw["max_time"], datetime.datetime)
-    assert isinstance(kw["min_time"], str)
-    assert isinstance(kw["cdm_data_type"], str)
-
-    assert kw["min_time"].startswith('"')
-    assert kw["min_time"].endswith('"')
-    assert kw["cdm_data_type"].startswith('"')
-    assert kw["cdm_data_type"].endswith('"')
-
-    for value in kw.values():
-        if isinstance(value, str):
-            assert value.startswith('"')
-            assert value.endswith('"')
-
-
-def test__format_constraints_url():
-    """Test constraint formatting."""
-    kw_url = _format_constraints_url(
-        {
-            "latitude>=": 42,
-            "longitude<=": 42.0,
-        },
-    )
-
-    assert kw_url == "&latitude>=42&longitude<=42.0"
 
 
 @pytest.mark.web
