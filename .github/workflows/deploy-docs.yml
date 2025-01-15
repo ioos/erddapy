@@ -21,7 +21,7 @@ jobs:
         fetch-depth: 0
 
     - name: Setup Micromamba
-      uses: mamba-org/setup-micromamba@0dea6379afdaffa5d528b3d1dabc45da37f443fc #v1
+      uses: mamba-org/setup-micromamba@0dea6379afdaffa5d528b3d1dabc45da37f443fc # v2.0.4
       with:
         environment-name: TEST
         init-shell: bash
