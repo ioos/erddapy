@@ -1,5 +1,11 @@
 [
 	{
+		"name": "Voice of the Ocean",
+		"short_name": "VOTO",
+		"url": "https://erddap.observations.voiceoftheocean.org/erddap/",
+		"public": true
+	},
+	{
 		"name": "St. Lawrence Global Observatory - CIOOS | Observatoire global du Saint-Laurent - SIOOC",
 		"short_name": "SLGO-OGSL",
 		"url": "https://erddap.ogsl.ca/erddap/",
@@ -30,8 +36,14 @@
 		"public": true
 	},
     {
-		"name": "European Marine Observation and Data Network (EMODnet) Physics ERDDAP",
+		"name": "European Marine Observation and Data Network (EMODnet) ERDDAP",
 		"short_name": "EMODnet",
+		"url": "https://erddap.emodnet.eu/erddap/",
+		"public": true
+	},
+	{
+		"name": "European Marine Observation and Data Network (EMODnet) Physics ERDDAP",
+		"short_name": "EMODnet Physics",
 		"url": "https://erddap.emodnet-physics.eu/erddap/",
 		"public": true
 	},
@@ -357,6 +369,12 @@
 		"name": "UNESCO IOC-IODE Ocean Acidification",
 		"short_name": "IOC-IODE-OA",
 		"url": "https://erddap.oa.iode.org/erddap/",
+		"public": true
+	},
+	{
+		"name": "Linked Systems @ the British Oceanographic Data Centre, National Oceanography Centre, UK",
+		"short_name": "NOC-BODC Linked Systems",
+		"url": "https://linkedsystems.uk/erddap",
 		"public": true
 	}
 ]
