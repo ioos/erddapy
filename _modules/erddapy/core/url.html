@@ -4,12 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>erddapy.core.url &#8212; erddapy 2.2.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=c058f7c8" />
+    <title>erddapy.core.url &#8212; erddapy 2.2.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=f6a572b4" />
-    <script src="../../../_static/documentation_options.js?v=16656018"></script>
-    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/documentation_options.js?v=4e6cfea6"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -90,22 +90,22 @@
   <h1>Source code for erddapy.core.url</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;URL handling.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">functools</span>
-<span class="kn">import</span> <span class="nn">io</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">BinaryIO</span>
-<span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">parse</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">BinaryIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse</span>
 
-<span class="kn">import</span> <span class="nn">httpx</span>
-<span class="kn">import</span> <span class="nn">pytz</span>
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">to_datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_datetime</span>
 
 <span class="n">OptionalStr</span> <span class="o">=</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
 <span class="n">OptionalBool</span> <span class="o">=</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span>
@@ -113,16 +113,20 @@
 <span class="n">OptionalList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">quote_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">quote_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Quote URL args for modern ERDDAP servers.&quot;&quot;&quot;</span>
-    <span class="c1"># We should always quote for queries.</span>
-    <span class="k">if</span> <span class="s2">&quot;?&quot;</span> <span class="ow">in</span> <span class="n">url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s2">&quot;searchFor&quot;</span><span class="p">:</span>
+    <span class="c1"># No idea why csv must be quoted in 2.23 but ncCF doesn&#39;t :-/</span>
+    <span class="n">do_not_quote</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/erddap/search/&quot;</span><span class="p">,</span> <span class="s2">&quot;ncCF&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="kc">True</span> <span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">do_not_quote</span> <span class="k">if</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">url</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">url</span>
+    <span class="c1"># We should always quote some queries.</span>
+    <span class="k">if</span> <span class="s2">&quot;?&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
         <span class="n">base</span><span class="p">,</span> <span class="n">unquoted</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">?</span><span class="si">{</span><span class="n">parse</span><span class="o">.</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">unquoted</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">return</span> <span class="n">url</span>
 
 
-<span class="k">def</span> <span class="nf">_sort_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_sort_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a URL with sorted variables and constraints for hashing.&quot;&quot;&quot;</span>
     <span class="n">parts</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">parts</span><span class="o">.</span><span class="n">query</span><span class="p">:</span>
@@ -144,7 +148,7 @@
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
     <span class="k">if</span> <span class="s2">&quot;timeout&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -157,13 +161,13 @@
         <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
     <span class="k">except</span> <span class="n">httpx</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">raise</span> <span class="n">httpx</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+        <span class="k">raise</span> <span class="n">httpx</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
     <span class="k">return</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="urlopen">
 <a class="viewcode-back" href="../../../erddapy.html#erddapy.erddapy.urlopen">[docs]</a>
-<span class="k">def</span> <span class="nf">urlopen</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">urlopen</span><span class="p">(</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">requests_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
@@ -172,6 +176,18 @@
 <span class="sd">    See httpx.get docs for the `params` and `kwargs` options.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This is a horrible hack to work around opendap.co-ops.nos.noaa.gov.</span>
+    <span class="c1"># The co-ops serve require variable in a specific order to work.</span>
+    <span class="n">date_string</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;BEGIN_DATE&quot;</span><span class="p">,</span> <span class="s2">&quot;END_DATE&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;opendap.co-ops.nos.noaa.gov&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+        <span class="n">dates</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">date_string</span><span class="p">):</span>
+                <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">base</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;&amp;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">dates</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">requests_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">requests_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">requests_kwargs</span><span class="p">)</span>
@@ -181,7 +197,7 @@
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">check_url_response</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_url_response</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Shortcut to `raise_for_status` instead of fetching the whole content.</span>
 
 <span class="sd">    One should only use this is passing URLs that are known to work is</span>
@@ -193,7 +209,7 @@
     <span class="k">return</span> <span class="n">url</span>
 
 
-<span class="k">def</span> <span class="nf">_distinct</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">distinct</span><span class="p">:</span> <span class="n">OptionalBool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_distinct</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">distinct</span><span class="p">:</span> <span class="n">OptionalBool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sort all of the rows in the results table.</span>
 
 <span class="sd">    Starting with the first requested variable,</span>
@@ -212,7 +228,7 @@
     <span class="k">return</span> <span class="n">url</span>
 
 
-<span class="k">def</span> <span class="nf">_format_search_string</span><span class="p">(</span><span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_format_search_string</span><span class="p">(</span><span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate search string for an ERDDAP server with user defined query.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">search/index.csv?&quot;</span>
@@ -221,7 +237,7 @@
     <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_multi_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_multi_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simpler url open to work with multiprocessing.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -230,7 +246,7 @@
     <span class="k">return</span> <span class="n">data</span>
 
 
-<span class="k">def</span> <span class="nf">_quote_string_constraints</span><span class="p">(</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_quote_string_constraints</span><span class="p">(</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Quote constraints of String variables.</span>
 
 <span class="sd">    The right-hand-side value must be surrounded by double quotes if they are</span>
@@ -242,7 +258,7 @@
     <span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">_format_constraints_url</span><span class="p">(</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_format_constraints_url</span><span class="p">(</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Join the constraint variables with separator &#39;&amp;&#39; and</span>
 <span class="sd">    add to the download link.</span>
 
@@ -250,7 +266,7 @@
     <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;&amp;</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
 
 
-<span class="k">def</span> <span class="nf">_check_substrings</span><span class="p">(</span><span class="n">constraint</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_substrings</span><span class="p">(</span><span class="n">constraint</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Extend the OPeNDAP with extra strings.&quot;&quot;&quot;</span>
     <span class="n">substrings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;now&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">]</span>
     <span class="k">return</span> <span class="nb">any</span><span class="p">(</span>
@@ -260,7 +276,7 @@
 
 <div class="viewcode-block" id="parse_dates">
 <a class="viewcode-back" href="../../../erddapy.html#erddapy.erddapy.parse_dates">[docs]</a>
-<span class="k">def</span> <span class="nf">parse_dates</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_dates</span><span class="p">(</span>
     <span class="n">date_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">dayfirst</span><span class="p">:</span> <span class="n">OptionalBool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -291,7 +307,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">get_search_url</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_search_url</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913</span>
     <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span><span class="p">,</span>
     <span class="n">search_for</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -442,7 +458,7 @@
     <span class="k">return</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;minTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;maxTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">get_info_url</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_info_url</span><span class="p">(</span>
     <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">dataset_id</span><span class="p">:</span> <span class="n">OptionalStr</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="p">:</span> <span class="n">OptionalStr</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -466,7 +482,7 @@
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/info/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">get_categorize_url</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_categorize_url</span><span class="p">(</span>
     <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">categorize_by</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">value</span><span class="p">:</span> <span class="n">OptionalStr</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -495,7 +511,7 @@
     <span class="k">return</span> <span class="n">url</span>
 
 
-<span class="k">def</span> <span class="nf">get_download_url</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913, C901</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_download_url</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913, C901</span>
     <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">dataset_id</span><span class="p">:</span> <span class="n">OptionalStr</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -672,7 +688,7 @@
       &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

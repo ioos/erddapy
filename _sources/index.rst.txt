@@ -29,7 +29,7 @@ The main advantages of ERDDAP are:
   and reformats the data into the format that you requested.
 
 
-See https://standards.sensors.ioos.us/erddap/index.html for more information.
+See https://erddap.github.io/ for more information.
 
 
 .. toctree::

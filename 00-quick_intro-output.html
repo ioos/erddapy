@@ -5,17 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Quick introduction &#8212; erddapy 2.2.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <title>Quick introduction &#8212; erddapy 2.2.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
     <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
-    <script src="_static/documentation_options.js?v=16656018"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/documentation_options.js?v=4e6cfea6"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Griddap" href="01a-griddap-output.html" />
@@ -103,14 +101,14 @@
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>erddapy
 </pre></div>
 </div>
-<p>First we need to instantiate the ERDDAP URL constructor for a server. In these examples we will use <a class="reference external" href="https://standards.sensors.ioos.us/erddap/index.html">https://standards.sensors.ioos.us/erddap/index.html</a> and <a class="reference external" href="https://erddap.ioos.us/erddap/index.html">https://erddap.ioos.us/erddap/index.html</a>.</p>
+<p>First we need to instantiate the ERDDAP URL constructor for a server. In these examples we will use <a class="reference external" href="https://erddap.sensors.ioos.us/erddap/index.html">https://erddap.sensors.ioos.us/erddap/index.html</a>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy</span> <span class="kn">import</span> <span class="n">ERDDAP</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ERDDAP</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;https://standards.sensors.ioos.us/erddap&quot;</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;https://erddap.sensors.ioos.us/erddap&quot;</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span>
     <span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span>
     <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tabledap&quot;</span><span class="p">,</span>
@@ -186,39 +184,39 @@
   </thead>
   <tbody>
     <tr>
-      <th>2000-01-01 00:08:00+00:00</th>
+      <th>2005-11-14 23:00:40+00:00</th>
       <td>32.8032</td>
       <td>-79.6204</td>
-      <td>14.01</td>
-      <td>14.42</td>
+      <td>20.3767</td>
+      <td>21.7</td>
     </tr>
     <tr>
-      <th>2000-01-01 01:08:00+00:00</th>
+      <th>2005-11-15 01:00:40+00:00</th>
       <td>32.8032</td>
       <td>-79.6204</td>
-      <td>13.92</td>
-      <td>13.91</td>
+      <td>20.0283</td>
+      <td>20.9</td>
     </tr>
     <tr>
-      <th>2000-01-01 02:08:00+00:00</th>
+      <th>2005-11-15 03:00:40+00:00</th>
       <td>32.8032</td>
       <td>-79.6204</td>
-      <td>13.90</td>
-      <td>13.60</td>
+      <td>19.7840</td>
+      <td>20.3</td>
     </tr>
     <tr>
-      <th>2000-01-01 03:08:00+00:00</th>
+      <th>2005-11-15 05:00:40+00:00</th>
       <td>32.8032</td>
       <td>-79.6204</td>
-      <td>13.92</td>
-      <td>13.47</td>
+      <td>19.6207</td>
+      <td>20.1</td>
     </tr>
     <tr>
-      <th>2000-01-01 04:08:00+00:00</th>
+      <th>2005-11-15 07:00:40+00:00</th>
       <td>32.8032</td>
       <td>-79.6204</td>
-      <td>13.93</td>
-      <td>13.28</td>
+      <td>19.7652</td>
+      <td>20.8</td>
     </tr>
   </tbody>
 </table>
@@ -333,19 +331,19 @@ https://erddap.ioos.us/erddap/tabledap/allDatasets.html?datasetID,institution
       <td>Integrated Ocean Observing System (IOOS)</td>
     </tr>
     <tr>
+      <th>atn_collection</th>
+      <td>IOOS / ATN</td>
+    </tr>
+    <tr>
+      <th>atn_99310_bearded-seal_trajectory_20110617-20120606</th>
+      <td>NOAA Alaska Fisheries Science Center</td>
+    </tr>
+    <tr>
       <th>OBIS</th>
       <td>???</td>
     </tr>
     <tr>
       <th>ra_regional_boundaries</th>
-      <td>NOAA/NOS/IOOS</td>
-    </tr>
-    <tr>
-      <th>by_the_numbers</th>
-      <td>IOOS</td>
-    </tr>
-    <tr>
-      <th>processed_asset_inventory</th>
       <td>NOAA/NOS/IOOS</td>
     </tr>
   </tbody>
@@ -365,7 +363,7 @@ https://erddap.ioos.us/erddap/tabledap/allDatasets.html?datasetID,institution
       &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |

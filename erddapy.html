@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ERDDAP class API &#8212; erddapy 2.2.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <title>ERDDAP class API &#8212; erddapy 2.2.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
-    <script src="_static/documentation_options.js?v=16656018"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/documentation_options.js?v=4e6cfea6"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -61,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="03-advanced_search-output.html">Searching datasets</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ERDDAP</span> <span class="pre">class</span> <span class="pre">API</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#erddapy.erddapy.ERDDAP"><code class="docutils literal notranslate"><span class="pre">ERDDAP</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#erddapy.erddapy.ERDDAP.dataset_id"><code class="docutils literal notranslate"><span class="pre">ERDDAP.dataset_id</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#erddapy.erddapy.ERDDAP.download_file"><code class="docutils literal notranslate"><span class="pre">ERDDAP.download_file()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#erddapy.erddapy.ERDDAP.get_categorize_url"><code class="docutils literal notranslate"><span class="pre">ERDDAP.get_categorize_url()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#erddapy.erddapy.ERDDAP.get_download_url"><code class="docutils literal notranslate"><span class="pre">ERDDAP.get_download_url()</span></code></a></li>
@@ -111,7 +112,7 @@
 <p>Pythonic way to access ERDDAP data.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="erddapy.erddapy.ERDDAP">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">ERDDAP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'html'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">ERDDAP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'html'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Creates an ERDDAP instance for a specific server endpoint.</p>
 <section id="args">
@@ -145,7 +146,7 @@ params and requests_kwargs: <cite>httpx.get</cite> options</p>
 </pre></div>
 </div>
 <p>let’s search for glider <cite>ru29</cite> and read the csv response with pandas.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="s2">&quot;ru29&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">]</span>
 <span class="go">0    ru29-20150623T1046</span>
@@ -160,7 +161,7 @@ params and requests_kwargs: <cite>httpx.get</cite> options</p>
 </pre></div>
 </div>
 <p>to get a list of the shortcuts available servers:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">erddapy</span> <span class="kn">import</span> <span class="n">servers</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">servers</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">url</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">servers</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 <span class="go">{&#39;MDA&#39;: &#39;https://bluehub.jrc.ec.europa.eu/erddap/&#39;,</span>
 <span class="go"> &#39;MII&#39;: &#39;https://erddap.marine.ie/erddap/&#39;,</span>
@@ -182,6 +183,12 @@ params and requests_kwargs: <cite>httpx.get</cite> options</p>
 </pre></div>
 </div>
 </div></blockquote>
+<dl class="py property">
+<dt class="sig sig-object py" id="erddapy.erddapy.ERDDAP.dataset_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dataset_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#erddapy.erddapy.ERDDAP.dataset_id" title="Link to this definition">¶</a></dt>
+<dd><p>dataset_id property.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="erddapy.erddapy.ERDDAP.download_file">
 <span class="sig-name descname"><span class="pre">download_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.download_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.download_file" title="Link to this definition">¶</a></dt>
@@ -238,7 +245,7 @@ response: default is HTML.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="erddapy.erddapy.ERDDAP.get_download_url">
-<span class="sig-name descname"><span class="pre">get_download_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distinct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_download_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.get_download_url" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_download_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distinct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP.get_download_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP.get_download_url" title="Link to this definition">¶</a></dt>
 <dd><p>Build the download URL for the <cite>server</cite> endpoint.</p>
 <section id="id3">
 <h3>Args:<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
@@ -577,7 +584,7 @@ please check ERDDAP’s docs for the other csv options available.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="erddapy.erddapy.parse_dates">
-<span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">parse_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_time</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dayfirst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yearfirst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/core/url.html#parse_dates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.parse_dates" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">parse_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_time</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">dayfirst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yearfirst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/core/url.html#parse_dates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.parse_dates" title="Link to this definition">¶</a></dt>
 <dd><p>Parse dates to ERDDAP internal format.</p>
 <p>ERDDAP ReSTful API standardizes the representation of dates as either ISO
 strings or seconds since 1970, but internally ERDDAPY uses datetime-like
@@ -627,7 +634,7 @@ objects. <cite>timestamp</cite> returns the expected strings in seconds since 19
       &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |

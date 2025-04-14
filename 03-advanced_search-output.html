@@ -5,17 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Searching datasets &#8212; erddapy 2.2.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <title>Searching datasets &#8212; erddapy 2.2.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
     <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
-    <script src="_static/documentation_options.js?v=16656018"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/documentation_options.js?v=4e6cfea6"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ERDDAP class API" href="erddapy.html" />
@@ -95,12 +93,12 @@
             
   <section id="Searching-datasets">
 <h1>Searching datasets<a class="headerlink" href="#Searching-datasets" title="Link to this heading">¶</a></h1>
-<p>erddapy can wrap the same form-like search capabilities of ERDDAP with the <em>search_for</em> keyword.</p>
+<p>Erddapy can wrap the same form-like search capabilities of ERDDAP with the <em>search_for</em> keyword.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy</span> <span class="kn">import</span> <span class="n">ERDDAP</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ERDDAP</span>
 
 <span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span>
     <span class="n">server</span><span class="o">=</span><span class="s2">&quot;https://pae-paha.pacioos.hawaii.edu/erddap&quot;</span><span class="p">,</span>
@@ -114,7 +112,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">search_for</span> <span class="o">=</span> <span class="s2">&quot;etopo&quot;</span>
 
@@ -206,7 +204,7 @@ Name: Dataset ID, dtype: object
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-69
+70
 </pre></div></div>
 </div>
 <p>Too many datasets because wind, speed, and wind speed are matched. Now let’s use the quoted search to reduce the number of results to only wind speed.</p>
@@ -236,7 +234,7 @@ Name: Dataset ID, dtype: object
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy.multiple_server_search</span> <span class="kn">import</span> <span class="n">search_servers</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy.multiple_server_search</span><span class="w"> </span><span class="kn">import</span> <span class="n">search_servers</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">search_servers</span><span class="p">(</span>
     <span class="n">query</span><span class="o">=</span><span class="s2">&quot;glider&quot;</span><span class="p">,</span>
@@ -260,7 +258,7 @@ Name: Dataset ID, dtype: object
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-There are 3849 entries in this search!
+There are 4649 entries in this search!
 </pre></div></div>
 </div>
 <p>These are the servers that have glider data according to our query.</p>
@@ -280,12 +278,22 @@ There are 3849 entries in this search!
 <div class="highlight"><pre>
 {&#39;http://erddap.cencoos.org/erddap/&#39;,
  &#39;http://erddap.secoora.org/erddap/&#39;,
+ &#39;http://tds.marine.rutgers.edu/erddap/&#39;,
+ &#39;https://basin.ceoe.udel.edu/erddap/&#39;,
+ &#39;https://coastwatch.pfeg.noaa.gov/erddap/&#39;,
  &#39;https://cwcgom.aoml.noaa.gov/erddap/&#39;,
  &#39;https://erddap-goldcopy.dataexplorer.oceanobservatories.org/erddap/&#39;,
+ &#39;https://erddap.bco-dmo.org/erddap/&#39;,
+ &#39;https://erddap.emodnet-physics.eu/erddap/&#39;,
  &#39;https://erddap.griidc.org/erddap/&#39;,
  &#39;https://erddap.observations.voiceoftheocean.org/erddap/&#39;,
  &#39;https://erddap.sensors.ioos.us/erddap/&#39;,
  &#39;https://gliders.ioos.us/erddap/&#39;,
+ &#39;https://pae-paha.pacioos.hawaii.edu/erddap/&#39;,
+ &#39;https://polarwatch.noaa.gov/erddap/&#39;,
+ &#39;https://spraydata.ucsd.edu/erddap/&#39;,
+ &#39;https://upwell.pfeg.noaa.gov/erddap/&#39;,
+ &#39;https://www.ifremer.fr/erddap/&#39;,
  &#39;https://www.smartatlantic.ca/erddap/&#39;}
 </pre></div></div>
 </div>
@@ -295,7 +303,7 @@ There are 3849 entries in this search!
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy.multiple_server_search</span> <span class="kn">import</span> <span class="n">advanced_search_servers</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy.multiple_server_search</span><span class="w"> </span><span class="kn">import</span> <span class="n">advanced_search_servers</span>
 
 <span class="n">min_time</span> <span class="o">=</span> <span class="s2">&quot;2017-07-01T00:00:00Z&quot;</span>
 <span class="n">max_time</span> <span class="o">=</span> <span class="s2">&quot;2017-09-01T00:00:00Z&quot;</span>
@@ -410,7 +418,7 @@ There are 3849 entries in this search!
       &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
