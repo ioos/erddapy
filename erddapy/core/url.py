@@ -84,6 +84,18 @@ def urlopen(
     See httpx.get docs for the `params` and `kwargs` options.
 
     """
+    # This is a horrible hack to work around opendap.co-ops.nos.noaa.gov.
+    # The co-ops serve require variable in a specific order to work.
+    date_string = ("BEGIN_DATE", "END_DATE")
+    if "opendap.co-ops.nos.noaa.gov" in url:
+        dates, base = [], []
+        for part in url.split("&"):
+            if part.startswith(date_string):
+                dates.append(part)
+            else:
+                base.append(part)
+        url = "&".join(base + dates)
+
     if requests_kwargs is None:
         requests_kwargs = {}
     data = _urlopen(url, **requests_kwargs)
