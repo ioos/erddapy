@@ -3,10 +3,10 @@
 import datetime
 import sys
 
-import httpx
 import packaging.version
 import pytest
 import pytz
+import urllib3
 
 from erddapy.core.griddap import (
     _griddap_check_constraints,
@@ -96,9 +96,9 @@ def test_erddap2_10():
     """Check regression for ERDDAP 2.10."""
     e = ERDDAP(server="https://erddap.ioos.us/erddap/")
     url = e.get_search_url(search_for="NOAA", response="csv")
-    r = httpx.head(url)
+    r = urllib3.request("HEAD", url, preload_content=False)
     ok_200 = 200
-    assert r.status_code == ok_200
+    assert r.status == ok_200
 
 
 def test__griddap_check_constraints():

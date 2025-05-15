@@ -8,7 +8,6 @@ from erddapy.multiple_server_search import fetch_results, search_servers
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_fetch_results():
     """Test searches should return results."""
     url = (
@@ -104,7 +103,6 @@ def test_search_servers_with_a_list_parallel_true(servers_list):
     assert not df.empty
 
 
-@pytest.mark.vcr
 @pytest.mark.web
 @pytest.mark.skipif(
     sys.platform in ["win32", "darwin"],

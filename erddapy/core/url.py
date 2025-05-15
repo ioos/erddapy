@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 from typing import BinaryIO
 from urllib import parse
 
-import httpx
 import pytz
+import urllib3
 from pandas import to_datetime
 
 OptionalStr = str | None
@@ -61,27 +61,41 @@ def _sort_url(url: str) -> str:
 def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     if "timeout" not in kwargs:
         kwargs["timeout"] = 60
-    response = httpx.get(
+    headers = None
+    if auth is not None:
+        headers = urllib3.make_headers(basic_auth="f{auth[0]}:{auth[1]}")
+    response = urllib3.request(
+        "GET",
         quote_url(url),
-        follow_redirects=True,
-        auth=auth,
+        redirect=True,
+        preload_content=False,
+        decode_content=True,
+        headers=headers,
         **kwargs,
     )
-    try:
-        response.raise_for_status()
-    except httpx.HTTPError as err:
-        msg = f"{response.content.decode()}"
-        raise httpx.HTTPError(msg) from err
-    return io.BytesIO(response.content)
+
+    ok_200 = 200
+    if response.status != ok_200:
+        msg = f"{response.data}."
+        raise urllib3.exceptions.HTTPError(msg)
+    if "gzip" in response.headers.get("content-encoding", "''"):
+        import gzip
+
+        data = gzip.GzipFile(fileobj=io.BytesIO(response.data)).read()
+        data = io.BytesIO(data)
+    else:
+        data = io.BytesIO(response.data)
+    response.release_conn()
+    return data
 
 
 def urlopen(
     url: str,
     requests_kwargs: dict | None = None,
 ) -> BinaryIO:
-    """Thin wrapper around httpx get content.
+    """Thin wrapper around 'GET'.
 
-    See httpx.get docs for the `params` and `kwargs` options.
+    See urllib3 docs for the `params` and `kwargs` options.
 
     """
     # This is a horrible hack to work around opendap.co-ops.nos.noaa.gov.
@@ -111,8 +125,17 @@ def check_url_response(url: str, **kwargs: dict) -> str:
     necessary. Otherwise let it fail later and avoid fetching the head.
 
     """
-    r = httpx.head(url, **kwargs)
-    r.raise_for_status()
+    r = urllib3.request(
+        "HEAD",
+        url,
+        preload_content=False,
+        decode_content=True,
+        **kwargs,
+    )
+    ok_200 = 200
+    if r.status != ok_200:
+        raise urllib3.exceptions.HTTPError(r.status)
+    r.release_conn()
     return url
 
 
@@ -148,7 +171,7 @@ def _multi_urlopen(url: str) -> BinaryIO:
     """Simpler url open to work with multiprocessing."""
     try:
         data = urlopen(url)
-    except (httpx.HTTPError, httpx.ConnectError):
+    except (urllib3.exceptions.HTTPError, urllib3.exceptions.ConnectionError):
         return None
     return data
 

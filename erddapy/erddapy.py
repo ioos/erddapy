@@ -68,7 +68,7 @@ class ERDDAP:
         variables: a list variables to download.
         response: default is HTML.
         constraints: download constraints, default None (opendap-like url)
-        params and requests_kwargs: `httpx.get` options
+        params and requests_kwargs: `urllib3.request` options
 
     Returns:
     -------

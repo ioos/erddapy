@@ -5,8 +5,8 @@ import io
 from pathlib import Path
 from typing import NamedTuple
 
-import httpx
 import pandas as pd
+import urllib3
 
 
 class Server(NamedTuple):
@@ -26,9 +26,10 @@ def servers_list() -> dict:
     """
     try:
         url = "https://raw.githubusercontent.com/IrishMarineInstitute/awesome-erddap/master/erddaps.json"
-        r = httpx.get(url, timeout=10)
-        df_servers = pd.read_json(io.StringIO(r.text))
-    except httpx.HTTPError:
+        r = urllib3.request("GET", url, preload_content=False, timeout=10)
+        df_servers = pd.read_json(io.BytesIO(r.data))
+        # ValueError is necessary b/c urllib3 can return partial data.
+    except (urllib3.exceptions.HTTPError, ValueError):
         path = Path(__file__).absolute().parent
         df_servers = pd.read_json(path.joinpath("erddaps.json"))
     # Drop non-public servers.

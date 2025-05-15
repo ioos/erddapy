@@ -3,9 +3,9 @@
 import sys
 
 import dask
-import httpx
 import iris
 import pytest
+import urllib3
 import xarray as xr
 
 from erddapy import ERDDAP
@@ -84,8 +84,14 @@ def dataset_tabledap(sensors):
 def test_csv_search(gliders):
     """Test if a CSV search returns all items (instead of the first 1000)."""
     url = gliders.get_search_url(search_for="all", response="csv")
-    handle = httpx.get(url)
-    nrows = len(list(handle.iter_lines())) - 1
+    handle = urllib3.request(
+        "GET",
+        url,
+        preload_content=False,
+        decode_content=True,
+    )
+    nrows = len(handle.readlines()) - 1
+    handle.release_conn()
     expected = 1000
     assert nrows > expected
 
@@ -94,14 +100,19 @@ def test_csv_search(gliders):
 def test_json_search(gliders):
     """Test if a JSON search returns all items (instead of the first 1000)."""
     url = gliders.get_search_url(search_for="all", response="json")
-    handle = httpx.get(url)
+    handle = urllib3.request(
+        "GET",
+        url,
+        preload_content=False,
+        decode_content=True,
+    )
     nrows = len(handle.json()["table"]["rows"])
+    handle.release_conn()
     expected = 1000
     assert nrows > expected
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_to_pandas(dataset_tabledap):
     """Test converting tabledap to a pandas DataFrame."""
     import pandas as pd  # noqa: PLC0415
@@ -118,7 +129,6 @@ def test_to_pandas(dataset_tabledap):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_to_pandas_requests_kwargs(dataset_tabledap):
     """Test if to_pandas_requests_kwargs are processed as expected."""
     import pandas as pd  # noqa: PLC0415
