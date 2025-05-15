@@ -1,7 +1,7 @@
 """Test URL builders."""
 
-import httpx
 import pytest
+import urllib3
 
 from erddapy.core.url import check_url_response, parse_dates
 from erddapy.erddapy import ERDDAP
@@ -29,7 +29,7 @@ def test_search_url_bad_request(e):
         "min_time": "1700-01-01T12:00:00Z",
         "max_time": "1750-01-01T12:00:00Z",
     }
-    with pytest.raises(httpx.HTTPError):
+    with pytest.raises(urllib3.exceptions.HTTPError):
         check_url_response(e.get_search_url(**kw))
 
 
@@ -44,7 +44,6 @@ def test_search_normalization(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_search_url_valid_request(e):
     """Test if a bad request returns HTTPError."""
     min_time = "2000-03-23T00:00:00Z"
@@ -65,11 +64,10 @@ def test_search_url_valid_request(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_search_url_valid_request_with_relative_time_constraints(e):
     """Test if a bad request returns HTTPError."""
-    min_time = "now-25years"
-    max_time = "now-20years"
+    min_time = "now-26years"
+    max_time = "now-1years"
     kw = {"min_time": min_time, "max_time": max_time}
     url = e.get_search_url(dataset_id="org_cormp_cap2", **kw)
     assert url == check_url_response(url)
@@ -86,7 +84,6 @@ def test_search_url_valid_request_with_relative_time_constraints(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_search_url_change_protocol(e):
     """Test if we change the protocol it show in the URL."""
     kw = {"search_for": "salinity"}
@@ -110,7 +107,6 @@ def test_search_url_change_protocol(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_info_url(e):
     """Check info URL results."""
     dataset_id = "org_cormp_cap2"
@@ -136,13 +132,12 @@ def test_categorize_url(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_download_url_unconstrained(e):
     """Check download URL results."""
     dataset_id = "org_cormp_cap2"
     variables = ["station", "z"]
     url = e.get_download_url(dataset_id=dataset_id, variables=variables)
-    assert url == check_url_response(url, follow_redirects=True)
+    assert url == check_url_response(url, redirect=True)
     assert url.startswith(
         f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?",
     )
@@ -150,7 +145,6 @@ def test_download_url_unconstrained(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_download_url_constrained(e):
     """Test a constraint download URL."""
     dataset_id = "org_cormp_cap2"
@@ -178,7 +172,7 @@ def test_download_url_constrained(e):
         response="csv",
         constraints=constraints,
     )
-    assert url == check_url_response(url, follow_redirects=True)
+    assert url == check_url_response(url, redirect=True)
     assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.csv?")
     options = _url_to_dict(url)
     assert options["time>"] == str(parse_dates(min_time))
@@ -231,7 +225,6 @@ def test_download_url_relative_constraints(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_get_var_by_attr(e):
     """Test get_var_by_attr."""
     variables = e.get_var_by_attr(dataset_id="org_cormp_cap2", axis="X")
@@ -260,7 +253,6 @@ def test_get_var_by_attr(e):
 
 
 @pytest.mark.web
-@pytest.mark.vcr
 def test_download_url_distinct(e):
     """Check download URL results with and without the distinct option."""
     dataset_id = "org_cormp_cap2"
@@ -278,9 +270,9 @@ def test_download_url_distinct(e):
     assert with_distinct_url.endswith("&distinct()")
     assert no_distinct_url == check_url_response(
         no_distinct_url,
-        follow_redirects=True,
+        redirect=True,
     )
     assert with_distinct_url == check_url_response(
         with_distinct_url,
-        follow_redirects=True,
+        redirect=True,
     )
