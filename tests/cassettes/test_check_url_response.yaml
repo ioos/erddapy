@@ -1,21 +1,12 @@
 interactions:
 - request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate, br
-      connection:
-      - keep-alive
-      host:
-      - standards.sensors.ioos.us
-      user-agent:
-      - python-httpx/0.23.0
+    body: null
+    headers: {}
     method: HEAD
     uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?time,&time%3E=2017-08-29T00:00:00Z&time%3C=2015-09-05T19:00:00Z
   response:
-    content: ''
+    body:
+      string: ''
     headers:
       Connection:
       - keep-alive
@@ -23,20 +14,25 @@ interactions:
       - dods-error
       Content-Encoding:
       - identity
-      Content-Length:
-      - '93'
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Wed, 27 Jul 2022 20:46:55 GMT
+      - Thu, 15 May 2025 18:10:31 GMT
       Last-Modified:
-      - Wed, 27 Jul 2022 20:46:46 GMT
+      - Thu, 15 May 2025 18:10:31 GMT
       Server:
-      - nginx/1.20.1
+      - nginx/1.22.1
+      Strict-Transport-Security:
+      - max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
       erddap-server:
-      - 2.02_axiom-r1
+      - '2.25_1'
       xdods-server:
       - dods/3.7
-    http_version: HTTP/1.1
-    status_code: 400
+    status:
+      code: 400
+      message: ''
 version: 1
