@@ -93,7 +93,7 @@ class ERDDAP:
 
         >>> e = ERDDAP(server="SECOORA")
         >>> e.server
-        'http://erddap.secoora.org/erddap'
+        'https://erddap.secoora.org/erddap'
 
         to get a list of the shortcuts available servers:
 
@@ -101,20 +101,20 @@ class ERDDAP:
         >>> {k: v.url for k, v in servers.items()}
         {'MDA': 'https://bluehub.jrc.ec.europa.eu/erddap/',
          'MII': 'https://erddap.marine.ie/erddap/',
-         'CSCGOM': 'http://cwcgom.aoml.noaa.gov/erddap/',
+         'CSCGOM': 'https://cwcgom.aoml.noaa.gov/erddap/',
          'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap/',
-         'CeNCOOS': 'http://erddap.axiomalaska.com/erddap/',
-         'NERACOOS': 'http://www.neracoos.org/erddap/',
+         'CeNCOOS': 'https://erddap.axiomalaska.com/erddap/',
+         'NERACOOS': 'https://www.neracoos.org/erddap/',
          'NGDAC': 'https://gliders.ioos.us/erddap/',
-         'PacIOOS': 'http://oos.soest.hawaii.edu/erddap/',
-         'SECOORA': 'http://erddap.secoora.org/erddap/',
+         'PacIOOS': 'https://pae-paha.pacioos.hawaii.edu/erddap/',
+         'SECOORA': 'https://erddap.secoora.org/erddap/',
          'NCEI': 'https://ecowatch.ncddc.noaa.gov/erddap/',
-         'OSMC': 'http://osmc.noaa.gov/erddap/',
+         'OSMC': 'https://osmc.noaa.gov/erddap/',
          'UAF': 'https://upwell.pfeg.noaa.gov/erddap/',
-         'ONC': 'http://dap.onc.uvic.ca/erddap/',
+         'ONC': 'https://dap.onc.uvic.ca/erddap/',
          'BMLSC': 'http://bmlsc.ucdavis.edu:8080/erddap/',
          'RTECH': 'https://meteo.rtech.fr/erddap/',
-         'IFREMER': 'http://www.ifremer.fr/erddap/',
+         'IFREMER': 'https://www.ifremer.fr/erddap/',
          'UBC': 'https://salishsea.eos.ubc.ca/erddap/'}
 
     """
@@ -299,7 +299,7 @@ class ERDDAP:
         ----
             categorize_by: a valid attribute, e.g. ioos_category
                 or standard_name. Valid attributes are shown in
-                http://erddap.ioos.us/erddap/categorize page.
+                https://erddap.ioos.us/erddap/categorize page.
             value: an attribute value.
             response: default is HTML.
 

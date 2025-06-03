@@ -40,7 +40,7 @@ def gliders():
 def neracoos():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
-        server="http://www.neracoos.org/erddap/",
+        server="https://www.neracoos.org/erddap/",
         response="htmlTable",
     )
 

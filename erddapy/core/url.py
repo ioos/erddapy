@@ -127,7 +127,7 @@ def _distinct(url: str, *, distinct: OptionalBool = False) -> str:
     with `distinct=True` will return a sorted list of "stationIDs" associated
     with each "stationType".
 
-    See http://erddap.ioos.us/erddap/tabledap/documentation.html#distinct
+    See https://erddap.ioos.us/erddap/tabledap/documentation.html#distinct
 
     """
     if distinct:
@@ -399,7 +399,7 @@ def get_categorize_url(
         server: data server endpoint.
         categorize_by: a valid attribute, e.g.: ioos_category or standard_name.
             Valid attributes are shown in
-            http://erddap.ioos.us/erddap/categorize page.
+            https://erddap.ioos.us/erddap/categorize page.
         value: an attribute value.
         response: default is HTML.
 
