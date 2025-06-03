@@ -16,7 +16,7 @@ def test__nc_dataset_in_memory_https():
     """Test loading a netcdf dataset in-memory."""
     from netCDF4 import Dataset
 
-    url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"
+    url = "https://erddap.ioos.us/erddap/tabledap/allDatasets.nc"
     _nc = _nc_dataset(url)
     assert isinstance(_nc, Dataset)
     assert _nc.filepath() == url.split("/")[-1]
@@ -30,7 +30,7 @@ def test__nc_dataset_in_memory_https():
 )
 def test__tempnc():
     """Test temporary netcdf file."""
-    url = "http://erddap.ioos.us/erddap/tabledap/allDatasets.nc"
+    url = "https://erddap.ioos.us/erddap/tabledap/allDatasets.nc"
     data = urlopen(url)
     with _tempnc(data) as tmp:
         # Check that the file was exists.

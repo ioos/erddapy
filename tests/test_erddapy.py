@@ -94,7 +94,7 @@ def test__format_constraints_url():
 @pytest.mark.vcr
 def test_erddap2_10():
     """Check regression for ERDDAP 2.10."""
-    e = ERDDAP(server="http://erddap.ioos.us/erddap/")
+    e = ERDDAP(server="https://erddap.ioos.us/erddap/")
     url = e.get_search_url(search_for="NOAA", response="csv")
     r = httpx.head(url)
     ok_200 = 200
