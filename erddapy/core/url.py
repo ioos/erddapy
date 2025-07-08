@@ -79,7 +79,7 @@ def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
         msg = f"{response.data}."
         raise urllib3.exceptions.HTTPError(msg)
     if "gzip" in response.headers.get("content-encoding", "''"):
-        import gzip
+        import gzip  # noqa: PLC0415
 
         data = gzip.GzipFile(fileobj=io.BytesIO(response.data)).read()
         data = io.BytesIO(data)
