@@ -19,7 +19,7 @@ dask.config.set(scheduler="single-threaded")
 def sensors():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
-        server="https://erddap.sensors.ioos.us/erddap/",
+        server="https://gliders.ioos.us/erddap/",
         response="htmlTable",
     )
 
@@ -66,7 +66,7 @@ def dataset_opendap(neracoos):
 @pytest.fixture
 def dataset_tabledap(sensors):
     """Load tabledap for testing."""
-    sensors.dataset_id = "amelia_20180501t0000"
+    sensors.dataset_id = "amelia-20180501T0000"
     sensors.protocol = "tabledap"
     sensors.variables = ["temperature", "time"]
     sensors.constraints = {
@@ -104,7 +104,7 @@ def test_json_search(gliders):
 @pytest.mark.vcr
 def test_to_pandas(dataset_tabledap):
     """Test converting tabledap to a pandas DataFrame."""
-    import pandas as pd
+    import pandas as pd  # noqa: PLC0415
 
     df = dataset_tabledap.to_pandas(
         index_col="time (UTC)",
@@ -114,15 +114,15 @@ def test_to_pandas(dataset_tabledap):
     assert isinstance(df, pd.DataFrame)
     assert df.index.name == "time (UTC)"
     assert len(df.columns) == 1
-    assert df.columns[0] == "temperature (degree_Celsius)"
+    assert df.columns[0] == "temperature (Celsius)"
 
 
 @pytest.mark.web
 @pytest.mark.vcr
 def test_to_pandas_requests_kwargs(dataset_tabledap):
     """Test if to_pandas_requests_kwargs are processed as expected."""
-    import pandas as pd
-    from pandas.api.types import is_datetime64_any_dtype
+    import pandas as pd  # noqa: PLC0415
+    from pandas.api.types import is_datetime64_any_dtype  # noqa: PLC0415
 
     df = dataset_tabledap.to_pandas(
         index_col="time (UTC)",

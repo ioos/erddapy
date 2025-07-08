@@ -93,8 +93,8 @@ from erddapy import ERDDAP
 
 
 e = ERDDAP(
-  server="https://gliders.ioos.us/erddap",
-  protocol="tabledap",
+    server="https://gliders.ioos.us/erddap",
+    protocol="tabledap",
 )
 
 e.response = "csv"

@@ -5,6 +5,7 @@ from __future__ import annotations
 import platform
 from contextlib import contextmanager
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 from typing import TYPE_CHECKING, BinaryIO
 from urllib.parse import urlparse
 
@@ -24,7 +25,7 @@ def _nc_dataset(
     and fallbacks to disk if that fails.
 
     """
-    from netCDF4 import Dataset
+    from netCDF4 import Dataset  # noqa: PLC0415
 
     data = urlopen(url, requests_kwargs)
     try:
@@ -39,8 +40,6 @@ def _nc_dataset(
 @contextmanager
 def _tempnc(data: BinaryIO) -> Generator[str, None, None]:
     """Create a temporary netcdf file."""
-    from tempfile import NamedTemporaryFile
-
     # Let windows handle the file cleanup to avoid its aggressive file lock.
     delete = True
     if platform.system().lower() == "windows":

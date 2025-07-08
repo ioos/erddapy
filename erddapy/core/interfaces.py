@@ -76,7 +76,7 @@ def to_xarray(
     requests_kwargs: arguments to be passed to urlopen method.
     xarray_kwargs: kwargs to be passed to third-party library (xarray).
     """
-    import xarray as xr
+    import xarray as xr  # noqa: PLC0415
 
     if response == "opendap":
         return xr.open_dataset(url, **(xarray_kwargs or {}))
@@ -99,7 +99,7 @@ def to_iris(
     requests_kwargs: arguments to be passed to urlopen method.
     iris_kwargs: kwargs to be passed to third-party library (iris).
     """
-    import iris
+    import iris  # noqa: PLC0415
 
     data = urlopen(url, **(requests_kwargs or {}))
     with _tempnc(data) as tmp:

@@ -14,7 +14,7 @@ from erddapy.core.url import urlopen
 # (also all the to_objects that uses in_memory).
 def test__nc_dataset_in_memory_https():
     """Test loading a netcdf dataset in-memory."""
-    from netCDF4 import Dataset
+    from netCDF4 import Dataset  # noqa: PLC0415
 
     url = "https://erddap.ioos.us/erddap/tabledap/allDatasets.nc"
     _nc = _nc_dataset(url)
