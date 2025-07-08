@@ -2,6 +2,7 @@
 
 import functools
 import io
+from pathlib import Path
 from typing import NamedTuple
 
 import httpx
@@ -28,8 +29,6 @@ def servers_list() -> dict:
         r = httpx.get(url, timeout=10)
         df_servers = pd.read_json(io.StringIO(r.text))
     except httpx.HTTPError:
-        from pathlib import Path
-
         path = Path(__file__).absolute().parent
         df_servers = pd.read_json(path.joinpath("erddaps.json"))
     # Drop non-public servers.
