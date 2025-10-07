@@ -27,10 +27,9 @@ OptionalStr = str | None
 def _format_results(dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
     """Format dictionary of results into a Pandas dataframe."""
     # we return None for bad server, so we need to filter them here
-    df_all = pd.concat(
+    return pd.concat(
         [next(iter(df.values())) for df in dfs if df is not None],
-    )
-    return df_all.reset_index(drop=True)
+    ).reset_index(drop=True)
 
 
 def fetch_results(
@@ -79,7 +78,7 @@ def search_servers(
         protocol: tabledap or griddap
         parallel: If True, uses joblib to parallelize the search
     """
-    if protocol not in ["tabledap", "griddap"]:
+    if protocol not in ("tabledap", "griddap"):
         msg = f"Protocol must be tabledap or griddap, got {protocol}"
         raise ValueError(msg)
     if servers_list:
@@ -103,9 +102,10 @@ def search_servers(
         )
         dfs = [x for x in returns if x is not None]
     else:
-        dfs = []
-        for key, url in urls.items():
-            dfs.append(fetch_results(url, key, protocol=protocol))
+        dfs = [
+            fetch_results(url, key, protocol=protocol)
+            for key, url in urls.items()
+        ]
     return _format_results(dfs)
 
 
@@ -126,7 +126,7 @@ def advanced_search_servers(
         parallel: If True, uses joblib to parallelize the search
 
     """
-    if protocol not in ["tabledap", "griddap"]:
+    if protocol not in ("tabledap", "griddap"):
         msg = f"Protocol must be tabledap or griddap, got {protocol}"
         raise ValueError(msg)
     response = "csv"
@@ -152,7 +152,9 @@ def advanced_search_servers(
         )
         dfs = [x for x in returns if x is not None]
     else:
-        dfs = []
-        for key, url in urls.items():
-            dfs.append(fetch_results(url, key, protocol=protocol))
+        dfs = [
+            fetch_results(url, key, protocol=protocol)
+            for key, url in urls.items()
+        ]
+
     return _format_results(dfs)

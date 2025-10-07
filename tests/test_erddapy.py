@@ -94,8 +94,10 @@ def test__format_constraints_url():
 @pytest.mark.vcr
 def test_erddap2_10():
     """Check regression for ERDDAP 2.10."""
-    e = ERDDAP(server="https://erddap.ioos.us/erddap/")
-    url = e.get_search_url(search_for="NOAA", response="csv")
+    url = ERDDAP(server="https://erddap.ioos.us/erddap/").get_search_url(
+        search_for="NOAA",
+        response="csv",
+    )
     r = httpx.head(url)
     ok_200 = 200
     assert r.status_code == ok_200
@@ -125,7 +127,7 @@ def test__griddap_check_constraints():
     _griddap_check_constraints(good_constraints, constraints_dict)
     with pytest.raises(
         ValueError,
-        match="e.constraints have changed. Re-run e.griddap_initialize",
+        match=r"e.constraints have changed. Re-run e.griddap_initialize",
     ):
         _griddap_check_constraints(bad_constraints, constraints_dict)
 
@@ -139,6 +141,6 @@ def test__griddap_check_variables():
     _griddap_check_variables(good_variables, original_variables)
     with pytest.raises(
         ValueError,
-        match="are not present in dataset. Re-run e.griddap_initialize",
+        match=r"are not present in dataset. Re-run e.griddap_initialize",
     ):
         _griddap_check_variables(bad_variables, original_variables)

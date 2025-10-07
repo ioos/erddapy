@@ -240,7 +240,7 @@ def test_get_var_by_attr(e):
 
     variables = e.get_var_by_attr(
         dataset_id="org_cormp_cap2",
-        axis=lambda v: v in ["X", "Y", "Z", "T"],
+        axis=lambda v: v in ("X", "Y", "Z", "T"),
     )
     assert sorted(variables) == ["latitude", "longitude", "time", "z"]
 

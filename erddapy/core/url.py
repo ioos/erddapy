@@ -70,7 +70,7 @@ def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     try:
         response.raise_for_status()
     except httpx.HTTPError as err:
-        msg = f"{response.content.decode()}"
+        msg = str(response.content.decode())
         raise httpx.HTTPError(msg) from err
     return io.BytesIO(response.content)
 
@@ -335,31 +335,34 @@ def get_search_url(  # noqa: PLR0913
     if response in non_paginated_responses:
         items_per_page = int(1e6)
 
-    default = "(ANY)"
-    url = base.format(
-        server=server,
-        response=response,
-        page=page,
-        itemsPerPage=items_per_page,
-        protocol=kwargs.get("protocol", default),
-        cdm_data_type=kwargs.get("cdm_data_type", default),
-        institution=kwargs.get("institution", default),
-        ioos_category=kwargs.get("ioos_category", default),
-        keywords=kwargs.get("keywords", default),
-        long_name=kwargs.get("long_name", default),
-        standard_name=kwargs.get("standard_name", default),
-        variableName=kwargs.get("variableName", default),
-        minLon=kwargs.get("min_lon", default),
-        maxLon=kwargs.get("max_lon", default),
-        minLat=kwargs.get("min_lat", default),
-        maxLat=kwargs.get("max_lat", default),
-        minTime=kwargs.get("min_time", default),
-        maxTime=kwargs.get("max_time", default),
-        searchFor=search_for,
-    )
     # ERDDAP 2.10 no longer accepts strings placeholder for dates.
     # Removing them entirely should be OK for older versions too.
-    return url.replace("&minTime=(ANY)", "").replace("&maxTime=(ANY)", "")
+    default = "(ANY)"
+    return (
+        base.format(
+            server=server,
+            response=response,
+            page=page,
+            itemsPerPage=items_per_page,
+            protocol=kwargs.get("protocol", default),
+            cdm_data_type=kwargs.get("cdm_data_type", default),
+            institution=kwargs.get("institution", default),
+            ioos_category=kwargs.get("ioos_category", default),
+            keywords=kwargs.get("keywords", default),
+            long_name=kwargs.get("long_name", default),
+            standard_name=kwargs.get("standard_name", default),
+            variableName=kwargs.get("variableName", default),
+            minLon=kwargs.get("min_lon", default),
+            maxLon=kwargs.get("max_lon", default),
+            minLat=kwargs.get("min_lat", default),
+            maxLat=kwargs.get("max_lat", default),
+            minTime=kwargs.get("min_time", default),
+            maxTime=kwargs.get("max_time", default),
+            searchFor=search_for,
+        )
+        .replace("&minTime=(ANY)", "")
+        .replace("&maxTime=(ANY)", "")
+    )
 
 
 def get_info_url(
@@ -528,7 +531,7 @@ def get_download_url(  # noqa: PLR0913, C901
         _constraints = _quote_string_constraints(_constraints)
         _constraints_url = _format_constraints_url(_constraints)
 
-        url += f"{_constraints_url}"
+        url += _constraints_url
 
     return _distinct(url, distinct=distinct)
 

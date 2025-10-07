@@ -37,7 +37,7 @@ def test_fetch_no_results():
 
 @pytest.mark.web
 @pytest.mark.skipif(
-    sys.platform in ["win32", "darwin"],
+    sys.platform in ("win32", "darwin"),
     reason="run only on linux to avoid extra load on the server",
 )
 def test_search_awesome_erddap_servers_true():
@@ -53,7 +53,7 @@ def test_search_awesome_erddap_servers_true():
 
 @pytest.mark.web
 @pytest.mark.skipif(
-    sys.platform in ["win32", "darwin"],
+    sys.platform in ("win32", "darwin"),
     reason="run only on linux to avoid extra load on the server",
 )
 def test_search_awesome_erddap_servers_false():
@@ -83,7 +83,7 @@ def servers_list():
 
 @pytest.mark.web
 @pytest.mark.skipif(
-    (sys.platform in ["win32", "darwin"] or sys.version_info < (3, 10)),
+    (sys.platform in ("win32", "darwin") or sys.version_info < (3, 10)),
     reason="run only on linux and latest to avoid extra load on the server",
 )
 def test_search_servers_with_a_list_parallel_true(servers_list):
@@ -107,7 +107,7 @@ def test_search_servers_with_a_list_parallel_true(servers_list):
 @pytest.mark.vcr
 @pytest.mark.web
 @pytest.mark.skipif(
-    sys.platform in ["win32", "darwin"],
+    sys.platform in ("win32", "darwin"),
     reason="run only on linux to avoid extra load on the server",
 )
 def test_search_servers_with_a_list_parallel_false(servers_list):
