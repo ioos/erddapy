@@ -180,7 +180,7 @@ class ERDDAP:
         step: step used to subset dataset
 
         """
-        dataset_id = dataset_id if dataset_id else self.dataset_id
+        dataset_id = dataset_id or self.dataset_id
         # Short-circuit for opendap and/or non-griddap datasets.
         if self.protocol != "griddap" or self.response == "opendap":
             return
@@ -247,8 +247,8 @@ class ERDDAP:
             url: the search URL.
 
         """
-        protocol = protocol if protocol else self.protocol
-        response = response if response else self.response
+        protocol = protocol or self.protocol
+        response = response or self.response
 
         return get_search_url(
             self.server,
@@ -278,8 +278,8 @@ class ERDDAP:
             url: the info URL for the `response` chosen.
 
         """
-        dataset_id = dataset_id if dataset_id else self.dataset_id
-        response = response if response else self.response
+        dataset_id = dataset_id or self.dataset_id
+        response = response or self.response
 
         return get_info_url(
             self.server,
@@ -308,7 +308,7 @@ class ERDDAP:
             url: the categorized URL for the `response` chosen.
 
         """
-        response = response if response else self.response
+        response = response or self.response
         return get_categorize_url(self.server, categorize_by, value, response)
 
     def get_download_url(  # noqa: PLR0913
@@ -357,12 +357,12 @@ class ERDDAP:
             url (str): the download URL for the `response` chosen.
 
         """
-        dataset_id = dataset_id if dataset_id else self.dataset_id
-        protocol = protocol if protocol else self.protocol
-        variables = variables if variables else self.variables
-        dim_names = dim_names if dim_names else self.dim_names
-        response = response if response else self.response
-        constraints = constraints if constraints else self.constraints
+        dataset_id = dataset_id or self.dataset_id
+        protocol = protocol or self.protocol
+        variables = variables or self.variables
+        dim_names = dim_names or self.dim_names
+        response = response or self.response
+        constraints = constraints or self.constraints
 
         if not dataset_id:
             msg = f"Please specify a valid `dataset_id`, got {dataset_id}"
@@ -420,7 +420,7 @@ class ERDDAP:
         return to_pandas(
             url,
             requests_kwargs=requests_kwargs,
-            pandas_kwargs=dict(**kw),
+            pandas_kwargs={**kw},
         )
 
     def to_ncCF(  # noqa: N802
@@ -430,9 +430,9 @@ class ERDDAP:
     ) -> netCDF4.Dataset:
         """Load the data request into a CF compliant netCDF4-python object."""
         distinct = kw.pop("distinct", False)
-        protocol = protocol if protocol else self.protocol
+        protocol = protocol or self.protocol
         url = self.get_download_url(response="ncCF", distinct=distinct)
-        return to_ncCF(url, protocol=protocol, requests_kwargs=dict(**kw))
+        return to_ncCF(url, protocol=protocol, requests_kwargs={**kw})
 
     def to_xarray(
         self: ERDDAP,
@@ -459,7 +459,7 @@ class ERDDAP:
             url,
             response,
             requests_kwargs,
-            xarray_kwargs=dict(**kw),
+            xarray_kwargs={**kw},
         )
 
     def to_iris(self: ERDDAP, **kw: dict) -> iris.cube.CubeList:
@@ -470,7 +470,7 @@ class ERDDAP:
         response = "nc" if self.protocol == "griddap" else "ncCF"
         distinct = kw.pop("distinct", False)
         url = self.get_download_url(response=response, distinct=distinct)
-        return to_iris(url, iris_kwargs=dict(**kw))
+        return to_iris(url, iris_kwargs={**kw})
 
     def _get_variables_uncached(
         self: ERDDAP,
@@ -545,14 +545,14 @@ class ERDDAP:
             for k, v in kwargs.items():
                 if callable(v):
                     has_value_flag = v(var.get(k, None))
-                    if has_value_flag is False:
+                    if not has_value_flag:
                         break
                 elif var.get(k) and var.get(k) == v:
                     has_value_flag = True
                 else:
                     has_value_flag = False
                     break
-            if has_value_flag is True:
+            if has_value_flag:
                 vs.append(vname)
         return vs
 
