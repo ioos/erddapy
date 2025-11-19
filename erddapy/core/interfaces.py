@@ -76,10 +76,14 @@ def to_xarray(
     requests_kwargs: arguments to be passed to urlopen method.
     xarray_kwargs: kwargs to be passed to third-party library (xarray).
     """
+    # NB: This is b/c xarray 2025.11.0 requires an explicit engine and we will
+    # rely on `ImportError`` as the message for the user to install this
+    # optional dependency.
+    import netCDF4  # noqa: PLC0415, F401
     import xarray as xr  # noqa: PLC0415
 
     if response == "opendap":
-        return xr.open_dataset(url, **(xarray_kwargs or {}))
+        return xr.open_dataset(url, engine="netcdf4", **(xarray_kwargs or {}))
 
     nc = _nc_dataset(url, requests_kwargs)
     return xr.open_dataset(
