@@ -14,4 +14,4 @@ updates:
         patterns:
           - '*'
     cooldown:
-      default-days: 4
+      default-days: 7
