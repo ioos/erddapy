@@ -18,6 +18,7 @@ from erddapy.core.griddap import (
 from erddapy.core.interfaces import to_iris, to_ncCF, to_pandas, to_xarray
 from erddapy.core.url import (
     _check_substrings,
+    _clean_response,
     _distinct,
     _format_constraints_url,
     _quote_string_constraints,
@@ -249,7 +250,7 @@ class ERDDAP:
         """
         protocol = protocol or self.protocol
         response = response or self.response
-
+        response = _clean_response(response)
         return get_search_url(
             self.server,
             response=response,
@@ -280,7 +281,7 @@ class ERDDAP:
         """
         dataset_id = dataset_id or self.dataset_id
         response = response or self.response
-
+        response = _clean_response(response)
         return get_info_url(
             self.server,
             dataset_id=dataset_id,
@@ -363,7 +364,7 @@ class ERDDAP:
         dim_names = dim_names or self.dim_names
         response = response or self.response
         constraints = constraints or self.constraints
-
+        response = _clean_response(response)
         if not dataset_id:
             msg = f"Please specify a valid `dataset_id`, got {dataset_id}"
             raise ValueError(msg)

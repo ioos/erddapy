@@ -57,6 +57,15 @@ def _sort_url(url: str) -> str:
     return sorted_url.strip("&")
 
 
+def _clean_response(response: str) -> str:
+    """Allow for `ext` or `.ext` format.
+
+    Users can, for example, use either `.csv` or `csv` in the response kwarg.
+
+    """
+    return response.lstrip(".")
+
+
 @functools.lru_cache(maxsize=128)
 def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     if "timeout" not in kwargs:
@@ -263,6 +272,7 @@ def get_search_url(  # noqa: PLR0913
 
     """
     server = server.rstrip("/")
+    response = _clean_response(response)
     base = (
         "{server}/search/advanced.{response}"
         "?page={page}"

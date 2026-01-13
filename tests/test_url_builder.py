@@ -3,7 +3,7 @@
 import httpx
 import pytest
 
-from erddapy.core.url import check_url_response, parse_dates
+from erddapy.core.url import _clean_response, check_url_response, parse_dates
 from erddapy.erddapy import ERDDAP
 
 
@@ -284,3 +284,8 @@ def test_download_url_distinct(e):
         with_distinct_url,
         follow_redirects=True,
     )
+
+
+def test__clean_response():
+    """Test if users can pass responses with or without the '.'."""
+    assert _clean_response("html") == _clean_response(".html")
