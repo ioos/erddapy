@@ -70,12 +70,23 @@ def _clean_response(response: str) -> str:
 def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     if "timeout" not in kwargs:
         kwargs["timeout"] = 60
-    response = httpx.get(
-        quote_url(url),
-        follow_redirects=True,
-        auth=auth,
-        **kwargs,
-    )
+    user = kwargs.pop("user", None)
+    password = kwargs.pop("password", None)
+    with httpx.Client() as client:
+        p = parse.urlparse(url)
+        protocol = "tabledap" if "tabledap" in p.path else "griddap"
+        base = p.path.split(f"/{protocol}/")[0]
+        if user is not None and password is not None:
+            login_page = f"{p.scheme}://{p.netloc}{base}/login.html"
+            client.post(
+                login_page,
+                data={
+                    "user": f"{user}",
+                    "password": f"{password}",
+                },
+            )
+        response = client.get(url, follow_redirects=True, auth=auth, **kwargs)
+
     try:
         response.raise_for_status()
     except httpx.HTTPError as err:

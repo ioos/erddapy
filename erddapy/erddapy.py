@@ -418,6 +418,9 @@ class ERDDAP:
         response = kw.pop("response", "csvp")
         distinct = kw.pop("distinct", False)
         url = self.get_download_url(response=response, distinct=distinct)
+        requests_kwargs = (
+            requests_kwargs if requests_kwargs else self.requests_kwargs
+        )
         return to_pandas(
             url,
             requests_kwargs=requests_kwargs,
