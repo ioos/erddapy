@@ -71,7 +71,7 @@ def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     if "timeout" not in kwargs:
         kwargs["timeout"] = 60
     response = httpx.get(
-        quote_url(url),
+        url,
         follow_redirects=True,
         auth=auth,
         **kwargs,
@@ -86,6 +86,8 @@ def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
 
 def urlopen(
     url: str,
+    *,
+    quote: bool | True,
     requests_kwargs: dict | None = None,
 ) -> BinaryIO:
     """Thin wrapper around httpx get content.
@@ -107,6 +109,8 @@ def urlopen(
 
     if requests_kwargs is None:
         requests_kwargs = {}
+    if quote:
+        url = quote_url(url)
     data = _urlopen(url, **requests_kwargs)
     data.seek(0)
     return data
