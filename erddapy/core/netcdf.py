@@ -27,7 +27,7 @@ def _nc_dataset(
     """
     from netCDF4 import Dataset  # noqa: PLC0415
 
-    data = urlopen(url, requests_kwargs)
+    data = urlopen(url, requests_kwargs=requests_kwargs)
     try:
         return Dataset(Path(urlparse(url).path).name, memory=data.read())
     except OSError:
