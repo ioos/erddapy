@@ -87,7 +87,7 @@ def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
 def urlopen(
     url: str,
     *,
-    quote: bool | True,
+    quote: bool = True,
     requests_kwargs: dict | None = None,
 ) -> BinaryIO:
     """Thin wrapper around httpx get content.
