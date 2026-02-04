@@ -91,7 +91,6 @@ is named `scitools-iris` on PyPI so `pip` users must rename that before installi
 ```python
 from erddapy import ERDDAP
 
-
 e = ERDDAP(
     server="https://gliders.ioos.us/erddap",
     protocol="tabledap",
