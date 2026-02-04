@@ -55,7 +55,7 @@ def fetch_results(
         df_results = df_results.dropna(subset=[protocol])
     except KeyError:
         return None
-    df_results["Server url"] = url.split("search")[0]
+    df_results["Server url"] = url.split("search", maxsplit=1)[0]
     return {
         key: df_results[["Title", "Institution", "Dataset ID", "Server url"]],
     }
