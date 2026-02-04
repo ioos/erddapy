@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ERDDAP class API &#8212; erddapy 2.2.4 documentation</title>
+    <title>ERDDAP class API &#8212; erddapy 3.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
-    <script src="_static/documentation_options.js?v=4e6cfea6"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/documentation_options.js?v=acc74ff5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -112,7 +112,7 @@
 <p>Pythonic way to access ERDDAP data.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="erddapy.erddapy.ERDDAP">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">ERDDAP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'html'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">ERDDAP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'html'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/erddapy.html#ERDDAP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.ERDDAP" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Creates an ERDDAP instance for a specific server endpoint.</p>
 <section id="args">
@@ -157,7 +157,7 @@ params and requests_kwargs: <cite>httpx.get</cite> options</p>
 <p>there are “shortcuts” for some servers</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="s2">&quot;SECOORA&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">server</span>
-<span class="go">&#39;http://erddap.secoora.org/erddap&#39;</span>
+<span class="go">&#39;https://erddap.secoora.org/erddap&#39;</span>
 </pre></div>
 </div>
 <p>to get a list of the shortcuts available servers:</p>
@@ -165,27 +165,27 @@ params and requests_kwargs: <cite>httpx.get</cite> options</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">url</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">servers</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 <span class="go">{&#39;MDA&#39;: &#39;https://bluehub.jrc.ec.europa.eu/erddap/&#39;,</span>
 <span class="go"> &#39;MII&#39;: &#39;https://erddap.marine.ie/erddap/&#39;,</span>
-<span class="go"> &#39;CSCGOM&#39;: &#39;http://cwcgom.aoml.noaa.gov/erddap/&#39;,</span>
+<span class="go"> &#39;CSCGOM&#39;: &#39;https://cwcgom.aoml.noaa.gov/erddap/&#39;,</span>
 <span class="go"> &#39;CSWC&#39;: &#39;https://coastwatch.pfeg.noaa.gov/erddap/&#39;,</span>
-<span class="go"> &#39;CeNCOOS&#39;: &#39;http://erddap.axiomalaska.com/erddap/&#39;,</span>
-<span class="go"> &#39;NERACOOS&#39;: &#39;http://www.neracoos.org/erddap/&#39;,</span>
+<span class="go"> &#39;CeNCOOS&#39;: &#39;https://erddap.axiomalaska.com/erddap/&#39;,</span>
+<span class="go"> &#39;NERACOOS&#39;: &#39;https://www.neracoos.org/erddap/&#39;,</span>
 <span class="go"> &#39;NGDAC&#39;: &#39;https://gliders.ioos.us/erddap/&#39;,</span>
-<span class="go"> &#39;PacIOOS&#39;: &#39;http://oos.soest.hawaii.edu/erddap/&#39;,</span>
-<span class="go"> &#39;SECOORA&#39;: &#39;http://erddap.secoora.org/erddap/&#39;,</span>
+<span class="go"> &#39;PacIOOS&#39;: &#39;https://pae-paha.pacioos.hawaii.edu/erddap/&#39;,</span>
+<span class="go"> &#39;SECOORA&#39;: &#39;https://erddap.secoora.org/erddap/&#39;,</span>
 <span class="go"> &#39;NCEI&#39;: &#39;https://ecowatch.ncddc.noaa.gov/erddap/&#39;,</span>
-<span class="go"> &#39;OSMC&#39;: &#39;http://osmc.noaa.gov/erddap/&#39;,</span>
+<span class="go"> &#39;OSMC&#39;: &#39;https://osmc.noaa.gov/erddap/&#39;,</span>
 <span class="go"> &#39;UAF&#39;: &#39;https://upwell.pfeg.noaa.gov/erddap/&#39;,</span>
-<span class="go"> &#39;ONC&#39;: &#39;http://dap.onc.uvic.ca/erddap/&#39;,</span>
+<span class="go"> &#39;ONC&#39;: &#39;https://dap.onc.uvic.ca/erddap/&#39;,</span>
 <span class="go"> &#39;BMLSC&#39;: &#39;http://bmlsc.ucdavis.edu:8080/erddap/&#39;,</span>
 <span class="go"> &#39;RTECH&#39;: &#39;https://meteo.rtech.fr/erddap/&#39;,</span>
-<span class="go"> &#39;IFREMER&#39;: &#39;http://www.ifremer.fr/erddap/&#39;,</span>
+<span class="go"> &#39;IFREMER&#39;: &#39;https://www.ifremer.fr/erddap/&#39;,</span>
 <span class="go"> &#39;UBC&#39;: &#39;https://salishsea.eos.ubc.ca/erddap/&#39;}</span>
 </pre></div>
 </div>
 </div></blockquote>
 <dl class="py property">
 <dt class="sig sig-object py" id="erddapy.erddapy.ERDDAP.dataset_id">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dataset_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#erddapy.erddapy.ERDDAP.dataset_id" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">dataset_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#erddapy.erddapy.ERDDAP.dataset_id" title="Link to this definition">¶</a></dt>
 <dd><p>dataset_id property.</p>
 </dd></dl>
 
@@ -215,7 +215,7 @@ params and requests_kwargs: <cite>httpx.get</cite> options</p>
 <blockquote>
 <div><dl class="simple">
 <dt>categorize_by: a valid attribute, e.g. ioos_category</dt><dd><p>or standard_name. Valid attributes are shown in
-<a class="reference external" href="http://erddap.ioos.us/erddap/categorize">http://erddap.ioos.us/erddap/categorize</a> page.</p>
+<a class="reference external" href="https://erddap.ioos.us/erddap/categorize">https://erddap.ioos.us/erddap/categorize</a> page.</p>
 </dd>
 </dl>
 <p>value: an attribute value.
@@ -605,13 +605,14 @@ objects. <cite>timestamp</cite> returns the expected strings in seconds since 19
 
 <dl class="py function">
 <dt class="sig sig-object py" id="erddapy.erddapy.urlopen">
-<span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">urlopen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requests_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/core/url.html#urlopen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.urlopen" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">urlopen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">quote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requests_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/core/url.html#urlopen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.urlopen" title="Link to this definition">¶</a></dt>
 <dd><p>Thin wrapper around httpx get content.</p>
 <p>See httpx.get docs for the <cite>params</cite> and <cite>kwargs</cite> options.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>url</strong> (<em>str</em>)</p></li>
+<li><p><strong>quote</strong> (<em>bool</em>)</p></li>
 <li><p><strong>requests_kwargs</strong> (<em>dict</em><em> | </em><em>None</em>)</p></li>
 </ul>
 </dd>
@@ -634,7 +635,7 @@ objects. <cite>timestamp</cite> returns the expected strings in seconds since 19
       &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |

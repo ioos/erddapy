@@ -5,15 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extra convenience methods for common responses &#8212; erddapy 2.2.4 documentation</title>
+    <title>Extra convenience methods for common responses &#8212; erddapy 3.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
     <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
-    <script src="_static/documentation_options.js?v=4e6cfea6"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/documentation_options.js?v=acc74ff5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Searching datasets" href="03-advanced_search-output.html" />
@@ -219,39 +221,87 @@ filling on
 </symbol>
 </defs>
 </svg>
-<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
- *
- */
+<style>/* CSS stylesheet for displaying xarray objects in notebooks */
 
 :root {
-  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-  --xr-border-color: var(--jp-border-color2, #e0e0e0);
-  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-  --xr-background-color: var(--jp-layout-color0, white);
-  --xr-background-color-row-even: var(--jp-layout-color1, white);
-  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base rgba(0, 0, 0, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(0, 0, 0, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, white)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, white) h s calc(l - 15))
+  );
 }
 
 html[theme="dark"],
 html[data-theme="dark"],
 body[data-theme="dark"],
 body.vscode-dark {
-  --xr-font-color0: rgba(255, 255, 255, 1);
-  --xr-font-color2: rgba(255, 255, 255, 0.54);
-  --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1f1f1f;
-  --xr-disabled-color: #515151;
-  --xr-background-color: #111111;
-  --xr-background-color-row-even: #111111;
-  --xr-background-color-row-odd: #313131;
+  --xr-font-color0: var(
+    --jp-content-font-color0,
+    var(--pst-color-text-base, rgba(255, 255, 255, 1))
+  );
+  --xr-font-color2: var(
+    --jp-content-font-color2,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.54))
+  );
+  --xr-font-color3: var(
+    --jp-content-font-color3,
+    var(--pst-color-text-base, rgba(255, 255, 255, 0.38))
+  );
+  --xr-border-color: var(
+    --jp-border-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 10))
+  );
+  --xr-disabled-color: var(
+    --jp-layout-color3,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 40))
+  );
+  --xr-background-color: var(
+    --jp-layout-color0,
+    var(--pst-color-on-background, #111111)
+  );
+  --xr-background-color-row-even: var(
+    --jp-layout-color1,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 5))
+  );
+  --xr-background-color-row-odd: var(
+    --jp-layout-color2,
+    hsl(from var(--pst-color-on-background, #111111) h s calc(l + 15))
+  );
 }
 
 .xr-wrap {
   display: block !important;
   min-width: 300px;
   max-width: 700px;
+  line-height: 1.6;
+  padding-bottom: 4px;
 }
 
 .xr-text-repr-fallback {
@@ -262,8 +312,11 @@ body.vscode-dark {
 .xr-header {
   padding-top: 6px;
   padding-bottom: 6px;
-  margin-bottom: 4px;
+}
+
+.xr-header {
   border-bottom: solid 1px var(--xr-border-color);
+  margin-bottom: 4px;
 }
 
 .xr-header > div,
@@ -274,45 +327,62 @@ body.vscode-dark {
 }
 
 .xr-obj-type,
-.xr-array-name {
+.xr-obj-name {
   margin-left: 2px;
   margin-right: 10px;
 }
 
-.xr-obj-type {
+.xr-obj-type,
+.xr-group-box-contents > label {
   color: var(--xr-font-color2);
+  display: block;
 }
 
 .xr-sections {
   padding-left: 0 !important;
   display: grid;
   grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .xr-section-item {
   display: contents;
 }
 
-.xr-section-item input {
-  display: inline-block;
+.xr-section-item > input,
+.xr-group-box-contents > input,
+.xr-array-wrap > input {
+  display: block;
   opacity: 0;
   height: 0;
+  margin: 0;
 }
 
-.xr-section-item input + label {
+.xr-section-item > input + label,
+.xr-var-item > input + label {
   color: var(--xr-disabled-color);
 }
 
-.xr-section-item input:enabled + label {
+.xr-section-item > input:enabled + label,
+.xr-var-item > input:enabled + label,
+.xr-array-wrap > input:enabled + label,
+.xr-group-box-contents > input:enabled + label {
   cursor: pointer;
   color: var(--xr-font-color2);
 }
 
-.xr-section-item input:focus + label {
-  border: 2px solid var(--xr-font-color0);
+.xr-section-item > input:focus-visible + label,
+.xr-var-item > input:focus-visible + label,
+.xr-array-wrap > input:focus-visible + label,
+.xr-group-box-contents > input:focus-visible + label {
+  outline: auto;
 }
 
-.xr-section-item input:enabled + label:hover {
+.xr-section-item > input:enabled + label:hover,
+.xr-var-item > input:enabled + label:hover,
+.xr-array-wrap > input:enabled + label:hover,
+.xr-group-box-contents > input:enabled + label:hover {
   color: var(--xr-font-color0);
 }
 
@@ -320,11 +390,25 @@ body.vscode-dark {
   grid-column: 1;
   color: var(--xr-font-color2);
   font-weight: 500;
+  white-space: nowrap;
+}
+
+.xr-section-summary > em {
+  font-weight: normal;
+}
+
+.xr-span-grid {
+  grid-column-end: -1;
 }
 
 .xr-section-summary > span {
   display: inline-block;
-  padding-left: 0.5em;
+  padding-left: 0.3em;
+}
+
+.xr-group-box-contents > input:checked + label > span {
+  display: inline-block;
+  padding-left: 0.6em;
 }
 
 .xr-section-summary-in:disabled + label {
@@ -352,9 +436,9 @@ body.vscode-dark {
 }
 
 .xr-section-summary,
-.xr-section-inline-details {
+.xr-section-inline-details,
+.xr-group-box-contents > label {
   padding-top: 4px;
-  padding-bottom: 4px;
 }
 
 .xr-section-inline-details {
@@ -362,13 +446,79 @@ body.vscode-dark {
 }
 
 .xr-section-details {
-  display: none;
   grid-column: 1 / -1;
+  margin-top: 4px;
   margin-bottom: 5px;
+}
+
+.xr-section-summary-in ~ .xr-section-details {
+  display: none;
 }
 
 .xr-section-summary-in:checked ~ .xr-section-details {
   display: contents;
+}
+
+.xr-children {
+  display: inline-grid;
+  grid-template-columns: 100%;
+  grid-column: 1 / -1;
+  padding-top: 4px;
+}
+
+.xr-group-box {
+  display: inline-grid;
+  grid-template-columns: 0px 30px auto;
+}
+
+.xr-group-box-vline {
+  grid-column-start: 1;
+  border-right: 0.2em solid;
+  border-color: var(--xr-border-color);
+  width: 0px;
+}
+
+.xr-group-box-hline {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  height: 1em;
+  width: 26px;
+  border-bottom: 0.2em solid;
+  border-color: var(--xr-border-color);
+}
+
+.xr-group-box-contents {
+  grid-column-start: 3;
+  padding-bottom: 4px;
+}
+
+.xr-group-box-contents > label::before {
+  content: "📂";
+  padding-right: 0.3em;
+}
+
+.xr-group-box-contents > input:checked + label::before {
+  content: "📁";
+}
+
+.xr-group-box-contents > input:checked + label {
+  padding-bottom: 0px;
+}
+
+.xr-group-box-contents > input:checked ~ .xr-sections {
+  display: none;
+}
+
+.xr-group-box-contents > input + label > span {
+  display: none;
+}
+
+.xr-group-box-ellipsis {
+  font-size: 1.4em;
+  font-weight: 900;
+  color: var(--xr-font-color2);
+  letter-spacing: 0.15em;
+  cursor: default;
 }
 
 .xr-array-wrap {
@@ -441,7 +591,9 @@ body.vscode-dark {
 .xr-var-item label,
 .xr-var-item > .xr-var-name span {
   background-color: var(--xr-background-color-row-even);
+  border-color: var(--xr-background-color-row-odd);
   margin-bottom: 0;
+  padding-top: 2px;
 }
 
 .xr-var-item > .xr-var-name:hover span {
@@ -452,6 +604,7 @@ body.vscode-dark {
 .xr-var-list > li:nth-child(odd) > label,
 .xr-var-list > li:nth-child(odd) > .xr-var-name span {
   background-color: var(--xr-background-color-row-odd);
+  border-color: var(--xr-background-color-row-even);
 }
 
 .xr-var-name {
@@ -501,8 +654,15 @@ body.vscode-dark {
 .xr-var-data,
 .xr-index-data {
   display: none;
-  background-color: var(--xr-background-color) !important;
-  padding-bottom: 5px !important;
+  border-top: 2px dotted var(--xr-background-color);
+  padding-bottom: 20px !important;
+  padding-top: 10px !important;
+}
+
+.xr-var-attrs-in + label,
+.xr-var-data-in + label,
+.xr-index-data-in + label {
+  padding: 0 1px;
 }
 
 .xr-var-attrs-in:checked ~ .xr-var-attrs,
@@ -513,6 +673,12 @@ body.vscode-dark {
 
 .xr-var-data > table {
   float: right;
+}
+
+.xr-var-data > pre,
+.xr-index-data > pre,
+.xr-var-data > table > tbody > tr {
+  background-color: transparent !important;
 }
 
 .xr-var-name span,
@@ -574,14 +740,22 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
+
+.xr-var-attrs-in:checked + label > .xr-icon-file-text2,
+.xr-var-data-in:checked + label > .xr-icon-database,
+.xr-index-data-in:checked + label > .xr-icon-database {
+  color: var(--xr-font-color0);
+  filter: drop-shadow(1px 1px 5px var(--xr-font-color2));
+  stroke-width: 0.8px;
+}
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 672kB
-Dimensions:          (trajectory: 1, profile: 525, obs: 54245)
+Dimensions:          (profile: 525, obs: 54245, trajectory: 1)
 Coordinates:
-  * trajectory       (trajectory) object 8B &#x27;whoi_406-20160902T1700&#x27;
     time             (profile) datetime64[ns] 4kB ...
     longitude        (profile) float64 4kB ...
     latitude         (profile) float64 4kB ...
     depth            (obs) float32 217kB ...
+  * trajectory       (trajectory) object 8B &#x27;whoi_406-20160902T1700&#x27;
 Dimensions without coordinates: profile, obs
 Data variables:
     profile_id       (profile) float64 4kB ...
@@ -602,9 +776,9 @@ Attributes: (12/56)
     time_coverage_end:             2016-09-20T13:32:33Z
     time_coverage_start:           2016-09-02T17:05:38Z
     title:                         whoi_406-20160902T1700
-    Westernmost_Easting:           -71.54982816987487</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-8e706b32-48fb-477a-9ef9-f9108c606a53' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-8e706b32-48fb-477a-9ef9-f9108c606a53' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>trajectory</span>: 1</li><li><span>profile</span>: 525</li><li><span>obs</span>: 54245</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-900d9017-dd39-4e6f-a94c-f0a00265c0f6' class='xr-section-summary-in' type='checkbox'  checked><label for='section-900d9017-dd39-4e6f-a94c-f0a00265c0f6' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>trajectory</span></div><div class='xr-var-dims'>(trajectory)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>&#x27;whoi_406-20160902T1700&#x27;</div><input id='attrs-fc554914-f8c7-4a0e-9a86-9a5df8072bce' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fc554914-f8c7-4a0e-9a86-9a5df8072bce' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6c0b239a-74a4-4dc2-80c1-ecb1352cc8dd' class='xr-var-data-in' type='checkbox'><label for='data-6c0b239a-74a4-4dc2-80c1-ecb1352cc8dd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>22</dd><dt><span>cf_role :</span></dt><dd>trajectory_id</dd><dt><span>comment :</span></dt><dd>A trajectory is one deployment of a glider.</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>Trajectory Name</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;whoi_406-20160902T1700&#x27;], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-72883032-d753-4c49-88e0-bb726f2e00ff' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-72883032-d753-4c49-88e0-bb726f2e00ff' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cda4f277-6ba6-484f-ade9-f85b9480cb93' class='xr-var-data-in' type='checkbox'><label for='data-cda4f277-6ba6-484f-ade9-f85b9480cb93' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[1.47283594e+09 1.47437835e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>comment :</span></dt><dd>Timestamp corresponding to the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Profile Time</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=datetime64[ns]]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>longitude</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-eced7716-fa50-47ad-a6ac-36b118706a25' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-eced7716-fa50-47ad-a6ac-36b118706a25' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-00789886-970e-4ef3-853b-040a14a69d26' class='xr-var-data-in' type='checkbox'><label for='data-00789886-970e-4ef3-853b-040a14a69d26' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd><dt><span>actual_range :</span></dt><dd>[-71.54982817 -70.67537292]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>colorBarMaximum :</span></dt><dd>180.0</dd><dt><span>colorBarMinimum :</span></dt><dd>-180.0</dd><dt><span>comment :</span></dt><dd>Value is interpolated to provide an estimate of the longitude at the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Profile Longitude</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>valid_max :</span></dt><dd>180.0</dd><dt><span>valid_min :</span></dt><dd>-180.0</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>latitude</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-4d927b59-1ceb-4ba2-bb05-c46f4de1cd31' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4d927b59-1ceb-4ba2-bb05-c46f4de1cd31' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fbd5f67d-9d1b-4351-9124-fa6f74b06c9a' class='xr-var-data-in' type='checkbox'><label for='data-fbd5f67d-9d1b-4351-9124-fa6f74b06c9a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd><dt><span>actual_range :</span></dt><dd>[40.25779415 41.1200183 ]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>colorBarMaximum :</span></dt><dd>90.0</dd><dt><span>colorBarMinimum :</span></dt><dd>-90.0</dd><dt><span>comment :</span></dt><dd>Value is interpolated to provide an estimate of the latitude at the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Profile Latitude</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>valid_max :</span></dt><dd>90.0</dd><dt><span>valid_min :</span></dt><dd>-90.0</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>depth</span></div><div class='xr-var-dims'>(obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-ae4a5489-43f0-4104-96c4-257f867e659f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ae4a5489-43f0-4104-96c4-257f867e659f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-18dcae73-6c7e-4a33-81c6-1369165aebfa' class='xr-var-data-in' type='checkbox'><label for='data-18dcae73-6c7e-4a33-81c6-1369165aebfa' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>106</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Height</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>down</dd><dt><span>actual_range :</span></dt><dd>[ 2.49 98.05]</dd><dt><span>ancillary_variables :</span></dt><dd>depth_qc</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>colorBarMaximum :</span></dt><dd>2000.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>colorBarPalette :</span></dt><dd>OceanDepth</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Depth</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>positive :</span></dt><dd>down</dd><dt><span>reference_datum :</span></dt><dd>sea-surface</dd><dt><span>standard_name :</span></dt><dd>depth</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>valid_max :</span></dt><dd>2000.0</dd><dt><span>valid_min :</span></dt><dd>0.0</dd></dl></div><div class='xr-var-data'><pre>[54245 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ea328cbd-8d12-4cea-b71d-c9d7e5967279' class='xr-section-summary-in' type='checkbox'  checked><label for='section-ea328cbd-8d12-4cea-b71d-c9d7e5967279' class='xr-section-summary' >Data variables: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>profile_id</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-9d2dcec2-1345-4da6-870e-3c6f89d6e592' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9d2dcec2-1345-4da6-870e-3c6f89d6e592' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2bd35c6d-d59c-4b93-b182-d82589e6e9a5' class='xr-var-data-in' type='checkbox'><label for='data-2bd35c6d-d59c-4b93-b182-d82589e6e9a5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>actual_range :</span></dt><dd>[  1 545]</dd><dt><span>cf_role :</span></dt><dd>profile_id</dd><dt><span>comment :</span></dt><dd>Sequential profile number within the trajectory.  This value is unique in each file that is part of a single trajectory/deployment.</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>Profile ID</dd><dt><span>valid_max :</span></dt><dd>2147483647</dd><dt><span>valid_min :</span></dt><dd>1</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>trajectoryIndex</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-3af02a04-d893-4fa2-8dc5-c73ff650e262' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3af02a04-d893-4fa2-8dc5-c73ff650e262' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-532c57dd-4e69-4689-a3b0-bf6651119d1c' class='xr-var-data-in' type='checkbox'><label for='data-532c57dd-4e69-4689-a3b0-bf6651119d1c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>instance_dimension :</span></dt><dd>trajectory</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>The trajectory to which this profile is associated.</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=int32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rowSize</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-ced3ac58-7ef4-40c1-92a7-04b705a3ffd1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ced3ac58-7ef4-40c1-92a7-04b705a3ffd1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-64e96b85-dc3e-482e-8a66-dad901d8cccb' class='xr-var-data-in' type='checkbox'><label for='data-64e96b85-dc3e-482e-8a66-dad901d8cccb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>Number of Observations for this Profile</dd><dt><span>sample_dimension :</span></dt><dd>obs</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=int32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temperature</span></div><div class='xr-var-dims'>(obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-3dbd02cc-5489-4df3-864b-16c1ca1519e4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3dbd02cc-5489-4df3-864b-16c1ca1519e4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-47b75e1e-6223-418f-9926-bae412ba5227' class='xr-var-data-in' type='checkbox'><label for='data-47b75e1e-6223-418f-9926-bae412ba5227' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>106</dd><dt><span>actual_range :</span></dt><dd>[ 9.9473 22.6177]</dd><dt><span>ancillary_variables :</span></dt><dd>qartod_temperature_climatological_flag qartod_temperature_flat_line_flag qartod_temperature_gross_range_flag qartod_temperature_rate_of_change_flag qartod_temperature_spike_flag temperature_qc</dd><dt><span>colorBarMaximum :</span></dt><dd>32.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Temperature</dd><dt><span>long_name :</span></dt><dd>Sea Water Temperature</dd><dt><span>observation_type :</span></dt><dd>measured</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>sea_water_temperature</dd><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>valid_max :</span></dt><dd>40.0</dd><dt><span>valid_min :</span></dt><dd>-5.0</dd></dl></div><div class='xr-var-data'><pre>[54245 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>salinity</span></div><div class='xr-var-dims'>(obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-18e75d2f-0fdf-4a00-a9a3-5ded73a557c9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-18e75d2f-0fdf-4a00-a9a3-5ded73a557c9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f8ce2396-ddf3-4864-b940-20ada740ea89' class='xr-var-data-in' type='checkbox'><label for='data-f8ce2396-ddf3-4864-b940-20ada740ea89' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>106</dd><dt><span>actual_range :</span></dt><dd>[29.50964 36.43851]</dd><dt><span>ancillary_variables :</span></dt><dd>qartod_salinity_climatological_flag qartod_salinity_flat_line_flag qartod_salinity_rate_of_change_flag qartod_salinity_spike_flag salinity_qc</dd><dt><span>colorBarMaximum :</span></dt><dd>37.0</dd><dt><span>colorBarMinimum :</span></dt><dd>30.0</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Salinity</dd><dt><span>long_name :</span></dt><dd>Sea Water Practical Salinity</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>sea_water_practical_salinity</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_max :</span></dt><dd>40.0</dd><dt><span>valid_min :</span></dt><dd>0.0</dd></dl></div><div class='xr-var-data'><pre>[54245 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6e5e2698-d48b-4eaf-9b49-ae1752fbe5e2' class='xr-section-summary-in' type='checkbox'  ><label for='section-6e5e2698-d48b-4eaf-9b49-ae1752fbe5e2' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>trajectory</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-e955084c-0b79-498a-a323-328308bfaa2b' class='xr-index-data-in' type='checkbox'/><label for='index-e955084c-0b79-498a-a323-328308bfaa2b' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;whoi_406-20160902T1700&#x27;], dtype=&#x27;object&#x27;, name=&#x27;trajectory&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f78acce8-398a-4da5-b7de-0566411a3be6' class='xr-section-summary-in' type='checkbox'  ><label for='section-f78acce8-398a-4da5-b7de-0566411a3be6' class='xr-section-summary' >Attributes: <span>(56)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>acknowledgment :</span></dt><dd>This deployment supported by NOAA through the Cooperative Institute for the North Atlantic Region</dd><dt><span>cdm_data_type :</span></dt><dd>TrajectoryProfile</dd><dt><span>cdm_profile_variables :</span></dt><dd>time_uv,lat_uv,lon_uv,u,v,profile_id,time,latitude,longitude</dd><dt><span>cdm_trajectory_variables :</span></dt><dd>trajectory,wmo_id</dd><dt><span>comment :</span></dt><dd>Glider operatored by Woods Hole Oceanographic Institution</dd><dt><span>contributor_name :</span></dt><dd>Robert Todd, Larry George, Patrick Deane, Sean Whalen, John Kerfoot</dd><dt><span>contributor_role :</span></dt><dd>Principal Investigator, pilot and technician, technician, technician, data management</dd><dt><span>Conventions :</span></dt><dd>Unidata Dataset Discovery v1.0, COARDS, CF-1.10</dd><dt><span>creator_email :</span></dt><dd>rtodd@whoi.edu</dd><dt><span>creator_name :</span></dt><dd>Robert Todd</dd><dt><span>creator_url :</span></dt><dd>gliders.whoi.edu</dd><dt><span>date_created :</span></dt><dd>2016-09-09T22:06:05Z</dd><dt><span>date_issued :</span></dt><dd>2016-09-09T22:06:05Z</dd><dt><span>Easternmost_Easting :</span></dt><dd>-70.67537291773046</dd><dt><span>featureType :</span></dt><dd>TrajectoryProfile</dd><dt><span>format_version :</span></dt><dd>/tmp/IOOS_Glider_NetCDF_v2.0-qartod.nc</dd><dt><span>geospatial_lat_max :</span></dt><dd>41.120018298037856</dd><dt><span>geospatial_lat_min :</span></dt><dd>40.257794149155615</dd><dt><span>geospatial_lat_units :</span></dt><dd>degrees_north</dd><dt><span>geospatial_lon_max :</span></dt><dd>-70.67537291773046</dd><dt><span>geospatial_lon_min :</span></dt><dd>-71.54982816987487</dd><dt><span>geospatial_lon_units :</span></dt><dd>degrees_east</dd><dt><span>geospatial_vertical_max :</span></dt><dd>98.05</dd><dt><span>geospatial_vertical_min :</span></dt><dd>2.49</dd><dt><span>geospatial_vertical_positive :</span></dt><dd>down</dd><dt><span>geospatial_vertical_units :</span></dt><dd>m</dd><dt><span>gts_ingest :</span></dt><dd>true</dd><dt><span>history :</span></dt><dd>2016-09-09T22:06:05Z /home/kerfoot/slocum/matlab/spt/export/nc/IOOS/DAC/writeQartodGliderFlatNc.m%standard names for qartod flags have changed on 2022-07-04
-2025-04-14T17:22:13Z (local files)
-2025-04-14T17:22:13Z http://gliders.ioos.us/erddap/tabledap/whoi_406-20160902T1700.ncCF?trajectory,profile_id,time,depth,longitude,latitude,temperature,salinity</dd><dt><span>id :</span></dt><dd>whoi_406-20160905T0304</dd><dt><span>infoUrl :</span></dt><dd>https://gliders.ioos.us/erddap/</dd><dt><span>institution :</span></dt><dd>Woods Hole Oceanographic Institution</dd><dt><span>ioos_dac_checksum :</span></dt><dd>6e67c5e2c364def562bb32242dec8fd5</dd><dt><span>ioos_dac_completed :</span></dt><dd>True</dd><dt><span>keywords :</span></dt><dd>AUVS &gt; Autonomous Underwater Vehicles, Earth Science &gt; Oceans &gt; Ocean Pressure &gt; Water Pressure, Earth Science &gt; Oceans &gt; Ocean Temperature &gt; Water Temperature, Earth Science &gt; Oceans &gt; Salinity/Density &gt; Conductivity, Earth Science &gt; Oceans &gt; Salinity/Density &gt; Density, Earth Science &gt; Oceans &gt; Salinity/Density &gt; Salinity, glider, In Situ Ocean-based platforms &gt; Seaglider, Slocum, Spray, trajectory, underwater glider, water, wmo</dd><dt><span>keywords_vocabulary :</span></dt><dd>GCMD Science Keywords</dd><dt><span>license :</span></dt><dd>This data may be redistributed and used without restriction.  Data provided as is with no expressed or implied assurance of quality assurance or quality control</dd><dt><span>Metadata_Conventions :</span></dt><dd>Unidata Dataset Discovery v1.0, COARDS, CF-1.6</dd><dt><span>naming_authority :</span></dt><dd>edu.rutgers.marine</dd><dt><span>Northernmost_Northing :</span></dt><dd>41.120018298037856</dd><dt><span>platform_type :</span></dt><dd>Slocum Glider</dd><dt><span>project :</span></dt><dd>TEMPESTS</dd><dt><span>publisher_email :</span></dt><dd>kerfoot@marine.rutgers.edu</dd><dt><span>publisher_name :</span></dt><dd>John Kerfoot</dd><dt><span>publisher_url :</span></dt><dd>https://rucool/marine.rutgers.edu</dd><dt><span>references :</span></dt><dd>https://ioos.noaa.gov/wp-content/uploads/2015/10/Manual-for-QC-of-Glider-Data_05_09_16.pdf</dd><dt><span>sea_name :</span></dt><dd>Mid-Atlantic Bight</dd><dt><span>source :</span></dt><dd>Observational data from a profiling glider</dd><dt><span>sourceUrl :</span></dt><dd>(local files)</dd><dt><span>Southernmost_Northing :</span></dt><dd>40.257794149155615</dd><dt><span>standard_name_vocabulary :</span></dt><dd>CF-v25</dd><dt><span>subsetVariables :</span></dt><dd>wmo_id,trajectory,profile_id,time,latitude,longitude</dd><dt><span>summary :</span></dt><dd>Slocum glider dataset gathered as part of the TEMPESTS (The Experiment to Measure and Predict East coast STorm Strength), funded by NOAA through CINAR (Cooperative Institute for the North Atlantic Region).</dd><dt><span>time_coverage_end :</span></dt><dd>2016-09-20T13:32:33Z</dd><dt><span>time_coverage_start :</span></dt><dd>2016-09-02T17:05:38Z</dd><dt><span>title :</span></dt><dd>whoi_406-20160902T1700</dd><dt><span>Westernmost_Easting :</span></dt><dd>-71.54982816987487</dd></dl></div></li></ul></div></div></div>
+    Westernmost_Easting:           -71.54982816987487</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-97bfad68-62fb-4fa2-9065-2bb70a6c1fdd' class='xr-section-summary-in' type='checkbox' disabled /><label for='section-97bfad68-62fb-4fa2-9065-2bb70a6c1fdd' class='xr-section-summary'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>profile</span>: 525</li><li><span>obs</span>: 54245</li><li><span class='xr-has-index'>trajectory</span>: 1</li></ul></div></li><li class='xr-section-item'><input id='section-240b98b4-09c9-4a6d-984e-769d832332c7' class='xr-section-summary-in' type='checkbox' checked /><label for='section-240b98b4-09c9-4a6d-984e-769d832332c7' class='xr-section-summary' title='Expand/collapse section'>Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>time</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-5c12c2e5-e513-464c-af64-c38ad3d1e695' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5c12c2e5-e513-464c-af64-c38ad3d1e695' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-506da752-bdee-47d7-9de8-51f93143578c' class='xr-var-data-in' type='checkbox'><label for='data-506da752-bdee-47d7-9de8-51f93143578c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[1.47283594e+09 1.47437835e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>comment :</span></dt><dd>Timestamp corresponding to the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Profile Time</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=datetime64[ns]]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>longitude</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-68b5588f-0f00-4c77-a116-156118035bb8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-68b5588f-0f00-4c77-a116-156118035bb8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-184b9ee3-979f-4291-905f-cb63a1f73d18' class='xr-var-data-in' type='checkbox'><label for='data-184b9ee3-979f-4291-905f-cb63a1f73d18' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd><dt><span>actual_range :</span></dt><dd>[-71.54982817 -70.67537292]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>colorBarMaximum :</span></dt><dd>180.0</dd><dt><span>colorBarMinimum :</span></dt><dd>-180.0</dd><dt><span>comment :</span></dt><dd>Value is interpolated to provide an estimate of the longitude at the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Profile Longitude</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>valid_max :</span></dt><dd>180.0</dd><dt><span>valid_min :</span></dt><dd>-180.0</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>latitude</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-982b3c12-692e-4a20-986b-066be824e01c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-982b3c12-692e-4a20-986b-066be824e01c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-70b5cbf5-c381-46ad-8170-594a1de9dec6' class='xr-var-data-in' type='checkbox'><label for='data-70b5cbf5-c381-46ad-8170-594a1de9dec6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd><dt><span>actual_range :</span></dt><dd>[40.25779415 41.1200183 ]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>colorBarMaximum :</span></dt><dd>90.0</dd><dt><span>colorBarMinimum :</span></dt><dd>-90.0</dd><dt><span>comment :</span></dt><dd>Value is interpolated to provide an estimate of the latitude at the mid-point of the profile.</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Profile Latitude</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>valid_max :</span></dt><dd>90.0</dd><dt><span>valid_min :</span></dt><dd>-90.0</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>depth</span></div><div class='xr-var-dims'>(obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-82f49498-b9f8-46d7-8bba-32fd0aff6198' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-82f49498-b9f8-46d7-8bba-32fd0aff6198' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8117534b-f0f1-426d-833a-eb6aa816c4ab' class='xr-var-data-in' type='checkbox'><label for='data-8117534b-f0f1-426d-833a-eb6aa816c4ab' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>106</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Height</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>down</dd><dt><span>actual_range :</span></dt><dd>[ 2.49 98.05]</dd><dt><span>ancillary_variables :</span></dt><dd>depth_qc</dd><dt><span>axis :</span></dt><dd>Z</dd><dt><span>colorBarMaximum :</span></dt><dd>2000.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>colorBarPalette :</span></dt><dd>OceanDepth</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Depth</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>positive :</span></dt><dd>down</dd><dt><span>reference_datum :</span></dt><dd>sea-surface</dd><dt><span>standard_name :</span></dt><dd>depth</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>valid_max :</span></dt><dd>2000.0</dd><dt><span>valid_min :</span></dt><dd>0.0</dd></dl></div><div class='xr-var-data'><pre>[54245 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>trajectory</span></div><div class='xr-var-dims'>(trajectory)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>&#x27;whoi_406-20160902T1700&#x27;</div><input id='attrs-85e9113b-774b-4e0b-a834-df20b0933900' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-85e9113b-774b-4e0b-a834-df20b0933900' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-127afa42-ae6a-4672-bab4-b77255a4b4cc' class='xr-var-data-in' type='checkbox'><label for='data-127afa42-ae6a-4672-bab4-b77255a4b4cc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>22</dd><dt><span>cf_role :</span></dt><dd>trajectory_id</dd><dt><span>comment :</span></dt><dd>A trajectory is one deployment of a glider.</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>Trajectory Name</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;whoi_406-20160902T1700&#x27;], dtype=object)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e8fde977-fd63-4d0b-bbb6-8e951e96310d' class='xr-section-summary-in' type='checkbox' checked /><label for='section-e8fde977-fd63-4d0b-bbb6-8e951e96310d' class='xr-section-summary' title='Expand/collapse section'>Data variables: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>profile_id</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-f57d95ee-272a-42e9-9f53-b935965a4f79' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f57d95ee-272a-42e9-9f53-b935965a4f79' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8d7084cf-7ce1-4ffe-97f9-5efdd75e4987' class='xr-var-data-in' type='checkbox'><label for='data-8d7084cf-7ce1-4ffe-97f9-5efdd75e4987' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>actual_range :</span></dt><dd>[  1 545]</dd><dt><span>cf_role :</span></dt><dd>profile_id</dd><dt><span>comment :</span></dt><dd>Sequential profile number within the trajectory.  This value is unique in each file that is part of a single trajectory/deployment.</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>Profile ID</dd><dt><span>valid_max :</span></dt><dd>2147483647</dd><dt><span>valid_min :</span></dt><dd>1</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=float64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>trajectoryIndex</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-40ff2e75-a3db-47b3-8755-61ed94e8bf08' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-40ff2e75-a3db-47b3-8755-61ed94e8bf08' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-38789782-8a2d-47cd-9b3b-3d46a6cb64cf' class='xr-var-data-in' type='checkbox'><label for='data-38789782-8a2d-47cd-9b3b-3d46a6cb64cf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>instance_dimension :</span></dt><dd>trajectory</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>The trajectory to which this profile is associated.</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=int32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rowSize</span></div><div class='xr-var-dims'>(profile)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-233697f6-3b75-4324-bf0e-9db43342a959' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-233697f6-3b75-4324-bf0e-9db43342a959' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2b08b5cb-3c0f-4915-a69d-7ac3f8ca6558' class='xr-var-data-in' type='checkbox'><label for='data-2b08b5cb-3c0f-4915-a69d-7ac3f8ca6558' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>Number of Observations for this Profile</dd><dt><span>sample_dimension :</span></dt><dd>obs</dd></dl></div><div class='xr-var-data'><pre>[525 values with dtype=int32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temperature</span></div><div class='xr-var-dims'>(obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-af2c1057-4948-4b01-aaa8-abb99f4c273c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-af2c1057-4948-4b01-aaa8-abb99f4c273c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f5f06cf1-3fad-47a4-b6f1-8e5e7dda8bc7' class='xr-var-data-in' type='checkbox'><label for='data-f5f06cf1-3fad-47a4-b6f1-8e5e7dda8bc7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>106</dd><dt><span>actual_range :</span></dt><dd>[ 9.9473 22.6177]</dd><dt><span>ancillary_variables :</span></dt><dd>qartod_temperature_climatological_flag qartod_temperature_flat_line_flag qartod_temperature_gross_range_flag qartod_temperature_rate_of_change_flag qartod_temperature_spike_flag temperature_qc</dd><dt><span>colorBarMaximum :</span></dt><dd>32.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Temperature</dd><dt><span>long_name :</span></dt><dd>Sea Water Temperature</dd><dt><span>observation_type :</span></dt><dd>measured</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>sea_water_temperature</dd><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>valid_max :</span></dt><dd>40.0</dd><dt><span>valid_min :</span></dt><dd>-5.0</dd></dl></div><div class='xr-var-data'><pre>[54245 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>salinity</span></div><div class='xr-var-dims'>(obs)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-64057917-cf40-497b-b223-343aaafa862f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-64057917-cf40-497b-b223-343aaafa862f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9d737e8b-35c2-41c2-a481-66f957bd1cc6' class='xr-var-data-in' type='checkbox'><label for='data-9d737e8b-35c2-41c2-a481-66f957bd1cc6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_ChunkSizes :</span></dt><dd>106</dd><dt><span>actual_range :</span></dt><dd>[29.50964 36.43851]</dd><dt><span>ancillary_variables :</span></dt><dd>qartod_salinity_climatological_flag qartod_salinity_flat_line_flag qartod_salinity_rate_of_change_flag qartod_salinity_spike_flag salinity_qc</dd><dt><span>colorBarMaximum :</span></dt><dd>37.0</dd><dt><span>colorBarMinimum :</span></dt><dd>30.0</dd><dt><span>instrument :</span></dt><dd>instrument_ctd</dd><dt><span>ioos_category :</span></dt><dd>Salinity</dd><dt><span>long_name :</span></dt><dd>Sea Water Practical Salinity</dd><dt><span>observation_type :</span></dt><dd>calculated</dd><dt><span>platform :</span></dt><dd>platform</dd><dt><span>standard_name :</span></dt><dd>sea_water_practical_salinity</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_max :</span></dt><dd>40.0</dd><dt><span>valid_min :</span></dt><dd>0.0</dd></dl></div><div class='xr-var-data'><pre>[54245 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-41ba9d7d-ad3b-40c7-9e48-340d3977cda1' class='xr-section-summary-in' type='checkbox' /><label for='section-41ba9d7d-ad3b-40c7-9e48-340d3977cda1' class='xr-section-summary' title='Expand/collapse section'>Attributes: <span>(56)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>acknowledgment :</span></dt><dd>This deployment supported by NOAA through the Cooperative Institute for the North Atlantic Region</dd><dt><span>cdm_data_type :</span></dt><dd>TrajectoryProfile</dd><dt><span>cdm_profile_variables :</span></dt><dd>time_uv,lat_uv,lon_uv,u,v,profile_id,time,latitude,longitude</dd><dt><span>cdm_trajectory_variables :</span></dt><dd>trajectory,wmo_id</dd><dt><span>comment :</span></dt><dd>Glider operatored by Woods Hole Oceanographic Institution</dd><dt><span>contributor_name :</span></dt><dd>Robert Todd, Larry George, Patrick Deane, Sean Whalen, John Kerfoot</dd><dt><span>contributor_role :</span></dt><dd>Principal Investigator, pilot and technician, technician, technician, data management</dd><dt><span>Conventions :</span></dt><dd>Unidata Dataset Discovery v1.0, COARDS, CF-1.10</dd><dt><span>creator_email :</span></dt><dd>rtodd@whoi.edu</dd><dt><span>creator_name :</span></dt><dd>Robert Todd</dd><dt><span>creator_url :</span></dt><dd>gliders.whoi.edu</dd><dt><span>date_created :</span></dt><dd>2016-09-09T22:06:05Z</dd><dt><span>date_issued :</span></dt><dd>2016-09-09T22:06:05Z</dd><dt><span>Easternmost_Easting :</span></dt><dd>-70.67537291773046</dd><dt><span>featureType :</span></dt><dd>TrajectoryProfile</dd><dt><span>format_version :</span></dt><dd>/tmp/IOOS_Glider_NetCDF_v2.0-qartod.nc</dd><dt><span>geospatial_lat_max :</span></dt><dd>41.120018298037856</dd><dt><span>geospatial_lat_min :</span></dt><dd>40.257794149155615</dd><dt><span>geospatial_lat_units :</span></dt><dd>degrees_north</dd><dt><span>geospatial_lon_max :</span></dt><dd>-70.67537291773046</dd><dt><span>geospatial_lon_min :</span></dt><dd>-71.54982816987487</dd><dt><span>geospatial_lon_units :</span></dt><dd>degrees_east</dd><dt><span>geospatial_vertical_max :</span></dt><dd>98.05</dd><dt><span>geospatial_vertical_min :</span></dt><dd>2.49</dd><dt><span>geospatial_vertical_positive :</span></dt><dd>down</dd><dt><span>geospatial_vertical_units :</span></dt><dd>m</dd><dt><span>gts_ingest :</span></dt><dd>true</dd><dt><span>history :</span></dt><dd>2016-09-09T22:06:05Z /home/kerfoot/slocum/matlab/spt/export/nc/IOOS/DAC/writeQartodGliderFlatNc.m%standard names for qartod flags have changed on 2022-07-04
+2026-02-04T17:20:07Z (local files)
+2026-02-04T17:20:07Z http://gliders.ioos.us/erddap/tabledap/whoi_406-20160902T1700.ncCF?trajectory,profile_id,time,depth,longitude,latitude,temperature,salinity</dd><dt><span>id :</span></dt><dd>whoi_406-20160905T0304</dd><dt><span>infoUrl :</span></dt><dd>https://gliders.ioos.us/erddap/</dd><dt><span>institution :</span></dt><dd>Woods Hole Oceanographic Institution</dd><dt><span>ioos_dac_checksum :</span></dt><dd>6e67c5e2c364def562bb32242dec8fd5</dd><dt><span>ioos_dac_completed :</span></dt><dd>True</dd><dt><span>keywords :</span></dt><dd>AUVS &gt; Autonomous Underwater Vehicles, Earth Science &gt; Oceans &gt; Ocean Pressure &gt; Water Pressure, Earth Science &gt; Oceans &gt; Ocean Temperature &gt; Water Temperature, Earth Science &gt; Oceans &gt; Salinity/Density &gt; Conductivity, Earth Science &gt; Oceans &gt; Salinity/Density &gt; Density, Earth Science &gt; Oceans &gt; Salinity/Density &gt; Salinity, glider, In Situ Ocean-based platforms &gt; Seaglider, Slocum, Spray, trajectory, underwater glider, water, wmo</dd><dt><span>keywords_vocabulary :</span></dt><dd>GCMD Science Keywords</dd><dt><span>license :</span></dt><dd>This data may be redistributed and used without restriction.  Data provided as is with no expressed or implied assurance of quality assurance or quality control</dd><dt><span>Metadata_Conventions :</span></dt><dd>Unidata Dataset Discovery v1.0, COARDS, CF-1.6</dd><dt><span>naming_authority :</span></dt><dd>edu.rutgers.marine</dd><dt><span>Northernmost_Northing :</span></dt><dd>41.120018298037856</dd><dt><span>platform_type :</span></dt><dd>Slocum Glider</dd><dt><span>project :</span></dt><dd>TEMPESTS</dd><dt><span>publisher_email :</span></dt><dd>kerfoot@marine.rutgers.edu</dd><dt><span>publisher_name :</span></dt><dd>John Kerfoot</dd><dt><span>publisher_url :</span></dt><dd>https://rucool/marine.rutgers.edu</dd><dt><span>references :</span></dt><dd>https://ioos.noaa.gov/wp-content/uploads/2015/10/Manual-for-QC-of-Glider-Data_05_09_16.pdf</dd><dt><span>sea_name :</span></dt><dd>Mid-Atlantic Bight</dd><dt><span>source :</span></dt><dd>Observational data from a profiling glider</dd><dt><span>sourceUrl :</span></dt><dd>(local files)</dd><dt><span>Southernmost_Northing :</span></dt><dd>40.257794149155615</dd><dt><span>standard_name_vocabulary :</span></dt><dd>CF-v25</dd><dt><span>subsetVariables :</span></dt><dd>wmo_id,trajectory,profile_id,time,latitude,longitude</dd><dt><span>summary :</span></dt><dd>Slocum glider dataset gathered as part of the TEMPESTS (The Experiment to Measure and Predict East coast STorm Strength), funded by NOAA through CINAR (Cooperative Institute for the North Atlantic Region).</dd><dt><span>time_coverage_end :</span></dt><dd>2016-09-20T13:32:33Z</dd><dt><span>time_coverage_start :</span></dt><dd>2016-09-02T17:05:38Z</dd><dt><span>title :</span></dt><dd>whoi_406-20160902T1700</dd><dt><span>Westernmost_Easting :</span></dt><dd>-71.54982816987487</dd></dl></div></li></ul></div></div></div>
 </div>
 </section>
 <section id="iris">
@@ -629,14 +803,14 @@ Attributes: (12/56)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0: sea_water_practical_salinity / (1)  (-- : 54245)
-1: The trajectory to which this profile is associated. / (unknown) (-- : 525)
-2: Trajectory Name / (unknown)         (-- : 1)
-3: Number of Observations for this Profile / (unknown) (-- : 525)
-4: Profile ID / (unknown)              (-- : 525)
+0: Trajectory Name / (unknown)         (-- : 1)
+1: Number of Observations for this Profile / (unknown) (-- : 525)
+2: Profile ID / (unknown)              (-- : 525)
+3: sea_water_practical_salinity / (1)  (-- : 54245)
+4: The trajectory to which this profile is associated. / (unknown) (-- : 525)
 5: sea_water_temperature / (Celsius)   (-- : 54245)
-6: time / (seconds since 1970-01-01T00:00:00Z) (-- : 525)
-7: latitude / (degrees)                (-- : 525)
+6: latitude / (degrees)                (-- : 525)
+7: time / (seconds since 1970-01-01T00:00:00Z) (-- : 525)
 8: longitude / (degrees)               (-- : 525)
 </pre></div></div>
 </div>
@@ -700,7 +874,7 @@ Attributes: (12/56)
       margin-top: 7px;
   }
 </style>
-<table class="iris" id="140570748321040">
+<table class="iris" id="140459858555920">
     <tr class="iris">
 <th class="iris iris-word-cell">Sea Water Temperature (Celsius)</th>
 <th class="iris iris-word-cell">--</th>
@@ -851,7 +1025,7 @@ Attributes: (12/56)
 </tr>
 <tr class="iris">
     <td class="iris-word-cell iris-subheading-cell">        geospatial_vertical_positive</td>
-    <td class="iris-word-cell" colspan="1">#x27;down&#x27;</td>
+    <td class="iris-word-cell" colspan="1">&#x27;down&#x27;</td>
 </tr>
 <tr class="iris">
     <td class="iris-word-cell iris-subheading-cell">        geospatial_vertical_units</td>
@@ -1001,7 +1175,7 @@ Attributes: (12/56)
       &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |

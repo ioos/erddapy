@@ -4,13 +4,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>erddapy.core.url &#8212; erddapy 2.2.4 documentation</title>
+    <title>erddapy.core.url &#8212; erddapy 3.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=f6a572b4" />
-    <script src="../../../_static/documentation_options.js?v=4e6cfea6"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/documentation_options.js?v=acc74ff5"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -147,12 +147,21 @@
     <span class="k">return</span> <span class="n">sorted_url</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">)</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_clean_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allow for `ext` or `.ext` format.</span>
+
+<span class="sd">    Users can, for example, use either `.csv` or `csv` in the response kwarg.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
     <span class="k">if</span> <span class="s2">&quot;timeout&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-        <span class="n">quote_url</span><span class="p">(</span><span class="n">url</span><span class="p">),</span>
+        <span class="n">url</span><span class="p">,</span>
         <span class="n">follow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
@@ -160,7 +169,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
     <span class="k">except</span> <span class="n">httpx</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
         <span class="k">raise</span> <span class="n">httpx</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
     <span class="k">return</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
@@ -169,6 +178,8 @@
 <a class="viewcode-back" href="../../../erddapy.html#erddapy.erddapy.urlopen">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">urlopen</span><span class="p">(</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">quote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">requests_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Thin wrapper around httpx get content.</span>
@@ -190,6 +201,8 @@
 
     <span class="k">if</span> <span class="n">requests_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">requests_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">quote</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">quote_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">requests_kwargs</span><span class="p">)</span>
     <span class="n">data</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span></div>
@@ -220,7 +233,7 @@
 <span class="sd">    with `distinct=True` will return a sorted list of &quot;stationIDs&quot; associated</span>
 <span class="sd">    with each &quot;stationType&quot;.</span>
 
-<span class="sd">    See http://erddap.ioos.us/erddap/tabledap/documentation.html#distinct</span>
+<span class="sd">    See https://erddap.ioos.us/erddap/tabledap/documentation.html#distinct</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">distinct</span><span class="p">:</span>
@@ -359,6 +372,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">server</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">_clean_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
     <span class="n">base</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s2">&quot;</span><span class="si">{server}</span><span class="s2">/search/advanced.</span><span class="si">{response}</span><span class="s2">&quot;</span>
         <span class="s2">&quot;?page=</span><span class="si">{page}</span><span class="s2">&quot;</span>
@@ -431,31 +445,34 @@
     <span class="k">if</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">non_paginated_responses</span><span class="p">:</span>
         <span class="n">items_per_page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
 
-    <span class="n">default</span> <span class="o">=</span> <span class="s2">&quot;(ANY)&quot;</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span>
-        <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
-        <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span>
-        <span class="n">itemsPerPage</span><span class="o">=</span><span class="n">items_per_page</span><span class="p">,</span>
-        <span class="n">protocol</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;protocol&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">cdm_data_type</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cdm_data_type&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">institution</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;institution&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">ioos_category</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ioos_category&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">keywords</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keywords&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">long_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;long_name&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">standard_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;standard_name&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">variableName</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;variableName&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">minLon</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_lon&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">maxLon</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_lon&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">minLat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_lat&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">maxLat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_lat&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">minTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_time&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">maxTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_time&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-        <span class="n">searchFor</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span>
-    <span class="p">)</span>
     <span class="c1"># ERDDAP 2.10 no longer accepts strings placeholder for dates.</span>
     <span class="c1"># Removing them entirely should be OK for older versions too.</span>
-    <span class="k">return</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;minTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;maxTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="s2">&quot;(ANY)&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">base</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
+            <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span>
+            <span class="n">itemsPerPage</span><span class="o">=</span><span class="n">items_per_page</span><span class="p">,</span>
+            <span class="n">protocol</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;protocol&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">cdm_data_type</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cdm_data_type&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">institution</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;institution&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">ioos_category</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ioos_category&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">keywords</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keywords&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;long_name&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">standard_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;standard_name&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">variableName</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;variableName&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">minLon</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_lon&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">maxLon</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_lon&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">minLat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_lat&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">maxLat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_lat&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">minTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_time&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">maxTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_time&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">searchFor</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;minTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;maxTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_info_url</span><span class="p">(</span>
@@ -495,7 +512,7 @@
 <span class="sd">        server: data server endpoint.</span>
 <span class="sd">        categorize_by: a valid attribute, e.g.: ioos_category or standard_name.</span>
 <span class="sd">            Valid attributes are shown in</span>
-<span class="sd">            http://erddap.ioos.us/erddap/categorize page.</span>
+<span class="sd">            https://erddap.ioos.us/erddap/categorize page.</span>
 <span class="sd">        value: an attribute value.</span>
 <span class="sd">        response: default is HTML.</span>
 
@@ -624,7 +641,7 @@
         <span class="n">_constraints</span> <span class="o">=</span> <span class="n">_quote_string_constraints</span><span class="p">(</span><span class="n">_constraints</span><span class="p">)</span>
         <span class="n">_constraints_url</span> <span class="o">=</span> <span class="n">_format_constraints_url</span><span class="p">(</span><span class="n">_constraints</span><span class="p">)</span>
 
-        <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_constraints_url</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">+=</span> <span class="n">_constraints_url</span>
 
     <span class="k">return</span> <span class="n">_distinct</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">distinct</span><span class="o">=</span><span class="n">distinct</span><span class="p">)</span>
 
@@ -688,7 +705,7 @@
       &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>
