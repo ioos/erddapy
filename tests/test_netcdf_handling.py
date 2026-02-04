@@ -19,7 +19,7 @@ def test__nc_dataset_in_memory_https():
     url = "https://erddap.ioos.us/erddap/tabledap/allDatasets.nc"
     _nc = _nc_dataset(url)
     assert isinstance(_nc, Dataset)
-    assert _nc.filepath() == url.split("/")[-1]
+    assert _nc.filepath() == url.rsplit("/", maxsplit=1)[-1]
 
 
 @pytest.mark.web
