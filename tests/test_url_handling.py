@@ -14,7 +14,28 @@ def test_urlopen():
     """Assure that urlopen is always a BytesIO object."""
     url = "https://standards.sensors.ioos.us/erddap/tabledap/"
     ret = urlopen(url)
-    isinstance(ret, io.BytesIO)
+    assert isinstance(ret, io.BytesIO)
+
+
+@pytest.mark.web
+@pytest.mark.vcr
+def test_unquoted_urlopen():
+    """Assure that urlopen can load unquoted URLs."""
+    url = "https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?crs&time>=2000-03-23T00:00:00Z&time<=2000-03-30T15:08:00Z"
+    ret = urlopen(url, quote=True)
+    assert isinstance(ret, io.BytesIO)
+
+
+@pytest.mark.web
+@pytest.mark.vcr
+def test_quoted_urlopen():
+    """Assure that urlopen can load quoted URLs."""
+    url = "https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?crs&time%3E=2000-03-23T00%3A00%3A00Z&time%3C=2000-03-30T15%3A08%3A00Z"
+    ret = urlopen(url, quote=False)
+    assert isinstance(ret, io.BytesIO)
+    # Unquoted URLs may work, but quoted cannot be quoted again and must fail.
+    with pytest.raises(httpx.HTTPError):
+        urlopen(url, quote=True)
 
 
 @pytest.mark.web

@@ -1,0 +1,136 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Host:
+      - standards.sensors.ioos.us
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?crs&time%3E=2000-03-23T00%3A00%3A00Z&time%3C=2000-03-30T15%3A08%3A00Z
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAA/+2aTW/jNhCG7/4VLBftaSXFbrbJ2rIAx0n2tJsg3m2xJ2NEjSUiFCmQtB0X/fEl
+        9RE4wabdj6InBkgoSg/nneGQzGGY/nR5s/z4+faKVLYW2Sj1DREgyzlFGX1aUf8OoXBNjRYIq0Ab
+        tHP66eN1dO6/Wm4FZld3l5eLWxIRpcs1U7pu1gyayRrfbM7Wb99uNuuTCY7TpKNHqeDynmgUc2oq
+        pS3bWsKZkpRUGjdzmqAuCmiSDez869j9ocOopwSvoUTT9yYxM4b2du1BoKkQLSX20OCcWnywiQeG
+        YCTU7vWO475xPlDilCxKF9yeF7aaF+jEMWo7rwmX3HIQkWEgcD72RpJ+ZnJVHDKSWsgFEibAmDll
+        qm6AWSLVXkNDSetOb3k6Pjn5eUZyYPelVltZREwJpaevxpPz5cWbmbNNnDntG/9QDKN9BBEIXsop
+        c46inpHO4PlJ8+CGpdDFnit1X4O+p60B0k9ZZW1jpkmy3+9jqQDiUu0SN4jXZc+12ZnTD2C5kiDI
+        DUOQnBGQBVnYWpmmQu36i6J202GsbsFBxWjWiTgNY90Y0IWJDUqjtIm5Uibemmd5837kcSNLSkC4
+        mf9ws1g82uuC3qG23E16H3jNi0KgDzYB92uLf5olgRs7IxuX18jwP3H6EAnQJc5IP+HX7c+M0KzX
+        TF1QSpb9ek6Tvjt8zXWWmhqEeNZcgeGoCTCGxhCriGHcJYhv3GQVYMEZ6vBn7WD3X8LQvKyexNGO
+        nj16feTehVtQDvY+HNSW5IfhG3xvdr91SdHMJ9Fn52Xp96C5RHLNjZdEQ1ao/Wb7arHNMPJY9v31
+        6ouyK7W11R6NPRb0CWJIlu0++gHdBHJnPjGDRvSIRKbTiLq9SrPVH9er5Rc9vJI77hZa7UA3O3do
+        EDSryCXfcfMtOXjRPTwWiHQvEBW9QPQ17rs9ceT8LzI3zaxvnq1j12p/PrYnYjbqGL86+8fR07PS
+        HQluQ9a1khfvln5jDqem//fiDdkqY9qMerPDq8HW8dtisHlHs2gyPj07Pf/1t9OzAAUoQAEKUIAC
+        FKAABShAAQpQgAIUoAAFKEABClCAAhSgAAXoP4KGIlha8N1ADtXxdVu992WuXD+Wsyo3qis/vya/
+        o/blOTKJJ+fxuMWGGr/gDKXB5zcmBJYgYn+Ng2aX3DhBXjsjvnBH/hr1Vcen1cQXLbxqNN8BO9wq
+        J3ag2W3XJV3/+0z6OxbALM2W3UNbUUybx+j/j6fEpcJnpr234dru7svfEH4EtgwjAAA=
+    headers:
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Security-Policy:
+      - 'default-src ''self''; script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        data: blob: http://*.axds.co http://*.axiomalaska.com http://*.axiomdatascience.com
+        http://*.aoos.org http://*.ioos.us http://cdnjs.cloudflare.com http://d3js.org
+        http://maps.googleapis.com http://www.youtube.com http://www.googletagmanager.com
+        http://cdn.jsdelivr.net http://dgd6r9iiqa8y9.cloudfront.net; style-src ''self''
+        ''unsafe-inline'' http://*.axds.co http://*.axiomalaska.com http://fonts.googleapis.com
+        http://cdn.jsdelivr.net http://dgd6r9iiqa8y9.cloudfront.net; object-src ''none'';
+        base-uri ''self'' http://www.opendap.org; connect-src ''self'' http://*.axds.co
+        http://*.axiomalaska.com http://*.axiomdatascience.com http://*.ioos.us http://maps.googleapis.com
+        http://www.google-analytics.com http://cdn.jsdelivr.net; font-src ''self''
+        data: http://fonts.gstatic.com http://cdn.jsdelivr.net; frame-src ''self''
+        http://*.axiomalaska.com http://www.youtube.com; img-src ''self'' data: http://*.axds.co
+        http://*.axiomalaska.com http://*.mapbox.com http://*.openstreetmap.org http://maps.googleapis.com
+        http://*.noaa.gov http://maps.gstatic.com http://www2.demis.nl http://ahocevar.com
+        http://*.nasa.gov http://godiva.reading.ac.uk http://www.gebco.net http://wms.gebco.net
+        http://*.api.mapbox.com http://*.alaska.gov http://fishingstatus.com http://images.marinespecies.org
+        http://images.squarespace-cdn.com http://ioos.us http://server.arcgisonline.com
+        http://upload.wikimedia.org http://wms.chartbundle.com http://www.gmrt.org
+        http://secoora.org http://www.gravatar.com http://www.googletagmanager.com
+        http://*.amazonaws.com http://cdn.jsdelivr.net http://dgd6r9iiqa8y9.cloudfront.net;
+        manifest-src ''self''; media-src ''self'' http://*.amazonaws.com http://cdn.jsdelivr.net;
+        worker-src blob:; form-action http://status.atn.ioos.us http://atn.ioos.us
+        http://portal.atn.ioos.us http://mbon.ioos.us http://sensors.ioos.us http://standards.sensors.ioos.us
+        http://beta.sensors.ioos.us http://video.ioos.us http://dacregistration.atn.ioos.us;
+        report-uri https://sentry.srv.axds.co/api/2/security/?sentry_key=7de616494a2346fb8fdf8cd018062730&sentry_version=7'
+      Content-Type:
+      - text/html;charset=UTF-8
+      Date:
+      - Wed, 04 Feb 2026 17:34:10 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:01 GMT
+      Last-Modified:
+      - Wed, 04 Feb 2026 17:34:10 GMT
+      Server:
+      - nginx/1.28.0
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      erddap-server:
+      - 2.28.1
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 200
+      message: ''
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Host:
+      - standards.sensors.ioos.us
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?crs%26time%253E%3D2000-03-23T00%253A00%253A00Z%26time%253C%3D2000-03-30T15%253A08%253A00Z
+  response:
+    body:
+      string: "Error {\n    code=400;\n    message=\"Bad Request: Query error: Unrecognized\
+        \ constraint variable=\\\"time%3E\\\".\";\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Wed, 04 Feb 2026 17:34:14 GMT
+      Last-Modified:
+      - Wed, 04 Feb 2026 17:34:14 GMT
+      Server:
+      - nginx/1.28.0
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - 2.28.1
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 400
+      message: ''
+version: 1
