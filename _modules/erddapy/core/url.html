@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>erddapy.core.url &#8212; erddapy 3.0.0 documentation</title>
+    <title>erddapy.core.url &#8212; erddapy 3.1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=f6a572b4" />
-    <script src="../../../_static/documentation_options.js?v=acc74ff5"></script>
+    <script src="../../../_static/documentation_options.js?v=dd1205ac"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -285,6 +285,12 @@
     <span class="k">return</span> <span class="nb">any</span><span class="p">(</span>
         <span class="kc">True</span> <span class="k">for</span> <span class="n">substring</span> <span class="ow">in</span> <span class="n">substrings</span> <span class="k">if</span> <span class="n">substring</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">constraint</span><span class="p">)</span>
     <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_quoted</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if UTL is percent encoded, else False.&quot;&quot;&quot;</span>
+    <span class="n">unquoted</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">unquote_plus</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">url</span> <span class="o">!=</span> <span class="n">unquoted</span>
 
 
 <div class="viewcode-block" id="parse_dates">

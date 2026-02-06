@@ -28,10 +28,10 @@
    "execution_count": 1,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-04T17:58:42.382223Z",
-     "iopub.status.busy": "2026-02-04T17:58:42.382054Z",
-     "iopub.status.idle": "2026-02-04T17:58:42.842855Z",
-     "shell.execute_reply": "2026-02-04T17:58:42.842078Z"
+     "iopub.execute_input": "2026-02-06T17:47:27.901479Z",
+     "iopub.status.busy": "2026-02-06T17:47:27.901310Z",
+     "iopub.status.idle": "2026-02-06T17:47:28.324400Z",
+     "shell.execute_reply": "2026-02-06T17:47:28.323622Z"
     }
    },
    "outputs": [],
@@ -60,10 +60,10 @@
    "execution_count": 2,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-04T17:58:42.844786Z",
-     "iopub.status.busy": "2026-02-04T17:58:42.844592Z",
-     "iopub.status.idle": "2026-02-04T17:58:45.723071Z",
-     "shell.execute_reply": "2026-02-04T17:58:45.722085Z"
+     "iopub.execute_input": "2026-02-06T17:47:28.326322Z",
+     "iopub.status.busy": "2026-02-06T17:47:28.326138Z",
+     "iopub.status.idle": "2026-02-06T17:47:31.577789Z",
+     "shell.execute_reply": "2026-02-06T17:47:31.576898Z"
     }
    },
    "outputs": [
@@ -210,10 +210,10 @@
    "execution_count": 3,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-04T17:58:45.753211Z",
-     "iopub.status.busy": "2026-02-04T17:58:45.753009Z",
-     "iopub.status.idle": "2026-02-04T17:58:45.757116Z",
-     "shell.execute_reply": "2026-02-04T17:58:45.756411Z"
+     "iopub.execute_input": "2026-02-06T17:47:31.607646Z",
+     "iopub.status.busy": "2026-02-06T17:47:31.607427Z",
+     "iopub.status.idle": "2026-02-06T17:47:31.611670Z",
+     "shell.execute_reply": "2026-02-06T17:47:31.610900Z"
     }
    },
    "outputs": [
@@ -264,10 +264,10 @@
    "execution_count": 4,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-04T17:58:45.758723Z",
-     "iopub.status.busy": "2026-02-04T17:58:45.758544Z",
-     "iopub.status.idle": "2026-02-04T17:58:46.089939Z",
-     "shell.execute_reply": "2026-02-04T17:58:46.089022Z"
+     "iopub.execute_input": "2026-02-06T17:47:31.613199Z",
+     "iopub.status.busy": "2026-02-06T17:47:31.613042Z",
+     "iopub.status.idle": "2026-02-06T17:47:32.008072Z",
+     "shell.execute_reply": "2026-02-06T17:47:32.007284Z"
     }
    },
    "outputs": [
@@ -394,7 +394,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.14.2"
+   "version": "3.14.3"
   }
  },
  "nbformat": 4,
