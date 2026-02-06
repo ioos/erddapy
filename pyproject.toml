@@ -33,6 +33,8 @@ urls.documentation = "https://ioos.github.io/erddapy"
 urls.homepage = "https://github.com/ioos/erddapy"
 urls.repository = "https://github.com/ioos/erddapy"
 
+entry-points."xarray.backends".erddapy = "erddapy.xarray_erddap:ERDDAPyBackendEntrypoint"
+
 [tool.setuptools]
 packages = [
   "erddapy",

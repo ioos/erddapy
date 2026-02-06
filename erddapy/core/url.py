@@ -194,6 +194,12 @@ def _check_substrings(constraint: dict) -> bool:
     )
 
 
+def _is_quoted(url: str) -> bool:
+    """Return True if UTL is percent encoded, else False."""
+    unquoted = parse.unquote_plus(url)
+    return url != unquoted
+
+
 def parse_dates(
     date_time: datetime | str,
     *,

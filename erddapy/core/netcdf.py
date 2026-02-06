@@ -9,7 +9,9 @@ from tempfile import NamedTemporaryFile
 from typing import TYPE_CHECKING, BinaryIO
 from urllib.parse import urlparse
 
-from erddapy.core.url import urlopen
+# Maybe _is_quoted should be lower in the stack call,
+# but I'm restricting it to netCDF for now.
+from erddapy.core.url import _is_quoted, urlopen
 
 if TYPE_CHECKING:
     from collections.abc import Generator
@@ -27,7 +29,15 @@ def _nc_dataset(
     """
     from netCDF4 import Dataset  # noqa: PLC0415
 
-    data = urlopen(url, requests_kwargs=requests_kwargs)
+    quote = False
+    if not _is_quoted(url):
+        quote = True
+
+    data = urlopen(
+        url,
+        quote=quote,
+        requests_kwargs=requests_kwargs,
+    )
     try:
         return Dataset(Path(urlparse(url).path).name, memory=data.read())
     except OSError:
