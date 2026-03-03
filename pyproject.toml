@@ -32,7 +32,6 @@ dynamic = [
 urls.documentation = "https://ioos.github.io/erddapy"
 urls.homepage = "https://github.com/ioos/erddapy"
 urls.repository = "https://github.com/ioos/erddapy"
-
 entry-points."xarray.backends".erddapy = "erddapy.xarray_erddap:ERDDAPyBackendEntrypoint"
 
 [tool.setuptools]
@@ -40,9 +39,7 @@ packages = [
   "erddapy",
 ]
 include-package-data = true
-
-[tool.setuptools.dynamic]
-dependencies = { file = [
+dynamic.dependencies = { file = [
   "requirements.txt",
 ] }
 
@@ -64,12 +61,12 @@ ignore = [
   "tests/*",
 ]
 
-[tool.pytest.ini_options]
-markers = [
+[tool.pytest]
+ini_options.markers = [
   "web: marks tests require connection (deselect with '-m \"not web\"')",
   "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
 ]
-filterwarnings = [
+ini_options.filterwarnings = [
   "error:::erddapy.*",
   "ignore::UserWarning",
   "ignore::RuntimeWarning",
