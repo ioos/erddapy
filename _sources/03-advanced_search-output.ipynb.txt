@@ -15,10 +15,10 @@
    "execution_count": 1,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:49:15.184261Z",
-     "iopub.status.busy": "2026-02-06T17:49:15.184038Z",
-     "iopub.status.idle": "2026-02-06T17:49:15.579640Z",
-     "shell.execute_reply": "2026-02-06T17:49:15.578812Z"
+     "iopub.execute_input": "2026-03-06T15:44:45.474161Z",
+     "iopub.status.busy": "2026-03-06T15:44:45.473988Z",
+     "iopub.status.idle": "2026-03-06T15:44:45.848336Z",
+     "shell.execute_reply": "2026-03-06T15:44:45.847559Z"
     }
    },
    "outputs": [],
@@ -43,10 +43,10 @@
    "execution_count": 2,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:49:15.581490Z",
-     "iopub.status.busy": "2026-02-06T17:49:15.581299Z",
-     "iopub.status.idle": "2026-02-06T17:49:16.186949Z",
-     "shell.execute_reply": "2026-02-06T17:49:16.186366Z"
+     "iopub.execute_input": "2026-03-06T15:44:45.850251Z",
+     "iopub.status.busy": "2026-03-06T15:44:45.850072Z",
+     "iopub.status.idle": "2026-03-06T15:44:46.097321Z",
+     "shell.execute_reply": "2026-03-06T15:44:46.096571Z"
     }
    },
    "outputs": [
@@ -59,7 +59,7 @@
        "3        etopo1_ice_lon360\n",
        "4                   etopo5\n",
        "5            etopo5_lon180\n",
-       "Name: Dataset ID, dtype: object"
+       "Name: Dataset ID, dtype: str"
       ]
      },
      "execution_count": 2,
@@ -89,10 +89,10 @@
    "execution_count": 3,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:49:16.217541Z",
-     "iopub.status.busy": "2026-02-06T17:49:16.217320Z",
-     "iopub.status.idle": "2026-02-06T17:49:16.860117Z",
-     "shell.execute_reply": "2026-02-06T17:49:16.859372Z"
+     "iopub.execute_input": "2026-03-06T15:44:46.127571Z",
+     "iopub.status.busy": "2026-03-06T15:44:46.127337Z",
+     "iopub.status.idle": "2026-03-06T15:44:46.443669Z",
+     "shell.execute_reply": "2026-03-06T15:44:46.442789Z"
     }
    },
    "outputs": [
@@ -101,7 +101,7 @@
       "text/plain": [
        "0           etopo5\n",
        "1    etopo5_lon180\n",
-       "Name: Dataset ID, dtype: object"
+       "Name: Dataset ID, dtype: str"
       ]
      },
      "execution_count": 3,
@@ -129,10 +129,10 @@
    "execution_count": 4,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:49:16.862058Z",
-     "iopub.status.busy": "2026-02-06T17:49:16.861897Z",
-     "iopub.status.idle": "2026-02-06T17:49:17.488952Z",
-     "shell.execute_reply": "2026-02-06T17:49:17.488182Z"
+     "iopub.execute_input": "2026-03-06T15:44:46.445293Z",
+     "iopub.status.busy": "2026-03-06T15:44:46.445120Z",
+     "iopub.status.idle": "2026-03-06T15:44:46.968929Z",
+     "shell.execute_reply": "2026-03-06T15:44:46.968105Z"
     }
    },
    "outputs": [
@@ -141,7 +141,7 @@
       "text/plain": [
        "0           etopo5\n",
        "1    etopo5_lon180\n",
-       "Name: Dataset ID, dtype: object"
+       "Name: Dataset ID, dtype: str"
       ]
      },
      "execution_count": 4,
@@ -169,10 +169,10 @@
    "execution_count": 5,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:49:17.490684Z",
-     "iopub.status.busy": "2026-02-06T17:49:17.490523Z",
-     "iopub.status.idle": "2026-02-06T17:49:18.564134Z",
-     "shell.execute_reply": "2026-02-06T17:49:18.563374Z"
+     "iopub.execute_input": "2026-03-06T15:44:46.970525Z",
+     "iopub.status.busy": "2026-03-06T15:44:46.970341Z",
+     "iopub.status.idle": "2026-03-06T15:44:47.482100Z",
+     "shell.execute_reply": "2026-03-06T15:44:47.481272Z"
     },
     "scrolled": true
    },
@@ -209,10 +209,10 @@
    "execution_count": 6,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:49:18.565857Z",
-     "iopub.status.busy": "2026-02-06T17:49:18.565696Z",
-     "iopub.status.idle": "2026-02-06T17:49:18.941453Z",
-     "shell.execute_reply": "2026-02-06T17:49:18.940691Z"
+     "iopub.execute_input": "2026-03-06T15:44:47.483754Z",
+     "iopub.status.busy": "2026-03-06T15:44:47.483589Z",
+     "iopub.status.idle": "2026-03-06T15:44:47.717179Z",
+     "shell.execute_reply": "2026-03-06T15:44:47.716440Z"
     }
    },
    "outputs": [
@@ -248,10 +248,10 @@
    "execution_count": 7,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:49:18.943127Z",
-     "iopub.status.busy": "2026-02-06T17:49:18.942965Z",
-     "iopub.status.idle": "2026-02-06T17:50:43.749969Z",
-     "shell.execute_reply": "2026-02-06T17:50:43.749154Z"
+     "iopub.execute_input": "2026-03-06T15:44:47.718824Z",
+     "iopub.status.busy": "2026-03-06T15:44:47.718661Z",
+     "iopub.status.idle": "2026-03-06T15:45:17.822479Z",
+     "shell.execute_reply": "2026-03-06T15:45:17.821555Z"
     }
    },
    "outputs": [],
@@ -271,10 +271,10 @@
    "execution_count": 8,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:50:43.751571Z",
-     "iopub.status.busy": "2026-02-06T17:50:43.751400Z",
-     "iopub.status.idle": "2026-02-06T17:50:43.754627Z",
-     "shell.execute_reply": "2026-02-06T17:50:43.753864Z"
+     "iopub.execute_input": "2026-03-06T15:45:17.824049Z",
+     "iopub.status.busy": "2026-03-06T15:45:17.823888Z",
+     "iopub.status.idle": "2026-03-06T15:45:17.826936Z",
+     "shell.execute_reply": "2026-03-06T15:45:17.826191Z"
     }
    },
    "outputs": [
@@ -282,7 +282,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "There are 6342 entries in this search!\n"
+      "There are 6493 entries in this search!\n"
      ]
     }
    ],
@@ -302,10 +302,10 @@
    "execution_count": 9,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:50:43.756071Z",
-     "iopub.status.busy": "2026-02-06T17:50:43.755914Z",
-     "iopub.status.idle": "2026-02-06T17:50:43.759965Z",
-     "shell.execute_reply": "2026-02-06T17:50:43.759268Z"
+     "iopub.execute_input": "2026-03-06T15:45:17.828494Z",
+     "iopub.status.busy": "2026-03-06T15:45:17.828306Z",
+     "iopub.status.idle": "2026-03-06T15:45:17.833525Z",
+     "shell.execute_reply": "2026-03-06T15:45:17.832726Z"
     },
     "scrolled": false
    },
@@ -319,6 +319,7 @@
        " 'https://basin.ceoe.udel.edu/erddap/',\n",
        " 'https://coastwatch.pfeg.noaa.gov/erddap/',\n",
        " 'https://cwcgom.aoml.noaa.gov/erddap/',\n",
+       " 'https://data.cioospacific.ca/erddap/',\n",
        " 'https://data.pmel.noaa.gov/pmel/erddap/',\n",
        " 'https://erddap.bco-dmo.org/erddap/',\n",
        " 'https://erddap.emodnet-physics.eu/erddap/',\n",
@@ -362,10 +363,10 @@
    "execution_count": 10,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-02-06T17:50:43.761489Z",
-     "iopub.status.busy": "2026-02-06T17:50:43.761333Z",
-     "iopub.status.idle": "2026-02-06T17:50:44.707476Z",
-     "shell.execute_reply": "2026-02-06T17:50:44.706754Z"
+     "iopub.execute_input": "2026-03-06T15:45:17.835137Z",
+     "iopub.status.busy": "2026-03-06T15:45:17.834963Z",
+     "iopub.status.idle": "2026-03-06T15:45:18.288238Z",
+     "shell.execute_reply": "2026-03-06T15:45:18.287483Z"
     }
    },
    "outputs": [
