@@ -9,6 +9,9 @@ repos:
     - id: check-docstring-first
     - id: check-added-large-files
       exclude_types: [yaml]
+    - id: check-json
+    - id: check-merge-conflict
+    - id: check-yaml
     - id: requirements-txt-fixer
     - id: file-contents-sorter
       files: requirements-dev.txt
@@ -34,7 +37,7 @@ repos:
       args: [--config=pyproject.toml]
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.1
+  rev: v2.4.2
   hooks:
     - id: codespell
       exclude: >
@@ -50,7 +53,7 @@ repos:
     - id: add-trailing-comma
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.15.4
+  rev: v0.15.5
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
