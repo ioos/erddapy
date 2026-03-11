@@ -15,7 +15,7 @@ pre-commit
 pytest
 pytest-cov
 pytest-sugar
-pytest-vcr
+pytest-recording
 regionmask>=0.9
 scitools-iris>=3.3.0
 setuptools_scm
