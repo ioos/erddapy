@@ -1,0 +1,50 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Host:
+      - erddap.ioos.us
+      User-Agent:
+      - python-httpx/0.28.1
+    method: HEAD
+    uri: https://erddap.ioos.us/erddap/search/advanced.csv?page=1&itemsPerPage=1000000&protocol=(ANY)&cdm_data_type=(ANY)&institution=(ANY)&ioos_category=(ANY)&keywords=(ANY)&long_name=(ANY)&standard_name=(ANY)&variableName=(ANY)&minLon=(ANY)&maxLon=(ANY)&minLat=(ANY)&maxLat=(ANY)&minTime=&maxTime=&searchFor=NOAA
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=AdvancedSearch.csv
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Wed, 11 Mar 2026 17:58:59 GMT
+      Keep-Alive:
+      - timeout=20
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+    status:
+      code: 200
+      message: ''
+version: 1

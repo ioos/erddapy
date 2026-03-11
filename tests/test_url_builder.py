@@ -68,8 +68,8 @@ def test_search_url_valid_request(e):
 @pytest.mark.vcr
 def test_search_url_valid_request_with_relative_time_constraints(e):
     """Test if a bad request returns HTTPError."""
-    min_time = "now-25years"
-    max_time = "now-20years"
+    min_time = "now-50years"
+    max_time = "now"
     kw = {"min_time": min_time, "max_time": max_time}
     url = e.get_search_url(dataset_id="org_cormp_cap2", **kw)
     assert url == check_url_response(url)
