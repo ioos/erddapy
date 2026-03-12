@@ -3,7 +3,9 @@
 version: 2
 updates:
 
-  - package-ecosystem: "github-actions"
+  - package-ecosystem:
+    - "github-actions"
+    - "pre-commit"
     directory: "/"
     schedule:
       interval: "daily"

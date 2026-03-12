@@ -76,12 +76,12 @@ repos:
     - id: nb-strip-paths
 
 - repo: https://github.com/tox-dev/pyproject-fmt
-  rev: v2.16.2
+  rev: v2.18.1
   hooks:
     - id: pyproject-fmt
 
 - repo: https://github.com/woodruffw/zizmor-pre-commit
-  rev: v1.22.0
+  rev: v1.23.1
   hooks:
     - id: zizmor
 
@@ -91,7 +91,5 @@ ci:
 
         for more information, see https://pre-commit.ci
     autofix_prs: false
-    autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
-    autoupdate_schedule: monthly
     skip: []
     submodules: false
