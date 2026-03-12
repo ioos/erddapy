@@ -29,13 +29,13 @@ interactions:
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Wed, 11 Mar 2026 17:59:45 GMT
+      - Thu, 12 Mar 2026 12:06:49 GMT
       Last-Modified:
-      - Wed, 11 Mar 2026 17:59:45 GMT
+      - Thu, 12 Mar 2026 12:06:49 GMT
       Server:
       - nginx/1.28.0
       Set-Cookie:
-      - cid=CgIHBWmxrXsV3wjNAx9HAg==; expires=Fri, 10-Mar-28 17:59:45 GMT; path=/
+      - cid=CgIKAWmyrEG0f1EBAxTFAg==; expires=Sat, 11-Mar-28 12:06:49 GMT; path=/
       Transfer-Encoding:
       - chunked
       erddap-server:

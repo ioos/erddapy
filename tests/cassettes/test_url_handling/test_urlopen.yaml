@@ -51,11 +51,11 @@ interactions:
         http://beta.sensors.ioos.us http://video.ioos.us http://dacregistration.atn.ioos.us;
         report-uri https://sentry.srv.axds.co/api/2/security/?sentry_key=7de616494a2346fb8fdf8cd018062730&sentry_version=7'
       Date:
-      - Wed, 11 Mar 2026 18:06:05 GMT
+      - Thu, 12 Mar 2026 12:16:10 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Last-Modified:
-      - Wed, 11 Mar 2026 18:06:05 GMT
+      - Thu, 12 Mar 2026 12:16:10 GMT
       Location:
       - http://standards.sensors.ioos.us/erddap/tabledap/index.html?page=1&itemsPerPage=1000
       Server:
@@ -98,7 +98,7 @@ interactions:
       Content-Type:
       - text/html
       Date:
-      - Wed, 11 Mar 2026 18:06:05 GMT
+      - Thu, 12 Mar 2026 12:16:16 GMT
       Location:
       - https://standards.sensors.ioos.us/erddap/tabledap/index.html?page=1&itemsPerPage=1000
       Server:
@@ -238,11 +238,11 @@ interactions:
       Content-Type:
       - text/html;charset=UTF-8
       Date:
-      - Wed, 11 Mar 2026 18:06:07 GMT
+      - Thu, 12 Mar 2026 12:16:18 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Last-Modified:
-      - Wed, 11 Mar 2026 18:06:07 GMT
+      - Thu, 12 Mar 2026 12:16:18 GMT
       Server:
       - nginx/1.28.0
       Strict-Transport-Security:
