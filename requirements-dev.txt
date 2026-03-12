@@ -14,8 +14,8 @@ pooch
 pre-commit
 pytest
 pytest-cov
+pytest-recording
 pytest-sugar
-pytest-vcr
 regionmask>=0.9
 scitools-iris>=3.3.0
 setuptools_scm

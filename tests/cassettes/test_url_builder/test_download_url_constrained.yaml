@@ -1,0 +1,76 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Host:
+      - standards.sensors.ioos.us
+      User-Agent:
+      - python-httpx/0.28.1
+    method: HEAD
+    uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.csv?station,z&time%3E=953769600.0&time%3C=954425280.0&latitude%3E=32.8032&latitude%3C=32.8032&longitude%3E=-79.6204&longitude%3C=-79.6204
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=org_cormp_cap2_3cb6_db9f_e150.csv
+      Content-Encoding:
+      - gzip
+      Content-Security-Policy:
+      - 'default-src ''self''; script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        data: blob: http://*.axds.co http://*.axiomalaska.com http://*.axiomdatascience.com
+        http://*.aoos.org http://*.ioos.us http://cdnjs.cloudflare.com http://d3js.org
+        http://maps.googleapis.com http://www.youtube.com http://www.googletagmanager.com
+        http://cdn.jsdelivr.net http://dgd6r9iiqa8y9.cloudfront.net; style-src ''self''
+        ''unsafe-inline'' http://*.axds.co http://*.axiomalaska.com http://fonts.googleapis.com
+        http://cdn.jsdelivr.net http://dgd6r9iiqa8y9.cloudfront.net; object-src ''none'';
+        base-uri ''self'' http://www.opendap.org; connect-src ''self'' http://*.axds.co
+        http://*.axiomalaska.com http://*.axiomdatascience.com http://*.ioos.us http://maps.googleapis.com
+        http://www.google-analytics.com http://cdn.jsdelivr.net; font-src ''self''
+        data: http://fonts.gstatic.com http://cdn.jsdelivr.net; frame-src ''self''
+        http://*.axiomalaska.com http://www.youtube.com; img-src ''self'' data: http://*.axds.co
+        http://*.axiomalaska.com http://*.mapbox.com http://*.openstreetmap.org http://maps.googleapis.com
+        http://*.noaa.gov http://maps.gstatic.com http://www2.demis.nl http://ahocevar.com
+        http://*.nasa.gov http://godiva.reading.ac.uk http://www.gebco.net http://wms.gebco.net
+        http://*.api.mapbox.com http://*.alaska.gov http://fishingstatus.com http://images.marinespecies.org
+        http://images.squarespace-cdn.com http://ioos.us http://server.arcgisonline.com
+        http://upload.wikimedia.org http://wms.chartbundle.com http://www.gmrt.org
+        http://secoora.org http://www.gravatar.com http://www.googletagmanager.com
+        http://*.amazonaws.com http://cdn.jsdelivr.net http://dgd6r9iiqa8y9.cloudfront.net;
+        manifest-src ''self''; media-src ''self'' http://*.amazonaws.com http://cdn.jsdelivr.net;
+        worker-src blob:; form-action http://status.atn.ioos.us http://atn.ioos.us
+        http://portal.atn.ioos.us http://mbon.ioos.us http://sensors.ioos.us http://standards.sensors.ioos.us
+        http://beta.sensors.ioos.us http://video.ioos.us http://dacregistration.atn.ioos.us;
+        report-uri https://sentry.srv.axds.co/api/2/security/?sentry_key=7de616494a2346fb8fdf8cd018062730&sentry_version=7'
+      Content-Type:
+      - text/csv;charset=ISO-8859-1
+      Date:
+      - Thu, 12 Mar 2026 12:15:53 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:01 GMT
+      Last-Modified:
+      - Thu, 12 Mar 2026 12:15:53 GMT
+      Server:
+      - nginx/1.28.0
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      erddap-server:
+      - 2.28.1
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 200
+      message: ''
+version: 1

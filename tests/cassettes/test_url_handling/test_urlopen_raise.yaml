@@ -1,0 +1,38 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Host:
+      - httpbin.org
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://httpbin.org/status/404
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Thu, 12 Mar 2026 12:16:34 GMT
+      Server:
+      - gunicorn/19.9.0
+    status:
+      code: 404
+      message: NOT FOUND
+version: 1

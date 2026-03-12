@@ -42,7 +42,7 @@ def test_quoted_urlopen():
 @pytest.mark.vcr
 def test_urlopen_raise():
     """Assure that urlopen will raise for bad URLs."""
-    url = "https://developer.mozilla.org/en-US/404"
+    url = "https://httpbin.org/status/404"
     with pytest.raises(httpx.HTTPError):
         urlopen(url)
 

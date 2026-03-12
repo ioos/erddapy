@@ -1,0 +1,48 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      Host:
+      - erddap.sensors.ioos.us
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://erddap.sensors.ioos.us/erddap/search/index.csv?page=1&itemsPerPage=1000000&searchFor=%22incredibly_long_string_that_should_never_match_a_real_dataset%22%20
+  response:
+    body:
+      string: "Error {\n    code=404;\n    message=\"Not Found: Resource not found:
+        Your query produced no matching results. Check the spelling of the word(s)
+        you searched for.\";\n}\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Description:
+      - dods-error
+      Content-Encoding:
+      - identity
+      Content-Type:
+      - text/plain;charset=UTF-8
+      Date:
+      - Thu, 12 Mar 2026 12:06:49 GMT
+      Last-Modified:
+      - Thu, 12 Mar 2026 12:06:49 GMT
+      Server:
+      - nginx/1.28.0
+      Set-Cookie:
+      - cid=CgIKAWmyrEG0f1EBAxTFAg==; expires=Sat, 11-Mar-28 12:06:49 GMT; path=/
+      Transfer-Encoding:
+      - chunked
+      erddap-server:
+      - 2.28.1
+      xdods-server:
+      - dods/3.7
+    status:
+      code: 404
+      message: ''
+version: 1
