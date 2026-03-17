@@ -31,13 +31,13 @@ def _is_netcdf(url: str) -> bool:
     return isnetcdf
 
 
-def _is_url(url: str) -> bool:
+def _is_url(url: object) -> bool:
     """Check if it is a valid ERDDAP URL.
 
     Parameters
     ----------
-    url : str or unicode
-        ERDDAP netcdf-like URL
+    url : object
+        Input to check. Non-string values return False.
 
     Returns
     -------
@@ -75,7 +75,7 @@ class ERDDAPyBackendEntrypoint(xr.backends.BackendEntrypoint):
 
     def guess_can_open(
         self,
-        filename_or_obj: str,
+        filename_or_obj: object,
     ) -> bool:
         """Check if the backend can open the given URL."""
         return _is_url(filename_or_obj)
