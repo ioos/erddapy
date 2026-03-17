@@ -1,4 +1,4 @@
-"""ERDDAPyBackebdEntrypoint."""
+"""ERDDAPyBackendEntrypoint."""
 
 import urllib.parse
 
@@ -47,7 +47,7 @@ def _is_url(url: str) -> bool:
     """
     isurl = False
     if not isinstance(url, str):
-        isurl = False
+        return False
     if url.startswith(("http://", "https://")) and "/erddap/" in url:
         isurl = True
     return isurl
@@ -72,6 +72,13 @@ class ERDDAPyBackendEntrypoint(xr.backends.BackendEntrypoint):
     ) -> xr.Dataset:
         """Open ERDDAP URLs as xarray datasets."""
         return open_erddap_dataset(filename_or_obj)
+
+    def guess_can_open(
+        self,
+        filename_or_obj: str,
+    ) -> bool:
+        """Check if the backend can open the given URL."""
+        return _is_url(filename_or_obj)
 
     open_dataset_parameters = ("filename_or_obj", "drop_variables")
 
