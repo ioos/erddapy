@@ -1,4 +1,4 @@
-"""ERDDAPyBackebdEntrypoint."""
+"""ERDDAPyBackendEntrypoint."""
 
 import urllib.parse
 
