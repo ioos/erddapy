@@ -3,9 +3,7 @@
 version: 2
 updates:
 
-  - package-ecosystem:
-    - "github-actions"
-    - "pre-commit"
+  - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
@@ -15,5 +13,14 @@ updates:
       github-actions:
         patterns:
           - '*'
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: "pre-commit"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "Bot"
     cooldown:
       default-days: 7
