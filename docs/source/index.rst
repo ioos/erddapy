@@ -42,6 +42,7 @@ See https://erddap.github.io/ for more information.
    02-extras-output.ipynb
    03-advanced_search-output.ipynb
    erddapy
+   xarray
 
 Indices and tables
 ==================
