@@ -56,68 +56,41 @@ OptionalStr = str | None
 
 
 class ERDDAP:
-    """Creates an ERDDAP instance for a specific server endpoint.
+    """
+    Python interface for interacting with ERDDAP servers.
 
-    Args:
-    ----
-        server: an ERDDAP server URL or acronym is using the builtin servers.
-        protocol: tabledap or griddap.
+    This class provides a high-level API for constructing requests,
+    querying datasets, and retrieving data in multiple formats such as
+    pandas DataFrames, xarray Datasets, and netCDF objects.
+
+    Key Features:
+    -------------
+    - Search datasets available on an ERDDAP server
+    - Retrieve metadata and dataset information
+    - Download data using tabledap or griddap protocols
+    - Convert results into Python-friendly formats (xarray, pandas)
 
     Attributes:
     ----------
-        dataset_id: a dataset unique id.
-        variables: a list variables to download.
-        response: default is HTML.
-        constraints: download constraints, default None (opendap-like url)
-        params and requests_kwargs: `httpx.get` options
+    server : str
+        Base URL of the ERDDAP server.
 
-    Returns:
-    -------
-        instance: the ERDDAP URL builder.
+    protocol : str
+        Access method ('tabledap' or 'griddap').
 
-    Examples:
-    --------
-        Specifying the server URL
+    dataset_id : str
+        Identifier of the dataset to query.
 
-        >>> e = ERDDAP(server="https://gliders.ioos.us/erddap")
+    variables : list[str]
+        Variables to retrieve.
 
-        let's search for glider `ru29` and read the csv response with pandas.
+    constraints : dict
+        Filtering conditions applied to data queries.
 
-        >>> import pandas as pd
-        >>> url = e.get_search_url(search_for="ru29", response="csv")
-        >>> pd.read_csv(url)["Dataset ID"]
-        0    ru29-20150623T1046
-        1    ru29-20161105T0131
-        Name: Dataset ID, dtype: object
-
-        there are "shortcuts" for some servers
-
-        >>> e = ERDDAP(server="SECOORA")
-        >>> e.server
-        'https://erddap.secoora.org/erddap'
-
-        to get a list of the shortcuts available servers:
-
-        >>> from erddapy import servers
-        >>> {k: v.url for k, v in servers.items()}
-        {'MDA': 'https://bluehub.jrc.ec.europa.eu/erddap/',
-         'MII': 'https://erddap.marine.ie/erddap/',
-         'CSCGOM': 'https://cwcgom.aoml.noaa.gov/erddap/',
-         'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap/',
-         'CeNCOOS': 'https://erddap.axiomalaska.com/erddap/',
-         'NERACOOS': 'https://www.neracoos.org/erddap/',
-         'NGDAC': 'https://gliders.ioos.us/erddap/',
-         'PacIOOS': 'https://pae-paha.pacioos.hawaii.edu/erddap/',
-         'SECOORA': 'https://erddap.secoora.org/erddap/',
-         'NCEI': 'https://ecowatch.ncddc.noaa.gov/erddap/',
-         'OSMC': 'https://osmc.noaa.gov/erddap/',
-         'UAF': 'https://upwell.pfeg.noaa.gov/erddap/',
-         'ONC': 'https://dap.onc.uvic.ca/erddap/',
-         'BMLSC': 'http://bmlsc.ucdavis.edu:8080/erddap/',
-         'RTECH': 'https://meteo.rtech.fr/erddap/',
-         'IFREMER': 'https://www.ifremer.fr/erddap/',
-         'UBC': 'https://salishsea.eos.ubc.ca/erddap/'}
-
+    Notes:
+    ------
+    ERDDAP is widely used in oceanographic and environmental data systems.
+    This class simplifies interaction with ERDDAP endpoints in Python.
     """
 
     def __init__(
@@ -312,7 +285,7 @@ class ERDDAP:
         response = response or self.response
         return get_categorize_url(self.server, categorize_by, value, response)
 
-    def get_download_url(  # noqa: PLR0913
+    def get_download_url(
         self: ERDDAP,
         *,
         dataset_id: OptionalStr = None,
@@ -323,41 +296,53 @@ class ERDDAP:
         constraints: OptionalDict = None,
         distinct: OptionalBool = False,
     ) -> str:
-        """Build the download URL for the `server` endpoint.
+        """
+        Construct a valid ERDDAP download URL for a dataset request.
 
-        Args:
-        ----
-            dataset_id: a dataset unique id.
-            protocol: tabledap or griddap.
-            variables (list/tuple): a list of the variables to download.
-            dim_names (list/tuple): a list of the dimensions (griddap only).
-            response (str): default is HTML.
-            constraints (dict): download constraints, default None (opendap).
-            distinct (bool): if true, only unique values will be downloaded.
+        This method combines server URL, dataset ID, protocol, variables,
+        and constraints to generate a downloadable endpoint.
 
-        Example:
-        -------
-            constraints = {
-                'latitude<=': 41.0,
-                'latitude>=': 38.0,
-                'longitude<=': -69.0,
-                'longitude>=': -72.0,
-                'time<=': '2017-02-10T00:00:00+00:00',
-                'time>=': '2016-07-10T00:00:00+00:00',
-            }
+        Parameters:
+        ----------
+        dataset_id : str
+            Unique identifier of the dataset.
 
-            One can also use relative constraints like:
-            constraints = {
-                'time>': 'now-7days',
-                'latitude<': 'min(longitude)+180',
-                'depth>': 'max(depth)-23',
-            }
+        protocol : str
+            ERDDAP access protocol:
+            - 'griddap' for gridded datasets
+            - 'tabledap' for tabular datasets
+
+        variables : list[str]
+            Variables to include in the request.
+
+        dim_names : list[str]
+            Dimension names (used for griddap datasets).
+
+        response : str
+            Output format (e.g., 'nc', 'csv', 'json').
+
+        constraints : dict
+            Filters applied to dataset (e.g., time, latitude, longitude).
+
+        distinct : bool
+            If True, return only unique values.
 
         Returns:
         -------
-            url (str): the download URL for the `response` chosen.
+        str
+            A fully constructed ERDDAP download URL.
 
+        Raises:
+        ------
+        ValueError
+            If dataset_id or protocol is missing or invalid.
+
+        Notes:
+        ------
+        This function validates constraints and variables before constructing
+        the URL to prevent invalid queries.
         """
+
         dataset_id = dataset_id or self.dataset_id
         protocol = protocol or self.protocol
         variables = variables or self.variables
