@@ -48,4 +48,16 @@ jobs:
 
     - name: Full Tests
       run: |
-        python -m pytest -rxs --cov=erddapy tests
+        python -m pytest -rxs \
+          --cov=erddapy \
+          --cov-report=term-missing \
+          --cov-report=xml \
+          tests
+
+    - name: Store coverage report
+      if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+      uses: actions/upload-artifact@604373da6383bf45833079f984012d1253fd6154  # v4.4.3
+      with:
+        name: coverage-xml-py3.12-ubuntu
+        path: coverage.xml
+        if-no-files-found: error
