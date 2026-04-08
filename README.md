@@ -46,6 +46,7 @@ erddapy: ERDDAP + Python.
 
 - [Overview](#overview)
   - [Example](#example)
+  - [Open ERDDAP URLs in xarray](#open-erddap-urls-in-xarray)
 - [Get in touch](#get-in-touch)
 - [License and copyright](#license-and-copyright)
 
@@ -117,6 +118,35 @@ e.variables = [
 
 df = e.to_pandas()
 ```
+
+### Open ERDDAP URLs in xarray
+
+erddapy registers an **xarray** backend (`engine="erddap"`) so you can open
+ERDDAP **TableDAP** / **GridDAP** URLs that return netCDF-style responses (or
+OPeNDAP views) without reshaping the URL yourself.
+
+Install xarray and a NetCDF reader (for example `netCDF4`) in the same environment:
+
+```shell
+python -m pip install erddapy xarray netcdf4
+```
+
+Example (subset of the same glider dataset as above):
+
+```python
+import xarray as xr
+
+url = (
+    "https://gliders.ioos.us/erddap/tabledap/whoi_406-20160902T1700.nc"
+    "?time,latitude,longitude,temperature"
+    "&time>=2016-07-10T00:00:00Z"
+    "&time<=2016-07-15T00:00:00Z"
+)
+ds = xr.open_dataset(url, engine="erddap")
+```
+
+More detail, API reference, and notes on URL rules are in the documentation:
+[xarray backend](https://ioos.github.io/erddapy/xarray.html).
 
 
 ## Get in touch
