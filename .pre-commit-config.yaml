@@ -17,7 +17,7 @@ repos:
       files: requirements-dev.txt
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.20.0
+  rev: v1.20.1
   hooks:
   - id: mypy
     exclude: docs/source/conf.py
@@ -53,7 +53,7 @@ repos:
     - id: add-trailing-comma
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.15.9
+  rev: v0.15.10
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -76,12 +76,12 @@ repos:
     - id: nb-strip-paths
 
 - repo: https://github.com/tox-dev/pyproject-fmt
-  rev: v2.21.0
+  rev: v2.21.1
   hooks:
     - id: pyproject-fmt
 
 - repo: https://github.com/woodruffw/zizmor-pre-commit
-  rev: v1.23.1
+  rev: v1.24.1
   hooks:
     - id: zizmor
 
