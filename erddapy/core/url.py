@@ -116,7 +116,6 @@ def urlopen(
     return data
 
 
-@functools.lru_cache(maxsize=128)
 def check_url_response(url: str, **kwargs: dict) -> str:
     """Shortcut to `raise_for_status` instead of fetching the whole content.
 
