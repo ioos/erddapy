@@ -1,5 +1,7 @@
 *.egg*
 .coverage
+coverage.xml
+htmlcov/
 .ipynb_checkpoints
 .mypy_cache/
 .pytest_cache/
