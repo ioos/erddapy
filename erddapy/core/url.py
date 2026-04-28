@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 from typing import BinaryIO
 from urllib import parse
 
-import httpx
 import pytz
+import requests
 from pandas import to_datetime
 
 OptionalStr = str | None
@@ -68,19 +68,19 @@ def _clean_response(response: str) -> str:
 
 @functools.lru_cache(maxsize=128)
 def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
-    if "timeout" not in kwargs:
-        kwargs["timeout"] = 60
-    response = httpx.get(
+    timeout = kwargs.pop("timeout", 60)
+    response = requests.get(
         url,
-        follow_redirects=True,
+        allow_redirects=True,
         auth=auth,
+        timeout=timeout,
         **kwargs,
     )
     try:
         response.raise_for_status()
-    except httpx.HTTPError as err:
+    except requests.HTTPError as err:
         msg = str(response.content.decode())
-        raise httpx.HTTPError(msg) from err
+        raise requests.HTTPError(msg) from err
     return io.BytesIO(response.content)
 
 
@@ -90,9 +90,9 @@ def urlopen(
     quote: bool = True,
     requests_kwargs: dict | None = None,
 ) -> BinaryIO:
-    """Thin wrapper around httpx get content.
+    """Thin wrapper around requests get content.
 
-    See httpx.get docs for the `params` and `kwargs` options.
+    See requests.get docs for the `params` and `kwargs` options.
 
     """
     # This is a horrible hack to work around opendap.co-ops.nos.noaa.gov.
@@ -123,7 +123,8 @@ def check_url_response(url: str, **kwargs: dict) -> str:
     necessary. Otherwise let it fail later and avoid fetching the head.
 
     """
-    r = httpx.head(url, **kwargs)
+    timeout = kwargs.pop("timeout", 10)
+    r = requests.head(url, timeout=timeout, **kwargs)
     r.raise_for_status()
     return url
 
@@ -159,8 +160,8 @@ def _format_search_string(server: str, query: str) -> str:
 def _multi_urlopen(url: str) -> BinaryIO:
     """Simpler url open to work with multiprocessing."""
     try:
-        data = urlopen(url)
-    except (httpx.HTTPError, httpx.ConnectError):
+        data = urlopen(url, requests_kwargs={"timeout": 120})
+    except (requests.HTTPError, requests.ConnectionError):
         return None
     return data
 
