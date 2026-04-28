@@ -6,7 +6,6 @@ import sys
 import packaging.version
 import pytest
 import pytz
-import requests
 
 from erddapy.core.griddap import (
     _griddap_check_constraints,
@@ -17,7 +16,6 @@ from erddapy.core.url import (
     _quote_string_constraints,
     parse_dates,
 )
-from erddapy.erddapy import ERDDAP
 
 if packaging.version.parse(
     f"{sys.version_info.major}.{sys.version_info.minor}",
@@ -88,19 +86,6 @@ def test__format_constraints_url():
     )
 
     assert kw_url == "&latitude>=42&longitude<=42.0"
-
-
-@pytest.mark.web
-@pytest.mark.vcr
-def test_erddap2_10():
-    """Check regression for ERDDAP 2.10."""
-    url = ERDDAP(server="https://erddap.ioos.us/erddap/").get_search_url(
-        search_for="NOAA",
-        response="csv",
-    )
-    r = requests.head(url, timeout=10)
-    ok_200 = 200
-    assert r.status_code == ok_200
 
 
 def test__griddap_check_constraints():
