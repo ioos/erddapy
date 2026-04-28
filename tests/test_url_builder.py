@@ -1,7 +1,7 @@
 """Test URL builders."""
 
-import httpx
 import pytest
+import requests
 
 from erddapy.core.url import _clean_response, check_url_response, parse_dates
 from erddapy.erddapy import ERDDAP
@@ -29,7 +29,7 @@ def test_search_url_bad_request(e):
         "min_time": "1700-01-01T12:00:00Z",
         "max_time": "1750-01-01T12:00:00Z",
     }
-    with pytest.raises(httpx.HTTPError):
+    with pytest.raises(requests.HTTPError):
         check_url_response(e.get_search_url(**kw))
 
 
@@ -142,7 +142,7 @@ def test_download_url_unconstrained(e):
     dataset_id = "org_cormp_cap2"
     variables = ["station", "z"]
     url = e.get_download_url(dataset_id=dataset_id, variables=variables)
-    assert url == check_url_response(url, follow_redirects=True)
+    assert url == check_url_response(url, allow_redirects=True)
     assert url.startswith(
         f"{e.server}/{e.protocol}/{dataset_id}.{e.response}?",
     )
@@ -178,7 +178,7 @@ def test_download_url_constrained(e):
         response="csv",
         constraints=constraints,
     )
-    assert url == check_url_response(url, follow_redirects=True)
+    assert url == check_url_response(url, allow_redirects=True)
     assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.csv?")
     options = _url_to_dict(url)
     assert options["time>"] == str(parse_dates(min_time))
@@ -278,11 +278,11 @@ def test_download_url_distinct(e):
     assert with_distinct_url.endswith("&distinct()")
     assert no_distinct_url == check_url_response(
         no_distinct_url,
-        follow_redirects=True,
+        allow_redirects=True,
     )
     assert with_distinct_url == check_url_response(
         with_distinct_url,
-        follow_redirects=True,
+        allow_redirects=True,
     )
 
 

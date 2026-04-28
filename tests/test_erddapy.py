@@ -3,10 +3,10 @@
 import datetime
 import sys
 
-import httpx
 import packaging.version
 import pytest
 import pytz
+import requests
 
 from erddapy.core.griddap import (
     _griddap_check_constraints,
@@ -98,7 +98,7 @@ def test_erddap2_10():
         search_for="NOAA",
         response="csv",
     )
-    r = httpx.head(url)
+    r = requests.head(url, timeout=10)
     ok_200 = 200
     assert r.status_code == ok_200
 
