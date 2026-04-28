@@ -47,5 +47,6 @@ jobs:
         python -m pip install -e . --no-deps --force-reinstall
 
     - name: Full Tests
-      run: |
-        python -m pytest -rxs --cov=erddapy tests
+      run: >
+        pushd tests && python download_test_data.py && popd
+        && python -m pytest -rxs --cov=erddapy tests

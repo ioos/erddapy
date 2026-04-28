@@ -3,9 +3,9 @@
 import sys
 
 import dask
-import httpx
 import iris
 import pytest
+import requests
 import xarray as xr
 
 from erddapy import ERDDAP
@@ -84,7 +84,7 @@ def dataset_tabledap(sensors):
 def test_csv_search(gliders):
     """Test if a CSV search returns all items (instead of the first 1000)."""
     url = gliders.get_search_url(search_for="all", response="csv")
-    handle = httpx.get(url)
+    handle = requests.get(url, timeout=10)
     nrows = len(list(handle.iter_lines())) - 1
     expected = 1000
     assert nrows > expected
@@ -94,7 +94,7 @@ def test_csv_search(gliders):
 def test_json_search(gliders):
     """Test if a JSON search returns all items (instead of the first 1000)."""
     url = gliders.get_search_url(search_for="all", response="json")
-    handle = httpx.get(url)
+    handle = requests.get(url, timeout=10)
     nrows = len(handle.json()["table"]["rows"])
     expected = 1000
     assert nrows > expected
