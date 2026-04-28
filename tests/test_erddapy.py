@@ -1,11 +1,13 @@
 """Test ERDDAP functionality."""
 
+from __future__ import annotations
+
 import datetime
 import sys
+from zoneinfo import ZoneInfo
 
 import packaging.version
 import pytest
-import pytz
 
 from erddapy.core.griddap import (
     _griddap_check_constraints,
@@ -27,13 +29,13 @@ if packaging.version.parse(
 
 def test_parse_dates_utc_datetime():
     """UTC timestamp at 1970-1-1 must be 0."""
-    d = datetime.datetime(1970, 1, 1, 0, 0, tzinfo=pytz.utc)
+    d = datetime.datetime(1970, 1, 1, 0, 0, tzinfo=datetime.UTC)
     assert parse_dates(d) == 0
 
 
 def test_parse_dates_nonutc_datetime():
     """Non-UTC timestamp at 1970-1-1 must have the zone offset."""
-    d = datetime.datetime(1970, 1, 1, tzinfo=pytz.timezone("US/Eastern"))
+    d = datetime.datetime(1970, 1, 1, tzinfo=ZoneInfo("US/Eastern"))
     assert parse_dates(d) == abs(d.utcoffset().total_seconds())
 
 

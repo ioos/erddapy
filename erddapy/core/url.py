@@ -6,14 +6,10 @@ import copy
 import functools
 import io
 from collections import OrderedDict
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from datetime import datetime
+from datetime import datetime
 from typing import BinaryIO
 from urllib import parse
 
-import pytz
 import requests
 from pandas import to_datetime
 
@@ -222,10 +218,11 @@ def parse_dates(
     else:
         parse_date_time = date_time
 
+    # Naive datetimes tzinfo must be replaced, tz-aware should be converted.
     if not parse_date_time.tzinfo:
-        parse_date_time = pytz.utc.localize(parse_date_time)
+        parse_date_time = parse_date_time.replace(tzinfo=datetime.UTC)
     else:
-        parse_date_time = parse_date_time.astimezone(pytz.utc)
+        parse_date_time = parse_date_time.astimezone(datetime.UTC)
 
     return parse_date_time.timestamp()
 
