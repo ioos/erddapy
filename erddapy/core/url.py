@@ -3,17 +3,13 @@
 from __future__ import annotations
 
 import copy
+import datetime
 import functools
 import io
 from collections import OrderedDict
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from datetime import datetime
 from typing import BinaryIO
 from urllib import parse
 
-import pytz
 import requests
 from pandas import to_datetime
 
@@ -201,7 +197,7 @@ def _is_quoted(url: str) -> bool:
 
 
 def parse_dates(
-    date_time: datetime | str,
+    date_time: datetime.datetime | str,
     *,
     dayfirst: OptionalBool = False,
     yearfirst: OptionalBool = False,
@@ -222,10 +218,11 @@ def parse_dates(
     else:
         parse_date_time = date_time
 
+    # Naive datetimes tzinfo must be replaced, tz-aware should be converted.
     if not parse_date_time.tzinfo:
-        parse_date_time = pytz.utc.localize(parse_date_time)
+        parse_date_time = parse_date_time.replace(tzinfo=datetime.UTC)
     else:
-        parse_date_time = parse_date_time.astimezone(pytz.utc)
+        parse_date_time = parse_date_time.astimezone(datetime.UTC)
 
     return parse_date_time.timestamp()
 
@@ -306,7 +303,7 @@ def get_search_url(  # noqa: PLR0913
         search_for = parse.quote_plus(search_for)
         base += "&searchFor={searchFor}"
 
-    # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
+    # Convert dates from datetime.datetime to secs since 1970-01-01T00:00:00Z.
     min_time = kwargs.pop("min_time", "")
     max_time = kwargs.pop("max_time", "")
     if min_time and not _check_substrings(min_time):
