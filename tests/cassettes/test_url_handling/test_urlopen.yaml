@@ -1,17 +1,15 @@
 interactions:
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: GET
     uri: https://standards.sensors.ioos.us/erddap/tabledap/
   response:
@@ -51,11 +49,11 @@ interactions:
         http://beta.sensors.ioos.us http://video.ioos.us http://dacregistration.atn.ioos.us;
         report-uri https://sentry.srv.axds.co/api/2/security/?sentry_key=7de616494a2346fb8fdf8cd018062730&sentry_version=7'
       Date:
-      - Thu, 12 Mar 2026 12:16:10 GMT
+      - Tue, 28 Apr 2026 11:30:38 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Last-Modified:
-      - Thu, 12 Mar 2026 12:16:10 GMT
+      - Tue, 28 Apr 2026 11:30:38 GMT
       Location:
       - http://standards.sensors.ioos.us/erddap/tabledap/index.html?page=1&itemsPerPage=1000
       Server:
@@ -65,25 +63,23 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       erddap-server:
-      - 2.28.1
+      - 2.30.0
       xdods-server:
       - dods/3.7
     status:
       code: 302
       message: ''
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: GET
     uri: http://standards.sensors.ioos.us/erddap/tabledap/index.html?page=1&itemsPerPage=1000
   response:
@@ -98,7 +94,7 @@ interactions:
       Content-Type:
       - text/html
       Date:
-      - Thu, 12 Mar 2026 12:16:16 GMT
+      - Tue, 28 Apr 2026 11:30:40 GMT
       Location:
       - https://standards.sensors.ioos.us/erddap/tabledap/index.html?page=1&itemsPerPage=1000
       Server:
@@ -107,101 +103,239 @@ interactions:
       code: 301
       message: Moved Permanently
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: GET
     uri: https://standards.sensors.ioos.us/erddap/tabledap/index.html?page=1&itemsPerPage=1000
   response:
     body:
-      string: !!binary |
-        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
-        f40zNyBN86k7+vKd+VTg/wFwhns5O1AAAA==
+      string: "<!DOCTYPE html>\n<html lang=\"en-US\">\n<head>\n<meta charset=\"UTF-8\">\n<title>ERDDAP
+        - List of tabledap Datasets</title>\n<link rel=\"shortcut icon\" href=\"/erddap/favicon.ico\">\n<link
+        href=\"/erddap/images/erddap2.css\" rel=\"stylesheet\" type=\"text/css\">\n<meta
+        name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n</head>\n<body>
+        <table class=\"compact nowrap\" style=\"width:100%; background-color:#128CB5;\">\n
+        \ <tr>\n    <td style=\"text-align:center; width:80px;\"><a rel=\"bookmark\"\n
+        \     href=\"https://www.noaa.gov/\"><img\n      title=\"National Oceanic
+        and Atmospheric Administration\"\n      src=\"http://standards.sensors.ioos.us/erddap/images/noaab.png\"
+        alt=\"NOAA\"\n      style=\"vertical-align:middle;\"></a></td>\n    <td style=\"text-align:left;
+        font-size:x-large; color:#FFFFFF; \">\n      <strong>ERDDAP</strong>\n      <br><small><small><small>Easier
+        access to scientific data</small></small></small>\n      </td>\n    <td style=\"text-align:right;
+        font-size:small;\">\n      \n      <br>Brought to you by\n      <a title=\"National
+        Oceanic and Atmospheric Administration\" rel=\"bookmark\"\n      href=\"https://www.noaa.gov\">NOAA</a>\n
+        \     <a title=\"National Marine Fisheries Service\" rel=\"bookmark\"\n      href=\"https://www.fisheries.noaa.gov\">NMFS</a>\n
+        \     <a title=\"Southwest Fisheries Science Center\" rel=\"bookmark\"\n      href=\"https://www.fisheries.noaa.gov/about/southwest-fisheries-science-center\">SWFSC</a>\n
+        \     <a title=\"Environmental Research Division\" rel=\"bookmark\"\n      href=\"https://www.fisheries.noaa.gov/about/environmental-research-division-southwest-fisheries-science-center\">ERD</a>\n
+        \     &nbsp; &nbsp;\n      </td>\n  </tr>\n</table>\n\n<!-- Big HTML tooltips
+        are generated with wz_tooltip from \n    http://wztip.info/index.php/Main_Page
+        (LGPL license) -->\n<script src=\"http://standards.sensors.ioos.us/erddap/images/wz_tooltip.js\"></script>\n\n<div
+        class=\"standard_width\">\n\n<h1 class=\"nowrap\"><a title=\"Click here to
+        return to the ERDDAP home page.\" \nrel=\"start\" href=\"http://standards.sensors.ioos.us/erddap/index.html\">ERDDAP</a>
+        &gt; tabledap</h1>\nTabledap lets you use the OPeNDAP constraint/selection
+        protocol to request data subsets, graphs, and maps from tabular datasets (for
+        example, buoy data).\nFor a quick introduction, see this\n<a class=\"N\" rel=\"help\"
+        href=\"https://www.youtube.com/watch?v=_BwMHRh7CS8\"><img \nstyle=\"vertical-align:middle\"
+        alt=\"YouTube\" src=\"http://standards.sensors.ioos.us/erddap/images/youtube.png\"
+        /> \nvideo introduction to using tabledap<img\nsrc=\"http://standards.sensors.ioos.us/erddap/images/external.png\"
+        alt=\" (external link)\"\ntitle=\"This link to an external website does not
+        constitute an endorsement.\" /></a>.\n\nFor details, see\n<a rel=\"help\"
+        href=\"http://standards.sensors.ioos.us/erddap/tabledap/documentation.html\">ERDDAP's&nbsp;tabledap&nbsp;Documentation</a>.\n<p>4
+        matching datasets, listed in alphabetical order.\n\n<span class=\"N\">(Or,
+        refine this search with <span class=\"N\"><a href=\"http&#x3a;&#x2f;&#x2f;standards&#x2e;sensors&#x2e;ioos&#x2e;us&#x2f;erddap&#x2f;search&#x2f;advanced&#x2e;html&#x3f;page&#x3d;1&#x26;itemsPerPage&#x3d;1000&#x26;protocol&#x3d;tabledap\">Advanced&nbsp;Search</a>&nbsp;<img
+        src=\"http&#x3a;&#x2f;&#x2f;standards&#x2e;sensors&#x2e;ioos&#x2e;us&#x2f;erddap&#x2f;images&#x2f;QuestionMark&#x2e;png\"
+        alt=\"&#x3f;\" onmouseover=\"Tip('<div class=&quot;narrow_max_width&quot;>Advanced
+        Search combines all of the search techniques and adds searches for datasets
+        that have data within longitude, latitude, and time ranges, so you can search
+        for datasets based on many different criteria simultaneously.</div>')\" onmouseout=\"UnTip()\"
+        \ >\n</span>)</span>\n<table class=\"erd nowrap commonBGColor nowrap\" >\n<tr>\n<th>Grid<br>DAP<br>Data\n<th>Sub-<br>set\n<th>Table<br>DAP<br>Data\n<th>Make<br>A<br>Graph\n<th>W<br>M<br>S\n<th>Source<br>Data<br>Files\n<th>Title\n<th>Sum-<br>mary\n<th>FGDC,<br>ISO,<br>Metadata\n<th>Back-<br>ground<br>Info\n<th>RSS\n<th>E<br>mail\n<th>Institution\n<th>Dataset
+        ID\n</tr>\n<tr>\n<td>&nbsp;\n<td> &nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/allDatasets.subset\"
+        title=\"Click to select and view subsets of this dataset via faceted search.\"
+        >set</a>\n<td>&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/allDatasets.html\"
+        title=\"Click to see a tabledap Data Access Form for this dataset so that
+        you can request data.\" >data</a>&nbsp;\n<td> &nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/allDatasets.graph\"
+        title=\"Click to see Make A Graph for this dataset.\" >graph</a>\n<td>&nbsp;\n<td>&nbsp;\n<td>*
+        The List of All Active Datasets in this ERDDAP *\n<td>&nbsp;&nbsp;&nbsp;<img
+        src=\"http&#x3a;&#x2f;&#x2f;standards&#x2e;sensors&#x2e;ioos&#x2e;us&#x2f;erddap&#x2f;images&#x2f;QuestionMark&#x2e;png\"
+        alt=\"&#x3f;\" onmouseover=\"Tip('<div class=&quot;standard_max_width&quot;>This
+        dataset is a table which has a row of information for each dataset currently
+        active in this ERDDAP.<br><br>cdm_data_type = Other<br>VARIABLES:<br>datasetID
+        (Dataset ID)<br>accessible<br>institution<br>dataStructure (Data Structure)<br>cdm_data_type
+        (Common Data Model Type)<br>class (ERDDAP Class)<br>title<br>minLongitude
+        (Minimum Longitude, degrees_east)<br>maxLongitude (Maximum Longitude, degrees_east)<br>longitudeSpacing
+        (Average Grid Longitude Spacing, degrees_east)<br>minLatitude (Minimum Latitude,
+        degrees_north)<br>maxLatitude (Maximum Latitude, degrees_north)<br>latitudeSpacing
+        (Average Grid Latitude Spacing, degrees_north)<br>minAltitude (Minimum Altitude
+        (or negative Depth), m)<br>maxAltitude (Maximum Altitude (or negative Depth),
+        m)<br>minTime (Minimum Time, seconds since 1970-01-01T00:00:00Z)<br>maxTime
+        (Maximum Time, seconds since 1970-01-01T00:00:00Z)<br>timeSpacing (Average
+        Grid Time Spacing, seconds)<br>griddap (Base URL of OPeNDAP Grid Service)<br>subset
+        (URL of Subset Web Page)<br>tabledap (Base URL of OPeNDAP Table/Sequence Service)<br>MakeAGraph
+        (URL of Make-A-Graph Web Page)<br>sos (Base URL of SOS Service)<br>wcs (Base
+        URL of WCS Service)<br>wms (Base URL of WMS Service)<br>files (Base URL of
+        &quot;files&quot; Service)<br>... (10 more variables)<br></div>')\" onmouseout=\"UnTip()\"
+        \ >\n\n<td>\n&nbsp;&nbsp;&nbsp;&nbsp;\n&nbsp;&nbsp;&nbsp;&nbsp;\n&nbsp;<a
+        rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/info/allDatasets/index.html\"
+        title=\"Click to see a list of this dataset's variables and the complete list
+        of metadata attributes.\" >M</a>\n&nbsp;\n<td><a rel=\"bookmark\" href=\"http://standards.sensors.ioos.us/erddap\"
+        title=\"Click to see background information from the source of this dataset.\"
+        >background</a>\n<td>&nbsp;\n<td>&nbsp;\n<td>Axiom Data Science\n<td>allDatasets\n</tr>\n<tr>\n<td>&nbsp;\n<td>
+        &nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.subset\"
+        title=\"Click to select and view subsets of this dataset via faceted search.\"
+        >set</a>\n<td>&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.html\"
+        title=\"Click to see a tabledap Data Access Form for this dataset so that
+        you can request data.\" >data</a>&nbsp;\n<td> &nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.graph\"
+        title=\"Click to see Make A Graph for this dataset.\" >graph</a>\n<td>&nbsp;\n<td>&nbsp;&nbsp;<a
+        rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/files/org_cormp_cap2/\"
+        title=\"Click to browse and download the source data files for this dataset.\"
+        >files</a>&nbsp;\n<td>41029 / CAP2 Capers Nearshore\n<td>&nbsp;&nbsp;&nbsp;<img
+        src=\"http&#x3a;&#x2f;&#x2f;standards&#x2e;sensors&#x2e;ioos&#x2e;us&#x2f;erddap&#x2f;images&#x2f;QuestionMark&#x2e;png\"
+        alt=\"&#x3f;\" onmouseover=\"Tip('<div class=&quot;standard_max_width&quot;>Timeseries
+        data from \\&#39;(41029 / CAP2) Capers Nearshore\\&#39; (org_cormp_cap2)<br><br>cdm_data_type
+        = TimeSeries<br>VARIABLES:<br>crs<br>time (seconds since 1970-01-01T00:00:00Z)<br>station
+        ((41029 / CAP2) Capers Nearshore)<br>latitude (degrees_north)<br>longitude
+        (degrees_east)<br>z (Altitude, m)<br>air_temperature (degree_Celsius)<br>air_temperature_qc_agg
+        (Air Temperature QARTOD Aggregate Quality Flag)<br>air_temperature_qc_tests
+        (Air Temperature QARTOD Individual Tests)<br>air_pressure (Barometric Pressure,
+        millibars)<br>air_pressure_qc_agg (Barometric Pressure QARTOD Aggregate Quality
+        Flag)<br>air_pressure_qc_tests (Barometric Pressure QARTOD Individual Tests)<br>relative_humidity
+        (percent)<br>relative_humidity_qc_agg (Relative Humidity QARTOD Aggregate
+        Quality Flag)<br>relative_humidity_qc_tests (Relative Humidity QARTOD Individual
+        Tests)<br>sea_water_practical_salinity (Salinity, 1e-3)<br>sea_water_practical_salinity_qc_agg
+        (Salinity QARTOD Aggregate Quality Flag)<br>sea_water_practical_salinity_qc_tests
+        (Salinity QARTOD Individual Tests)<br>sea_water_temperature (Water Temperature,
+        degree_Celsius)<br>sea_water_temperature_qc_agg (Water Temperature QARTOD
+        Aggregate Quality Flag)<br>sea_water_temperature_qc_tests (Water Temperature
+        QARTOD Individual Tests)<br>wind_speed_of_gust (Wind Gust, m.s-1)<br>wind_speed_of_gust_qc_agg
+        (Wind Gust QARTOD Aggregate Quality Flag)<br>wind_speed_of_gust_qc_tests (Wind
+        Gust QARTOD Individual Tests)<br>wind_speed (m.s-1)<br>wind_speed_qc_agg (Wind
+        Speed QARTOD Aggregate Quality Flag)<br>wind_speed_qc_tests (Wind Speed QARTOD
+        Individual Tests)<br>wind_from_direction (degrees)<br>wind_from_direction_qc_agg
+        (Wind From Direction QARTOD Aggregate Quality Flag)<br>wind_from_direction_qc_tests
+        (Wind From Direction QARTOD Individual Tests)<br></div>')\" onmouseout=\"UnTip()\"
+        \ >\n\n<td>\n&nbsp;&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/metadata/fgdc/xml/org_cormp_cap2_fgdc.xml\"
+        title=\"Click&#x20;to&#x20;download&#x20;FGDC&#x20;metadata&#x2e;\" >F</a>\n&nbsp;<a
+        rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/metadata/iso19115/xml/org_cormp_cap2_iso19115.xml\"
+        title=\"Click&#x20;to&#x20;download&#x20;ISO&#x20;19115&#x2d;2&#x2f;19139&#x20;metadata&#x2e;\"
+        >&nbsp;I&nbsp;</a>\n&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/info/org_cormp_cap2/index.html\"
+        title=\"Click to see a list of this dataset's variables and the complete list
+        of metadata attributes.\" >M</a>\n&nbsp;\n<td><a rel=\"bookmark\" href=\"https://sensors.ioos.us/#metadata/60417/station\"
+        title=\"Click to see background information from the source of this dataset.\"
+        >background<img\n    src=\"http://standards.sensors.ioos.us/erddap/images/external.png\"
+        alt=\" (external link)\"\n    title=\"This link to an external website does
+        not constitute an endorsement.\"></a>\n<td><a rel=\"alternate\" type=\"application/rss+xml\"
+        \  href=\"https://standards.sensors.ioos.us/erddap/rss/org_cormp_cap2.rss\"
+        \n  title=\"\"><img alt=\"RSS\"\n    title=\"Subscribe to the RSS feed for
+        this dataset...\" \n    src=\"http://standards.sensors.ioos.us/erddap/images/rss.gif\"
+        ></a>\n<td><a rel=\"alternate\" \n  href=\"https://standards.sensors.ioos.us/erddap/subscriptions/add.html?datasetID=org_cormp_cap2&amp;showErrors=false&amp;email=\"
+        \n  title=\"\"><img alt=\"Subscribe\"\n    title=\"Get&#x20;an&#x20;email&#x20;immediately&#x20;whenever&#x20;this&#x20;dataset&#x20;changes&#x2e;&#x2e;&#x2e;\"
+        \n    src=\"http://standards.sensors.ioos.us/erddap/images/envelope.gif\"
+        ></a>\n<td>CORMP\n<td>org_cormp_cap2\n</tr>\n<tr>\n<td>&nbsp;\n<td> &nbsp;<a
+        rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/usf_comps_c10_inwater.subset\"
+        title=\"Click to select and view subsets of this dataset via faceted search.\"
+        >set</a>\n<td>&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/usf_comps_c10_inwater.html\"
+        title=\"Click to see a tabledap Data Access Form for this dataset so that
+        you can request data.\" >data</a>&nbsp;\n<td> &nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/usf_comps_c10_inwater.graph\"
+        title=\"Click to see Make A Graph for this dataset.\" >graph</a>\n<td>&nbsp;\n<td>&nbsp;&nbsp;<a
+        rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/files/usf_comps_c10_inwater/\"
+        title=\"Click to browse and download the source data files for this dataset.\"
+        >files</a>&nbsp;\n<td>42013, C10 Currents, WFS Central Buoy\n<td>&nbsp;&nbsp;&nbsp;<img
+        src=\"http&#x3a;&#x2f;&#x2f;standards&#x2e;sensors&#x2e;ioos&#x2e;us&#x2f;erddap&#x2f;images&#x2f;QuestionMark&#x2e;png\"
+        alt=\"&#x3f;\" onmouseover=\"Tip('<div class=&quot;standard_max_width&quot;>Timeseries
+        data from \\&#39;42013 - C10 Currents - WFS Central Buoy\\&#39; (42013-c10-currents-wfs-centra)<br><br>cdm_data_type
+        = TimeSeriesProfile<br>VARIABLES:<br>station (42013 - C10 Currents - WFS Central
+        Buoy)<br>latitude (degrees_north)<br>longitude (degrees_east)<br>crs<br>time
+        (seconds since 1970-01-01T00:00:00Z)<br>z (Altitude, m)<br>sea_water_velocity_to_direction
+        (Current To Direction, degrees)<br>sea_water_velocity_to_direction_qc_agg
+        (Current To Direction QARTOD Aggregate Quality Flag)<br>sea_water_velocity_to_direction_qc_tests
+        (Current To Direction QARTOD Individual Tests)<br>sea_water_speed (Current
+        Speed, m.s-1)<br>sea_water_speed_qc_agg (Current Speed QARTOD Aggregate Quality
+        Flag)<br>sea_water_speed_qc_tests (Current Speed QARTOD Individual Tests)<br>eastward_sea_water_velocity
+        (m.s-1)<br>eastward_sea_water_velocity_qc_agg (Eastward Sea Water Velocity
+        QARTOD Aggregate Quality Flag)<br>eastward_sea_water_velocity_qc_tests (Eastward
+        Sea Water Velocity QARTOD Individual Tests)<br>northward_sea_water_velocity
+        (m.s-1)<br>northward_sea_water_velocity_qc_agg (Northward Sea Water Velocity
+        QARTOD Aggregate Quality Flag)<br>northward_sea_water_velocity_qc_tests (Northward
+        Sea Water Velocity QARTOD Individual Tests)<br></div>')\" onmouseout=\"UnTip()\"
+        \ >\n\n<td>\n&nbsp;&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/metadata/fgdc/xml/usf_comps_c10_inwater_fgdc.xml\"
+        title=\"Click&#x20;to&#x20;download&#x20;FGDC&#x20;metadata&#x2e;\" >F</a>\n&nbsp;<a
+        rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/metadata/iso19115/xml/usf_comps_c10_inwater_iso19115.xml\"
+        title=\"Click&#x20;to&#x20;download&#x20;ISO&#x20;19115&#x2d;2&#x2f;19139&#x20;metadata&#x2e;\"
+        >&nbsp;I&nbsp;</a>\n&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/info/usf_comps_c10_inwater/index.html\"
+        title=\"Click to see a list of this dataset's variables and the complete list
+        of metadata attributes.\" >M</a>\n&nbsp;\n<td><a rel=\"bookmark\" href=\"https://sensors.ioos.us/#metadata/100702/station\"
+        title=\"Click to see background information from the source of this dataset.\"
+        >background<img\n    src=\"http://standards.sensors.ioos.us/erddap/images/external.png\"
+        alt=\" (external link)\"\n    title=\"This link to an external website does
+        not constitute an endorsement.\"></a>\n<td><a rel=\"alternate\" type=\"application/rss+xml\"
+        \  href=\"https://standards.sensors.ioos.us/erddap/rss/usf_comps_c10_inwater.rss\"
+        \n  title=\"\"><img alt=\"RSS\"\n    title=\"Subscribe to the RSS feed for
+        this dataset...\" \n    src=\"http://standards.sensors.ioos.us/erddap/images/rss.gif\"
+        ></a>\n<td><a rel=\"alternate\" \n  href=\"https://standards.sensors.ioos.us/erddap/subscriptions/add.html?datasetID=usf_comps_c10_inwater&amp;showErrors=false&amp;email=\"
+        \n  title=\"\"><img alt=\"Subscribe\"\n    title=\"Get&#x20;an&#x20;email&#x20;immediately&#x20;whenever&#x20;this&#x20;dataset&#x20;changes&#x2e;&#x2e;&#x2e;\"
+        \n    src=\"http://standards.sensors.ioos.us/erddap/images/envelope.gif\"
+        ></a>\n<td>COMPS\n<td>usf_comps_c10_inwater\n</tr>\n<tr>\n<td>&nbsp;\n<td>
+        &nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/morro-bay-bs1-met.subset\"
+        title=\"Click to select and view subsets of this dataset via faceted search.\"
+        >set</a>\n<td>&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/morro-bay-bs1-met.html\"
+        title=\"Click to see a tabledap Data Access Form for this dataset so that
+        you can request data.\" >data</a>&nbsp;\n<td> &nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/tabledap/morro-bay-bs1-met.graph\"
+        title=\"Click to see Make A Graph for this dataset.\" >graph</a>\n<td>&nbsp;\n<td>&nbsp;&nbsp;<a
+        rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/files/morro-bay-bs1-met/\"
+        title=\"Click to browse and download the source data files for this dataset.\"
+        >files</a>&nbsp;\n<td>CeNCOOS met monitoring at Morro Bay (BS1).\n<td>&nbsp;&nbsp;&nbsp;<img
+        src=\"http&#x3a;&#x2f;&#x2f;standards&#x2e;sensors&#x2e;ioos&#x2e;us&#x2f;erddap&#x2f;images&#x2f;QuestionMark&#x2e;png\"
+        alt=\"&#x3f;\" onmouseover=\"Tip('<div class=&quot;standard_max_width&quot;>Morro
+        Bay BS1 Met station is located in the back of Morro Bay, CA and owned by California
+        Polytechnic State University of San Luis Obispo. The station is mounted on
+        a large tripod, resting on the seafloor. A Nova Lynx 100 Weather Station is
+        fixed at 3 meters above MLLW to a pole extending from the tripod and reports
+        the following in near real-time: wind speed, wind direction, air temperature,
+        barometric pressure, precipitation, relative humidity, and solar radiation.
+        The instrument is maintained and operated by San Luis Obispo Science and Ecosystem
+        Alliance (SLOSEA), a part of the Cal Poly Center for Coastal Marine Sciences.<br><br>cdm_data_type
+        = TimeSeries<br>VARIABLES:<br>crs<br>time (seconds since 1970-01-01T00:00:00Z)<br>station
+        (Morro Bay - BS1 MET)<br>latitude (degrees_north)<br>longitude (degrees_east)<br>z
+        (Altitude, m)<br>air_temperature (degree_Celsius)<br>air_pressure (Barometric
+        Pressure, millibars)<br>dew_point_temperature (Dew Point, degree_Celsius)<br>lwe_precipitation_rate_cm_time_sum_over_pt2m
+        (Precipitation (increment), mm)<br>relative_humidity (percent)<br>solar_irradiance
+        (Solar Radiation, W.m-2)<br>wind_chill_temperature (Wind Chill, degree_Celsius)<br>wind_speed
+        (m.s-1)<br>wind_from_direction (degrees)<br></div>')\" onmouseout=\"UnTip()\"
+        \ >\n\n<td>\n&nbsp;&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/metadata/fgdc/xml/morro-bay-bs1-met_fgdc.xml\"
+        title=\"Click&#x20;to&#x20;download&#x20;FGDC&#x20;metadata&#x2e;\" >F</a>\n&nbsp;<a
+        rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/metadata/iso19115/xml/morro-bay-bs1-met_iso19115.xml\"
+        title=\"Click&#x20;to&#x20;download&#x20;ISO&#x20;19115&#x2d;2&#x2f;19139&#x20;metadata&#x2e;\"
+        >&nbsp;I&nbsp;</a>\n&nbsp;<a rel=\"chapter\" href=\"http://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html\"
+        title=\"Click to see a list of this dataset's variables and the complete list
+        of metadata attributes.\" >M</a>\n&nbsp;\n<td><a rel=\"bookmark\" href=\"https://sensors.ioos.us/#metadata/57163/station\"
+        title=\"Click to see background information from the source of this dataset.\"
+        >background<img\n    src=\"http://standards.sensors.ioos.us/erddap/images/external.png\"
+        alt=\" (external link)\"\n    title=\"This link to an external website does
+        not constitute an endorsement.\"></a>\n<td><a rel=\"alternate\" type=\"application/rss+xml\"
+        \  href=\"https://standards.sensors.ioos.us/erddap/rss/morro-bay-bs1-met.rss\"
+        \n  title=\"\"><img alt=\"RSS\"\n    title=\"Subscribe to the RSS feed for
+        this dataset...\" \n    src=\"http://standards.sensors.ioos.us/erddap/images/rss.gif\"
+        ></a>\n<td><a rel=\"alternate\" \n  href=\"https://standards.sensors.ioos.us/erddap/subscriptions/add.html?datasetID=morro-bay-bs1-met&amp;showErrors=false&amp;email=\"
+        \n  title=\"\"><img alt=\"Subscribe\"\n    title=\"Get&#x20;an&#x20;email&#x20;immediately&#x20;whenever&#x20;this&#x20;dataset&#x20;changes&#x2e;&#x2e;&#x2e;\"
+        \n    src=\"http://standards.sensors.ioos.us/erddap/images/envelope.gif\"
+        ></a>\n<td><table class=\"compact nowrap\" style=\"width:100%;\">\n<tr>\n
+        \ <td>California Polyte...</td>\n  <td class=\"R\">&nbsp;<img src=\"http&#x3a;&#x2f;&#x2f;standards&#x2e;sensors&#x2e;ioos&#x2e;us&#x2f;erddap&#x2f;images&#x2f;QuestionMark&#x2e;png\"
+        alt=\"&#x3f;\" onmouseover=\"Tip('<div class=&quot;standard_max_width&quot;>California
+        Polytechnic State Univeristy, San Luis Obispo</div>')\" onmouseout=\"UnTip()\"
+        \ >\n</td>\n</tr>\n</table>\n\n<td>morro-bay-bs1-met\n</tr>\n</table>\n\n<p>The
+        information in the table above is also available in other file formats \n(.csv,
+        .htmlTable, .itx, .json, .jsonlCSV1, .jsonlCSV, .jsonlKVP, .mat, .nc, .nccsv,
+        .tsv, .xhtml) <a rel=\"help\" href=\"http://standards.sensors.ioos.us/erddap/rest.html\">via
+        a RESTful web service</a>.\n</div>\n<div class=\"standard_width\">\n<br>&nbsp;\n<hr>\nERDDAP,
+        Version 2.30.0\n<br><a rel=\"license\" href=\"/erddap/legal.html\">Disclaimers</a>
+        |\n    <a rel=\"bookmark\" href=\"/erddap/legal.html#privacyPolicy\">Privacy
+        Policy</a> |\n    <a rel=\"bookmark\" href=\"/erddap/legal.html#contact\">Contact</a>\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n</div>\n</body>\n</html>\n"
     headers:
       Cache-Control:
       - no-cache
@@ -238,11 +372,11 @@ interactions:
       Content-Type:
       - text/html;charset=UTF-8
       Date:
-      - Thu, 12 Mar 2026 12:16:18 GMT
+      - Tue, 28 Apr 2026 11:30:46 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Last-Modified:
-      - Thu, 12 Mar 2026 12:16:18 GMT
+      - Tue, 28 Apr 2026 11:30:46 GMT
       Server:
       - nginx/1.28.0
       Strict-Transport-Security:
@@ -252,7 +386,7 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       erddap-server:
-      - 2.28.1
+      - 2.30.0
       xdods-server:
       - dods/3.7
     status:

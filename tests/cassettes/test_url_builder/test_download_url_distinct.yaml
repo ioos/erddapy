@@ -1,17 +1,15 @@
 interactions:
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: HEAD
     uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?station,z
   response:
@@ -53,11 +51,11 @@ interactions:
       Content-Type:
       - text/html;charset=UTF-8
       Date:
-      - Fri, 24 Apr 2026 17:15:33 GMT
+      - Tue, 28 Apr 2026 11:30:24 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Last-Modified:
-      - Fri, 24 Apr 2026 17:15:33 GMT
+      - Tue, 28 Apr 2026 11:30:24 GMT
       Server:
       - nginx/1.28.0
       Strict-Transport-Security:
@@ -72,18 +70,16 @@ interactions:
       code: 200
       message: ''
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: HEAD
     uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?station,z&distinct()
   response:
@@ -125,11 +121,11 @@ interactions:
       Content-Type:
       - text/html;charset=UTF-8
       Date:
-      - Fri, 24 Apr 2026 17:15:35 GMT
+      - Tue, 28 Apr 2026 11:30:32 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Last-Modified:
-      - Fri, 24 Apr 2026 17:15:35 GMT
+      - Tue, 28 Apr 2026 11:30:32 GMT
       Server:
       - nginx/1.28.0
       Strict-Transport-Security:

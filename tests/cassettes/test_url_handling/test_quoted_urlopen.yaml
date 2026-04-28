@@ -1,39 +1,133 @@
 interactions:
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: GET
     uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?crs&time%3E=2000-03-23T00%3A00%3A00Z&time%3C=2000-03-30T15%3A08%3A00Z
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAA/+2aTW/jNhCG7/4VLBftaSXFbrbJ2rIAx0n2tJsg3m2xJ2NEjSUiFCmQtB0X/fEl
-        9RE4wabdj6InBkgoSg/nneGQzGGY/nR5s/z4+faKVLYW2Sj1DREgyzlFGX1aUf8OoXBNjRYIq0Ab
-        tHP66eN1dO6/Wm4FZld3l5eLWxIRpcs1U7pu1gyayRrfbM7Wb99uNuuTCY7TpKNHqeDynmgUc2oq
-        pS3bWsKZkpRUGjdzmqAuCmiSDez869j9ocOopwSvoUTT9yYxM4b2du1BoKkQLSX20OCcWnywiQeG
-        YCTU7vWO475xPlDilCxKF9yeF7aaF+jEMWo7rwmX3HIQkWEgcD72RpJ+ZnJVHDKSWsgFEibAmDll
-        qm6AWSLVXkNDSetOb3k6Pjn5eUZyYPelVltZREwJpaevxpPz5cWbmbNNnDntG/9QDKN9BBEIXsop
-        c46inpHO4PlJ8+CGpdDFnit1X4O+p60B0k9ZZW1jpkmy3+9jqQDiUu0SN4jXZc+12ZnTD2C5kiDI
-        DUOQnBGQBVnYWpmmQu36i6J202GsbsFBxWjWiTgNY90Y0IWJDUqjtIm5Uibemmd5837kcSNLSkC4
-        mf9ws1g82uuC3qG23E16H3jNi0KgDzYB92uLf5olgRs7IxuX18jwP3H6EAnQJc5IP+HX7c+M0KzX
-        TF1QSpb9ek6Tvjt8zXWWmhqEeNZcgeGoCTCGxhCriGHcJYhv3GQVYMEZ6vBn7WD3X8LQvKyexNGO
-        nj16feTehVtQDvY+HNSW5IfhG3xvdr91SdHMJ9Fn52Xp96C5RHLNjZdEQ1ao/Wb7arHNMPJY9v31
-        6ouyK7W11R6NPRb0CWJIlu0++gHdBHJnPjGDRvSIRKbTiLq9SrPVH9er5Rc9vJI77hZa7UA3O3do
-        EDSryCXfcfMtOXjRPTwWiHQvEBW9QPQ17rs9ceT8LzI3zaxvnq1j12p/PrYnYjbqGL86+8fR07PS
-        HQluQ9a1khfvln5jDqem//fiDdkqY9qMerPDq8HW8dtisHlHs2gyPj07Pf/1t9OzAAUoQAEKUIAC
-        FKAABShAAQpQgAIUoAAFKEABClCAAhSgAAXoP4KGIlha8N1ADtXxdVu992WuXD+Wsyo3qis/vya/
-        o/blOTKJJ+fxuMWGGr/gDKXB5zcmBJYgYn+Ng2aX3DhBXjsjvnBH/hr1Vcen1cQXLbxqNN8BO9wq
-        J3ag2W3XJV3/+0z6OxbALM2W3UNbUUybx+j/j6fEpcJnpr234dru7svfEH4EtgwjAAA=
+      string: "<!DOCTYPE html>\n<html lang=\"en-US\">\n<head>\n<meta charset=\"UTF-8\">\n<title>ERDDAP
+        - org_cormp_cap2_e5f7_99ff_02e1</title>\n<link rel=\"shortcut icon\" href=\"/erddap/favicon.ico\">\n<link
+        href=\"/erddap/images/erddap2.css\" rel=\"stylesheet\" type=\"text/css\">\n<meta
+        name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n</head>\n<body>
+        <table class=\"compact nowrap\" style=\"width:100%; background-color:#128CB5;\">\n
+        \ <tr>\n    <td style=\"text-align:center; width:80px;\"><a rel=\"bookmark\"\n
+        \     href=\"https://www.noaa.gov/\"><img\n      title=\"National Oceanic
+        and Atmospheric Administration\"\n      src=\"http://standards.sensors.ioos.us/erddap/images/noaab.png\"
+        alt=\"NOAA\"\n      style=\"vertical-align:middle;\"></a></td>\n    <td style=\"text-align:left;
+        font-size:x-large; color:#FFFFFF; \">\n      <strong>ERDDAP</strong>\n      <br><small><small><small>Easier
+        access to scientific data</small></small></small>\n      </td>\n    <td style=\"text-align:right;
+        font-size:small;\">\n      \n      <br>Brought to you by\n      <a title=\"National
+        Oceanic and Atmospheric Administration\" rel=\"bookmark\"\n      href=\"https://www.noaa.gov\">NOAA</a>\n
+        \     <a title=\"National Marine Fisheries Service\" rel=\"bookmark\"\n      href=\"https://www.fisheries.noaa.gov\">NMFS</a>\n
+        \     <a title=\"Southwest Fisheries Science Center\" rel=\"bookmark\"\n      href=\"https://www.fisheries.noaa.gov/about/southwest-fisheries-science-center\">SWFSC</a>\n
+        \     <a title=\"Environmental Research Division\" rel=\"bookmark\"\n      href=\"https://www.fisheries.noaa.gov/about/environmental-research-division-southwest-fisheries-science-center\">ERD</a>\n
+        \     &nbsp; &nbsp;\n      </td>\n  </tr>\n</table>\n&nbsp;<br>\n&nbsp;\n<table
+        class=\"erd commonBGColor nowrap\">\n<tr>\n<th>crs\n</tr>\n<tr>\n<th>&nbsp;\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n<tr>\n<td
+        class=\"R\">-2147483647\n</tr>\n<tr>\n<td class=\"R\">-2147483647\n</tr>\n</table>\n<div
+        class=\"standard_width\">\n<br>&nbsp;\n<hr>\nERDDAP, Version 2.30.0\n<br><a
+        rel=\"license\" href=\"/erddap/legal.html\">Disclaimers</a> |\n    <a rel=\"bookmark\"
+        href=\"/erddap/legal.html#privacyPolicy\">Privacy Policy</a> |\n    <a rel=\"bookmark\"
+        href=\"/erddap/legal.html#contact\">Contact</a>\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n<p>&nbsp;\n</div>\n</body>\n</html>\n"
     headers:
       Cache-Control:
       - no-cache
@@ -70,11 +164,11 @@ interactions:
       Content-Type:
       - text/html;charset=UTF-8
       Date:
-      - Thu, 12 Mar 2026 12:16:30 GMT
+      - Tue, 28 Apr 2026 11:30:53 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Last-Modified:
-      - Thu, 12 Mar 2026 12:16:30 GMT
+      - Tue, 28 Apr 2026 11:30:53 GMT
       Server:
       - nginx/1.28.0
       Strict-Transport-Security:
@@ -84,25 +178,23 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       erddap-server:
-      - 2.28.1
+      - 2.30.0
       xdods-server:
       - dods/3.7
     status:
       code: 200
       message: ''
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: GET
     uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?crs%26time%253E%3D2000-03-23T00%253A00%253A00Z%26time%253C%3D2000-03-30T15%253A08%253A00Z
   response:
@@ -111,7 +203,7 @@ interactions:
         constraint variable=\\\"time%3E\\\".\";\n}\n"
     headers:
       Connection:
-      - keep-alive
+      - close
       Content-Description:
       - dods-error
       Content-Encoding:
@@ -119,15 +211,15 @@ interactions:
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Thu, 12 Mar 2026 12:16:33 GMT
+      - Tue, 28 Apr 2026 11:30:56 GMT
       Last-Modified:
-      - Thu, 12 Mar 2026 12:16:33 GMT
+      - Tue, 28 Apr 2026 11:30:56 GMT
       Server:
       - nginx/1.28.0
       Transfer-Encoding:
       - chunked
       erddap-server:
-      - 2.28.1
+      - 2.30.0
       xdods-server:
       - dods/3.7
     status:

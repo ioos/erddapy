@@ -1,17 +1,15 @@
 interactions:
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - httpbin.org
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: GET
     uri: https://httpbin.org/status/404
   response:
@@ -29,7 +27,7 @@ interactions:
       Content-Type:
       - text/html; charset=utf-8
       Date:
-      - Thu, 12 Mar 2026 12:16:34 GMT
+      - Tue, 28 Apr 2026 11:30:57 GMT
       Server:
       - gunicorn/19.9.0
     status:

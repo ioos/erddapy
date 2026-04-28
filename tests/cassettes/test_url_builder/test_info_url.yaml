@@ -1,17 +1,15 @@
 interactions:
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: HEAD
     uri: https://standards.sensors.ioos.us/erddap/info/org_cormp_cap2/index.htmlTable
   response:
@@ -53,7 +51,7 @@ interactions:
       Content-Type:
       - text/html;charset=UTF-8
       Date:
-      - Thu, 12 Mar 2026 12:15:48 GMT
+      - Tue, 28 Apr 2026 11:30:09 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Server:
@@ -66,18 +64,16 @@ interactions:
       code: 200
       message: ''
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: HEAD
     uri: https://standards.sensors.ioos.us/erddap/info/org_cormp_cap2/index.csv
   response:
@@ -121,7 +117,7 @@ interactions:
       Content-Type:
       - text/csv;charset=ISO-8859-1
       Date:
-      - Thu, 12 Mar 2026 12:15:49 GMT
+      - Tue, 28 Apr 2026 11:30:11 GMT
       Expires:
       - Thu, 01 Jan 1970 00:00:01 GMT
       Server:

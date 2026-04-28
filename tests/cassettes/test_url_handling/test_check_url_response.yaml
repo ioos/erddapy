@@ -1,17 +1,15 @@
 interactions:
 - request:
-    body: ''
+    body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Host:
-      - standards.sensors.ioos.us
       User-Agent:
-      - python-httpx/0.28.1
+      - python-requests/2.33.1
     method: HEAD
     uri: https://standards.sensors.ioos.us/erddap/tabledap/org_cormp_cap2.htmlTable?time,&time%3E=2017-08-29T00:00:00Z&time%3C=2015-09-05T19:00:00Z
   response:
@@ -27,13 +25,13 @@ interactions:
       Content-Type:
       - text/plain;charset=UTF-8
       Date:
-      - Thu, 12 Mar 2026 12:16:42 GMT
+      - Tue, 28 Apr 2026 11:31:05 GMT
       Last-Modified:
-      - Thu, 12 Mar 2026 12:16:42 GMT
+      - Tue, 28 Apr 2026 11:31:05 GMT
       Server:
       - nginx/1.28.0
       erddap-server:
-      - 2.28.1
+      - 2.30.0
       xdods-server:
       - dods/3.7
     status:
