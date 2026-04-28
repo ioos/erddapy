@@ -1,12 +1,15 @@
+# noqa: INP001, D100
+
 import zipfile
 from pathlib import Path
 
 import pooch
 
 
-def download_test_data():
+def download_test_data() -> None:
+    """Fetch cassettes yaml data from cassettes test release."""
     url = "https://github.com/ioos/erddapy/releases/download"
-    version = "2026.04.28"
+    version = "v2026.04.28"
 
     fname = pooch.retrieve(
         url=f"{url}/{version}/test_data.zip",
@@ -14,8 +17,6 @@ def download_test_data():
     )
 
     here = Path(__file__).resolve().parent
-    print(fname)
-    print(here)
     with zipfile.ZipFile(fname, "r") as zip_ref:
         zip_ref.extractall(here)
 
