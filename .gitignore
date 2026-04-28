@@ -10,3 +10,4 @@ dist/
 .vscode/
 *.code-workspace
 **/__pycache__
+tests/cassettes/**/*.yaml
