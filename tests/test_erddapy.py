@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 import datetime
-import sys
 from zoneinfo import ZoneInfo
 
-import packaging.version
 import pytest
 
 from erddapy.core.griddap import (
@@ -18,13 +16,6 @@ from erddapy.core.url import (
     _quote_string_constraints,
     parse_dates,
 )
-
-if packaging.version.parse(
-    f"{sys.version_info.major}.{sys.version_info.minor}",
-) < packaging.version.parse(
-    "3.11",
-):
-    datetime.UTC = datetime.timezone.utc
 
 
 def test_parse_dates_utc_datetime():
