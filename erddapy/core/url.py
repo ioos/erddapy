@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 import copy
+import datetime
 import functools
 import io
 from collections import OrderedDict
-from datetime import datetime
 from typing import BinaryIO
 from urllib import parse
 
@@ -197,7 +197,7 @@ def _is_quoted(url: str) -> bool:
 
 
 def parse_dates(
-    date_time: datetime | str,
+    date_time: datetime.datetime | str,
     *,
     dayfirst: OptionalBool = False,
     yearfirst: OptionalBool = False,
@@ -303,7 +303,7 @@ def get_search_url(  # noqa: PLR0913
         search_for = parse.quote_plus(search_for)
         base += "&searchFor={searchFor}"
 
-    # Convert dates from datetime to `seconds since 1970-01-01T00:00:00Z`.
+    # Convert dates from datetime.datetime to secs since 1970-01-01T00:00:00Z.
     min_time = kwargs.pop("min_time", "")
     max_time = kwargs.pop("max_time", "")
     if min_time and not _check_substrings(min_time):
