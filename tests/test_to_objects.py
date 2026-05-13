@@ -37,30 +37,30 @@ def gliders():
 
 @pytest.fixture
 @pytest.mark.web
-def neracoos():
+def ncei():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
-        server="https://www.neracoos.org/erddap/",
+        server="https://www.ncei.noaa.gov/erddap/",
         response="htmlTable",
     )
 
 
 @pytest.fixture
-def dataset_griddap(neracoos):
+def dataset_griddap(ncei):
     """Load griddap data for testing."""
-    neracoos.dataset_id = "WW3_EastCoast_latest"
-    neracoos.protocol = "griddap"
-    neracoos.griddap_initialize()
-    return neracoos
+    ncei.dataset_id = "AEC_gomex_satellite_climo"
+    ncei.protocol = "griddap"
+    ncei.griddap_initialize()
+    return ncei
 
 
 @pytest.fixture
-def dataset_opendap(neracoos):
+def dataset_opendap(ncei):
     """Load griddap data with OPeNDAP response for testing."""
-    neracoos.dataset_id = "WW3_EastCoast_latest"
-    neracoos.protocol = "griddap"
-    neracoos.response = "opendap"
-    return neracoos
+    ncei.dataset_id = "AEC_gomex_satellite_climo"
+    ncei.protocol = "griddap"
+    ncei.response = "opendap"
+    return ncei
 
 
 @pytest.fixture
