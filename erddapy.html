@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ERDDAP class API &#8212; erddapy 3.1.1 documentation</title>
+    <title>ERDDAP class API &#8212; erddapy 3.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
-    <script src="_static/documentation_options.js?v=796a81b5"></script>
+    <script src="_static/documentation_options.js?v=4f6ddb47"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -129,7 +129,7 @@ protocol: tabledap or griddap.</p>
 variables: a list variables to download.
 response: default is HTML.
 constraints: download constraints, default None (opendap-like url)
-params and requests_kwargs: <cite>httpx.get</cite> options</p>
+params and requests_kwargs: <cite>requests.get</cite> options</p>
 </div></blockquote>
 </section>
 <section id="returns">
@@ -593,8 +593,8 @@ objects. <cite>timestamp</cite> returns the expected strings in seconds since 19
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>date_time</strong> (<em>datetime</em><em> | </em><em>str</em>)</p></li>
-<li><p><strong>dayfirst</strong> (<em>OptionalBool</em>)</p></li>
-<li><p><strong>yearfirst</strong> (<em>OptionalBool</em>)</p></li>
+<li><p><strong>dayfirst</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>yearfirst</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -606,8 +606,8 @@ objects. <cite>timestamp</cite> returns the expected strings in seconds since 19
 <dl class="py function">
 <dt class="sig sig-object py" id="erddapy.erddapy.urlopen">
 <span class="sig-prename descclassname"><span class="pre">erddapy.erddapy.</span></span><span class="sig-name descname"><span class="pre">urlopen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">quote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requests_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/erddapy/core/url.html#urlopen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#erddapy.erddapy.urlopen" title="Link to this definition">¶</a></dt>
-<dd><p>Thin wrapper around httpx get content.</p>
-<p>See httpx.get docs for the <cite>params</cite> and <cite>kwargs</cite> options.</p>
+<dd><p>Thin wrapper around requests get content.</p>
+<p>See requests.get docs for the <cite>params</cite> and <cite>kwargs</cite> options.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
