@@ -74,9 +74,9 @@ def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
     )
     try:
         response.raise_for_status()
-    except requests.HTTPError as err:
+    except requests.exceptions.HTTPError as err:
         msg = str(response.content.decode())
-        raise requests.HTTPError(msg) from err
+        raise requests.exceptions.HTTPError(msg) from err
     return io.BytesIO(response.content)
 
 
@@ -157,7 +157,11 @@ def _multi_urlopen(url: str) -> BinaryIO:
     """Simpler url open to work with multiprocessing."""
     try:
         data = urlopen(url, requests_kwargs={"timeout": 120})
-    except (requests.HTTPError, requests.ConnectionError):
+    except (
+        requests.exceptions.HTTPError,
+        requests.exceptions.ConnectionError,
+        requests.exceptions.ReadTimeout,
+    ):
         return None
     return data
 
