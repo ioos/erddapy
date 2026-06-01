@@ -43,17 +43,33 @@ dynamic.dependencies = { file = [
 ] }
 
 [tool.setuptools_scm]
+tag_regex = "^(?P<prefix>v)?(?P<version>[^\\+]+)(?P<suffix>.*)?$"
 write_to = "erddapy/_version.py"
 write_to_template = "__version__ = '{version}'"
-tag_regex = "^(?P<prefix>v)?(?P<version>[^\\+]+)(?P<suffix>.*)?$"
+
+[tool.interrogate]
+fail-under = 85
+ignore-init-method = true
+ignore-init-module = false
+ignore-magic = false
+ignore-semiprivate = false
+ignore-private = false
+ignore-module = false
+exclude = [
+  "docs",
+  "tests",
+]
+color = true
+verbose = 1
+quiet = false
 
 [tool.check-manifest]
 ignore = [
   "*.yml",
   ".coveragerc",
-  "Makefile",
   "docs",
   "docs/*",
+  "Makefile",
   "notebooks",
   "notebooks/*",
   "tests",
@@ -62,27 +78,11 @@ ignore = [
 
 [tool.pytest]
 ini_options.markers = [
-  "web: marks tests require connection (deselect with '-m \"not web\"')",
   "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",
+  "web: marks tests require connection (deselect with '-m \"not web\"')",
 ]
 ini_options.filterwarnings = [
   "error:::erddapy.*",
-  "ignore::UserWarning",
   "ignore::RuntimeWarning",
+  "ignore::UserWarning",
 ]
-
-[tool.interrogate]
-ignore-init-method = true
-ignore-init-module = false
-ignore-magic = false
-ignore-semiprivate = false
-ignore-private = false
-ignore-module = false
-fail-under = 85
-exclude = [
-  "docs",
-  "tests",
-]
-verbose = 1
-quiet = false
-color = true
