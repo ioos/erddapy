@@ -1,8 +1,10 @@
 """ERDDAPyBackendEntrypoint."""
 
 import urllib.parse
+from collections.abc import Iterable
 
 import xarray as xr
+from xarray.backends.common import T_PathFileOrDataStore
 
 from erddapy.core.interfaces import to_xarray
 
@@ -31,7 +33,7 @@ def _is_netcdf(url: str) -> bool:
     return isnetcdf
 
 
-def _is_url(url: str) -> bool:
+def _is_url(url: T_PathFileOrDataStore) -> bool:
     """Check if it is a valid ERDDAP URL.
 
     Parameters
@@ -47,7 +49,7 @@ def _is_url(url: str) -> bool:
     """
     isurl = False
     if not isinstance(url, str):
-        isurl = False
+        return False
     if url.startswith(("http://", "https://")) and "/erddap/" in url:
         isurl = True
     return isurl
@@ -66,9 +68,9 @@ class ERDDAPyBackendEntrypoint(xr.backends.BackendEntrypoint):
 
     def open_dataset(
         self,
-        filename_or_obj: str,
+        filename_or_obj: T_PathFileOrDataStore,
         *,
-        drop_variables: list | None = None,  # noqa: ARG002
+        drop_variables: str | Iterable[str] | None = None,  # noqa: ARG002
     ) -> xr.Dataset:
         """Open ERDDAP URLs as xarray datasets."""
         return open_erddap_dataset(filename_or_obj)
@@ -78,16 +80,17 @@ class ERDDAPyBackendEntrypoint(xr.backends.BackendEntrypoint):
     description = "Load ERDDAP URLs in xarray."
 
 
-def open_erddap_dataset(filename_or_obj: str) -> xr.Dataset:
+def open_erddap_dataset(filename_or_obj: T_PathFileOrDataStore) -> xr.Dataset:
     """Open an ERDDAP URL with a netcdf-like response as an xarray object."""
     if not _is_url(filename_or_obj):
-        msg = f"Expected an ERDDAP URL, got {filename_or_obj}."
+        msg = f"Expected an ERDDAP URL, got {filename_or_obj!r}."
         raise ValueError(msg)
 
-    if _is_netcdf(filename_or_obj):
+    url = str(filename_or_obj)
+    if _is_netcdf(url):
         response = "nc"
     else:
-        filename_or_obj = _make_opendap(filename_or_obj)
+        filename_or_obj = _make_opendap(url)
         response = "opendap"
 
-    return to_xarray(filename_or_obj, response=response)
+    return to_xarray(url, response=response)

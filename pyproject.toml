@@ -76,6 +76,11 @@ ignore = [
   "tests/*",
 ]
 
+[tool.mypy]
+ignore_missing_imports = true
+warn_unreachable = true
+warn_unused_configs = true
+
 [tool.pytest]
 ini_options.markers = [
   "serial: marks tests that cannot be run in parallel (deselect with '-m \"not serial\"')",

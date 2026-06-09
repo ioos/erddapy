@@ -1,22 +1,15 @@
 """URL handling."""
 
-from __future__ import annotations
-
 import copy
 import datetime
 import functools
 import io
 from collections import OrderedDict
-from typing import BinaryIO
+from typing import Any, BinaryIO
 from urllib import parse
 
 import requests
 from pandas import to_datetime
-
-OptionalStr = str | None
-OptionalBool = bool | None
-OptionalDict = dict | None
-OptionalList = list[str] | tuple[str] | None
 
 
 def quote_url(url: str) -> str:
@@ -63,7 +56,7 @@ def _clean_response(response: str) -> str:
 
 
 @functools.lru_cache(maxsize=128)
-def _urlopen(url: str, auth: tuple | None = None, **kwargs: dict) -> BinaryIO:
+def _urlopen(url: str, auth: tuple | None = None, **kwargs: Any) -> BinaryIO:
     timeout = kwargs.pop("timeout", 60)
     response = requests.get(
         url,
@@ -112,7 +105,7 @@ def urlopen(
     return data
 
 
-def check_url_response(url: str, **kwargs: dict) -> str:
+def check_url_response(url: str, **kwargs: Any) -> str:
     """Shortcut to `raise_for_status` instead of fetching the whole content.
 
     One should only use this is passing URLs that are known to work is
@@ -125,7 +118,7 @@ def check_url_response(url: str, **kwargs: dict) -> str:
     return url
 
 
-def _distinct(url: str, *, distinct: OptionalBool = False) -> str:
+def _distinct(url: str, *, distinct: bool = False) -> str:
     """Sort all of the rows in the results table.
 
     Starting with the first requested variable,
@@ -153,8 +146,8 @@ def _format_search_string(server: str, query: str) -> str:
     )
 
 
-def _multi_urlopen(url: str) -> BinaryIO:
-    """Simpler url open to work with multiprocessing."""
+def _multi_urlopen(url: str) -> BinaryIO | None:
+    """Simpler URL openner to work with multiprocessing."""
     try:
         data = urlopen(url, requests_kwargs={"timeout": 120})
     except (
@@ -166,7 +159,7 @@ def _multi_urlopen(url: str) -> BinaryIO:
     return data
 
 
-def _quote_string_constraints(kwargs: dict) -> dict:
+def _quote_string_constraints(kwargs: dict[str, str]) -> dict[str, str]:
     """Quote constraints of String variables.
 
     The right-hand-side value must be surrounded by double quotes if they are
@@ -186,7 +179,7 @@ def _format_constraints_url(kwargs: dict) -> str:
     return "".join([f"&{k}{v}" for k, v in kwargs.items()])
 
 
-def _check_substrings(constraint: dict) -> bool:
+def _check_substrings(constraint: str) -> bool:
     """Extend the OPeNDAP with extra strings."""
     substrings = ["now", "min", "max"]
     return any(
@@ -203,8 +196,8 @@ def _is_quoted(url: str) -> bool:
 def parse_dates(
     date_time: datetime.datetime | str,
     *,
-    dayfirst: OptionalBool = False,
-    yearfirst: OptionalBool = False,
+    dayfirst: bool = False,
+    yearfirst: bool = False,
 ) -> float:
     """Parse dates to ERDDAP internal format.
 
@@ -235,10 +228,10 @@ def get_search_url(  # noqa: PLR0913
     server: str,
     response: str = "html",
     search_for: str | None = None,
-    protocol: str = "tabledap",
+    protocol: str | None = "tabledap",
     items_per_page: int = 1_000_000,
     page: int = 1,
-    **kwargs: dict,
+    **kwargs: Any,
 ) -> str:
     """Build the search URL for the `server` endpoint provided.
 
@@ -388,8 +381,8 @@ def get_search_url(  # noqa: PLR0913
 
 def get_info_url(
     server: str,
-    dataset_id: OptionalStr = None,
-    response: OptionalStr = None,
+    dataset_id: str | None,
+    response: str | None,
 ) -> str:
     """Build the info URL for the `server` endpoint.
 
@@ -413,8 +406,8 @@ def get_info_url(
 def get_categorize_url(
     server: str,
     categorize_by: str,
-    value: OptionalStr = None,
-    response: OptionalStr = None,
+    value: str | None,
+    response: str | None,
 ) -> str:
     """Build the categorize URL for the `server` endpoint.
 
@@ -439,16 +432,16 @@ def get_categorize_url(
     return url
 
 
-def get_download_url(  # noqa: PLR0913, C901
+def get_download_url(  # noqa: PLR0913
     server: str,
     *,
-    dataset_id: OptionalStr = None,
-    protocol: OptionalStr = None,
-    variables: OptionalList = None,
-    dim_names: OptionalList = None,
-    response: OptionalStr = None,
-    constraints: OptionalDict = None,
-    distinct: OptionalBool = False,
+    dataset_id: str,
+    protocol: str,
+    variables: list[str] | tuple[str] | None = None,
+    dim_names: list[str] | tuple[str] | None = None,
+    response: str = "html",
+    constraints: dict[Any, Any] | None = None,
+    distinct: bool = False,
 ) -> str:
     """Build the download URL.
 
@@ -486,14 +479,6 @@ def get_download_url(  # noqa: PLR0913, C901
         url (str): the download URL for the `response` chosen.
 
     """
-    if not dataset_id:
-        msg = f"Please specify a valid `dataset_id`, got {dataset_id}"
-        raise ValueError(msg)
-
-    if not protocol:
-        msg = f"Please specify a valid `protocol`, got {protocol}"
-        raise ValueError(msg)
-
     if (
         protocol == "griddap"
         and constraints is not None

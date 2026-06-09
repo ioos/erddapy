@@ -5,7 +5,7 @@ from __future__ import annotations
 import functools
 import hashlib
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from urllib.request import urlretrieve
 
 import pandas as pd
@@ -48,11 +48,6 @@ if TYPE_CHECKING:
     import iris.cube
     import netCDF4.Dataset
     import xarray as xr
-
-OptionalBool = bool | None
-OptionalDict = dict | None
-OptionalList = list[str] | tuple[str] | None
-OptionalStr = str | None
 
 
 class ERDDAP:
@@ -123,7 +118,7 @@ class ERDDAP:
     def __init__(
         self: ERDDAP,
         server: str,
-        protocol: OptionalStr = None,
+        protocol: str | None = None,
         response: str = "html",
     ) -> None:
         """Instantiate main class attributes.
@@ -147,19 +142,19 @@ class ERDDAP:
         self.auth: tuple | None = None
 
         self.constraints: dict | None = None
-        self.variables: OptionalList | None = None
-        self.dim_names: OptionalList | None = None
+        self.variables: list[str] | tuple[str] | None = None
+        self.dim_names: list[str] | tuple[str] | None = None
 
         self._get_variables = functools.lru_cache(maxsize=128)(
             self._get_variables_uncached,
         )
         # Caching the last dataset_id and variables list request for
         # quicker access, will be overridden when requesting a new dataset_id.
-        self._dataset_id: OptionalStr = None
+        self._dataset_id: str | None = None
         self._variables: dict = {}
 
     @property
-    def dataset_id(self) -> str:
+    def dataset_id(self) -> str | None:
         """dataset_id property."""
         return self._dataset_id
 
@@ -170,7 +165,7 @@ class ERDDAP:
 
     def griddap_initialize(
         self: ERDDAP,
-        dataset_id: OptionalStr = None,
+        dataset_id: str | None = None,
         step: int = 1,
     ) -> None:
         """Fetch metadata of dataset and initialize constraints and variables.
@@ -200,9 +195,9 @@ class ERDDAP:
 
     def get_search_url(
         self: ERDDAP,
-        response: OptionalStr = None,
-        search_for: OptionalStr = None,
-        protocol: OptionalStr = None,
+        response: str | None = None,
+        search_for: str | None = None,
+        protocol: str | None = None,
         items_per_page: int = 1_000_000,
         page: int = 1,
         **kwargs: dict,
@@ -263,8 +258,8 @@ class ERDDAP:
 
     def get_info_url(
         self: ERDDAP,
-        dataset_id: OptionalStr = None,
-        response: OptionalStr = None,
+        dataset_id: str | None = None,
+        response: str | None = None,
     ) -> str:
         """Build the info URL for the `server` endpoint.
 
@@ -291,8 +286,8 @@ class ERDDAP:
     def get_categorize_url(
         self: ERDDAP,
         categorize_by: str,
-        value: OptionalStr = None,
-        response: OptionalStr = None,
+        value: str | None = None,
+        response: str | None = None,
     ) -> str:
         """Build the categorize URL for the `server` endpoint.
 
@@ -315,13 +310,13 @@ class ERDDAP:
     def get_download_url(  # noqa: PLR0913
         self: ERDDAP,
         *,
-        dataset_id: OptionalStr = None,
-        protocol: OptionalStr = None,
-        variables: OptionalList = None,
-        dim_names: OptionalList = None,
-        response: OptionalStr = None,
-        constraints: OptionalDict = None,
-        distinct: OptionalBool = False,
+        dataset_id: str | None = None,
+        protocol: str | None = None,
+        variables: list[str] | tuple[str] | None = None,
+        dim_names: list[str] | tuple[str] | None = None,
+        response: str | None = None,
+        constraints: dict[str, Any] | None = None,
+        distinct: bool = False,
     ) -> str:
         """Build the download URL for the `server` endpoint.
 
@@ -417,7 +412,10 @@ class ERDDAP:
         """
         response = kw.pop("response", "csvp")
         distinct = kw.pop("distinct", False)
-        url = self.get_download_url(response=response, distinct=distinct)
+        url = self.get_download_url(
+            response=str(response),
+            distinct=bool(distinct),
+        )
         return to_pandas(
             url,
             requests_kwargs=requests_kwargs,
@@ -426,13 +424,13 @@ class ERDDAP:
 
     def to_ncCF(  # noqa: N802
         self: ERDDAP,
-        protocol: OptionalStr = None,
+        protocol: str | None = None,
         **kw: dict,
     ) -> netCDF4.Dataset:
         """Load the data request into a CF compliant netCDF4-python object."""
         distinct = kw.pop("distinct", False)
         protocol = protocol or self.protocol
-        url = self.get_download_url(response="ncCF", distinct=distinct)
+        url = self.get_download_url(response="ncCF", distinct=bool(distinct))
         return to_ncCF(url, protocol=protocol, requests_kwargs={**kw})
 
     def to_xarray(
@@ -451,7 +449,7 @@ class ERDDAP:
         else:
             response = "ncCF"
         distinct = kw.pop("distinct", False)
-        url = self.get_download_url(response=response, distinct=distinct)
+        url = self.get_download_url(response=response, distinct=bool(distinct))
         if requests_kwargs:
             requests_kwargs = {"auth": self.auth, **requests_kwargs}
         else:
@@ -463,7 +461,7 @@ class ERDDAP:
             xarray_kwargs={**kw},
         )
 
-    def to_iris(self: ERDDAP, **kw: dict) -> iris.cube.CubeList:
+    def to_iris(self: ERDDAP, **kw: Any) -> iris.cube.CubeList:
         """Load the data request into an iris.cube.CubeList.
 
         Accepts any `iris.load_raw` keyword arguments.
@@ -475,7 +473,7 @@ class ERDDAP:
 
     def _get_variables_uncached(
         self: ERDDAP,
-        dataset_id: OptionalStr = None,
+        dataset_id: str | None = None,
     ) -> dict:
         if not dataset_id:
             dataset_id = self.dataset_id
@@ -504,7 +502,7 @@ class ERDDAP:
 
     def get_var_by_attr(
         self: ERDDAP,
-        dataset_id: OptionalStr = None,
+        dataset_id: str | None = None,
         **kwargs: dict,
     ) -> list[str]:
         """Return a variable based on its attributes.
@@ -560,7 +558,7 @@ class ERDDAP:
     def download_file(
         self: ERDDAP,
         file_type: str,
-    ) -> str:
+    ) -> Path:
         """Download the dataset to a file in a user specified format."""
         file_type = file_type.lstrip(".")
         if file_type not in download_formats:

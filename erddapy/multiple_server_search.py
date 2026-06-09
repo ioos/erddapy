@@ -1,8 +1,7 @@
 """Multiple Server Search."""
 
-from __future__ import annotations
-
 import multiprocessing
+from typing import Any
 
 import pandas as pd
 
@@ -19,12 +18,10 @@ from erddapy.core.url import (
 )
 from erddapy.servers.servers import servers
 
-OptionalList = list | None
-OptionalBool = bool | None
 OptionalStr = str | None
 
 
-def _format_results(dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
+def _format_results(dfs: list[dict[str, pd.DataFrame]]) -> pd.DataFrame:
     """Format dictionary of results into a Pandas dataframe."""
     # we return None for bad server, so we need to filter them here
     return pd.concat(
@@ -36,7 +33,7 @@ def fetch_results(
     url: str,
     key: str,
     protocol: str,
-) -> dict[str, pd.DataFrame]:
+) -> dict[str, pd.DataFrame] | None:
     """Fetch search results from multiple servers.
 
     If the server fails to response this function returns None
@@ -64,10 +61,10 @@ def fetch_results(
 def search_servers(
     query: str,
     *,
-    servers_list: OptionalList = None,
-    parallel: OptionalBool = False,
+    servers_list: list | None = None,
+    parallel: bool | None = False,
     protocol: OptionalStr = "tabledap",
-) -> pd.Dataframe:
+) -> pd.DataFrame:
     """Search all servers for a query string.
 
     Returns a dataframe of details for all matching datasets
@@ -110,11 +107,11 @@ def search_servers(
 
 
 def advanced_search_servers(
-    servers_list: OptionalList = None,
+    servers_list: list | None = None,
     *,
-    parallel: OptionalBool = False,
+    parallel: bool | None = False,
     protocol: OptionalStr = "tabledap",
-    **kwargs: dict,
+    **kwargs: Any,
 ) -> pd.DataFrame:
     """Search multiple ERDDAP servers.
 
