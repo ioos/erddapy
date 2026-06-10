@@ -259,6 +259,30 @@ def test_get_var_by_attr(e):
     ]
 
 
+def test_get_var_by_attr_falsy_attribute_values(e, monkeypatch):
+    """Test that get_var_by_attr can match falsy values like 0 and ""."""
+    datasets = {
+        "fake_dataset": {
+            "salt": {"valid_min": 0, "comment": ""},
+            "temp": {"valid_min": 2.5, "comment": "in-situ"},
+        },
+    }
+
+    def _get_variables(dataset_id):
+        return datasets[dataset_id]
+
+    monkeypatch.setattr(e, "_get_variables", _get_variables)
+
+    matches = e.get_var_by_attr(dataset_id="fake_dataset", valid_min=0)
+    assert matches == ["salt"]
+
+    matches = e.get_var_by_attr(dataset_id="fake_dataset", comment="")
+    assert matches == ["salt"]
+
+    matches = e.get_var_by_attr(dataset_id="fake_dataset", valid_min=2.5)
+    assert matches == ["temp"]
+
+
 @pytest.mark.web
 @pytest.mark.vcr
 def test_download_url_distinct(e):

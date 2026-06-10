@@ -546,7 +546,7 @@ class ERDDAP:
                     has_value_flag = v(var.get(k, None))
                     if not has_value_flag:
                         break
-                elif var.get(k) and var.get(k) == v:
+                elif k in var and var[k] == v:
                     has_value_flag = True
                 else:
                     has_value_flag = False
