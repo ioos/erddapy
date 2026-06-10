@@ -20,10 +20,6 @@ def _griddap_get_constraints(
     xmlns = "https://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2"
 
     ncml_url = f"{dataset_url}.ncml"
-    res = urlopen(
-        "https://erddap.ioos.us/erddap/griddap/etopo5_EDDGridCopy.ncml",
-    )
-
     res = urlopen(ncml_url)
     xml = res.read().decode("utf-8")
     root = ET.fromstring(xml)  # noqa: S314
