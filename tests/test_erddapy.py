@@ -67,6 +67,39 @@ def test__quote_string_constraints():
             assert value.endswith('"')
 
 
+def test__quote_string_constraints_substring_false_positives():
+    """Plain values that merely contain now/min/max must still be quoted."""
+    kw = _quote_string_constraints(
+        {
+            "station=": "terminal_1",
+            "station!=": "snowfall_stn",
+            "station<": "maximum_buoy",
+            "station>": "minas_basin",
+            "cdm_data_type": "Maximum",
+            "station=~": "(WMO.*|.*minute.*)",
+        },
+    )
+
+    for value in kw.values():
+        assert value.startswith('"')
+        assert value.endswith('"')
+
+
+def test__quote_string_constraints_relative_constraints():
+    """Relative constraints like now-7days must not be quoted."""
+    kw = _quote_string_constraints(
+        {
+            "time>": "now-7days",
+            "depth>": "min(depth)",
+            "time<": "max(time)-1day",
+        },
+    )
+
+    for value in kw.values():
+        assert not value.startswith('"')
+        assert not value.endswith('"')
+
+
 def test__format_constraints_url():
     """Test constraint formatting."""
     kw_url = _format_constraints_url(

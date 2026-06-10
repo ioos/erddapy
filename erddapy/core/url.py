@@ -4,6 +4,7 @@ import copy
 import datetime
 import functools
 import io
+import re
 from collections import OrderedDict
 from typing import Any, BinaryIO
 from urllib import parse
@@ -180,10 +181,22 @@ def _format_constraints_url(kwargs: dict) -> str:
 
 
 def _check_substrings(constraint: str) -> bool:
-    """Extend the OPeNDAP with extra strings."""
-    substrings = ["now", "min", "max"]
+    """Return True if the constraint is a relative (server-side) expression.
+
+    ERDDAP relative constraints are "now", optionally followed by an offset,
+    like "now-7days", or "min(varName)"/"max(varName)", optionally followed
+    by an offset, like "max(time)-1day". Those must not be quoted nor parsed
+    as dates. See
+    https://erddap.ioos.us/erddap/tabledap/documentation.html#constraints
+
+    """
+    relative_expressions = (
+        r"^now([+-].+)?$",
+        r"^(min|max)\(.+\)([+-].+)?$",
+    )
+    value = str(constraint)
     return any(
-        True for substring in substrings if substring in str(constraint)
+        re.match(expression, value) for expression in relative_expressions
     )
 
 

@@ -230,6 +230,35 @@ def test_download_url_relative_constraints(e):
     assert options["longitude<"] == max_lon
 
 
+def test_download_url_quotes_substring_false_positives(e):
+    """Test that values containing now/min/max substrings get quoted."""
+    dataset_id = "org_cormp_cap2"
+    variables = ["station", "z"]
+
+    stations = [
+        "terminal_1",
+        "snowfall_stn",
+        "maximum_buoy",
+        "minas_basin",
+    ]
+    for station in stations:
+        url = e.get_download_url(
+            dataset_id=dataset_id,
+            variables=variables,
+            response="csv",
+            constraints={"station=": station},
+        )
+        assert url.endswith(f'&station="{station}"')
+
+    url = e.get_download_url(
+        dataset_id=dataset_id,
+        variables=variables,
+        response="csv",
+        constraints={"station=~": "(WMO.*|.*minute.*)"},
+    )
+    assert url.endswith('&station=~"(WMO.*|.*minute.*)"')
+
+
 @pytest.mark.web
 @pytest.mark.vcr
 def test_get_var_by_attr(e):
