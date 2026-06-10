@@ -1,11 +1,10 @@
 """Griddap handling."""
 
+import xml.etree.ElementTree as ET
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from collections.abc import Hashable
-
-import pandas as pd
 
 from erddapy.core.url import urlopen
 
@@ -18,33 +17,48 @@ def _griddap_get_constraints(
 
     Step size is applied to all dimensions.
     """
-    dds_url = f"{dataset_url}.dds"
-    res = urlopen(dds_url)
-    data = res.read().decode("utf-8")
-    dims, *variables = data.split("GRID")
-    dim_list = dims.split("[")[:-1]
-    dim_names, variable_names = [], []
-    for dim in dim_list:
-        dim_name = dim.split(" ")[-1]
-        dim_names.append(dim_name)
-    for var in variables:
-        phrase, *__ = var.split("[")
-        var_name = phrase.split(" ")[-1]
-        variable_names.append(var_name)
+    xmlns = "https://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2"
+
+    ncml_url = f"{dataset_url}.ncml"
+    res = urlopen(
+        "https://erddap.ioos.us/erddap/griddap/etopo5_EDDGridCopy.ncml",
+    )
+
+    res = urlopen(ncml_url)
+    xml = res.read().decode("utf-8")
+    root = ET.fromstring(xml)  # noqa: S314
+
+    variables = root.findall(f"{{{xmlns}}}variable")
+    dimensions = root.findall(f"{{{xmlns}}}dimension")
+
+    dimension_names = [dimension.attrib["name"] for dimension in dimensions]
+    variable_names = [variable.attrib["name"] for variable in variables]
+    variable_names = list(set(variable_names).difference(dimension_names))
 
     constraints_dict: dict[Hashable, str] = {}
-    for dim_name in dim_names:
-        url = f"{dataset_url}.csvp?{dim_name}"
-        data_info = pd.read_csv(url).to_numpy()
-        data_start = (
-            data_info[-1][0] if dim_name == "time" else data_info[0][0]
+
+    ns = {"nc": "https://www.unidata.ucar.edu/namespaces/netcdf/ncml-2.2"}
+
+    for dimension_name in dimension_names:
+        element = root.find(
+            path=f'nc:variable[@name="{dimension_name}"]/nc:attribute[@name="actual_range"]',
+            namespaces=ns,
         )
+        if element is None:
+            msg = (
+                f"Could not find actual_range for dimension {dimension_name}."
+            )
+            raise ValueError(msg)
+        actual_range = element.attrib["value"]
+        range_min, range_max = actual_range.split()
+        if dimension_name == "time":
+            range_min = range_max
 
-        constraints_dict[f"{dim_name}>="] = data_start
-        constraints_dict[f"{dim_name}<="] = data_info[-1][0]
-        constraints_dict[f"{dim_name}_step"] = str(step)
+        constraints_dict[f"{dimension_name}>="] = range_min
+        constraints_dict[f"{dimension_name}<="] = range_max
+        constraints_dict[f"{dimension_name}_step"] = str(step)
 
-    return constraints_dict, dim_names, variable_names
+    return constraints_dict, dimension_names, variable_names
 
 
 def _griddap_check_constraints(
