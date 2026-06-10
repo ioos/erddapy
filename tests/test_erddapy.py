@@ -1,7 +1,5 @@
 """Test ERDDAP functionality."""
 
-from __future__ import annotations
-
 import datetime
 from zoneinfo import ZoneInfo
 

@@ -5,10 +5,12 @@ geopandas
 interrogate
 joblib
 jupyter
+mypy
 nbclassic
 nbconvert
 nbsphinx
 netcdf4
+pandas-stubs
 pendulum>=2.0.1
 pooch
 pytest

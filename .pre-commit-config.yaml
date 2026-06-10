@@ -20,9 +20,10 @@ repos:
   rev: v2.1.0
   hooks:
   - id: mypy
-    exclude: docs/source/conf.py
-    entry: bash -c 'exec env CONDA_PREFIX="$(python -c "import sys; print(sys.executable)")"'
-    args: ["--ignore-missing-imports", "--python-executable=CONDA_PREFIX"]
+    additional_dependencies:
+      - types-requests
+      - pandas-stubs
+    exclude: 'docs/source/conf\.py'
 
 - repo: https://github.com/keewis/blackdoc
   rev: v0.4.6

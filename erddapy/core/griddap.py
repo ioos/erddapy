@@ -1,12 +1,13 @@
 """Griddap handling."""
 
-from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Hashable
 
 import pandas as pd
 
 from erddapy.core.url import urlopen
-
-OptionalList = list[str] | tuple[str] | None
 
 
 def _griddap_get_constraints(
@@ -18,8 +19,8 @@ def _griddap_get_constraints(
     Step size is applied to all dimensions.
     """
     dds_url = f"{dataset_url}.dds"
-    url = urlopen(dds_url)
-    data = url.read().decode()
+    res = urlopen(dds_url)
+    data = res.read().decode("utf-8")
     dims, *variables = data.split("GRID")
     dim_list = dims.split("[")[:-1]
     dim_names, variable_names = [], []
@@ -30,31 +31,18 @@ def _griddap_get_constraints(
         phrase, *__ = var.split("[")
         var_name = phrase.split(" ")[-1]
         variable_names.append(var_name)
-    table = pd.DataFrame(
-        {"dimension name": [], "min": [], "max": [], "length": []},
-    )
-    for dim in dim_names:
-        url = f"{dataset_url}.csvp?{dim}"
-        data = pd.read_csv(url).to_numpy()
-        data_start = data[-1][0] if dim == "time" else data[0][0]
 
-        meta = pd.DataFrame(
-            [
-                {
-                    "dimension name": dim,
-                    "min": data_start,
-                    "max": data[-1][0],
-                    "length": len(data),
-                },
-            ],
+    constraints_dict: dict[Hashable, str] = {}
+    for dim_name in dim_names:
+        url = f"{dataset_url}.csvp?{dim_name}"
+        data_info = pd.read_csv(url).to_numpy()
+        data_start = (
+            data_info[-1][0] if dim_name == "time" else data_info[0][0]
         )
-        table = pd.concat([table, meta])
-    table = table.set_index("dimension name", drop=True)
-    constraints_dict = {}
-    for dim, data in table.iterrows():
-        constraints_dict[f"{dim}>="] = data["min"]
-        constraints_dict[f"{dim}<="] = data["max"]
-        constraints_dict[f"{dim}_step"] = step
+
+        constraints_dict[f"{dim_name}>="] = data_start
+        constraints_dict[f"{dim_name}<="] = data_info[-1][0]
+        constraints_dict[f"{dim_name}_step"] = str(step)
 
     return constraints_dict, dim_names, variable_names
 
@@ -72,11 +60,11 @@ def _griddap_check_constraints(
 
 
 def _griddap_check_variables(
-    user_variables: OptionalList = None,
-    original_variables: OptionalList = None,
+    user_variables: list[str] | tuple[str],
+    original_variables: list[str] | tuple[str],
 ) -> None:
     """Check user has not requested variables that do not exist in dataset."""
-    invalid_variables = []
+    invalid_variables: list[str] = []
     invalid_variables.extend(
         variable
         for variable in user_variables

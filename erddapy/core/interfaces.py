@@ -19,10 +19,6 @@ if TYPE_CHECKING:
     import xarray as xr
 
 
-OptionalStr = str | None
-OptionalDict = dict | None
-
-
 def to_pandas(
     url: str,
     requests_kwargs: dict | None = None,
@@ -45,8 +41,8 @@ def to_pandas(
 
 def to_ncCF(  # noqa: N802
     url: str,
-    protocol: OptionalStr = None,
-    requests_kwargs: OptionalDict = None,
+    protocol: str | None = None,
+    requests_kwargs: dict | None = None,
 ) -> netCDF4.Dataset:
     """Convert a URL to a netCDF4 Dataset.
 
@@ -66,7 +62,7 @@ def to_ncCF(  # noqa: N802
 
 def to_xarray(
     url: str,
-    response: OptionalStr = "opendap",
+    response: str | None = "opendap",
     requests_kwargs: dict | None = None,
     xarray_kwargs: dict | None = None,
 ) -> xr.Dataset:
