@@ -21,7 +21,6 @@ from erddapy.core.url import (
     _clean_response,
     _distinct,
     _format_constraints_url,
-    _quote_string_constraints,
     _sort_url,
     download_formats,
     get_categorize_url,
@@ -39,7 +38,6 @@ __all__ = [
     "_check_substrings",
     "_distinct",
     "_format_constraints_url",
-    "_quote_string_constraints",
     "parse_dates",
     "urlopen",
 ]
@@ -542,11 +540,13 @@ class ERDDAP:
         for vname in variables:
             var = variables[vname]
             for k, v in kwargs.items():
+                # Attributes must always be a string.
+                _k = str(k)
                 if callable(v):
-                    has_value_flag = v(var.get(k, None))
+                    has_value_flag = v(var.get(_k, None))
                     if not has_value_flag:
                         break
-                elif var.get(k) and var.get(k) == v:
+                elif var.get(_k) == v:
                     has_value_flag = True
                 else:
                     has_value_flag = False

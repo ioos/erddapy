@@ -49,6 +49,7 @@ jobs:
         python -m pip install -e . --no-deps --force-reinstall
 
     - name: Full Tests
+      # Use the --record-mode=rewrite if you need to re-record the cassetts.
       run: >
         pushd tests && python download_test_data.py && popd
         && python -m pytest -rxs --cov=erddapy tests
