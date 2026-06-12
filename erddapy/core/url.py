@@ -181,7 +181,8 @@ def _format_constraints_url(kwargs: dict) -> str:
 
 def _check_substrings(constraint: str) -> bool:
     """Extend the OPeNDAP with extra strings."""
-    substrings = ["now", "min", "max"]
+    # The `now` doesn't need this check, it works both quoted and unquoted.
+    substrings = ["now+", "now-", "min(", "max("]
     return any(
         True for substring in substrings if substring in str(constraint)
     )
