@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ERDDAP class API &#8212; erddapy 3.2.0 documentation</title>
+    <title>ERDDAP class API &#8212; erddapy 2026.6.12 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
-    <script src="_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="_static/documentation_options.js?v=16f968bd"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -185,7 +185,7 @@ params and requests_kwargs: <cite>requests.get</cite> options</p>
 </div></blockquote>
 <dl class="py property">
 <dt class="sig sig-object py" id="erddapy.erddapy.ERDDAP.dataset_id">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">dataset_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#erddapy.erddapy.ERDDAP.dataset_id" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">dataset_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#erddapy.erddapy.ERDDAP.dataset_id" title="Link to this definition">¶</a></dt>
 <dd><p>dataset_id property.</p>
 </dd></dl>
 
@@ -201,7 +201,7 @@ params and requests_kwargs: <cite>requests.get</cite> options</p>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p><em>Path</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -297,8 +297,8 @@ constraints = {</p>
 <li><p><strong>variables</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>tuple</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
 <li><p><strong>dim_names</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>tuple</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
 <li><p><strong>response</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
-<li><p><strong>constraints</strong> (<em>dict</em><em> | </em><em>None</em>)</p></li>
-<li><p><strong>distinct</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>constraints</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>distinct</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -496,7 +496,7 @@ step: step used to subset dataset</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#erddapy.erddapy.ERDDAP" title="erddapy.erddapy.ERDDAP"><em>ERDDAP</em></a>)</p></li>
-<li><p><strong>kw</strong> (<em>dict</em>)</p></li>
+<li><p><strong>kw</strong> (<em>Any</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -513,7 +513,7 @@ step: step used to subset dataset</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>self</strong> (<a class="reference internal" href="#erddapy.erddapy.ERDDAP" title="erddapy.erddapy.ERDDAP"><em>ERDDAP</em></a>)</p></li>
-<li><p><strong>protocol</strong> (<em>OptionalStr</em>)</p></li>
+<li><p><strong>protocol</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>kw</strong> (<em>dict</em>)</p></li>
 </ul>
 </dd>
@@ -575,7 +575,7 @@ please check ERDDAP’s docs for the other csv options available.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>server</strong> (<em>str</em>)</p></li>
-<li><p><strong>protocol</strong> (<em>OptionalStr</em>)</p></li>
+<li><p><strong>protocol</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>response</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>
@@ -593,8 +593,8 @@ objects. <cite>timestamp</cite> returns the expected strings in seconds since 19
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>date_time</strong> (<em>datetime</em><em> | </em><em>str</em>)</p></li>
-<li><p><strong>dayfirst</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
-<li><p><strong>yearfirst</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>dayfirst</strong> (<em>bool</em>)</p></li>
+<li><p><strong>yearfirst</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
