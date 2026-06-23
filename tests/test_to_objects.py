@@ -15,7 +15,6 @@ dask.config.set(scheduler="single-threaded")
 
 
 @pytest.fixture
-@pytest.mark.web
 def sensors():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
@@ -25,7 +24,6 @@ def sensors():
 
 
 @pytest.fixture
-@pytest.mark.web
 def gliders():
     """Instantiate ERDDAP class for testing."""
     # The gliders server has 1244 datasets at time of writing
@@ -36,7 +34,6 @@ def gliders():
 
 
 @pytest.fixture
-@pytest.mark.web
 def ncei():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
