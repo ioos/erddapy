@@ -68,7 +68,6 @@ def test_search_awesome_erddap_servers_false():
 
 
 @pytest.fixture
-@pytest.mark.web
 def servers_list():
     """Objects for server search."""
     return {
