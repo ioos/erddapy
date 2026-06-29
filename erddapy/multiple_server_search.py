@@ -78,16 +78,12 @@ def search_servers(
     if protocol not in ("tabledap", "griddap"):
         msg = f"Protocol must be tabledap or griddap, got {protocol}"
         raise ValueError(msg)
-    if servers_list:
-        urls = {
-            server: _format_search_string(server, query)
-            for server in servers_list
-        }
-    else:
-        urls = {
-            key: _format_search_string(server.url, query)
-            for key, server in servers.items()
-        }
+    if servers_list is None:
+        servers_list = [v.url for k, v in servers().items()]
+
+    urls = {
+        server: _format_search_string(server, query) for server in servers_list
+    }
     if parallel:
         num_cores = multiprocessing.cpu_count()
         if not joblib:
@@ -127,16 +123,13 @@ def advanced_search_servers(
         msg = f"Protocol must be tabledap or griddap, got {protocol}"
         raise ValueError(msg)
     response = "csv"
-    if servers_list:
-        urls = {
-            server: get_search_url(server, response=response, **kwargs)
-            for server in servers_list
-        }
-    else:
-        urls = {
-            key: get_search_url(server.url, response=response, **kwargs)
-            for key, server in servers.items()
-        }
+    if servers_list is None:
+        servers_list = [v.url for k, v in servers().items()]
+
+    urls = {
+        server: get_search_url(server, response=response, **kwargs)
+        for server in servers_list
+    }
 
     if parallel:
         num_cores = multiprocessing.cpu_count()

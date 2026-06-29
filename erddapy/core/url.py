@@ -5,11 +5,60 @@ import datetime
 import functools
 import io
 from collections import OrderedDict
-from typing import Any, BinaryIO
+from typing import TYPE_CHECKING, Any, BinaryIO
 from urllib import parse
 
 import requests
 from pandas import to_datetime
+
+if TYPE_CHECKING:
+    from xarray.backends.common import T_PathFileOrDataStore
+
+
+def _is_netcdf(url: str) -> bool:
+    """Check if it .nc .ncCF, or ncCFMA URL.
+
+    Parameters
+    ----------
+    url : str or unicode
+        ERDDAP netcdf-like URL
+
+    Returns
+    -------
+    isnetcdf : bool
+        True is `url` can be opened by xarray otherwise False.
+
+    """
+    isnetcdf = False
+    if any(
+        ext in url for ext in (".nc?", ".ncCF?", ".ncCFMA?")
+    ) or url.endswith(
+        (".nc", ".ncCF", ".ncCFMA"),
+    ):
+        isnetcdf = True
+    return isnetcdf
+
+
+def _is_url(url: "T_PathFileOrDataStore") -> bool:
+    """Check if it is a valid ERDDAP URL.
+
+    Parameters
+    ----------
+    url : str or unicode
+        ERDDAP netcdf-like URL
+
+    Returns
+    -------
+    isurl : bool
+        True is `url` is a valid ERDDAP URL otherwise False.
+
+    """
+    isurl = False
+    if not isinstance(url, str):
+        return False
+    if url.startswith(("http://", "https://")) and "/erddap" in url:
+        isurl = True
+    return isurl
 
 
 def quote_url(url: str) -> str:
