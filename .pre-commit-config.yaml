@@ -54,7 +54,7 @@ repos:
     - id: add-trailing-comma
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.15.18
+  rev: v0.15.20
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -77,7 +77,7 @@ repos:
     - id: nb-strip-paths
 
 - repo: https://github.com/tox-dev/pyproject-fmt
-  rev: v2.25.0
+  rev: v2.25.1
   hooks:
     - id: pyproject-fmt
 
