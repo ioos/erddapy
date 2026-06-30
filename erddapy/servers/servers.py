@@ -17,7 +17,7 @@ class Server(NamedTuple):
 
 
 @functools.lru_cache(maxsize=128)
-def servers_list() -> dict:
+def servers() -> dict:
     """Download a new server list from awesome-erddap.
 
     First we try to load the latest list from GitHub.
@@ -38,6 +38,3 @@ def servers_list() -> dict:
         for k, row in df_servers.iterrows()
         if row["short_name"]
     }
-
-
-servers = servers_list()

@@ -21,6 +21,7 @@ from erddapy.core.url import (
     _clean_response,
     _distinct,
     _format_constraints_url,
+    _is_url,
     _sort_url,
     download_formats,
     get_categorize_url,
@@ -30,7 +31,7 @@ from erddapy.core.url import (
     parse_dates,
     urlopen,
 )
-from erddapy.servers.servers import servers
+from erddapy.servers import servers
 
 # Objects used by downstream packages
 __all__ = [
@@ -92,24 +93,12 @@ class ERDDAP:
         to get a list of the shortcuts available servers:
 
         >>> from erddapy import servers
-        >>> {k: v.url for k, v in servers.items()}
-        {'MDA': 'https://bluehub.jrc.ec.europa.eu/erddap/',
-         'MII': 'https://erddap.marine.ie/erddap/',
-         'CSCGOM': 'https://cwcgom.aoml.noaa.gov/erddap/',
-         'CSWC': 'https://coastwatch.pfeg.noaa.gov/erddap/',
-         'CeNCOOS': 'https://erddap.axiomalaska.com/erddap/',
-         'NERACOOS': 'https://www.neracoos.org/erddap/',
-         'NGDAC': 'https://gliders.ioos.us/erddap/',
-         'PacIOOS': 'https://pae-paha.pacioos.hawaii.edu/erddap/',
-         'SECOORA': 'https://erddap.secoora.org/erddap/',
-         'NCEI': 'https://ecowatch.ncddc.noaa.gov/erddap/',
-         'OSMC': 'https://osmc.noaa.gov/erddap/',
-         'UAF': 'https://upwell.pfeg.noaa.gov/erddap/',
-         'ONC': 'https://dap.onc.uvic.ca/erddap/',
-         'BMLSC': 'http://bmlsc.ucdavis.edu:8080/erddap/',
-         'RTECH': 'https://meteo.rtech.fr/erddap/',
-         'IFREMER': 'https://www.ifremer.fr/erddap/',
-         'UBC': 'https://salishsea.eos.ubc.ca/erddap/'}
+        >>> servers()
+        {'voto': Server(description='Voice of the Ocean', url='https://erddap.observations.voiceoftheocean.org/erddap/'),
+        'cswc': Server(description='CoastWatch West Coast Node', url='https://coastwatch.pfeg.noaa.gov/erddap/'),
+        ...,
+        'noaa oceanview': Server(description='NOAA Oceanview', url='https://oceanview.pfeg.noaa.gov/erddap/'),
+        'cfrf': Server(description='Commercial Fisheries Research Foundation', url='https://erddap.ondeckdata.com/erddap/')}
 
     """
 
@@ -128,8 +117,13 @@ class ERDDAP:
           response: default is HTML.
 
         """
-        if server.lower() in servers:
-            server = servers[server.lower()].url
+        if not _is_url(server):
+            _servers = servers()
+            if server.lower() in _servers:
+                server = _servers[server.lower()].url
+            else:
+                msg = f"Cannot initialize {server=}."
+                raise ValueError(msg)
         self.server = server.rstrip("/")
         self.protocol = protocol
         self.response = response

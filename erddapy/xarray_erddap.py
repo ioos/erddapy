@@ -7,52 +7,7 @@ import xarray as xr
 from xarray.backends.common import T_PathFileOrDataStore
 
 from erddapy.core.interfaces import to_xarray
-
-
-def _is_netcdf(url: str) -> bool:
-    """Check if it .nc .ncCF, or ncCFMA URL.
-
-    Parameters
-    ----------
-    url : str or unicode
-        ERDDAP netcdf-like URL
-
-    Returns
-    -------
-    isnetcdf : bool
-        True is `url` can be opened by xarray otherwise False.
-
-    """
-    isnetcdf = False
-    if any(
-        ext in url for ext in (".nc?", ".ncCF?", ".ncCFMA?")
-    ) or url.endswith(
-        (".nc", ".ncCF", ".ncCFMA"),
-    ):
-        isnetcdf = True
-    return isnetcdf
-
-
-def _is_url(url: T_PathFileOrDataStore) -> bool:
-    """Check if it is a valid ERDDAP URL.
-
-    Parameters
-    ----------
-    url : str or unicode
-        ERDDAP netcdf-like URL
-
-    Returns
-    -------
-    isurl : bool
-        True is `url` is a valid ERDDAP URL otherwise False.
-
-    """
-    isurl = False
-    if not isinstance(url, str):
-        return False
-    if url.startswith(("http://", "https://")) and "/erddap/" in url:
-        isurl = True
-    return isurl
+from erddapy.core.url import _is_netcdf, _is_url
 
 
 def _make_opendap(url: str) -> str:
