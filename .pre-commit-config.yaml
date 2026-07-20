@@ -38,7 +38,7 @@ repos:
       args: [--config=pyproject.toml]
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.2
+  rev: v2.4.3
   hooks:
     - id: codespell
       exclude: >
@@ -54,7 +54,7 @@ repos:
     - id: add-trailing-comma
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.15.21
+  rev: v0.15.22
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -82,7 +82,7 @@ repos:
     - id: pyproject-fmt
 
 - repo: https://github.com/woodruffw/zizmor-pre-commit
-  rev: v1.26.1
+  rev: v1.27.0
   hooks:
     - id: zizmor
 
