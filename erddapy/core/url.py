@@ -274,7 +274,7 @@ def parse_dates(
     return parse_date_time.timestamp()
 
 
-def get_search_url(  # noqa: PLR0913
+def get_search_url(  # noqa: PLR0913, PLR0917
     server: str,
     response: str = "html",
     search_for: str | None = None,
