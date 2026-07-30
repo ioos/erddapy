@@ -5,6 +5,7 @@ lint.select = ["ALL"]
 lint.ignore = [
   "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
   "COM812",  # missing-trailing-comma
+  "CPY001",  # Missing copyright notice at top of file
   "D203",  # 1 blank line required before class docstring
   "D205",  # 1 blank line required between summary line and description
   "D213",  # incompatible. Ignoring `multi-line-summary-second-line`
