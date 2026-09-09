@@ -29,3 +29,7 @@ jobs:
       run: >
         pushd tests && python download_test_data.py && popd
         && python -m pytest -rxs --cov=erddapy tests
+
+    - name: Run linters
+      run: >
+        prek run --all-files
