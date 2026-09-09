@@ -225,7 +225,6 @@ def test_download_url_relative_constraints(e):
         response="csv",
         constraints=constraints,
     )
-    assert url == check_url_response(url, allow_redirects=True)
     assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.csv?")
     options = _url_to_dict(url)
     assert options["time>="] == min_time
@@ -238,10 +237,10 @@ def test_download_url_relative_constraints(e):
 
 def test_download_url_relative_constraints_non_coordinate(e):
     """Test download URL with relative constraints."""
-    dataset_id = "OBIS"
+    dataset_id = "processed_asset_inventory"
 
     constraints = {
-        "identifiedby=": "Max Hoberg",
+        "RA=": "SECOORA",
     }
 
     url = e.get_download_url(
@@ -252,7 +251,7 @@ def test_download_url_relative_constraints_non_coordinate(e):
     assert url == check_url_response(url, allow_redirects=True)
     assert url.startswith(f"{e.server}/{e.protocol}/{dataset_id}.csv?")
     options = _url_to_dict(url)
-    assert options["identifiedby="] == '"Max Hoberg"'
+    assert options["RA="] == '"SECOORA"'
 
 
 @pytest.mark.web

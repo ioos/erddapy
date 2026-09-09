@@ -19,10 +19,36 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
 ]
-dynamic = [
-  "dependencies",
-  "version",
+dynamic = [ "version" ]
+dependencies = [
+  "pandas",
+  "requests",
+  "xarray",
+]
+optional-dependencies.dev = [
+  "dask",
+  "pooch",
+  "prek",
+  "pytest",
+  "pytest-cov",
+  "pytest-recording",
+]
+optional-dependencies.docs = [
+  "cartopy>=0.21",
+  "geopandas",
+  "joblib",
+  "nbclassic",
+  "nbconvert",
+  "nbsphinx",
+  "regionmask>=0.9",
+  "sphinx",
+]
+optional-dependencies.extras = [
+  "joblib",
+  "netcdf4",
+  "scitools-iris>=3.3",
 ]
 urls.documentation = "https://ioos.github.io/erddapy"
 urls.homepage = "https://github.com/ioos/erddapy"
@@ -30,13 +56,8 @@ urls.repository = "https://github.com/ioos/erddapy"
 entry-points."xarray.backends".erddapy = "erddapy.xarray_erddap:ERDDAPyBackendEntrypoint"
 
 [tool.setuptools]
-packages = [
-  "erddapy",
-]
+packages = [ "erddapy" ]
 include-package-data = true
-dynamic.dependencies = { file = [
-  "requirements.txt",
-] }
 
 [tool.setuptools_scm]
 tag_regex = "^(?P<prefix>v)?(?P<version>[^\\+]+)(?P<suffix>.*)?$"

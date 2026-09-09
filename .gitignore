@@ -1,13 +1,13 @@
+**/__pycache__
+*-output.ipynb
+*.code-workspace
 *.egg*
 .coverage
 .ipynb_checkpoints
 .mypy_cache/
 .pytest_cache/
+.vscode/
 _version.py
 build/
 dist/
-*-output.ipynb
-.vscode/
-*.code-workspace
-**/__pycache__
 tests/cassettes/**/*.yaml

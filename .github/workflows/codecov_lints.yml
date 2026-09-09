@@ -1,0 +1,35 @@
+name: Code coverage report
+
+# no permissions by default
+permissions: {}
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Set up Python
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+      with:
+        python-version: "3.x"
+
+    - name: Install erddapy
+      run: |
+        pip install -e ".[dev,extras,docs]"
+
+    - name: Run tests with coverage
+      run: >
+        pushd tests && python download_test_data.py && popd
+        && python -m pytest -rxs --cov=erddapy tests
+
+    - name: Run linters
+      run: >
+        prek run --all-files

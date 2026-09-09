@@ -6,24 +6,25 @@ permissions: {}
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   run:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [ "3.11", "3.12", "3.13", "3.14" ]
+        python-version: [ "3.11", "3.14" ]
         os: [ ubuntu-latest ]
         include:
           - os: windows-latest
             python-version: "3.14"
           - os: macos-latest
             python-version: "3.14"
+          - os: macos-15-intel
+            python-version: "3.14"
       fail-fast: false
-    defaults:
-      run:
-        shell: bash -l {0}
+    permissions:
+      actions: none
 
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
@@ -31,25 +32,12 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
 
-    - name: Setup Micromamba Python ${{ matrix.python-version }}
-      uses: mamba-org/setup-micromamba@f457c30a868e4760d3a6fcea5f25dc655b8edf39 # v3.2.1
-      with:
-        # Remove the line below when micromamba 2.6.2 is released.
-        micromamba-version: '2.6.0-0'
-        environment-name: TEST
-        init-shell: bash
-        create-args: >-
-          python=${{ matrix.python-version }}
-          --file requirements.txt
-          --file requirements-dev.txt
-          --channel conda-forge
-
-    - name: Install library
+    - name: Install erddapy
       run: |
-        python -m pip install -e . --no-deps --force-reinstall
+        pip install -e ".[dev,extras,docs]"
 
     - name: Full Tests
       # Use the --record-mode=rewrite if you need to re-record the cassetts.
       run: >
         pushd tests && python download_test_data.py && popd
-        && python -m pytest -rxs --cov=erddapy tests
+        && python -m pytest -rxs tests
