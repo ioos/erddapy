@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Quick introduction &#8212; erddapy 3.3.0 documentation</title>
+    <title>Quick introduction &#8212; erddapy 3.3.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
     <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
-    <script src="_static/documentation_options.js?v=3eb8911e"></script>
+    <script src="_static/documentation_options.js?v=9ac01507"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -110,11 +110,11 @@
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ERDDAP</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;https://erddap.sensors.ioos.us/erddap&quot;</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s2">"https://erddap.sensors.ioos.us/erddap"</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span>
     <span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span>
-    <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tabledap&quot;</span><span class="p">,</span>
-    <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">,</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s2">"tabledap"</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="s2">"csv"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -124,23 +124,23 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;org_cormp_cap2&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">"org_cormp_cap2"</span>
 
 <span class="n">e</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;time&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sea_water_temperature&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
+    <span class="s2">"time"</span><span class="p">,</span>
+    <span class="s2">"latitude"</span><span class="p">,</span>
+    <span class="s2">"longitude"</span><span class="p">,</span>
+    <span class="s2">"sea_water_temperature"</span><span class="p">,</span>
+    <span class="s2">"air_temperature"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">e</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;time&gt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;2000-01-01&quot;</span><span class="p">,</span>
+    <span class="s2">"time&gt;="</span><span class="p">:</span> <span class="s2">"2000-01-01"</span><span class="p">,</span>
 <span class="p">}</span>
 
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span>
-    <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="s2">"time (UTC)"</span><span class="p">,</span>
     <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
@@ -229,26 +229,26 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;https://erddap.ioos.us/erddap&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">server</span> <span class="o">=</span> <span class="s2">"https://erddap.ioos.us/erddap"</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span>
     <span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span>
-    <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tabledap&quot;</span><span class="p">,</span>
-    <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">,</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s2">"tabledap"</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="s2">"csv"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;processed_asset_inventory&quot;</span>
+<span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">"processed_asset_inventory"</span>
 
 <span class="c1"># Get the box of the first 10 degrees bbox.</span>
 <span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;longitude&lt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;min(longitude)+10&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;longitude&gt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;min(longitude)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;latitude&lt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;min(latitude)+10&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;latitude&gt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;min(latitude)&quot;</span><span class="p">,</span>
+    <span class="s2">"longitude&lt;="</span><span class="p">:</span> <span class="s2">"min(longitude)+10"</span><span class="p">,</span>
+    <span class="s2">"longitude&gt;="</span><span class="p">:</span> <span class="s2">"min(longitude)"</span><span class="p">,</span>
+    <span class="s2">"latitude&lt;="</span><span class="p">:</span> <span class="s2">"min(latitude)+10"</span><span class="p">,</span>
+    <span class="s2">"latitude&gt;="</span><span class="p">:</span> <span class="s2">"min(latitude)"</span><span class="p">,</span>
 <span class="p">}</span>
 
 
 <span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span>
-    <span class="n">response</span><span class="o">=</span><span class="s2">&quot;htmlTable&quot;</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="s2">"htmlTable"</span><span class="p">,</span>
     <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -269,19 +269,19 @@ https://erddap.ioos.us/erddap/tabledap/processed_asset_inventory.htmlTable?&amp;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;allDatasets&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">"allDatasets"</span>
 
 <span class="n">e</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;datasetID&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;institution&quot;</span><span class="p">,</span>
+    <span class="s2">"datasetID"</span><span class="p">,</span>
+    <span class="s2">"institution"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
-<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="s2">"html"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span>
-    <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;datasetID&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="s2">"datasetID"</span><span class="p">,</span>
 <span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
 
@@ -337,16 +337,16 @@ https://erddap.ioos.us/erddap/tabledap/allDatasets.html?datasetID,institution
       <td>NOAA Marine Geology and Geophysics (MGG)</td>
     </tr>
     <tr>
-      <th>OBIS</th>
-      <td>???</td>
-    </tr>
-    <tr>
       <th>ra_regional_boundaries</th>
       <td>NOAA/NOS/IOOS</td>
     </tr>
     <tr>
       <th>by_the_numbers</th>
-      <td>IOOS</td>
+      <td>NOAA/NOS/IOOS</td>
+    </tr>
+    <tr>
+      <th>processed_asset_inventory</th>
+      <td>NOAA/NOS/IOOS</td>
     </tr>
   </tbody>
 </table>

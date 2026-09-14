@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ERDDAP class API &#8212; erddapy 3.3.0 documentation</title>
+    <title>ERDDAP class API &#8212; erddapy 3.3.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
-    <script src="_static/documentation_options.js?v=3eb8911e"></script>
+    <script src="_static/documentation_options.js?v=9ac01507"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -142,32 +142,32 @@ params and requests_kwargs: <cite>requests.get</cite> options</p>
 <h2>Examples:<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
 <blockquote>
 <div><p>Specifying the server URL</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="s2">&quot;https://gliders.ioos.us/erddap&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="s2">"https://gliders.ioos.us/erddap"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>let’s search for glider <cite>ru29</cite> and read the csv response with pandas.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="s2">&quot;ru29&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="s2">"ru29"</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">"csv"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s2">"Dataset ID"</span><span class="p">]</span>
 <span class="go">0    ru29-20150623T1046</span>
 <span class="go">1    ru29-20161105T0131</span>
 <span class="go">Name: Dataset ID, dtype: object</span>
 </pre></div>
 </div>
 <p>there are “shortcuts” for some servers</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="s2">&quot;SECOORA&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="s2">"SECOORA"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">server</span>
-<span class="go">&#39;https://erddap.secoora.org/erddap&#39;</span>
+<span class="go">'https://erddap.secoora.org/erddap'</span>
 </pre></div>
 </div>
 <p>to get a list of the shortcuts available servers:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">erddapy</span><span class="w"> </span><span class="kn">import</span> <span class="n">servers</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">servers</span><span class="p">()</span>
-<span class="go">{&#39;voto&#39;: Server(description=&#39;Voice of the Ocean&#39;, url=&#39;https://erddap.observations.voiceoftheocean.org/erddap/&#39;),</span>
-<span class="go">&#39;cswc&#39;: Server(description=&#39;CoastWatch West Coast Node&#39;, url=&#39;https://coastwatch.pfeg.noaa.gov/erddap/&#39;),</span>
+<span class="go">{'voto': Server(description='Voice of the Ocean', url='https://erddap.observations.voiceoftheocean.org/erddap/'),</span>
+<span class="go">'cswc': Server(description='CoastWatch West Coast Node', url='https://coastwatch.pfeg.noaa.gov/erddap/'),</span>
 <span class="go">...,</span>
-<span class="go">&#39;noaa oceanview&#39;: Server(description=&#39;NOAA Oceanview&#39;, url=&#39;https://oceanview.pfeg.noaa.gov/erddap/&#39;),</span>
-<span class="go">&#39;cfrf&#39;: Server(description=&#39;Commercial Fisheries Research Foundation&#39;, url=&#39;https://erddap.ondeckdata.com/erddap/&#39;)}</span>
+<span class="go">'noaa oceanview': Server(description='NOAA Oceanview', url='https://oceanview.pfeg.noaa.gov/erddap/'),</span>
+<span class="go">'cfrf': Server(description='Commercial Fisheries Research Foundation', url='https://erddap.ondeckdata.com/erddap/')}</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -416,26 +416,26 @@ coordinates: <cite>minLon</cite>, <cite>maxLon</cite>, <cite>minLat</cite>, <cit
 for the <cite>dataset_id</cite>, and the variables attribute dictionary,
 similar to netCDF4-python <cite>get_variables_by_attributes</cite>.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server_url</span><span class="o">=</span><span class="s2">&quot;https://gliders.ioos.us/erddap&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;whoi_406-20160902T1700&quot;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server_url</span><span class="o">=</span><span class="s2">"https://gliders.ioos.us/erddap"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">"whoi_406-20160902T1700"</span>
 </pre></div>
 </div>
 <p>Get variables with x-axis attribute.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">get_var_by_attr</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
-<span class="go">[&#39;longitude&#39;]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">get_var_by_attr</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">"X"</span><span class="p">)</span>
+<span class="go">['longitude']</span>
 </pre></div>
 </div>
 <p>Get variables with matching “standard_name” attribute</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">get_var_by_attr</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">dataset_id</span><span class="p">,</span> <span class="n">standard_name</span><span class="o">=</span><span class="s2">&quot;northward_sea_water_velocity&quot;</span>
+<span class="gp">... </span>    <span class="n">dataset_id</span><span class="p">,</span> <span class="n">standard_name</span><span class="o">=</span><span class="s2">"northward_sea_water_velocity"</span>
 <span class="gp">... </span><span class="p">)</span>
-<span class="go">[&#39;v&#39;]</span>
+<span class="go">['v']</span>
 </pre></div>
 </div>
 <p>Get Axis variables</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">axis</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">axis</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"X"</span><span class="p">,</span> <span class="s2">"Y"</span><span class="p">,</span> <span class="s2">"Z"</span><span class="p">,</span> <span class="s2">"T"</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">get_var_by_attr</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
-<span class="go">[&#39;latitude&#39;, &#39;longitude&#39;, &#39;time&#39;, &#39;depth&#39;]</span>
+<span class="go">['latitude', 'longitude', 'time', 'depth']</span>
 </pre></div>
 </div>
 <dl class="field-list simple">

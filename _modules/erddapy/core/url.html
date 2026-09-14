@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>erddapy.core.url &#8212; erddapy 3.3.0 documentation</title>
+    <title>erddapy.core.url &#8212; erddapy 3.3.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=f6a572b4" />
-    <script src="../../../_static/documentation_options.js?v=3eb8911e"></script>
+    <script src="../../../_static/documentation_options.js?v=9ac01507"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -88,7 +88,7 @@
           <div class="body" role="main">
             
   <h1>Source code for erddapy.core.url</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;URL handling.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""URL handling."""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
@@ -106,7 +106,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_is_netcdf</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if it .nc .ncCF, or ncCFMA URL.</span>
+<span class="w">    </span><span class="sd">"""Check if it .nc .ncCF, or ncCFMA URL.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -118,19 +118,19 @@
 <span class="sd">    isnetcdf : bool</span>
 <span class="sd">        True is `url` can be opened by xarray otherwise False.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">isnetcdf</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
-        <span class="n">ext</span> <span class="ow">in</span> <span class="n">url</span> <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;.nc?&quot;</span><span class="p">,</span> <span class="s2">&quot;.ncCF?&quot;</span><span class="p">,</span> <span class="s2">&quot;.ncCFMA?&quot;</span><span class="p">)</span>
+        <span class="n">ext</span> <span class="ow">in</span> <span class="n">url</span> <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">".nc?"</span><span class="p">,</span> <span class="s2">".ncCF?"</span><span class="p">,</span> <span class="s2">".ncCFMA?"</span><span class="p">)</span>
     <span class="p">)</span> <span class="ow">or</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span>
-        <span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">,</span> <span class="s2">&quot;.ncCF&quot;</span><span class="p">,</span> <span class="s2">&quot;.ncCFMA&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">".nc"</span><span class="p">,</span> <span class="s2">".ncCF"</span><span class="p">,</span> <span class="s2">".ncCFMA"</span><span class="p">),</span>
     <span class="p">):</span>
         <span class="n">isnetcdf</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="n">isnetcdf</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_is_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s2">&quot;T_PathFileOrDataStore&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if it is a valid ERDDAP URL.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="s2">"T_PathFileOrDataStore"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Check if it is a valid ERDDAP URL.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -142,61 +142,61 @@
 <span class="sd">    isurl : bool</span>
 <span class="sd">        True is `url` is a valid ERDDAP URL otherwise False.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">isurl</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s2">&quot;http://&quot;</span><span class="p">,</span> <span class="s2">&quot;https://&quot;</span><span class="p">))</span> <span class="ow">and</span> <span class="s2">&quot;/erddap&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s2">"http://"</span><span class="p">,</span> <span class="s2">"https://"</span><span class="p">))</span> <span class="ow">and</span> <span class="s2">"/erddap"</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
         <span class="n">isurl</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="n">isurl</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">quote_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Quote URL args for modern ERDDAP servers.&quot;&quot;&quot;</span>
-    <span class="c1"># No idea why csv must be quoted in 2.23 but ncCF doesn&#39;t :-/</span>
-    <span class="n">do_not_quote</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/erddap/search/&quot;</span><span class="p">,</span> <span class="s2">&quot;ncCF&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">"""Quote URL args for modern ERDDAP servers."""</span>
+    <span class="c1"># No idea why csv must be quoted in 2.23 but ncCF doesn't :-/</span>
+    <span class="n">do_not_quote</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"/erddap/search/"</span><span class="p">,</span> <span class="s2">"ncCF"</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="kc">True</span> <span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">do_not_quote</span> <span class="k">if</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">url</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">url</span>
     <span class="c1"># We should always quote some queries.</span>
-    <span class="k">if</span> <span class="s2">&quot;?&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
-        <span class="n">base</span><span class="p">,</span> <span class="n">unquoted</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">?</span><span class="si">{</span><span class="n">parse</span><span class="o">.</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">unquoted</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="s2">"?"</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">unquoted</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"?"</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">?</span><span class="si">{</span><span class="n">parse</span><span class="o">.</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">unquoted</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">return</span> <span class="n">url</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_sort_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a URL with sorted variables and constraints for hashing.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return a URL with sorted variables and constraints for hashing."""</span>
     <span class="n">parts</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">parts</span><span class="o">.</span><span class="n">query</span><span class="p">:</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"&amp;"</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">variables</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">query</span>
-            <span class="n">constraints</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">constraints</span> <span class="o">=</span> <span class="s2">""</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">variables</span><span class="p">,</span> <span class="n">constraints</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">sorted_variables</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
+            <span class="n">variables</span><span class="p">,</span> <span class="n">constraints</span> <span class="o">=</span> <span class="n">parts</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"&amp;"</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">sorted_variables</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">variables</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)))</span>
         <span class="n">sorted_query</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span>
             <span class="nb">sorted</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">parse</span><span class="o">.</span><span class="n">parse_qsl</span><span class="p">(</span><span class="n">constraints</span><span class="p">))</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
         <span class="p">)</span>
         <span class="n">sorted_query_str</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">sorted_query</span><span class="p">))</span>
-        <span class="n">sorted_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parts</span><span class="o">.</span><span class="n">scheme</span><span class="si">}</span><span class="s2">://</span><span class="si">{</span><span class="n">parts</span><span class="o">.</span><span class="n">netloc</span><span class="si">}{</span><span class="n">parts</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">?</span><span class="si">{</span><span class="n">parts</span><span class="o">.</span><span class="n">params</span><span class="si">}{</span><span class="n">sorted_variables</span><span class="si">}</span><span class="s2">&amp;</span><span class="si">{</span><span class="n">sorted_query_str</span><span class="si">}{</span><span class="n">parts</span><span class="o">.</span><span class="n">fragment</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">sorted_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">parts</span><span class="o">.</span><span class="n">scheme</span><span class="si">}</span><span class="s2">://</span><span class="si">{</span><span class="n">parts</span><span class="o">.</span><span class="n">netloc</span><span class="si">}{</span><span class="n">parts</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">?</span><span class="si">{</span><span class="n">parts</span><span class="o">.</span><span class="n">params</span><span class="si">}{</span><span class="n">sorted_variables</span><span class="si">}</span><span class="s2">&amp;</span><span class="si">{</span><span class="n">sorted_query_str</span><span class="si">}{</span><span class="n">parts</span><span class="o">.</span><span class="n">fragment</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">sorted_url</span> <span class="o">=</span> <span class="n">url</span>
-    <span class="k">return</span> <span class="n">sorted_url</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sorted_url</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">"&amp;"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_clean_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allow for `ext` or `.ext` format.</span>
+<span class="w">    </span><span class="sd">"""Allow for `ext` or `.ext` format.</span>
 
 <span class="sd">    Users can, for example, use either `.csv` or `csv` in the response kwarg.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
 
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
-    <span class="n">timeout</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;timeout&quot;</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="n">timeout</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"timeout"</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
         <span class="n">url</span><span class="p">,</span>
         <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -220,22 +220,22 @@
     <span class="n">quote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">requests_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Thin wrapper around requests get content.</span>
+<span class="w">    </span><span class="sd">"""Thin wrapper around requests get content.</span>
 
 <span class="sd">    See requests.get docs for the `params` and `kwargs` options.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># This is a horrible hack to work around opendap.co-ops.nos.noaa.gov.</span>
     <span class="c1"># The co-ops serve require variable in a specific order to work.</span>
-    <span class="n">date_string</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;BEGIN_DATE&quot;</span><span class="p">,</span> <span class="s2">&quot;END_DATE&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s2">&quot;opendap.co-ops.nos.noaa.gov&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+    <span class="n">date_string</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"BEGIN_DATE"</span><span class="p">,</span> <span class="s2">"END_DATE"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"opendap.co-ops.nos.noaa.gov"</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
         <span class="n">dates</span><span class="p">,</span> <span class="n">base</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"&amp;"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">date_string</span><span class="p">):</span>
                 <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">base</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;&amp;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">dates</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">"&amp;"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">dates</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">requests_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">requests_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
@@ -248,50 +248,50 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">check_url_response</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shortcut to `raise_for_status` instead of fetching the whole content.</span>
+<span class="w">    </span><span class="sd">"""Shortcut to `raise_for_status` instead of fetching the whole content.</span>
 
 <span class="sd">    One should only use this is passing URLs that are known to work is</span>
 <span class="sd">    necessary. Otherwise let it fail later and avoid fetching the head.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">timeout</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;timeout&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">timeout</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"timeout"</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">url</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_distinct</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">distinct</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sort all of the rows in the results table.</span>
+<span class="w">    </span><span class="sd">"""Sort all of the rows in the results table.</span>
 
 <span class="sd">    Starting with the first requested variable,</span>
 <span class="sd">    then using the second requested variable if the first variable has a tie,</span>
 <span class="sd">    then remove all non-unique rows of data.</span>
 
-<span class="sd">    For example, a query for the variables [&quot;stationType&quot;, &quot;stationID&quot;]</span>
-<span class="sd">    with `distinct=True` will return a sorted list of &quot;stationIDs&quot; associated</span>
-<span class="sd">    with each &quot;stationType&quot;.</span>
+<span class="sd">    For example, a query for the variables ["stationType", "stationID"]</span>
+<span class="sd">    with `distinct=True` will return a sorted list of "stationIDs" associated</span>
+<span class="sd">    with each "stationType".</span>
 
 <span class="sd">    See https://erddap.ioos.us/erddap/tabledap/documentation.html#distinct</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">distinct</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&amp;distinct()&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&amp;distinct()"</span>
     <span class="k">return</span> <span class="n">url</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_format_search_string</span><span class="p">(</span><span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate search string for an ERDDAP server with user defined query.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generate search string for an ERDDAP server with user defined query."""</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">search/index.csv?&quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;page=1&amp;&quot;</span>
-        <span class="sa">f</span><span class="s1">&#39;itemsPerPage=1000000&amp;searchFor=&quot;</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">search/index.csv?"</span>
+        <span class="sa">f</span><span class="s2">"page=1&amp;"</span>
+        <span class="sa">f</span><span class="s1">'itemsPerPage=1000000&amp;searchFor="</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s1">"'</span>
     <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_multi_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BinaryIO</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simpler URL openner to work with multiprocessing.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Simpler URL openner to work with multiprocessing."""</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">requests_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;timeout&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">})</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">requests_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"timeout"</span><span class="p">:</span> <span class="mi">120</span><span class="p">})</span>
     <span class="k">except</span> <span class="p">(</span>
         <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span><span class="p">,</span>
         <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">,</span>
@@ -302,36 +302,36 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_quote_string_constraints</span><span class="p">(</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Quote constraints of String variables.</span>
+<span class="w">    </span><span class="sd">"""Quote constraints of String variables.</span>
 
 <span class="sd">    The right-hand-side value must be surrounded by double quotes if they are</span>
 <span class="sd">    not relative constraints.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="n">k</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s1">&quot;&#39;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_check_substrings</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span>
+        <span class="n">k</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'"</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s1">"'</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_check_substrings</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
     <span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_format_constraints_url</span><span class="p">(</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Join the constraint variables with separator &#39;&amp;&#39; and</span>
+<span class="w">    </span><span class="sd">"""Join the constraint variables with separator '&amp;' and</span>
 <span class="sd">    add to the download link.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;&amp;</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">"&amp;</span><span class="si">{</span><span class="n">k</span><span class="si">}{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_check_substrings</span><span class="p">(</span><span class="n">constraint</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extend the OPeNDAP with extra strings.&quot;&quot;&quot;</span>
-    <span class="c1"># The `now` doesn&#39;t need this check, it works both quoted and unquoted.</span>
-    <span class="n">substrings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;now+&quot;</span><span class="p">,</span> <span class="s2">&quot;now-&quot;</span><span class="p">,</span> <span class="s2">&quot;min(&quot;</span><span class="p">,</span> <span class="s2">&quot;max(&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">"""Extend the OPeNDAP with extra strings."""</span>
+    <span class="c1"># The `now` doesn't need this check, it works both quoted and unquoted.</span>
+    <span class="n">substrings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"now+"</span><span class="p">,</span> <span class="s2">"now-"</span><span class="p">,</span> <span class="s2">"min("</span><span class="p">,</span> <span class="s2">"max("</span><span class="p">]</span>
     <span class="k">return</span> <span class="nb">any</span><span class="p">(</span>
         <span class="kc">True</span> <span class="k">for</span> <span class="n">substring</span> <span class="ow">in</span> <span class="n">substrings</span> <span class="k">if</span> <span class="n">substring</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">constraint</span><span class="p">)</span>
     <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_is_quoted</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if UTL is percent encoded, else False.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return True if UTL is percent encoded, else False."""</span>
     <span class="n">unquoted</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">unquote_plus</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">url</span> <span class="o">!=</span> <span class="n">unquoted</span>
 
@@ -344,13 +344,13 @@
     <span class="n">dayfirst</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">yearfirst</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse dates to ERDDAP internal format.</span>
+<span class="w">    </span><span class="sd">"""Parse dates to ERDDAP internal format.</span>
 
 <span class="sd">    ERDDAP ReSTful API standardizes the representation of dates as either ISO</span>
 <span class="sd">    strings or seconds since 1970, but internally ERDDAPY uses datetime-like</span>
 <span class="sd">    objects. `timestamp` returns the expected strings in seconds since 1970.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">date_time</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">parse_date_time</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span>
             <span class="n">date_time</span><span class="p">,</span>
@@ -370,29 +370,29 @@
 
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">get_search_url</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_search_url</span><span class="p">(</span>  <span class="c1"># noqa: PLR0913, PLR0917</span>
     <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span><span class="p">,</span>
+    <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"html"</span><span class="p">,</span>
     <span class="n">search_for</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;tabledap&quot;</span><span class="p">,</span>
+    <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">"tabledap"</span><span class="p">,</span>
     <span class="n">items_per_page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1_000_000</span><span class="p">,</span>
     <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the search URL for the `server` endpoint provided.</span>
+<span class="w">    </span><span class="sd">"""Build the search URL for the `server` endpoint provided.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">    ----</span>
-<span class="sd">        search_for: &quot;Google-like&quot; search of the datasets&#39; metadata.</span>
+<span class="sd">        search_for: "Google-like" search of the datasets' metadata.</span>
 
 <span class="sd">            - Type the words you want to search for,</span>
 <span class="sd">                with spaces between the words.</span>
 <span class="sd">                ERDDAP will search for the words separately, not as a phrase.</span>
 <span class="sd">            - To search for a phrase, put double quotes around the phrase</span>
-<span class="sd">                (for example, `&quot;wind speed&quot;`).</span>
+<span class="sd">                (for example, `"wind speed"`).</span>
 <span class="sd">            - To exclude datasets with a specific word use `-excludedWord`.</span>
 <span class="sd">            - To exclude datasets with a specific phrase,</span>
-<span class="sd">                use `-&quot;excluded phrase&quot;`</span>
+<span class="sd">                use `-"excluded phrase"`</span>
 <span class="sd">            - Searches are not case-sensitive.</span>
 <span class="sd">            - You can search for any part of a word. For example,</span>
 <span class="sd">                searching for `spee` will find datasets with `speed`</span>
@@ -400,7 +400,7 @@
 <span class="sd">            - The last word in a phrase may be a partial word. For example,</span>
 <span class="sd">                to find datasets from a specific website</span>
 <span class="sd">                (usually the start of the datasetID),</span>
-<span class="sd">                include (for example) `&quot;datasetID=erd&quot;` in your search.</span>
+<span class="sd">                include (for example) `"datasetID=erd"` in your search.</span>
 
 <span class="sd">        server: data server endpoint.</span>
 <span class="sd">        response: default is HTML.</span>
@@ -420,55 +420,55 @@
 <span class="sd">    -------</span>
 <span class="sd">        url: the search URL.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">server</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">_clean_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
     <span class="n">base</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;</span><span class="si">{server}</span><span class="s2">/search/advanced.</span><span class="si">{response}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;?page=</span><span class="si">{page}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;itemsPerPage=</span><span class="si">{itemsPerPage}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;protocol=</span><span class="si">{protocol}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;cdm_data_type=</span><span class="si">{cdm_data_type}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;institution=</span><span class="si">{institution}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;ioos_category=</span><span class="si">{ioos_category}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;keywords=</span><span class="si">{keywords}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;long_name=</span><span class="si">{long_name}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;standard_name=</span><span class="si">{standard_name}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;variableName=</span><span class="si">{variableName}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;minLon=</span><span class="si">{minLon}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;maxLon=</span><span class="si">{maxLon}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;minLat=</span><span class="si">{minLat}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;maxLat=</span><span class="si">{maxLat}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;minTime=</span><span class="si">{minTime}</span><span class="s2">&quot;</span>
-        <span class="s2">&quot;&amp;maxTime=</span><span class="si">{maxTime}</span><span class="s2">&quot;</span>
+        <span class="s2">"</span><span class="si">{server}</span><span class="s2">/search/advanced.</span><span class="si">{response}</span><span class="s2">"</span>
+        <span class="s2">"?page=</span><span class="si">{page}</span><span class="s2">"</span>
+        <span class="s2">"&amp;itemsPerPage=</span><span class="si">{itemsPerPage}</span><span class="s2">"</span>
+        <span class="s2">"&amp;protocol=</span><span class="si">{protocol}</span><span class="s2">"</span>
+        <span class="s2">"&amp;cdm_data_type=</span><span class="si">{cdm_data_type}</span><span class="s2">"</span>
+        <span class="s2">"&amp;institution=</span><span class="si">{institution}</span><span class="s2">"</span>
+        <span class="s2">"&amp;ioos_category=</span><span class="si">{ioos_category}</span><span class="s2">"</span>
+        <span class="s2">"&amp;keywords=</span><span class="si">{keywords}</span><span class="s2">"</span>
+        <span class="s2">"&amp;long_name=</span><span class="si">{long_name}</span><span class="s2">"</span>
+        <span class="s2">"&amp;standard_name=</span><span class="si">{standard_name}</span><span class="s2">"</span>
+        <span class="s2">"&amp;variableName=</span><span class="si">{variableName}</span><span class="s2">"</span>
+        <span class="s2">"&amp;minLon=</span><span class="si">{minLon}</span><span class="s2">"</span>
+        <span class="s2">"&amp;maxLon=</span><span class="si">{maxLon}</span><span class="s2">"</span>
+        <span class="s2">"&amp;minLat=</span><span class="si">{minLat}</span><span class="s2">"</span>
+        <span class="s2">"&amp;maxLat=</span><span class="si">{maxLat}</span><span class="s2">"</span>
+        <span class="s2">"&amp;minTime=</span><span class="si">{minTime}</span><span class="s2">"</span>
+        <span class="s2">"&amp;maxTime=</span><span class="si">{maxTime}</span><span class="s2">"</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="n">search_for</span><span class="p">:</span>
         <span class="n">search_for</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">search_for</span><span class="p">)</span>
-        <span class="n">base</span> <span class="o">+=</span> <span class="s2">&quot;&amp;searchFor=</span><span class="si">{searchFor}</span><span class="s2">&quot;</span>
+        <span class="n">base</span> <span class="o">+=</span> <span class="s2">"&amp;searchFor=</span><span class="si">{searchFor}</span><span class="s2">"</span>
 
     <span class="c1"># Convert dates from datetime.datetime to secs since 1970-01-01T00:00:00Z.</span>
-    <span class="n">min_time</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;min_time&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">max_time</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;max_time&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">min_time</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"min_time"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+    <span class="n">max_time</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"max_time"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">min_time</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_check_substrings</span><span class="p">(</span><span class="n">min_time</span><span class="p">):</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;min_time&quot;</span><span class="p">:</span> <span class="n">parse_dates</span><span class="p">(</span><span class="n">min_time</span><span class="p">)})</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"min_time"</span><span class="p">:</span> <span class="n">parse_dates</span><span class="p">(</span><span class="n">min_time</span><span class="p">)})</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;min_time&quot;</span><span class="p">:</span> <span class="n">min_time</span><span class="p">})</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"min_time"</span><span class="p">:</span> <span class="n">min_time</span><span class="p">})</span>
     <span class="k">if</span> <span class="n">max_time</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_check_substrings</span><span class="p">(</span><span class="n">max_time</span><span class="p">):</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;max_time&quot;</span><span class="p">:</span> <span class="n">parse_dates</span><span class="p">(</span><span class="n">max_time</span><span class="p">)})</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"max_time"</span><span class="p">:</span> <span class="n">parse_dates</span><span class="p">(</span><span class="n">max_time</span><span class="p">)})</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;max_time&quot;</span><span class="p">:</span> <span class="n">max_time</span><span class="p">})</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"max_time"</span><span class="p">:</span> <span class="n">max_time</span><span class="p">})</span>
 
     <span class="k">if</span> <span class="n">protocol</span><span class="p">:</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="n">protocol</span><span class="p">})</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"protocol"</span><span class="p">:</span> <span class="n">protocol</span><span class="p">})</span>
 
     <span class="n">lower_case_search_terms</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;cdm_data_type&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;institution&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ioos_category&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;keywords&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;long_name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;standard_name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;variableName&quot;</span><span class="p">,</span>
+        <span class="s2">"cdm_data_type"</span><span class="p">,</span>
+        <span class="s2">"institution"</span><span class="p">,</span>
+        <span class="s2">"ioos_category"</span><span class="p">,</span>
+        <span class="s2">"keywords"</span><span class="p">,</span>
+        <span class="s2">"long_name"</span><span class="p">,</span>
+        <span class="s2">"standard_name"</span><span class="p">,</span>
+        <span class="s2">"variableName"</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">for</span> <span class="n">search_term</span> <span class="ow">in</span> <span class="n">lower_case_search_terms</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">search_term</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
@@ -477,51 +477,51 @@
 
     <span class="c1"># These responses should not be paginated b/c that hinders the correct</span>
     <span class="c1"># amount of data silently and can surprise users when the number of items</span>
-    <span class="c1"># is greater than ERDDAP&#39;s defaults (1_000_000 items).</span>
+    <span class="c1"># is greater than ERDDAP's defaults (1_000_000 items).</span>
     <span class="c1"># Ideally there should be no pagination for this on the ERDDAP side but for</span>
-    <span class="c1"># now we settled for a &quot;really big&quot; `items_per_page` number.</span>
+    <span class="c1"># now we settled for a "really big" `items_per_page` number.</span>
     <span class="n">non_paginated_responses</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;csv&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;csvp&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;csv0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;jsonlCSV1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;jsonlCSV&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;jsonlKVP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tsv&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tsvp&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tsv0&quot;</span><span class="p">,</span>
+        <span class="s2">"csv"</span><span class="p">,</span>
+        <span class="s2">"csvp"</span><span class="p">,</span>
+        <span class="s2">"csv0"</span><span class="p">,</span>
+        <span class="s2">"json"</span><span class="p">,</span>
+        <span class="s2">"jsonlCSV1"</span><span class="p">,</span>
+        <span class="s2">"jsonlCSV"</span><span class="p">,</span>
+        <span class="s2">"jsonlKVP"</span><span class="p">,</span>
+        <span class="s2">"tsv"</span><span class="p">,</span>
+        <span class="s2">"tsvp"</span><span class="p">,</span>
+        <span class="s2">"tsv0"</span><span class="p">,</span>
     <span class="p">]</span>
     <span class="k">if</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">non_paginated_responses</span><span class="p">:</span>
         <span class="n">items_per_page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
 
     <span class="c1"># ERDDAP 2.10 no longer accepts strings placeholder for dates.</span>
     <span class="c1"># Removing them entirely should be OK for older versions too.</span>
-    <span class="n">default</span> <span class="o">=</span> <span class="s2">&quot;(ANY)&quot;</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="s2">"(ANY)"</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="n">base</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span>
             <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
             <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span>
             <span class="n">itemsPerPage</span><span class="o">=</span><span class="n">items_per_page</span><span class="p">,</span>
-            <span class="n">protocol</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;protocol&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">cdm_data_type</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cdm_data_type&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">institution</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;institution&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">ioos_category</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ioos_category&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">keywords</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keywords&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">long_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;long_name&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">standard_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;standard_name&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">variableName</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;variableName&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">minLon</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_lon&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">maxLon</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_lon&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">minLat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_lat&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">maxLat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_lat&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">minTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min_time&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
-            <span class="n">maxTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_time&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">protocol</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"protocol"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">cdm_data_type</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cdm_data_type"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">institution</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"institution"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">ioos_category</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ioos_category"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">keywords</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"keywords"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">long_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"long_name"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">standard_name</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"standard_name"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">variableName</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"variableName"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">minLon</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"min_lon"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">maxLon</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"max_lon"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">minLat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"min_lat"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">maxLat</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"max_lat"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">minTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"min_time"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
+            <span class="n">maxTime</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"max_time"</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span>
             <span class="n">searchFor</span><span class="o">=</span><span class="n">search_for</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;minTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;maxTime=(ANY)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"&amp;minTime=(ANY)"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"&amp;maxTime=(ANY)"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
     <span class="p">)</span>
 
 
@@ -530,7 +530,7 @@
     <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the info URL for the `server` endpoint.</span>
+<span class="w">    </span><span class="sd">"""Build the info URL for the `server` endpoint.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">    ----</span>
@@ -543,10 +543,10 @@
 <span class="sd">    -------</span>
 <span class="sd">        url: the info URL for the `response` chosen.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">dataset_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/info/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">?itemsPerPage=1000000&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/info/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/info/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">?itemsPerPage=1000000"</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/info/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">"</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_categorize_url</span><span class="p">(</span>
@@ -555,7 +555,7 @@
     <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the categorize URL for the `server` endpoint.</span>
+<span class="w">    </span><span class="sd">"""Build the categorize URL for the `server` endpoint.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">    ----</span>
@@ -570,11 +570,11 @@
 <span class="sd">    -------</span>
 <span class="sd">        url: the categorized URL for the `response` chosen.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/categorize/</span><span class="si">{</span><span class="n">categorize_by</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/categorize/</span><span class="si">{</span><span class="n">categorize_by</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/categorize/</span><span class="si">{</span><span class="n">categorize_by</span><span class="si">}</span><span class="s2">/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/categorize/</span><span class="si">{</span><span class="n">categorize_by</span><span class="si">}</span><span class="s2">/index.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">return</span> <span class="n">url</span>
 
 
@@ -585,11 +585,11 @@
     <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">variables</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">dim_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span><span class="p">,</span>
+    <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"html"</span><span class="p">,</span>
     <span class="n">constraints</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">distinct</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build the download URL.</span>
+<span class="w">    </span><span class="sd">"""Build the download URL.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">    ----</span>
@@ -605,62 +605,62 @@
 <span class="sd">    Example:</span>
 <span class="sd">    -------</span>
 <span class="sd">            constraints = {</span>
-<span class="sd">                &#39;latitude&lt;=&#39;: 41.0,</span>
-<span class="sd">                &#39;latitude&gt;=&#39;: 38.0,</span>
-<span class="sd">                &#39;longitude&lt;=&#39;: -69.0,</span>
-<span class="sd">                &#39;longitude&gt;=&#39;: -72.0,</span>
-<span class="sd">                &#39;time&lt;=&#39;: &#39;2017-02-10T00:00:00+00:00&#39;,</span>
-<span class="sd">                &#39;time&gt;=&#39;: &#39;2016-07-10T00:00:00+00:00&#39;,</span>
+<span class="sd">                'latitude&lt;=': 41.0,</span>
+<span class="sd">                'latitude&gt;=': 38.0,</span>
+<span class="sd">                'longitude&lt;=': -69.0,</span>
+<span class="sd">                'longitude&gt;=': -72.0,</span>
+<span class="sd">                'time&lt;=': '2017-02-10T00:00:00+00:00',</span>
+<span class="sd">                'time&gt;=': '2016-07-10T00:00:00+00:00',</span>
 <span class="sd">                }</span>
 
 <span class="sd">        One can also use relative constraints like:</span>
 <span class="sd">            constraints = {</span>
-<span class="sd">                &#39;time&gt;&#39;: &#39;now-7days&#39;,</span>
-<span class="sd">                &#39;latitude&lt;&#39;: &#39;min(longitude)+180&#39;,</span>
-<span class="sd">                &#39;depth&gt;&#39;: &#39;max(depth)-23&#39;,</span>
+<span class="sd">                'time&gt;': 'now-7days',</span>
+<span class="sd">                'latitude&lt;': 'min(longitude)+180',</span>
+<span class="sd">                'depth&gt;': 'max(depth)-23',</span>
 <span class="sd">                }</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">    -------</span>
 <span class="sd">        url (str): the download URL for the `response` chosen.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="p">(</span>
-        <span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;griddap&quot;</span>
+        <span class="n">protocol</span> <span class="o">==</span> <span class="s2">"griddap"</span>
         <span class="ow">and</span> <span class="n">constraints</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="ow">and</span> <span class="n">variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="ow">and</span> <span class="n">dim_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
     <span class="p">):</span>
         <span class="n">download_url</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">server</span><span class="p">,</span>
-            <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+            <span class="s2">"/"</span><span class="p">,</span>
             <span class="n">protocol</span><span class="p">,</span>
-            <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+            <span class="s2">"/"</span><span class="p">,</span>
             <span class="n">dataset_id</span><span class="p">,</span>
-            <span class="s2">&quot;.&quot;</span><span class="p">,</span>
+            <span class="s2">"."</span><span class="p">,</span>
             <span class="n">response</span><span class="p">,</span>
-            <span class="s2">&quot;?&quot;</span><span class="p">,</span>
+            <span class="s2">"?"</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
             <span class="n">sub_url</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="p">]</span>
             <span class="n">sub_url</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;[(</span><span class="si">{</span><span class="n">constraints</span><span class="p">[</span><span class="n">dim</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">):&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">constraints</span><span class="p">[</span><span class="n">dim</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;_step&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">constraints</span><span class="p">[</span><span class="n">dim</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)]&quot;</span>
+                <span class="sa">f</span><span class="s2">"[(</span><span class="si">{</span><span class="n">constraints</span><span class="p">[</span><span class="n">dim</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">'&gt;='</span><span class="p">]</span><span class="si">}</span><span class="s2">):"</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">constraints</span><span class="p">[</span><span class="n">dim</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">'_step'</span><span class="p">]</span><span class="si">}</span><span class="s2">:"</span>
+                <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">constraints</span><span class="p">[</span><span class="n">dim</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">'&lt;='</span><span class="p">]</span><span class="si">}</span><span class="s2">)]"</span>
                 <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dim_names</span>
             <span class="p">)</span>
-            <span class="n">sub_url</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
-            <span class="n">download_url</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_url</span><span class="p">))</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">download_url</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">sub_url</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+            <span class="n">download_url</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_url</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">download_url</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># This is an unconstrained OPeNDAP response b/c</span>
     <span class="c1"># the integer based constrained version is just not worth supporting ;-p</span>
-    <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s2">&quot;opendap&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s2">"opendap"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">"</span>
 
-    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">?&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">?"</span>
     <span class="k">if</span> <span class="n">variables</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">+=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">+=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">constraints</span><span class="p">:</span>
         <span class="n">_constraints</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">constraints</span><span class="p">)</span>
@@ -670,13 +670,13 @@
             <span class="c1"># The valid operators are =, != (not equals),</span>
             <span class="c1"># =~ (a regular expression test), &lt;, &lt;=, &gt;, and &gt;=</span>
             <span class="n">valid_time_constraints</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s2">&quot;time=&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;time!=&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;time=~&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;time&lt;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;time&lt;=&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;time&gt;&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;time&gt;=&quot;</span><span class="p">,</span>
+                <span class="s2">"time="</span><span class="p">,</span>
+                <span class="s2">"time!="</span><span class="p">,</span>
+                <span class="s2">"time=~"</span><span class="p">,</span>
+                <span class="s2">"time&lt;"</span><span class="p">,</span>
+                <span class="s2">"time&lt;="</span><span class="p">,</span>
+                <span class="s2">"time&gt;"</span><span class="p">,</span>
+                <span class="s2">"time&gt;="</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">valid_time_constraints</span><span class="p">):</span>
                 <span class="n">_constraints</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">parse_dates</span><span class="p">(</span><span class="n">v</span><span class="p">)})</span>
@@ -689,57 +689,57 @@
 
 
 <span class="n">data_types</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;asc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;croissant&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;csv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;csv0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;csvp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;das&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;dataTable&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;dds&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;dods&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;esriCsv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;fgdc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;geoJson&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;htmlTable&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iso19115&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iso19115_2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iso19115_3_2016&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iso19139_2007&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;itx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jsonlCSV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jsonlCSV1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jsonlKVP&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mat&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;nc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ncCF&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ncCFHeader&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ncCFMA&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ncCFMAHeader&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ncHeader&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;nccsv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;nccsvMetadata&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ncoJson&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;odvTxt&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;parquet&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;parquetWMeta&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;tsv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;tsv0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;tsvp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wav&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;xhtml&quot;</span><span class="p">,</span>
+    <span class="s2">"asc"</span><span class="p">,</span>
+    <span class="s2">"croissant"</span><span class="p">,</span>
+    <span class="s2">"csv"</span><span class="p">,</span>
+    <span class="s2">"csv0"</span><span class="p">,</span>
+    <span class="s2">"csvp"</span><span class="p">,</span>
+    <span class="s2">"das"</span><span class="p">,</span>
+    <span class="s2">"dataTable"</span><span class="p">,</span>
+    <span class="s2">"dds"</span><span class="p">,</span>
+    <span class="s2">"dods"</span><span class="p">,</span>
+    <span class="s2">"esriCsv"</span><span class="p">,</span>
+    <span class="s2">"fgdc"</span><span class="p">,</span>
+    <span class="s2">"geoJson"</span><span class="p">,</span>
+    <span class="s2">"htmlTable"</span><span class="p">,</span>
+    <span class="s2">"iso19115"</span><span class="p">,</span>
+    <span class="s2">"iso19115_2"</span><span class="p">,</span>
+    <span class="s2">"iso19115_3_2016"</span><span class="p">,</span>
+    <span class="s2">"iso19139_2007"</span><span class="p">,</span>
+    <span class="s2">"itx"</span><span class="p">,</span>
+    <span class="s2">"json"</span><span class="p">,</span>
+    <span class="s2">"jsonlCSV"</span><span class="p">,</span>
+    <span class="s2">"jsonlCSV1"</span><span class="p">,</span>
+    <span class="s2">"jsonlKVP"</span><span class="p">,</span>
+    <span class="s2">"mat"</span><span class="p">,</span>
+    <span class="s2">"nc"</span><span class="p">,</span>
+    <span class="s2">"ncCF"</span><span class="p">,</span>
+    <span class="s2">"ncCFHeader"</span><span class="p">,</span>
+    <span class="s2">"ncCFMA"</span><span class="p">,</span>
+    <span class="s2">"ncCFMAHeader"</span><span class="p">,</span>
+    <span class="s2">"ncHeader"</span><span class="p">,</span>
+    <span class="s2">"nccsv"</span><span class="p">,</span>
+    <span class="s2">"nccsvMetadata"</span><span class="p">,</span>
+    <span class="s2">"ncoJson"</span><span class="p">,</span>
+    <span class="s2">"odvTxt"</span><span class="p">,</span>
+    <span class="s2">"parquet"</span><span class="p">,</span>
+    <span class="s2">"parquetWMeta"</span><span class="p">,</span>
+    <span class="s2">"tsv"</span><span class="p">,</span>
+    <span class="s2">"tsv0"</span><span class="p">,</span>
+    <span class="s2">"tsvp"</span><span class="p">,</span>
+    <span class="s2">"wav"</span><span class="p">,</span>
+    <span class="s2">"xhtml"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">image_types</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;kml&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;largePdf&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;largePng&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;pdf&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;png&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;smallPdf&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;smallPng&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;transparentPng&quot;</span><span class="p">,</span>
+    <span class="s2">"kml"</span><span class="p">,</span>
+    <span class="s2">"largePdf"</span><span class="p">,</span>
+    <span class="s2">"largePng"</span><span class="p">,</span>
+    <span class="s2">"pdf"</span><span class="p">,</span>
+    <span class="s2">"png"</span><span class="p">,</span>
+    <span class="s2">"smallPdf"</span><span class="p">,</span>
+    <span class="s2">"smallPng"</span><span class="p">,</span>
+    <span class="s2">"transparentPng"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">download_formats</span> <span class="o">=</span> <span class="n">data_types</span> <span class="o">+</span> <span class="n">image_types</span>

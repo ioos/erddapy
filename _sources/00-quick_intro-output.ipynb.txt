@@ -28,10 +28,10 @@
    "execution_count": 1,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-06-30T14:50:55.794373Z",
-     "iopub.status.busy": "2026-06-30T14:50:55.794207Z",
-     "iopub.status.idle": "2026-06-30T14:50:56.061563Z",
-     "shell.execute_reply": "2026-06-30T14:50:56.060692Z"
+     "iopub.execute_input": "2026-09-14T11:14:16.761676Z",
+     "iopub.status.busy": "2026-09-14T11:14:16.761492Z",
+     "iopub.status.idle": "2026-09-14T11:14:17.071178Z",
+     "shell.execute_reply": "2026-09-14T11:14:17.070333Z"
     }
    },
    "outputs": [],
@@ -60,10 +60,10 @@
    "execution_count": 2,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-06-30T14:50:56.063377Z",
-     "iopub.status.busy": "2026-06-30T14:50:56.063149Z",
-     "iopub.status.idle": "2026-06-30T14:50:58.809616Z",
-     "shell.execute_reply": "2026-06-30T14:50:58.808773Z"
+     "iopub.execute_input": "2026-09-14T11:14:17.073649Z",
+     "iopub.status.busy": "2026-09-14T11:14:17.073404Z",
+     "iopub.status.idle": "2026-09-14T11:14:20.009195Z",
+     "shell.execute_reply": "2026-09-14T11:14:20.008320Z"
     }
    },
    "outputs": [
@@ -210,10 +210,10 @@
    "execution_count": 3,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-06-30T14:50:58.840454Z",
-     "iopub.status.busy": "2026-06-30T14:50:58.840275Z",
-     "iopub.status.idle": "2026-06-30T14:50:58.844088Z",
-     "shell.execute_reply": "2026-06-30T14:50:58.843216Z"
+     "iopub.execute_input": "2026-09-14T11:14:20.056416Z",
+     "iopub.status.busy": "2026-09-14T11:14:20.056227Z",
+     "iopub.status.idle": "2026-09-14T11:14:20.060644Z",
+     "shell.execute_reply": "2026-09-14T11:14:20.059909Z"
     }
    },
    "outputs": [
@@ -264,10 +264,10 @@
    "execution_count": 4,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-06-30T14:50:58.845605Z",
-     "iopub.status.busy": "2026-06-30T14:50:58.845446Z",
-     "iopub.status.idle": "2026-06-30T14:50:58.927761Z",
-     "shell.execute_reply": "2026-06-30T14:50:58.927001Z"
+     "iopub.execute_input": "2026-09-14T11:14:20.062429Z",
+     "iopub.status.busy": "2026-09-14T11:14:20.062264Z",
+     "iopub.status.idle": "2026-09-14T11:14:20.123676Z",
+     "shell.execute_reply": "2026-09-14T11:14:20.122955Z"
     }
    },
    "outputs": [
@@ -316,29 +316,29 @@
        "      <td>NOAA Marine Geology and Geophysics (MGG)</td>\n",
        "    </tr>\n",
        "    <tr>\n",
-       "      <th>OBIS</th>\n",
-       "      <td>???</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
        "      <th>ra_regional_boundaries</th>\n",
        "      <td>NOAA/NOS/IOOS</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>by_the_numbers</th>\n",
-       "      <td>IOOS</td>\n",
+       "      <td>NOAA/NOS/IOOS</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>processed_asset_inventory</th>\n",
+       "      <td>NOAA/NOS/IOOS</td>\n",
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
        "</div>"
       ],
       "text/plain": [
-       "                                                     institution\n",
-       "datasetID                                                       \n",
-       "allDatasets             Integrated Ocean Observing System (IOOS)\n",
-       "etopo5_EDDGridCopy      NOAA Marine Geology and Geophysics (MGG)\n",
-       "OBIS                                                         ???\n",
-       "ra_regional_boundaries                             NOAA/NOS/IOOS\n",
-       "by_the_numbers                                              IOOS"
+       "                                                        institution\n",
+       "datasetID                                                          \n",
+       "allDatasets                Integrated Ocean Observing System (IOOS)\n",
+       "etopo5_EDDGridCopy         NOAA Marine Geology and Geophysics (MGG)\n",
+       "ra_regional_boundaries                                NOAA/NOS/IOOS\n",
+       "by_the_numbers                                        NOAA/NOS/IOOS\n",
+       "processed_asset_inventory                             NOAA/NOS/IOOS"
       ]
      },
      "execution_count": 4,
@@ -394,7 +394,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.14.6"
+   "version": "3.14.7"
   }
  },
  "nbformat": 4,

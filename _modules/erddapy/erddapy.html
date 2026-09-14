@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>erddapy.erddapy &#8212; erddapy 3.3.0 documentation</title>
+    <title>erddapy.erddapy &#8212; erddapy 3.3.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=f6a572b4" />
-    <script src="../../_static/documentation_options.js?v=3eb8911e"></script>
+    <script src="../../_static/documentation_options.js?v=9ac01507"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -88,7 +88,7 @@
           <div class="body" role="main">
             
   <h1>Source code for erddapy.erddapy</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Pythonic way to access ERDDAP data.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Pythonic way to access ERDDAP data."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -125,12 +125,12 @@
 
 <span class="c1"># Objects used by downstream packages</span>
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;ERDDAP&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;_check_substrings&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;_distinct&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;_format_constraints_url&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;parse_dates&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;urlopen&quot;</span><span class="p">,</span>
+    <span class="s2">"ERDDAP"</span><span class="p">,</span>
+    <span class="s2">"_check_substrings"</span><span class="p">,</span>
+    <span class="s2">"_distinct"</span><span class="p">,</span>
+    <span class="s2">"_format_constraints_url"</span><span class="p">,</span>
+    <span class="s2">"parse_dates"</span><span class="p">,</span>
+    <span class="s2">"urlopen"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -142,7 +142,7 @@
 <div class="viewcode-block" id="ERDDAP">
 <a class="viewcode-back" href="../../erddapy.html#erddapy.erddapy.ERDDAP">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ERDDAP</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an ERDDAP instance for a specific server endpoint.</span>
+<span class="w">    </span><span class="sd">"""Creates an ERDDAP instance for a specific server endpoint.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">    ----</span>
@@ -165,58 +165,55 @@
 <span class="sd">    --------</span>
 <span class="sd">        Specifying the server URL</span>
 
-<span class="sd">        &gt;&gt;&gt; e = ERDDAP(server=&quot;https://gliders.ioos.us/erddap&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; e = ERDDAP(server="https://gliders.ioos.us/erddap")</span>
 
-<span class="sd">        let&#39;s search for glider `ru29` and read the csv response with pandas.</span>
+<span class="sd">        let's search for glider `ru29` and read the csv response with pandas.</span>
 
 <span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
-<span class="sd">        &gt;&gt;&gt; url = e.get_search_url(search_for=&quot;ru29&quot;, response=&quot;csv&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; pd.read_csv(url)[&quot;Dataset ID&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; url = e.get_search_url(search_for="ru29", response="csv")</span>
+<span class="sd">        &gt;&gt;&gt; pd.read_csv(url)["Dataset ID"]</span>
 <span class="sd">        0    ru29-20150623T1046</span>
 <span class="sd">        1    ru29-20161105T0131</span>
 <span class="sd">        Name: Dataset ID, dtype: object</span>
 
-<span class="sd">        there are &quot;shortcuts&quot; for some servers</span>
+<span class="sd">        there are "shortcuts" for some servers</span>
 
-<span class="sd">        &gt;&gt;&gt; e = ERDDAP(server=&quot;SECOORA&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; e = ERDDAP(server="SECOORA")</span>
 <span class="sd">        &gt;&gt;&gt; e.server</span>
-<span class="sd">        &#39;https://erddap.secoora.org/erddap&#39;</span>
+<span class="sd">        'https://erddap.secoora.org/erddap'</span>
 
 <span class="sd">        to get a list of the shortcuts available servers:</span>
 
 <span class="sd">        &gt;&gt;&gt; from erddapy import servers</span>
 <span class="sd">        &gt;&gt;&gt; servers()</span>
-<span class="sd">        {&#39;voto&#39;: Server(description=&#39;Voice of the Ocean&#39;, url=&#39;https://erddap.observations.voiceoftheocean.org/erddap/&#39;),</span>
-<span class="sd">        &#39;cswc&#39;: Server(description=&#39;CoastWatch West Coast Node&#39;, url=&#39;https://coastwatch.pfeg.noaa.gov/erddap/&#39;),</span>
+<span class="sd">        {'voto': Server(description='Voice of the Ocean', url='https://erddap.observations.voiceoftheocean.org/erddap/'),</span>
+<span class="sd">        'cswc': Server(description='CoastWatch West Coast Node', url='https://coastwatch.pfeg.noaa.gov/erddap/'),</span>
 <span class="sd">        ...,</span>
-<span class="sd">        &#39;noaa oceanview&#39;: Server(description=&#39;NOAA Oceanview&#39;, url=&#39;https://oceanview.pfeg.noaa.gov/erddap/&#39;),</span>
-<span class="sd">        &#39;cfrf&#39;: Server(description=&#39;Commercial Fisheries Research Foundation&#39;, url=&#39;https://erddap.ondeckdata.com/erddap/&#39;)}</span>
+<span class="sd">        'noaa oceanview': Server(description='NOAA Oceanview', url='https://oceanview.pfeg.noaa.gov/erddap/'),</span>
+<span class="sd">        'cfrf': Server(description='Commercial Fisheries Research Foundation', url='https://erddap.ondeckdata.com/erddap/')}</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">:</span> <span class="n">ERDDAP</span><span class="p">,</span>
         <span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span><span class="p">,</span>
+        <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"html"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate main class attributes.</span>
+<span class="w">        </span><span class="sd">"""Instantiate main class attributes.</span>
 
 <span class="sd">        Attributes</span>
 <span class="sd">        ----------</span>
 <span class="sd">          server: the server URL.</span>
-<span class="sd">          protocol: ERDDAP&#39;s protocol (tabledap/griddap)</span>
+<span class="sd">          protocol: ERDDAP's protocol (tabledap/griddap)</span>
 <span class="sd">          response: default is HTML.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_url</span><span class="p">(</span><span class="n">server</span><span class="p">):</span>
             <span class="n">_servers</span> <span class="o">=</span> <span class="n">servers</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">server</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">_servers</span><span class="p">:</span>
                 <span class="n">server</span> <span class="o">=</span> <span class="n">_servers</span><span class="p">[</span><span class="n">server</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">.</span><span class="n">url</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Cannot initialize </span><span class="si">{</span><span class="n">server</span><span class="si">=}</span><span class="s2">.&quot;</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span>
 
@@ -239,7 +236,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">dataset_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;dataset_id property.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""dataset_id property."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_id</span>
 
     <span class="nd">@dataset_id</span><span class="o">.</span><span class="n">setter</span>
@@ -254,23 +251,23 @@
         <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch metadata of dataset and initialize constraints and variables.</span>
+<span class="w">        </span><span class="sd">"""Fetch metadata of dataset and initialize constraints and variables.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">        ----</span>
 <span class="sd">        dataset_id: a dataset unique id.</span>
 <span class="sd">        step: step used to subset dataset</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">dataset_id</span> <span class="o">=</span> <span class="n">dataset_id</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span>
         <span class="c1"># Short-circuit for opendap and/or non-griddap datasets.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">!=</span> <span class="s2">&quot;griddap&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="s2">&quot;opendap&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">!=</span> <span class="s2">"griddap"</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="s2">"opendap"</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Must set a valid dataset_id, got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Must set a valid dataset_id, got </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">"</span>
         <span class="k">if</span> <span class="n">dataset_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-        <span class="n">metadata_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="si">}</span><span class="s2">/griddap/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">metadata_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="si">}</span><span class="s2">/griddap/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dim_names</span><span class="p">,</span>
@@ -291,20 +288,20 @@
         <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the search URL for the `server` endpoint provided.</span>
+<span class="w">        </span><span class="sd">"""Build the search URL for the `server` endpoint provided.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">        ----</span>
-<span class="sd">            search_for: &quot;Google-like&quot; search of the datasets&#39; metadata.</span>
+<span class="sd">            search_for: "Google-like" search of the datasets' metadata.</span>
 
 <span class="sd">                - Type the words you want to search for,</span>
 <span class="sd">                  with spaces between the words.</span>
 <span class="sd">                  ERDDAP will search for the words separately, not as a phrase.</span>
 <span class="sd">                - To search for a phrase, put double quotes around the phrase</span>
-<span class="sd">                    (for example, `&quot;wind speed&quot;`).</span>
+<span class="sd">                    (for example, `"wind speed"`).</span>
 <span class="sd">                - To exclude datasets with a specific word use `-excludedWord`.</span>
 <span class="sd">                - To exclude datasets with a specific phrase,</span>
-<span class="sd">                  use `-&quot;excluded phrase&quot;`</span>
+<span class="sd">                  use `-"excluded phrase"`</span>
 <span class="sd">                - Searches are not case-sensitive.</span>
 <span class="sd">                - You can search for any part of a word. For example,</span>
 <span class="sd">                    searching for `spee` will find datasets with `speed`</span>
@@ -312,7 +309,7 @@
 <span class="sd">                - The last word in a phrase may be a partial word. For example,</span>
 <span class="sd">                    to find datasets from a specific website</span>
 <span class="sd">                    (usually the start of the datasetID),</span>
-<span class="sd">                    include (for example) `&quot;datasetID=erd&quot;` in your search.</span>
+<span class="sd">                    include (for example) `"datasetID=erd"` in your search.</span>
 
 <span class="sd">            response: default is HTML.</span>
 <span class="sd">            protocol: tabledap or griddap.</span>
@@ -331,7 +328,7 @@
 <span class="sd">        -------</span>
 <span class="sd">            url: the search URL.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">response</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">_clean_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
@@ -353,7 +350,7 @@
         <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the info URL for the `server` endpoint.</span>
+<span class="w">        </span><span class="sd">"""Build the info URL for the `server` endpoint.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">        ----</span>
@@ -365,7 +362,7 @@
 <span class="sd">        -------</span>
 <span class="sd">            url: the info URL for the `response` chosen.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">dataset_id</span> <span class="o">=</span> <span class="n">dataset_id</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">response</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">_clean_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
@@ -384,7 +381,7 @@
         <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the categorize URL for the `server` endpoint.</span>
+<span class="w">        </span><span class="sd">"""Build the categorize URL for the `server` endpoint.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">        ----</span>
@@ -398,7 +395,7 @@
 <span class="sd">        -------</span>
 <span class="sd">            url: the categorized URL for the `response` chosen.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">response</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span>
         <span class="k">return</span> <span class="n">get_categorize_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="n">categorize_by</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span></div>
 
@@ -416,7 +413,7 @@
         <span class="n">constraints</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">distinct</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the download URL for the `server` endpoint.</span>
+<span class="w">        </span><span class="sd">"""Build the download URL for the `server` endpoint.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">        ----</span>
@@ -431,26 +428,26 @@
 <span class="sd">        Example:</span>
 <span class="sd">        -------</span>
 <span class="sd">            constraints = {</span>
-<span class="sd">                &#39;latitude&lt;=&#39;: 41.0,</span>
-<span class="sd">                &#39;latitude&gt;=&#39;: 38.0,</span>
-<span class="sd">                &#39;longitude&lt;=&#39;: -69.0,</span>
-<span class="sd">                &#39;longitude&gt;=&#39;: -72.0,</span>
-<span class="sd">                &#39;time&lt;=&#39;: &#39;2017-02-10T00:00:00+00:00&#39;,</span>
-<span class="sd">                &#39;time&gt;=&#39;: &#39;2016-07-10T00:00:00+00:00&#39;,</span>
+<span class="sd">                'latitude&lt;=': 41.0,</span>
+<span class="sd">                'latitude&gt;=': 38.0,</span>
+<span class="sd">                'longitude&lt;=': -69.0,</span>
+<span class="sd">                'longitude&gt;=': -72.0,</span>
+<span class="sd">                'time&lt;=': '2017-02-10T00:00:00+00:00',</span>
+<span class="sd">                'time&gt;=': '2016-07-10T00:00:00+00:00',</span>
 <span class="sd">            }</span>
 
 <span class="sd">            One can also use relative constraints like:</span>
 <span class="sd">            constraints = {</span>
-<span class="sd">                &#39;time&gt;&#39;: &#39;now-7days&#39;,</span>
-<span class="sd">                &#39;latitude&lt;&#39;: &#39;min(longitude)+180&#39;,</span>
-<span class="sd">                &#39;depth&gt;&#39;: &#39;max(depth)-23&#39;,</span>
+<span class="sd">                'time&gt;': 'now-7days',</span>
+<span class="sd">                'latitude&lt;': 'min(longitude)+180',</span>
+<span class="sd">                'depth&gt;': 'max(depth)-23',</span>
 <span class="sd">            }</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">        -------</span>
 <span class="sd">            url (str): the download URL for the `response` chosen.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">dataset_id</span> <span class="o">=</span> <span class="n">dataset_id</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span>
         <span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span>
         <span class="n">variables</span> <span class="o">=</span> <span class="n">variables</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span>
@@ -459,15 +456,15 @@
         <span class="n">constraints</span> <span class="o">=</span> <span class="n">constraints</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">_clean_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dataset_id</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Please specify a valid `dataset_id`, got </span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Please specify a valid `dataset_id`, got </span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">"</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">protocol</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Please specify a valid `protocol`, got </span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Please specify a valid `protocol`, got </span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">"</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="p">(</span>
-            <span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;griddap&quot;</span>
+            <span class="n">protocol</span> <span class="o">==</span> <span class="s2">"griddap"</span>
             <span class="ow">and</span> <span class="n">constraints</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
             <span class="ow">and</span> <span class="n">variables</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
             <span class="ow">and</span> <span class="n">dim_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -497,22 +494,22 @@
         <span class="n">requests_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kw</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save a data request to a pandas.DataFrame.</span>
+<span class="w">        </span><span class="sd">"""Save a data request to a pandas.DataFrame.</span>
 
 <span class="sd">        Accepts any `pandas.read_csv` keyword arguments,</span>
 <span class="sd">        passed as a dictionary to pandas_kwargs.</span>
 
 <span class="sd">        This method uses the .csvp [1] response as the default for simplicity,</span>
-<span class="sd">        please check ERDDAP&#39;s docs for the other csv options available.</span>
+<span class="sd">        please check ERDDAP's docs for the other csv options available.</span>
 
 <span class="sd">        [1] Download a ISO-8859-1 .csv file with line 1: name (units).</span>
 <span class="sd">            Times are ISO 8601 strings.</span>
 
 <span class="sd">        requests_kwargs: kwargs to be passed to urlopen method.</span>
 <span class="sd">        **kw: kwargs to be passed to third-party library (pandas).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;response&quot;</span><span class="p">,</span> <span class="s2">&quot;csvp&quot;</span><span class="p">)</span>
-        <span class="n">distinct</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;distinct&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"response"</span><span class="p">,</span> <span class="s2">"csvp"</span><span class="p">)</span>
+        <span class="n">distinct</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"distinct"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span>
             <span class="n">response</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="p">),</span>
             <span class="n">distinct</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">distinct</span><span class="p">),</span>
@@ -531,10 +528,10 @@
         <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kw</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">netCDF4</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the data request into a CF compliant netCDF4-python object.&quot;&quot;&quot;</span>
-        <span class="n">distinct</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;distinct&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Load the data request into a CF compliant netCDF4-python object."""</span>
+        <span class="n">distinct</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"distinct"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="s2">&quot;ncCF&quot;</span><span class="p">,</span> <span class="n">distinct</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">distinct</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="s2">"ncCF"</span><span class="p">,</span> <span class="n">distinct</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">distinct</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">to_ncCF</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">,</span> <span class="n">requests_kwargs</span><span class="o">=</span><span class="p">{</span><span class="o">**</span><span class="n">kw</span><span class="p">})</span></div>
 
 
@@ -545,22 +542,22 @@
         <span class="n">requests_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kw</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the data request into a xarray.Dataset.</span>
+<span class="w">        </span><span class="sd">"""Load the data request into a xarray.Dataset.</span>
 
 <span class="sd">        Accepts any `xr.open_dataset` keyword arguments.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="s2">&quot;opendap&quot;</span><span class="p">:</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="s2">&quot;opendap&quot;</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;griddap&quot;</span><span class="p">:</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="s2">&quot;nc&quot;</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">==</span> <span class="s2">"opendap"</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="s2">"opendap"</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">==</span> <span class="s2">"griddap"</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="s2">"nc"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="s2">&quot;ncCF&quot;</span>
-        <span class="n">distinct</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;distinct&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="s2">"ncCF"</span>
+        <span class="n">distinct</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"distinct"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">distinct</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">distinct</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">requests_kwargs</span><span class="p">:</span>
-            <span class="n">requests_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;auth&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">,</span> <span class="o">**</span><span class="n">requests_kwargs</span><span class="p">}</span>
+            <span class="n">requests_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"auth"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">,</span> <span class="o">**</span><span class="n">requests_kwargs</span><span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">requests_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;auth&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">}</span>
+            <span class="n">requests_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"auth"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">}</span>
         <span class="k">return</span> <span class="n">to_xarray</span><span class="p">(</span>
             <span class="n">url</span><span class="p">,</span>
             <span class="n">response</span><span class="p">,</span>
@@ -572,12 +569,12 @@
 <div class="viewcode-block" id="ERDDAP.to_iris">
 <a class="viewcode-back" href="../../erddapy.html#erddapy.erddapy.ERDDAP.to_iris">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_iris</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">ERDDAP</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">iris</span><span class="o">.</span><span class="n">cube</span><span class="o">.</span><span class="n">CubeList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the data request into an iris.cube.CubeList.</span>
+<span class="w">        </span><span class="sd">"""Load the data request into an iris.cube.CubeList.</span>
 
 <span class="sd">        Accepts any `iris.load_raw` keyword arguments.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="s2">&quot;nc&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;griddap&quot;</span> <span class="k">else</span> <span class="s2">&quot;ncCF&quot;</span>
-        <span class="n">distinct</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;distinct&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="s2">"nc"</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">==</span> <span class="s2">"griddap"</span> <span class="k">else</span> <span class="s2">"ncCF"</span>
+        <span class="n">distinct</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"distinct"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">distinct</span><span class="o">=</span><span class="n">distinct</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">to_iris</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">iris_kwargs</span><span class="o">=</span><span class="p">{</span><span class="o">**</span><span class="n">kw</span><span class="p">})</span></div>
 
@@ -590,23 +587,23 @@
             <span class="n">dataset_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span>
 
         <span class="k">if</span> <span class="n">dataset_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;You must specify a valid dataset_id, got </span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"You must specify a valid dataset_id, got </span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">"</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_info_url</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_info_url</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">"csv"</span><span class="p">)</span>
 
         <span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">requests_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">requests_kwargs</span><span class="p">)</span>
         <span class="n">_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dataset_id</span> <span class="o">=</span> <span class="n">dataset_id</span>
-        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">_df</span><span class="p">[</span><span class="s2">&quot;Variable Name&quot;</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">_df</span><span class="p">[</span><span class="s2">"Variable Name"</span><span class="p">]):</span>
             <span class="n">attributes</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="n">_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
-                    <span class="n">_df</span><span class="p">[</span><span class="s2">&quot;Variable Name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span><span class="p">,</span>
-                    <span class="p">[</span><span class="s2">&quot;Attribute Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">],</span>
+                    <span class="n">_df</span><span class="p">[</span><span class="s2">"Variable Name"</span><span class="p">]</span> <span class="o">==</span> <span class="n">variable</span><span class="p">,</span>
+                    <span class="p">[</span><span class="s2">"Attribute Name"</span><span class="p">,</span> <span class="s2">"Value"</span><span class="p">],</span>
                 <span class="p">]</span>
-                <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Attribute Name&quot;</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">&quot;Value&quot;</span><span class="p">]</span>
+                <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Attribute Name"</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">"Value"</span><span class="p">]</span>
             <span class="p">)</span>
             <span class="n">variables</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">variable</span><span class="p">:</span> <span class="n">attributes</span><span class="p">})</span>
         <span class="k">return</span> <span class="n">variables</span>
@@ -618,7 +615,7 @@
         <span class="n">dataset_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a variable based on its attributes.</span>
+<span class="w">        </span><span class="sd">"""Return a variable based on its attributes.</span>
 
 <span class="sd">        The `get_var_by_attr` method will create an info `csv` return,</span>
 <span class="sd">        for the `dataset_id`, and the variables attribute dictionary,</span>
@@ -626,28 +623,28 @@
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">            &gt;&gt;&gt; e = ERDDAP(server_url=&quot;https://gliders.ioos.us/erddap&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; dataset_id = &quot;whoi_406-20160902T1700&quot;</span>
+<span class="sd">            &gt;&gt;&gt; e = ERDDAP(server_url="https://gliders.ioos.us/erddap")</span>
+<span class="sd">            &gt;&gt;&gt; dataset_id = "whoi_406-20160902T1700"</span>
 
 <span class="sd">            Get variables with x-axis attribute.</span>
 
-<span class="sd">            &gt;&gt;&gt; e.get_var_by_attr(dataset_id, axis=&quot;X&quot;)</span>
-<span class="sd">            [&#39;longitude&#39;]</span>
+<span class="sd">            &gt;&gt;&gt; e.get_var_by_attr(dataset_id, axis="X")</span>
+<span class="sd">            ['longitude']</span>
 
-<span class="sd">            Get variables with matching &quot;standard_name&quot; attribute</span>
+<span class="sd">            Get variables with matching "standard_name" attribute</span>
 
 <span class="sd">            &gt;&gt;&gt; e.get_var_by_attr(</span>
-<span class="sd">            ...     dataset_id, standard_name=&quot;northward_sea_water_velocity&quot;</span>
+<span class="sd">            ...     dataset_id, standard_name="northward_sea_water_velocity"</span>
 <span class="sd">            ... )</span>
-<span class="sd">            [&#39;v&#39;]</span>
+<span class="sd">            ['v']</span>
 
 <span class="sd">            Get Axis variables</span>
 
-<span class="sd">            &gt;&gt;&gt; axis = lambda v: v in [&quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;T&quot;]</span>
+<span class="sd">            &gt;&gt;&gt; axis = lambda v: v in ["X", "Y", "Z", "T"]</span>
 <span class="sd">            &gt;&gt;&gt; e.get_var_by_attr(dataset_id, axis=axis)</span>
-<span class="sd">            [&#39;latitude&#39;, &#39;longitude&#39;, &#39;time&#39;, &#39;depth&#39;]</span>
+<span class="sd">            ['latitude', 'longitude', 'time', 'depth']</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_variables</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">)</span>
         <span class="c1"># Virtually the same code as the netCDF4 counterpart.</span>
         <span class="n">vs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -677,14 +674,14 @@
         <span class="bp">self</span><span class="p">:</span> <span class="n">ERDDAP</span><span class="p">,</span>
         <span class="n">file_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Download the dataset to a file in a user specified format.&quot;&quot;&quot;</span>
-        <span class="n">file_type</span> <span class="o">=</span> <span class="n">file_type</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Download the dataset to a file in a user specified format."""</span>
+        <span class="n">file_type</span> <span class="o">=</span> <span class="n">file_type</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">file_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">download_formats</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Requested filetype </span><span class="si">{</span><span class="n">file_type</span><span class="si">}</span><span class="s2"> not available on ERDDAP&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Requested filetype </span><span class="si">{</span><span class="n">file_type</span><span class="si">}</span><span class="s2"> not available on ERDDAP"</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">_sort_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_download_url</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">file_type</span><span class="p">))</span>
         <span class="n">fname_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">shake_256</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-        <span class="n">file_name</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">fname_hash</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">file_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">fname_hash</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">file_type</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">file_name</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>  <span class="c1"># noqa: S310</span>
         <span class="k">return</span> <span class="n">file_name</span></div>
