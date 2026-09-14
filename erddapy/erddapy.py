@@ -121,9 +121,6 @@ class ERDDAP:
             _servers = servers()
             if server.lower() in _servers:
                 server = _servers[server.lower()].url
-            else:
-                msg = f"Cannot initialize {server=}."
-                raise ValueError(msg)
         self.server = server.rstrip("/")
         self.protocol = protocol
         self.response = response
