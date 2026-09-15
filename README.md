@@ -20,7 +20,7 @@ erddapy: ERDDAP + Python.
 <img src="https://img.shields.io/github/contributors/ioos/erddapy.svg"
  alt="# contributors" /></a>
 <a href="https://zenodo.org/badge/latestdoi/104919828">
-<img src="https://zenodo.org/badge/104919828.svg"
+<img src="https://zenodo.org/badge/DOI/10.5281/zenodo.latest.svg"
  alt="zenodo" /></a>
 <a href="https://pypi.org/project/erddapy">
 <img src="https://img.shields.io/pypi/pyversions/erddapy.svg"
