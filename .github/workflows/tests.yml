@@ -39,7 +39,7 @@ jobs:
 
     - name: Install erddapy
       run: |
-        pip install -e ".[dev,extras,docs]"
+        pip install -e ".[dev,extras]"
 
     - name: Full Tests
       # Use the --record-mode=rewrite if you need to re-record the cassetts.
