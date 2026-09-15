@@ -7,7 +7,7 @@ import xarray as xr
 
 
 def test_load_backend():
-    """Check if the backend is loaded."""
+    """Check if the backend exists and is the correct one."""
     backends = xr.backends.list_engines()
     assert "erddapy" in backends
     assert backends["erddapy"].description == "Load ERDDAP URLs in xarray."
@@ -26,7 +26,7 @@ def test_netcdf4_erddapy_same_opendap_dataset():
 @pytest.mark.web
 @pytest.mark.vcr
 def test_netcdf_like_response():
-    """Check if netCDF response."""
+    """Check the netCDF response."""
     url = "https://gliders.ioos.us/erddap/tabledap/amelia-20180501T0000.nc"
     ds = xr.open_dataset(url, engine="erddapy")
     assert ds.attrs["ioos_dac_checksum"] == "c3150831158a8ce077b817c2f31ad498"
@@ -44,7 +44,7 @@ urls = [
 @pytest.mark.vcr
 @pytest.mark.parametrize("url", urls)
 def test_nc_with_slices_and_variables(url):
-    """Check if various netCDF-like response with slices."""
+    """Check various netCDF-like response with slices."""
     ds = xr.open_dataset(url, engine="erddapy")
     url_history = ds.attrs["history"].split()[-1]
 
@@ -55,7 +55,7 @@ def test_nc_with_slices_and_variables(url):
 @pytest.mark.web
 @pytest.mark.vcr
 def test_griddap_opendap():
-    """Check if various griddap response."""
+    """Check the griddap response."""
     url = "https://erddap.ioos.us/erddap/griddap/etopo5_EDDGridCopy"
     ds = xr.open_dataset(url, engine="erddapy")
     url_history = ds.attrs["history"].split()[-1]
@@ -69,7 +69,7 @@ def test_griddap_opendap():
 @pytest.mark.web
 @pytest.mark.vcr
 def test_griddap_opendap_slice():
-    """Check if various griddap response with slices."""
+    """Check griddap response variable slice."""
     url = "https://erddap.ioos.us/erddap/griddap/etopo5_EDDGridCopy.nc?ROSE%5B(0.0):1:(42.0)%5D%5B(0.0):1:(42.0)%5D"
     ds = xr.open_dataset(url, engine="erddapy")
 
