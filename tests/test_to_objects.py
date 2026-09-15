@@ -2,16 +2,33 @@
 
 import sys
 
-import dask
-import iris
+try:
+    import dask
+
+    # netcdf-c is not thread safe and iris doesn't limit that.
+    dask.config.set(scheduler="single-threaded")
+except ImportError:
+    pass
+
+try:
+    import iris
+
+    IRIS_INSTALLED = True
+except ImportError:
+    IRIS_INSTALLED = False
+
 import pytest
 import requests
 import xarray as xr
 
-from erddapy import ERDDAP
+try:
+    import netCDF4  # noqa: F401
 
-# netcdf-c is not thread safe and iris doesn't limit that.
-dask.config.set(scheduler="single-threaded")
+    NETCDF4_INSTALLED = True
+except ImportError:
+    NETCDF4_INSTALLED = False
+
+from erddapy import ERDDAP
 
 
 @pytest.fixture
@@ -34,30 +51,30 @@ def gliders():
 
 
 @pytest.fixture
-def ncei():
+def ioos():
     """Instantiate ERDDAP class for testing."""
     return ERDDAP(
-        server="https://www.ncei.noaa.gov/erddap/",
+        server="https://erddap.ioos.us/erddap/",
         response="htmlTable",
     )
 
 
 @pytest.fixture
-def dataset_griddap(ncei):
+def dataset_griddap(ioos):
     """Load griddap data for testing."""
-    ncei.dataset_id = "AEC_gomex_satellite_climo"
-    ncei.protocol = "griddap"
-    ncei.griddap_initialize()
-    return ncei
+    ioos.dataset_id = "etopo5_EDDGridCopy"
+    ioos.protocol = "griddap"
+    ioos.griddap_initialize()
+    return ioos
 
 
 @pytest.fixture
-def dataset_opendap(ncei):
+def dataset_opendap(ioos):
     """Load griddap data with OPeNDAP response for testing."""
-    ncei.dataset_id = "AEC_gomex_satellite_climo"
-    ncei.protocol = "griddap"
-    ncei.response = "opendap"
-    return ncei
+    ioos.dataset_id = "etopo5_EDDGridCopy"
+    ioos.protocol = "griddap"
+    ioos.response = "opendap"
+    return ioos
 
 
 @pytest.fixture
@@ -132,6 +149,10 @@ def test_to_pandas_requests_kwargs(dataset_tabledap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_to_xarray_tabledap(dataset_tabledap):
     """Test converting tabledap to an xarray Dataset."""
     ds = dataset_tabledap.to_xarray()
@@ -144,6 +165,10 @@ def test_to_xarray_tabledap(dataset_tabledap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_to_xarray_cannot_be_quoted():
     """Test dataset that failed when quoted."""
     e = ERDDAP(server="https://erddap.aoos.org/erddap/", protocol="tabledap")
@@ -157,6 +182,10 @@ def test_to_xarray_cannot_be_quoted():
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_to_xarray_requests_kwargs(dataset_tabledap):
     """Test converting tabledap to an xarray Dataset with manual timeout."""
     ds = dataset_tabledap.to_xarray(requests_kwargs={"timeout": 30})
@@ -169,6 +198,10 @@ def test_to_xarray_requests_kwargs(dataset_tabledap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_to_xarray_griddap(dataset_griddap):
     """Test converting griddap to an xarray Dataset."""
     ds = dataset_griddap.to_xarray()
@@ -176,6 +209,10 @@ def test_to_xarray_griddap(dataset_griddap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_to_xarray_opendap(dataset_opendap):
     """Test converting griddap to xarray with the OPeNDAP response."""
     ds = dataset_opendap.to_xarray()
@@ -183,6 +220,10 @@ def test_to_xarray_opendap(dataset_opendap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_to_xarray_opendap_griddap_initialize(dataset_opendap):
     """Test converting griddap aftert calling griddap_initialize."""
     dataset_opendap.griddap_initialize()
@@ -192,8 +233,8 @@ def test_to_xarray_opendap_griddap_initialize(dataset_opendap):
 
 @pytest.mark.web
 @pytest.mark.skipif(
-    (sys.platform in ("win32", "darwin")),
-    reason="run this test until we figure out a way to mock it.",
+    (sys.platform in ("win32", "darwin") or not IRIS_INSTALLED),
+    reason="Optional deps  are tested in coverage and oldest Python only.",
 )
 def test_to_iris_tabledap(dataset_tabledap):
     """Test converting tabledap to an iris cube."""
@@ -209,8 +250,8 @@ def test_to_iris_tabledap(dataset_tabledap):
 
 @pytest.mark.web
 @pytest.mark.skipif(
-    (sys.platform in ("win32", "darwin")),
-    reason="run this test until we figure out a way to mock it.",
+    (sys.platform in ("win32", "darwin") or not IRIS_INSTALLED),
+    reason="Optional deps  are tested in coverage and oldest Python only.",
 )
 def test_to_iris_griddap(dataset_griddap):
     """Test converting griddap to an iris cube."""
@@ -219,6 +260,10 @@ def test_to_iris_griddap(dataset_griddap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_download_file(dataset_tabledap):
     """Test file download of tabledap with defined variable and constraints."""
     fn = dataset_tabledap.download_file("nc")
@@ -231,6 +276,10 @@ def test_download_file(dataset_tabledap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_download_file_variables_only(dataset_tabledap):
     """Test direct download of tabledap dataset with undefined constraints."""
     dataset_tabledap.constraints = {}
@@ -244,6 +293,10 @@ def test_download_file_variables_only(dataset_tabledap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_download_file_constraints_only(dataset_tabledap):
     """Test direct download of tabledap dataset with undefined variables."""
     dataset_tabledap.variables = []
@@ -257,6 +310,10 @@ def test_download_file_constraints_only(dataset_tabledap):
 
 
 @pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test_download_file_undefined_query(dataset_tabledap):
     """Test direct download of tabledap dataset with undefined query."""
     dataset_tabledap.variables = []

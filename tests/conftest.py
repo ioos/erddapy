@@ -4,8 +4,10 @@ import zipfile
 from pathlib import Path
 
 import pooch
+import pytest
 
 
+@pytest.fixture(scope="session", autouse=True)
 def download_test_data() -> None:
     """Fetch cassettes yaml data from cassettes test release."""
     url = "https://github.com/ioos/erddapy/releases/download"
@@ -19,7 +21,3 @@ def download_test_data() -> None:
     here = Path(__file__).resolve().parent
     with zipfile.ZipFile(fname, "r") as zip_ref:
         zip_ref.extractall(here)
-
-
-if __name__ == "__main__":
-    download_test_data()

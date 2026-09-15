@@ -25,17 +25,19 @@ dynamic = [ "version" ]
 dependencies = [
   "pandas",
   "requests",
-  "xarray",
 ]
-optional-dependencies.dev = [
-  "dask",
+entry-points."xarray.backends".erddapy = "erddapy.xarray_erddap:ERDDAPyBackendEntrypoint"
+
+[dependency-groups]
+dev = [
   "pooch",
   "prek",
   "pytest",
   "pytest-cov",
   "pytest-recording",
+  "xarray",
 ]
-optional-dependencies.docs = [
+docs = [
   "cartopy>=0.21",
   "geopandas",
   "joblib",
@@ -44,16 +46,22 @@ optional-dependencies.docs = [
   "nbsphinx",
   "regionmask>=0.9",
   "sphinx",
+  { include-group = "dev" },
+  { include-group = "objects" },
+  { include-group = "extras" },
 ]
-optional-dependencies.extras = [
+extras = [
   "joblib",
+]
+objects = [
+  "dask",
   "netcdf4",
   "scitools-iris>=3.3",
+  "xarray",
 ]
 urls.documentation = "https://ioos.github.io/erddapy"
 urls.homepage = "https://github.com/ioos/erddapy"
 urls.repository = "https://github.com/ioos/erddapy"
-entry-points."xarray.backends".erddapy = "erddapy.xarray_erddap:ERDDAPyBackendEntrypoint"
 
 [tool.setuptools]
 packages = [ "erddapy" ]

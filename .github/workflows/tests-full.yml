@@ -1,4 +1,4 @@
-name: Code coverage report
+name: Full Tests
 
 # no permissions by default
 permissions: {}
@@ -23,13 +23,13 @@ jobs:
 
     - name: Install erddapy
       run: |
-        pip install -e ".[dev,extras,docs]"
+        pip install --group docs
+        pip install -e .
 
     - name: Run tests with coverage
-      run: >
-        pushd tests && python download_test_data.py && popd
-        && python -m pytest -rxs --cov=erddapy tests
+      run: |
+        python -m pytest -rxs --cov=erddapy tests
 
     - name: Run linters
-      run: >
+      run: |
         prek run --all-files
