@@ -56,11 +56,13 @@ def test_nc_with_slices_and_variables(url):
 @pytest.mark.vcr
 def test_griddap_opendap():
     """Check if various griddap response."""
-    url = "https://pae-paha.pacioos.hawaii.edu/erddap/griddap/etopo1_bedrock"
+    url = "https://erddap.ioos.us/erddap/griddap/etopo5_EDDGridCopy"
     ds = xr.open_dataset(url, engine="erddapy")
+    url_history = ds.attrs["history"].split()[-1]
+    # Check the path b/c the copied dataset netloc is netloc 'localhost:8080'.
     assert (
-        ds.attrs["history"].split()[-1]
-        == "https://pae-paha.pacioos.hawaii.edu/erddap/griddap/etopo1_bedrock.das"
+        urllib.parse.urlparse(url_history).path.rstrip(".das")
+        == urllib.parse.urlparse(url).path
     )
 
 
@@ -68,7 +70,7 @@ def test_griddap_opendap():
 @pytest.mark.vcr
 def test_griddap_opendap_slice():
     """Check if various griddap response with slices."""
-    url = "https://pae-paha.pacioos.hawaii.edu/erddap/griddap/etopo1_bedrock.nc?z%5B(-42.0):1:(-44.0)%5D%5B(-42.0):1:(-44.0)%5D"
+    url = "https://erddap.ioos.us/erddap/griddap/etopo5_EDDGridCopy.nc?ROSE%5B(0.0):1:(42.0)%5D%5B(0.0):1:(42.0)%5D"
     ds = xr.open_dataset(url, engine="erddapy")
 
     url_history = ds.attrs["history"].split()[-1]
