@@ -5,6 +5,20 @@ import urllib.parse
 import pytest
 import xarray as xr
 
+try:
+    import netCDF4  # noqa: F401
+
+    NETCDF4_INSTALLED = True
+except ImportError:
+    NETCDF4_INSTALLED = False
+
+
+if not NETCDF4_INSTALLED:
+    pytest.skip(
+        "Optional deps  are tested in coverage and oldest Python only.",
+        allow_module_level=True,
+    )
+
 
 def test_load_backend():
     """Check if the backend exists and is the correct one."""

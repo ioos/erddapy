@@ -6,6 +6,13 @@ import pytest
 
 from erddapy.multiple_server_search import fetch_results, search_servers
 
+try:
+    import joblib  # noqa: F401
+
+    JOBLIB_INSTALLED = True
+except ImportError:
+    JOBLIB_INSTALLED = False
+
 
 @pytest.mark.web
 @pytest.mark.vcr
@@ -37,7 +44,7 @@ def test_fetch_no_results():
 
 @pytest.mark.web
 @pytest.mark.skipif(
-    sys.platform in ("win32", "darwin"),
+    (sys.platform in ("win32", "darwin") or not JOBLIB_INSTALLED),
     reason="run only on linux to avoid extra load on the server",
 )
 def test_search_awesome_erddap_servers_true():
@@ -82,7 +89,7 @@ def servers_list():
 
 @pytest.mark.web
 @pytest.mark.skipif(
-    (sys.platform in ("win32", "darwin") or sys.version_info < (3, 10)),
+    (sys.platform in ("win32", "darwin") or not JOBLIB_INSTALLED),
     reason="run only on linux and latest to avoid extra load on the server",
 )
 def test_search_servers_with_a_list_parallel_true(servers_list):

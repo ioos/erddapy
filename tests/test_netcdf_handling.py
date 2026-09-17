@@ -3,15 +3,26 @@
 import platform
 from pathlib import Path
 
+try:
+    import netCDF4  # noqa: F401
+
+    NETCDF4_INSTALLED = True
+except ImportError:
+    NETCDF4_INSTALLED = False
+
 import pytest
 
 from erddapy.core.netcdf import _nc_dataset, _tempnc
 from erddapy.core.url import urlopen
 
 
-@pytest.mark.web
 # For some reason we cannot use vcr with requests with in_memory
 # (also all the to_objects that uses in_memory).
+@pytest.mark.web
+@pytest.mark.skipif(
+    not NETCDF4_INSTALLED,
+    reason="Optional deps  are tested in coverage and oldest Python only.",
+)
 def test__nc_dataset_in_memory_https():
     """Test loading a netcdf dataset in-memory."""
     from netCDF4 import Dataset  # noqa: PLC0415
@@ -25,7 +36,7 @@ def test__nc_dataset_in_memory_https():
 @pytest.mark.web
 @pytest.mark.vcr
 @pytest.mark.skipif(
-    platform.system().lower() == "windows",
+    (platform.system().lower() == "windows" or not NETCDF4_INSTALLED),
     reason="does not remove the file on windows",
 )
 def test__tempnc():
