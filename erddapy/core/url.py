@@ -255,6 +255,7 @@ def parse_dates(
     strings or seconds since 1970, but internally ERDDAPY uses datetime-like
     objects. `timestamp` returns the expected strings in seconds since 1970.
 
+    This function will shift any tz-aware, and convert naive datetimes, to UTC.
     """
     if isinstance(date_time, str):
         parse_date_time = to_datetime(
