@@ -30,7 +30,7 @@ erddapy: ERDDAP + Python.
  alt="pre-commit.ci status" /></a>
 
  <a href="https://github.com/ioos/erddapy/actions">
-<img src="https://github.com/ioos/erddapy/actions/workflows/tests.yml/badge.svg"
+<img src="https://github.com/ioos/erddapy/actions/workflows/tests-full.yml/badge.svg"
  alt="GHA-tests" /></a>
 
 
