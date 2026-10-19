@@ -1,7 +1,7 @@
 """URL handling."""
 
 import copy
-import datetime
+import datetime as dt
 import functools
 import io
 from collections import OrderedDict
@@ -244,7 +244,7 @@ def _is_quoted(url: str) -> bool:
 
 
 def parse_dates(
-    date_time: datetime.datetime | str,
+    date_time: dt.datetime | str,
     *,
     dayfirst: bool = False,
     yearfirst: bool = False,
@@ -268,9 +268,9 @@ def parse_dates(
 
     # Naive datetimes tzinfo must be replaced, tz-aware should be converted.
     if not parse_date_time.tzinfo:
-        parse_date_time = parse_date_time.replace(tzinfo=datetime.UTC)
+        parse_date_time = parse_date_time.replace(tzinfo=dt.UTC)
     else:
-        parse_date_time = parse_date_time.astimezone(datetime.UTC)
+        parse_date_time = parse_date_time.astimezone(dt.UTC)
 
     return parse_date_time.timestamp()
 
@@ -351,7 +351,7 @@ def get_search_url(  # noqa: PLR0913, PLR0917
         search_for = parse.quote_plus(search_for)
         base += "&searchFor={searchFor}"
 
-    # Convert dates from datetime.datetime to secs since 1970-01-01T00:00:00Z.
+    # Convert dates from dt.datetime to secs since 1970-01-01T00:00:00Z.
     min_time = kwargs.pop("min_time", "")
     max_time = kwargs.pop("max_time", "")
     if min_time and not _check_substrings(min_time):
