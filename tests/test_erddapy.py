@@ -1,6 +1,6 @@
 """Test ERDDAP functionality."""
 
-import datetime
+import datetime as dt
 from zoneinfo import ZoneInfo
 
 import pytest
@@ -17,13 +17,13 @@ from erddapy.core.url import (
 
 def test_parse_dates_utc_datetime():
     """UTC timestamp at 1970-1-1 must be 0."""
-    d = datetime.datetime(1970, 1, 1, 0, 0, tzinfo=datetime.UTC)
+    d = dt.datetime(1970, 1, 1, 0, 0, tzinfo=dt.UTC)
     assert parse_dates(d) == 0
 
 
 def test_parse_dates_nonutc_datetime():
     """Non-UTC timestamp at 1970-1-1 must have the zone offset."""
-    d = datetime.datetime(1970, 1, 1, tzinfo=ZoneInfo("US/Eastern"))
+    d = dt.datetime(1970, 1, 1, tzinfo=ZoneInfo("US/Eastern"))
     assert parse_dates(d) == abs(d.utcoffset().total_seconds())
 
 
