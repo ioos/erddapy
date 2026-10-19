@@ -27,6 +27,7 @@ jobs:
         pip install -e .
 
     - name: Run tests with coverage
+      # Use the --record-mode=rewrite if you need to re-record the cassetts.
       run: |
         python -m pytest -rxs --cov=erddapy tests
 
