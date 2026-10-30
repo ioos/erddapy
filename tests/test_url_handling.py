@@ -101,5 +101,5 @@ def test_quoting():
         'END_DATE="20161004"&'
         'STATION_ID="8729840"'
     )
-    data = urlopen(url)
+    data = urlopen(url, requests_kwargs={"timeout": 120})
     assert data is not None
