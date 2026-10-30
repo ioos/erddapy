@@ -23,8 +23,8 @@ jobs:
 
     - name: Install erddapy
       run: |
-        pip install --group docs
-        pip install -e .
+        python -m pip install --group docs
+        python -m pip install -e .
 
     - name: Run tests with coverage
       # Use the --record-mode=rewrite if you need to re-record the cassetts.

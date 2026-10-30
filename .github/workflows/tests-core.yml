@@ -39,8 +39,8 @@ jobs:
 
     - name: Install erddapy
       run: |
-        pip install --group dev
-        pip install -e .
+        python -m pip install --group dev
+        python -m pip install -e .
 
     - name: Full Tests
       # Use the --record-mode=rewrite if you need to re-record the cassetts.
