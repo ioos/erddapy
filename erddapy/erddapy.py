@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import functools
 import hashlib
+import re
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 from urllib.request import urlretrieve
 
 import pandas as pd
+import requests
 
 from erddapy.core.griddap import (
     _griddap_check_constraints,
@@ -141,6 +143,34 @@ class ERDDAP:
         # quicker access, will be overridden when requesting a new dataset_id.
         self._dataset_id: str | None = None
         self._variables: dict = {}
+        self._build_info = functools.lru_cache(maxsize=128)(
+            self._build_info_uncached,
+        )
+
+    def _build_info_uncached(self) -> tuple[str | None, str | None]:
+        """ERDDAP server build_info."""
+        build_info: tuple[str | None, str | None] = (None, None)
+        metrics = f"{self.server}/metrics"
+        try:
+            ret = urlopen(metrics)
+            text = ret.read()
+            for line in text.decode().splitlines():
+                if line.strip().startswith("ERDDAP_build_info"):
+                    break
+            match = re.search(
+                r'deployment_info="([^"]+)".*?version_full="([^"]+)"',
+                line,
+            )
+            if match:
+                build_info = match.group(2), match.group(1)
+        except (
+            requests.exceptions.HTTPError,
+            requests.exceptions.ConnectionError,
+            requests.exceptions.ReadTimeout,
+        ):
+            pass
+
+        return build_info
 
     @property
     def dataset_id(self) -> str | None:
