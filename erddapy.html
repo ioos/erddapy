@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ERDDAP class API &#8212; erddapy 3.3.1 documentation</title>
+    <title>ERDDAP class API &#8212; erddapy 3.3.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=f6a572b4" />
-    <script src="_static/documentation_options.js?v=9ac01507"></script>
+    <script src="_static/documentation_options.js?v=ad389f6d"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -577,6 +577,7 @@ please check ERDDAP’s docs for the other csv options available.</p>
 <p>ERDDAP ReSTful API standardizes the representation of dates as either ISO
 strings or seconds since 1970, but internally ERDDAPY uses datetime-like
 objects. <cite>timestamp</cite> returns the expected strings in seconds since 1970.</p>
+<p>This function will shift any tz-aware, and convert naive datetimes, to UTC.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -623,7 +624,7 @@ objects. <cite>timestamp</cite> returns the expected strings in seconds since 19
       &#169;2022, Filipe Fernandes.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
