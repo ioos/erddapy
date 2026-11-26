@@ -554,7 +554,12 @@ class ERDDAP:
             ['latitude', 'longitude', 'time', 'depth']
 
         """
-        variables = self._get_variables(dataset_id=dataset_id)
+        # Resolve the dataset_id before the cached call: a call without it
+        # would be cached under `None` and keep returning the variables of
+        # whatever dataset was set the first time.
+        variables = self._get_variables(
+            dataset_id=dataset_id or self.dataset_id,
+        )
         # Virtually the same code as the netCDF4 counterpart.
         vs = []
         has_value_flag = False

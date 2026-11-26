@@ -1,6 +1,7 @@
 """Test ERDDAP functionality."""
 
 import datetime as dt
+import io
 from zoneinfo import ZoneInfo
 
 import pytest
@@ -13,6 +14,7 @@ from erddapy.core.url import (
     _format_constraints_url,
     parse_dates,
 )
+from erddapy.erddapy import ERDDAP
 
 
 def test_parse_dates_utc_datetime():
@@ -90,3 +92,25 @@ def test__griddap_check_variables():
         match=r"are not present in dataset. Re-run e.griddap_initialize",
     ):
         _griddap_check_variables(bad_variables, original_variables)
+
+
+def test_get_var_by_attr_follows_dataset_id(monkeypatch):
+    """Variables must come from the current dataset_id, not a cached one."""
+    header = "Row Type,Variable Name,Attribute Name,Data Type,Value\n"
+    info = {
+        "dataset_a": header + "attribute,lon_a,axis,String,X\n",
+        "dataset_b": header + "attribute,lon_b,axis,String,X\n",
+    }
+
+    def fake_urlopen(url, **kwargs: object):  # noqa: ARG001
+        dataset_id = url.split("/info/")[1].split("/")[0]
+        return io.BytesIO(info[dataset_id].encode())
+
+    monkeypatch.setattr("erddapy.erddapy.urlopen", fake_urlopen)
+    e = ERDDAP(server="https://erddap.example.org/erddap", protocol="tabledap")
+
+    e.dataset_id = "dataset_a"
+    assert e.get_var_by_attr(axis="X") == ["lon_a"]
+
+    e.dataset_id = "dataset_b"
+    assert e.get_var_by_attr(axis="X") == ["lon_b"]
